@@ -45,7 +45,7 @@
     "scripts": {
         "build": [
             "vendor/bin/jane-openapi generate",
-            "cp -r src/ lib/"
+            "cp -R src/ lib/"
         ],
         "clean": [
             "rm -rf lib/"
