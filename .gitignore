@@ -1,0 +1,16 @@
+# Composer files
+/vendor/
+composer.lock
+composer.phar
+
+# PHPUnit
+.phpunit.result.cache
+
+# PHP CS Fixer
+.php-cs-fixer.cache
+
+# Vim swap files
+*.swp
+
+# Mac OS
+.DS_Store
