@@ -1,5 +1,9 @@
 # braze-php
 
+![Packagist Version (custom server)](https://img.shields.io/packagist/v/braze-community/braze-php)
+[![build](https://github.com/braze-community/braze-php/actions/workflows/build.yml/badge.svg)](https://github.com/braze-community/braze-php/actions/workflows/build.yml)
+[![test](https://github.com/braze-community/braze-php/actions/workflows/test.yml/badge.svg)](https://github.com/braze-community/braze-php/actions/workflows/test.yml)
+
 PHP library for [Braze](https://www.braze.com/). Code is generated using the [OpenAPI spec](https://github.com/braze-community/braze-specification).
 
 ## Requirements
