@@ -1,0 +1,31 @@
+name: php-cs-fixer
+on:
+  pull_request:
+    paths:
+      - '**.php'
+
+permissions:
+  contents: write
+
+jobs:
+  php-cs-fixer:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          tools: php-cs-fixer:3
+
+      - name: Run php-cs-fixer
+        run: vendor/bin/php-cs-fixer fix
+
+      - name: Git commit and push
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: 'style: run php-cs-fixer'
