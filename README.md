@@ -1,6 +1,6 @@
 # braze-php
 
-![Packagist Version](https://img.shields.io/packagist/v/braze/sdk)
+[![packagist](https://img.shields.io/packagist/v/braze/sdk)](https://packagist.org/packages/braze/sdk)
 [![build](https://github.com/braze-community/braze-php/actions/workflows/build.yml/badge.svg)](https://github.com/braze-community/braze-php/actions/workflows/build.yml)
 [![test](https://github.com/braze-community/braze-php/actions/workflows/test.yml/badge.svg)](https://github.com/braze-community/braze-php/actions/workflows/test.yml)
 
