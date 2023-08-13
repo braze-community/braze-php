@@ -21,7 +21,6 @@ jobs:
 
       - name: Run tests
         run: |
-          rm -rf src/
           composer dumpautoload
           vendor/bin/pest --coverage --coverage-clover=coverage.xml
 
