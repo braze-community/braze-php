@@ -19,7 +19,9 @@ jobs:
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
 
       - name: Run tests
-        run: vendor/bin/pest --coverage --coverage-clover=coverage.xml
+        run: |
+          composer dumpautoload
+          vendor/bin/pest --coverage --coverage-clover=coverage.xml
 
       - name: Upload coverage report to Codecov
         uses: codecov/codecov-action@v3
