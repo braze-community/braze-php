@@ -45,7 +45,7 @@
     "scripts": {
         "build": [
             "vendor/bin/jane-openapi generate",
-            "cp -R src/ lib/"
+            "cp src/Braze.php lib/Braze.php"
         ],
         "clean": [
             "rm -rf lib/"
