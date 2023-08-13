@@ -44,7 +44,7 @@
     },
     "scripts": {
         "build": [
-            "@php vendor/bin/jane-openapi generate",
+            "vendor/bin/jane-openapi generate",
             "cp -r src/ lib/"
         ],
         "clean": [
@@ -52,7 +52,7 @@
         ],
         "test": [
             "composer dumpautoload",
-            "@php vendor/bin/pest"
+            "vendor/bin/pest"
         ]
     },
     "version": "1.0.0-alpha"
