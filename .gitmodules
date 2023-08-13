@@ -1,0 +1,3 @@
+[submodule "braze-specification"]
+	path = braze-specification
+	url = https://github.com/braze-community/braze-specification.git

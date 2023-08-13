@@ -5,6 +5,6 @@ declare(strict_types=1);
 return [
     'directory' => __DIR__ . '/lib',
     'namespace' => 'Braze',
-    'openapi-file' => 'https://raw.githubusercontent.com/braze-community/braze-specification/master/openapi/spec.json',
+    'openapi-file' => __DIR__ . '/braze-specification/openapi/spec.json',
     'use-fixer' => true,
 ];
