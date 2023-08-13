@@ -22,7 +22,7 @@
     ],
     "require": {
         "jane-php/open-api-runtime": "^7.5",
-        "php": ">=7"
+        "php": ">=7.2"
     },
     "require-dev": {
         "jane-php/open-api-3": "^7.5",
