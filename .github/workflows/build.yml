@@ -20,9 +20,7 @@ jobs:
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
 
       - name: Generate code
-        run: |
-          composer build
-          cp -r src/ lib/
+        run: composer build
 
       - name: Check Git working tree
         run: |
