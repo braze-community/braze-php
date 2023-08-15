@@ -101,8 +101,6 @@ class PostTemplatesEmailUpdate extends \Braze\Runtime\Client\BaseEndpoint implem
     }
 
     /**
-     * @return null
-     *
      * @throws \Braze\Exception\PostTemplatesEmailUpdateBadRequestException
      * @throws \Braze\Exception\PostTemplatesEmailUpdateUnauthorizedException
      * @throws \Braze\Exception\PostTemplatesEmailUpdateForbiddenException

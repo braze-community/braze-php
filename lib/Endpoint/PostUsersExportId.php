@@ -417,8 +417,6 @@ class PostUsersExportId extends \Braze\Runtime\Client\BaseEndpoint implements \B
     }
 
     /**
-     * @return null
-     *
      * @throws \Braze\Exception\PostUsersExportIdBadRequestException
      * @throws \Braze\Exception\PostUsersExportIdUnauthorizedException
      * @throws \Braze\Exception\PostUsersExportIdForbiddenException

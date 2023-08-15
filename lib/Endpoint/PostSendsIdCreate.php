@@ -95,8 +95,6 @@ class PostSendsIdCreate extends \Braze\Runtime\Client\BaseEndpoint implements \B
     }
 
     /**
-     * @return null
-     *
      * @throws \Braze\Exception\PostSendsIdCreateBadRequestException
      * @throws \Braze\Exception\PostSendsIdCreateUnauthorizedException
      * @throws \Braze\Exception\PostSendsIdCreateForbiddenException

@@ -268,8 +268,6 @@ class GetCampaignsDataSeries extends \Braze\Runtime\Client\BaseEndpoint implemen
     }
 
     /**
-     * @return null
-     *
      * @throws \Braze\Exception\GetCampaignsDataSeriesBadRequestException
      * @throws \Braze\Exception\GetCampaignsDataSeriesUnauthorizedException
      * @throws \Braze\Exception\GetCampaignsDataSeriesForbiddenException

@@ -159,8 +159,6 @@ class GetCatalog extends \Braze\Runtime\Client\BaseEndpoint implements \Braze\Ru
     }
 
     /**
-     * @return null
-     *
      * @throws \Braze\Exception\GetCatalogBadRequestException
      * @throws \Braze\Exception\GetCatalogUnauthorizedException
      * @throws \Braze\Exception\GetCatalogForbiddenException

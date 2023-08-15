@@ -106,8 +106,6 @@ class GetMessagesScheduledBroadcast extends \Braze\Runtime\Client\BaseEndpoint i
     }
 
     /**
-     * @return null
-     *
      * @throws \Braze\Exception\GetMessagesScheduledBroadcastBadRequestException
      * @throws \Braze\Exception\GetMessagesScheduledBroadcastUnauthorizedException
      * @throws \Braze\Exception\GetMessagesScheduledBroadcastForbiddenException

@@ -145,8 +145,6 @@ class GetEmailUnsubscribe extends \Braze\Runtime\Client\BaseEndpoint implements 
     }
 
     /**
-     * @return null
-     *
      * @throws \Braze\Exception\GetEmailUnsubscribeBadRequestException
      * @throws \Braze\Exception\GetEmailUnsubscribeUnauthorizedException
      * @throws \Braze\Exception\GetEmailUnsubscribeForbiddenException

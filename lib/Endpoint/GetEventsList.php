@@ -107,8 +107,6 @@ class GetEventsList extends \Braze\Runtime\Client\BaseEndpoint implements \Braze
     }
 
     /**
-     * @return null
-     *
      * @throws \Braze\Exception\GetEventsListBadRequestException
      * @throws \Braze\Exception\GetEventsListUnauthorizedException
      * @throws \Braze\Exception\GetEventsListForbiddenException

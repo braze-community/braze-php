@@ -100,8 +100,6 @@ class GetPurchasesProductList extends \Braze\Runtime\Client\BaseEndpoint impleme
     }
 
     /**
-     * @return null
-     *
      * @throws \Braze\Exception\GetPurchasesProductListBadRequestException
      * @throws \Braze\Exception\GetPurchasesProductListUnauthorizedException
      * @throws \Braze\Exception\GetPurchasesProductListForbiddenException

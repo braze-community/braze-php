@@ -113,8 +113,6 @@ class PostCampaignsTriggerSend extends \Braze\Runtime\Client\BaseEndpoint implem
     }
 
     /**
-     * @return null
-     *
      * @throws \Braze\Exception\PostCampaignsTriggerSendBadRequestException
      * @throws \Braze\Exception\PostCampaignsTriggerSendUnauthorizedException
      * @throws \Braze\Exception\PostCampaignsTriggerSendForbiddenException

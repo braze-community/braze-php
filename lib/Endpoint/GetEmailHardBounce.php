@@ -145,8 +145,6 @@ class GetEmailHardBounce extends \Braze\Runtime\Client\BaseEndpoint implements \
     }
 
     /**
-     * @return null
-     *
      * @throws \Braze\Exception\GetEmailHardBounceBadRequestException
      * @throws \Braze\Exception\GetEmailHardBounceUnauthorizedException
      * @throws \Braze\Exception\GetEmailHardBounceForbiddenException

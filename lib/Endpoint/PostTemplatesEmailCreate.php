@@ -101,8 +101,6 @@ class PostTemplatesEmailCreate extends \Braze\Runtime\Client\BaseEndpoint implem
     }
 
     /**
-     * @return null
-     *
      * @throws \Braze\Exception\PostTemplatesEmailCreateBadRequestException
      * @throws \Braze\Exception\PostTemplatesEmailCreateUnauthorizedException
      * @throws \Braze\Exception\PostTemplatesEmailCreateForbiddenException

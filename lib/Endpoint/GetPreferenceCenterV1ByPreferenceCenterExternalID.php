@@ -105,8 +105,6 @@ class GetPreferenceCenterV1ByPreferenceCenterExternalID extends \Braze\Runtime\C
     }
 
     /**
-     * @return null
-     *
      * @throws \Braze\Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDBadRequestException
      * @throws \Braze\Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDUnauthorizedException
      * @throws \Braze\Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDForbiddenException

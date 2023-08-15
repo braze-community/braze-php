@@ -122,8 +122,6 @@ class PostContentBlocksUpdate extends \Braze\Runtime\Client\BaseEndpoint impleme
     }
 
     /**
-     * @return null
-     *
      * @throws \Braze\Exception\PostContentBlocksUpdateBadRequestException
      * @throws \Braze\Exception\PostContentBlocksUpdateUnauthorizedException
      * @throws \Braze\Exception\PostContentBlocksUpdateForbiddenException

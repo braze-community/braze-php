@@ -119,8 +119,6 @@ class GetFeedList extends \Braze\Runtime\Client\BaseEndpoint implements \Braze\R
     }
 
     /**
-     * @return null
-     *
      * @throws \Braze\Exception\GetFeedListBadRequestException
      * @throws \Braze\Exception\GetFeedListUnauthorizedException
      * @throws \Braze\Exception\GetFeedListForbiddenException

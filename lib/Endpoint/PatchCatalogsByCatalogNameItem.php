@@ -152,8 +152,6 @@ class PatchCatalogsByCatalogNameItem extends \Braze\Runtime\Client\BaseEndpoint 
     }
 
     /**
-     * @return null
-     *
      * @throws \Braze\Exception\PatchCatalogsByCatalogNameItemBadRequestException
      * @throws \Braze\Exception\PatchCatalogsByCatalogNameItemUnauthorizedException
      * @throws \Braze\Exception\PatchCatalogsByCatalogNameItemForbiddenException

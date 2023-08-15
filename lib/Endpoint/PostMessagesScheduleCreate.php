@@ -92,8 +92,6 @@ class PostMessagesScheduleCreate extends \Braze\Runtime\Client\BaseEndpoint impl
     }
 
     /**
-     * @return null
-     *
      * @throws \Braze\Exception\PostMessagesScheduleCreateBadRequestException
      * @throws \Braze\Exception\PostMessagesScheduleCreateUnauthorizedException
      * @throws \Braze\Exception\PostMessagesScheduleCreateForbiddenException

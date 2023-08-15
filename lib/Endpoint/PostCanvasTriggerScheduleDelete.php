@@ -79,8 +79,6 @@ class PostCanvasTriggerScheduleDelete extends \Braze\Runtime\Client\BaseEndpoint
     }
 
     /**
-     * @return null
-     *
      * @throws \Braze\Exception\PostCanvasTriggerScheduleDeleteBadRequestException
      * @throws \Braze\Exception\PostCanvasTriggerScheduleDeleteUnauthorizedException
      * @throws \Braze\Exception\PostCanvasTriggerScheduleDeleteForbiddenException

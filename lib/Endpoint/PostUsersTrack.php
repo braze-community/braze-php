@@ -178,8 +178,6 @@ class PostUsersTrack extends \Braze\Runtime\Client\BaseEndpoint implements \Braz
     }
 
     /**
-     * @return null
-     *
      * @throws \Braze\Exception\PostUsersTrackBadRequestException
      * @throws \Braze\Exception\PostUsersTrackUnauthorizedException
      * @throws \Braze\Exception\PostUsersTrackForbiddenException

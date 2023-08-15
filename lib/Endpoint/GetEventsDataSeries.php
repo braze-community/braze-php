@@ -130,8 +130,6 @@ class GetEventsDataSeries extends \Braze\Runtime\Client\BaseEndpoint implements 
     }
 
     /**
-     * @return null
-     *
      * @throws \Braze\Exception\GetEventsDataSeriesBadRequestException
      * @throws \Braze\Exception\GetEventsDataSeriesUnauthorizedException
      * @throws \Braze\Exception\GetEventsDataSeriesForbiddenException

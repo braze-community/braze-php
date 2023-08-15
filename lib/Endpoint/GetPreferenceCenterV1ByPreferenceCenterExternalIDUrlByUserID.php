@@ -114,8 +114,6 @@ class GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserID extends \Braz
     }
 
     /**
-     * @return null
-     *
      * @throws \Braze\Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserIDBadRequestException
      * @throws \Braze\Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserIDUnauthorizedException
      * @throws \Braze\Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserIDForbiddenException

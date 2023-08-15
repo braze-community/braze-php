@@ -114,8 +114,6 @@ class GetTemplatesEmailList extends \Braze\Runtime\Client\BaseEndpoint implement
     }
 
     /**
-     * @return null
-     *
      * @throws \Braze\Exception\GetTemplatesEmailListBadRequestException
      * @throws \Braze\Exception\GetTemplatesEmailListUnauthorizedException
      * @throws \Braze\Exception\GetTemplatesEmailListForbiddenException

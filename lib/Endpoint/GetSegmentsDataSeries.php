@@ -116,8 +116,6 @@ class GetSegmentsDataSeries extends \Braze\Runtime\Client\BaseEndpoint implement
     }
 
     /**
-     * @return null
-     *
      * @throws \Braze\Exception\GetSegmentsDataSeriesBadRequestException
      * @throws \Braze\Exception\GetSegmentsDataSeriesUnauthorizedException
      * @throws \Braze\Exception\GetSegmentsDataSeriesForbiddenException

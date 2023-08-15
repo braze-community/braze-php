@@ -123,8 +123,6 @@ class GetContentBlocksInfo extends \Braze\Runtime\Client\BaseEndpoint implements
     }
 
     /**
-     * @return null
-     *
      * @throws \Braze\Exception\GetContentBlocksInfoBadRequestException
      * @throws \Braze\Exception\GetContentBlocksInfoUnauthorizedException
      * @throws \Braze\Exception\GetContentBlocksInfoForbiddenException

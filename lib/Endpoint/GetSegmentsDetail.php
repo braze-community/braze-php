@@ -107,8 +107,6 @@ class GetSegmentsDetail extends \Braze\Runtime\Client\BaseEndpoint implements \B
     }
 
     /**
-     * @return null
-     *
      * @throws \Braze\Exception\GetSegmentsDetailBadRequestException
      * @throws \Braze\Exception\GetSegmentsDetailUnauthorizedException
      * @throws \Braze\Exception\GetSegmentsDetailForbiddenException

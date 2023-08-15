@@ -134,8 +134,6 @@ class PostScimV2User extends \Braze\Runtime\Client\BaseEndpoint implements \Braz
     }
 
     /**
-     * @return null
-     *
      * @throws \Braze\Exception\PostScimV2UserBadRequestException
      * @throws \Braze\Exception\PostScimV2UserUnauthorizedException
      * @throws \Braze\Exception\PostScimV2UserForbiddenException

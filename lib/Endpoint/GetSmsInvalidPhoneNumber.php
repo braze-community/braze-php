@@ -127,8 +127,6 @@ class GetSmsInvalidPhoneNumber extends \Braze\Runtime\Client\BaseEndpoint implem
     }
 
     /**
-     * @return null
-     *
      * @throws \Braze\Exception\GetSmsInvalidPhoneNumberBadRequestException
      * @throws \Braze\Exception\GetSmsInvalidPhoneNumberUnauthorizedException
      * @throws \Braze\Exception\GetSmsInvalidPhoneNumberForbiddenException

@@ -119,8 +119,6 @@ class PostMessagesLiveActivityUpdate extends \Braze\Runtime\Client\BaseEndpoint 
     }
 
     /**
-     * @return null
-     *
      * @throws \Braze\Exception\PostMessagesLiveActivityUpdateBadRequestException
      * @throws \Braze\Exception\PostMessagesLiveActivityUpdateUnauthorizedException
      * @throws \Braze\Exception\PostMessagesLiveActivityUpdateForbiddenException

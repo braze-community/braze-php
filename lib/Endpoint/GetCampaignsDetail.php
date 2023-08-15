@@ -306,8 +306,6 @@ class GetCampaignsDetail extends \Braze\Runtime\Client\BaseEndpoint implements \
     }
 
     /**
-     * @return null
-     *
      * @throws \Braze\Exception\GetCampaignsDetailBadRequestException
      * @throws \Braze\Exception\GetCampaignsDetailUnauthorizedException
      * @throws \Braze\Exception\GetCampaignsDetailForbiddenException

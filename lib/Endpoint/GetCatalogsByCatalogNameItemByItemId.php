@@ -149,8 +149,6 @@ class GetCatalogsByCatalogNameItemByItemId extends \Braze\Runtime\Client\BaseEnd
     }
 
     /**
-     * @return null
-     *
      * @throws \Braze\Exception\GetCatalogsByCatalogNameItemByItemIdBadRequestException
      * @throws \Braze\Exception\GetCatalogsByCatalogNameItemByItemIdUnauthorizedException
      * @throws \Braze\Exception\GetCatalogsByCatalogNameItemByItemIdForbiddenException

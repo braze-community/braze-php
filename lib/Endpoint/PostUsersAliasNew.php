@@ -84,8 +84,6 @@ class PostUsersAliasNew extends \Braze\Runtime\Client\BaseEndpoint implements \B
     }
 
     /**
-     * @return null
-     *
      * @throws \Braze\Exception\PostUsersAliasNewBadRequestException
      * @throws \Braze\Exception\PostUsersAliasNewUnauthorizedException
      * @throws \Braze\Exception\PostUsersAliasNewForbiddenException

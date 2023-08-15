@@ -151,8 +151,6 @@ class PutCatalogsByCatalogNameItem extends \Braze\Runtime\Client\BaseEndpoint im
     }
 
     /**
-     * @return null
-     *
      * @throws \Braze\Exception\PutCatalogsByCatalogNameItemBadRequestException
      * @throws \Braze\Exception\PutCatalogsByCatalogNameItemUnauthorizedException
      * @throws \Braze\Exception\PutCatalogsByCatalogNameItemForbiddenException

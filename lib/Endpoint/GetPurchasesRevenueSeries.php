@@ -123,8 +123,6 @@ class GetPurchasesRevenueSeries extends \Braze\Runtime\Client\BaseEndpoint imple
     }
 
     /**
-     * @return null
-     *
      * @throws \Braze\Exception\GetPurchasesRevenueSeriesBadRequestException
      * @throws \Braze\Exception\GetPurchasesRevenueSeriesUnauthorizedException
      * @throws \Braze\Exception\GetPurchasesRevenueSeriesForbiddenException

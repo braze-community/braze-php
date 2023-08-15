@@ -37,6 +37,9 @@ class ErrorNormalizer implements DenormalizerInterface, NormalizerInterface, Den
         return is_object($data) && get_class($data) === 'Braze\\Model\\Error';
     }
 
+    /**
+     * @return mixed
+     */
     public function denormalize($data, $class, $format = null, array $context = [])
     {
         if (isset($data['$ref'])) {

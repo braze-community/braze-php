@@ -114,8 +114,6 @@ class GetKpiMauDataSeries extends \Braze\Runtime\Client\BaseEndpoint implements 
     }
 
     /**
-     * @return null
-     *
      * @throws \Braze\Exception\GetKpiMauDataSeriesBadRequestException
      * @throws \Braze\Exception\GetKpiMauDataSeriesUnauthorizedException
      * @throws \Braze\Exception\GetKpiMauDataSeriesForbiddenException

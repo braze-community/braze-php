@@ -95,8 +95,6 @@ class PostUsersAliasUpdate extends \Braze\Runtime\Client\BaseEndpoint implements
     }
 
     /**
-     * @return null
-     *
      * @throws \Braze\Exception\PostUsersAliasUpdateBadRequestException
      * @throws \Braze\Exception\PostUsersAliasUpdateUnauthorizedException
      * @throws \Braze\Exception\PostUsersAliasUpdateForbiddenException
