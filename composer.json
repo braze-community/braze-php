@@ -44,6 +44,7 @@
     },
     "scripts": {
         "build": [
+            "composer update",
             "vendor/bin/jane-openapi generate",
             "cp src/Braze.php lib/Braze.php"
         ],
