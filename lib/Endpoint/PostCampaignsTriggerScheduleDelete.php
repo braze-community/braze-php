@@ -38,7 +38,7 @@ class PostCampaignsTriggerScheduleDelete extends \Braze\Runtime\Client\BaseEndpo
      * @var string $Authorization
      *             }
      */
-    public function __construct(\stdClass $requestBody = null, array $headerParameters = [])
+    public function __construct(\Braze\Model\CampaignsTriggerScheduleDeletePostBody $requestBody = null, array $headerParameters = [])
     {
         $this->body = $requestBody;
         $this->headerParameters = $headerParameters;
@@ -56,8 +56,8 @@ class PostCampaignsTriggerScheduleDelete extends \Braze\Runtime\Client\BaseEndpo
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        if ($this->body instanceof \stdClass) {
-            return [['Content-Type' => ['application/json']], json_encode($this->body)];
+        if ($this->body instanceof \Braze\Model\CampaignsTriggerScheduleDeletePostBody) {
+            return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
         }
 
         return [[], null];

@@ -142,7 +142,7 @@ class PostCatalogsByCatalogNameItem extends \Braze\Runtime\Client\BaseEndpoint i
      * @var string $Authorization
      *             }
      */
-    public function __construct(string $catalogName, \stdClass $requestBody = null, array $headerParameters = [])
+    public function __construct(string $catalogName, \Braze\Model\CatalogsCatalogNameItemsPostBody $requestBody = null, array $headerParameters = [])
     {
         $this->catalog_name = $catalogName;
         $this->body = $requestBody;
@@ -161,8 +161,8 @@ class PostCatalogsByCatalogNameItem extends \Braze\Runtime\Client\BaseEndpoint i
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        if ($this->body instanceof \stdClass) {
-            return [['Content-Type' => ['application/json']], json_encode($this->body)];
+        if ($this->body instanceof \Braze\Model\CatalogsCatalogNameItemsPostBody) {
+            return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
         }
 
         return [[], null];

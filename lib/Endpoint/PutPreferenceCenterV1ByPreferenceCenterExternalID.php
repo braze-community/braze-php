@@ -75,7 +75,7 @@ class PutPreferenceCenterV1ByPreferenceCenterExternalID extends \Braze\Runtime\C
      * @var string
      *                  }
      */
-    public function __construct(string $preferenceCenterExternalID, \stdClass $requestBody = null, array $headerParameters = [])
+    public function __construct(string $preferenceCenterExternalID, \Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBody $requestBody = null, array $headerParameters = [])
     {
         $this->PreferenceCenterExternalID = $preferenceCenterExternalID;
         $this->body = $requestBody;
@@ -94,8 +94,8 @@ class PutPreferenceCenterV1ByPreferenceCenterExternalID extends \Braze\Runtime\C
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        if ($this->body instanceof \stdClass) {
-            return [['Content-Type' => ['application/json']], json_encode($this->body)];
+        if ($this->body instanceof \Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBody) {
+            return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
         }
 
         return [[], null];

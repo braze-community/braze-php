@@ -62,7 +62,7 @@ class PostMessagesScheduleCreate extends \Braze\Runtime\Client\BaseEndpoint impl
      *
      * ```
      */
-    public function __construct(\stdClass $requestBody = null)
+    public function __construct(\Braze\Model\MessagesScheduleCreatePostBody $requestBody = null)
     {
         $this->body = $requestBody;
     }
@@ -79,8 +79,8 @@ class PostMessagesScheduleCreate extends \Braze\Runtime\Client\BaseEndpoint impl
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        if ($this->body instanceof \stdClass) {
-            return [['Content-Type' => ['application/json']], json_encode($this->body)];
+        if ($this->body instanceof \Braze\Model\MessagesScheduleCreatePostBody) {
+            return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
         }
 
         return [[], null];
