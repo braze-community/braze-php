@@ -1,13 +1,14 @@
-name: build
-on: [push, pull_request]
+name: dependabot
+on: pull_request_target
 
 permissions:
   pull-requests: write
   contents: write
 
 jobs:
-  build:
+  dependabot:
     runs-on: ubuntu-latest
+    if: github.actor == 'dependabot[bot]'
 
     steps:
       - name: Checkout repository
@@ -24,10 +25,7 @@ jobs:
       - name: Build library
         run: composer build
 
-      - name: Check Git working tree
-        run: |
-          if [[ $(git diff --stat) != '' ]]; then
-            echo 'Detected uncommitted changes. See status below:'
-            git diff
-            exit 1
-          fi
+      - name: Git commit and push
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: 'feat: generate lib from braze-specification'
