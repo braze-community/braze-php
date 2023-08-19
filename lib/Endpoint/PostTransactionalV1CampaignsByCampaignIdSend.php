@@ -226,7 +226,7 @@ class PostTransactionalV1CampaignsByCampaignIdSend extends \Braze\Runtime\Client
      * @var string $Authorization
      *             }
      */
-    public function __construct(string $campaignId, \stdClass $requestBody = null, array $headerParameters = [])
+    public function __construct(string $campaignId, \Braze\Model\TransactionalV1CampaignsCampaignIdSendPostBody $requestBody = null, array $headerParameters = [])
     {
         $this->campaign_id = $campaignId;
         $this->body = $requestBody;
@@ -245,8 +245,8 @@ class PostTransactionalV1CampaignsByCampaignIdSend extends \Braze\Runtime\Client
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        if ($this->body instanceof \stdClass) {
-            return [['Content-Type' => ['application/json']], json_encode($this->body)];
+        if ($this->body instanceof \Braze\Model\TransactionalV1CampaignsCampaignIdSendPostBody) {
+            return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
         }
 
         return [[], null];

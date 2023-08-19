@@ -79,10 +79,11 @@ Send a message to your user:
 
 ```php
 use Braze\Braze;
+use Braze\Model\MessagesSendPostBody;
 
 $braze = new Braze('YOUR_API_URL', 'YOUR_API_KEY');
 
-$braze->client->postMessagesSend((object) [
+$braze->client->postMessagesSend(new MessagesSendPostBody([
     'external_user_ids' => ['your_external_user_id'],
     'messages' => [
         'email' => [
@@ -91,7 +92,7 @@ $braze->client->postMessagesSend((object) [
             'email_template_id' => 'your_email_template_id',
         ],
     ],
-]);
+]));
 ```
 
 Handle an API error:

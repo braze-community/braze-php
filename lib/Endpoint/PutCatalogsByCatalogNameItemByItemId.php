@@ -129,7 +129,7 @@ class PutCatalogsByCatalogNameItemByItemId extends \Braze\Runtime\Client\BaseEnd
      * @var string $Authorization
      *             }
      */
-    public function __construct(string $catalogName, string $itemId, \stdClass $requestBody = null, array $headerParameters = [])
+    public function __construct(string $catalogName, string $itemId, \Braze\Model\CatalogsCatalogNameItemsItemIdPutBody $requestBody = null, array $headerParameters = [])
     {
         $this->catalog_name = $catalogName;
         $this->item_id = $itemId;
@@ -149,8 +149,8 @@ class PutCatalogsByCatalogNameItemByItemId extends \Braze\Runtime\Client\BaseEnd
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        if ($this->body instanceof \stdClass) {
-            return [['Content-Type' => ['application/json']], json_encode($this->body)];
+        if ($this->body instanceof \Braze\Model\CatalogsCatalogNameItemsItemIdPutBody) {
+            return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
         }
 
         return [[], null];

@@ -67,7 +67,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PostTemplatesEmailUpdateTooManyRequestsException
      * @throws \Braze\Exception\PostTemplatesEmailUpdateInternalServerErrorException
      */
-    public function postTemplatesEmailUpdate(\stdClass $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postTemplatesEmailUpdate(Model\TemplatesEmailUpdatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PostTemplatesEmailUpdate($requestBody, $headerParameters), $fetch);
     }
@@ -204,7 +204,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PostUsersTrackTooManyRequestsException
      * @throws \Braze\Exception\PostUsersTrackInternalServerErrorException
      */
-    public function postUsersTrack(\stdClass $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postUsersTrack(Model\UsersTrackPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PostUsersTrack($requestBody, $headerParameters), $fetch);
     }
@@ -599,7 +599,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PostCatalogTooManyRequestsException
      * @throws \Braze\Exception\PostCatalogInternalServerErrorException
      */
-    public function postCatalog(\stdClass $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postCatalog(Model\CatalogsPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PostCatalog($requestBody, $headerParameters), $fetch);
     }
@@ -967,7 +967,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PatchCatalogsByCatalogNameItemTooManyRequestsException
      * @throws \Braze\Exception\PatchCatalogsByCatalogNameItemInternalServerErrorException
      */
-    public function patchCatalogsByCatalogNameItem(string $catalogName, \stdClass $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function patchCatalogsByCatalogNameItem(string $catalogName, Model\CatalogsCatalogNameItemsPatchBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PatchCatalogsByCatalogNameItem($catalogName, $requestBody, $headerParameters), $fetch);
     }
@@ -1110,7 +1110,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PostCatalogsByCatalogNameItemTooManyRequestsException
      * @throws \Braze\Exception\PostCatalogsByCatalogNameItemInternalServerErrorException
      */
-    public function postCatalogsByCatalogNameItem(string $catalogName, \stdClass $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postCatalogsByCatalogNameItem(string $catalogName, Model\CatalogsCatalogNameItemsPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PostCatalogsByCatalogNameItem($catalogName, $requestBody, $headerParameters), $fetch);
     }
@@ -1218,7 +1218,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PutCatalogsByCatalogNameItemTooManyRequestsException
      * @throws \Braze\Exception\PutCatalogsByCatalogNameItemInternalServerErrorException
      */
-    public function putCatalogsByCatalogNameItem(string $catalogName, \stdClass $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function putCatalogsByCatalogNameItem(string $catalogName, Model\CatalogsCatalogNameItemsPutBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PutCatalogsByCatalogNameItem($catalogName, $requestBody, $headerParameters), $fetch);
     }
@@ -1547,7 +1547,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PatchCatalogsByCatalogNameItemByItemIdTooManyRequestsException
      * @throws \Braze\Exception\PatchCatalogsByCatalogNameItemByItemIdInternalServerErrorException
      */
-    public function patchCatalogsByCatalogNameItemByItemId(string $catalogName, string $itemId, \stdClass $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function patchCatalogsByCatalogNameItemByItemId(string $catalogName, string $itemId, Model\CatalogsCatalogNameItemsItemIdPatchBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PatchCatalogsByCatalogNameItemByItemId($catalogName, $itemId, $requestBody, $headerParameters), $fetch);
     }
@@ -1673,7 +1673,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PostCatalogsByCatalogNameItemByItemIdTooManyRequestsException
      * @throws \Braze\Exception\PostCatalogsByCatalogNameItemByItemIdInternalServerErrorException
      */
-    public function postCatalogsByCatalogNameItemByItemId(string $catalogName, string $itemId, \stdClass $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postCatalogsByCatalogNameItemByItemId(string $catalogName, string $itemId, Model\CatalogsCatalogNameItemsItemIdPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PostCatalogsByCatalogNameItemByItemId($catalogName, $itemId, $requestBody, $headerParameters), $fetch);
     }
@@ -1802,7 +1802,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PutCatalogsByCatalogNameItemByItemIdTooManyRequestsException
      * @throws \Braze\Exception\PutCatalogsByCatalogNameItemByItemIdInternalServerErrorException
      */
-    public function putCatalogsByCatalogNameItemByItemId(string $catalogName, string $itemId, \stdClass $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function putCatalogsByCatalogNameItemByItemId(string $catalogName, string $itemId, Model\CatalogsCatalogNameItemsItemIdPutBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PutCatalogsByCatalogNameItemByItemId($catalogName, $itemId, $requestBody, $headerParameters), $fetch);
     }
@@ -2029,7 +2029,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PostEmailStatusTooManyRequestsException
      * @throws \Braze\Exception\PostEmailStatusInternalServerErrorException
      */
-    public function postEmailStatus(\stdClass $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postEmailStatus(Model\EmailStatusPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PostEmailStatus($requestBody, $headerParameters), $fetch);
     }
@@ -2068,7 +2068,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PostEmailBounceRemoveTooManyRequestsException
      * @throws \Braze\Exception\PostEmailBounceRemoveInternalServerErrorException
      */
-    public function postEmailBounceRemove(\stdClass $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postEmailBounceRemove(Model\EmailBounceRemovePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PostEmailBounceRemove($requestBody, $headerParameters), $fetch);
     }
@@ -2107,7 +2107,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PostEmailSpamRemoveTooManyRequestsException
      * @throws \Braze\Exception\PostEmailSpamRemoveInternalServerErrorException
      */
-    public function postEmailSpamRemove(\stdClass $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postEmailSpamRemove(Model\EmailSpamRemovePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PostEmailSpamRemove($requestBody, $headerParameters), $fetch);
     }
@@ -2144,7 +2144,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PostEmailBlocklistTooManyRequestsException
      * @throws \Braze\Exception\PostEmailBlocklistInternalServerErrorException
      */
-    public function postEmailBlocklist(\stdClass $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postEmailBlocklist(Model\EmailBlocklistPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PostEmailBlocklist($requestBody, $headerParameters), $fetch);
     }
@@ -2181,7 +2181,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PostEmailBlacklistTooManyRequestsException
      * @throws \Braze\Exception\PostEmailBlacklistInternalServerErrorException
      */
-    public function postEmailBlacklist(\stdClass $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postEmailBlacklist(Model\EmailBlacklistPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PostEmailBlacklist($requestBody, $headerParameters), $fetch);
     }
@@ -4667,7 +4667,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PostUsersExportIdTooManyRequestsException
      * @throws \Braze\Exception\PostUsersExportIdInternalServerErrorException
      */
-    public function postUsersExportId(\stdClass $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postUsersExportId(Model\UsersExportIdsPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PostUsersExportId($requestBody, $headerParameters), $fetch);
     }
@@ -5065,7 +5065,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PostUsersExportSegmentTooManyRequestsException
      * @throws \Braze\Exception\PostUsersExportSegmentInternalServerErrorException
      */
-    public function postUsersExportSegment(\stdClass $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postUsersExportSegment(Model\UsersExportSegmentPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PostUsersExportSegment($requestBody, $headerParameters), $fetch);
     }
@@ -5319,7 +5319,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PostUsersExportGlobalControlGroupTooManyRequestsException
      * @throws \Braze\Exception\PostUsersExportGlobalControlGroupInternalServerErrorException
      */
-    public function postUsersExportGlobalControlGroup(\stdClass $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postUsersExportGlobalControlGroup(Model\UsersExportGlobalControlGroupPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PostUsersExportGlobalControlGroup($requestBody, $headerParameters), $fetch);
     }
@@ -5397,7 +5397,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PostMessagesLiveActivityUpdateTooManyRequestsException
      * @throws \Braze\Exception\PostMessagesLiveActivityUpdateInternalServerErrorException
      */
-    public function postMessagesLiveActivityUpdate(\stdClass $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postMessagesLiveActivityUpdate(Model\MessagesLiveActivityUpdatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PostMessagesLiveActivityUpdate($requestBody, $headerParameters), $fetch);
     }
@@ -5493,7 +5493,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PostMessagesScheduleDeleteTooManyRequestsException
      * @throws \Braze\Exception\PostMessagesScheduleDeleteInternalServerErrorException
      */
-    public function postMessagesScheduleDelete(\stdClass $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postMessagesScheduleDelete(Model\MessagesScheduleDeletePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PostMessagesScheduleDelete($requestBody, $headerParameters), $fetch);
     }
@@ -5531,7 +5531,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PostCanvasTriggerScheduleDeleteTooManyRequestsException
      * @throws \Braze\Exception\PostCanvasTriggerScheduleDeleteInternalServerErrorException
      */
-    public function postCanvasTriggerScheduleDelete(\stdClass $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postCanvasTriggerScheduleDelete(Model\CanvasTriggerScheduleDeletePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PostCanvasTriggerScheduleDelete($requestBody, $headerParameters), $fetch);
     }
@@ -5571,7 +5571,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PostCampaignsTriggerScheduleDeleteTooManyRequestsException
      * @throws \Braze\Exception\PostCampaignsTriggerScheduleDeleteInternalServerErrorException
      */
-    public function postCampaignsTriggerScheduleDelete(\stdClass $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postCampaignsTriggerScheduleDelete(Model\CampaignsTriggerScheduleDeletePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PostCampaignsTriggerScheduleDelete($requestBody, $headerParameters), $fetch);
     }
@@ -5635,7 +5635,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PostMessagesScheduleCreateTooManyRequestsException
      * @throws \Braze\Exception\PostMessagesScheduleCreateInternalServerErrorException
      */
-    public function postMessagesScheduleCreate(\stdClass $requestBody = null, string $fetch = self::FETCH_OBJECT)
+    public function postMessagesScheduleCreate(Model\MessagesScheduleCreatePostBody $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PostMessagesScheduleCreate($requestBody), $fetch);
     }
@@ -5705,7 +5705,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PostCampaignsTriggerScheduleCreateTooManyRequestsException
      * @throws \Braze\Exception\PostCampaignsTriggerScheduleCreateInternalServerErrorException
      */
-    public function postCampaignsTriggerScheduleCreate(\stdClass $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postCampaignsTriggerScheduleCreate(Model\CampaignsTriggerScheduleCreatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PostCampaignsTriggerScheduleCreate($requestBody, $headerParameters), $fetch);
     }
@@ -5759,7 +5759,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PostCanvasTriggerScheduleCreateTooManyRequestsException
      * @throws \Braze\Exception\PostCanvasTriggerScheduleCreateInternalServerErrorException
      */
-    public function postCanvasTriggerScheduleCreate(\stdClass $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postCanvasTriggerScheduleCreate(Model\CanvasTriggerScheduleCreatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PostCanvasTriggerScheduleCreate($requestBody, $headerParameters), $fetch);
     }
@@ -5800,7 +5800,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PostMessagesScheduleUpdateTooManyRequestsException
      * @throws \Braze\Exception\PostMessagesScheduleUpdateInternalServerErrorException
      */
-    public function postMessagesScheduleUpdate(\stdClass $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postMessagesScheduleUpdate(Model\MessagesScheduleUpdatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PostMessagesScheduleUpdate($requestBody, $headerParameters), $fetch);
     }
@@ -5845,7 +5845,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PostCampaignsTriggerScheduleUpdateTooManyRequestsException
      * @throws \Braze\Exception\PostCampaignsTriggerScheduleUpdateInternalServerErrorException
      */
-    public function postCampaignsTriggerScheduleUpdate(\stdClass $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postCampaignsTriggerScheduleUpdate(Model\CampaignsTriggerScheduleUpdatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PostCampaignsTriggerScheduleUpdate($requestBody, $headerParameters), $fetch);
     }
@@ -5890,7 +5890,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PostCanvasTriggerScheduleUpdateTooManyRequestsException
      * @throws \Braze\Exception\PostCanvasTriggerScheduleUpdateInternalServerErrorException
      */
-    public function postCanvasTriggerScheduleUpdate(\stdClass $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postCanvasTriggerScheduleUpdate(Model\CanvasTriggerScheduleUpdatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PostCanvasTriggerScheduleUpdate($requestBody, $headerParameters), $fetch);
     }
@@ -5944,7 +5944,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PostSendsIdCreateTooManyRequestsException
      * @throws \Braze\Exception\PostSendsIdCreateInternalServerErrorException
      */
-    public function postSendsIdCreate(\stdClass $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postSendsIdCreate(Model\SendsIdCreatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PostSendsIdCreate($requestBody, $headerParameters), $fetch);
     }
@@ -6005,7 +6005,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PostMessagesSendTooManyRequestsException
      * @throws \Braze\Exception\PostMessagesSendInternalServerErrorException
      */
-    public function postMessagesSend(\stdClass $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postMessagesSend(Model\MessagesSendPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PostMessagesSend($requestBody, $headerParameters), $fetch);
     }
@@ -6232,7 +6232,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PostTransactionalV1CampaignsByCampaignIdSendTooManyRequestsException
      * @throws \Braze\Exception\PostTransactionalV1CampaignsByCampaignIdSendInternalServerErrorException
      */
-    public function postTransactionalV1CampaignsByCampaignIdSend(string $campaignId, \stdClass $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postTransactionalV1CampaignsByCampaignIdSend(string $campaignId, Model\TransactionalV1CampaignsCampaignIdSendPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PostTransactionalV1CampaignsByCampaignIdSend($campaignId, $requestBody, $headerParameters), $fetch);
     }
@@ -6304,7 +6304,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PostCampaignsTriggerSendTooManyRequestsException
      * @throws \Braze\Exception\PostCampaignsTriggerSendInternalServerErrorException
      */
-    public function postCampaignsTriggerSend(\stdClass $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postCampaignsTriggerSend(Model\CampaignsTriggerSendPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PostCampaignsTriggerSend($requestBody, $headerParameters), $fetch);
     }
@@ -6373,7 +6373,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PostCanvasTriggerSendTooManyRequestsException
      * @throws \Braze\Exception\PostCanvasTriggerSendInternalServerErrorException
      */
-    public function postCanvasTriggerSend(\stdClass $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postCanvasTriggerSend(Model\CanvasTriggerSendPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PostCanvasTriggerSend($requestBody, $headerParameters), $fetch);
     }
@@ -6655,7 +6655,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PutPreferenceCenterV1ByPreferenceCenterExternalIDTooManyRequestsException
      * @throws \Braze\Exception\PutPreferenceCenterV1ByPreferenceCenterExternalIDInternalServerErrorException
      */
-    public function putPreferenceCenterV1ByPreferenceCenterExternalID(string $preferenceCenterExternalID, \stdClass $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function putPreferenceCenterV1ByPreferenceCenterExternalID(string $preferenceCenterExternalID, Model\PreferenceCenterV1PreferenceCenterExternalIDPutBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PutPreferenceCenterV1ByPreferenceCenterExternalID($preferenceCenterExternalID, $requestBody, $headerParameters), $fetch);
     }
@@ -6733,7 +6733,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PostPreferenceCenterV1TooManyRequestsException
      * @throws \Braze\Exception\PostPreferenceCenterV1InternalServerErrorException
      */
-    public function postPreferenceCenterV1(\stdClass $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postPreferenceCenterV1(Model\PreferenceCenterV1PostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PostPreferenceCenterV1($requestBody, $headerParameters), $fetch);
     }
@@ -6967,7 +6967,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PutScimV2UserByIdTooManyRequestsException
      * @throws \Braze\Exception\PutScimV2UserByIdInternalServerErrorException
      */
-    public function putScimV2UserById(string $id, \stdClass $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function putScimV2UserById(string $id, Model\ScimV2UsersIdPutBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PutScimV2UserById($id, $requestBody, $headerParameters), $fetch);
     }
@@ -7152,7 +7152,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PostScimV2UserTooManyRequestsException
      * @throws \Braze\Exception\PostScimV2UserInternalServerErrorException
      */
-    public function postScimV2User(\stdClass $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postScimV2User(Model\ScimV2UsersPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PostScimV2User($requestBody, $headerParameters), $fetch);
     }
@@ -7267,7 +7267,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PostSmsInvalidPhoneNumbersRemoveTooManyRequestsException
      * @throws \Braze\Exception\PostSmsInvalidPhoneNumbersRemoveInternalServerErrorException
      */
-    public function postSmsInvalidPhoneNumbersRemove(\stdClass $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postSmsInvalidPhoneNumbersRemove(Model\SmsInvalidPhoneNumbersRemovePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PostSmsInvalidPhoneNumbersRemove($requestBody, $headerParameters), $fetch);
     }
@@ -7440,7 +7440,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PostSubscriptionStatusSetTooManyRequestsException
      * @throws \Braze\Exception\PostSubscriptionStatusSetInternalServerErrorException
      */
-    public function postSubscriptionStatusSet(\stdClass $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postSubscriptionStatusSet(Model\SubscriptionStatusSetPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PostSubscriptionStatusSet($requestBody, $headerParameters), $fetch);
     }
@@ -7493,7 +7493,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PostV2SubscriptionStatusSetTooManyRequestsException
      * @throws \Braze\Exception\PostV2SubscriptionStatusSetInternalServerErrorException
      */
-    public function postV2SubscriptionStatusSet(\stdClass $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postV2SubscriptionStatusSet(Model\V2SubscriptionStatusSetPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PostV2SubscriptionStatusSet($requestBody, $headerParameters), $fetch);
     }
@@ -7730,7 +7730,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PostContentBlocksCreateTooManyRequestsException
      * @throws \Braze\Exception\PostContentBlocksCreateInternalServerErrorException
      */
-    public function postContentBlocksCreate(\stdClass $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postContentBlocksCreate(Model\ContentBlocksCreatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PostContentBlocksCreate($requestBody, $headerParameters), $fetch);
     }
@@ -7811,7 +7811,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PostContentBlocksUpdateTooManyRequestsException
      * @throws \Braze\Exception\PostContentBlocksUpdateInternalServerErrorException
      */
-    public function postContentBlocksUpdate(\stdClass $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postContentBlocksUpdate(Model\ContentBlocksUpdatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PostContentBlocksUpdate($requestBody, $headerParameters), $fetch);
     }
@@ -7998,7 +7998,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PostTemplatesEmailCreateTooManyRequestsException
      * @throws \Braze\Exception\PostTemplatesEmailCreateInternalServerErrorException
      */
-    public function postTemplatesEmailCreate(\stdClass $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postTemplatesEmailCreate(Model\TemplatesEmailCreatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PostTemplatesEmailCreate($requestBody, $headerParameters), $fetch);
     }
@@ -8087,7 +8087,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PostUsersExternalIdsRenameTooManyRequestsException
      * @throws \Braze\Exception\PostUsersExternalIdsRenameInternalServerErrorException
      */
-    public function postUsersExternalIdsRename(\stdClass $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postUsersExternalIdsRename(Model\UsersExternalIdsRenamePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PostUsersExternalIdsRename($requestBody, $headerParameters), $fetch);
     }
@@ -8152,7 +8152,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PostUsersExternalIdsRemoveTooManyRequestsException
      * @throws \Braze\Exception\PostUsersExternalIdsRemoveInternalServerErrorException
      */
-    public function postUsersExternalIdsRemove(\stdClass $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postUsersExternalIdsRemove(Model\UsersExternalIdsRemovePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PostUsersExternalIdsRemove($requestBody, $headerParameters), $fetch);
     }
@@ -8206,7 +8206,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PostUsersAliasUpdateTooManyRequestsException
      * @throws \Braze\Exception\PostUsersAliasUpdateInternalServerErrorException
      */
-    public function postUsersAliasUpdate(\stdClass $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postUsersAliasUpdate(Model\UsersAliasUpdatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PostUsersAliasUpdate($requestBody, $headerParameters), $fetch);
     }
@@ -8249,7 +8249,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PostUsersAliasNewTooManyRequestsException
      * @throws \Braze\Exception\PostUsersAliasNewInternalServerErrorException
      */
-    public function postUsersAliasNew(\stdClass $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postUsersAliasNew(Model\UsersAliasNewPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PostUsersAliasNew($requestBody, $headerParameters), $fetch);
     }
@@ -8293,7 +8293,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PostUsersDeleteTooManyRequestsException
      * @throws \Braze\Exception\PostUsersDeleteInternalServerErrorException
      */
-    public function postUsersDelete(\stdClass $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postUsersDelete(Model\UsersDeletePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PostUsersDelete($requestBody, $headerParameters), $fetch);
     }
@@ -8403,7 +8403,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PostUsersIdentifyTooManyRequestsException
      * @throws \Braze\Exception\PostUsersIdentifyInternalServerErrorException
      */
-    public function postUsersIdentify(\stdClass $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postUsersIdentify(Model\UsersIdentifyPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PostUsersIdentify($requestBody, $headerParameters), $fetch);
     }
@@ -8558,7 +8558,7 @@ class Client extends \Braze\Runtime\Client\Client
      * @throws \Braze\Exception\PostUsersMergeTooManyRequestsException
      * @throws \Braze\Exception\PostUsersMergeInternalServerErrorException
      */
-    public function postUsersMerge(\stdClass $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postUsersMerge(Model\UsersMergePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Braze\Endpoint\PostUsersMerge($requestBody, $headerParameters), $fetch);
     }
