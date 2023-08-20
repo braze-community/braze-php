@@ -22,7 +22,7 @@ class UsersTrackPostBody extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * @var UsersTrackPostBodyAttributesItem[]
+     * @var array<string, mixed>[]
      */
     protected $attributes;
     /**
@@ -30,12 +30,12 @@ class UsersTrackPostBody extends \ArrayObject
      */
     protected $events;
     /**
-     * @var UsersTrackPostBodyPurchasesItem[]
+     * @var array<string, mixed>[]
      */
     protected $purchases;
 
     /**
-     * @return UsersTrackPostBodyAttributesItem[]
+     * @return array<string, mixed>[]
      */
     public function getAttributes(): array
     {
@@ -43,7 +43,7 @@ class UsersTrackPostBody extends \ArrayObject
     }
 
     /**
-     * @param UsersTrackPostBodyAttributesItem[] $attributes
+     * @param array<string, mixed>[] $attributes
      */
     public function setAttributes(array $attributes): self
     {
@@ -73,7 +73,7 @@ class UsersTrackPostBody extends \ArrayObject
     }
 
     /**
-     * @return UsersTrackPostBodyPurchasesItem[]
+     * @return array<string, mixed>[]
      */
     public function getPurchases(): array
     {
@@ -81,7 +81,7 @@ class UsersTrackPostBody extends \ArrayObject
     }
 
     /**
-     * @param UsersTrackPostBodyPurchasesItem[] $purchases
+     * @param array<string, mixed>[] $purchases
      */
     public function setPurchases(array $purchases): self
     {

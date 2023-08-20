@@ -55,30 +55,38 @@ class UsersTrackPostBodyNormalizer implements DenormalizerInterface, NormalizerI
         if (\array_key_exists('attributes', $data)) {
             $values = [];
             foreach ($data['attributes'] as $value) {
-                $values[] = $this->denormalizer->denormalize($value, 'Braze\\Model\\UsersTrackPostBodyAttributesItem', 'json', $context);
+                $values_1 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+                foreach ($value as $key => $value_1) {
+                    $values_1[$key] = $value_1;
+                }
+                $values[] = $values_1;
             }
             $object->setAttributes($values);
             unset($data['attributes']);
         }
         if (\array_key_exists('events', $data)) {
-            $values_1 = [];
-            foreach ($data['events'] as $value_1) {
-                $values_1[] = $value_1;
+            $values_2 = [];
+            foreach ($data['events'] as $value_2) {
+                $values_2[] = $value_2;
             }
-            $object->setEvents($values_1);
+            $object->setEvents($values_2);
             unset($data['events']);
         }
         if (\array_key_exists('purchases', $data)) {
-            $values_2 = [];
-            foreach ($data['purchases'] as $value_2) {
-                $values_2[] = $this->denormalizer->denormalize($value_2, 'Braze\\Model\\UsersTrackPostBodyPurchasesItem', 'json', $context);
+            $values_3 = [];
+            foreach ($data['purchases'] as $value_3) {
+                $values_4 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+                foreach ($value_3 as $key_1 => $value_4) {
+                    $values_4[$key_1] = $value_4;
+                }
+                $values_3[] = $values_4;
             }
-            $object->setPurchases($values_2);
+            $object->setPurchases($values_3);
             unset($data['purchases']);
         }
-        foreach ($data as $key => $value_3) {
-            if (preg_match('/.*/', (string) $key)) {
-                $object[$key] = $value_3;
+        foreach ($data as $key_2 => $value_5) {
+            if (preg_match('/.*/', (string) $key_2)) {
+                $object[$key_2] = $value_5;
             }
         }
 
@@ -94,27 +102,35 @@ class UsersTrackPostBodyNormalizer implements DenormalizerInterface, NormalizerI
         if ($object->isInitialized('attributes') && null !== $object->getAttributes()) {
             $values = [];
             foreach ($object->getAttributes() as $value) {
-                $values[] = $this->normalizer->normalize($value, 'json', $context);
+                $values_1 = [];
+                foreach ($value as $key => $value_1) {
+                    $values_1[$key] = $value_1;
+                }
+                $values[] = $values_1;
             }
             $data['attributes'] = $values;
         }
         if ($object->isInitialized('events') && null !== $object->getEvents()) {
-            $values_1 = [];
-            foreach ($object->getEvents() as $value_1) {
-                $values_1[] = $value_1;
+            $values_2 = [];
+            foreach ($object->getEvents() as $value_2) {
+                $values_2[] = $value_2;
             }
-            $data['events'] = $values_1;
+            $data['events'] = $values_2;
         }
         if ($object->isInitialized('purchases') && null !== $object->getPurchases()) {
-            $values_2 = [];
-            foreach ($object->getPurchases() as $value_2) {
-                $values_2[] = $this->normalizer->normalize($value_2, 'json', $context);
+            $values_3 = [];
+            foreach ($object->getPurchases() as $value_3) {
+                $values_4 = [];
+                foreach ($value_3 as $key_1 => $value_4) {
+                    $values_4[$key_1] = $value_4;
+                }
+                $values_3[] = $values_4;
             }
-            $data['purchases'] = $values_2;
+            $data['purchases'] = $values_3;
         }
-        foreach ($object as $key => $value_3) {
-            if (preg_match('/.*/', (string) $key)) {
-                $data[$key] = $value_3;
+        foreach ($object as $key_2 => $value_5) {
+            if (preg_match('/.*/', (string) $key_2)) {
+                $data[$key_2] = $value_5;
             }
         }
 
