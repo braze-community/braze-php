@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/braze-community/braze-php/compare/v1.1.0...v1.1.1) (2023-08-20)
+
+
+### Bug Fixes
+
+* **lib:** update and remove Model and Normalizer ([37549e1](https://github.com/braze-community/braze-php/commit/37549e1cd1931b21b025521f3559eb88153a644d))
+
 ## [1.1.0](https://github.com/braze-community/braze-php/compare/v1.0.1...v1.1.0) (2023-08-19)
 
 
