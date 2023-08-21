@@ -53,7 +53,7 @@ class MessagesScheduleUpdatePostBodyScheduleNormalizer implements DenormalizerIn
             return $object;
         }
         if (\array_key_exists('time', $data)) {
-            $object->setTime($data['time']);
+            $object->setTime(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['time']));
             unset($data['time']);
         }
         foreach ($data as $key => $value) {
@@ -72,7 +72,7 @@ class MessagesScheduleUpdatePostBodyScheduleNormalizer implements DenormalizerIn
     {
         $data = [];
         if ($object->isInitialized('time') && null !== $object->getTime()) {
-            $data['time'] = $object->getTime();
+            $data['time'] = $object->getTime()->format('Y-m-d\\TH:i:sP');
         }
         foreach ($object as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {

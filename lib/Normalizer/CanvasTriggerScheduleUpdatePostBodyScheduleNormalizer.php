@@ -53,7 +53,7 @@ class CanvasTriggerScheduleUpdatePostBodyScheduleNormalizer implements Denormali
             return $object;
         }
         if (\array_key_exists('time', $data)) {
-            $object->setTime($data['time']);
+            $object->setTime(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['time']));
             unset($data['time']);
         }
         if (\array_key_exists('in_local_time', $data)) {
@@ -76,7 +76,7 @@ class CanvasTriggerScheduleUpdatePostBodyScheduleNormalizer implements Denormali
     {
         $data = [];
         if ($object->isInitialized('time') && null !== $object->getTime()) {
-            $data['time'] = $object->getTime();
+            $data['time'] = $object->getTime()->format('Y-m-d\\TH:i:sP');
         }
         if ($object->isInitialized('inLocalTime') && null !== $object->getInLocalTime()) {
             $data['in_local_time'] = $object->getInLocalTime();

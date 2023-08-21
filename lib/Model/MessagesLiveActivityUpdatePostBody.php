@@ -38,11 +38,11 @@ class MessagesLiveActivityUpdatePostBody extends \ArrayObject
      */
     protected $endActivity;
     /**
-     * @var string
+     * @var \DateTime
      */
     protected $dismissalDate;
     /**
-     * @var string
+     * @var \DateTime
      */
     protected $staleDate;
     /**
@@ -102,12 +102,12 @@ class MessagesLiveActivityUpdatePostBody extends \ArrayObject
         return $this;
     }
 
-    public function getDismissalDate(): string
+    public function getDismissalDate(): \DateTime
     {
         return $this->dismissalDate;
     }
 
-    public function setDismissalDate(string $dismissalDate): self
+    public function setDismissalDate(\DateTime $dismissalDate): self
     {
         $this->initialized['dismissalDate'] = true;
         $this->dismissalDate = $dismissalDate;
@@ -115,12 +115,12 @@ class MessagesLiveActivityUpdatePostBody extends \ArrayObject
         return $this;
     }
 
-    public function getStaleDate(): string
+    public function getStaleDate(): \DateTime
     {
         return $this->staleDate;
     }
 
-    public function setStaleDate(string $staleDate): self
+    public function setStaleDate(\DateTime $staleDate): self
     {
         $this->initialized['staleDate'] = true;
         $this->staleDate = $staleDate;

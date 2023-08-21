@@ -22,7 +22,7 @@ class CanvasTriggerScheduleUpdatePostBodySchedule extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * @var string
+     * @var \DateTime
      */
     protected $time;
     /**
@@ -30,12 +30,12 @@ class CanvasTriggerScheduleUpdatePostBodySchedule extends \ArrayObject
      */
     protected $inLocalTime;
 
-    public function getTime(): string
+    public function getTime(): \DateTime
     {
         return $this->time;
     }
 
-    public function setTime(string $time): self
+    public function setTime(\DateTime $time): self
     {
         $this->initialized['time'] = true;
         $this->time = $time;
