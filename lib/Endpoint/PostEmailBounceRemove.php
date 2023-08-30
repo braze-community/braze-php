@@ -80,6 +80,8 @@ class PostEmailBounceRemove extends \Braze\Runtime\Client\BaseEndpoint implement
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\PostEmailBounceRemoveBadRequestException
      * @throws \Braze\Exception\PostEmailBounceRemoveUnauthorizedException
      * @throws \Braze\Exception\PostEmailBounceRemoveForbiddenException

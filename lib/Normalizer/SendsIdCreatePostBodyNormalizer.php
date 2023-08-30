@@ -37,9 +37,6 @@ class SendsIdCreatePostBodyNormalizer implements DenormalizerInterface, Normaliz
         return is_object($data) && get_class($data) === 'Braze\\Model\\SendsIdCreatePostBody';
     }
 
-    /**
-     * @return mixed
-     */
     public function denormalize($data, $class, $format = null, array $context = [])
     {
         if (isset($data['$ref'])) {

@@ -230,6 +230,8 @@ class PostCatalog extends \Braze\Runtime\Client\BaseEndpoint implements \Braze\R
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\PostCatalogBadRequestException
      * @throws \Braze\Exception\PostCatalogUnauthorizedException
      * @throws \Braze\Exception\PostCatalogForbiddenException

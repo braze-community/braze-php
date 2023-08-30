@@ -196,6 +196,8 @@ class PostUsersMerge extends \Braze\Runtime\Client\BaseEndpoint implements \Braz
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\PostUsersMergeBadRequestException
      * @throws \Braze\Exception\PostUsersMergeUnauthorizedException
      * @throws \Braze\Exception\PostUsersMergeForbiddenException

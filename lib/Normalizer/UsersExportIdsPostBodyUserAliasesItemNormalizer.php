@@ -37,9 +37,6 @@ class UsersExportIdsPostBodyUserAliasesItemNormalizer implements DenormalizerInt
         return is_object($data) && get_class($data) === 'Braze\\Model\\UsersExportIdsPostBodyUserAliasesItem';
     }
 
-    /**
-     * @return mixed
-     */
     public function denormalize($data, $class, $format = null, array $context = [])
     {
         if (isset($data['$ref'])) {

@@ -94,6 +94,8 @@ class PostV2SubscriptionStatusSet extends \Braze\Runtime\Client\BaseEndpoint imp
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\PostV2SubscriptionStatusSetBadRequestException
      * @throws \Braze\Exception\PostV2SubscriptionStatusSetUnauthorizedException
      * @throws \Braze\Exception\PostV2SubscriptionStatusSetForbiddenException

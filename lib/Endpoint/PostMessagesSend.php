@@ -102,6 +102,8 @@ class PostMessagesSend extends \Braze\Runtime\Client\BaseEndpoint implements \Br
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\PostMessagesSendBadRequestException
      * @throws \Braze\Exception\PostMessagesSendUnauthorizedException
      * @throws \Braze\Exception\PostMessagesSendForbiddenException

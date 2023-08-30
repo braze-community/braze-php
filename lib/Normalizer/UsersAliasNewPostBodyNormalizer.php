@@ -37,9 +37,6 @@ class UsersAliasNewPostBodyNormalizer implements DenormalizerInterface, Normaliz
         return is_object($data) && get_class($data) === 'Braze\\Model\\UsersAliasNewPostBody';
     }
 
-    /**
-     * @return mixed
-     */
     public function denormalize($data, $class, $format = null, array $context = [])
     {
         if (isset($data['$ref'])) {

@@ -37,9 +37,6 @@ class MessagesScheduleUpdatePostBodyMessagesNormalizer implements DenormalizerIn
         return is_object($data) && get_class($data) === 'Braze\\Model\\MessagesScheduleUpdatePostBodyMessages';
     }
 
-    /**
-     * @return mixed
-     */
     public function denormalize($data, $class, $format = null, array $context = [])
     {
         if (isset($data['$ref'])) {

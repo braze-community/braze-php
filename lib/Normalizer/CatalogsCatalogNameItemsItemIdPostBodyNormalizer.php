@@ -37,9 +37,6 @@ class CatalogsCatalogNameItemsItemIdPostBodyNormalizer implements DenormalizerIn
         return is_object($data) && get_class($data) === 'Braze\\Model\\CatalogsCatalogNameItemsItemIdPostBody';
     }
 
-    /**
-     * @return mixed
-     */
     public function denormalize($data, $class, $format = null, array $context = [])
     {
         if (isset($data['$ref'])) {

@@ -80,6 +80,8 @@ class PostSmsInvalidPhoneNumbersRemove extends \Braze\Runtime\Client\BaseEndpoin
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\PostSmsInvalidPhoneNumbersRemoveBadRequestException
      * @throws \Braze\Exception\PostSmsInvalidPhoneNumbersRemoveUnauthorizedException
      * @throws \Braze\Exception\PostSmsInvalidPhoneNumbersRemoveForbiddenException

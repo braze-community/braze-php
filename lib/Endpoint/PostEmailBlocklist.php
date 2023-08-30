@@ -78,6 +78,8 @@ class PostEmailBlocklist extends \Braze\Runtime\Client\BaseEndpoint implements \
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\PostEmailBlocklistBadRequestException
      * @throws \Braze\Exception\PostEmailBlocklistUnauthorizedException
      * @throws \Braze\Exception\PostEmailBlocklistForbiddenException

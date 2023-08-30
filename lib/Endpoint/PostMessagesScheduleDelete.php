@@ -78,6 +78,8 @@ class PostMessagesScheduleDelete extends \Braze\Runtime\Client\BaseEndpoint impl
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\PostMessagesScheduleDeleteBadRequestException
      * @throws \Braze\Exception\PostMessagesScheduleDeleteUnauthorizedException
      * @throws \Braze\Exception\PostMessagesScheduleDeleteForbiddenException

@@ -134,6 +134,8 @@ class GetContentBlocksList extends \Braze\Runtime\Client\BaseEndpoint implements
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\GetContentBlocksListBadRequestException
      * @throws \Braze\Exception\GetContentBlocksListUnauthorizedException
      * @throws \Braze\Exception\GetContentBlocksListForbiddenException

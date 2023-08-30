@@ -85,6 +85,8 @@ class PostUsersDelete extends \Braze\Runtime\Client\BaseEndpoint implements \Bra
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\PostUsersDeleteBadRequestException
      * @throws \Braze\Exception\PostUsersDeleteUnauthorizedException
      * @throws \Braze\Exception\PostUsersDeleteForbiddenException

@@ -81,6 +81,8 @@ class PostCampaignsTriggerScheduleDelete extends \Braze\Runtime\Client\BaseEndpo
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\PostCampaignsTriggerScheduleDeleteBadRequestException
      * @throws \Braze\Exception\PostCampaignsTriggerScheduleDeleteUnauthorizedException
      * @throws \Braze\Exception\PostCampaignsTriggerScheduleDeleteForbiddenException

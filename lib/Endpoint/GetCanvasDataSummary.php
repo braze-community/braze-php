@@ -163,6 +163,8 @@ class GetCanvasDataSummary extends \Braze\Runtime\Client\BaseEndpoint implements
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\GetCanvasDataSummaryBadRequestException
      * @throws \Braze\Exception\GetCanvasDataSummaryUnauthorizedException
      * @throws \Braze\Exception\GetCanvasDataSummaryForbiddenException

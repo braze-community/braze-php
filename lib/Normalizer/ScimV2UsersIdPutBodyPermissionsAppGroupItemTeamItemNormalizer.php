@@ -37,9 +37,6 @@ class ScimV2UsersIdPutBodyPermissionsAppGroupItemTeamItemNormalizer implements D
         return is_object($data) && get_class($data) === 'Braze\\Model\\ScimV2UsersIdPutBodyPermissionsAppGroupItemTeamItem';
     }
 
-    /**
-     * @return mixed
-     */
     public function denormalize($data, $class, $format = null, array $context = [])
     {
         if (isset($data['$ref'])) {

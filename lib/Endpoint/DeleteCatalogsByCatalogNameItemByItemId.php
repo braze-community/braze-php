@@ -139,6 +139,8 @@ class DeleteCatalogsByCatalogNameItemByItemId extends \Braze\Runtime\Client\Base
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\DeleteCatalogsByCatalogNameItemByItemIdBadRequestException
      * @throws \Braze\Exception\DeleteCatalogsByCatalogNameItemByItemIdUnauthorizedException
      * @throws \Braze\Exception\DeleteCatalogsByCatalogNameItemByItemIdForbiddenException

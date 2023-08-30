@@ -171,6 +171,8 @@ class GetCanvasDataSeries extends \Braze\Runtime\Client\BaseEndpoint implements 
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\GetCanvasDataSeriesBadRequestException
      * @throws \Braze\Exception\GetCanvasDataSeriesUnauthorizedException
      * @throws \Braze\Exception\GetCanvasDataSeriesForbiddenException

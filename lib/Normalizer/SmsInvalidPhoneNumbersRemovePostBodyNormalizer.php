@@ -37,9 +37,6 @@ class SmsInvalidPhoneNumbersRemovePostBodyNormalizer implements DenormalizerInte
         return is_object($data) && get_class($data) === 'Braze\\Model\\SmsInvalidPhoneNumbersRemovePostBody';
     }
 
-    /**
-     * @return mixed
-     */
     public function denormalize($data, $class, $format = null, array $context = [])
     {
         if (isset($data['$ref'])) {

@@ -125,6 +125,8 @@ class GetCanvasList extends \Braze\Runtime\Client\BaseEndpoint implements \Braze
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\GetCanvasListBadRequestException
      * @throws \Braze\Exception\GetCanvasListUnauthorizedException
      * @throws \Braze\Exception\GetCanvasListForbiddenException

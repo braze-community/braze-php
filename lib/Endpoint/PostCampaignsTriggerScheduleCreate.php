@@ -111,6 +111,8 @@ class PostCampaignsTriggerScheduleCreate extends \Braze\Runtime\Client\BaseEndpo
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\PostCampaignsTriggerScheduleCreateBadRequestException
      * @throws \Braze\Exception\PostCampaignsTriggerScheduleCreateUnauthorizedException
      * @throws \Braze\Exception\PostCampaignsTriggerScheduleCreateForbiddenException

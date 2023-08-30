@@ -188,6 +188,8 @@ class GetCatalogsByCatalogNameItem extends \Braze\Runtime\Client\BaseEndpoint im
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\GetCatalogsByCatalogNameItemBadRequestException
      * @throws \Braze\Exception\GetCatalogsByCatalogNameItemUnauthorizedException
      * @throws \Braze\Exception\GetCatalogsByCatalogNameItemForbiddenException

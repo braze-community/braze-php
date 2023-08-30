@@ -142,6 +142,8 @@ class PutScimV2UserById extends \Braze\Runtime\Client\BaseEndpoint implements \B
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\PutScimV2UserByIdBadRequestException
      * @throws \Braze\Exception\PutScimV2UserByIdUnauthorizedException
      * @throws \Braze\Exception\PutScimV2UserByIdForbiddenException

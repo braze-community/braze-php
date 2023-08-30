@@ -119,6 +119,8 @@ class PostPreferenceCenterV1 extends \Braze\Runtime\Client\BaseEndpoint implemen
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\PostPreferenceCenterV1BadRequestException
      * @throws \Braze\Exception\PostPreferenceCenterV1UnauthorizedException
      * @throws \Braze\Exception\PostPreferenceCenterV1ForbiddenException

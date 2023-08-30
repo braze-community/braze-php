@@ -113,6 +113,8 @@ class GetKpiDauDataSeries extends \Braze\Runtime\Client\BaseEndpoint implements 
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\GetKpiDauDataSeriesBadRequestException
      * @throws \Braze\Exception\GetKpiDauDataSeriesUnauthorizedException
      * @throws \Braze\Exception\GetKpiDauDataSeriesForbiddenException

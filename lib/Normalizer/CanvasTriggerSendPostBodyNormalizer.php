@@ -37,9 +37,6 @@ class CanvasTriggerSendPostBodyNormalizer implements DenormalizerInterface, Norm
         return is_object($data) && get_class($data) === 'Braze\\Model\\CanvasTriggerSendPostBody';
     }
 
-    /**
-     * @return mixed
-     */
     public function denormalize($data, $class, $format = null, array $context = [])
     {
         if (isset($data['$ref'])) {

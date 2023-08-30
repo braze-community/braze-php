@@ -270,6 +270,8 @@ class PostTransactionalV1CampaignsByCampaignIdSend extends \Braze\Runtime\Client
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\PostTransactionalV1CampaignsByCampaignIdSendBadRequestException
      * @throws \Braze\Exception\PostTransactionalV1CampaignsByCampaignIdSendUnauthorizedException
      * @throws \Braze\Exception\PostTransactionalV1CampaignsByCampaignIdSendForbiddenException

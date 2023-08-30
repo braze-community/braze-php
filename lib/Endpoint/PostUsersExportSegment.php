@@ -439,6 +439,8 @@ class PostUsersExportSegment extends \Braze\Runtime\Client\BaseEndpoint implemen
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\PostUsersExportSegmentBadRequestException
      * @throws \Braze\Exception\PostUsersExportSegmentUnauthorizedException
      * @throws \Braze\Exception\PostUsersExportSegmentForbiddenException

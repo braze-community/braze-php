@@ -134,6 +134,8 @@ class GetCanvasDetail extends \Braze\Runtime\Client\BaseEndpoint implements \Bra
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\GetCanvasDetailBadRequestException
      * @throws \Braze\Exception\GetCanvasDetailUnauthorizedException
      * @throws \Braze\Exception\GetCanvasDetailForbiddenException

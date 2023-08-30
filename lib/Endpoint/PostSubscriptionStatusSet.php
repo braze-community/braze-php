@@ -100,6 +100,8 @@ class PostSubscriptionStatusSet extends \Braze\Runtime\Client\BaseEndpoint imple
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\PostSubscriptionStatusSetBadRequestException
      * @throws \Braze\Exception\PostSubscriptionStatusSetUnauthorizedException
      * @throws \Braze\Exception\PostSubscriptionStatusSetForbiddenException

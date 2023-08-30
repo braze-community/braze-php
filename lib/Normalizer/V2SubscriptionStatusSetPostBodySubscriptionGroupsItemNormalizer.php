@@ -37,9 +37,6 @@ class V2SubscriptionStatusSetPostBodySubscriptionGroupsItemNormalizer implements
         return is_object($data) && get_class($data) === 'Braze\\Model\\V2SubscriptionStatusSetPostBodySubscriptionGroupsItem';
     }
 
-    /**
-     * @return mixed
-     */
     public function denormalize($data, $class, $format = null, array $context = [])
     {
         if (isset($data['$ref'])) {

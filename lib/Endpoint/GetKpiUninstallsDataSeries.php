@@ -114,6 +114,8 @@ class GetKpiUninstallsDataSeries extends \Braze\Runtime\Client\BaseEndpoint impl
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\GetKpiUninstallsDataSeriesBadRequestException
      * @throws \Braze\Exception\GetKpiUninstallsDataSeriesUnauthorizedException
      * @throws \Braze\Exception\GetKpiUninstallsDataSeriesForbiddenException

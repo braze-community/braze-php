@@ -37,9 +37,6 @@ class PreferenceCenterV1PreferenceCenterExternalIDPutBodyRecipientItemNormalizer
         return is_object($data) && get_class($data) === 'Braze\\Model\\PreferenceCenterV1PreferenceCenterExternalIDPutBodyRecipientItem';
     }
 
-    /**
-     * @return mixed
-     */
     public function denormalize($data, $class, $format = null, array $context = [])
     {
         if (isset($data['$ref'])) {

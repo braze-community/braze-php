@@ -122,6 +122,8 @@ class GetSessionsDataSeries extends \Braze\Runtime\Client\BaseEndpoint implement
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\GetSessionsDataSeriesBadRequestException
      * @throws \Braze\Exception\GetSessionsDataSeriesUnauthorizedException
      * @throws \Braze\Exception\GetSessionsDataSeriesForbiddenException

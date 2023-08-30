@@ -81,6 +81,8 @@ class PostEmailStatus extends \Braze\Runtime\Client\BaseEndpoint implements \Bra
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\PostEmailStatusBadRequestException
      * @throws \Braze\Exception\PostEmailStatusUnauthorizedException
      * @throws \Braze\Exception\PostEmailStatusForbiddenException

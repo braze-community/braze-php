@@ -142,6 +142,8 @@ class GetScimV2User extends \Braze\Runtime\Client\BaseEndpoint implements \Braze
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\GetScimV2UserBadRequestException
      * @throws \Braze\Exception\GetScimV2UserUnauthorizedException
      * @throws \Braze\Exception\GetScimV2UserForbiddenException
