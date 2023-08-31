@@ -37,9 +37,6 @@ class EmailBounceRemovePostBodyNormalizer implements DenormalizerInterface, Norm
         return is_object($data) && get_class($data) === 'Braze\\Model\\EmailBounceRemovePostBody';
     }
 
-    /**
-     * @return mixed
-     */
     public function denormalize($data, $class, $format = null, array $context = [])
     {
         if (isset($data['$ref'])) {

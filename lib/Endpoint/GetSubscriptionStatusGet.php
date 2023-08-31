@@ -115,6 +115,8 @@ class GetSubscriptionStatusGet extends \Braze\Runtime\Client\BaseEndpoint implem
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\GetSubscriptionStatusGetBadRequestException
      * @throws \Braze\Exception\GetSubscriptionStatusGetUnauthorizedException
      * @throws \Braze\Exception\GetSubscriptionStatusGetForbiddenException

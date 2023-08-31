@@ -106,6 +106,8 @@ class PostUsersExternalIdsRemove extends \Braze\Runtime\Client\BaseEndpoint impl
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\PostUsersExternalIdsRemoveBadRequestException
      * @throws \Braze\Exception\PostUsersExternalIdsRemoveUnauthorizedException
      * @throws \Braze\Exception\PostUsersExternalIdsRemoveForbiddenException

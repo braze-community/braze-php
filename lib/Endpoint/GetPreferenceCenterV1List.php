@@ -111,6 +111,8 @@ class GetPreferenceCenterV1List extends \Braze\Runtime\Client\BaseEndpoint imple
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\GetPreferenceCenterV1ListBadRequestException
      * @throws \Braze\Exception\GetPreferenceCenterV1ListUnauthorizedException
      * @throws \Braze\Exception\GetPreferenceCenterV1ListForbiddenException

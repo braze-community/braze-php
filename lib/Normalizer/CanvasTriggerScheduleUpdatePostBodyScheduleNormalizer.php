@@ -37,9 +37,6 @@ class CanvasTriggerScheduleUpdatePostBodyScheduleNormalizer implements Denormali
         return is_object($data) && get_class($data) === 'Braze\\Model\\CanvasTriggerScheduleUpdatePostBodySchedule';
     }
 
-    /**
-     * @return mixed
-     */
     public function denormalize($data, $class, $format = null, array $context = [])
     {
         if (isset($data['$ref'])) {

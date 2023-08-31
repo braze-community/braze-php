@@ -37,9 +37,6 @@ class TransactionalV1CampaignsCampaignIdSendPostBodyRecipientItemNormalizer impl
         return is_object($data) && get_class($data) === 'Braze\\Model\\TransactionalV1CampaignsCampaignIdSendPostBodyRecipientItem';
     }
 
-    /**
-     * @return mixed
-     */
     public function denormalize($data, $class, $format = null, array $context = [])
     {
         if (isset($data['$ref'])) {

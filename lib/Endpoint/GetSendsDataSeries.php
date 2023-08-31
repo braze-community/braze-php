@@ -149,6 +149,8 @@ class GetSendsDataSeries extends \Braze\Runtime\Client\BaseEndpoint implements \
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\GetSendsDataSeriesBadRequestException
      * @throws \Braze\Exception\GetSendsDataSeriesUnauthorizedException
      * @throws \Braze\Exception\GetSendsDataSeriesForbiddenException

@@ -114,6 +114,8 @@ class GetKpiNewUsersDataSeries extends \Braze\Runtime\Client\BaseEndpoint implem
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\GetKpiNewUsersDataSeriesBadRequestException
      * @throws \Braze\Exception\GetKpiNewUsersDataSeriesUnauthorizedException
      * @throws \Braze\Exception\GetKpiNewUsersDataSeriesForbiddenException

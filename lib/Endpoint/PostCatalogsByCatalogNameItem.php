@@ -186,6 +186,8 @@ class PostCatalogsByCatalogNameItem extends \Braze\Runtime\Client\BaseEndpoint i
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\PostCatalogsByCatalogNameItemBadRequestException
      * @throws \Braze\Exception\PostCatalogsByCatalogNameItemUnauthorizedException
      * @throws \Braze\Exception\PostCatalogsByCatalogNameItemForbiddenException

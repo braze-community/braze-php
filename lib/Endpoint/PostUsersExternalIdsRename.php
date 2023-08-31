@@ -130,6 +130,8 @@ class PostUsersExternalIdsRename extends \Braze\Runtime\Client\BaseEndpoint impl
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\PostUsersExternalIdsRenameBadRequestException
      * @throws \Braze\Exception\PostUsersExternalIdsRenameUnauthorizedException
      * @throws \Braze\Exception\PostUsersExternalIdsRenameForbiddenException

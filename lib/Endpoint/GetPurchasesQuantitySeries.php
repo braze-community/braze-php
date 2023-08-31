@@ -123,6 +123,8 @@ class GetPurchasesQuantitySeries extends \Braze\Runtime\Client\BaseEndpoint impl
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\GetPurchasesQuantitySeriesBadRequestException
      * @throws \Braze\Exception\GetPurchasesQuantitySeriesUnauthorizedException
      * @throws \Braze\Exception\GetPurchasesQuantitySeriesForbiddenException

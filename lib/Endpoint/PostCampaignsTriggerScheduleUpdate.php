@@ -86,6 +86,8 @@ class PostCampaignsTriggerScheduleUpdate extends \Braze\Runtime\Client\BaseEndpo
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\PostCampaignsTriggerScheduleUpdateBadRequestException
      * @throws \Braze\Exception\PostCampaignsTriggerScheduleUpdateUnauthorizedException
      * @throws \Braze\Exception\PostCampaignsTriggerScheduleUpdateForbiddenException

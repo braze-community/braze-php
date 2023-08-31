@@ -99,6 +99,8 @@ class DeleteScimV2UserById extends \Braze\Runtime\Client\BaseEndpoint implements
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\DeleteScimV2UserByIdBadRequestException
      * @throws \Braze\Exception\DeleteScimV2UserByIdUnauthorizedException
      * @throws \Braze\Exception\DeleteScimV2UserByIdForbiddenException

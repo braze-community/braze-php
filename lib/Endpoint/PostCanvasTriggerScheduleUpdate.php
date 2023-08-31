@@ -86,6 +86,8 @@ class PostCanvasTriggerScheduleUpdate extends \Braze\Runtime\Client\BaseEndpoint
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\PostCanvasTriggerScheduleUpdateBadRequestException
      * @throws \Braze\Exception\PostCanvasTriggerScheduleUpdateUnauthorizedException
      * @throws \Braze\Exception\PostCanvasTriggerScheduleUpdateForbiddenException

@@ -37,9 +37,6 @@ class MessagesLiveActivityUpdatePostBodyContentStateNormalizer implements Denorm
         return is_object($data) && get_class($data) === 'Braze\\Model\\MessagesLiveActivityUpdatePostBodyContentState';
     }
 
-    /**
-     * @return mixed
-     */
     public function denormalize($data, $class, $format = null, array $context = [])
     {
         if (isset($data['$ref'])) {

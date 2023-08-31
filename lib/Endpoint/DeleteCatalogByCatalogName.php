@@ -121,6 +121,8 @@ class DeleteCatalogByCatalogName extends \Braze\Runtime\Client\BaseEndpoint impl
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\DeleteCatalogByCatalogNameBadRequestException
      * @throws \Braze\Exception\DeleteCatalogByCatalogNameUnauthorizedException
      * @throws \Braze\Exception\DeleteCatalogByCatalogNameForbiddenException

@@ -110,6 +110,8 @@ class PostCanvasTriggerSend extends \Braze\Runtime\Client\BaseEndpoint implement
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\PostCanvasTriggerSendBadRequestException
      * @throws \Braze\Exception\PostCanvasTriggerSendUnauthorizedException
      * @throws \Braze\Exception\PostCanvasTriggerSendForbiddenException

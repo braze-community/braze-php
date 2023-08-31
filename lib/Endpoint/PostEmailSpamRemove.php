@@ -80,6 +80,8 @@ class PostEmailSpamRemove extends \Braze\Runtime\Client\BaseEndpoint implements 
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\PostEmailSpamRemoveBadRequestException
      * @throws \Braze\Exception\PostEmailSpamRemoveUnauthorizedException
      * @throws \Braze\Exception\PostEmailSpamRemoveForbiddenException

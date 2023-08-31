@@ -113,6 +113,8 @@ class GetFeedDetail extends \Braze\Runtime\Client\BaseEndpoint implements \Braze
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\GetFeedDetailBadRequestException
      * @throws \Braze\Exception\GetFeedDetailUnauthorizedException
      * @throws \Braze\Exception\GetFeedDetailForbiddenException

@@ -115,6 +115,8 @@ class GetScimV2UserById extends \Braze\Runtime\Client\BaseEndpoint implements \B
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\GetScimV2UserByIdBadRequestException
      * @throws \Braze\Exception\GetScimV2UserByIdUnauthorizedException
      * @throws \Braze\Exception\GetScimV2UserByIdForbiddenException

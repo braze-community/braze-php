@@ -115,6 +115,8 @@ class GetSegmentsList extends \Braze\Runtime\Client\BaseEndpoint implements \Bra
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\GetSegmentsListBadRequestException
      * @throws \Braze\Exception\GetSegmentsListUnauthorizedException
      * @throws \Braze\Exception\GetSegmentsListForbiddenException

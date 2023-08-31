@@ -119,6 +119,8 @@ class PostContentBlocksCreate extends \Braze\Runtime\Client\BaseEndpoint impleme
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\PostContentBlocksCreateBadRequestException
      * @throws \Braze\Exception\PostContentBlocksCreateUnauthorizedException
      * @throws \Braze\Exception\PostContentBlocksCreateForbiddenException

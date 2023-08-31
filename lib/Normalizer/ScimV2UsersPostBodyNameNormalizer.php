@@ -37,9 +37,6 @@ class ScimV2UsersPostBodyNameNormalizer implements DenormalizerInterface, Normal
         return is_object($data) && get_class($data) === 'Braze\\Model\\ScimV2UsersPostBodyName';
     }
 
-    /**
-     * @return mixed
-     */
     public function denormalize($data, $class, $format = null, array $context = [])
     {
         if (isset($data['$ref'])) {

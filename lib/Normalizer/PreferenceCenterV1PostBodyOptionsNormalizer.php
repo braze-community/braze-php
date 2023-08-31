@@ -37,9 +37,6 @@ class PreferenceCenterV1PostBodyOptionsNormalizer implements DenormalizerInterfa
         return is_object($data) && get_class($data) === 'Braze\\Model\\PreferenceCenterV1PostBodyOptions';
     }
 
-    /**
-     * @return mixed
-     */
     public function denormalize($data, $class, $format = null, array $context = [])
     {
         if (isset($data['$ref'])) {

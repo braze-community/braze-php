@@ -95,6 +95,8 @@ class PostCanvasTriggerScheduleCreate extends \Braze\Runtime\Client\BaseEndpoint
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\PostCanvasTriggerScheduleCreateBadRequestException
      * @throws \Braze\Exception\PostCanvasTriggerScheduleCreateUnauthorizedException
      * @throws \Braze\Exception\PostCanvasTriggerScheduleCreateForbiddenException

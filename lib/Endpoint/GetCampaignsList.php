@@ -124,6 +124,8 @@ class GetCampaignsList extends \Braze\Runtime\Client\BaseEndpoint implements \Br
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\GetCampaignsListBadRequestException
      * @throws \Braze\Exception\GetCampaignsListUnauthorizedException
      * @throws \Braze\Exception\GetCampaignsListForbiddenException

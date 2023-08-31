@@ -151,6 +151,8 @@ class PostUsersIdentify extends \Braze\Runtime\Client\BaseEndpoint implements \B
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\PostUsersIdentifyBadRequestException
      * @throws \Braze\Exception\PostUsersIdentifyUnauthorizedException
      * @throws \Braze\Exception\PostUsersIdentifyForbiddenException

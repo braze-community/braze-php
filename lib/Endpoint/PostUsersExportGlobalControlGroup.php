@@ -295,6 +295,8 @@ class PostUsersExportGlobalControlGroup extends \Braze\Runtime\Client\BaseEndpoi
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\PostUsersExportGlobalControlGroupBadRequestException
      * @throws \Braze\Exception\PostUsersExportGlobalControlGroupUnauthorizedException
      * @throws \Braze\Exception\PostUsersExportGlobalControlGroupForbiddenException

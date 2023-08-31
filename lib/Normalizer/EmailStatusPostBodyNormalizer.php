@@ -37,9 +37,6 @@ class EmailStatusPostBodyNormalizer implements DenormalizerInterface, Normalizer
         return is_object($data) && get_class($data) === 'Braze\\Model\\EmailStatusPostBody';
     }
 
-    /**
-     * @return mixed
-     */
     public function denormalize($data, $class, $format = null, array $context = [])
     {
         if (isset($data['$ref'])) {

@@ -37,9 +37,6 @@ class SubscriptionStatusSetPostBodyNormalizer implements DenormalizerInterface, 
         return is_object($data) && get_class($data) === 'Braze\\Model\\SubscriptionStatusSetPostBody';
     }
 
-    /**
-     * @return mixed
-     */
     public function denormalize($data, $class, $format = null, array $context = [])
     {
         if (isset($data['$ref'])) {

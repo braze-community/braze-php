@@ -82,6 +82,8 @@ class PostMessagesScheduleUpdate extends \Braze\Runtime\Client\BaseEndpoint impl
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\PostMessagesScheduleUpdateBadRequestException
      * @throws \Braze\Exception\PostMessagesScheduleUpdateUnauthorizedException
      * @throws \Braze\Exception\PostMessagesScheduleUpdateForbiddenException

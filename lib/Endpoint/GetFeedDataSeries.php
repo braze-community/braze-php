@@ -124,6 +124,8 @@ class GetFeedDataSeries extends \Braze\Runtime\Client\BaseEndpoint implements \B
     }
 
     /**
+     * @return null
+     *
      * @throws \Braze\Exception\GetFeedDataSeriesBadRequestException
      * @throws \Braze\Exception\GetFeedDataSeriesUnauthorizedException
      * @throws \Braze\Exception\GetFeedDataSeriesForbiddenException
