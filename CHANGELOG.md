@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.1](https://github.com/braze-community/braze-php/compare/v1.3.0...v1.3.1) (2023-10-09)
+
+
+### Bug Fixes
+
+* **lib:** replace `findUrlFactory` with `findUriFactory` in Client.php ([f9aec37](https://github.com/braze-community/braze-php/commit/f9aec37398220f0627ff3efea7f31a300e51f721))
+
 ## [1.3.0](https://github.com/braze-community/braze-php/compare/v1.2.0...v1.3.0) (2023-08-31)
 
 
