@@ -58,7 +58,11 @@ class CanvasTriggerSendPostBodyRecipientsItemNormalizer implements DenormalizerI
             unset($data['external_user_id']);
         }
         if (\array_key_exists('trigger_properties', $data)) {
-            $object->setTriggerProperties($data['trigger_properties']);
+            $values = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+            foreach ($data['trigger_properties'] as $key => $value) {
+                $values[$key] = $value;
+            }
+            $object->setTriggerProperties($values);
             unset($data['trigger_properties']);
         }
         if (\array_key_exists('canvas_entry_properties', $data)) {
@@ -73,9 +77,9 @@ class CanvasTriggerSendPostBodyRecipientsItemNormalizer implements DenormalizerI
             $object->setAttributes($this->denormalizer->denormalize($data['attributes'], 'Braze\\Model\\CanvasTriggerSendPostBodyRecipientsItemAttributes', 'json', $context));
             unset($data['attributes']);
         }
-        foreach ($data as $key => $value) {
-            if (preg_match('/.*/', (string) $key)) {
-                $object[$key] = $value;
+        foreach ($data as $key_1 => $value_1) {
+            if (preg_match('/.*/', (string) $key_1)) {
+                $object[$key_1] = $value_1;
             }
         }
 
@@ -95,7 +99,11 @@ class CanvasTriggerSendPostBodyRecipientsItemNormalizer implements DenormalizerI
             $data['external_user_id'] = $object->getExternalUserId();
         }
         if ($object->isInitialized('triggerProperties') && null !== $object->getTriggerProperties()) {
-            $data['trigger_properties'] = $object->getTriggerProperties();
+            $values = [];
+            foreach ($object->getTriggerProperties() as $key => $value) {
+                $values[$key] = $value;
+            }
+            $data['trigger_properties'] = $values;
         }
         if ($object->isInitialized('canvasEntryProperties') && null !== $object->getCanvasEntryProperties()) {
             $data['canvas_entry_properties'] = $object->getCanvasEntryProperties();
@@ -106,9 +114,9 @@ class CanvasTriggerSendPostBodyRecipientsItemNormalizer implements DenormalizerI
         if ($object->isInitialized('attributes') && null !== $object->getAttributes()) {
             $data['attributes'] = $this->normalizer->normalize($object->getAttributes(), 'json', $context);
         }
-        foreach ($object as $key => $value) {
-            if (preg_match('/.*/', (string) $key)) {
-                $data[$key] = $value;
+        foreach ($object as $key_1 => $value_1) {
+            if (preg_match('/.*/', (string) $key_1)) {
+                $data[$key_1] = $value_1;
             }
         }
 
