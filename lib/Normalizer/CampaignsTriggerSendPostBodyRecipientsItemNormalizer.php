@@ -58,7 +58,11 @@ class CampaignsTriggerSendPostBodyRecipientsItemNormalizer implements Denormaliz
             unset($data['external_user_id']);
         }
         if (\array_key_exists('trigger_properties', $data)) {
-            $object->setTriggerProperties($data['trigger_properties']);
+            $values = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+            foreach ($data['trigger_properties'] as $key => $value) {
+                $values[$key] = $value;
+            }
+            $object->setTriggerProperties($values);
             unset($data['trigger_properties']);
         }
         if (\array_key_exists('send_to_existing_only', $data)) {
@@ -69,9 +73,9 @@ class CampaignsTriggerSendPostBodyRecipientsItemNormalizer implements Denormaliz
             $object->setAttributes($this->denormalizer->denormalize($data['attributes'], 'Braze\\Model\\CampaignsTriggerSendPostBodyRecipientsItemAttributes', 'json', $context));
             unset($data['attributes']);
         }
-        foreach ($data as $key => $value) {
-            if (preg_match('/.*/', (string) $key)) {
-                $object[$key] = $value;
+        foreach ($data as $key_1 => $value_1) {
+            if (preg_match('/.*/', (string) $key_1)) {
+                $object[$key_1] = $value_1;
             }
         }
 
@@ -91,7 +95,11 @@ class CampaignsTriggerSendPostBodyRecipientsItemNormalizer implements Denormaliz
             $data['external_user_id'] = $object->getExternalUserId();
         }
         if ($object->isInitialized('triggerProperties') && null !== $object->getTriggerProperties()) {
-            $data['trigger_properties'] = $object->getTriggerProperties();
+            $values = [];
+            foreach ($object->getTriggerProperties() as $key => $value) {
+                $values[$key] = $value;
+            }
+            $data['trigger_properties'] = $values;
         }
         if ($object->isInitialized('sendToExistingOnly') && null !== $object->getSendToExistingOnly()) {
             $data['send_to_existing_only'] = $object->getSendToExistingOnly();
@@ -99,9 +107,9 @@ class CampaignsTriggerSendPostBodyRecipientsItemNormalizer implements Denormaliz
         if ($object->isInitialized('attributes') && null !== $object->getAttributes()) {
             $data['attributes'] = $this->normalizer->normalize($object->getAttributes(), 'json', $context);
         }
-        foreach ($object as $key => $value) {
-            if (preg_match('/.*/', (string) $key)) {
-                $data[$key] = $value;
+        foreach ($object as $key_1 => $value_1) {
+            if (preg_match('/.*/', (string) $key_1)) {
+                $data[$key_1] = $value_1;
             }
         }
 

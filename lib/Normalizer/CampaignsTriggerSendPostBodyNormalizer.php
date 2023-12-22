@@ -58,7 +58,11 @@ class CampaignsTriggerSendPostBodyNormalizer implements DenormalizerInterface, N
             unset($data['send_id']);
         }
         if (\array_key_exists('trigger_properties', $data)) {
-            $object->setTriggerProperties($data['trigger_properties']);
+            $values = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+            foreach ($data['trigger_properties'] as $key => $value) {
+                $values[$key] = $value;
+            }
+            $object->setTriggerProperties($values);
             unset($data['trigger_properties']);
         }
         if (\array_key_exists('broadcast', $data)) {
@@ -70,16 +74,16 @@ class CampaignsTriggerSendPostBodyNormalizer implements DenormalizerInterface, N
             unset($data['audience']);
         }
         if (\array_key_exists('recipients', $data)) {
-            $values = [];
-            foreach ($data['recipients'] as $value) {
-                $values[] = $this->denormalizer->denormalize($value, 'Braze\\Model\\CampaignsTriggerSendPostBodyRecipientsItem', 'json', $context);
+            $values_1 = [];
+            foreach ($data['recipients'] as $value_1) {
+                $values_1[] = $this->denormalizer->denormalize($value_1, 'Braze\\Model\\CampaignsTriggerSendPostBodyRecipientsItem', 'json', $context);
             }
-            $object->setRecipients($values);
+            $object->setRecipients($values_1);
             unset($data['recipients']);
         }
-        foreach ($data as $key => $value_1) {
-            if (preg_match('/.*/', (string) $key)) {
-                $object[$key] = $value_1;
+        foreach ($data as $key_1 => $value_2) {
+            if (preg_match('/.*/', (string) $key_1)) {
+                $object[$key_1] = $value_2;
             }
         }
 
@@ -99,7 +103,11 @@ class CampaignsTriggerSendPostBodyNormalizer implements DenormalizerInterface, N
             $data['send_id'] = $object->getSendId();
         }
         if ($object->isInitialized('triggerProperties') && null !== $object->getTriggerProperties()) {
-            $data['trigger_properties'] = $object->getTriggerProperties();
+            $values = [];
+            foreach ($object->getTriggerProperties() as $key => $value) {
+                $values[$key] = $value;
+            }
+            $data['trigger_properties'] = $values;
         }
         if ($object->isInitialized('broadcast') && null !== $object->getBroadcast()) {
             $data['broadcast'] = $object->getBroadcast();
@@ -108,15 +116,15 @@ class CampaignsTriggerSendPostBodyNormalizer implements DenormalizerInterface, N
             $data['audience'] = $this->normalizer->normalize($object->getAudience(), 'json', $context);
         }
         if ($object->isInitialized('recipients') && null !== $object->getRecipients()) {
-            $values = [];
-            foreach ($object->getRecipients() as $value) {
-                $values[] = $this->normalizer->normalize($value, 'json', $context);
+            $values_1 = [];
+            foreach ($object->getRecipients() as $value_1) {
+                $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
             }
-            $data['recipients'] = $values;
+            $data['recipients'] = $values_1;
         }
-        foreach ($object as $key => $value_1) {
-            if (preg_match('/.*/', (string) $key)) {
-                $data[$key] = $value_1;
+        foreach ($object as $key_1 => $value_2) {
+            if (preg_match('/.*/', (string) $key_1)) {
+                $data[$key_1] = $value_2;
             }
         }
 

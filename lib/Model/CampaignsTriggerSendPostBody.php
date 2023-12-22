@@ -30,7 +30,7 @@ class CampaignsTriggerSendPostBody extends \ArrayObject
      */
     protected $sendId;
     /**
-     * @var string
+     * @var array<string, mixed>
      */
     protected $triggerProperties;
     /**
@@ -72,12 +72,18 @@ class CampaignsTriggerSendPostBody extends \ArrayObject
         return $this;
     }
 
-    public function getTriggerProperties(): string
+    /**
+     * @return array<string, mixed>
+     */
+    public function getTriggerProperties(): iterable
     {
         return $this->triggerProperties;
     }
 
-    public function setTriggerProperties(string $triggerProperties): self
+    /**
+     * @param array<string, mixed> $triggerProperties
+     */
+    public function setTriggerProperties(iterable $triggerProperties): self
     {
         $this->initialized['triggerProperties'] = true;
         $this->triggerProperties = $triggerProperties;

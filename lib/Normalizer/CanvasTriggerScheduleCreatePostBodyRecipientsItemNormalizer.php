@@ -58,20 +58,24 @@ class CanvasTriggerScheduleCreatePostBodyRecipientsItemNormalizer implements Den
             unset($data['external_user_id']);
         }
         if (\array_key_exists('trigger_properties', $data)) {
-            $object->setTriggerProperties($data['trigger_properties']);
+            $values = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+            foreach ($data['trigger_properties'] as $key => $value) {
+                $values[$key] = $value;
+            }
+            $object->setTriggerProperties($values);
             unset($data['trigger_properties']);
         }
         if (\array_key_exists('canvas_entry_properties', $data)) {
-            $values = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
-            foreach ($data['canvas_entry_properties'] as $key => $value) {
-                $values[$key] = $value;
+            $values_1 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+            foreach ($data['canvas_entry_properties'] as $key_1 => $value_1) {
+                $values_1[$key_1] = $value_1;
             }
-            $object->setCanvasEntryProperties($values);
+            $object->setCanvasEntryProperties($values_1);
             unset($data['canvas_entry_properties']);
         }
-        foreach ($data as $key_1 => $value_1) {
-            if (preg_match('/.*/', (string) $key_1)) {
-                $object[$key_1] = $value_1;
+        foreach ($data as $key_2 => $value_2) {
+            if (preg_match('/.*/', (string) $key_2)) {
+                $object[$key_2] = $value_2;
             }
         }
 
@@ -91,18 +95,22 @@ class CanvasTriggerScheduleCreatePostBodyRecipientsItemNormalizer implements Den
             $data['external_user_id'] = $object->getExternalUserId();
         }
         if ($object->isInitialized('triggerProperties') && null !== $object->getTriggerProperties()) {
-            $data['trigger_properties'] = $object->getTriggerProperties();
-        }
-        if ($object->isInitialized('canvasEntryProperties') && null !== $object->getCanvasEntryProperties()) {
             $values = [];
-            foreach ($object->getCanvasEntryProperties() as $key => $value) {
+            foreach ($object->getTriggerProperties() as $key => $value) {
                 $values[$key] = $value;
             }
-            $data['canvas_entry_properties'] = $values;
+            $data['trigger_properties'] = $values;
         }
-        foreach ($object as $key_1 => $value_1) {
-            if (preg_match('/.*/', (string) $key_1)) {
-                $data[$key_1] = $value_1;
+        if ($object->isInitialized('canvasEntryProperties') && null !== $object->getCanvasEntryProperties()) {
+            $values_1 = [];
+            foreach ($object->getCanvasEntryProperties() as $key_1 => $value_1) {
+                $values_1[$key_1] = $value_1;
+            }
+            $data['canvas_entry_properties'] = $values_1;
+        }
+        foreach ($object as $key_2 => $value_2) {
+            if (preg_match('/.*/', (string) $key_2)) {
+                $data[$key_2] = $value_2;
             }
         }
 
