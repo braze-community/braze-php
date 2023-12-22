@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.2](https://github.com/braze-community/braze-php/compare/v1.3.1...v1.3.2) (2023-12-22)
+
+
+### Bug Fixes
+
+* **lib:** update 'trigger_properties' so that it's an object ([3abc609](https://github.com/braze-community/braze-php/commit/3abc6097ef37eba3a58bcbcda358d73109541cfb)), closes [#37](https://github.com/braze-community/braze-php/issues/37)
+
 ## [1.3.1](https://github.com/braze-community/braze-php/compare/v1.3.0...v1.3.1) (2023-10-09)
 
 
