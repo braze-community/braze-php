@@ -13,6 +13,7 @@ namespace Braze\Normalizer;
 use Braze\Runtime\Normalizer\CheckArray;
 use Braze\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -20,104 +21,205 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class CanvasTriggerSendPostBodyNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
-{
-    use DenormalizerAwareTrait;
-    use NormalizerAwareTrait;
-    use CheckArray;
-    use ValidatorTrait;
-
-    public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
+if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
+    class CanvasTriggerSendPostBodyNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        return $type === 'Braze\\Model\\CanvasTriggerSendPostBody';
-    }
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-    public function supportsNormalization($data, $format = null, array $context = []): bool
-    {
-        return is_object($data) && get_class($data) === 'Braze\\Model\\CanvasTriggerSendPostBody';
-    }
-
-    public function denormalize($data, $class, $format = null, array $context = [])
-    {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        public function supportsDenormalization(mixed $data, string $type, string $format = null, array $context = []): bool
+        {
+            return $type === 'Braze\\Model\\CanvasTriggerSendPostBody';
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+
+        public function supportsNormalization(mixed $data, string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === 'Braze\\Model\\CanvasTriggerSendPostBody';
         }
-        $object = new \Braze\Model\CanvasTriggerSendPostBody();
-        if (null === $data || false === \is_array($data)) {
+
+        public function denormalize(mixed $data, string $type, string $format = null, array $context = []): mixed
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \Braze\Model\CanvasTriggerSendPostBody();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('canvas_id', $data)) {
+                $object->setCanvasId($data['canvas_id']);
+                unset($data['canvas_id']);
+            }
+            if (\array_key_exists('canvas_entry_properties', $data)) {
+                $object->setCanvasEntryProperties($this->denormalizer->denormalize($data['canvas_entry_properties'], 'Braze\\Model\\CanvasTriggerSendPostBodyCanvasEntryProperties', 'json', $context));
+                unset($data['canvas_entry_properties']);
+            }
+            if (\array_key_exists('broadcast', $data)) {
+                $object->setBroadcast($data['broadcast']);
+                unset($data['broadcast']);
+            }
+            if (\array_key_exists('audience', $data)) {
+                $object->setAudience($this->denormalizer->denormalize($data['audience'], 'Braze\\Model\\CanvasTriggerSendPostBodyAudience', 'json', $context));
+                unset($data['audience']);
+            }
+            if (\array_key_exists('recipients', $data)) {
+                $values = [];
+                foreach ($data['recipients'] as $value) {
+                    $values[] = $this->denormalizer->denormalize($value, 'Braze\\Model\\CanvasTriggerSendPostBodyRecipientsItem', 'json', $context);
+                }
+                $object->setRecipients($values);
+                unset($data['recipients']);
+            }
+            foreach ($data as $key => $value_1) {
+                if (preg_match('/.*/', (string) $key)) {
+                    $object[$key] = $value_1;
+                }
+            }
+
             return $object;
         }
-        if (\array_key_exists('canvas_id', $data)) {
-            $object->setCanvasId($data['canvas_id']);
-            unset($data['canvas_id']);
-        }
-        if (\array_key_exists('canvas_entry_properties', $data)) {
-            $object->setCanvasEntryProperties($this->denormalizer->denormalize($data['canvas_entry_properties'], 'Braze\\Model\\CanvasTriggerSendPostBodyCanvasEntryProperties', 'json', $context));
-            unset($data['canvas_entry_properties']);
-        }
-        if (\array_key_exists('broadcast', $data)) {
-            $object->setBroadcast($data['broadcast']);
-            unset($data['broadcast']);
-        }
-        if (\array_key_exists('audience', $data)) {
-            $object->setAudience($this->denormalizer->denormalize($data['audience'], 'Braze\\Model\\CanvasTriggerSendPostBodyAudience', 'json', $context));
-            unset($data['audience']);
-        }
-        if (\array_key_exists('recipients', $data)) {
-            $values = [];
-            foreach ($data['recipients'] as $value) {
-                $values[] = $this->denormalizer->denormalize($value, 'Braze\\Model\\CanvasTriggerSendPostBodyRecipientsItem', 'json', $context);
+
+        public function normalize(mixed $object, string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+        {
+            $data = [];
+            if ($object->isInitialized('canvasId') && null !== $object->getCanvasId()) {
+                $data['canvas_id'] = $object->getCanvasId();
             }
-            $object->setRecipients($values);
-            unset($data['recipients']);
-        }
-        foreach ($data as $key => $value_1) {
-            if (preg_match('/.*/', (string) $key)) {
-                $object[$key] = $value_1;
+            if ($object->isInitialized('canvasEntryProperties') && null !== $object->getCanvasEntryProperties()) {
+                $data['canvas_entry_properties'] = $this->normalizer->normalize($object->getCanvasEntryProperties(), 'json', $context);
             }
+            if ($object->isInitialized('broadcast') && null !== $object->getBroadcast()) {
+                $data['broadcast'] = $object->getBroadcast();
+            }
+            if ($object->isInitialized('audience') && null !== $object->getAudience()) {
+                $data['audience'] = $this->normalizer->normalize($object->getAudience(), 'json', $context);
+            }
+            if ($object->isInitialized('recipients') && null !== $object->getRecipients()) {
+                $values = [];
+                foreach ($object->getRecipients() as $value) {
+                    $values[] = $this->normalizer->normalize($value, 'json', $context);
+                }
+                $data['recipients'] = $values;
+            }
+            foreach ($object as $key => $value_1) {
+                if (preg_match('/.*/', (string) $key)) {
+                    $data[$key] = $value_1;
+                }
+            }
+
+            return $data;
         }
 
-        return $object;
+        public function getSupportedTypes(string $format = null): array
+        {
+            return ['Braze\\Model\\CanvasTriggerSendPostBody' => false];
+        }
     }
-
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = [])
+} else {
+    class CanvasTriggerSendPostBodyNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        $data = [];
-        if ($object->isInitialized('canvasId') && null !== $object->getCanvasId()) {
-            $data['canvas_id'] = $object->getCanvasId();
-        }
-        if ($object->isInitialized('canvasEntryProperties') && null !== $object->getCanvasEntryProperties()) {
-            $data['canvas_entry_properties'] = $this->normalizer->normalize($object->getCanvasEntryProperties(), 'json', $context);
-        }
-        if ($object->isInitialized('broadcast') && null !== $object->getBroadcast()) {
-            $data['broadcast'] = $object->getBroadcast();
-        }
-        if ($object->isInitialized('audience') && null !== $object->getAudience()) {
-            $data['audience'] = $this->normalizer->normalize($object->getAudience(), 'json', $context);
-        }
-        if ($object->isInitialized('recipients') && null !== $object->getRecipients()) {
-            $values = [];
-            foreach ($object->getRecipients() as $value) {
-                $values[] = $this->normalizer->normalize($value, 'json', $context);
-            }
-            $data['recipients'] = $values;
-        }
-        foreach ($object as $key => $value_1) {
-            if (preg_match('/.*/', (string) $key)) {
-                $data[$key] = $value_1;
-            }
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
+
+        public function supportsDenormalization($data, $type, string $format = null, array $context = []): bool
+        {
+            return $type === 'Braze\\Model\\CanvasTriggerSendPostBody';
         }
 
-        return $data;
-    }
+        public function supportsNormalization(mixed $data, string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === 'Braze\\Model\\CanvasTriggerSendPostBody';
+        }
 
-    public function getSupportedTypes(string $format = null): array
-    {
-        return ['Braze\\Model\\CanvasTriggerSendPostBody' => false];
+        public function denormalize($data, $type, $format = null, array $context = [])
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \Braze\Model\CanvasTriggerSendPostBody();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('canvas_id', $data)) {
+                $object->setCanvasId($data['canvas_id']);
+                unset($data['canvas_id']);
+            }
+            if (\array_key_exists('canvas_entry_properties', $data)) {
+                $object->setCanvasEntryProperties($this->denormalizer->denormalize($data['canvas_entry_properties'], 'Braze\\Model\\CanvasTriggerSendPostBodyCanvasEntryProperties', 'json', $context));
+                unset($data['canvas_entry_properties']);
+            }
+            if (\array_key_exists('broadcast', $data)) {
+                $object->setBroadcast($data['broadcast']);
+                unset($data['broadcast']);
+            }
+            if (\array_key_exists('audience', $data)) {
+                $object->setAudience($this->denormalizer->denormalize($data['audience'], 'Braze\\Model\\CanvasTriggerSendPostBodyAudience', 'json', $context));
+                unset($data['audience']);
+            }
+            if (\array_key_exists('recipients', $data)) {
+                $values = [];
+                foreach ($data['recipients'] as $value) {
+                    $values[] = $this->denormalizer->denormalize($value, 'Braze\\Model\\CanvasTriggerSendPostBodyRecipientsItem', 'json', $context);
+                }
+                $object->setRecipients($values);
+                unset($data['recipients']);
+            }
+            foreach ($data as $key => $value_1) {
+                if (preg_match('/.*/', (string) $key)) {
+                    $object[$key] = $value_1;
+                }
+            }
+
+            return $object;
+        }
+
+        /**
+         * @return array|string|int|float|bool|\ArrayObject|null
+         */
+        public function normalize($object, $format = null, array $context = [])
+        {
+            $data = [];
+            if ($object->isInitialized('canvasId') && null !== $object->getCanvasId()) {
+                $data['canvas_id'] = $object->getCanvasId();
+            }
+            if ($object->isInitialized('canvasEntryProperties') && null !== $object->getCanvasEntryProperties()) {
+                $data['canvas_entry_properties'] = $this->normalizer->normalize($object->getCanvasEntryProperties(), 'json', $context);
+            }
+            if ($object->isInitialized('broadcast') && null !== $object->getBroadcast()) {
+                $data['broadcast'] = $object->getBroadcast();
+            }
+            if ($object->isInitialized('audience') && null !== $object->getAudience()) {
+                $data['audience'] = $this->normalizer->normalize($object->getAudience(), 'json', $context);
+            }
+            if ($object->isInitialized('recipients') && null !== $object->getRecipients()) {
+                $values = [];
+                foreach ($object->getRecipients() as $value) {
+                    $values[] = $this->normalizer->normalize($value, 'json', $context);
+                }
+                $data['recipients'] = $values;
+            }
+            foreach ($object as $key => $value_1) {
+                if (preg_match('/.*/', (string) $key)) {
+                    $data[$key] = $value_1;
+                }
+            }
+
+            return $data;
+        }
+
+        public function getSupportedTypes(string $format = null): array
+        {
+            return ['Braze\\Model\\CanvasTriggerSendPostBody' => false];
+        }
     }
 }
