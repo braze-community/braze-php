@@ -13,7 +13,6 @@ namespace Braze\Normalizer;
 use Braze\Runtime\Normalizer\CheckArray;
 use Braze\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
-use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -21,147 +20,75 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
-    class MessagesLiveActivityUpdatePostBodyContentStateNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
+class MessagesLiveActivityUpdatePostBodyContentStateNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
+{
+    use DenormalizerAwareTrait;
+    use NormalizerAwareTrait;
+    use CheckArray;
+    use ValidatorTrait;
+
+    public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
     {
-        use DenormalizerAwareTrait;
-        use NormalizerAwareTrait;
-        use CheckArray;
-        use ValidatorTrait;
-
-        public function supportsDenormalization(mixed $data, string $type, string $format = null, array $context = []): bool
-        {
-            return $type === 'Braze\\Model\\MessagesLiveActivityUpdatePostBodyContentState';
-        }
-
-        public function supportsNormalization(mixed $data, string $format = null, array $context = []): bool
-        {
-            return is_object($data) && get_class($data) === 'Braze\\Model\\MessagesLiveActivityUpdatePostBodyContentState';
-        }
-
-        public function denormalize(mixed $data, string $type, string $format = null, array $context = []): mixed
-        {
-            if (isset($data['$ref'])) {
-                return new Reference($data['$ref'], $context['document-origin']);
-            }
-            if (isset($data['$recursiveRef'])) {
-                return new Reference($data['$recursiveRef'], $context['document-origin']);
-            }
-            $object = new \Braze\Model\MessagesLiveActivityUpdatePostBodyContentState();
-            if (null === $data || false === \is_array($data)) {
-                return $object;
-            }
-            if (\array_key_exists('teamOneScore', $data)) {
-                $object->setTeamOneScore($data['teamOneScore']);
-                unset($data['teamOneScore']);
-            }
-            if (\array_key_exists('teamTwoScore', $data)) {
-                $object->setTeamTwoScore($data['teamTwoScore']);
-                unset($data['teamTwoScore']);
-            }
-            foreach ($data as $key => $value) {
-                if (preg_match('/.*/', (string) $key)) {
-                    $object[$key] = $value;
-                }
-            }
-
-            return $object;
-        }
-
-        public function normalize(mixed $object, string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
-        {
-            $data = [];
-            if ($object->isInitialized('teamOneScore') && null !== $object->getTeamOneScore()) {
-                $data['teamOneScore'] = $object->getTeamOneScore();
-            }
-            if ($object->isInitialized('teamTwoScore') && null !== $object->getTeamTwoScore()) {
-                $data['teamTwoScore'] = $object->getTeamTwoScore();
-            }
-            foreach ($object as $key => $value) {
-                if (preg_match('/.*/', (string) $key)) {
-                    $data[$key] = $value;
-                }
-            }
-
-            return $data;
-        }
-
-        public function getSupportedTypes(string $format = null): array
-        {
-            return ['Braze\\Model\\MessagesLiveActivityUpdatePostBodyContentState' => false];
-        }
+        return $type === 'Braze\\Model\\MessagesLiveActivityUpdatePostBodyContentState';
     }
-} else {
-    class MessagesLiveActivityUpdatePostBodyContentStateNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
+
+    public function supportsNormalization($data, $format = null, array $context = []): bool
     {
-        use DenormalizerAwareTrait;
-        use NormalizerAwareTrait;
-        use CheckArray;
-        use ValidatorTrait;
+        return is_object($data) && get_class($data) === 'Braze\\Model\\MessagesLiveActivityUpdatePostBodyContentState';
+    }
 
-        public function supportsDenormalization($data, $type, string $format = null, array $context = []): bool
-        {
-            return $type === 'Braze\\Model\\MessagesLiveActivityUpdatePostBodyContentState';
+    public function denormalize($data, $class, $format = null, array $context = [])
+    {
+        if (isset($data['$ref'])) {
+            return new Reference($data['$ref'], $context['document-origin']);
         }
-
-        public function supportsNormalization(mixed $data, string $format = null, array $context = []): bool
-        {
-            return is_object($data) && get_class($data) === 'Braze\\Model\\MessagesLiveActivityUpdatePostBodyContentState';
+        if (isset($data['$recursiveRef'])) {
+            return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
-
-        public function denormalize($data, $type, $format = null, array $context = [])
-        {
-            if (isset($data['$ref'])) {
-                return new Reference($data['$ref'], $context['document-origin']);
-            }
-            if (isset($data['$recursiveRef'])) {
-                return new Reference($data['$recursiveRef'], $context['document-origin']);
-            }
-            $object = new \Braze\Model\MessagesLiveActivityUpdatePostBodyContentState();
-            if (null === $data || false === \is_array($data)) {
-                return $object;
-            }
-            if (\array_key_exists('teamOneScore', $data)) {
-                $object->setTeamOneScore($data['teamOneScore']);
-                unset($data['teamOneScore']);
-            }
-            if (\array_key_exists('teamTwoScore', $data)) {
-                $object->setTeamTwoScore($data['teamTwoScore']);
-                unset($data['teamTwoScore']);
-            }
-            foreach ($data as $key => $value) {
-                if (preg_match('/.*/', (string) $key)) {
-                    $object[$key] = $value;
-                }
-            }
-
+        $object = new \Braze\Model\MessagesLiveActivityUpdatePostBodyContentState();
+        if (null === $data || false === \is_array($data)) {
             return $object;
         }
-
-        /**
-         * @return array|string|int|float|bool|\ArrayObject|null
-         */
-        public function normalize($object, $format = null, array $context = [])
-        {
-            $data = [];
-            if ($object->isInitialized('teamOneScore') && null !== $object->getTeamOneScore()) {
-                $data['teamOneScore'] = $object->getTeamOneScore();
+        if (\array_key_exists('teamOneScore', $data)) {
+            $object->setTeamOneScore($data['teamOneScore']);
+            unset($data['teamOneScore']);
+        }
+        if (\array_key_exists('teamTwoScore', $data)) {
+            $object->setTeamTwoScore($data['teamTwoScore']);
+            unset($data['teamTwoScore']);
+        }
+        foreach ($data as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $object[$key] = $value;
             }
-            if ($object->isInitialized('teamTwoScore') && null !== $object->getTeamTwoScore()) {
-                $data['teamTwoScore'] = $object->getTeamTwoScore();
-            }
-            foreach ($object as $key => $value) {
-                if (preg_match('/.*/', (string) $key)) {
-                    $data[$key] = $value;
-                }
-            }
-
-            return $data;
         }
 
-        public function getSupportedTypes(string $format = null): array
-        {
-            return ['Braze\\Model\\MessagesLiveActivityUpdatePostBodyContentState' => false];
+        return $object;
+    }
+
+    /**
+     * @return array|string|int|float|bool|\ArrayObject|null
+     */
+    public function normalize($object, $format = null, array $context = [])
+    {
+        $data = [];
+        if ($object->isInitialized('teamOneScore') && null !== $object->getTeamOneScore()) {
+            $data['teamOneScore'] = $object->getTeamOneScore();
         }
+        if ($object->isInitialized('teamTwoScore') && null !== $object->getTeamTwoScore()) {
+            $data['teamTwoScore'] = $object->getTeamTwoScore();
+        }
+        foreach ($object as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $data[$key] = $value;
+            }
+        }
+
+        return $data;
+    }
+
+    public function getSupportedTypes(string $format = null): array
+    {
+        return ['Braze\\Model\\MessagesLiveActivityUpdatePostBodyContentState' => false];
     }
 }

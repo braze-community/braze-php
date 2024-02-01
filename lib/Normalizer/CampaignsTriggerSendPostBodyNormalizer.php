@@ -13,7 +13,6 @@ namespace Braze\Normalizer;
 use Braze\Runtime\Normalizer\CheckArray;
 use Braze\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
-use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -21,235 +20,119 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
-    class CampaignsTriggerSendPostBodyNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
+class CampaignsTriggerSendPostBodyNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
+{
+    use DenormalizerAwareTrait;
+    use NormalizerAwareTrait;
+    use CheckArray;
+    use ValidatorTrait;
+
+    public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
     {
-        use DenormalizerAwareTrait;
-        use NormalizerAwareTrait;
-        use CheckArray;
-        use ValidatorTrait;
-
-        public function supportsDenormalization(mixed $data, string $type, string $format = null, array $context = []): bool
-        {
-            return $type === 'Braze\\Model\\CampaignsTriggerSendPostBody';
-        }
-
-        public function supportsNormalization(mixed $data, string $format = null, array $context = []): bool
-        {
-            return is_object($data) && get_class($data) === 'Braze\\Model\\CampaignsTriggerSendPostBody';
-        }
-
-        public function denormalize(mixed $data, string $type, string $format = null, array $context = []): mixed
-        {
-            if (isset($data['$ref'])) {
-                return new Reference($data['$ref'], $context['document-origin']);
-            }
-            if (isset($data['$recursiveRef'])) {
-                return new Reference($data['$recursiveRef'], $context['document-origin']);
-            }
-            $object = new \Braze\Model\CampaignsTriggerSendPostBody();
-            if (null === $data || false === \is_array($data)) {
-                return $object;
-            }
-            if (\array_key_exists('campaign_id', $data)) {
-                $object->setCampaignId($data['campaign_id']);
-                unset($data['campaign_id']);
-            }
-            if (\array_key_exists('send_id', $data)) {
-                $object->setSendId($data['send_id']);
-                unset($data['send_id']);
-            }
-            if (\array_key_exists('trigger_properties', $data)) {
-                $values = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
-                foreach ($data['trigger_properties'] as $key => $value) {
-                    $values[$key] = $value;
-                }
-                $object->setTriggerProperties($values);
-                unset($data['trigger_properties']);
-            }
-            if (\array_key_exists('broadcast', $data)) {
-                $object->setBroadcast($data['broadcast']);
-                unset($data['broadcast']);
-            }
-            if (\array_key_exists('audience', $data)) {
-                $object->setAudience($this->denormalizer->denormalize($data['audience'], 'Braze\\Model\\CampaignsTriggerSendPostBodyAudience', 'json', $context));
-                unset($data['audience']);
-            }
-            if (\array_key_exists('recipients', $data)) {
-                $values_1 = [];
-                foreach ($data['recipients'] as $value_1) {
-                    $values_1[] = $this->denormalizer->denormalize($value_1, 'Braze\\Model\\CampaignsTriggerSendPostBodyRecipientsItem', 'json', $context);
-                }
-                $object->setRecipients($values_1);
-                unset($data['recipients']);
-            }
-            foreach ($data as $key_1 => $value_2) {
-                if (preg_match('/.*/', (string) $key_1)) {
-                    $object[$key_1] = $value_2;
-                }
-            }
-
-            return $object;
-        }
-
-        public function normalize(mixed $object, string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
-        {
-            $data = [];
-            if ($object->isInitialized('campaignId') && null !== $object->getCampaignId()) {
-                $data['campaign_id'] = $object->getCampaignId();
-            }
-            if ($object->isInitialized('sendId') && null !== $object->getSendId()) {
-                $data['send_id'] = $object->getSendId();
-            }
-            if ($object->isInitialized('triggerProperties') && null !== $object->getTriggerProperties()) {
-                $values = [];
-                foreach ($object->getTriggerProperties() as $key => $value) {
-                    $values[$key] = $value;
-                }
-                $data['trigger_properties'] = $values;
-            }
-            if ($object->isInitialized('broadcast') && null !== $object->getBroadcast()) {
-                $data['broadcast'] = $object->getBroadcast();
-            }
-            if ($object->isInitialized('audience') && null !== $object->getAudience()) {
-                $data['audience'] = $this->normalizer->normalize($object->getAudience(), 'json', $context);
-            }
-            if ($object->isInitialized('recipients') && null !== $object->getRecipients()) {
-                $values_1 = [];
-                foreach ($object->getRecipients() as $value_1) {
-                    $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
-                }
-                $data['recipients'] = $values_1;
-            }
-            foreach ($object as $key_1 => $value_2) {
-                if (preg_match('/.*/', (string) $key_1)) {
-                    $data[$key_1] = $value_2;
-                }
-            }
-
-            return $data;
-        }
-
-        public function getSupportedTypes(string $format = null): array
-        {
-            return ['Braze\\Model\\CampaignsTriggerSendPostBody' => false];
-        }
+        return $type === 'Braze\\Model\\CampaignsTriggerSendPostBody';
     }
-} else {
-    class CampaignsTriggerSendPostBodyNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
+
+    public function supportsNormalization($data, $format = null, array $context = []): bool
     {
-        use DenormalizerAwareTrait;
-        use NormalizerAwareTrait;
-        use CheckArray;
-        use ValidatorTrait;
+        return is_object($data) && get_class($data) === 'Braze\\Model\\CampaignsTriggerSendPostBody';
+    }
 
-        public function supportsDenormalization($data, $type, string $format = null, array $context = []): bool
-        {
-            return $type === 'Braze\\Model\\CampaignsTriggerSendPostBody';
+    public function denormalize($data, $class, $format = null, array $context = [])
+    {
+        if (isset($data['$ref'])) {
+            return new Reference($data['$ref'], $context['document-origin']);
         }
-
-        public function supportsNormalization(mixed $data, string $format = null, array $context = []): bool
-        {
-            return is_object($data) && get_class($data) === 'Braze\\Model\\CampaignsTriggerSendPostBody';
+        if (isset($data['$recursiveRef'])) {
+            return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
-
-        public function denormalize($data, $type, $format = null, array $context = [])
-        {
-            if (isset($data['$ref'])) {
-                return new Reference($data['$ref'], $context['document-origin']);
-            }
-            if (isset($data['$recursiveRef'])) {
-                return new Reference($data['$recursiveRef'], $context['document-origin']);
-            }
-            $object = new \Braze\Model\CampaignsTriggerSendPostBody();
-            if (null === $data || false === \is_array($data)) {
-                return $object;
-            }
-            if (\array_key_exists('campaign_id', $data)) {
-                $object->setCampaignId($data['campaign_id']);
-                unset($data['campaign_id']);
-            }
-            if (\array_key_exists('send_id', $data)) {
-                $object->setSendId($data['send_id']);
-                unset($data['send_id']);
-            }
-            if (\array_key_exists('trigger_properties', $data)) {
-                $values = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
-                foreach ($data['trigger_properties'] as $key => $value) {
-                    $values[$key] = $value;
-                }
-                $object->setTriggerProperties($values);
-                unset($data['trigger_properties']);
-            }
-            if (\array_key_exists('broadcast', $data)) {
-                $object->setBroadcast($data['broadcast']);
-                unset($data['broadcast']);
-            }
-            if (\array_key_exists('audience', $data)) {
-                $object->setAudience($this->denormalizer->denormalize($data['audience'], 'Braze\\Model\\CampaignsTriggerSendPostBodyAudience', 'json', $context));
-                unset($data['audience']);
-            }
-            if (\array_key_exists('recipients', $data)) {
-                $values_1 = [];
-                foreach ($data['recipients'] as $value_1) {
-                    $values_1[] = $this->denormalizer->denormalize($value_1, 'Braze\\Model\\CampaignsTriggerSendPostBodyRecipientsItem', 'json', $context);
-                }
-                $object->setRecipients($values_1);
-                unset($data['recipients']);
-            }
-            foreach ($data as $key_1 => $value_2) {
-                if (preg_match('/.*/', (string) $key_1)) {
-                    $object[$key_1] = $value_2;
-                }
-            }
-
+        $object = new \Braze\Model\CampaignsTriggerSendPostBody();
+        if (null === $data || false === \is_array($data)) {
             return $object;
         }
-
-        /**
-         * @return array|string|int|float|bool|\ArrayObject|null
-         */
-        public function normalize($object, $format = null, array $context = [])
-        {
-            $data = [];
-            if ($object->isInitialized('campaignId') && null !== $object->getCampaignId()) {
-                $data['campaign_id'] = $object->getCampaignId();
+        if (\array_key_exists('campaign_id', $data)) {
+            $object->setCampaignId($data['campaign_id']);
+            unset($data['campaign_id']);
+        }
+        if (\array_key_exists('send_id', $data)) {
+            $object->setSendId($data['send_id']);
+            unset($data['send_id']);
+        }
+        if (\array_key_exists('trigger_properties', $data)) {
+            $values = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+            foreach ($data['trigger_properties'] as $key => $value) {
+                $values[$key] = $value;
             }
-            if ($object->isInitialized('sendId') && null !== $object->getSendId()) {
-                $data['send_id'] = $object->getSendId();
+            $object->setTriggerProperties($values);
+            unset($data['trigger_properties']);
+        }
+        if (\array_key_exists('broadcast', $data)) {
+            $object->setBroadcast($data['broadcast']);
+            unset($data['broadcast']);
+        }
+        if (\array_key_exists('audience', $data)) {
+            $object->setAudience($this->denormalizer->denormalize($data['audience'], 'Braze\\Model\\CampaignsTriggerSendPostBodyAudience', 'json', $context));
+            unset($data['audience']);
+        }
+        if (\array_key_exists('recipients', $data)) {
+            $values_1 = [];
+            foreach ($data['recipients'] as $value_1) {
+                $values_1[] = $this->denormalizer->denormalize($value_1, 'Braze\\Model\\CampaignsTriggerSendPostBodyRecipientsItem', 'json', $context);
             }
-            if ($object->isInitialized('triggerProperties') && null !== $object->getTriggerProperties()) {
-                $values = [];
-                foreach ($object->getTriggerProperties() as $key => $value) {
-                    $values[$key] = $value;
-                }
-                $data['trigger_properties'] = $values;
+            $object->setRecipients($values_1);
+            unset($data['recipients']);
+        }
+        foreach ($data as $key_1 => $value_2) {
+            if (preg_match('/.*/', (string) $key_1)) {
+                $object[$key_1] = $value_2;
             }
-            if ($object->isInitialized('broadcast') && null !== $object->getBroadcast()) {
-                $data['broadcast'] = $object->getBroadcast();
-            }
-            if ($object->isInitialized('audience') && null !== $object->getAudience()) {
-                $data['audience'] = $this->normalizer->normalize($object->getAudience(), 'json', $context);
-            }
-            if ($object->isInitialized('recipients') && null !== $object->getRecipients()) {
-                $values_1 = [];
-                foreach ($object->getRecipients() as $value_1) {
-                    $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
-                }
-                $data['recipients'] = $values_1;
-            }
-            foreach ($object as $key_1 => $value_2) {
-                if (preg_match('/.*/', (string) $key_1)) {
-                    $data[$key_1] = $value_2;
-                }
-            }
-
-            return $data;
         }
 
-        public function getSupportedTypes(string $format = null): array
-        {
-            return ['Braze\\Model\\CampaignsTriggerSendPostBody' => false];
+        return $object;
+    }
+
+    /**
+     * @return array|string|int|float|bool|\ArrayObject|null
+     */
+    public function normalize($object, $format = null, array $context = [])
+    {
+        $data = [];
+        if ($object->isInitialized('campaignId') && null !== $object->getCampaignId()) {
+            $data['campaign_id'] = $object->getCampaignId();
         }
+        if ($object->isInitialized('sendId') && null !== $object->getSendId()) {
+            $data['send_id'] = $object->getSendId();
+        }
+        if ($object->isInitialized('triggerProperties') && null !== $object->getTriggerProperties()) {
+            $values = [];
+            foreach ($object->getTriggerProperties() as $key => $value) {
+                $values[$key] = $value;
+            }
+            $data['trigger_properties'] = $values;
+        }
+        if ($object->isInitialized('broadcast') && null !== $object->getBroadcast()) {
+            $data['broadcast'] = $object->getBroadcast();
+        }
+        if ($object->isInitialized('audience') && null !== $object->getAudience()) {
+            $data['audience'] = $this->normalizer->normalize($object->getAudience(), 'json', $context);
+        }
+        if ($object->isInitialized('recipients') && null !== $object->getRecipients()) {
+            $values_1 = [];
+            foreach ($object->getRecipients() as $value_1) {
+                $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
+            }
+            $data['recipients'] = $values_1;
+        }
+        foreach ($object as $key_1 => $value_2) {
+            if (preg_match('/.*/', (string) $key_1)) {
+                $data[$key_1] = $value_2;
+            }
+        }
+
+        return $data;
+    }
+
+    public function getSupportedTypes(string $format = null): array
+    {
+        return ['Braze\\Model\\CampaignsTriggerSendPostBody' => false];
     }
 }

@@ -13,7 +13,6 @@ namespace Braze\Normalizer;
 use Braze\Runtime\Normalizer\CheckArray;
 use Braze\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
-use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -21,241 +20,122 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
-    class UsersTrackPostBodyNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
+class UsersTrackPostBodyNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
+{
+    use DenormalizerAwareTrait;
+    use NormalizerAwareTrait;
+    use CheckArray;
+    use ValidatorTrait;
+
+    public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
     {
-        use DenormalizerAwareTrait;
-        use NormalizerAwareTrait;
-        use CheckArray;
-        use ValidatorTrait;
-
-        public function supportsDenormalization(mixed $data, string $type, string $format = null, array $context = []): bool
-        {
-            return $type === 'Braze\\Model\\UsersTrackPostBody';
-        }
-
-        public function supportsNormalization(mixed $data, string $format = null, array $context = []): bool
-        {
-            return is_object($data) && get_class($data) === 'Braze\\Model\\UsersTrackPostBody';
-        }
-
-        public function denormalize(mixed $data, string $type, string $format = null, array $context = []): mixed
-        {
-            if (isset($data['$ref'])) {
-                return new Reference($data['$ref'], $context['document-origin']);
-            }
-            if (isset($data['$recursiveRef'])) {
-                return new Reference($data['$recursiveRef'], $context['document-origin']);
-            }
-            $object = new \Braze\Model\UsersTrackPostBody();
-            if (null === $data || false === \is_array($data)) {
-                return $object;
-            }
-            if (\array_key_exists('attributes', $data)) {
-                $values = [];
-                foreach ($data['attributes'] as $value) {
-                    $values_1 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
-                    foreach ($value as $key => $value_1) {
-                        $values_1[$key] = $value_1;
-                    }
-                    $values[] = $values_1;
-                }
-                $object->setAttributes($values);
-                unset($data['attributes']);
-            }
-            if (\array_key_exists('events', $data)) {
-                $values_2 = [];
-                foreach ($data['events'] as $value_2) {
-                    $values_2[] = $value_2;
-                }
-                $object->setEvents($values_2);
-                unset($data['events']);
-            }
-            if (\array_key_exists('purchases', $data)) {
-                $values_3 = [];
-                foreach ($data['purchases'] as $value_3) {
-                    $values_4 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
-                    foreach ($value_3 as $key_1 => $value_4) {
-                        $values_4[$key_1] = $value_4;
-                    }
-                    $values_3[] = $values_4;
-                }
-                $object->setPurchases($values_3);
-                unset($data['purchases']);
-            }
-            foreach ($data as $key_2 => $value_5) {
-                if (preg_match('/.*/', (string) $key_2)) {
-                    $object[$key_2] = $value_5;
-                }
-            }
-
-            return $object;
-        }
-
-        public function normalize(mixed $object, string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
-        {
-            $data = [];
-            if ($object->isInitialized('attributes') && null !== $object->getAttributes()) {
-                $values = [];
-                foreach ($object->getAttributes() as $value) {
-                    $values_1 = [];
-                    foreach ($value as $key => $value_1) {
-                        $values_1[$key] = $value_1;
-                    }
-                    $values[] = $values_1;
-                }
-                $data['attributes'] = $values;
-            }
-            if ($object->isInitialized('events') && null !== $object->getEvents()) {
-                $values_2 = [];
-                foreach ($object->getEvents() as $value_2) {
-                    $values_2[] = $value_2;
-                }
-                $data['events'] = $values_2;
-            }
-            if ($object->isInitialized('purchases') && null !== $object->getPurchases()) {
-                $values_3 = [];
-                foreach ($object->getPurchases() as $value_3) {
-                    $values_4 = [];
-                    foreach ($value_3 as $key_1 => $value_4) {
-                        $values_4[$key_1] = $value_4;
-                    }
-                    $values_3[] = $values_4;
-                }
-                $data['purchases'] = $values_3;
-            }
-            foreach ($object as $key_2 => $value_5) {
-                if (preg_match('/.*/', (string) $key_2)) {
-                    $data[$key_2] = $value_5;
-                }
-            }
-
-            return $data;
-        }
-
-        public function getSupportedTypes(string $format = null): array
-        {
-            return ['Braze\\Model\\UsersTrackPostBody' => false];
-        }
+        return $type === 'Braze\\Model\\UsersTrackPostBody';
     }
-} else {
-    class UsersTrackPostBodyNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
+
+    public function supportsNormalization($data, $format = null, array $context = []): bool
     {
-        use DenormalizerAwareTrait;
-        use NormalizerAwareTrait;
-        use CheckArray;
-        use ValidatorTrait;
+        return is_object($data) && get_class($data) === 'Braze\\Model\\UsersTrackPostBody';
+    }
 
-        public function supportsDenormalization($data, $type, string $format = null, array $context = []): bool
-        {
-            return $type === 'Braze\\Model\\UsersTrackPostBody';
+    public function denormalize($data, $class, $format = null, array $context = [])
+    {
+        if (isset($data['$ref'])) {
+            return new Reference($data['$ref'], $context['document-origin']);
         }
-
-        public function supportsNormalization(mixed $data, string $format = null, array $context = []): bool
-        {
-            return is_object($data) && get_class($data) === 'Braze\\Model\\UsersTrackPostBody';
+        if (isset($data['$recursiveRef'])) {
+            return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
-
-        public function denormalize($data, $type, $format = null, array $context = [])
-        {
-            if (isset($data['$ref'])) {
-                return new Reference($data['$ref'], $context['document-origin']);
-            }
-            if (isset($data['$recursiveRef'])) {
-                return new Reference($data['$recursiveRef'], $context['document-origin']);
-            }
-            $object = new \Braze\Model\UsersTrackPostBody();
-            if (null === $data || false === \is_array($data)) {
-                return $object;
-            }
-            if (\array_key_exists('attributes', $data)) {
-                $values = [];
-                foreach ($data['attributes'] as $value) {
-                    $values_1 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
-                    foreach ($value as $key => $value_1) {
-                        $values_1[$key] = $value_1;
-                    }
-                    $values[] = $values_1;
-                }
-                $object->setAttributes($values);
-                unset($data['attributes']);
-            }
-            if (\array_key_exists('events', $data)) {
-                $values_2 = [];
-                foreach ($data['events'] as $value_2) {
-                    $values_2[] = $value_2;
-                }
-                $object->setEvents($values_2);
-                unset($data['events']);
-            }
-            if (\array_key_exists('purchases', $data)) {
-                $values_3 = [];
-                foreach ($data['purchases'] as $value_3) {
-                    $values_4 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
-                    foreach ($value_3 as $key_1 => $value_4) {
-                        $values_4[$key_1] = $value_4;
-                    }
-                    $values_3[] = $values_4;
-                }
-                $object->setPurchases($values_3);
-                unset($data['purchases']);
-            }
-            foreach ($data as $key_2 => $value_5) {
-                if (preg_match('/.*/', (string) $key_2)) {
-                    $object[$key_2] = $value_5;
-                }
-            }
-
+        $object = new \Braze\Model\UsersTrackPostBody();
+        if (null === $data || false === \is_array($data)) {
             return $object;
         }
-
-        /**
-         * @return array|string|int|float|bool|\ArrayObject|null
-         */
-        public function normalize($object, $format = null, array $context = [])
-        {
-            $data = [];
-            if ($object->isInitialized('attributes') && null !== $object->getAttributes()) {
-                $values = [];
-                foreach ($object->getAttributes() as $value) {
-                    $values_1 = [];
-                    foreach ($value as $key => $value_1) {
-                        $values_1[$key] = $value_1;
-                    }
-                    $values[] = $values_1;
+        if (\array_key_exists('attributes', $data)) {
+            $values = [];
+            foreach ($data['attributes'] as $value) {
+                $values_1 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+                foreach ($value as $key => $value_1) {
+                    $values_1[$key] = $value_1;
                 }
-                $data['attributes'] = $values;
+                $values[] = $values_1;
             }
-            if ($object->isInitialized('events') && null !== $object->getEvents()) {
-                $values_2 = [];
-                foreach ($object->getEvents() as $value_2) {
-                    $values_2[] = $value_2;
+            $object->setAttributes($values);
+            unset($data['attributes']);
+        }
+        if (\array_key_exists('events', $data)) {
+            $values_2 = [];
+            foreach ($data['events'] as $value_2) {
+                $values_2[] = $value_2;
+            }
+            $object->setEvents($values_2);
+            unset($data['events']);
+        }
+        if (\array_key_exists('purchases', $data)) {
+            $values_3 = [];
+            foreach ($data['purchases'] as $value_3) {
+                $values_4 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+                foreach ($value_3 as $key_1 => $value_4) {
+                    $values_4[$key_1] = $value_4;
                 }
-                $data['events'] = $values_2;
+                $values_3[] = $values_4;
             }
-            if ($object->isInitialized('purchases') && null !== $object->getPurchases()) {
-                $values_3 = [];
-                foreach ($object->getPurchases() as $value_3) {
-                    $values_4 = [];
-                    foreach ($value_3 as $key_1 => $value_4) {
-                        $values_4[$key_1] = $value_4;
-                    }
-                    $values_3[] = $values_4;
-                }
-                $data['purchases'] = $values_3;
+            $object->setPurchases($values_3);
+            unset($data['purchases']);
+        }
+        foreach ($data as $key_2 => $value_5) {
+            if (preg_match('/.*/', (string) $key_2)) {
+                $object[$key_2] = $value_5;
             }
-            foreach ($object as $key_2 => $value_5) {
-                if (preg_match('/.*/', (string) $key_2)) {
-                    $data[$key_2] = $value_5;
-                }
-            }
-
-            return $data;
         }
 
-        public function getSupportedTypes(string $format = null): array
-        {
-            return ['Braze\\Model\\UsersTrackPostBody' => false];
+        return $object;
+    }
+
+    /**
+     * @return array|string|int|float|bool|\ArrayObject|null
+     */
+    public function normalize($object, $format = null, array $context = [])
+    {
+        $data = [];
+        if ($object->isInitialized('attributes') && null !== $object->getAttributes()) {
+            $values = [];
+            foreach ($object->getAttributes() as $value) {
+                $values_1 = [];
+                foreach ($value as $key => $value_1) {
+                    $values_1[$key] = $value_1;
+                }
+                $values[] = $values_1;
+            }
+            $data['attributes'] = $values;
         }
+        if ($object->isInitialized('events') && null !== $object->getEvents()) {
+            $values_2 = [];
+            foreach ($object->getEvents() as $value_2) {
+                $values_2[] = $value_2;
+            }
+            $data['events'] = $values_2;
+        }
+        if ($object->isInitialized('purchases') && null !== $object->getPurchases()) {
+            $values_3 = [];
+            foreach ($object->getPurchases() as $value_3) {
+                $values_4 = [];
+                foreach ($value_3 as $key_1 => $value_4) {
+                    $values_4[$key_1] = $value_4;
+                }
+                $values_3[] = $values_4;
+            }
+            $data['purchases'] = $values_3;
+        }
+        foreach ($object as $key_2 => $value_5) {
+            if (preg_match('/.*/', (string) $key_2)) {
+                $data[$key_2] = $value_5;
+            }
+        }
+
+        return $data;
+    }
+
+    public function getSupportedTypes(string $format = null): array
+    {
+        return ['Braze\\Model\\UsersTrackPostBody' => false];
     }
 }

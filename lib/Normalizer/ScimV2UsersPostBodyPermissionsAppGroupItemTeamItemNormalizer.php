@@ -13,7 +13,6 @@ namespace Braze\Normalizer;
 use Braze\Runtime\Normalizer\CheckArray;
 use Braze\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
-use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -21,163 +20,83 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
-    class ScimV2UsersPostBodyPermissionsAppGroupItemTeamItemNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
+class ScimV2UsersPostBodyPermissionsAppGroupItemTeamItemNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
+{
+    use DenormalizerAwareTrait;
+    use NormalizerAwareTrait;
+    use CheckArray;
+    use ValidatorTrait;
+
+    public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
     {
-        use DenormalizerAwareTrait;
-        use NormalizerAwareTrait;
-        use CheckArray;
-        use ValidatorTrait;
-
-        public function supportsDenormalization(mixed $data, string $type, string $format = null, array $context = []): bool
-        {
-            return $type === 'Braze\\Model\\ScimV2UsersPostBodyPermissionsAppGroupItemTeamItem';
-        }
-
-        public function supportsNormalization(mixed $data, string $format = null, array $context = []): bool
-        {
-            return is_object($data) && get_class($data) === 'Braze\\Model\\ScimV2UsersPostBodyPermissionsAppGroupItemTeamItem';
-        }
-
-        public function denormalize(mixed $data, string $type, string $format = null, array $context = []): mixed
-        {
-            if (isset($data['$ref'])) {
-                return new Reference($data['$ref'], $context['document-origin']);
-            }
-            if (isset($data['$recursiveRef'])) {
-                return new Reference($data['$recursiveRef'], $context['document-origin']);
-            }
-            $object = new \Braze\Model\ScimV2UsersPostBodyPermissionsAppGroupItemTeamItem();
-            if (null === $data || false === \is_array($data)) {
-                return $object;
-            }
-            if (\array_key_exists('teamName', $data)) {
-                $object->setTeamName($data['teamName']);
-                unset($data['teamName']);
-            }
-            if (\array_key_exists('teamPermissions', $data)) {
-                $values = [];
-                foreach ($data['teamPermissions'] as $value) {
-                    $values[] = $value;
-                }
-                $object->setTeamPermissions($values);
-                unset($data['teamPermissions']);
-            }
-            foreach ($data as $key => $value_1) {
-                if (preg_match('/.*/', (string) $key)) {
-                    $object[$key] = $value_1;
-                }
-            }
-
-            return $object;
-        }
-
-        public function normalize(mixed $object, string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
-        {
-            $data = [];
-            if ($object->isInitialized('teamName') && null !== $object->getTeamName()) {
-                $data['teamName'] = $object->getTeamName();
-            }
-            if ($object->isInitialized('teamPermissions') && null !== $object->getTeamPermissions()) {
-                $values = [];
-                foreach ($object->getTeamPermissions() as $value) {
-                    $values[] = $value;
-                }
-                $data['teamPermissions'] = $values;
-            }
-            foreach ($object as $key => $value_1) {
-                if (preg_match('/.*/', (string) $key)) {
-                    $data[$key] = $value_1;
-                }
-            }
-
-            return $data;
-        }
-
-        public function getSupportedTypes(string $format = null): array
-        {
-            return ['Braze\\Model\\ScimV2UsersPostBodyPermissionsAppGroupItemTeamItem' => false];
-        }
+        return $type === 'Braze\\Model\\ScimV2UsersPostBodyPermissionsAppGroupItemTeamItem';
     }
-} else {
-    class ScimV2UsersPostBodyPermissionsAppGroupItemTeamItemNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
+
+    public function supportsNormalization($data, $format = null, array $context = []): bool
     {
-        use DenormalizerAwareTrait;
-        use NormalizerAwareTrait;
-        use CheckArray;
-        use ValidatorTrait;
+        return is_object($data) && get_class($data) === 'Braze\\Model\\ScimV2UsersPostBodyPermissionsAppGroupItemTeamItem';
+    }
 
-        public function supportsDenormalization($data, $type, string $format = null, array $context = []): bool
-        {
-            return $type === 'Braze\\Model\\ScimV2UsersPostBodyPermissionsAppGroupItemTeamItem';
+    public function denormalize($data, $class, $format = null, array $context = [])
+    {
+        if (isset($data['$ref'])) {
+            return new Reference($data['$ref'], $context['document-origin']);
         }
-
-        public function supportsNormalization(mixed $data, string $format = null, array $context = []): bool
-        {
-            return is_object($data) && get_class($data) === 'Braze\\Model\\ScimV2UsersPostBodyPermissionsAppGroupItemTeamItem';
+        if (isset($data['$recursiveRef'])) {
+            return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
-
-        public function denormalize($data, $type, $format = null, array $context = [])
-        {
-            if (isset($data['$ref'])) {
-                return new Reference($data['$ref'], $context['document-origin']);
-            }
-            if (isset($data['$recursiveRef'])) {
-                return new Reference($data['$recursiveRef'], $context['document-origin']);
-            }
-            $object = new \Braze\Model\ScimV2UsersPostBodyPermissionsAppGroupItemTeamItem();
-            if (null === $data || false === \is_array($data)) {
-                return $object;
-            }
-            if (\array_key_exists('teamName', $data)) {
-                $object->setTeamName($data['teamName']);
-                unset($data['teamName']);
-            }
-            if (\array_key_exists('teamPermissions', $data)) {
-                $values = [];
-                foreach ($data['teamPermissions'] as $value) {
-                    $values[] = $value;
-                }
-                $object->setTeamPermissions($values);
-                unset($data['teamPermissions']);
-            }
-            foreach ($data as $key => $value_1) {
-                if (preg_match('/.*/', (string) $key)) {
-                    $object[$key] = $value_1;
-                }
-            }
-
+        $object = new \Braze\Model\ScimV2UsersPostBodyPermissionsAppGroupItemTeamItem();
+        if (null === $data || false === \is_array($data)) {
             return $object;
         }
-
-        /**
-         * @return array|string|int|float|bool|\ArrayObject|null
-         */
-        public function normalize($object, $format = null, array $context = [])
-        {
-            $data = [];
-            if ($object->isInitialized('teamName') && null !== $object->getTeamName()) {
-                $data['teamName'] = $object->getTeamName();
+        if (\array_key_exists('teamName', $data)) {
+            $object->setTeamName($data['teamName']);
+            unset($data['teamName']);
+        }
+        if (\array_key_exists('teamPermissions', $data)) {
+            $values = [];
+            foreach ($data['teamPermissions'] as $value) {
+                $values[] = $value;
             }
-            if ($object->isInitialized('teamPermissions') && null !== $object->getTeamPermissions()) {
-                $values = [];
-                foreach ($object->getTeamPermissions() as $value) {
-                    $values[] = $value;
-                }
-                $data['teamPermissions'] = $values;
+            $object->setTeamPermissions($values);
+            unset($data['teamPermissions']);
+        }
+        foreach ($data as $key => $value_1) {
+            if (preg_match('/.*/', (string) $key)) {
+                $object[$key] = $value_1;
             }
-            foreach ($object as $key => $value_1) {
-                if (preg_match('/.*/', (string) $key)) {
-                    $data[$key] = $value_1;
-                }
-            }
-
-            return $data;
         }
 
-        public function getSupportedTypes(string $format = null): array
-        {
-            return ['Braze\\Model\\ScimV2UsersPostBodyPermissionsAppGroupItemTeamItem' => false];
+        return $object;
+    }
+
+    /**
+     * @return array|string|int|float|bool|\ArrayObject|null
+     */
+    public function normalize($object, $format = null, array $context = [])
+    {
+        $data = [];
+        if ($object->isInitialized('teamName') && null !== $object->getTeamName()) {
+            $data['teamName'] = $object->getTeamName();
         }
+        if ($object->isInitialized('teamPermissions') && null !== $object->getTeamPermissions()) {
+            $values = [];
+            foreach ($object->getTeamPermissions() as $value) {
+                $values[] = $value;
+            }
+            $data['teamPermissions'] = $values;
+        }
+        foreach ($object as $key => $value_1) {
+            if (preg_match('/.*/', (string) $key)) {
+                $data[$key] = $value_1;
+            }
+        }
+
+        return $data;
+    }
+
+    public function getSupportedTypes(string $format = null): array
+    {
+        return ['Braze\\Model\\ScimV2UsersPostBodyPermissionsAppGroupItemTeamItem' => false];
     }
 }

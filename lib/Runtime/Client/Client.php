@@ -83,7 +83,7 @@ abstract class Client
             }
         }
         foreach ($endpoint->getHeaders($bodyHeaders) as $name => $value) {
-            $request = $request->withHeader($name, !is_bool($value) ? $value : ($value ? 'true' : 'false'));
+            $request = $request->withHeader($name, $value);
         }
         if (count($endpoint->getAuthenticationScopes()) > 0) {
             $scopes = [];

@@ -13,7 +13,6 @@ namespace Braze\Normalizer;
 use Braze\Runtime\Normalizer\CheckArray;
 use Braze\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
-use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -21,389 +20,196 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
-    class MessagesScheduleCreatePostBodyMessagesNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
+class MessagesScheduleCreatePostBodyMessagesNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
+{
+    use DenormalizerAwareTrait;
+    use NormalizerAwareTrait;
+    use CheckArray;
+    use ValidatorTrait;
+
+    public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
     {
-        use DenormalizerAwareTrait;
-        use NormalizerAwareTrait;
-        use CheckArray;
-        use ValidatorTrait;
-
-        public function supportsDenormalization(mixed $data, string $type, string $format = null, array $context = []): bool
-        {
-            return $type === 'Braze\\Model\\MessagesScheduleCreatePostBodyMessages';
-        }
-
-        public function supportsNormalization(mixed $data, string $format = null, array $context = []): bool
-        {
-            return is_object($data) && get_class($data) === 'Braze\\Model\\MessagesScheduleCreatePostBodyMessages';
-        }
-
-        public function denormalize(mixed $data, string $type, string $format = null, array $context = []): mixed
-        {
-            if (isset($data['$ref'])) {
-                return new Reference($data['$ref'], $context['document-origin']);
-            }
-            if (isset($data['$recursiveRef'])) {
-                return new Reference($data['$recursiveRef'], $context['document-origin']);
-            }
-            $object = new \Braze\Model\MessagesScheduleCreatePostBodyMessages();
-            if (null === $data || false === \is_array($data)) {
-                return $object;
-            }
-            if (\array_key_exists('apple_push', $data)) {
-                $values = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
-                foreach ($data['apple_push'] as $key => $value) {
-                    $values[$key] = $value;
-                }
-                $object->setApplePush($values);
-                unset($data['apple_push']);
-            }
-            if (\array_key_exists('android_push', $data)) {
-                $values_1 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
-                foreach ($data['android_push'] as $key_1 => $value_1) {
-                    $values_1[$key_1] = $value_1;
-                }
-                $object->setAndroidPush($values_1);
-                unset($data['android_push']);
-            }
-            if (\array_key_exists('windows_push', $data)) {
-                $values_2 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
-                foreach ($data['windows_push'] as $key_2 => $value_2) {
-                    $values_2[$key_2] = $value_2;
-                }
-                $object->setWindowsPush($values_2);
-                unset($data['windows_push']);
-            }
-            if (\array_key_exists('windows8_push', $data)) {
-                $values_3 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
-                foreach ($data['windows8_push'] as $key_3 => $value_3) {
-                    $values_3[$key_3] = $value_3;
-                }
-                $object->setWindows8Push($values_3);
-                unset($data['windows8_push']);
-            }
-            if (\array_key_exists('kindle_push', $data)) {
-                $values_4 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
-                foreach ($data['kindle_push'] as $key_4 => $value_4) {
-                    $values_4[$key_4] = $value_4;
-                }
-                $object->setKindlePush($values_4);
-                unset($data['kindle_push']);
-            }
-            if (\array_key_exists('web_push', $data)) {
-                $values_5 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
-                foreach ($data['web_push'] as $key_5 => $value_5) {
-                    $values_5[$key_5] = $value_5;
-                }
-                $object->setWebPush($values_5);
-                unset($data['web_push']);
-            }
-            if (\array_key_exists('email', $data)) {
-                $values_6 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
-                foreach ($data['email'] as $key_6 => $value_6) {
-                    $values_6[$key_6] = $value_6;
-                }
-                $object->setEmail($values_6);
-                unset($data['email']);
-            }
-            if (\array_key_exists('webhook', $data)) {
-                $values_7 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
-                foreach ($data['webhook'] as $key_7 => $value_7) {
-                    $values_7[$key_7] = $value_7;
-                }
-                $object->setWebhook($values_7);
-                unset($data['webhook']);
-            }
-            if (\array_key_exists('content_card', $data)) {
-                $values_8 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
-                foreach ($data['content_card'] as $key_8 => $value_8) {
-                    $values_8[$key_8] = $value_8;
-                }
-                $object->setContentCard($values_8);
-                unset($data['content_card']);
-            }
-            foreach ($data as $key_9 => $value_9) {
-                if (preg_match('/.*/', (string) $key_9)) {
-                    $object[$key_9] = $value_9;
-                }
-            }
-
-            return $object;
-        }
-
-        public function normalize(mixed $object, string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
-        {
-            $data = [];
-            if ($object->isInitialized('applePush') && null !== $object->getApplePush()) {
-                $values = [];
-                foreach ($object->getApplePush() as $key => $value) {
-                    $values[$key] = $value;
-                }
-                $data['apple_push'] = $values;
-            }
-            if ($object->isInitialized('androidPush') && null !== $object->getAndroidPush()) {
-                $values_1 = [];
-                foreach ($object->getAndroidPush() as $key_1 => $value_1) {
-                    $values_1[$key_1] = $value_1;
-                }
-                $data['android_push'] = $values_1;
-            }
-            if ($object->isInitialized('windowsPush') && null !== $object->getWindowsPush()) {
-                $values_2 = [];
-                foreach ($object->getWindowsPush() as $key_2 => $value_2) {
-                    $values_2[$key_2] = $value_2;
-                }
-                $data['windows_push'] = $values_2;
-            }
-            if ($object->isInitialized('windows8Push') && null !== $object->getWindows8Push()) {
-                $values_3 = [];
-                foreach ($object->getWindows8Push() as $key_3 => $value_3) {
-                    $values_3[$key_3] = $value_3;
-                }
-                $data['windows8_push'] = $values_3;
-            }
-            if ($object->isInitialized('kindlePush') && null !== $object->getKindlePush()) {
-                $values_4 = [];
-                foreach ($object->getKindlePush() as $key_4 => $value_4) {
-                    $values_4[$key_4] = $value_4;
-                }
-                $data['kindle_push'] = $values_4;
-            }
-            if ($object->isInitialized('webPush') && null !== $object->getWebPush()) {
-                $values_5 = [];
-                foreach ($object->getWebPush() as $key_5 => $value_5) {
-                    $values_5[$key_5] = $value_5;
-                }
-                $data['web_push'] = $values_5;
-            }
-            if ($object->isInitialized('email') && null !== $object->getEmail()) {
-                $values_6 = [];
-                foreach ($object->getEmail() as $key_6 => $value_6) {
-                    $values_6[$key_6] = $value_6;
-                }
-                $data['email'] = $values_6;
-            }
-            if ($object->isInitialized('webhook') && null !== $object->getWebhook()) {
-                $values_7 = [];
-                foreach ($object->getWebhook() as $key_7 => $value_7) {
-                    $values_7[$key_7] = $value_7;
-                }
-                $data['webhook'] = $values_7;
-            }
-            if ($object->isInitialized('contentCard') && null !== $object->getContentCard()) {
-                $values_8 = [];
-                foreach ($object->getContentCard() as $key_8 => $value_8) {
-                    $values_8[$key_8] = $value_8;
-                }
-                $data['content_card'] = $values_8;
-            }
-            foreach ($object as $key_9 => $value_9) {
-                if (preg_match('/.*/', (string) $key_9)) {
-                    $data[$key_9] = $value_9;
-                }
-            }
-
-            return $data;
-        }
-
-        public function getSupportedTypes(string $format = null): array
-        {
-            return ['Braze\\Model\\MessagesScheduleCreatePostBodyMessages' => false];
-        }
+        return $type === 'Braze\\Model\\MessagesScheduleCreatePostBodyMessages';
     }
-} else {
-    class MessagesScheduleCreatePostBodyMessagesNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
+
+    public function supportsNormalization($data, $format = null, array $context = []): bool
     {
-        use DenormalizerAwareTrait;
-        use NormalizerAwareTrait;
-        use CheckArray;
-        use ValidatorTrait;
+        return is_object($data) && get_class($data) === 'Braze\\Model\\MessagesScheduleCreatePostBodyMessages';
+    }
 
-        public function supportsDenormalization($data, $type, string $format = null, array $context = []): bool
-        {
-            return $type === 'Braze\\Model\\MessagesScheduleCreatePostBodyMessages';
+    public function denormalize($data, $class, $format = null, array $context = [])
+    {
+        if (isset($data['$ref'])) {
+            return new Reference($data['$ref'], $context['document-origin']);
         }
-
-        public function supportsNormalization(mixed $data, string $format = null, array $context = []): bool
-        {
-            return is_object($data) && get_class($data) === 'Braze\\Model\\MessagesScheduleCreatePostBodyMessages';
+        if (isset($data['$recursiveRef'])) {
+            return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
-
-        public function denormalize($data, $type, $format = null, array $context = [])
-        {
-            if (isset($data['$ref'])) {
-                return new Reference($data['$ref'], $context['document-origin']);
-            }
-            if (isset($data['$recursiveRef'])) {
-                return new Reference($data['$recursiveRef'], $context['document-origin']);
-            }
-            $object = new \Braze\Model\MessagesScheduleCreatePostBodyMessages();
-            if (null === $data || false === \is_array($data)) {
-                return $object;
-            }
-            if (\array_key_exists('apple_push', $data)) {
-                $values = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
-                foreach ($data['apple_push'] as $key => $value) {
-                    $values[$key] = $value;
-                }
-                $object->setApplePush($values);
-                unset($data['apple_push']);
-            }
-            if (\array_key_exists('android_push', $data)) {
-                $values_1 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
-                foreach ($data['android_push'] as $key_1 => $value_1) {
-                    $values_1[$key_1] = $value_1;
-                }
-                $object->setAndroidPush($values_1);
-                unset($data['android_push']);
-            }
-            if (\array_key_exists('windows_push', $data)) {
-                $values_2 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
-                foreach ($data['windows_push'] as $key_2 => $value_2) {
-                    $values_2[$key_2] = $value_2;
-                }
-                $object->setWindowsPush($values_2);
-                unset($data['windows_push']);
-            }
-            if (\array_key_exists('windows8_push', $data)) {
-                $values_3 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
-                foreach ($data['windows8_push'] as $key_3 => $value_3) {
-                    $values_3[$key_3] = $value_3;
-                }
-                $object->setWindows8Push($values_3);
-                unset($data['windows8_push']);
-            }
-            if (\array_key_exists('kindle_push', $data)) {
-                $values_4 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
-                foreach ($data['kindle_push'] as $key_4 => $value_4) {
-                    $values_4[$key_4] = $value_4;
-                }
-                $object->setKindlePush($values_4);
-                unset($data['kindle_push']);
-            }
-            if (\array_key_exists('web_push', $data)) {
-                $values_5 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
-                foreach ($data['web_push'] as $key_5 => $value_5) {
-                    $values_5[$key_5] = $value_5;
-                }
-                $object->setWebPush($values_5);
-                unset($data['web_push']);
-            }
-            if (\array_key_exists('email', $data)) {
-                $values_6 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
-                foreach ($data['email'] as $key_6 => $value_6) {
-                    $values_6[$key_6] = $value_6;
-                }
-                $object->setEmail($values_6);
-                unset($data['email']);
-            }
-            if (\array_key_exists('webhook', $data)) {
-                $values_7 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
-                foreach ($data['webhook'] as $key_7 => $value_7) {
-                    $values_7[$key_7] = $value_7;
-                }
-                $object->setWebhook($values_7);
-                unset($data['webhook']);
-            }
-            if (\array_key_exists('content_card', $data)) {
-                $values_8 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
-                foreach ($data['content_card'] as $key_8 => $value_8) {
-                    $values_8[$key_8] = $value_8;
-                }
-                $object->setContentCard($values_8);
-                unset($data['content_card']);
-            }
-            foreach ($data as $key_9 => $value_9) {
-                if (preg_match('/.*/', (string) $key_9)) {
-                    $object[$key_9] = $value_9;
-                }
-            }
-
+        $object = new \Braze\Model\MessagesScheduleCreatePostBodyMessages();
+        if (null === $data || false === \is_array($data)) {
             return $object;
         }
-
-        /**
-         * @return array|string|int|float|bool|\ArrayObject|null
-         */
-        public function normalize($object, $format = null, array $context = [])
-        {
-            $data = [];
-            if ($object->isInitialized('applePush') && null !== $object->getApplePush()) {
-                $values = [];
-                foreach ($object->getApplePush() as $key => $value) {
-                    $values[$key] = $value;
-                }
-                $data['apple_push'] = $values;
+        if (\array_key_exists('apple_push', $data)) {
+            $values = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+            foreach ($data['apple_push'] as $key => $value) {
+                $values[$key] = $value;
             }
-            if ($object->isInitialized('androidPush') && null !== $object->getAndroidPush()) {
-                $values_1 = [];
-                foreach ($object->getAndroidPush() as $key_1 => $value_1) {
-                    $values_1[$key_1] = $value_1;
-                }
-                $data['android_push'] = $values_1;
+            $object->setApplePush($values);
+            unset($data['apple_push']);
+        }
+        if (\array_key_exists('android_push', $data)) {
+            $values_1 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+            foreach ($data['android_push'] as $key_1 => $value_1) {
+                $values_1[$key_1] = $value_1;
             }
-            if ($object->isInitialized('windowsPush') && null !== $object->getWindowsPush()) {
-                $values_2 = [];
-                foreach ($object->getWindowsPush() as $key_2 => $value_2) {
-                    $values_2[$key_2] = $value_2;
-                }
-                $data['windows_push'] = $values_2;
+            $object->setAndroidPush($values_1);
+            unset($data['android_push']);
+        }
+        if (\array_key_exists('windows_push', $data)) {
+            $values_2 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+            foreach ($data['windows_push'] as $key_2 => $value_2) {
+                $values_2[$key_2] = $value_2;
             }
-            if ($object->isInitialized('windows8Push') && null !== $object->getWindows8Push()) {
-                $values_3 = [];
-                foreach ($object->getWindows8Push() as $key_3 => $value_3) {
-                    $values_3[$key_3] = $value_3;
-                }
-                $data['windows8_push'] = $values_3;
+            $object->setWindowsPush($values_2);
+            unset($data['windows_push']);
+        }
+        if (\array_key_exists('windows8_push', $data)) {
+            $values_3 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+            foreach ($data['windows8_push'] as $key_3 => $value_3) {
+                $values_3[$key_3] = $value_3;
             }
-            if ($object->isInitialized('kindlePush') && null !== $object->getKindlePush()) {
-                $values_4 = [];
-                foreach ($object->getKindlePush() as $key_4 => $value_4) {
-                    $values_4[$key_4] = $value_4;
-                }
-                $data['kindle_push'] = $values_4;
+            $object->setWindows8Push($values_3);
+            unset($data['windows8_push']);
+        }
+        if (\array_key_exists('kindle_push', $data)) {
+            $values_4 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+            foreach ($data['kindle_push'] as $key_4 => $value_4) {
+                $values_4[$key_4] = $value_4;
             }
-            if ($object->isInitialized('webPush') && null !== $object->getWebPush()) {
-                $values_5 = [];
-                foreach ($object->getWebPush() as $key_5 => $value_5) {
-                    $values_5[$key_5] = $value_5;
-                }
-                $data['web_push'] = $values_5;
+            $object->setKindlePush($values_4);
+            unset($data['kindle_push']);
+        }
+        if (\array_key_exists('web_push', $data)) {
+            $values_5 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+            foreach ($data['web_push'] as $key_5 => $value_5) {
+                $values_5[$key_5] = $value_5;
             }
-            if ($object->isInitialized('email') && null !== $object->getEmail()) {
-                $values_6 = [];
-                foreach ($object->getEmail() as $key_6 => $value_6) {
-                    $values_6[$key_6] = $value_6;
-                }
-                $data['email'] = $values_6;
+            $object->setWebPush($values_5);
+            unset($data['web_push']);
+        }
+        if (\array_key_exists('email', $data)) {
+            $values_6 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+            foreach ($data['email'] as $key_6 => $value_6) {
+                $values_6[$key_6] = $value_6;
             }
-            if ($object->isInitialized('webhook') && null !== $object->getWebhook()) {
-                $values_7 = [];
-                foreach ($object->getWebhook() as $key_7 => $value_7) {
-                    $values_7[$key_7] = $value_7;
-                }
-                $data['webhook'] = $values_7;
+            $object->setEmail($values_6);
+            unset($data['email']);
+        }
+        if (\array_key_exists('webhook', $data)) {
+            $values_7 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+            foreach ($data['webhook'] as $key_7 => $value_7) {
+                $values_7[$key_7] = $value_7;
             }
-            if ($object->isInitialized('contentCard') && null !== $object->getContentCard()) {
-                $values_8 = [];
-                foreach ($object->getContentCard() as $key_8 => $value_8) {
-                    $values_8[$key_8] = $value_8;
-                }
-                $data['content_card'] = $values_8;
+            $object->setWebhook($values_7);
+            unset($data['webhook']);
+        }
+        if (\array_key_exists('content_card', $data)) {
+            $values_8 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+            foreach ($data['content_card'] as $key_8 => $value_8) {
+                $values_8[$key_8] = $value_8;
             }
-            foreach ($object as $key_9 => $value_9) {
-                if (preg_match('/.*/', (string) $key_9)) {
-                    $data[$key_9] = $value_9;
-                }
+            $object->setContentCard($values_8);
+            unset($data['content_card']);
+        }
+        foreach ($data as $key_9 => $value_9) {
+            if (preg_match('/.*/', (string) $key_9)) {
+                $object[$key_9] = $value_9;
             }
-
-            return $data;
         }
 
-        public function getSupportedTypes(string $format = null): array
-        {
-            return ['Braze\\Model\\MessagesScheduleCreatePostBodyMessages' => false];
+        return $object;
+    }
+
+    /**
+     * @return array|string|int|float|bool|\ArrayObject|null
+     */
+    public function normalize($object, $format = null, array $context = [])
+    {
+        $data = [];
+        if ($object->isInitialized('applePush') && null !== $object->getApplePush()) {
+            $values = [];
+            foreach ($object->getApplePush() as $key => $value) {
+                $values[$key] = $value;
+            }
+            $data['apple_push'] = $values;
         }
+        if ($object->isInitialized('androidPush') && null !== $object->getAndroidPush()) {
+            $values_1 = [];
+            foreach ($object->getAndroidPush() as $key_1 => $value_1) {
+                $values_1[$key_1] = $value_1;
+            }
+            $data['android_push'] = $values_1;
+        }
+        if ($object->isInitialized('windowsPush') && null !== $object->getWindowsPush()) {
+            $values_2 = [];
+            foreach ($object->getWindowsPush() as $key_2 => $value_2) {
+                $values_2[$key_2] = $value_2;
+            }
+            $data['windows_push'] = $values_2;
+        }
+        if ($object->isInitialized('windows8Push') && null !== $object->getWindows8Push()) {
+            $values_3 = [];
+            foreach ($object->getWindows8Push() as $key_3 => $value_3) {
+                $values_3[$key_3] = $value_3;
+            }
+            $data['windows8_push'] = $values_3;
+        }
+        if ($object->isInitialized('kindlePush') && null !== $object->getKindlePush()) {
+            $values_4 = [];
+            foreach ($object->getKindlePush() as $key_4 => $value_4) {
+                $values_4[$key_4] = $value_4;
+            }
+            $data['kindle_push'] = $values_4;
+        }
+        if ($object->isInitialized('webPush') && null !== $object->getWebPush()) {
+            $values_5 = [];
+            foreach ($object->getWebPush() as $key_5 => $value_5) {
+                $values_5[$key_5] = $value_5;
+            }
+            $data['web_push'] = $values_5;
+        }
+        if ($object->isInitialized('email') && null !== $object->getEmail()) {
+            $values_6 = [];
+            foreach ($object->getEmail() as $key_6 => $value_6) {
+                $values_6[$key_6] = $value_6;
+            }
+            $data['email'] = $values_6;
+        }
+        if ($object->isInitialized('webhook') && null !== $object->getWebhook()) {
+            $values_7 = [];
+            foreach ($object->getWebhook() as $key_7 => $value_7) {
+                $values_7[$key_7] = $value_7;
+            }
+            $data['webhook'] = $values_7;
+        }
+        if ($object->isInitialized('contentCard') && null !== $object->getContentCard()) {
+            $values_8 = [];
+            foreach ($object->getContentCard() as $key_8 => $value_8) {
+                $values_8[$key_8] = $value_8;
+            }
+            $data['content_card'] = $values_8;
+        }
+        foreach ($object as $key_9 => $value_9) {
+            if (preg_match('/.*/', (string) $key_9)) {
+                $data[$key_9] = $value_9;
+            }
+        }
+
+        return $data;
+    }
+
+    public function getSupportedTypes(string $format = null): array
+    {
+        return ['Braze\\Model\\MessagesScheduleCreatePostBodyMessages' => false];
     }
 }
