@@ -51,7 +51,7 @@ class PostV2SubscriptionStatusSet extends \Braze\Runtime\Client\BaseEndpoint imp
      * @var string $Authorization
      *             }
      */
-    public function __construct(\Braze\Model\V2SubscriptionStatusSetPostBody $requestBody = null, array $headerParameters = [])
+    public function __construct(?\Braze\Model\V2SubscriptionStatusSetPostBody $requestBody = null, array $headerParameters = [])
     {
         $this->body = $requestBody;
         $this->headerParameters = $headerParameters;
@@ -103,7 +103,7 @@ class PostV2SubscriptionStatusSet extends \Braze\Runtime\Client\BaseEndpoint imp
      * @throws \Braze\Exception\PostV2SubscriptionStatusSetTooManyRequestsException
      * @throws \Braze\Exception\PostV2SubscriptionStatusSetInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();

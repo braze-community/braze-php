@@ -97,7 +97,7 @@ class PutScimV2UserById extends \Braze\Runtime\Client\BaseEndpoint implements \B
      * @var string $Authorization
      *             }
      */
-    public function __construct(string $id, \Braze\Model\ScimV2UsersIdPutBody $requestBody = null, array $headerParameters = [])
+    public function __construct(string $id, ?\Braze\Model\ScimV2UsersIdPutBody $requestBody = null, array $headerParameters = [])
     {
         $this->id = $id;
         $this->body = $requestBody;
@@ -151,7 +151,7 @@ class PutScimV2UserById extends \Braze\Runtime\Client\BaseEndpoint implements \B
      * @throws \Braze\Exception\PutScimV2UserByIdTooManyRequestsException
      * @throws \Braze\Exception\PutScimV2UserByIdInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();

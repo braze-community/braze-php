@@ -58,7 +58,7 @@ class PostTemplatesEmailCreate extends \Braze\Runtime\Client\BaseEndpoint implem
      * @var string $Authorization
      *             }
      */
-    public function __construct(\Braze\Model\TemplatesEmailCreatePostBody $requestBody = null, array $headerParameters = [])
+    public function __construct(?\Braze\Model\TemplatesEmailCreatePostBody $requestBody = null, array $headerParameters = [])
     {
         $this->body = $requestBody;
         $this->headerParameters = $headerParameters;
@@ -110,7 +110,7 @@ class PostTemplatesEmailCreate extends \Braze\Runtime\Client\BaseEndpoint implem
      * @throws \Braze\Exception\PostTemplatesEmailCreateTooManyRequestsException
      * @throws \Braze\Exception\PostTemplatesEmailCreateInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();
