@@ -142,7 +142,7 @@ class PostCatalogsByCatalogNameItem extends \Braze\Runtime\Client\BaseEndpoint i
      * @var string $Authorization
      *             }
      */
-    public function __construct(string $catalogName, \Braze\Model\CatalogsCatalogNameItemsPostBody $requestBody = null, array $headerParameters = [])
+    public function __construct(string $catalogName, ?\Braze\Model\CatalogsCatalogNameItemsPostBody $requestBody = null, array $headerParameters = [])
     {
         $this->catalog_name = $catalogName;
         $this->body = $requestBody;
@@ -195,7 +195,7 @@ class PostCatalogsByCatalogNameItem extends \Braze\Runtime\Client\BaseEndpoint i
      * @throws \Braze\Exception\PostCatalogsByCatalogNameItemTooManyRequestsException
      * @throws \Braze\Exception\PostCatalogsByCatalogNameItemInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();
