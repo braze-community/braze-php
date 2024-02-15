@@ -38,7 +38,7 @@ class PostEmailStatus extends \Braze\Runtime\Client\BaseEndpoint implements \Bra
      * @var string $Authorization
      *             }
      */
-    public function __construct(\Braze\Model\EmailStatusPostBody $requestBody = null, array $headerParameters = [])
+    public function __construct(?\Braze\Model\EmailStatusPostBody $requestBody = null, array $headerParameters = [])
     {
         $this->body = $requestBody;
         $this->headerParameters = $headerParameters;
@@ -90,7 +90,7 @@ class PostEmailStatus extends \Braze\Runtime\Client\BaseEndpoint implements \Bra
      * @throws \Braze\Exception\PostEmailStatusTooManyRequestsException
      * @throws \Braze\Exception\PostEmailStatusInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();

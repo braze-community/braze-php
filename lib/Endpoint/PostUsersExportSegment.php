@@ -396,7 +396,7 @@ class PostUsersExportSegment extends \Braze\Runtime\Client\BaseEndpoint implemen
      * @var string $Authorization
      *             }
      */
-    public function __construct(\Braze\Model\UsersExportSegmentPostBody $requestBody = null, array $headerParameters = [])
+    public function __construct(?\Braze\Model\UsersExportSegmentPostBody $requestBody = null, array $headerParameters = [])
     {
         $this->body = $requestBody;
         $this->headerParameters = $headerParameters;
@@ -448,7 +448,7 @@ class PostUsersExportSegment extends \Braze\Runtime\Client\BaseEndpoint implemen
      * @throws \Braze\Exception\PostUsersExportSegmentTooManyRequestsException
      * @throws \Braze\Exception\PostUsersExportSegmentInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();

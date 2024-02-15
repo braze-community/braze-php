@@ -67,7 +67,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PostTemplatesEmailUpdateTooManyRequestsException
      * @throws Exception\PostTemplatesEmailUpdateInternalServerErrorException
      */
-    public function postTemplatesEmailUpdate(Model\TemplatesEmailUpdatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postTemplatesEmailUpdate(?Model\TemplatesEmailUpdatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PostTemplatesEmailUpdate($requestBody, $headerParameters), $fetch);
     }
@@ -204,7 +204,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PostUsersTrackTooManyRequestsException
      * @throws Exception\PostUsersTrackInternalServerErrorException
      */
-    public function postUsersTrack(Model\UsersTrackPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postUsersTrack(?Model\UsersTrackPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PostUsersTrack($requestBody, $headerParameters), $fetch);
     }
@@ -599,7 +599,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PostCatalogTooManyRequestsException
      * @throws Exception\PostCatalogInternalServerErrorException
      */
-    public function postCatalog(Model\CatalogsPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postCatalog(?Model\CatalogsPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PostCatalog($requestBody, $headerParameters), $fetch);
     }
@@ -967,7 +967,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PatchCatalogsByCatalogNameItemTooManyRequestsException
      * @throws Exception\PatchCatalogsByCatalogNameItemInternalServerErrorException
      */
-    public function patchCatalogsByCatalogNameItem(string $catalogName, Model\CatalogsCatalogNameItemsPatchBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function patchCatalogsByCatalogNameItem(string $catalogName, ?Model\CatalogsCatalogNameItemsPatchBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PatchCatalogsByCatalogNameItem($catalogName, $requestBody, $headerParameters), $fetch);
     }
@@ -1110,7 +1110,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PostCatalogsByCatalogNameItemTooManyRequestsException
      * @throws Exception\PostCatalogsByCatalogNameItemInternalServerErrorException
      */
-    public function postCatalogsByCatalogNameItem(string $catalogName, Model\CatalogsCatalogNameItemsPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postCatalogsByCatalogNameItem(string $catalogName, ?Model\CatalogsCatalogNameItemsPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PostCatalogsByCatalogNameItem($catalogName, $requestBody, $headerParameters), $fetch);
     }
@@ -1218,7 +1218,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PutCatalogsByCatalogNameItemTooManyRequestsException
      * @throws Exception\PutCatalogsByCatalogNameItemInternalServerErrorException
      */
-    public function putCatalogsByCatalogNameItem(string $catalogName, Model\CatalogsCatalogNameItemsPutBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function putCatalogsByCatalogNameItem(string $catalogName, ?Model\CatalogsCatalogNameItemsPutBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PutCatalogsByCatalogNameItem($catalogName, $requestBody, $headerParameters), $fetch);
     }
@@ -1547,7 +1547,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PatchCatalogsByCatalogNameItemByItemIdTooManyRequestsException
      * @throws Exception\PatchCatalogsByCatalogNameItemByItemIdInternalServerErrorException
      */
-    public function patchCatalogsByCatalogNameItemByItemId(string $catalogName, string $itemId, Model\CatalogsCatalogNameItemsItemIdPatchBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function patchCatalogsByCatalogNameItemByItemId(string $catalogName, string $itemId, ?Model\CatalogsCatalogNameItemsItemIdPatchBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PatchCatalogsByCatalogNameItemByItemId($catalogName, $itemId, $requestBody, $headerParameters), $fetch);
     }
@@ -1673,7 +1673,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PostCatalogsByCatalogNameItemByItemIdTooManyRequestsException
      * @throws Exception\PostCatalogsByCatalogNameItemByItemIdInternalServerErrorException
      */
-    public function postCatalogsByCatalogNameItemByItemId(string $catalogName, string $itemId, Model\CatalogsCatalogNameItemsItemIdPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postCatalogsByCatalogNameItemByItemId(string $catalogName, string $itemId, ?Model\CatalogsCatalogNameItemsItemIdPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PostCatalogsByCatalogNameItemByItemId($catalogName, $itemId, $requestBody, $headerParameters), $fetch);
     }
@@ -1802,7 +1802,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PutCatalogsByCatalogNameItemByItemIdTooManyRequestsException
      * @throws Exception\PutCatalogsByCatalogNameItemByItemIdInternalServerErrorException
      */
-    public function putCatalogsByCatalogNameItemByItemId(string $catalogName, string $itemId, Model\CatalogsCatalogNameItemsItemIdPutBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function putCatalogsByCatalogNameItemByItemId(string $catalogName, string $itemId, ?Model\CatalogsCatalogNameItemsItemIdPutBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PutCatalogsByCatalogNameItemByItemId($catalogName, $itemId, $requestBody, $headerParameters), $fetch);
     }
@@ -2029,7 +2029,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PostEmailStatusTooManyRequestsException
      * @throws Exception\PostEmailStatusInternalServerErrorException
      */
-    public function postEmailStatus(Model\EmailStatusPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postEmailStatus(?Model\EmailStatusPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PostEmailStatus($requestBody, $headerParameters), $fetch);
     }
@@ -2068,7 +2068,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PostEmailBounceRemoveTooManyRequestsException
      * @throws Exception\PostEmailBounceRemoveInternalServerErrorException
      */
-    public function postEmailBounceRemove(Model\EmailBounceRemovePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postEmailBounceRemove(?Model\EmailBounceRemovePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PostEmailBounceRemove($requestBody, $headerParameters), $fetch);
     }
@@ -2107,7 +2107,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PostEmailSpamRemoveTooManyRequestsException
      * @throws Exception\PostEmailSpamRemoveInternalServerErrorException
      */
-    public function postEmailSpamRemove(Model\EmailSpamRemovePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postEmailSpamRemove(?Model\EmailSpamRemovePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PostEmailSpamRemove($requestBody, $headerParameters), $fetch);
     }
@@ -2144,7 +2144,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PostEmailBlocklistTooManyRequestsException
      * @throws Exception\PostEmailBlocklistInternalServerErrorException
      */
-    public function postEmailBlocklist(Model\EmailBlocklistPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postEmailBlocklist(?Model\EmailBlocklistPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PostEmailBlocklist($requestBody, $headerParameters), $fetch);
     }
@@ -2181,7 +2181,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PostEmailBlacklistTooManyRequestsException
      * @throws Exception\PostEmailBlacklistInternalServerErrorException
      */
-    public function postEmailBlacklist(Model\EmailBlacklistPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postEmailBlacklist(?Model\EmailBlacklistPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PostEmailBlacklist($requestBody, $headerParameters), $fetch);
     }
@@ -4667,7 +4667,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PostUsersExportIdTooManyRequestsException
      * @throws Exception\PostUsersExportIdInternalServerErrorException
      */
-    public function postUsersExportId(Model\UsersExportIdsPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postUsersExportId(?Model\UsersExportIdsPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PostUsersExportId($requestBody, $headerParameters), $fetch);
     }
@@ -5065,7 +5065,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PostUsersExportSegmentTooManyRequestsException
      * @throws Exception\PostUsersExportSegmentInternalServerErrorException
      */
-    public function postUsersExportSegment(Model\UsersExportSegmentPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postUsersExportSegment(?Model\UsersExportSegmentPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PostUsersExportSegment($requestBody, $headerParameters), $fetch);
     }
@@ -5319,7 +5319,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PostUsersExportGlobalControlGroupTooManyRequestsException
      * @throws Exception\PostUsersExportGlobalControlGroupInternalServerErrorException
      */
-    public function postUsersExportGlobalControlGroup(Model\UsersExportGlobalControlGroupPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postUsersExportGlobalControlGroup(?Model\UsersExportGlobalControlGroupPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PostUsersExportGlobalControlGroup($requestBody, $headerParameters), $fetch);
     }
@@ -5397,7 +5397,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PostMessagesLiveActivityUpdateTooManyRequestsException
      * @throws Exception\PostMessagesLiveActivityUpdateInternalServerErrorException
      */
-    public function postMessagesLiveActivityUpdate(Model\MessagesLiveActivityUpdatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postMessagesLiveActivityUpdate(?Model\MessagesLiveActivityUpdatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PostMessagesLiveActivityUpdate($requestBody, $headerParameters), $fetch);
     }
@@ -5493,7 +5493,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PostMessagesScheduleDeleteTooManyRequestsException
      * @throws Exception\PostMessagesScheduleDeleteInternalServerErrorException
      */
-    public function postMessagesScheduleDelete(Model\MessagesScheduleDeletePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postMessagesScheduleDelete(?Model\MessagesScheduleDeletePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PostMessagesScheduleDelete($requestBody, $headerParameters), $fetch);
     }
@@ -5531,7 +5531,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PostCanvasTriggerScheduleDeleteTooManyRequestsException
      * @throws Exception\PostCanvasTriggerScheduleDeleteInternalServerErrorException
      */
-    public function postCanvasTriggerScheduleDelete(Model\CanvasTriggerScheduleDeletePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postCanvasTriggerScheduleDelete(?Model\CanvasTriggerScheduleDeletePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PostCanvasTriggerScheduleDelete($requestBody, $headerParameters), $fetch);
     }
@@ -5571,7 +5571,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PostCampaignsTriggerScheduleDeleteTooManyRequestsException
      * @throws Exception\PostCampaignsTriggerScheduleDeleteInternalServerErrorException
      */
-    public function postCampaignsTriggerScheduleDelete(Model\CampaignsTriggerScheduleDeletePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postCampaignsTriggerScheduleDelete(?Model\CampaignsTriggerScheduleDeletePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PostCampaignsTriggerScheduleDelete($requestBody, $headerParameters), $fetch);
     }
@@ -5635,7 +5635,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PostMessagesScheduleCreateTooManyRequestsException
      * @throws Exception\PostMessagesScheduleCreateInternalServerErrorException
      */
-    public function postMessagesScheduleCreate(Model\MessagesScheduleCreatePostBody $requestBody = null, string $fetch = self::FETCH_OBJECT)
+    public function postMessagesScheduleCreate(?Model\MessagesScheduleCreatePostBody $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PostMessagesScheduleCreate($requestBody), $fetch);
     }
@@ -5705,7 +5705,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PostCampaignsTriggerScheduleCreateTooManyRequestsException
      * @throws Exception\PostCampaignsTriggerScheduleCreateInternalServerErrorException
      */
-    public function postCampaignsTriggerScheduleCreate(Model\CampaignsTriggerScheduleCreatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postCampaignsTriggerScheduleCreate(?Model\CampaignsTriggerScheduleCreatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PostCampaignsTriggerScheduleCreate($requestBody, $headerParameters), $fetch);
     }
@@ -5759,7 +5759,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PostCanvasTriggerScheduleCreateTooManyRequestsException
      * @throws Exception\PostCanvasTriggerScheduleCreateInternalServerErrorException
      */
-    public function postCanvasTriggerScheduleCreate(Model\CanvasTriggerScheduleCreatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postCanvasTriggerScheduleCreate(?Model\CanvasTriggerScheduleCreatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PostCanvasTriggerScheduleCreate($requestBody, $headerParameters), $fetch);
     }
@@ -5800,7 +5800,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PostMessagesScheduleUpdateTooManyRequestsException
      * @throws Exception\PostMessagesScheduleUpdateInternalServerErrorException
      */
-    public function postMessagesScheduleUpdate(Model\MessagesScheduleUpdatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postMessagesScheduleUpdate(?Model\MessagesScheduleUpdatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PostMessagesScheduleUpdate($requestBody, $headerParameters), $fetch);
     }
@@ -5845,7 +5845,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PostCampaignsTriggerScheduleUpdateTooManyRequestsException
      * @throws Exception\PostCampaignsTriggerScheduleUpdateInternalServerErrorException
      */
-    public function postCampaignsTriggerScheduleUpdate(Model\CampaignsTriggerScheduleUpdatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postCampaignsTriggerScheduleUpdate(?Model\CampaignsTriggerScheduleUpdatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PostCampaignsTriggerScheduleUpdate($requestBody, $headerParameters), $fetch);
     }
@@ -5890,7 +5890,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PostCanvasTriggerScheduleUpdateTooManyRequestsException
      * @throws Exception\PostCanvasTriggerScheduleUpdateInternalServerErrorException
      */
-    public function postCanvasTriggerScheduleUpdate(Model\CanvasTriggerScheduleUpdatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postCanvasTriggerScheduleUpdate(?Model\CanvasTriggerScheduleUpdatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PostCanvasTriggerScheduleUpdate($requestBody, $headerParameters), $fetch);
     }
@@ -5944,7 +5944,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PostSendsIdCreateTooManyRequestsException
      * @throws Exception\PostSendsIdCreateInternalServerErrorException
      */
-    public function postSendsIdCreate(Model\SendsIdCreatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postSendsIdCreate(?Model\SendsIdCreatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PostSendsIdCreate($requestBody, $headerParameters), $fetch);
     }
@@ -6005,7 +6005,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PostMessagesSendTooManyRequestsException
      * @throws Exception\PostMessagesSendInternalServerErrorException
      */
-    public function postMessagesSend(Model\MessagesSendPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postMessagesSend(?Model\MessagesSendPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PostMessagesSend($requestBody, $headerParameters), $fetch);
     }
@@ -6232,7 +6232,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PostTransactionalV1CampaignsByCampaignIdSendTooManyRequestsException
      * @throws Exception\PostTransactionalV1CampaignsByCampaignIdSendInternalServerErrorException
      */
-    public function postTransactionalV1CampaignsByCampaignIdSend(string $campaignId, Model\TransactionalV1CampaignsCampaignIdSendPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postTransactionalV1CampaignsByCampaignIdSend(string $campaignId, ?Model\TransactionalV1CampaignsCampaignIdSendPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PostTransactionalV1CampaignsByCampaignIdSend($campaignId, $requestBody, $headerParameters), $fetch);
     }
@@ -6304,7 +6304,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PostCampaignsTriggerSendTooManyRequestsException
      * @throws Exception\PostCampaignsTriggerSendInternalServerErrorException
      */
-    public function postCampaignsTriggerSend(Model\CampaignsTriggerSendPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postCampaignsTriggerSend(?Model\CampaignsTriggerSendPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PostCampaignsTriggerSend($requestBody, $headerParameters), $fetch);
     }
@@ -6373,7 +6373,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PostCanvasTriggerSendTooManyRequestsException
      * @throws Exception\PostCanvasTriggerSendInternalServerErrorException
      */
-    public function postCanvasTriggerSend(Model\CanvasTriggerSendPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postCanvasTriggerSend(?Model\CanvasTriggerSendPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PostCanvasTriggerSend($requestBody, $headerParameters), $fetch);
     }
@@ -6655,7 +6655,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PutPreferenceCenterV1ByPreferenceCenterExternalIDTooManyRequestsException
      * @throws Exception\PutPreferenceCenterV1ByPreferenceCenterExternalIDInternalServerErrorException
      */
-    public function putPreferenceCenterV1ByPreferenceCenterExternalID(string $preferenceCenterExternalID, Model\PreferenceCenterV1PreferenceCenterExternalIDPutBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function putPreferenceCenterV1ByPreferenceCenterExternalID(string $preferenceCenterExternalID, ?Model\PreferenceCenterV1PreferenceCenterExternalIDPutBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PutPreferenceCenterV1ByPreferenceCenterExternalID($preferenceCenterExternalID, $requestBody, $headerParameters), $fetch);
     }
@@ -6733,7 +6733,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PostPreferenceCenterV1TooManyRequestsException
      * @throws Exception\PostPreferenceCenterV1InternalServerErrorException
      */
-    public function postPreferenceCenterV1(Model\PreferenceCenterV1PostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postPreferenceCenterV1(?Model\PreferenceCenterV1PostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PostPreferenceCenterV1($requestBody, $headerParameters), $fetch);
     }
@@ -6967,7 +6967,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PutScimV2UserByIdTooManyRequestsException
      * @throws Exception\PutScimV2UserByIdInternalServerErrorException
      */
-    public function putScimV2UserById(string $id, Model\ScimV2UsersIdPutBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function putScimV2UserById(string $id, ?Model\ScimV2UsersIdPutBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PutScimV2UserById($id, $requestBody, $headerParameters), $fetch);
     }
@@ -7152,7 +7152,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PostScimV2UserTooManyRequestsException
      * @throws Exception\PostScimV2UserInternalServerErrorException
      */
-    public function postScimV2User(Model\ScimV2UsersPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postScimV2User(?Model\ScimV2UsersPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PostScimV2User($requestBody, $headerParameters), $fetch);
     }
@@ -7267,7 +7267,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PostSmsInvalidPhoneNumbersRemoveTooManyRequestsException
      * @throws Exception\PostSmsInvalidPhoneNumbersRemoveInternalServerErrorException
      */
-    public function postSmsInvalidPhoneNumbersRemove(Model\SmsInvalidPhoneNumbersRemovePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postSmsInvalidPhoneNumbersRemove(?Model\SmsInvalidPhoneNumbersRemovePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PostSmsInvalidPhoneNumbersRemove($requestBody, $headerParameters), $fetch);
     }
@@ -7440,7 +7440,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PostSubscriptionStatusSetTooManyRequestsException
      * @throws Exception\PostSubscriptionStatusSetInternalServerErrorException
      */
-    public function postSubscriptionStatusSet(Model\SubscriptionStatusSetPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postSubscriptionStatusSet(?Model\SubscriptionStatusSetPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PostSubscriptionStatusSet($requestBody, $headerParameters), $fetch);
     }
@@ -7493,7 +7493,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PostV2SubscriptionStatusSetTooManyRequestsException
      * @throws Exception\PostV2SubscriptionStatusSetInternalServerErrorException
      */
-    public function postV2SubscriptionStatusSet(Model\V2SubscriptionStatusSetPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postV2SubscriptionStatusSet(?Model\V2SubscriptionStatusSetPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PostV2SubscriptionStatusSet($requestBody, $headerParameters), $fetch);
     }
@@ -7730,7 +7730,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PostContentBlocksCreateTooManyRequestsException
      * @throws Exception\PostContentBlocksCreateInternalServerErrorException
      */
-    public function postContentBlocksCreate(Model\ContentBlocksCreatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postContentBlocksCreate(?Model\ContentBlocksCreatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PostContentBlocksCreate($requestBody, $headerParameters), $fetch);
     }
@@ -7811,7 +7811,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PostContentBlocksUpdateTooManyRequestsException
      * @throws Exception\PostContentBlocksUpdateInternalServerErrorException
      */
-    public function postContentBlocksUpdate(Model\ContentBlocksUpdatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postContentBlocksUpdate(?Model\ContentBlocksUpdatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PostContentBlocksUpdate($requestBody, $headerParameters), $fetch);
     }
@@ -7998,7 +7998,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PostTemplatesEmailCreateTooManyRequestsException
      * @throws Exception\PostTemplatesEmailCreateInternalServerErrorException
      */
-    public function postTemplatesEmailCreate(Model\TemplatesEmailCreatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postTemplatesEmailCreate(?Model\TemplatesEmailCreatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PostTemplatesEmailCreate($requestBody, $headerParameters), $fetch);
     }
@@ -8087,7 +8087,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PostUsersExternalIdsRenameTooManyRequestsException
      * @throws Exception\PostUsersExternalIdsRenameInternalServerErrorException
      */
-    public function postUsersExternalIdsRename(Model\UsersExternalIdsRenamePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postUsersExternalIdsRename(?Model\UsersExternalIdsRenamePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PostUsersExternalIdsRename($requestBody, $headerParameters), $fetch);
     }
@@ -8152,7 +8152,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PostUsersExternalIdsRemoveTooManyRequestsException
      * @throws Exception\PostUsersExternalIdsRemoveInternalServerErrorException
      */
-    public function postUsersExternalIdsRemove(Model\UsersExternalIdsRemovePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postUsersExternalIdsRemove(?Model\UsersExternalIdsRemovePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PostUsersExternalIdsRemove($requestBody, $headerParameters), $fetch);
     }
@@ -8206,7 +8206,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PostUsersAliasUpdateTooManyRequestsException
      * @throws Exception\PostUsersAliasUpdateInternalServerErrorException
      */
-    public function postUsersAliasUpdate(Model\UsersAliasUpdatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postUsersAliasUpdate(?Model\UsersAliasUpdatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PostUsersAliasUpdate($requestBody, $headerParameters), $fetch);
     }
@@ -8249,7 +8249,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PostUsersAliasNewTooManyRequestsException
      * @throws Exception\PostUsersAliasNewInternalServerErrorException
      */
-    public function postUsersAliasNew(Model\UsersAliasNewPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postUsersAliasNew(?Model\UsersAliasNewPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PostUsersAliasNew($requestBody, $headerParameters), $fetch);
     }
@@ -8293,7 +8293,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PostUsersDeleteTooManyRequestsException
      * @throws Exception\PostUsersDeleteInternalServerErrorException
      */
-    public function postUsersDelete(Model\UsersDeletePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postUsersDelete(?Model\UsersDeletePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PostUsersDelete($requestBody, $headerParameters), $fetch);
     }
@@ -8403,7 +8403,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PostUsersIdentifyTooManyRequestsException
      * @throws Exception\PostUsersIdentifyInternalServerErrorException
      */
-    public function postUsersIdentify(Model\UsersIdentifyPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postUsersIdentify(?Model\UsersIdentifyPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PostUsersIdentify($requestBody, $headerParameters), $fetch);
     }
@@ -8558,7 +8558,7 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PostUsersMergeTooManyRequestsException
      * @throws Exception\PostUsersMergeInternalServerErrorException
      */
-    public function postUsersMerge(Model\UsersMergePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postUsersMerge(?Model\UsersMergePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new Endpoint\PostUsersMerge($requestBody, $headerParameters), $fetch);
     }

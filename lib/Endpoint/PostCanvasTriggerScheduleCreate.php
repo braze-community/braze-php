@@ -52,7 +52,7 @@ class PostCanvasTriggerScheduleCreate extends \Braze\Runtime\Client\BaseEndpoint
      * @var string $Authorization
      *             }
      */
-    public function __construct(\Braze\Model\CanvasTriggerScheduleCreatePostBody $requestBody = null, array $headerParameters = [])
+    public function __construct(?\Braze\Model\CanvasTriggerScheduleCreatePostBody $requestBody = null, array $headerParameters = [])
     {
         $this->body = $requestBody;
         $this->headerParameters = $headerParameters;
@@ -104,7 +104,7 @@ class PostCanvasTriggerScheduleCreate extends \Braze\Runtime\Client\BaseEndpoint
      * @throws \Braze\Exception\PostCanvasTriggerScheduleCreateTooManyRequestsException
      * @throws \Braze\Exception\PostCanvasTriggerScheduleCreateInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();

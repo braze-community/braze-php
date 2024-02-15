@@ -52,7 +52,7 @@ class PostUsersAliasUpdate extends \Braze\Runtime\Client\BaseEndpoint implements
      * @var string $Authorization
      *             }
      */
-    public function __construct(\Braze\Model\UsersAliasUpdatePostBody $requestBody = null, array $headerParameters = [])
+    public function __construct(?\Braze\Model\UsersAliasUpdatePostBody $requestBody = null, array $headerParameters = [])
     {
         $this->body = $requestBody;
         $this->headerParameters = $headerParameters;
@@ -104,7 +104,7 @@ class PostUsersAliasUpdate extends \Braze\Runtime\Client\BaseEndpoint implements
      * @throws \Braze\Exception\PostUsersAliasUpdateTooManyRequestsException
      * @throws \Braze\Exception\PostUsersAliasUpdateInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();
