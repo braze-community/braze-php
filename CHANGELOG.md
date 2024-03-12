@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.0.0](https://github.com/braze-community/braze-php/compare/v1.4.0...v2.0.0) (2024-03-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* **lib:** drop PHP version 7 and require PHP >=8.0
+
+
+### Bug Fixes
+
+* **lib:** generate lib and lock `jane-php/open-api-runtime` to 7.5 ([b48a0e2](https://github.com/braze-community/braze-php/commit/b48a0e2a0070082ef2c3f8b9d48c94f80432f92d)), closes [#55](https://github.com/braze-community/braze-php/issues/55)
+
 ## [1.4.0](https://github.com/braze-community/braze-php/compare/v1.3.2...v1.4.0) (2024-01-05)
 
 
