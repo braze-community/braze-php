@@ -22,12 +22,12 @@ class UsersExternalIdsRenamePostBody extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * @var UsersExternalIdsRenamePostBodyExternalIdRenamesItem[]
+     * @var list<UsersExternalIdsRenamePostBodyExternalIdRenamesItem>
      */
     protected $externalIdRenames;
 
     /**
-     * @return UsersExternalIdsRenamePostBodyExternalIdRenamesItem[]
+     * @return list<UsersExternalIdsRenamePostBodyExternalIdRenamesItem>
      */
     public function getExternalIdRenames(): array
     {
@@ -35,7 +35,7 @@ class UsersExternalIdsRenamePostBody extends \ArrayObject
     }
 
     /**
-     * @param UsersExternalIdsRenamePostBodyExternalIdRenamesItem[] $externalIdRenames
+     * @param list<UsersExternalIdsRenamePostBodyExternalIdRenamesItem> $externalIdRenames
      */
     public function setExternalIdRenames(array $externalIdRenames): self
     {

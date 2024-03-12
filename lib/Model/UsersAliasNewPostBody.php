@@ -22,12 +22,12 @@ class UsersAliasNewPostBody extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * @var UsersAliasNewPostBodyUserAliasesItem[]
+     * @var list<UsersAliasNewPostBodyUserAliasesItem>
      */
     protected $userAliases;
 
     /**
-     * @return UsersAliasNewPostBodyUserAliasesItem[]
+     * @return list<UsersAliasNewPostBodyUserAliasesItem>
      */
     public function getUserAliases(): array
     {
@@ -35,7 +35,7 @@ class UsersAliasNewPostBody extends \ArrayObject
     }
 
     /**
-     * @param UsersAliasNewPostBodyUserAliasesItem[] $userAliases
+     * @param list<UsersAliasNewPostBodyUserAliasesItem> $userAliases
      */
     public function setUserAliases(array $userAliases): self
     {

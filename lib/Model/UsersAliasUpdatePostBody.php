@@ -22,12 +22,12 @@ class UsersAliasUpdatePostBody extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * @var UsersAliasUpdatePostBodyAliasUpdatesItem[]
+     * @var list<UsersAliasUpdatePostBodyAliasUpdatesItem>
      */
     protected $aliasUpdates;
 
     /**
-     * @return UsersAliasUpdatePostBodyAliasUpdatesItem[]
+     * @return list<UsersAliasUpdatePostBodyAliasUpdatesItem>
      */
     public function getAliasUpdates(): array
     {
@@ -35,7 +35,7 @@ class UsersAliasUpdatePostBody extends \ArrayObject
     }
 
     /**
-     * @param UsersAliasUpdatePostBodyAliasUpdatesItem[] $aliasUpdates
+     * @param list<UsersAliasUpdatePostBodyAliasUpdatesItem> $aliasUpdates
      */
     public function setAliasUpdates(array $aliasUpdates): self
     {

@@ -38,7 +38,7 @@ class ContentBlocksCreatePostBody extends \ArrayObject
      */
     protected $state;
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $tags;
 
@@ -95,7 +95,7 @@ class ContentBlocksCreatePostBody extends \ArrayObject
     }
 
     /**
-     * @return string[]
+     * @return list<string>
      */
     public function getTags(): array
     {
@@ -103,7 +103,7 @@ class ContentBlocksCreatePostBody extends \ArrayObject
     }
 
     /**
-     * @param string[] $tags
+     * @param list<string> $tags
      */
     public function setTags(array $tags): self
     {

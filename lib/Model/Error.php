@@ -26,7 +26,7 @@ class Error extends \ArrayObject
      */
     protected $message;
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $errors;
 
@@ -44,7 +44,7 @@ class Error extends \ArrayObject
     }
 
     /**
-     * @return string[]
+     * @return list<string>
      */
     public function getErrors(): array
     {
@@ -52,7 +52,7 @@ class Error extends \ArrayObject
     }
 
     /**
-     * @param string[] $errors
+     * @param list<string> $errors
      */
     public function setErrors(array $errors): self
     {

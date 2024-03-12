@@ -22,20 +22,20 @@ class UsersTrackPostBody extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * @var array<string, mixed>[]
+     * @var list<array<string, mixed>>
      */
     protected $attributes;
     /**
-     * @var mixed[]
+     * @var list<mixed>
      */
     protected $events;
     /**
-     * @var array<string, mixed>[]
+     * @var list<array<string, mixed>>
      */
     protected $purchases;
 
     /**
-     * @return array<string, mixed>[]
+     * @return list<array<string, mixed>>
      */
     public function getAttributes(): array
     {
@@ -43,7 +43,7 @@ class UsersTrackPostBody extends \ArrayObject
     }
 
     /**
-     * @param array<string, mixed>[] $attributes
+     * @param list<array<string, mixed>> $attributes
      */
     public function setAttributes(array $attributes): self
     {
@@ -54,7 +54,7 @@ class UsersTrackPostBody extends \ArrayObject
     }
 
     /**
-     * @return mixed[]
+     * @return list<mixed>
      */
     public function getEvents(): array
     {
@@ -62,7 +62,7 @@ class UsersTrackPostBody extends \ArrayObject
     }
 
     /**
-     * @param mixed[] $events
+     * @param list<mixed> $events
      */
     public function setEvents(array $events): self
     {
@@ -73,7 +73,7 @@ class UsersTrackPostBody extends \ArrayObject
     }
 
     /**
-     * @return array<string, mixed>[]
+     * @return list<array<string, mixed>>
      */
     public function getPurchases(): array
     {
@@ -81,7 +81,7 @@ class UsersTrackPostBody extends \ArrayObject
     }
 
     /**
-     * @param array<string, mixed>[] $purchases
+     * @param list<array<string, mixed>> $purchases
      */
     public function setPurchases(array $purchases): self
     {

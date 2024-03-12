@@ -22,12 +22,12 @@ class EmailBlocklistPostBody extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $email;
 
     /**
-     * @return string[]
+     * @return list<string>
      */
     public function getEmail(): array
     {
@@ -35,7 +35,7 @@ class EmailBlocklistPostBody extends \ArrayObject
     }
 
     /**
-     * @param string[] $email
+     * @param list<string> $email
      */
     public function setEmail(array $email): self
     {

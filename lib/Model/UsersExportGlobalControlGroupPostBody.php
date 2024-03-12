@@ -26,7 +26,7 @@ class UsersExportGlobalControlGroupPostBody extends \ArrayObject
      */
     protected $callbackEndpoint;
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $fieldsToExport;
     /**
@@ -48,7 +48,7 @@ class UsersExportGlobalControlGroupPostBody extends \ArrayObject
     }
 
     /**
-     * @return string[]
+     * @return list<string>
      */
     public function getFieldsToExport(): array
     {
@@ -56,7 +56,7 @@ class UsersExportGlobalControlGroupPostBody extends \ArrayObject
     }
 
     /**
-     * @param string[] $fieldsToExport
+     * @param list<string> $fieldsToExport
      */
     public function setFieldsToExport(array $fieldsToExport): self
     {

@@ -34,7 +34,7 @@ class SubscriptionStatusSetPostBody extends \ArrayObject
      */
     protected $externalId;
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $phone;
 
@@ -78,7 +78,7 @@ class SubscriptionStatusSetPostBody extends \ArrayObject
     }
 
     /**
-     * @return string[]
+     * @return list<string>
      */
     public function getPhone(): array
     {
@@ -86,7 +86,7 @@ class SubscriptionStatusSetPostBody extends \ArrayObject
     }
 
     /**
-     * @param string[] $phone
+     * @param list<string> $phone
      */
     public function setPhone(array $phone): self
     {

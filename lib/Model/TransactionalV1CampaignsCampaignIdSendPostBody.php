@@ -30,7 +30,7 @@ class TransactionalV1CampaignsCampaignIdSendPostBody extends \ArrayObject
      */
     protected $triggerProperties;
     /**
-     * @var TransactionalV1CampaignsCampaignIdSendPostBodyRecipientItem[]
+     * @var list<TransactionalV1CampaignsCampaignIdSendPostBodyRecipientItem>
      */
     protected $recipient;
 
@@ -61,7 +61,7 @@ class TransactionalV1CampaignsCampaignIdSendPostBody extends \ArrayObject
     }
 
     /**
-     * @return TransactionalV1CampaignsCampaignIdSendPostBodyRecipientItem[]
+     * @return list<TransactionalV1CampaignsCampaignIdSendPostBodyRecipientItem>
      */
     public function getRecipient(): array
     {
@@ -69,7 +69,7 @@ class TransactionalV1CampaignsCampaignIdSendPostBody extends \ArrayObject
     }
 
     /**
-     * @param TransactionalV1CampaignsCampaignIdSendPostBodyRecipientItem[] $recipient
+     * @param list<TransactionalV1CampaignsCampaignIdSendPostBodyRecipientItem> $recipient
      */
     public function setRecipient(array $recipient): self
     {

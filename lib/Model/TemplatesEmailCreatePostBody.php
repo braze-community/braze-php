@@ -42,7 +42,7 @@ class TemplatesEmailCreatePostBody extends \ArrayObject
      */
     protected $preheader;
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $tags;
 
@@ -112,7 +112,7 @@ class TemplatesEmailCreatePostBody extends \ArrayObject
     }
 
     /**
-     * @return string[]
+     * @return list<string>
      */
     public function getTags(): array
     {
@@ -120,7 +120,7 @@ class TemplatesEmailCreatePostBody extends \ArrayObject
     }
 
     /**
-     * @param string[] $tags
+     * @param list<string> $tags
      */
     public function setTags(array $tags): self
     {

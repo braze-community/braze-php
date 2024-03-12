@@ -30,7 +30,7 @@ class CatalogsPostBodyCatalogsItem extends \ArrayObject
      */
     protected $description;
     /**
-     * @var CatalogsPostBodyCatalogsItemFieldsItem[]
+     * @var list<CatalogsPostBodyCatalogsItemFieldsItem>
      */
     protected $fields;
 
@@ -61,7 +61,7 @@ class CatalogsPostBodyCatalogsItem extends \ArrayObject
     }
 
     /**
-     * @return CatalogsPostBodyCatalogsItemFieldsItem[]
+     * @return list<CatalogsPostBodyCatalogsItemFieldsItem>
      */
     public function getFields(): array
     {
@@ -69,7 +69,7 @@ class CatalogsPostBodyCatalogsItem extends \ArrayObject
     }
 
     /**
-     * @param CatalogsPostBodyCatalogsItemFieldsItem[] $fields
+     * @param list<CatalogsPostBodyCatalogsItemFieldsItem> $fields
      */
     public function setFields(array $fields): self
     {

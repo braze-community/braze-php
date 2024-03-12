@@ -38,7 +38,7 @@ class CanvasTriggerSendPostBody extends \ArrayObject
      */
     protected $audience;
     /**
-     * @var CanvasTriggerSendPostBodyRecipientsItem[]
+     * @var list<CanvasTriggerSendPostBodyRecipientsItem>
      */
     protected $recipients;
 
@@ -95,7 +95,7 @@ class CanvasTriggerSendPostBody extends \ArrayObject
     }
 
     /**
-     * @return CanvasTriggerSendPostBodyRecipientsItem[]
+     * @return list<CanvasTriggerSendPostBodyRecipientsItem>
      */
     public function getRecipients(): array
     {
@@ -103,7 +103,7 @@ class CanvasTriggerSendPostBody extends \ArrayObject
     }
 
     /**
-     * @param CanvasTriggerSendPostBodyRecipientsItem[] $recipients
+     * @param list<CanvasTriggerSendPostBodyRecipientsItem> $recipients
      */
     public function setRecipients(array $recipients): self
     {

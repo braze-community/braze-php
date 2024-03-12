@@ -26,11 +26,11 @@ class ScimV2UsersPostBodyPermissionsAppGroupItem extends \ArrayObject
      */
     protected $appGroupName;
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $appGroupPermissions;
     /**
-     * @var ScimV2UsersPostBodyPermissionsAppGroupItemTeamItem[]
+     * @var list<ScimV2UsersPostBodyPermissionsAppGroupItemTeamItem>
      */
     protected $team;
 
@@ -48,7 +48,7 @@ class ScimV2UsersPostBodyPermissionsAppGroupItem extends \ArrayObject
     }
 
     /**
-     * @return string[]
+     * @return list<string>
      */
     public function getAppGroupPermissions(): array
     {
@@ -56,7 +56,7 @@ class ScimV2UsersPostBodyPermissionsAppGroupItem extends \ArrayObject
     }
 
     /**
-     * @param string[] $appGroupPermissions
+     * @param list<string> $appGroupPermissions
      */
     public function setAppGroupPermissions(array $appGroupPermissions): self
     {
@@ -67,7 +67,7 @@ class ScimV2UsersPostBodyPermissionsAppGroupItem extends \ArrayObject
     }
 
     /**
-     * @return ScimV2UsersPostBodyPermissionsAppGroupItemTeamItem[]
+     * @return list<ScimV2UsersPostBodyPermissionsAppGroupItemTeamItem>
      */
     public function getTeam(): array
     {
@@ -75,7 +75,7 @@ class ScimV2UsersPostBodyPermissionsAppGroupItem extends \ArrayObject
     }
 
     /**
-     * @param ScimV2UsersPostBodyPermissionsAppGroupItemTeamItem[] $team
+     * @param list<ScimV2UsersPostBodyPermissionsAppGroupItemTeamItem> $team
      */
     public function setTeam(array $team): self
     {

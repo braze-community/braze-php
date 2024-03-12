@@ -22,7 +22,7 @@ class ScimV2UsersPostBody extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $schemas;
     /**
@@ -43,7 +43,7 @@ class ScimV2UsersPostBody extends \ArrayObject
     protected $permissions;
 
     /**
-     * @return string[]
+     * @return list<string>
      */
     public function getSchemas(): array
     {
@@ -51,7 +51,7 @@ class ScimV2UsersPostBody extends \ArrayObject
     }
 
     /**
-     * @param string[] $schemas
+     * @param list<string> $schemas
      */
     public function setSchemas(array $schemas): self
     {

@@ -123,7 +123,7 @@ class GetKpiUninstallsDataSeries extends \Braze\Runtime\Client\BaseEndpoint impl
      * @throws \Braze\Exception\GetKpiUninstallsDataSeriesTooManyRequestsException
      * @throws \Braze\Exception\GetKpiUninstallsDataSeriesInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();

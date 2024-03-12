@@ -22,16 +22,16 @@ class ScimV2UsersIdPutBodyPermissions extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $companyPermissions;
     /**
-     * @var ScimV2UsersIdPutBodyPermissionsAppGroupItem[]
+     * @var list<ScimV2UsersIdPutBodyPermissionsAppGroupItem>
      */
     protected $appGroup;
 
     /**
-     * @return string[]
+     * @return list<string>
      */
     public function getCompanyPermissions(): array
     {
@@ -39,7 +39,7 @@ class ScimV2UsersIdPutBodyPermissions extends \ArrayObject
     }
 
     /**
-     * @param string[] $companyPermissions
+     * @param list<string> $companyPermissions
      */
     public function setCompanyPermissions(array $companyPermissions): self
     {
@@ -50,7 +50,7 @@ class ScimV2UsersIdPutBodyPermissions extends \ArrayObject
     }
 
     /**
-     * @return ScimV2UsersIdPutBodyPermissionsAppGroupItem[]
+     * @return list<ScimV2UsersIdPutBodyPermissionsAppGroupItem>
      */
     public function getAppGroup(): array
     {
@@ -58,7 +58,7 @@ class ScimV2UsersIdPutBodyPermissions extends \ArrayObject
     }
 
     /**
-     * @param ScimV2UsersIdPutBodyPermissionsAppGroupItem[] $appGroup
+     * @param list<ScimV2UsersIdPutBodyPermissionsAppGroupItem> $appGroup
      */
     public function setAppGroup(array $appGroup): self
     {

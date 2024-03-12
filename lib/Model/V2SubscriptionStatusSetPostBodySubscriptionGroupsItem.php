@@ -30,7 +30,7 @@ class V2SubscriptionStatusSetPostBodySubscriptionGroupsItem extends \ArrayObject
      */
     protected $subscriptionState;
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $emails;
 
@@ -61,7 +61,7 @@ class V2SubscriptionStatusSetPostBodySubscriptionGroupsItem extends \ArrayObject
     }
 
     /**
-     * @return string[]
+     * @return list<string>
      */
     public function getEmails(): array
     {
@@ -69,7 +69,7 @@ class V2SubscriptionStatusSetPostBodySubscriptionGroupsItem extends \ArrayObject
     }
 
     /**
-     * @param string[] $emails
+     * @param list<string> $emails
      */
     public function setEmails(array $emails): self
     {

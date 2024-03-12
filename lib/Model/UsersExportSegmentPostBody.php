@@ -30,7 +30,7 @@ class UsersExportSegmentPostBody extends \ArrayObject
      */
     protected $callbackEndpoint;
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $fieldsToExport;
     /**
@@ -65,7 +65,7 @@ class UsersExportSegmentPostBody extends \ArrayObject
     }
 
     /**
-     * @return string[]
+     * @return list<string>
      */
     public function getFieldsToExport(): array
     {
@@ -73,7 +73,7 @@ class UsersExportSegmentPostBody extends \ArrayObject
     }
 
     /**
-     * @param string[] $fieldsToExport
+     * @param list<string> $fieldsToExport
      */
     public function setFieldsToExport(array $fieldsToExport): self
     {

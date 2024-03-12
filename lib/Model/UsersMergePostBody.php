@@ -22,12 +22,12 @@ class UsersMergePostBody extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * @var mixed[]
+     * @var list<mixed>
      */
     protected $mergeUpdates;
 
     /**
-     * @return mixed[]
+     * @return list<mixed>
      */
     public function getMergeUpdates(): array
     {
@@ -35,7 +35,7 @@ class UsersMergePostBody extends \ArrayObject
     }
 
     /**
-     * @param mixed[] $mergeUpdates
+     * @param list<mixed> $mergeUpdates
      */
     public function setMergeUpdates(array $mergeUpdates): self
     {

@@ -22,12 +22,12 @@ class CatalogsPostBody extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * @var CatalogsPostBodyCatalogsItem[]
+     * @var list<CatalogsPostBodyCatalogsItem>
      */
     protected $catalogs;
 
     /**
-     * @return CatalogsPostBodyCatalogsItem[]
+     * @return list<CatalogsPostBodyCatalogsItem>
      */
     public function getCatalogs(): array
     {
@@ -35,7 +35,7 @@ class CatalogsPostBody extends \ArrayObject
     }
 
     /**
-     * @param CatalogsPostBodyCatalogsItem[] $catalogs
+     * @param list<CatalogsPostBodyCatalogsItem> $catalogs
      */
     public function setCatalogs(array $catalogs): self
     {

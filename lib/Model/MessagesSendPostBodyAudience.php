@@ -22,12 +22,12 @@ class MessagesSendPostBodyAudience extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * @var mixed[]
+     * @var list<mixed>
      */
     protected $aND;
 
     /**
-     * @return mixed[]
+     * @return list<mixed>
      */
     public function getAND(): array
     {
@@ -35,7 +35,7 @@ class MessagesSendPostBodyAudience extends \ArrayObject
     }
 
     /**
-     * @param mixed[] $aND
+     * @param list<mixed> $aND
      */
     public function setAND(array $aND): self
     {
