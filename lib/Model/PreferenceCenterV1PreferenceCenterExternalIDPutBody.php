@@ -30,7 +30,7 @@ class PreferenceCenterV1PreferenceCenterExternalIDPutBody extends \ArrayObject
      */
     protected $triggerProperties;
     /**
-     * @var PreferenceCenterV1PreferenceCenterExternalIDPutBodyRecipientItem[]
+     * @var list<PreferenceCenterV1PreferenceCenterExternalIDPutBodyRecipientItem>
      */
     protected $recipient;
 
@@ -61,7 +61,7 @@ class PreferenceCenterV1PreferenceCenterExternalIDPutBody extends \ArrayObject
     }
 
     /**
-     * @return PreferenceCenterV1PreferenceCenterExternalIDPutBodyRecipientItem[]
+     * @return list<PreferenceCenterV1PreferenceCenterExternalIDPutBodyRecipientItem>
      */
     public function getRecipient(): array
     {
@@ -69,7 +69,7 @@ class PreferenceCenterV1PreferenceCenterExternalIDPutBody extends \ArrayObject
     }
 
     /**
-     * @param PreferenceCenterV1PreferenceCenterExternalIDPutBodyRecipientItem[] $recipient
+     * @param list<PreferenceCenterV1PreferenceCenterExternalIDPutBodyRecipientItem> $recipient
      */
     public function setRecipient(array $recipient): self
     {

@@ -22,12 +22,12 @@ class V2SubscriptionStatusSetPostBody extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * @var V2SubscriptionStatusSetPostBodySubscriptionGroupsItem[]
+     * @var list<V2SubscriptionStatusSetPostBodySubscriptionGroupsItem>
      */
     protected $subscriptionGroups;
 
     /**
-     * @return V2SubscriptionStatusSetPostBodySubscriptionGroupsItem[]
+     * @return list<V2SubscriptionStatusSetPostBodySubscriptionGroupsItem>
      */
     public function getSubscriptionGroups(): array
     {
@@ -35,7 +35,7 @@ class V2SubscriptionStatusSetPostBody extends \ArrayObject
     }
 
     /**
-     * @param V2SubscriptionStatusSetPostBodySubscriptionGroupsItem[] $subscriptionGroups
+     * @param list<V2SubscriptionStatusSetPostBodySubscriptionGroupsItem> $subscriptionGroups
      */
     public function setSubscriptionGroups(array $subscriptionGroups): self
     {

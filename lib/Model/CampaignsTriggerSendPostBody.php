@@ -42,7 +42,7 @@ class CampaignsTriggerSendPostBody extends \ArrayObject
      */
     protected $audience;
     /**
-     * @var CampaignsTriggerSendPostBodyRecipientsItem[]
+     * @var list<CampaignsTriggerSendPostBodyRecipientsItem>
      */
     protected $recipients;
 
@@ -118,7 +118,7 @@ class CampaignsTriggerSendPostBody extends \ArrayObject
     }
 
     /**
-     * @return CampaignsTriggerSendPostBodyRecipientsItem[]
+     * @return list<CampaignsTriggerSendPostBodyRecipientsItem>
      */
     public function getRecipients(): array
     {
@@ -126,7 +126,7 @@ class CampaignsTriggerSendPostBody extends \ArrayObject
     }
 
     /**
-     * @param CampaignsTriggerSendPostBodyRecipientsItem[] $recipients
+     * @param list<CampaignsTriggerSendPostBodyRecipientsItem> $recipients
      */
     public function setRecipients(array $recipients): self
     {

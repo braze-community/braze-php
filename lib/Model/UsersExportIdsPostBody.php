@@ -22,11 +22,11 @@ class UsersExportIdsPostBody extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $externalIds;
     /**
-     * @var UsersExportIdsPostBodyUserAliasesItem[]
+     * @var list<UsersExportIdsPostBodyUserAliasesItem>
      */
     protected $userAliases;
     /**
@@ -46,12 +46,12 @@ class UsersExportIdsPostBody extends \ArrayObject
      */
     protected $phone;
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $fieldsToExport;
 
     /**
-     * @return string[]
+     * @return list<string>
      */
     public function getExternalIds(): array
     {
@@ -59,7 +59,7 @@ class UsersExportIdsPostBody extends \ArrayObject
     }
 
     /**
-     * @param string[] $externalIds
+     * @param list<string> $externalIds
      */
     public function setExternalIds(array $externalIds): self
     {
@@ -70,7 +70,7 @@ class UsersExportIdsPostBody extends \ArrayObject
     }
 
     /**
-     * @return UsersExportIdsPostBodyUserAliasesItem[]
+     * @return list<UsersExportIdsPostBodyUserAliasesItem>
      */
     public function getUserAliases(): array
     {
@@ -78,7 +78,7 @@ class UsersExportIdsPostBody extends \ArrayObject
     }
 
     /**
-     * @param UsersExportIdsPostBodyUserAliasesItem[] $userAliases
+     * @param list<UsersExportIdsPostBodyUserAliasesItem> $userAliases
      */
     public function setUserAliases(array $userAliases): self
     {
@@ -141,7 +141,7 @@ class UsersExportIdsPostBody extends \ArrayObject
     }
 
     /**
-     * @return string[]
+     * @return list<string>
      */
     public function getFieldsToExport(): array
     {
@@ -149,7 +149,7 @@ class UsersExportIdsPostBody extends \ArrayObject
     }
 
     /**
-     * @param string[] $fieldsToExport
+     * @param list<string> $fieldsToExport
      */
     public function setFieldsToExport(array $fieldsToExport): self
     {

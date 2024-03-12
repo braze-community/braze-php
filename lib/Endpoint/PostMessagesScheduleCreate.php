@@ -62,7 +62,7 @@ class PostMessagesScheduleCreate extends \Braze\Runtime\Client\BaseEndpoint impl
      *
      * ```
      */
-    public function __construct(\Braze\Model\MessagesScheduleCreatePostBody $requestBody = null)
+    public function __construct(?\Braze\Model\MessagesScheduleCreatePostBody $requestBody = null)
     {
         $this->body = $requestBody;
     }
@@ -101,7 +101,7 @@ class PostMessagesScheduleCreate extends \Braze\Runtime\Client\BaseEndpoint impl
      * @throws \Braze\Exception\PostMessagesScheduleCreateTooManyRequestsException
      * @throws \Braze\Exception\PostMessagesScheduleCreateInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();

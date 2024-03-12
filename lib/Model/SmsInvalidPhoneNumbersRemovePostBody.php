@@ -22,12 +22,12 @@ class SmsInvalidPhoneNumbersRemovePostBody extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $phoneNumbers;
 
     /**
-     * @return string[]
+     * @return list<string>
      */
     public function getPhoneNumbers(): array
     {
@@ -35,7 +35,7 @@ class SmsInvalidPhoneNumbersRemovePostBody extends \ArrayObject
     }
 
     /**
-     * @param string[] $phoneNumbers
+     * @param list<string> $phoneNumbers
      */
     public function setPhoneNumbers(array $phoneNumbers): self
     {

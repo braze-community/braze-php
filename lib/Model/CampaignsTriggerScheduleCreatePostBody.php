@@ -30,7 +30,7 @@ class CampaignsTriggerScheduleCreatePostBody extends \ArrayObject
      */
     protected $sendId;
     /**
-     * @var CampaignsTriggerScheduleCreatePostBodyRecipientsItem[]
+     * @var list<CampaignsTriggerScheduleCreatePostBodyRecipientsItem>
      */
     protected $recipients;
     /**
@@ -77,7 +77,7 @@ class CampaignsTriggerScheduleCreatePostBody extends \ArrayObject
     }
 
     /**
-     * @return CampaignsTriggerScheduleCreatePostBodyRecipientsItem[]
+     * @return list<CampaignsTriggerScheduleCreatePostBodyRecipientsItem>
      */
     public function getRecipients(): array
     {
@@ -85,7 +85,7 @@ class CampaignsTriggerScheduleCreatePostBody extends \ArrayObject
     }
 
     /**
-     * @param CampaignsTriggerScheduleCreatePostBodyRecipientsItem[] $recipients
+     * @param list<CampaignsTriggerScheduleCreatePostBodyRecipientsItem> $recipients
      */
     public function setRecipients(array $recipients): self
     {

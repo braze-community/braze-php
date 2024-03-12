@@ -26,7 +26,7 @@ class CanvasTriggerScheduleCreatePostBody extends \ArrayObject
      */
     protected $canvasId;
     /**
-     * @var CanvasTriggerScheduleCreatePostBodyRecipientsItem[]
+     * @var list<CanvasTriggerScheduleCreatePostBodyRecipientsItem>
      */
     protected $recipients;
     /**
@@ -60,7 +60,7 @@ class CanvasTriggerScheduleCreatePostBody extends \ArrayObject
     }
 
     /**
-     * @return CanvasTriggerScheduleCreatePostBodyRecipientsItem[]
+     * @return list<CanvasTriggerScheduleCreatePostBodyRecipientsItem>
      */
     public function getRecipients(): array
     {
@@ -68,7 +68,7 @@ class CanvasTriggerScheduleCreatePostBody extends \ArrayObject
     }
 
     /**
-     * @param CanvasTriggerScheduleCreatePostBodyRecipientsItem[] $recipients
+     * @param list<CanvasTriggerScheduleCreatePostBodyRecipientsItem> $recipients
      */
     public function setRecipients(array $recipients): self
     {

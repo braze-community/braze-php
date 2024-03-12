@@ -22,12 +22,12 @@ class CatalogsCatalogNameItemsPatchBody extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * @var CatalogsCatalogNameItemsPatchBodyItemsItem[]
+     * @var list<CatalogsCatalogNameItemsPatchBodyItemsItem>
      */
     protected $items;
 
     /**
-     * @return CatalogsCatalogNameItemsPatchBodyItemsItem[]
+     * @return list<CatalogsCatalogNameItemsPatchBodyItemsItem>
      */
     public function getItems(): array
     {
@@ -35,7 +35,7 @@ class CatalogsCatalogNameItemsPatchBody extends \ArrayObject
     }
 
     /**
-     * @param CatalogsCatalogNameItemsPatchBodyItemsItem[] $items
+     * @param list<CatalogsCatalogNameItemsPatchBodyItemsItem> $items
      */
     public function setItems(array $items): self
     {

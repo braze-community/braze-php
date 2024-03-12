@@ -13,6 +13,7 @@ namespace Braze\Normalizer;
 use Braze\Runtime\Normalizer\CheckArray;
 use Braze\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -20,134 +21,265 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class UsersExportIdsPostBodyNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
-{
-    use DenormalizerAwareTrait;
-    use NormalizerAwareTrait;
-    use CheckArray;
-    use ValidatorTrait;
-
-    public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
+if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
+    class UsersExportIdsPostBodyNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        return $type === 'Braze\\Model\\UsersExportIdsPostBody';
-    }
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-    public function supportsNormalization($data, $format = null, array $context = []): bool
-    {
-        return is_object($data) && get_class($data) === 'Braze\\Model\\UsersExportIdsPostBody';
-    }
-
-    public function denormalize($data, $class, $format = null, array $context = [])
-    {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === 'Braze\\Model\\UsersExportIdsPostBody';
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === 'Braze\\Model\\UsersExportIdsPostBody';
         }
-        $object = new \Braze\Model\UsersExportIdsPostBody();
-        if (null === $data || false === \is_array($data)) {
+
+        public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \Braze\Model\UsersExportIdsPostBody();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('external_ids', $data)) {
+                $values = [];
+                foreach ($data['external_ids'] as $value) {
+                    $values[] = $value;
+                }
+                $object->setExternalIds($values);
+                unset($data['external_ids']);
+            }
+            if (\array_key_exists('user_aliases', $data)) {
+                $values_1 = [];
+                foreach ($data['user_aliases'] as $value_1) {
+                    $values_1[] = $this->denormalizer->denormalize($value_1, 'Braze\\Model\\UsersExportIdsPostBodyUserAliasesItem', 'json', $context);
+                }
+                $object->setUserAliases($values_1);
+                unset($data['user_aliases']);
+            }
+            if (\array_key_exists('device_id', $data)) {
+                $object->setDeviceId($data['device_id']);
+                unset($data['device_id']);
+            }
+            if (\array_key_exists('braze_id', $data)) {
+                $object->setBrazeId($data['braze_id']);
+                unset($data['braze_id']);
+            }
+            if (\array_key_exists('email_address', $data)) {
+                $object->setEmailAddress($data['email_address']);
+                unset($data['email_address']);
+            }
+            if (\array_key_exists('phone', $data)) {
+                $object->setPhone($data['phone']);
+                unset($data['phone']);
+            }
+            if (\array_key_exists('fields_to_export', $data)) {
+                $values_2 = [];
+                foreach ($data['fields_to_export'] as $value_2) {
+                    $values_2[] = $value_2;
+                }
+                $object->setFieldsToExport($values_2);
+                unset($data['fields_to_export']);
+            }
+            foreach ($data as $key => $value_3) {
+                if (preg_match('/.*/', (string) $key)) {
+                    $object[$key] = $value_3;
+                }
+            }
+
             return $object;
         }
-        if (\array_key_exists('external_ids', $data)) {
-            $values = [];
-            foreach ($data['external_ids'] as $value) {
-                $values[] = $value;
+
+        public function normalize(mixed $object, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+        {
+            $data = [];
+            if ($object->isInitialized('externalIds') && null !== $object->getExternalIds()) {
+                $values = [];
+                foreach ($object->getExternalIds() as $value) {
+                    $values[] = $value;
+                }
+                $data['external_ids'] = $values;
             }
-            $object->setExternalIds($values);
-            unset($data['external_ids']);
-        }
-        if (\array_key_exists('user_aliases', $data)) {
-            $values_1 = [];
-            foreach ($data['user_aliases'] as $value_1) {
-                $values_1[] = $this->denormalizer->denormalize($value_1, 'Braze\\Model\\UsersExportIdsPostBodyUserAliasesItem', 'json', $context);
+            if ($object->isInitialized('userAliases') && null !== $object->getUserAliases()) {
+                $values_1 = [];
+                foreach ($object->getUserAliases() as $value_1) {
+                    $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
+                }
+                $data['user_aliases'] = $values_1;
             }
-            $object->setUserAliases($values_1);
-            unset($data['user_aliases']);
-        }
-        if (\array_key_exists('device_id', $data)) {
-            $object->setDeviceId($data['device_id']);
-            unset($data['device_id']);
-        }
-        if (\array_key_exists('braze_id', $data)) {
-            $object->setBrazeId($data['braze_id']);
-            unset($data['braze_id']);
-        }
-        if (\array_key_exists('email_address', $data)) {
-            $object->setEmailAddress($data['email_address']);
-            unset($data['email_address']);
-        }
-        if (\array_key_exists('phone', $data)) {
-            $object->setPhone($data['phone']);
-            unset($data['phone']);
-        }
-        if (\array_key_exists('fields_to_export', $data)) {
-            $values_2 = [];
-            foreach ($data['fields_to_export'] as $value_2) {
-                $values_2[] = $value_2;
+            if ($object->isInitialized('deviceId') && null !== $object->getDeviceId()) {
+                $data['device_id'] = $object->getDeviceId();
             }
-            $object->setFieldsToExport($values_2);
-            unset($data['fields_to_export']);
-        }
-        foreach ($data as $key => $value_3) {
-            if (preg_match('/.*/', (string) $key)) {
-                $object[$key] = $value_3;
+            if ($object->isInitialized('brazeId') && null !== $object->getBrazeId()) {
+                $data['braze_id'] = $object->getBrazeId();
             }
+            if ($object->isInitialized('emailAddress') && null !== $object->getEmailAddress()) {
+                $data['email_address'] = $object->getEmailAddress();
+            }
+            if ($object->isInitialized('phone') && null !== $object->getPhone()) {
+                $data['phone'] = $object->getPhone();
+            }
+            if ($object->isInitialized('fieldsToExport') && null !== $object->getFieldsToExport()) {
+                $values_2 = [];
+                foreach ($object->getFieldsToExport() as $value_2) {
+                    $values_2[] = $value_2;
+                }
+                $data['fields_to_export'] = $values_2;
+            }
+            foreach ($object as $key => $value_3) {
+                if (preg_match('/.*/', (string) $key)) {
+                    $data[$key] = $value_3;
+                }
+            }
+
+            return $data;
         }
 
-        return $object;
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return ['Braze\\Model\\UsersExportIdsPostBody' => false];
+        }
     }
-
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = [])
+} else {
+    class UsersExportIdsPostBodyNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        $data = [];
-        if ($object->isInitialized('externalIds') && null !== $object->getExternalIds()) {
-            $values = [];
-            foreach ($object->getExternalIds() as $value) {
-                $values[] = $value;
-            }
-            $data['external_ids'] = $values;
-        }
-        if ($object->isInitialized('userAliases') && null !== $object->getUserAliases()) {
-            $values_1 = [];
-            foreach ($object->getUserAliases() as $value_1) {
-                $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
-            }
-            $data['user_aliases'] = $values_1;
-        }
-        if ($object->isInitialized('deviceId') && null !== $object->getDeviceId()) {
-            $data['device_id'] = $object->getDeviceId();
-        }
-        if ($object->isInitialized('brazeId') && null !== $object->getBrazeId()) {
-            $data['braze_id'] = $object->getBrazeId();
-        }
-        if ($object->isInitialized('emailAddress') && null !== $object->getEmailAddress()) {
-            $data['email_address'] = $object->getEmailAddress();
-        }
-        if ($object->isInitialized('phone') && null !== $object->getPhone()) {
-            $data['phone'] = $object->getPhone();
-        }
-        if ($object->isInitialized('fieldsToExport') && null !== $object->getFieldsToExport()) {
-            $values_2 = [];
-            foreach ($object->getFieldsToExport() as $value_2) {
-                $values_2[] = $value_2;
-            }
-            $data['fields_to_export'] = $values_2;
-        }
-        foreach ($object as $key => $value_3) {
-            if (preg_match('/.*/', (string) $key)) {
-                $data[$key] = $value_3;
-            }
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
+
+        public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === 'Braze\\Model\\UsersExportIdsPostBody';
         }
 
-        return $data;
-    }
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === 'Braze\\Model\\UsersExportIdsPostBody';
+        }
 
-    public function getSupportedTypes(string $format = null): array
-    {
-        return ['Braze\\Model\\UsersExportIdsPostBody' => false];
+        public function denormalize($data, $type, $format = null, array $context = [])
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \Braze\Model\UsersExportIdsPostBody();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('external_ids', $data)) {
+                $values = [];
+                foreach ($data['external_ids'] as $value) {
+                    $values[] = $value;
+                }
+                $object->setExternalIds($values);
+                unset($data['external_ids']);
+            }
+            if (\array_key_exists('user_aliases', $data)) {
+                $values_1 = [];
+                foreach ($data['user_aliases'] as $value_1) {
+                    $values_1[] = $this->denormalizer->denormalize($value_1, 'Braze\\Model\\UsersExportIdsPostBodyUserAliasesItem', 'json', $context);
+                }
+                $object->setUserAliases($values_1);
+                unset($data['user_aliases']);
+            }
+            if (\array_key_exists('device_id', $data)) {
+                $object->setDeviceId($data['device_id']);
+                unset($data['device_id']);
+            }
+            if (\array_key_exists('braze_id', $data)) {
+                $object->setBrazeId($data['braze_id']);
+                unset($data['braze_id']);
+            }
+            if (\array_key_exists('email_address', $data)) {
+                $object->setEmailAddress($data['email_address']);
+                unset($data['email_address']);
+            }
+            if (\array_key_exists('phone', $data)) {
+                $object->setPhone($data['phone']);
+                unset($data['phone']);
+            }
+            if (\array_key_exists('fields_to_export', $data)) {
+                $values_2 = [];
+                foreach ($data['fields_to_export'] as $value_2) {
+                    $values_2[] = $value_2;
+                }
+                $object->setFieldsToExport($values_2);
+                unset($data['fields_to_export']);
+            }
+            foreach ($data as $key => $value_3) {
+                if (preg_match('/.*/', (string) $key)) {
+                    $object[$key] = $value_3;
+                }
+            }
+
+            return $object;
+        }
+
+        /**
+         * @return array|string|int|float|bool|\ArrayObject|null
+         */
+        public function normalize($object, $format = null, array $context = [])
+        {
+            $data = [];
+            if ($object->isInitialized('externalIds') && null !== $object->getExternalIds()) {
+                $values = [];
+                foreach ($object->getExternalIds() as $value) {
+                    $values[] = $value;
+                }
+                $data['external_ids'] = $values;
+            }
+            if ($object->isInitialized('userAliases') && null !== $object->getUserAliases()) {
+                $values_1 = [];
+                foreach ($object->getUserAliases() as $value_1) {
+                    $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
+                }
+                $data['user_aliases'] = $values_1;
+            }
+            if ($object->isInitialized('deviceId') && null !== $object->getDeviceId()) {
+                $data['device_id'] = $object->getDeviceId();
+            }
+            if ($object->isInitialized('brazeId') && null !== $object->getBrazeId()) {
+                $data['braze_id'] = $object->getBrazeId();
+            }
+            if ($object->isInitialized('emailAddress') && null !== $object->getEmailAddress()) {
+                $data['email_address'] = $object->getEmailAddress();
+            }
+            if ($object->isInitialized('phone') && null !== $object->getPhone()) {
+                $data['phone'] = $object->getPhone();
+            }
+            if ($object->isInitialized('fieldsToExport') && null !== $object->getFieldsToExport()) {
+                $values_2 = [];
+                foreach ($object->getFieldsToExport() as $value_2) {
+                    $values_2[] = $value_2;
+                }
+                $data['fields_to_export'] = $values_2;
+            }
+            foreach ($object as $key => $value_3) {
+                if (preg_match('/.*/', (string) $key)) {
+                    $data[$key] = $value_3;
+                }
+            }
+
+            return $data;
+        }
+
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return ['Braze\\Model\\UsersExportIdsPostBody' => false];
+        }
     }
 }

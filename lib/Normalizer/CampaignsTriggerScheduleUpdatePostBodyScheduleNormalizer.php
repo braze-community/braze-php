@@ -13,6 +13,7 @@ namespace Braze\Normalizer;
 use Braze\Runtime\Normalizer\CheckArray;
 use Braze\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -20,75 +21,147 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class CampaignsTriggerScheduleUpdatePostBodyScheduleNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
-{
-    use DenormalizerAwareTrait;
-    use NormalizerAwareTrait;
-    use CheckArray;
-    use ValidatorTrait;
-
-    public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
+if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
+    class CampaignsTriggerScheduleUpdatePostBodyScheduleNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        return $type === 'Braze\\Model\\CampaignsTriggerScheduleUpdatePostBodySchedule';
-    }
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-    public function supportsNormalization($data, $format = null, array $context = []): bool
-    {
-        return is_object($data) && get_class($data) === 'Braze\\Model\\CampaignsTriggerScheduleUpdatePostBodySchedule';
-    }
-
-    public function denormalize($data, $class, $format = null, array $context = [])
-    {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === 'Braze\\Model\\CampaignsTriggerScheduleUpdatePostBodySchedule';
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === 'Braze\\Model\\CampaignsTriggerScheduleUpdatePostBodySchedule';
         }
-        $object = new \Braze\Model\CampaignsTriggerScheduleUpdatePostBodySchedule();
-        if (null === $data || false === \is_array($data)) {
+
+        public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \Braze\Model\CampaignsTriggerScheduleUpdatePostBodySchedule();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('time', $data)) {
+                $object->setTime(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['time']));
+                unset($data['time']);
+            }
+            if (\array_key_exists('in_local_time', $data)) {
+                $object->setInLocalTime($data['in_local_time']);
+                unset($data['in_local_time']);
+            }
+            foreach ($data as $key => $value) {
+                if (preg_match('/.*/', (string) $key)) {
+                    $object[$key] = $value;
+                }
+            }
+
             return $object;
         }
-        if (\array_key_exists('time', $data)) {
-            $object->setTime(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['time']));
-            unset($data['time']);
-        }
-        if (\array_key_exists('in_local_time', $data)) {
-            $object->setInLocalTime($data['in_local_time']);
-            unset($data['in_local_time']);
-        }
-        foreach ($data as $key => $value) {
-            if (preg_match('/.*/', (string) $key)) {
-                $object[$key] = $value;
+
+        public function normalize(mixed $object, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+        {
+            $data = [];
+            if ($object->isInitialized('time') && null !== $object->getTime()) {
+                $data['time'] = $object->getTime()->format('Y-m-d\\TH:i:sP');
             }
-        }
-
-        return $object;
-    }
-
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = [])
-    {
-        $data = [];
-        if ($object->isInitialized('time') && null !== $object->getTime()) {
-            $data['time'] = $object->getTime()->format('Y-m-d\\TH:i:sP');
-        }
-        if ($object->isInitialized('inLocalTime') && null !== $object->getInLocalTime()) {
-            $data['in_local_time'] = $object->getInLocalTime();
-        }
-        foreach ($object as $key => $value) {
-            if (preg_match('/.*/', (string) $key)) {
-                $data[$key] = $value;
+            if ($object->isInitialized('inLocalTime') && null !== $object->getInLocalTime()) {
+                $data['in_local_time'] = $object->getInLocalTime();
             }
+            foreach ($object as $key => $value) {
+                if (preg_match('/.*/', (string) $key)) {
+                    $data[$key] = $value;
+                }
+            }
+
+            return $data;
         }
 
-        return $data;
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return ['Braze\\Model\\CampaignsTriggerScheduleUpdatePostBodySchedule' => false];
+        }
     }
-
-    public function getSupportedTypes(string $format = null): array
+} else {
+    class CampaignsTriggerScheduleUpdatePostBodyScheduleNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        return ['Braze\\Model\\CampaignsTriggerScheduleUpdatePostBodySchedule' => false];
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
+
+        public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === 'Braze\\Model\\CampaignsTriggerScheduleUpdatePostBodySchedule';
+        }
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === 'Braze\\Model\\CampaignsTriggerScheduleUpdatePostBodySchedule';
+        }
+
+        public function denormalize($data, $type, $format = null, array $context = [])
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \Braze\Model\CampaignsTriggerScheduleUpdatePostBodySchedule();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('time', $data)) {
+                $object->setTime(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['time']));
+                unset($data['time']);
+            }
+            if (\array_key_exists('in_local_time', $data)) {
+                $object->setInLocalTime($data['in_local_time']);
+                unset($data['in_local_time']);
+            }
+            foreach ($data as $key => $value) {
+                if (preg_match('/.*/', (string) $key)) {
+                    $object[$key] = $value;
+                }
+            }
+
+            return $object;
+        }
+
+        /**
+         * @return array|string|int|float|bool|\ArrayObject|null
+         */
+        public function normalize($object, $format = null, array $context = [])
+        {
+            $data = [];
+            if ($object->isInitialized('time') && null !== $object->getTime()) {
+                $data['time'] = $object->getTime()->format('Y-m-d\\TH:i:sP');
+            }
+            if ($object->isInitialized('inLocalTime') && null !== $object->getInLocalTime()) {
+                $data['in_local_time'] = $object->getInLocalTime();
+            }
+            foreach ($object as $key => $value) {
+                if (preg_match('/.*/', (string) $key)) {
+                    $data[$key] = $value;
+                }
+            }
+
+            return $data;
+        }
+
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return ['Braze\\Model\\CampaignsTriggerScheduleUpdatePostBodySchedule' => false];
+        }
     }
 }

@@ -22,12 +22,12 @@ class CatalogsCatalogNameItemsItemIdPutBody extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * @var array<string, mixed>[]
+     * @var list<array<string, mixed>>
      */
     protected $items;
 
     /**
-     * @return array<string, mixed>[]
+     * @return list<array<string, mixed>>
      */
     public function getItems(): array
     {
@@ -35,7 +35,7 @@ class CatalogsCatalogNameItemsItemIdPutBody extends \ArrayObject
     }
 
     /**
-     * @param array<string, mixed>[] $items
+     * @param list<array<string, mixed>> $items
      */
     public function setItems(array $items): self
     {

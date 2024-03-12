@@ -22,20 +22,20 @@ class UsersDeletePostBody extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $externalIds;
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $brazeIds;
     /**
-     * @var UsersDeletePostBodyUserAliasesItem[]
+     * @var list<UsersDeletePostBodyUserAliasesItem>
      */
     protected $userAliases;
 
     /**
-     * @return string[]
+     * @return list<string>
      */
     public function getExternalIds(): array
     {
@@ -43,7 +43,7 @@ class UsersDeletePostBody extends \ArrayObject
     }
 
     /**
-     * @param string[] $externalIds
+     * @param list<string> $externalIds
      */
     public function setExternalIds(array $externalIds): self
     {
@@ -54,7 +54,7 @@ class UsersDeletePostBody extends \ArrayObject
     }
 
     /**
-     * @return string[]
+     * @return list<string>
      */
     public function getBrazeIds(): array
     {
@@ -62,7 +62,7 @@ class UsersDeletePostBody extends \ArrayObject
     }
 
     /**
-     * @param string[] $brazeIds
+     * @param list<string> $brazeIds
      */
     public function setBrazeIds(array $brazeIds): self
     {
@@ -73,7 +73,7 @@ class UsersDeletePostBody extends \ArrayObject
     }
 
     /**
-     * @return UsersDeletePostBodyUserAliasesItem[]
+     * @return list<UsersDeletePostBodyUserAliasesItem>
      */
     public function getUserAliases(): array
     {
@@ -81,7 +81,7 @@ class UsersDeletePostBody extends \ArrayObject
     }
 
     /**
-     * @param UsersDeletePostBodyUserAliasesItem[] $userAliases
+     * @param list<UsersDeletePostBodyUserAliasesItem> $userAliases
      */
     public function setUserAliases(array $userAliases): self
     {

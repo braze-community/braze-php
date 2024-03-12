@@ -136,7 +136,7 @@ class GetSmsInvalidPhoneNumber extends \Braze\Runtime\Client\BaseEndpoint implem
      * @throws \Braze\Exception\GetSmsInvalidPhoneNumberTooManyRequestsException
      * @throws \Braze\Exception\GetSmsInvalidPhoneNumberInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();

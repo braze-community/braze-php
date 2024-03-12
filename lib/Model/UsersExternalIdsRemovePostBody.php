@@ -22,12 +22,12 @@ class UsersExternalIdsRemovePostBody extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $externalIds;
 
     /**
-     * @return string[]
+     * @return list<string>
      */
     public function getExternalIds(): array
     {
@@ -35,7 +35,7 @@ class UsersExternalIdsRemovePostBody extends \ArrayObject
     }
 
     /**
-     * @param string[] $externalIds
+     * @param list<string> $externalIds
      */
     public function setExternalIds(array $externalIds): self
     {

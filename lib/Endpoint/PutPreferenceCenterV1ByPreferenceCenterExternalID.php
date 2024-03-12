@@ -75,7 +75,7 @@ class PutPreferenceCenterV1ByPreferenceCenterExternalID extends \Braze\Runtime\C
      * @var string
      *                  }
      */
-    public function __construct(string $preferenceCenterExternalID, \Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBody $requestBody = null, array $headerParameters = [])
+    public function __construct(string $preferenceCenterExternalID, ?\Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBody $requestBody = null, array $headerParameters = [])
     {
         $this->PreferenceCenterExternalID = $preferenceCenterExternalID;
         $this->body = $requestBody;
@@ -128,7 +128,7 @@ class PutPreferenceCenterV1ByPreferenceCenterExternalID extends \Braze\Runtime\C
      * @throws \Braze\Exception\PutPreferenceCenterV1ByPreferenceCenterExternalIDTooManyRequestsException
      * @throws \Braze\Exception\PutPreferenceCenterV1ByPreferenceCenterExternalIDInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();

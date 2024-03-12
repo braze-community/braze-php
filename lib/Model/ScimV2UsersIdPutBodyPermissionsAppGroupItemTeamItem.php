@@ -26,7 +26,7 @@ class ScimV2UsersIdPutBodyPermissionsAppGroupItemTeamItem extends \ArrayObject
      */
     protected $teamName;
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $teamPermissions;
 
@@ -44,7 +44,7 @@ class ScimV2UsersIdPutBodyPermissionsAppGroupItemTeamItem extends \ArrayObject
     }
 
     /**
-     * @return string[]
+     * @return list<string>
      */
     public function getTeamPermissions(): array
     {
@@ -52,7 +52,7 @@ class ScimV2UsersIdPutBodyPermissionsAppGroupItemTeamItem extends \ArrayObject
     }
 
     /**
-     * @param string[] $teamPermissions
+     * @param list<string> $teamPermissions
      */
     public function setTeamPermissions(array $teamPermissions): self
     {
