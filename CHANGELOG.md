@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.2](https://github.com/braze-community/braze-php/compare/v2.0.1...v2.0.2) (2024-05-31)
+
+
+### Build System
+
+* **deps:** update jane-php/open-api-runtime requirement ([#73](https://github.com/braze-community/braze-php/issues/73)) ([c798fa6](https://github.com/braze-community/braze-php/commit/c798fa6a9f45fdd03f1c6c76cdc8f97151ed1d55))
+
 ## [2.0.1](https://github.com/braze-community/braze-php/compare/v2.0.0...v2.0.1) (2024-03-13)
 
 
