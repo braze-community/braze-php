@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.1.0](https://github.com/braze-community/braze-php/compare/v2.0.2...v2.1.0) (2024-06-28)
+
+
+### Features
+
+* **lib:** generate code from `jane-php/open-api-3` upgrade to 7.7.0 ([3703142](https://github.com/braze-community/braze-php/commit/37031428b94a88a9a4b2f6a8795b18ae65d57644))
+
+
+### Build System
+
+* **deps:** update jane-php/open-api-runtime requirement ([#82](https://github.com/braze-community/braze-php/issues/82)) ([198f750](https://github.com/braze-community/braze-php/commit/198f750b110f305e1a273dd0740c6e8cb10e16f1))
+
 ## [2.0.2](https://github.com/braze-community/braze-php/compare/v2.0.1...v2.0.2) (2024-05-31)
 
 
