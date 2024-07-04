@@ -31,12 +31,12 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
         {
-            return $type === 'Braze\\Model\\CanvasTriggerScheduleCreatePostBody';
+            return $type === \Braze\Model\CanvasTriggerScheduleCreatePostBody::class;
         }
 
         public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
         {
-            return is_object($data) && get_class($data) === 'Braze\\Model\\CanvasTriggerScheduleCreatePostBody';
+            return is_object($data) && get_class($data) === Braze\Model\CanvasTriggerScheduleCreatePostBody::class;
         }
 
         public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
@@ -58,13 +58,13 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
             if (\array_key_exists('recipients', $data)) {
                 $values = [];
                 foreach ($data['recipients'] as $value) {
-                    $values[] = $this->denormalizer->denormalize($value, 'Braze\\Model\\CanvasTriggerScheduleCreatePostBodyRecipientsItem', 'json', $context);
+                    $values[] = $this->denormalizer->denormalize($value, \Braze\Model\CanvasTriggerScheduleCreatePostBodyRecipientsItem::class, 'json', $context);
                 }
                 $object->setRecipients($values);
                 unset($data['recipients']);
             }
             if (\array_key_exists('audience', $data)) {
-                $object->setAudience($this->denormalizer->denormalize($data['audience'], 'Braze\\Model\\CanvasTriggerScheduleCreatePostBodyAudience', 'json', $context));
+                $object->setAudience($this->denormalizer->denormalize($data['audience'], \Braze\Model\CanvasTriggerScheduleCreatePostBodyAudience::class, 'json', $context));
                 unset($data['audience']);
             }
             if (\array_key_exists('broadcast', $data)) {
@@ -80,7 +80,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
                 unset($data['canvas_entry_properties']);
             }
             if (\array_key_exists('schedule', $data)) {
-                $object->setSchedule($this->denormalizer->denormalize($data['schedule'], 'Braze\\Model\\CanvasTriggerScheduleCreatePostBodySchedule', 'json', $context));
+                $object->setSchedule($this->denormalizer->denormalize($data['schedule'], \Braze\Model\CanvasTriggerScheduleCreatePostBodySchedule::class, 'json', $context));
                 unset($data['schedule']);
             }
             foreach ($data as $key_1 => $value_2) {
@@ -132,7 +132,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function getSupportedTypes(?string $format = null): array
         {
-            return ['Braze\\Model\\CanvasTriggerScheduleCreatePostBody' => false];
+            return [\Braze\Model\CanvasTriggerScheduleCreatePostBody::class => false];
         }
     }
 } else {
@@ -145,12 +145,12 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
         {
-            return $type === 'Braze\\Model\\CanvasTriggerScheduleCreatePostBody';
+            return $type === \Braze\Model\CanvasTriggerScheduleCreatePostBody::class;
         }
 
         public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
         {
-            return is_object($data) && get_class($data) === 'Braze\\Model\\CanvasTriggerScheduleCreatePostBody';
+            return is_object($data) && get_class($data) === Braze\Model\CanvasTriggerScheduleCreatePostBody::class;
         }
 
         public function denormalize($data, $type, $format = null, array $context = [])
@@ -172,13 +172,13 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
             if (\array_key_exists('recipients', $data)) {
                 $values = [];
                 foreach ($data['recipients'] as $value) {
-                    $values[] = $this->denormalizer->denormalize($value, 'Braze\\Model\\CanvasTriggerScheduleCreatePostBodyRecipientsItem', 'json', $context);
+                    $values[] = $this->denormalizer->denormalize($value, \Braze\Model\CanvasTriggerScheduleCreatePostBodyRecipientsItem::class, 'json', $context);
                 }
                 $object->setRecipients($values);
                 unset($data['recipients']);
             }
             if (\array_key_exists('audience', $data)) {
-                $object->setAudience($this->denormalizer->denormalize($data['audience'], 'Braze\\Model\\CanvasTriggerScheduleCreatePostBodyAudience', 'json', $context));
+                $object->setAudience($this->denormalizer->denormalize($data['audience'], \Braze\Model\CanvasTriggerScheduleCreatePostBodyAudience::class, 'json', $context));
                 unset($data['audience']);
             }
             if (\array_key_exists('broadcast', $data)) {
@@ -194,7 +194,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
                 unset($data['canvas_entry_properties']);
             }
             if (\array_key_exists('schedule', $data)) {
-                $object->setSchedule($this->denormalizer->denormalize($data['schedule'], 'Braze\\Model\\CanvasTriggerScheduleCreatePostBodySchedule', 'json', $context));
+                $object->setSchedule($this->denormalizer->denormalize($data['schedule'], \Braze\Model\CanvasTriggerScheduleCreatePostBodySchedule::class, 'json', $context));
                 unset($data['schedule']);
             }
             foreach ($data as $key_1 => $value_2) {
@@ -249,7 +249,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function getSupportedTypes(?string $format = null): array
         {
-            return ['Braze\\Model\\CanvasTriggerScheduleCreatePostBody' => false];
+            return [\Braze\Model\CanvasTriggerScheduleCreatePostBody::class => false];
         }
     }
 }

@@ -31,12 +31,12 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
         {
-            return $type === 'Braze\\Model\\MessagesLiveActivityUpdatePostBody';
+            return $type === \Braze\Model\MessagesLiveActivityUpdatePostBody::class;
         }
 
         public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
         {
-            return is_object($data) && get_class($data) === 'Braze\\Model\\MessagesLiveActivityUpdatePostBody';
+            return is_object($data) && get_class($data) === Braze\Model\MessagesLiveActivityUpdatePostBody::class;
         }
 
         public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
@@ -60,7 +60,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
                 unset($data['activity_id']);
             }
             if (\array_key_exists('content_state', $data)) {
-                $object->setContentState($this->denormalizer->denormalize($data['content_state'], 'Braze\\Model\\MessagesLiveActivityUpdatePostBodyContentState', 'json', $context));
+                $object->setContentState($this->denormalizer->denormalize($data['content_state'], \Braze\Model\MessagesLiveActivityUpdatePostBodyContentState::class, 'json', $context));
                 unset($data['content_state']);
             }
             if (\array_key_exists('end_activity', $data)) {
@@ -76,7 +76,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
                 unset($data['stale_date']);
             }
             if (\array_key_exists('notification', $data)) {
-                $object->setNotification($this->denormalizer->denormalize($data['notification'], 'Braze\\Model\\MessagesLiveActivityUpdatePostBodyNotification', 'json', $context));
+                $object->setNotification($this->denormalizer->denormalize($data['notification'], \Braze\Model\MessagesLiveActivityUpdatePostBodyNotification::class, 'json', $context));
                 unset($data['notification']);
             }
             foreach ($data as $key => $value) {
@@ -123,7 +123,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function getSupportedTypes(?string $format = null): array
         {
-            return ['Braze\\Model\\MessagesLiveActivityUpdatePostBody' => false];
+            return [\Braze\Model\MessagesLiveActivityUpdatePostBody::class => false];
         }
     }
 } else {
@@ -136,12 +136,12 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
         {
-            return $type === 'Braze\\Model\\MessagesLiveActivityUpdatePostBody';
+            return $type === \Braze\Model\MessagesLiveActivityUpdatePostBody::class;
         }
 
         public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
         {
-            return is_object($data) && get_class($data) === 'Braze\\Model\\MessagesLiveActivityUpdatePostBody';
+            return is_object($data) && get_class($data) === Braze\Model\MessagesLiveActivityUpdatePostBody::class;
         }
 
         public function denormalize($data, $type, $format = null, array $context = [])
@@ -165,7 +165,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
                 unset($data['activity_id']);
             }
             if (\array_key_exists('content_state', $data)) {
-                $object->setContentState($this->denormalizer->denormalize($data['content_state'], 'Braze\\Model\\MessagesLiveActivityUpdatePostBodyContentState', 'json', $context));
+                $object->setContentState($this->denormalizer->denormalize($data['content_state'], \Braze\Model\MessagesLiveActivityUpdatePostBodyContentState::class, 'json', $context));
                 unset($data['content_state']);
             }
             if (\array_key_exists('end_activity', $data)) {
@@ -181,7 +181,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
                 unset($data['stale_date']);
             }
             if (\array_key_exists('notification', $data)) {
-                $object->setNotification($this->denormalizer->denormalize($data['notification'], 'Braze\\Model\\MessagesLiveActivityUpdatePostBodyNotification', 'json', $context));
+                $object->setNotification($this->denormalizer->denormalize($data['notification'], \Braze\Model\MessagesLiveActivityUpdatePostBodyNotification::class, 'json', $context));
                 unset($data['notification']);
             }
             foreach ($data as $key => $value) {
@@ -231,7 +231,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function getSupportedTypes(?string $format = null): array
         {
-            return ['Braze\\Model\\MessagesLiveActivityUpdatePostBody' => false];
+            return [\Braze\Model\MessagesLiveActivityUpdatePostBody::class => false];
         }
     }
 }

@@ -31,12 +31,12 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
         {
-            return $type === 'Braze\\Model\\CampaignsTriggerSendPostBody';
+            return $type === \Braze\Model\CampaignsTriggerSendPostBody::class;
         }
 
         public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
         {
-            return is_object($data) && get_class($data) === 'Braze\\Model\\CampaignsTriggerSendPostBody';
+            return is_object($data) && get_class($data) === Braze\Model\CampaignsTriggerSendPostBody::class;
         }
 
         public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
@@ -72,13 +72,13 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
                 unset($data['broadcast']);
             }
             if (\array_key_exists('audience', $data)) {
-                $object->setAudience($this->denormalizer->denormalize($data['audience'], 'Braze\\Model\\CampaignsTriggerSendPostBodyAudience', 'json', $context));
+                $object->setAudience($this->denormalizer->denormalize($data['audience'], \Braze\Model\CampaignsTriggerSendPostBodyAudience::class, 'json', $context));
                 unset($data['audience']);
             }
             if (\array_key_exists('recipients', $data)) {
                 $values_1 = [];
                 foreach ($data['recipients'] as $value_1) {
-                    $values_1[] = $this->denormalizer->denormalize($value_1, 'Braze\\Model\\CampaignsTriggerSendPostBodyRecipientsItem', 'json', $context);
+                    $values_1[] = $this->denormalizer->denormalize($value_1, \Braze\Model\CampaignsTriggerSendPostBodyRecipientsItem::class, 'json', $context);
                 }
                 $object->setRecipients($values_1);
                 unset($data['recipients']);
@@ -132,7 +132,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function getSupportedTypes(?string $format = null): array
         {
-            return ['Braze\\Model\\CampaignsTriggerSendPostBody' => false];
+            return [\Braze\Model\CampaignsTriggerSendPostBody::class => false];
         }
     }
 } else {
@@ -145,12 +145,12 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
         {
-            return $type === 'Braze\\Model\\CampaignsTriggerSendPostBody';
+            return $type === \Braze\Model\CampaignsTriggerSendPostBody::class;
         }
 
         public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
         {
-            return is_object($data) && get_class($data) === 'Braze\\Model\\CampaignsTriggerSendPostBody';
+            return is_object($data) && get_class($data) === Braze\Model\CampaignsTriggerSendPostBody::class;
         }
 
         public function denormalize($data, $type, $format = null, array $context = [])
@@ -186,13 +186,13 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
                 unset($data['broadcast']);
             }
             if (\array_key_exists('audience', $data)) {
-                $object->setAudience($this->denormalizer->denormalize($data['audience'], 'Braze\\Model\\CampaignsTriggerSendPostBodyAudience', 'json', $context));
+                $object->setAudience($this->denormalizer->denormalize($data['audience'], \Braze\Model\CampaignsTriggerSendPostBodyAudience::class, 'json', $context));
                 unset($data['audience']);
             }
             if (\array_key_exists('recipients', $data)) {
                 $values_1 = [];
                 foreach ($data['recipients'] as $value_1) {
-                    $values_1[] = $this->denormalizer->denormalize($value_1, 'Braze\\Model\\CampaignsTriggerSendPostBodyRecipientsItem', 'json', $context);
+                    $values_1[] = $this->denormalizer->denormalize($value_1, \Braze\Model\CampaignsTriggerSendPostBodyRecipientsItem::class, 'json', $context);
                 }
                 $object->setRecipients($values_1);
                 unset($data['recipients']);
@@ -249,7 +249,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function getSupportedTypes(?string $format = null): array
         {
-            return ['Braze\\Model\\CampaignsTriggerSendPostBody' => false];
+            return [\Braze\Model\CampaignsTriggerSendPostBody::class => false];
         }
     }
 }

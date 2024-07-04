@@ -31,12 +31,12 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
         {
-            return $type === 'Braze\\Model\\PreferenceCenterV1PreferenceCenterExternalIDPutBody';
+            return $type === \Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBody::class;
         }
 
         public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
         {
-            return is_object($data) && get_class($data) === 'Braze\\Model\\PreferenceCenterV1PreferenceCenterExternalIDPutBody';
+            return is_object($data) && get_class($data) === Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBody::class;
         }
 
         public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
@@ -56,13 +56,13 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
                 unset($data['external_send_id']);
             }
             if (\array_key_exists('trigger_properties', $data)) {
-                $object->setTriggerProperties($this->denormalizer->denormalize($data['trigger_properties'], 'Braze\\Model\\PreferenceCenterV1PreferenceCenterExternalIDPutBodyTriggerProperties', 'json', $context));
+                $object->setTriggerProperties($this->denormalizer->denormalize($data['trigger_properties'], \Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBodyTriggerProperties::class, 'json', $context));
                 unset($data['trigger_properties']);
             }
             if (\array_key_exists('recipient', $data)) {
                 $values = [];
                 foreach ($data['recipient'] as $value) {
-                    $values[] = $this->denormalizer->denormalize($value, 'Braze\\Model\\PreferenceCenterV1PreferenceCenterExternalIDPutBodyRecipientItem', 'json', $context);
+                    $values[] = $this->denormalizer->denormalize($value, \Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBodyRecipientItem::class, 'json', $context);
                 }
                 $object->setRecipient($values);
                 unset($data['recipient']);
@@ -103,7 +103,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function getSupportedTypes(?string $format = null): array
         {
-            return ['Braze\\Model\\PreferenceCenterV1PreferenceCenterExternalIDPutBody' => false];
+            return [\Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBody::class => false];
         }
     }
 } else {
@@ -116,12 +116,12 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
         {
-            return $type === 'Braze\\Model\\PreferenceCenterV1PreferenceCenterExternalIDPutBody';
+            return $type === \Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBody::class;
         }
 
         public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
         {
-            return is_object($data) && get_class($data) === 'Braze\\Model\\PreferenceCenterV1PreferenceCenterExternalIDPutBody';
+            return is_object($data) && get_class($data) === Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBody::class;
         }
 
         public function denormalize($data, $type, $format = null, array $context = [])
@@ -141,13 +141,13 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
                 unset($data['external_send_id']);
             }
             if (\array_key_exists('trigger_properties', $data)) {
-                $object->setTriggerProperties($this->denormalizer->denormalize($data['trigger_properties'], 'Braze\\Model\\PreferenceCenterV1PreferenceCenterExternalIDPutBodyTriggerProperties', 'json', $context));
+                $object->setTriggerProperties($this->denormalizer->denormalize($data['trigger_properties'], \Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBodyTriggerProperties::class, 'json', $context));
                 unset($data['trigger_properties']);
             }
             if (\array_key_exists('recipient', $data)) {
                 $values = [];
                 foreach ($data['recipient'] as $value) {
-                    $values[] = $this->denormalizer->denormalize($value, 'Braze\\Model\\PreferenceCenterV1PreferenceCenterExternalIDPutBodyRecipientItem', 'json', $context);
+                    $values[] = $this->denormalizer->denormalize($value, \Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBodyRecipientItem::class, 'json', $context);
                 }
                 $object->setRecipient($values);
                 unset($data['recipient']);
@@ -191,7 +191,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function getSupportedTypes(?string $format = null): array
         {
-            return ['Braze\\Model\\PreferenceCenterV1PreferenceCenterExternalIDPutBody' => false];
+            return [\Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBody::class => false];
         }
     }
 }

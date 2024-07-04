@@ -31,12 +31,12 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
         {
-            return $type === 'Braze\\Model\\ScimV2UsersIdPutBody';
+            return $type === \Braze\Model\ScimV2UsersIdPutBody::class;
         }
 
         public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
         {
-            return is_object($data) && get_class($data) === 'Braze\\Model\\ScimV2UsersIdPutBody';
+            return is_object($data) && get_class($data) === Braze\Model\ScimV2UsersIdPutBody::class;
         }
 
         public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
@@ -60,7 +60,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
                 unset($data['schemas']);
             }
             if (\array_key_exists('name', $data)) {
-                $object->setName($this->denormalizer->denormalize($data['name'], 'Braze\\Model\\ScimV2UsersIdPutBodyName', 'json', $context));
+                $object->setName($this->denormalizer->denormalize($data['name'], \Braze\Model\ScimV2UsersIdPutBodyName::class, 'json', $context));
                 unset($data['name']);
             }
             if (\array_key_exists('department', $data)) {
@@ -68,7 +68,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
                 unset($data['department']);
             }
             if (\array_key_exists('permissions', $data)) {
-                $object->setPermissions($this->denormalizer->denormalize($data['permissions'], 'Braze\\Model\\ScimV2UsersIdPutBodyPermissions', 'json', $context));
+                $object->setPermissions($this->denormalizer->denormalize($data['permissions'], \Braze\Model\ScimV2UsersIdPutBodyPermissions::class, 'json', $context));
                 unset($data['permissions']);
             }
             foreach ($data as $key => $value_1) {
@@ -110,7 +110,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function getSupportedTypes(?string $format = null): array
         {
-            return ['Braze\\Model\\ScimV2UsersIdPutBody' => false];
+            return [\Braze\Model\ScimV2UsersIdPutBody::class => false];
         }
     }
 } else {
@@ -123,12 +123,12 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
         {
-            return $type === 'Braze\\Model\\ScimV2UsersIdPutBody';
+            return $type === \Braze\Model\ScimV2UsersIdPutBody::class;
         }
 
         public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
         {
-            return is_object($data) && get_class($data) === 'Braze\\Model\\ScimV2UsersIdPutBody';
+            return is_object($data) && get_class($data) === Braze\Model\ScimV2UsersIdPutBody::class;
         }
 
         public function denormalize($data, $type, $format = null, array $context = [])
@@ -152,7 +152,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
                 unset($data['schemas']);
             }
             if (\array_key_exists('name', $data)) {
-                $object->setName($this->denormalizer->denormalize($data['name'], 'Braze\\Model\\ScimV2UsersIdPutBodyName', 'json', $context));
+                $object->setName($this->denormalizer->denormalize($data['name'], \Braze\Model\ScimV2UsersIdPutBodyName::class, 'json', $context));
                 unset($data['name']);
             }
             if (\array_key_exists('department', $data)) {
@@ -160,7 +160,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
                 unset($data['department']);
             }
             if (\array_key_exists('permissions', $data)) {
-                $object->setPermissions($this->denormalizer->denormalize($data['permissions'], 'Braze\\Model\\ScimV2UsersIdPutBodyPermissions', 'json', $context));
+                $object->setPermissions($this->denormalizer->denormalize($data['permissions'], \Braze\Model\ScimV2UsersIdPutBodyPermissions::class, 'json', $context));
                 unset($data['permissions']);
             }
             foreach ($data as $key => $value_1) {
@@ -205,7 +205,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function getSupportedTypes(?string $format = null): array
         {
-            return ['Braze\\Model\\ScimV2UsersIdPutBody' => false];
+            return [\Braze\Model\ScimV2UsersIdPutBody::class => false];
         }
     }
 }

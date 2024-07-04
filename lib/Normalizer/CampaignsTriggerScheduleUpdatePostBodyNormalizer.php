@@ -31,12 +31,12 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
         {
-            return $type === 'Braze\\Model\\CampaignsTriggerScheduleUpdatePostBody';
+            return $type === \Braze\Model\CampaignsTriggerScheduleUpdatePostBody::class;
         }
 
         public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
         {
-            return is_object($data) && get_class($data) === 'Braze\\Model\\CampaignsTriggerScheduleUpdatePostBody';
+            return is_object($data) && get_class($data) === Braze\Model\CampaignsTriggerScheduleUpdatePostBody::class;
         }
 
         public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
@@ -60,7 +60,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
                 unset($data['schedule_id']);
             }
             if (\array_key_exists('schedule', $data)) {
-                $object->setSchedule($this->denormalizer->denormalize($data['schedule'], 'Braze\\Model\\CampaignsTriggerScheduleUpdatePostBodySchedule', 'json', $context));
+                $object->setSchedule($this->denormalizer->denormalize($data['schedule'], \Braze\Model\CampaignsTriggerScheduleUpdatePostBodySchedule::class, 'json', $context));
                 unset($data['schedule']);
             }
             foreach ($data as $key => $value) {
@@ -95,7 +95,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function getSupportedTypes(?string $format = null): array
         {
-            return ['Braze\\Model\\CampaignsTriggerScheduleUpdatePostBody' => false];
+            return [\Braze\Model\CampaignsTriggerScheduleUpdatePostBody::class => false];
         }
     }
 } else {
@@ -108,12 +108,12 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
         {
-            return $type === 'Braze\\Model\\CampaignsTriggerScheduleUpdatePostBody';
+            return $type === \Braze\Model\CampaignsTriggerScheduleUpdatePostBody::class;
         }
 
         public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
         {
-            return is_object($data) && get_class($data) === 'Braze\\Model\\CampaignsTriggerScheduleUpdatePostBody';
+            return is_object($data) && get_class($data) === Braze\Model\CampaignsTriggerScheduleUpdatePostBody::class;
         }
 
         public function denormalize($data, $type, $format = null, array $context = [])
@@ -137,7 +137,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
                 unset($data['schedule_id']);
             }
             if (\array_key_exists('schedule', $data)) {
-                $object->setSchedule($this->denormalizer->denormalize($data['schedule'], 'Braze\\Model\\CampaignsTriggerScheduleUpdatePostBodySchedule', 'json', $context));
+                $object->setSchedule($this->denormalizer->denormalize($data['schedule'], \Braze\Model\CampaignsTriggerScheduleUpdatePostBodySchedule::class, 'json', $context));
                 unset($data['schedule']);
             }
             foreach ($data as $key => $value) {
@@ -175,7 +175,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function getSupportedTypes(?string $format = null): array
         {
-            return ['Braze\\Model\\CampaignsTriggerScheduleUpdatePostBody' => false];
+            return [\Braze\Model\CampaignsTriggerScheduleUpdatePostBody::class => false];
         }
     }
 }

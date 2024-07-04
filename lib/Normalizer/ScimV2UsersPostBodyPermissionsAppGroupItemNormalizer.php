@@ -31,12 +31,12 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
         {
-            return $type === 'Braze\\Model\\ScimV2UsersPostBodyPermissionsAppGroupItem';
+            return $type === \Braze\Model\ScimV2UsersPostBodyPermissionsAppGroupItem::class;
         }
 
         public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
         {
-            return is_object($data) && get_class($data) === 'Braze\\Model\\ScimV2UsersPostBodyPermissionsAppGroupItem';
+            return is_object($data) && get_class($data) === Braze\Model\ScimV2UsersPostBodyPermissionsAppGroupItem::class;
         }
 
         public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
@@ -66,7 +66,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
             if (\array_key_exists('team', $data)) {
                 $values_1 = [];
                 foreach ($data['team'] as $value_1) {
-                    $values_1[] = $this->denormalizer->denormalize($value_1, 'Braze\\Model\\ScimV2UsersPostBodyPermissionsAppGroupItemTeamItem', 'json', $context);
+                    $values_1[] = $this->denormalizer->denormalize($value_1, \Braze\Model\ScimV2UsersPostBodyPermissionsAppGroupItemTeamItem::class, 'json', $context);
                 }
                 $object->setTeam($values_1);
                 unset($data['team']);
@@ -111,7 +111,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function getSupportedTypes(?string $format = null): array
         {
-            return ['Braze\\Model\\ScimV2UsersPostBodyPermissionsAppGroupItem' => false];
+            return [\Braze\Model\ScimV2UsersPostBodyPermissionsAppGroupItem::class => false];
         }
     }
 } else {
@@ -124,12 +124,12 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
         {
-            return $type === 'Braze\\Model\\ScimV2UsersPostBodyPermissionsAppGroupItem';
+            return $type === \Braze\Model\ScimV2UsersPostBodyPermissionsAppGroupItem::class;
         }
 
         public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
         {
-            return is_object($data) && get_class($data) === 'Braze\\Model\\ScimV2UsersPostBodyPermissionsAppGroupItem';
+            return is_object($data) && get_class($data) === Braze\Model\ScimV2UsersPostBodyPermissionsAppGroupItem::class;
         }
 
         public function denormalize($data, $type, $format = null, array $context = [])
@@ -159,7 +159,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
             if (\array_key_exists('team', $data)) {
                 $values_1 = [];
                 foreach ($data['team'] as $value_1) {
-                    $values_1[] = $this->denormalizer->denormalize($value_1, 'Braze\\Model\\ScimV2UsersPostBodyPermissionsAppGroupItemTeamItem', 'json', $context);
+                    $values_1[] = $this->denormalizer->denormalize($value_1, \Braze\Model\ScimV2UsersPostBodyPermissionsAppGroupItemTeamItem::class, 'json', $context);
                 }
                 $object->setTeam($values_1);
                 unset($data['team']);
@@ -207,7 +207,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function getSupportedTypes(?string $format = null): array
         {
-            return ['Braze\\Model\\ScimV2UsersPostBodyPermissionsAppGroupItem' => false];
+            return [\Braze\Model\ScimV2UsersPostBodyPermissionsAppGroupItem::class => false];
         }
     }
 }

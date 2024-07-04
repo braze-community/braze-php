@@ -31,12 +31,12 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
         {
-            return $type === 'Braze\\Model\\MessagesScheduleUpdatePostBodyMessages';
+            return $type === \Braze\Model\MessagesScheduleUpdatePostBodyMessages::class;
         }
 
         public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
         {
-            return is_object($data) && get_class($data) === 'Braze\\Model\\MessagesScheduleUpdatePostBodyMessages';
+            return is_object($data) && get_class($data) === Braze\Model\MessagesScheduleUpdatePostBodyMessages::class;
         }
 
         public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
@@ -52,15 +52,15 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
                 return $object;
             }
             if (\array_key_exists('apple_push', $data)) {
-                $object->setApplePush($this->denormalizer->denormalize($data['apple_push'], 'Braze\\Model\\MessagesScheduleUpdatePostBodyMessagesApplePush', 'json', $context));
+                $object->setApplePush($this->denormalizer->denormalize($data['apple_push'], \Braze\Model\MessagesScheduleUpdatePostBodyMessagesApplePush::class, 'json', $context));
                 unset($data['apple_push']);
             }
             if (\array_key_exists('android_push', $data)) {
-                $object->setAndroidPush($this->denormalizer->denormalize($data['android_push'], 'Braze\\Model\\MessagesScheduleUpdatePostBodyMessagesAndroidPush', 'json', $context));
+                $object->setAndroidPush($this->denormalizer->denormalize($data['android_push'], \Braze\Model\MessagesScheduleUpdatePostBodyMessagesAndroidPush::class, 'json', $context));
                 unset($data['android_push']);
             }
             if (\array_key_exists('sms', $data)) {
-                $object->setSms($this->denormalizer->denormalize($data['sms'], 'Braze\\Model\\MessagesScheduleUpdatePostBodyMessagesSms', 'json', $context));
+                $object->setSms($this->denormalizer->denormalize($data['sms'], \Braze\Model\MessagesScheduleUpdatePostBodyMessagesSms::class, 'json', $context));
                 unset($data['sms']);
             }
             foreach ($data as $key => $value) {
@@ -95,7 +95,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function getSupportedTypes(?string $format = null): array
         {
-            return ['Braze\\Model\\MessagesScheduleUpdatePostBodyMessages' => false];
+            return [\Braze\Model\MessagesScheduleUpdatePostBodyMessages::class => false];
         }
     }
 } else {
@@ -108,12 +108,12 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
         {
-            return $type === 'Braze\\Model\\MessagesScheduleUpdatePostBodyMessages';
+            return $type === \Braze\Model\MessagesScheduleUpdatePostBodyMessages::class;
         }
 
         public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
         {
-            return is_object($data) && get_class($data) === 'Braze\\Model\\MessagesScheduleUpdatePostBodyMessages';
+            return is_object($data) && get_class($data) === Braze\Model\MessagesScheduleUpdatePostBodyMessages::class;
         }
 
         public function denormalize($data, $type, $format = null, array $context = [])
@@ -129,15 +129,15 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
                 return $object;
             }
             if (\array_key_exists('apple_push', $data)) {
-                $object->setApplePush($this->denormalizer->denormalize($data['apple_push'], 'Braze\\Model\\MessagesScheduleUpdatePostBodyMessagesApplePush', 'json', $context));
+                $object->setApplePush($this->denormalizer->denormalize($data['apple_push'], \Braze\Model\MessagesScheduleUpdatePostBodyMessagesApplePush::class, 'json', $context));
                 unset($data['apple_push']);
             }
             if (\array_key_exists('android_push', $data)) {
-                $object->setAndroidPush($this->denormalizer->denormalize($data['android_push'], 'Braze\\Model\\MessagesScheduleUpdatePostBodyMessagesAndroidPush', 'json', $context));
+                $object->setAndroidPush($this->denormalizer->denormalize($data['android_push'], \Braze\Model\MessagesScheduleUpdatePostBodyMessagesAndroidPush::class, 'json', $context));
                 unset($data['android_push']);
             }
             if (\array_key_exists('sms', $data)) {
-                $object->setSms($this->denormalizer->denormalize($data['sms'], 'Braze\\Model\\MessagesScheduleUpdatePostBodyMessagesSms', 'json', $context));
+                $object->setSms($this->denormalizer->denormalize($data['sms'], \Braze\Model\MessagesScheduleUpdatePostBodyMessagesSms::class, 'json', $context));
                 unset($data['sms']);
             }
             foreach ($data as $key => $value) {
@@ -175,7 +175,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function getSupportedTypes(?string $format = null): array
         {
-            return ['Braze\\Model\\MessagesScheduleUpdatePostBodyMessages' => false];
+            return [\Braze\Model\MessagesScheduleUpdatePostBodyMessages::class => false];
         }
     }
 }
