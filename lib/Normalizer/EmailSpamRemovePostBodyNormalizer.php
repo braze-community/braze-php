@@ -31,12 +31,12 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
         {
-            return $type === 'Braze\\Model\\EmailSpamRemovePostBody';
+            return $type === \Braze\Model\EmailSpamRemovePostBody::class;
         }
 
         public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
         {
-            return is_object($data) && get_class($data) === 'Braze\\Model\\EmailSpamRemovePostBody';
+            return is_object($data) && get_class($data) === Braze\Model\EmailSpamRemovePostBody::class;
         }
 
         public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
@@ -81,7 +81,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function getSupportedTypes(?string $format = null): array
         {
-            return ['Braze\\Model\\EmailSpamRemovePostBody' => false];
+            return [\Braze\Model\EmailSpamRemovePostBody::class => false];
         }
     }
 } else {
@@ -94,12 +94,12 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
         {
-            return $type === 'Braze\\Model\\EmailSpamRemovePostBody';
+            return $type === \Braze\Model\EmailSpamRemovePostBody::class;
         }
 
         public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
         {
-            return is_object($data) && get_class($data) === 'Braze\\Model\\EmailSpamRemovePostBody';
+            return is_object($data) && get_class($data) === Braze\Model\EmailSpamRemovePostBody::class;
         }
 
         public function denormalize($data, $type, $format = null, array $context = [])
@@ -147,7 +147,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function getSupportedTypes(?string $format = null): array
         {
-            return ['Braze\\Model\\EmailSpamRemovePostBody' => false];
+            return [\Braze\Model\EmailSpamRemovePostBody::class => false];
         }
     }
 }

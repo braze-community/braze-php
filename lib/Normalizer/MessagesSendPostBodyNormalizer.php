@@ -31,12 +31,12 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
         {
-            return $type === 'Braze\\Model\\MessagesSendPostBody';
+            return $type === \Braze\Model\MessagesSendPostBody::class;
         }
 
         public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
         {
-            return is_object($data) && get_class($data) === 'Braze\\Model\\MessagesSendPostBody';
+            return is_object($data) && get_class($data) === Braze\Model\MessagesSendPostBody::class;
         }
 
         public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
@@ -60,7 +60,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
                 unset($data['external_user_ids']);
             }
             if (\array_key_exists('user_aliases', $data)) {
-                $object->setUserAliases($this->denormalizer->denormalize($data['user_aliases'], 'Braze\\Model\\MessagesSendPostBodyUserAliases', 'json', $context));
+                $object->setUserAliases($this->denormalizer->denormalize($data['user_aliases'], \Braze\Model\MessagesSendPostBodyUserAliases::class, 'json', $context));
                 unset($data['user_aliases']);
             }
             if (\array_key_exists('segment_id', $data)) {
@@ -68,7 +68,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
                 unset($data['segment_id']);
             }
             if (\array_key_exists('audience', $data)) {
-                $object->setAudience($this->denormalizer->denormalize($data['audience'], 'Braze\\Model\\MessagesSendPostBodyAudience', 'json', $context));
+                $object->setAudience($this->denormalizer->denormalize($data['audience'], \Braze\Model\MessagesSendPostBodyAudience::class, 'json', $context));
                 unset($data['audience']);
             }
             if (\array_key_exists('campaign_id', $data)) {
@@ -88,7 +88,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
                 unset($data['recipient_subscription_state']);
             }
             if (\array_key_exists('messages', $data)) {
-                $object->setMessages($this->denormalizer->denormalize($data['messages'], 'Braze\\Model\\MessagesSendPostBodyMessages', 'json', $context));
+                $object->setMessages($this->denormalizer->denormalize($data['messages'], \Braze\Model\MessagesSendPostBodyMessages::class, 'json', $context));
                 unset($data['messages']);
             }
             foreach ($data as $key => $value) {
@@ -144,7 +144,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function getSupportedTypes(?string $format = null): array
         {
-            return ['Braze\\Model\\MessagesSendPostBody' => false];
+            return [\Braze\Model\MessagesSendPostBody::class => false];
         }
     }
 } else {
@@ -157,12 +157,12 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
         {
-            return $type === 'Braze\\Model\\MessagesSendPostBody';
+            return $type === \Braze\Model\MessagesSendPostBody::class;
         }
 
         public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
         {
-            return is_object($data) && get_class($data) === 'Braze\\Model\\MessagesSendPostBody';
+            return is_object($data) && get_class($data) === Braze\Model\MessagesSendPostBody::class;
         }
 
         public function denormalize($data, $type, $format = null, array $context = [])
@@ -186,7 +186,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
                 unset($data['external_user_ids']);
             }
             if (\array_key_exists('user_aliases', $data)) {
-                $object->setUserAliases($this->denormalizer->denormalize($data['user_aliases'], 'Braze\\Model\\MessagesSendPostBodyUserAliases', 'json', $context));
+                $object->setUserAliases($this->denormalizer->denormalize($data['user_aliases'], \Braze\Model\MessagesSendPostBodyUserAliases::class, 'json', $context));
                 unset($data['user_aliases']);
             }
             if (\array_key_exists('segment_id', $data)) {
@@ -194,7 +194,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
                 unset($data['segment_id']);
             }
             if (\array_key_exists('audience', $data)) {
-                $object->setAudience($this->denormalizer->denormalize($data['audience'], 'Braze\\Model\\MessagesSendPostBodyAudience', 'json', $context));
+                $object->setAudience($this->denormalizer->denormalize($data['audience'], \Braze\Model\MessagesSendPostBodyAudience::class, 'json', $context));
                 unset($data['audience']);
             }
             if (\array_key_exists('campaign_id', $data)) {
@@ -214,7 +214,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
                 unset($data['recipient_subscription_state']);
             }
             if (\array_key_exists('messages', $data)) {
-                $object->setMessages($this->denormalizer->denormalize($data['messages'], 'Braze\\Model\\MessagesSendPostBodyMessages', 'json', $context));
+                $object->setMessages($this->denormalizer->denormalize($data['messages'], \Braze\Model\MessagesSendPostBodyMessages::class, 'json', $context));
                 unset($data['messages']);
             }
             foreach ($data as $key => $value) {
@@ -273,7 +273,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function getSupportedTypes(?string $format = null): array
         {
-            return ['Braze\\Model\\MessagesSendPostBody' => false];
+            return [\Braze\Model\MessagesSendPostBody::class => false];
         }
     }
 }

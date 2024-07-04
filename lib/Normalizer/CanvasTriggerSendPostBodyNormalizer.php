@@ -31,12 +31,12 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
         {
-            return $type === 'Braze\\Model\\CanvasTriggerSendPostBody';
+            return $type === \Braze\Model\CanvasTriggerSendPostBody::class;
         }
 
         public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
         {
-            return is_object($data) && get_class($data) === 'Braze\\Model\\CanvasTriggerSendPostBody';
+            return is_object($data) && get_class($data) === Braze\Model\CanvasTriggerSendPostBody::class;
         }
 
         public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
@@ -56,7 +56,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
                 unset($data['canvas_id']);
             }
             if (\array_key_exists('canvas_entry_properties', $data)) {
-                $object->setCanvasEntryProperties($this->denormalizer->denormalize($data['canvas_entry_properties'], 'Braze\\Model\\CanvasTriggerSendPostBodyCanvasEntryProperties', 'json', $context));
+                $object->setCanvasEntryProperties($this->denormalizer->denormalize($data['canvas_entry_properties'], \Braze\Model\CanvasTriggerSendPostBodyCanvasEntryProperties::class, 'json', $context));
                 unset($data['canvas_entry_properties']);
             }
             if (\array_key_exists('broadcast', $data)) {
@@ -64,13 +64,13 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
                 unset($data['broadcast']);
             }
             if (\array_key_exists('audience', $data)) {
-                $object->setAudience($this->denormalizer->denormalize($data['audience'], 'Braze\\Model\\CanvasTriggerSendPostBodyAudience', 'json', $context));
+                $object->setAudience($this->denormalizer->denormalize($data['audience'], \Braze\Model\CanvasTriggerSendPostBodyAudience::class, 'json', $context));
                 unset($data['audience']);
             }
             if (\array_key_exists('recipients', $data)) {
                 $values = [];
                 foreach ($data['recipients'] as $value) {
-                    $values[] = $this->denormalizer->denormalize($value, 'Braze\\Model\\CanvasTriggerSendPostBodyRecipientsItem', 'json', $context);
+                    $values[] = $this->denormalizer->denormalize($value, \Braze\Model\CanvasTriggerSendPostBodyRecipientsItem::class, 'json', $context);
                 }
                 $object->setRecipients($values);
                 unset($data['recipients']);
@@ -117,7 +117,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function getSupportedTypes(?string $format = null): array
         {
-            return ['Braze\\Model\\CanvasTriggerSendPostBody' => false];
+            return [\Braze\Model\CanvasTriggerSendPostBody::class => false];
         }
     }
 } else {
@@ -130,12 +130,12 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
         {
-            return $type === 'Braze\\Model\\CanvasTriggerSendPostBody';
+            return $type === \Braze\Model\CanvasTriggerSendPostBody::class;
         }
 
         public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
         {
-            return is_object($data) && get_class($data) === 'Braze\\Model\\CanvasTriggerSendPostBody';
+            return is_object($data) && get_class($data) === Braze\Model\CanvasTriggerSendPostBody::class;
         }
 
         public function denormalize($data, $type, $format = null, array $context = [])
@@ -155,7 +155,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
                 unset($data['canvas_id']);
             }
             if (\array_key_exists('canvas_entry_properties', $data)) {
-                $object->setCanvasEntryProperties($this->denormalizer->denormalize($data['canvas_entry_properties'], 'Braze\\Model\\CanvasTriggerSendPostBodyCanvasEntryProperties', 'json', $context));
+                $object->setCanvasEntryProperties($this->denormalizer->denormalize($data['canvas_entry_properties'], \Braze\Model\CanvasTriggerSendPostBodyCanvasEntryProperties::class, 'json', $context));
                 unset($data['canvas_entry_properties']);
             }
             if (\array_key_exists('broadcast', $data)) {
@@ -163,13 +163,13 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
                 unset($data['broadcast']);
             }
             if (\array_key_exists('audience', $data)) {
-                $object->setAudience($this->denormalizer->denormalize($data['audience'], 'Braze\\Model\\CanvasTriggerSendPostBodyAudience', 'json', $context));
+                $object->setAudience($this->denormalizer->denormalize($data['audience'], \Braze\Model\CanvasTriggerSendPostBodyAudience::class, 'json', $context));
                 unset($data['audience']);
             }
             if (\array_key_exists('recipients', $data)) {
                 $values = [];
                 foreach ($data['recipients'] as $value) {
-                    $values[] = $this->denormalizer->denormalize($value, 'Braze\\Model\\CanvasTriggerSendPostBodyRecipientsItem', 'json', $context);
+                    $values[] = $this->denormalizer->denormalize($value, \Braze\Model\CanvasTriggerSendPostBodyRecipientsItem::class, 'json', $context);
                 }
                 $object->setRecipients($values);
                 unset($data['recipients']);
@@ -219,7 +219,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function getSupportedTypes(?string $format = null): array
         {
-            return ['Braze\\Model\\CanvasTriggerSendPostBody' => false];
+            return [\Braze\Model\CanvasTriggerSendPostBody::class => false];
         }
     }
 }

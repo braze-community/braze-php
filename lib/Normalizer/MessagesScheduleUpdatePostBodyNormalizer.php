@@ -31,12 +31,12 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
         {
-            return $type === 'Braze\\Model\\MessagesScheduleUpdatePostBody';
+            return $type === \Braze\Model\MessagesScheduleUpdatePostBody::class;
         }
 
         public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
         {
-            return is_object($data) && get_class($data) === 'Braze\\Model\\MessagesScheduleUpdatePostBody';
+            return is_object($data) && get_class($data) === Braze\Model\MessagesScheduleUpdatePostBody::class;
         }
 
         public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
@@ -56,11 +56,11 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
                 unset($data['schedule_id']);
             }
             if (\array_key_exists('schedule', $data)) {
-                $object->setSchedule($this->denormalizer->denormalize($data['schedule'], 'Braze\\Model\\MessagesScheduleUpdatePostBodySchedule', 'json', $context));
+                $object->setSchedule($this->denormalizer->denormalize($data['schedule'], \Braze\Model\MessagesScheduleUpdatePostBodySchedule::class, 'json', $context));
                 unset($data['schedule']);
             }
             if (\array_key_exists('messages', $data)) {
-                $object->setMessages($this->denormalizer->denormalize($data['messages'], 'Braze\\Model\\MessagesScheduleUpdatePostBodyMessages', 'json', $context));
+                $object->setMessages($this->denormalizer->denormalize($data['messages'], \Braze\Model\MessagesScheduleUpdatePostBodyMessages::class, 'json', $context));
                 unset($data['messages']);
             }
             foreach ($data as $key => $value) {
@@ -95,7 +95,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function getSupportedTypes(?string $format = null): array
         {
-            return ['Braze\\Model\\MessagesScheduleUpdatePostBody' => false];
+            return [\Braze\Model\MessagesScheduleUpdatePostBody::class => false];
         }
     }
 } else {
@@ -108,12 +108,12 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
         {
-            return $type === 'Braze\\Model\\MessagesScheduleUpdatePostBody';
+            return $type === \Braze\Model\MessagesScheduleUpdatePostBody::class;
         }
 
         public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
         {
-            return is_object($data) && get_class($data) === 'Braze\\Model\\MessagesScheduleUpdatePostBody';
+            return is_object($data) && get_class($data) === Braze\Model\MessagesScheduleUpdatePostBody::class;
         }
 
         public function denormalize($data, $type, $format = null, array $context = [])
@@ -133,11 +133,11 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
                 unset($data['schedule_id']);
             }
             if (\array_key_exists('schedule', $data)) {
-                $object->setSchedule($this->denormalizer->denormalize($data['schedule'], 'Braze\\Model\\MessagesScheduleUpdatePostBodySchedule', 'json', $context));
+                $object->setSchedule($this->denormalizer->denormalize($data['schedule'], \Braze\Model\MessagesScheduleUpdatePostBodySchedule::class, 'json', $context));
                 unset($data['schedule']);
             }
             if (\array_key_exists('messages', $data)) {
-                $object->setMessages($this->denormalizer->denormalize($data['messages'], 'Braze\\Model\\MessagesScheduleUpdatePostBodyMessages', 'json', $context));
+                $object->setMessages($this->denormalizer->denormalize($data['messages'], \Braze\Model\MessagesScheduleUpdatePostBodyMessages::class, 'json', $context));
                 unset($data['messages']);
             }
             foreach ($data as $key => $value) {
@@ -175,7 +175,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function getSupportedTypes(?string $format = null): array
         {
-            return ['Braze\\Model\\MessagesScheduleUpdatePostBody' => false];
+            return [\Braze\Model\MessagesScheduleUpdatePostBody::class => false];
         }
     }
 }

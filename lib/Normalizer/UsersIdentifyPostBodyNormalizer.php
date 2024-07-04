@@ -31,12 +31,12 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
         {
-            return $type === 'Braze\\Model\\UsersIdentifyPostBody';
+            return $type === \Braze\Model\UsersIdentifyPostBody::class;
         }
 
         public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
         {
-            return is_object($data) && get_class($data) === 'Braze\\Model\\UsersIdentifyPostBody';
+            return is_object($data) && get_class($data) === Braze\Model\UsersIdentifyPostBody::class;
         }
 
         public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
@@ -54,7 +54,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
             if (\array_key_exists('aliases_to_identify', $data)) {
                 $values = [];
                 foreach ($data['aliases_to_identify'] as $value) {
-                    $values[] = $this->denormalizer->denormalize($value, 'Braze\\Model\\UsersIdentifyPostBodyAliasesToIdentifyItem', 'json', $context);
+                    $values[] = $this->denormalizer->denormalize($value, \Braze\Model\UsersIdentifyPostBodyAliasesToIdentifyItem::class, 'json', $context);
                 }
                 $object->setAliasesToIdentify($values);
                 unset($data['aliases_to_identify']);
@@ -89,7 +89,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function getSupportedTypes(?string $format = null): array
         {
-            return ['Braze\\Model\\UsersIdentifyPostBody' => false];
+            return [\Braze\Model\UsersIdentifyPostBody::class => false];
         }
     }
 } else {
@@ -102,12 +102,12 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
         {
-            return $type === 'Braze\\Model\\UsersIdentifyPostBody';
+            return $type === \Braze\Model\UsersIdentifyPostBody::class;
         }
 
         public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
         {
-            return is_object($data) && get_class($data) === 'Braze\\Model\\UsersIdentifyPostBody';
+            return is_object($data) && get_class($data) === Braze\Model\UsersIdentifyPostBody::class;
         }
 
         public function denormalize($data, $type, $format = null, array $context = [])
@@ -125,7 +125,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
             if (\array_key_exists('aliases_to_identify', $data)) {
                 $values = [];
                 foreach ($data['aliases_to_identify'] as $value) {
-                    $values[] = $this->denormalizer->denormalize($value, 'Braze\\Model\\UsersIdentifyPostBodyAliasesToIdentifyItem', 'json', $context);
+                    $values[] = $this->denormalizer->denormalize($value, \Braze\Model\UsersIdentifyPostBodyAliasesToIdentifyItem::class, 'json', $context);
                 }
                 $object->setAliasesToIdentify($values);
                 unset($data['aliases_to_identify']);
@@ -163,7 +163,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function getSupportedTypes(?string $format = null): array
         {
-            return ['Braze\\Model\\UsersIdentifyPostBody' => false];
+            return [\Braze\Model\UsersIdentifyPostBody::class => false];
         }
     }
 }
