@@ -151,22 +151,22 @@ class GetContentBlocksList extends \Braze\Runtime\Client\BaseEndpoint implements
             return json_decode($body);
         }
         if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \Braze\Exception\GetContentBlocksListBadRequestException($serializer->deserialize($body, 'Braze\\Model\\Error', 'json'), $response);
+            throw new \Braze\Exception\GetContentBlocksListBadRequestException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
         if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \Braze\Exception\GetContentBlocksListUnauthorizedException($serializer->deserialize($body, 'Braze\\Model\\Error', 'json'), $response);
+            throw new \Braze\Exception\GetContentBlocksListUnauthorizedException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
         if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \Braze\Exception\GetContentBlocksListForbiddenException($serializer->deserialize($body, 'Braze\\Model\\Error', 'json'), $response);
+            throw new \Braze\Exception\GetContentBlocksListForbiddenException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
         if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \Braze\Exception\GetContentBlocksListNotFoundException($serializer->deserialize($body, 'Braze\\Model\\Error', 'json'), $response);
+            throw new \Braze\Exception\GetContentBlocksListNotFoundException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
         if (is_null($contentType) === false && (429 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \Braze\Exception\GetContentBlocksListTooManyRequestsException($serializer->deserialize($body, 'Braze\\Model\\Error', 'json'), $response);
+            throw new \Braze\Exception\GetContentBlocksListTooManyRequestsException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
         if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \Braze\Exception\GetContentBlocksListInternalServerErrorException($serializer->deserialize($body, 'Braze\\Model\\Error', 'json'), $response);
+            throw new \Braze\Exception\GetContentBlocksListInternalServerErrorException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
     }
 

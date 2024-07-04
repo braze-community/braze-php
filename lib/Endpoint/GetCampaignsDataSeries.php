@@ -285,22 +285,22 @@ class GetCampaignsDataSeries extends \Braze\Runtime\Client\BaseEndpoint implemen
             return json_decode($body);
         }
         if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \Braze\Exception\GetCampaignsDataSeriesBadRequestException($serializer->deserialize($body, 'Braze\\Model\\Error', 'json'), $response);
+            throw new \Braze\Exception\GetCampaignsDataSeriesBadRequestException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
         if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \Braze\Exception\GetCampaignsDataSeriesUnauthorizedException($serializer->deserialize($body, 'Braze\\Model\\Error', 'json'), $response);
+            throw new \Braze\Exception\GetCampaignsDataSeriesUnauthorizedException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
         if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \Braze\Exception\GetCampaignsDataSeriesForbiddenException($serializer->deserialize($body, 'Braze\\Model\\Error', 'json'), $response);
+            throw new \Braze\Exception\GetCampaignsDataSeriesForbiddenException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
         if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \Braze\Exception\GetCampaignsDataSeriesNotFoundException($serializer->deserialize($body, 'Braze\\Model\\Error', 'json'), $response);
+            throw new \Braze\Exception\GetCampaignsDataSeriesNotFoundException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
         if (is_null($contentType) === false && (429 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \Braze\Exception\GetCampaignsDataSeriesTooManyRequestsException($serializer->deserialize($body, 'Braze\\Model\\Error', 'json'), $response);
+            throw new \Braze\Exception\GetCampaignsDataSeriesTooManyRequestsException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
         if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \Braze\Exception\GetCampaignsDataSeriesInternalServerErrorException($serializer->deserialize($body, 'Braze\\Model\\Error', 'json'), $response);
+            throw new \Braze\Exception\GetCampaignsDataSeriesInternalServerErrorException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
     }
 

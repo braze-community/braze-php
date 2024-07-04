@@ -127,22 +127,22 @@ class GetTemplatesEmailInfo extends \Braze\Runtime\Client\BaseEndpoint implement
             return json_decode($body);
         }
         if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \Braze\Exception\GetTemplatesEmailInfoBadRequestException($serializer->deserialize($body, 'Braze\\Model\\Error', 'json'), $response);
+            throw new \Braze\Exception\GetTemplatesEmailInfoBadRequestException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
         if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \Braze\Exception\GetTemplatesEmailInfoUnauthorizedException($serializer->deserialize($body, 'Braze\\Model\\Error', 'json'), $response);
+            throw new \Braze\Exception\GetTemplatesEmailInfoUnauthorizedException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
         if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \Braze\Exception\GetTemplatesEmailInfoForbiddenException($serializer->deserialize($body, 'Braze\\Model\\Error', 'json'), $response);
+            throw new \Braze\Exception\GetTemplatesEmailInfoForbiddenException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
         if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \Braze\Exception\GetTemplatesEmailInfoNotFoundException($serializer->deserialize($body, 'Braze\\Model\\Error', 'json'), $response);
+            throw new \Braze\Exception\GetTemplatesEmailInfoNotFoundException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
         if (is_null($contentType) === false && (429 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \Braze\Exception\GetTemplatesEmailInfoTooManyRequestsException($serializer->deserialize($body, 'Braze\\Model\\Error', 'json'), $response);
+            throw new \Braze\Exception\GetTemplatesEmailInfoTooManyRequestsException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
         if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \Braze\Exception\GetTemplatesEmailInfoInternalServerErrorException($serializer->deserialize($body, 'Braze\\Model\\Error', 'json'), $response);
+            throw new \Braze\Exception\GetTemplatesEmailInfoInternalServerErrorException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
     }
 

@@ -169,22 +169,22 @@ class PatchCatalogsByCatalogNameItem extends \Braze\Runtime\Client\BaseEndpoint 
             return json_decode($body);
         }
         if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \Braze\Exception\PatchCatalogsByCatalogNameItemBadRequestException($serializer->deserialize($body, 'Braze\\Model\\Error', 'json'), $response);
+            throw new \Braze\Exception\PatchCatalogsByCatalogNameItemBadRequestException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
         if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \Braze\Exception\PatchCatalogsByCatalogNameItemUnauthorizedException($serializer->deserialize($body, 'Braze\\Model\\Error', 'json'), $response);
+            throw new \Braze\Exception\PatchCatalogsByCatalogNameItemUnauthorizedException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
         if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \Braze\Exception\PatchCatalogsByCatalogNameItemForbiddenException($serializer->deserialize($body, 'Braze\\Model\\Error', 'json'), $response);
+            throw new \Braze\Exception\PatchCatalogsByCatalogNameItemForbiddenException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
         if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \Braze\Exception\PatchCatalogsByCatalogNameItemNotFoundException($serializer->deserialize($body, 'Braze\\Model\\Error', 'json'), $response);
+            throw new \Braze\Exception\PatchCatalogsByCatalogNameItemNotFoundException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
         if (is_null($contentType) === false && (429 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \Braze\Exception\PatchCatalogsByCatalogNameItemTooManyRequestsException($serializer->deserialize($body, 'Braze\\Model\\Error', 'json'), $response);
+            throw new \Braze\Exception\PatchCatalogsByCatalogNameItemTooManyRequestsException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
         if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \Braze\Exception\PatchCatalogsByCatalogNameItemInternalServerErrorException($serializer->deserialize($body, 'Braze\\Model\\Error', 'json'), $response);
+            throw new \Braze\Exception\PatchCatalogsByCatalogNameItemInternalServerErrorException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
     }
 

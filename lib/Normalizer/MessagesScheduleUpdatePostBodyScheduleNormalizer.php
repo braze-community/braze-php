@@ -52,7 +52,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
                 return $object;
             }
             if (\array_key_exists('time', $data)) {
-                $object->setTime(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['time']));
+                $object->setTime(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['time']));
                 unset($data['time']);
             }
             foreach ($data as $key => $value) {
@@ -68,7 +68,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
         {
             $data = [];
             if ($object->isInitialized('time') && null !== $object->getTime()) {
-                $data['time'] = $object->getTime()->format('Y-m-d\\TH:i:sP');
+                $data['time'] = $object->getTime()->format('Y-m-d\TH:i:sP');
             }
             foreach ($object as $key => $value) {
                 if (preg_match('/.*/', (string) $key)) {
@@ -115,7 +115,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
                 return $object;
             }
             if (\array_key_exists('time', $data)) {
-                $object->setTime(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['time']));
+                $object->setTime(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['time']));
                 unset($data['time']);
             }
             foreach ($data as $key => $value) {
@@ -134,7 +134,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
         {
             $data = [];
             if ($object->isInitialized('time') && null !== $object->getTime()) {
-                $data['time'] = $object->getTime()->format('Y-m-d\\TH:i:sP');
+                $data['time'] = $object->getTime()->format('Y-m-d\TH:i:sP');
             }
             foreach ($object as $key => $value) {
                 if (preg_match('/.*/', (string) $key)) {
