@@ -4,6 +4,7 @@ pull_request_rules:
       - author=dependabot[bot]
       - check-success=build
       - check-success=commitlint
+      - check-success=dependabot
       - 'title~=^build\(deps-dev\): '
     actions:
       merge:
