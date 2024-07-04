@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.1.1](https://github.com/braze-community/braze-php/compare/v2.1.0...v2.1.1) (2024-07-04)
+
+
+### Code Refactoring
+
+* **lib:** get fully qualified name with `::class` ([3612123](https://github.com/braze-community/braze-php/commit/3612123ab1f8b83584072bd4228ba6504b20aeb7))
+* **lib:** tidy backslash in fully qualified name ([51c6405](https://github.com/braze-community/braze-php/commit/51c64052592910c7ddbd6ff39bfff47c4650bfeb))
+
 ## [2.1.0](https://github.com/braze-community/braze-php/compare/v2.0.2...v2.1.0) (2024-06-28)
 
 
