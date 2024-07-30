@@ -21,7 +21,7 @@
         }
     ],
     "require": {
-        "jane-php/open-api-runtime": "7.8.0",
+        "jane-php/open-api-runtime": "7.8.1",
         "php": ">=8.0"
     },
     "require-dev": {
