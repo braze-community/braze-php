@@ -9,6 +9,10 @@ updates:
     directory: '/'
     schedule:
       interval: 'daily'
+    groups:
+      jane-php:
+        patterns:
+          - 'jane-php/*'
 
   - package-ecosystem: 'gitsubmodule'
     directory: '/'
