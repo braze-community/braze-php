@@ -36,7 +36,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
         {
-            return is_object($data) && get_class($data) === Braze\Model\MessagesLiveActivityUpdatePostBody::class;
+            return is_object($data) && get_class($data) === \Braze\Model\MessagesLiveActivityUpdatePostBody::class;
         }
 
         public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
@@ -104,10 +104,10 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
                 $data['end_activity'] = $object->getEndActivity();
             }
             if ($object->isInitialized('dismissalDate') && null !== $object->getDismissalDate()) {
-                $data['dismissal_date'] = $object->getDismissalDate()->format('Y-m-d\TH:i:sP');
+                $data['dismissal_date'] = $object->getDismissalDate()?->format('Y-m-d\TH:i:sP');
             }
             if ($object->isInitialized('staleDate') && null !== $object->getStaleDate()) {
-                $data['stale_date'] = $object->getStaleDate()->format('Y-m-d\TH:i:sP');
+                $data['stale_date'] = $object->getStaleDate()?->format('Y-m-d\TH:i:sP');
             }
             if ($object->isInitialized('notification') && null !== $object->getNotification()) {
                 $data['notification'] = $this->normalizer->normalize($object->getNotification(), 'json', $context);
@@ -141,7 +141,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
         {
-            return is_object($data) && get_class($data) === Braze\Model\MessagesLiveActivityUpdatePostBody::class;
+            return is_object($data) && get_class($data) === \Braze\Model\MessagesLiveActivityUpdatePostBody::class;
         }
 
         public function denormalize($data, $type, $format = null, array $context = [])
@@ -212,10 +212,10 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
                 $data['end_activity'] = $object->getEndActivity();
             }
             if ($object->isInitialized('dismissalDate') && null !== $object->getDismissalDate()) {
-                $data['dismissal_date'] = $object->getDismissalDate()->format('Y-m-d\TH:i:sP');
+                $data['dismissal_date'] = $object->getDismissalDate()?->format('Y-m-d\TH:i:sP');
             }
             if ($object->isInitialized('staleDate') && null !== $object->getStaleDate()) {
-                $data['stale_date'] = $object->getStaleDate()->format('Y-m-d\TH:i:sP');
+                $data['stale_date'] = $object->getStaleDate()?->format('Y-m-d\TH:i:sP');
             }
             if ($object->isInitialized('notification') && null !== $object->getNotification()) {
                 $data['notification'] = $this->normalizer->normalize($object->getNotification(), 'json', $context);
