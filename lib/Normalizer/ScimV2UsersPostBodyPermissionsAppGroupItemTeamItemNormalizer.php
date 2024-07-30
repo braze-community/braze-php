@@ -36,7 +36,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
         {
-            return is_object($data) && get_class($data) === Braze\Model\ScimV2UsersPostBodyPermissionsAppGroupItemTeamItem::class;
+            return is_object($data) && get_class($data) === \Braze\Model\ScimV2UsersPostBodyPermissionsAppGroupItemTeamItem::class;
         }
 
         public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
@@ -114,7 +114,7 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
 
         public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
         {
-            return is_object($data) && get_class($data) === Braze\Model\ScimV2UsersPostBodyPermissionsAppGroupItemTeamItem::class;
+            return is_object($data) && get_class($data) === \Braze\Model\ScimV2UsersPostBodyPermissionsAppGroupItemTeamItem::class;
         }
 
         public function denormalize($data, $type, $format = null, array $context = [])
