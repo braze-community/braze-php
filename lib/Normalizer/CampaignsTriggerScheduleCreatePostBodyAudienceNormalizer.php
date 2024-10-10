@@ -54,14 +54,18 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
             if (\array_key_exists('AND', $data)) {
                 $values = [];
                 foreach ($data['AND'] as $value) {
-                    $values[] = $value;
+                    $values_1 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+                    foreach ($value as $key => $value_1) {
+                        $values_1[$key] = $value_1;
+                    }
+                    $values[] = $values_1;
                 }
                 $object->setAND($values);
                 unset($data['AND']);
             }
-            foreach ($data as $key => $value_1) {
-                if (preg_match('/.*/', (string) $key)) {
-                    $object[$key] = $value_1;
+            foreach ($data as $key_1 => $value_2) {
+                if (preg_match('/.*/', (string) $key_1)) {
+                    $object[$key_1] = $value_2;
                 }
             }
 
@@ -74,13 +78,17 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
             if ($object->isInitialized('aND') && null !== $object->getAND()) {
                 $values = [];
                 foreach ($object->getAND() as $value) {
-                    $values[] = $value;
+                    $values_1 = [];
+                    foreach ($value as $key => $value_1) {
+                        $values_1[$key] = $value_1;
+                    }
+                    $values[] = $values_1;
                 }
                 $data['AND'] = $values;
             }
-            foreach ($object as $key => $value_1) {
-                if (preg_match('/.*/', (string) $key)) {
-                    $data[$key] = $value_1;
+            foreach ($object as $key_1 => $value_2) {
+                if (preg_match('/.*/', (string) $key_1)) {
+                    $data[$key_1] = $value_2;
                 }
             }
 
@@ -125,14 +133,18 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
             if (\array_key_exists('AND', $data)) {
                 $values = [];
                 foreach ($data['AND'] as $value) {
-                    $values[] = $value;
+                    $values_1 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+                    foreach ($value as $key => $value_1) {
+                        $values_1[$key] = $value_1;
+                    }
+                    $values[] = $values_1;
                 }
                 $object->setAND($values);
                 unset($data['AND']);
             }
-            foreach ($data as $key => $value_1) {
-                if (preg_match('/.*/', (string) $key)) {
-                    $object[$key] = $value_1;
+            foreach ($data as $key_1 => $value_2) {
+                if (preg_match('/.*/', (string) $key_1)) {
+                    $object[$key_1] = $value_2;
                 }
             }
 
@@ -148,13 +160,17 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
             if ($object->isInitialized('aND') && null !== $object->getAND()) {
                 $values = [];
                 foreach ($object->getAND() as $value) {
-                    $values[] = $value;
+                    $values_1 = [];
+                    foreach ($value as $key => $value_1) {
+                        $values_1[$key] = $value_1;
+                    }
+                    $values[] = $values_1;
                 }
                 $data['AND'] = $values;
             }
-            foreach ($object as $key => $value_1) {
-                if (preg_match('/.*/', (string) $key)) {
-                    $data[$key] = $value_1;
+            foreach ($object as $key_1 => $value_2) {
+                if (preg_match('/.*/', (string) $key_1)) {
+                    $data[$key_1] = $value_2;
                 }
             }
 

@@ -54,14 +54,18 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
             if (\array_key_exists('merge_updates', $data)) {
                 $values = [];
                 foreach ($data['merge_updates'] as $value) {
-                    $values[] = $value;
+                    $values_1 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+                    foreach ($value as $key => $value_1) {
+                        $values_1[$key] = $value_1;
+                    }
+                    $values[] = $values_1;
                 }
                 $object->setMergeUpdates($values);
                 unset($data['merge_updates']);
             }
-            foreach ($data as $key => $value_1) {
-                if (preg_match('/.*/', (string) $key)) {
-                    $object[$key] = $value_1;
+            foreach ($data as $key_1 => $value_2) {
+                if (preg_match('/.*/', (string) $key_1)) {
+                    $object[$key_1] = $value_2;
                 }
             }
 
@@ -74,13 +78,17 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
             if ($object->isInitialized('mergeUpdates') && null !== $object->getMergeUpdates()) {
                 $values = [];
                 foreach ($object->getMergeUpdates() as $value) {
-                    $values[] = $value;
+                    $values_1 = [];
+                    foreach ($value as $key => $value_1) {
+                        $values_1[$key] = $value_1;
+                    }
+                    $values[] = $values_1;
                 }
                 $data['merge_updates'] = $values;
             }
-            foreach ($object as $key => $value_1) {
-                if (preg_match('/.*/', (string) $key)) {
-                    $data[$key] = $value_1;
+            foreach ($object as $key_1 => $value_2) {
+                if (preg_match('/.*/', (string) $key_1)) {
+                    $data[$key_1] = $value_2;
                 }
             }
 
@@ -125,14 +133,18 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
             if (\array_key_exists('merge_updates', $data)) {
                 $values = [];
                 foreach ($data['merge_updates'] as $value) {
-                    $values[] = $value;
+                    $values_1 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+                    foreach ($value as $key => $value_1) {
+                        $values_1[$key] = $value_1;
+                    }
+                    $values[] = $values_1;
                 }
                 $object->setMergeUpdates($values);
                 unset($data['merge_updates']);
             }
-            foreach ($data as $key => $value_1) {
-                if (preg_match('/.*/', (string) $key)) {
-                    $object[$key] = $value_1;
+            foreach ($data as $key_1 => $value_2) {
+                if (preg_match('/.*/', (string) $key_1)) {
+                    $object[$key_1] = $value_2;
                 }
             }
 
@@ -148,13 +160,17 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
             if ($object->isInitialized('mergeUpdates') && null !== $object->getMergeUpdates()) {
                 $values = [];
                 foreach ($object->getMergeUpdates() as $value) {
-                    $values[] = $value;
+                    $values_1 = [];
+                    foreach ($value as $key => $value_1) {
+                        $values_1[$key] = $value_1;
+                    }
+                    $values[] = $values_1;
                 }
                 $data['merge_updates'] = $values;
             }
-            foreach ($object as $key => $value_1) {
-                if (preg_match('/.*/', (string) $key)) {
-                    $data[$key] = $value_1;
+            foreach ($object as $key_1 => $value_2) {
+                if (preg_match('/.*/', (string) $key_1)) {
+                    $data[$key_1] = $value_2;
                 }
             }
 

@@ -26,7 +26,7 @@ class UsersTrackPostBody extends \ArrayObject
      */
     protected $attributes;
     /**
-     * @var list<mixed>
+     * @var list<array<string, mixed>>
      */
     protected $events;
     /**
@@ -54,7 +54,7 @@ class UsersTrackPostBody extends \ArrayObject
     }
 
     /**
-     * @return list<mixed>
+     * @return list<array<string, mixed>>
      */
     public function getEvents(): array
     {
@@ -62,7 +62,7 @@ class UsersTrackPostBody extends \ArrayObject
     }
 
     /**
-     * @param list<mixed> $events
+     * @param list<array<string, mixed>> $events
      */
     public function setEvents(array $events): self
     {

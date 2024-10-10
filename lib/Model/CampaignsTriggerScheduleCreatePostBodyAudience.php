@@ -22,12 +22,12 @@ class CampaignsTriggerScheduleCreatePostBodyAudience extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * @var list<mixed>
+     * @var list<array<string, mixed>>
      */
     protected $aND;
 
     /**
-     * @return list<mixed>
+     * @return list<array<string, mixed>>
      */
     public function getAND(): array
     {
@@ -35,7 +35,7 @@ class CampaignsTriggerScheduleCreatePostBodyAudience extends \ArrayObject
     }
 
     /**
-     * @param list<mixed> $aND
+     * @param list<array<string, mixed>> $aND
      */
     public function setAND(array $aND): self
     {
