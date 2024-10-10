@@ -66,26 +66,30 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
             if (\array_key_exists('events', $data)) {
                 $values_2 = [];
                 foreach ($data['events'] as $value_2) {
-                    $values_2[] = $value_2;
+                    $values_3 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+                    foreach ($value_2 as $key_1 => $value_3) {
+                        $values_3[$key_1] = $value_3;
+                    }
+                    $values_2[] = $values_3;
                 }
                 $object->setEvents($values_2);
                 unset($data['events']);
             }
             if (\array_key_exists('purchases', $data)) {
-                $values_3 = [];
-                foreach ($data['purchases'] as $value_3) {
-                    $values_4 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
-                    foreach ($value_3 as $key_1 => $value_4) {
-                        $values_4[$key_1] = $value_4;
+                $values_4 = [];
+                foreach ($data['purchases'] as $value_4) {
+                    $values_5 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+                    foreach ($value_4 as $key_2 => $value_5) {
+                        $values_5[$key_2] = $value_5;
                     }
-                    $values_3[] = $values_4;
+                    $values_4[] = $values_5;
                 }
-                $object->setPurchases($values_3);
+                $object->setPurchases($values_4);
                 unset($data['purchases']);
             }
-            foreach ($data as $key_2 => $value_5) {
-                if (preg_match('/.*/', (string) $key_2)) {
-                    $object[$key_2] = $value_5;
+            foreach ($data as $key_3 => $value_6) {
+                if (preg_match('/.*/', (string) $key_3)) {
+                    $object[$key_3] = $value_6;
                 }
             }
 
@@ -109,24 +113,28 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
             if ($object->isInitialized('events') && null !== $object->getEvents()) {
                 $values_2 = [];
                 foreach ($object->getEvents() as $value_2) {
-                    $values_2[] = $value_2;
+                    $values_3 = [];
+                    foreach ($value_2 as $key_1 => $value_3) {
+                        $values_3[$key_1] = $value_3;
+                    }
+                    $values_2[] = $values_3;
                 }
                 $data['events'] = $values_2;
             }
             if ($object->isInitialized('purchases') && null !== $object->getPurchases()) {
-                $values_3 = [];
-                foreach ($object->getPurchases() as $value_3) {
-                    $values_4 = [];
-                    foreach ($value_3 as $key_1 => $value_4) {
-                        $values_4[$key_1] = $value_4;
+                $values_4 = [];
+                foreach ($object->getPurchases() as $value_4) {
+                    $values_5 = [];
+                    foreach ($value_4 as $key_2 => $value_5) {
+                        $values_5[$key_2] = $value_5;
                     }
-                    $values_3[] = $values_4;
+                    $values_4[] = $values_5;
                 }
-                $data['purchases'] = $values_3;
+                $data['purchases'] = $values_4;
             }
-            foreach ($object as $key_2 => $value_5) {
-                if (preg_match('/.*/', (string) $key_2)) {
-                    $data[$key_2] = $value_5;
+            foreach ($object as $key_3 => $value_6) {
+                if (preg_match('/.*/', (string) $key_3)) {
+                    $data[$key_3] = $value_6;
                 }
             }
 
@@ -183,26 +191,30 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
             if (\array_key_exists('events', $data)) {
                 $values_2 = [];
                 foreach ($data['events'] as $value_2) {
-                    $values_2[] = $value_2;
+                    $values_3 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+                    foreach ($value_2 as $key_1 => $value_3) {
+                        $values_3[$key_1] = $value_3;
+                    }
+                    $values_2[] = $values_3;
                 }
                 $object->setEvents($values_2);
                 unset($data['events']);
             }
             if (\array_key_exists('purchases', $data)) {
-                $values_3 = [];
-                foreach ($data['purchases'] as $value_3) {
-                    $values_4 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
-                    foreach ($value_3 as $key_1 => $value_4) {
-                        $values_4[$key_1] = $value_4;
+                $values_4 = [];
+                foreach ($data['purchases'] as $value_4) {
+                    $values_5 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+                    foreach ($value_4 as $key_2 => $value_5) {
+                        $values_5[$key_2] = $value_5;
                     }
-                    $values_3[] = $values_4;
+                    $values_4[] = $values_5;
                 }
-                $object->setPurchases($values_3);
+                $object->setPurchases($values_4);
                 unset($data['purchases']);
             }
-            foreach ($data as $key_2 => $value_5) {
-                if (preg_match('/.*/', (string) $key_2)) {
-                    $object[$key_2] = $value_5;
+            foreach ($data as $key_3 => $value_6) {
+                if (preg_match('/.*/', (string) $key_3)) {
+                    $object[$key_3] = $value_6;
                 }
             }
 
@@ -229,24 +241,28 @@ if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR
             if ($object->isInitialized('events') && null !== $object->getEvents()) {
                 $values_2 = [];
                 foreach ($object->getEvents() as $value_2) {
-                    $values_2[] = $value_2;
+                    $values_3 = [];
+                    foreach ($value_2 as $key_1 => $value_3) {
+                        $values_3[$key_1] = $value_3;
+                    }
+                    $values_2[] = $values_3;
                 }
                 $data['events'] = $values_2;
             }
             if ($object->isInitialized('purchases') && null !== $object->getPurchases()) {
-                $values_3 = [];
-                foreach ($object->getPurchases() as $value_3) {
-                    $values_4 = [];
-                    foreach ($value_3 as $key_1 => $value_4) {
-                        $values_4[$key_1] = $value_4;
+                $values_4 = [];
+                foreach ($object->getPurchases() as $value_4) {
+                    $values_5 = [];
+                    foreach ($value_4 as $key_2 => $value_5) {
+                        $values_5[$key_2] = $value_5;
                     }
-                    $values_3[] = $values_4;
+                    $values_4[] = $values_5;
                 }
-                $data['purchases'] = $values_3;
+                $data['purchases'] = $values_4;
             }
-            foreach ($object as $key_2 => $value_5) {
-                if (preg_match('/.*/', (string) $key_2)) {
-                    $data[$key_2] = $value_5;
+            foreach ($object as $key_3 => $value_6) {
+                if (preg_match('/.*/', (string) $key_3)) {
+                    $data[$key_3] = $value_6;
                 }
             }
 
