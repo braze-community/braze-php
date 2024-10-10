@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.1](https://github.com/braze-community/braze-php/compare/v2.2.0...v2.2.1) (2024-10-10)
+
+
+### Bug Fixes
+
+* **lib:** generate code from braze-specification 1.2.2 ([88fd3ef](https://github.com/braze-community/braze-php/commit/88fd3ef72e3c2596404829e8b79ae30f2702bcf2))
+
 ## [2.2.0](https://github.com/braze-community/braze-php/compare/v2.1.1...v2.2.0) (2024-07-30)
 
 
