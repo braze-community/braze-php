@@ -135,6 +135,9 @@ class PostContentBlocksCreate extends \Braze\Runtime\Client\BaseEndpoint impleme
         if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
             return json_decode($body);
         }
+        if (is_null($contentType) === false && (201 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+            return json_decode($body);
+        }
         if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
             throw new \Braze\Exception\PostContentBlocksCreateBadRequestException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
