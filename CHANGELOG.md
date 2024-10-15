@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.2](https://github.com/braze-community/braze-php/compare/v2.2.1...v2.2.2) (2024-10-15)
+
+
+### Bug Fixes
+
+* **deps:** bump braze-specification from 1.2.3 to 1.2.4 ([#116](https://github.com/braze-community/braze-php/issues/116)) ([5b526c2](https://github.com/braze-community/braze-php/commit/5b526c26328d0dea74f573bb93952c6f61387e7f)), closes [#115](https://github.com/braze-community/braze-php/issues/115)
+
 ## [2.2.1](https://github.com/braze-community/braze-php/compare/v2.2.0...v2.2.1) (2024-10-10)
 
 
