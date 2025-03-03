@@ -34,13 +34,19 @@ The [API key](https://www.braze.com/docs/api/basics#creating-and-managing-rest-a
 
 ## Install
 
-Install with [Composer](http://getcomposer.org/):
+Install the package with [Composer](http://getcomposer.org/):
 
 ```sh
 composer require braze/sdk
 ```
 
-Use Composer's [autoload](https://getcomposer.org/doc/01-basic-usage.md#autoloading):
+If you're missing a package providing `psr/http-client-implementation`:
+
+```sh
+composer require php-http/guzzle7-adapter
+```
+
+Add [autoloading](https://getcomposer.org/doc/01-basic-usage.md#autoloading):
 
 ```php
 require_once 'vendor/autoload.php';
@@ -48,7 +54,7 @@ require_once 'vendor/autoload.php';
 
 ## Usage
 
-Instantiate the client:
+Instantiate the SDK:
 
 ```php
 use Braze\Braze;
@@ -56,23 +62,6 @@ use Braze\Braze;
 $braze = new Braze('YOUR_API_URL', 'YOUR_API_KEY');
 
 $client = $braze->client;
-```
-
-Or create a custom client:
-
-```php
-use Braze\Client;
-
-$httpClient = \Http\Discovery\Psr18ClientDiscovery::find();
-$uri = \Http\Discovery\Psr17FactoryDiscovery::findUriFactory()->createUri('YOUR_API_URL');
-$bearer = new \Http\Message\Authentication\Bearer('YOUR_API_KEY');
-$plugins = [
-    new \Http\Client\Common\Plugin\AddHostPlugin($uri),
-    new \Http\Client\Common\Plugin\AuthenticationPlugin($bearer),
-];
-$httpClient = new \Http\Client\Common\PluginClient($httpClient, $plugins);
-
-$client = Client::create($httpClient);
 ```
 
 Send a message to your user:
