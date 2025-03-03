@@ -34,7 +34,7 @@ The [API key](https://www.braze.com/docs/api/basics#creating-and-managing-rest-a
 
 ## Install
 
-Install the package with [Composer](http://getcomposer.org/):
+Install the package with [Composer](https://getcomposer.org/):
 
 ```sh
 composer require braze/sdk
