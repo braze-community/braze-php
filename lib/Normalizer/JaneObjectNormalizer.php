@@ -12,7 +12,6 @@ namespace Braze\Normalizer;
 
 use Braze\Runtime\Normalizer\CheckArray;
 use Braze\Runtime\Normalizer\ValidatorTrait;
-use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -20,763 +19,380 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
-    class JaneObjectNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
+class JaneObjectNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
+{
+    use DenormalizerAwareTrait;
+    use NormalizerAwareTrait;
+    use CheckArray;
+    use ValidatorTrait;
+    protected $normalizers = [
+        \Braze\Model\Error::class => ErrorNormalizer::class,
+
+        \Braze\Model\TemplatesEmailUpdatePostBody::class => TemplatesEmailUpdatePostBodyNormalizer::class,
+
+        \Braze\Model\UsersTrackPostBody::class => UsersTrackPostBodyNormalizer::class,
+
+        \Braze\Model\CatalogsPostBody::class => CatalogsPostBodyNormalizer::class,
+
+        \Braze\Model\CatalogsPostBodyCatalogsItem::class => CatalogsPostBodyCatalogsItemNormalizer::class,
+
+        \Braze\Model\CatalogsPostBodyCatalogsItemFieldsItem::class => CatalogsPostBodyCatalogsItemFieldsItemNormalizer::class,
+
+        \Braze\Model\CatalogsCatalogNameItemsPatchBody::class => CatalogsCatalogNameItemsPatchBodyNormalizer::class,
+
+        \Braze\Model\CatalogsCatalogNameItemsPatchBodyItemsItem::class => CatalogsCatalogNameItemsPatchBodyItemsItemNormalizer::class,
+
+        \Braze\Model\CatalogsCatalogNameItemsPostBody::class => CatalogsCatalogNameItemsPostBodyNormalizer::class,
+
+        \Braze\Model\CatalogsCatalogNameItemsPutBody::class => CatalogsCatalogNameItemsPutBodyNormalizer::class,
+
+        \Braze\Model\CatalogsCatalogNameItemsItemIdPatchBody::class => CatalogsCatalogNameItemsItemIdPatchBodyNormalizer::class,
+
+        \Braze\Model\CatalogsCatalogNameItemsItemIdPostBody::class => CatalogsCatalogNameItemsItemIdPostBodyNormalizer::class,
+
+        \Braze\Model\CatalogsCatalogNameItemsItemIdPutBody::class => CatalogsCatalogNameItemsItemIdPutBodyNormalizer::class,
+
+        \Braze\Model\EmailStatusPostBody::class => EmailStatusPostBodyNormalizer::class,
+
+        \Braze\Model\EmailBounceRemovePostBody::class => EmailBounceRemovePostBodyNormalizer::class,
+
+        \Braze\Model\EmailSpamRemovePostBody::class => EmailSpamRemovePostBodyNormalizer::class,
+
+        \Braze\Model\EmailBlocklistPostBody::class => EmailBlocklistPostBodyNormalizer::class,
+
+        \Braze\Model\EmailBlacklistPostBody::class => EmailBlacklistPostBodyNormalizer::class,
+
+        \Braze\Model\UsersExportIdsPostBody::class => UsersExportIdsPostBodyNormalizer::class,
+
+        \Braze\Model\UsersExportIdsPostBodyUserAliasesItem::class => UsersExportIdsPostBodyUserAliasesItemNormalizer::class,
+
+        \Braze\Model\UsersExportSegmentPostBody::class => UsersExportSegmentPostBodyNormalizer::class,
+
+        \Braze\Model\UsersExportGlobalControlGroupPostBody::class => UsersExportGlobalControlGroupPostBodyNormalizer::class,
+
+        \Braze\Model\MessagesLiveActivityUpdatePostBody::class => MessagesLiveActivityUpdatePostBodyNormalizer::class,
+
+        \Braze\Model\MessagesLiveActivityUpdatePostBodyContentState::class => MessagesLiveActivityUpdatePostBodyContentStateNormalizer::class,
+
+        \Braze\Model\MessagesLiveActivityUpdatePostBodyNotification::class => MessagesLiveActivityUpdatePostBodyNotificationNormalizer::class,
+
+        \Braze\Model\MessagesLiveActivityUpdatePostBodyNotificationAlert::class => MessagesLiveActivityUpdatePostBodyNotificationAlertNormalizer::class,
+
+        \Braze\Model\MessagesScheduleDeletePostBody::class => MessagesScheduleDeletePostBodyNormalizer::class,
+
+        \Braze\Model\CanvasTriggerScheduleDeletePostBody::class => CanvasTriggerScheduleDeletePostBodyNormalizer::class,
+
+        \Braze\Model\CampaignsTriggerScheduleDeletePostBody::class => CampaignsTriggerScheduleDeletePostBodyNormalizer::class,
+
+        \Braze\Model\MessagesScheduleCreatePostBody::class => MessagesScheduleCreatePostBodyNormalizer::class,
+
+        \Braze\Model\MessagesScheduleCreatePostBodyUserAliases::class => MessagesScheduleCreatePostBodyUserAliasesNormalizer::class,
+
+        \Braze\Model\MessagesScheduleCreatePostBodyAudience::class => MessagesScheduleCreatePostBodyAudienceNormalizer::class,
+
+        \Braze\Model\MessagesScheduleCreatePostBodySchedule::class => MessagesScheduleCreatePostBodyScheduleNormalizer::class,
+
+        \Braze\Model\MessagesScheduleCreatePostBodyMessages::class => MessagesScheduleCreatePostBodyMessagesNormalizer::class,
+
+        \Braze\Model\CampaignsTriggerScheduleCreatePostBody::class => CampaignsTriggerScheduleCreatePostBodyNormalizer::class,
+
+        \Braze\Model\CampaignsTriggerScheduleCreatePostBodyRecipientsItem::class => CampaignsTriggerScheduleCreatePostBodyRecipientsItemNormalizer::class,
+
+        \Braze\Model\CampaignsTriggerScheduleCreatePostBodyAudience::class => CampaignsTriggerScheduleCreatePostBodyAudienceNormalizer::class,
+
+        \Braze\Model\CampaignsTriggerScheduleCreatePostBodySchedule::class => CampaignsTriggerScheduleCreatePostBodyScheduleNormalizer::class,
+
+        \Braze\Model\CanvasTriggerScheduleCreatePostBody::class => CanvasTriggerScheduleCreatePostBodyNormalizer::class,
+
+        \Braze\Model\CanvasTriggerScheduleCreatePostBodyRecipientsItem::class => CanvasTriggerScheduleCreatePostBodyRecipientsItemNormalizer::class,
+
+        \Braze\Model\CanvasTriggerScheduleCreatePostBodyAudience::class => CanvasTriggerScheduleCreatePostBodyAudienceNormalizer::class,
+
+        \Braze\Model\CanvasTriggerScheduleCreatePostBodySchedule::class => CanvasTriggerScheduleCreatePostBodyScheduleNormalizer::class,
+
+        \Braze\Model\MessagesScheduleUpdatePostBody::class => MessagesScheduleUpdatePostBodyNormalizer::class,
+
+        \Braze\Model\MessagesScheduleUpdatePostBodySchedule::class => MessagesScheduleUpdatePostBodyScheduleNormalizer::class,
+
+        \Braze\Model\MessagesScheduleUpdatePostBodyMessages::class => MessagesScheduleUpdatePostBodyMessagesNormalizer::class,
+
+        \Braze\Model\MessagesScheduleUpdatePostBodyMessagesApplePush::class => MessagesScheduleUpdatePostBodyMessagesApplePushNormalizer::class,
+
+        \Braze\Model\MessagesScheduleUpdatePostBodyMessagesAndroidPush::class => MessagesScheduleUpdatePostBodyMessagesAndroidPushNormalizer::class,
+
+        \Braze\Model\MessagesScheduleUpdatePostBodyMessagesSms::class => MessagesScheduleUpdatePostBodyMessagesSmsNormalizer::class,
+
+        \Braze\Model\CampaignsTriggerScheduleUpdatePostBody::class => CampaignsTriggerScheduleUpdatePostBodyNormalizer::class,
+
+        \Braze\Model\CampaignsTriggerScheduleUpdatePostBodySchedule::class => CampaignsTriggerScheduleUpdatePostBodyScheduleNormalizer::class,
+
+        \Braze\Model\CanvasTriggerScheduleUpdatePostBody::class => CanvasTriggerScheduleUpdatePostBodyNormalizer::class,
+
+        \Braze\Model\CanvasTriggerScheduleUpdatePostBodySchedule::class => CanvasTriggerScheduleUpdatePostBodyScheduleNormalizer::class,
+
+        \Braze\Model\SendsIdCreatePostBody::class => SendsIdCreatePostBodyNormalizer::class,
+
+        \Braze\Model\MessagesSendPostBody::class => MessagesSendPostBodyNormalizer::class,
+
+        \Braze\Model\MessagesSendPostBodyUserAliases::class => MessagesSendPostBodyUserAliasesNormalizer::class,
+
+        \Braze\Model\MessagesSendPostBodyAudience::class => MessagesSendPostBodyAudienceNormalizer::class,
+
+        \Braze\Model\MessagesSendPostBodyMessages::class => MessagesSendPostBodyMessagesNormalizer::class,
+
+        \Braze\Model\TransactionalV1CampaignsCampaignIdSendPostBody::class => TransactionalV1CampaignsCampaignIdSendPostBodyNormalizer::class,
+
+        \Braze\Model\TransactionalV1CampaignsCampaignIdSendPostBodyTriggerProperties::class => TransactionalV1CampaignsCampaignIdSendPostBodyTriggerPropertiesNormalizer::class,
+
+        \Braze\Model\TransactionalV1CampaignsCampaignIdSendPostBodyRecipientItem::class => TransactionalV1CampaignsCampaignIdSendPostBodyRecipientItemNormalizer::class,
+
+        \Braze\Model\CampaignsTriggerSendPostBody::class => CampaignsTriggerSendPostBodyNormalizer::class,
+
+        \Braze\Model\CampaignsTriggerSendPostBodyAudience::class => CampaignsTriggerSendPostBodyAudienceNormalizer::class,
+
+        \Braze\Model\CampaignsTriggerSendPostBodyRecipientsItem::class => CampaignsTriggerSendPostBodyRecipientsItemNormalizer::class,
+
+        \Braze\Model\CampaignsTriggerSendPostBodyRecipientsItemUserAlias::class => CampaignsTriggerSendPostBodyRecipientsItemUserAliasNormalizer::class,
+
+        \Braze\Model\CampaignsTriggerSendPostBodyRecipientsItemAttributes::class => CampaignsTriggerSendPostBodyRecipientsItemAttributesNormalizer::class,
+
+        \Braze\Model\CanvasTriggerSendPostBody::class => CanvasTriggerSendPostBodyNormalizer::class,
+
+        \Braze\Model\CanvasTriggerSendPostBodyCanvasEntryProperties::class => CanvasTriggerSendPostBodyCanvasEntryPropertiesNormalizer::class,
+
+        \Braze\Model\CanvasTriggerSendPostBodyAudience::class => CanvasTriggerSendPostBodyAudienceNormalizer::class,
+
+        \Braze\Model\CanvasTriggerSendPostBodyRecipientsItem::class => CanvasTriggerSendPostBodyRecipientsItemNormalizer::class,
+
+        \Braze\Model\CanvasTriggerSendPostBodyRecipientsItemUserAlias::class => CanvasTriggerSendPostBodyRecipientsItemUserAliasNormalizer::class,
+
+        \Braze\Model\CanvasTriggerSendPostBodyRecipientsItemAttributes::class => CanvasTriggerSendPostBodyRecipientsItemAttributesNormalizer::class,
+
+        \Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBody::class => PreferenceCenterV1PreferenceCenterExternalIDPutBodyNormalizer::class,
+
+        \Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBodyTriggerProperties::class => PreferenceCenterV1PreferenceCenterExternalIDPutBodyTriggerPropertiesNormalizer::class,
+
+        \Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBodyRecipientItem::class => PreferenceCenterV1PreferenceCenterExternalIDPutBodyRecipientItemNormalizer::class,
+
+        \Braze\Model\PreferenceCenterV1PostBody::class => PreferenceCenterV1PostBodyNormalizer::class,
+
+        \Braze\Model\PreferenceCenterV1PostBodyOptions::class => PreferenceCenterV1PostBodyOptionsNormalizer::class,
+
+        \Braze\Model\ScimV2UsersIdPutBody::class => ScimV2UsersIdPutBodyNormalizer::class,
+
+        \Braze\Model\ScimV2UsersIdPutBodyName::class => ScimV2UsersIdPutBodyNameNormalizer::class,
+
+        \Braze\Model\ScimV2UsersIdPutBodyPermissions::class => ScimV2UsersIdPutBodyPermissionsNormalizer::class,
+
+        \Braze\Model\ScimV2UsersIdPutBodyPermissionsAppGroupItem::class => ScimV2UsersIdPutBodyPermissionsAppGroupItemNormalizer::class,
+
+        \Braze\Model\ScimV2UsersIdPutBodyPermissionsAppGroupItemTeamItem::class => ScimV2UsersIdPutBodyPermissionsAppGroupItemTeamItemNormalizer::class,
+
+        \Braze\Model\ScimV2UsersPostBody::class => ScimV2UsersPostBodyNormalizer::class,
+
+        \Braze\Model\ScimV2UsersPostBodyName::class => ScimV2UsersPostBodyNameNormalizer::class,
+
+        \Braze\Model\ScimV2UsersPostBodyPermissions::class => ScimV2UsersPostBodyPermissionsNormalizer::class,
+
+        \Braze\Model\ScimV2UsersPostBodyPermissionsAppGroupItem::class => ScimV2UsersPostBodyPermissionsAppGroupItemNormalizer::class,
+
+        \Braze\Model\ScimV2UsersPostBodyPermissionsAppGroupItemTeamItem::class => ScimV2UsersPostBodyPermissionsAppGroupItemTeamItemNormalizer::class,
+
+        \Braze\Model\SmsInvalidPhoneNumbersRemovePostBody::class => SmsInvalidPhoneNumbersRemovePostBodyNormalizer::class,
+
+        \Braze\Model\SubscriptionStatusSetPostBody::class => SubscriptionStatusSetPostBodyNormalizer::class,
+
+        \Braze\Model\V2SubscriptionStatusSetPostBody::class => V2SubscriptionStatusSetPostBodyNormalizer::class,
+
+        \Braze\Model\V2SubscriptionStatusSetPostBodySubscriptionGroupsItem::class => V2SubscriptionStatusSetPostBodySubscriptionGroupsItemNormalizer::class,
+
+        \Braze\Model\ContentBlocksCreatePostBody::class => ContentBlocksCreatePostBodyNormalizer::class,
+
+        \Braze\Model\ContentBlocksUpdatePostBody::class => ContentBlocksUpdatePostBodyNormalizer::class,
+
+        \Braze\Model\TemplatesEmailCreatePostBody::class => TemplatesEmailCreatePostBodyNormalizer::class,
+
+        \Braze\Model\UsersExternalIdsRenamePostBody::class => UsersExternalIdsRenamePostBodyNormalizer::class,
+
+        \Braze\Model\UsersExternalIdsRenamePostBodyExternalIdRenamesItem::class => UsersExternalIdsRenamePostBodyExternalIdRenamesItemNormalizer::class,
+
+        \Braze\Model\UsersExternalIdsRemovePostBody::class => UsersExternalIdsRemovePostBodyNormalizer::class,
+
+        \Braze\Model\UsersAliasUpdatePostBody::class => UsersAliasUpdatePostBodyNormalizer::class,
+
+        \Braze\Model\UsersAliasUpdatePostBodyAliasUpdatesItem::class => UsersAliasUpdatePostBodyAliasUpdatesItemNormalizer::class,
+
+        \Braze\Model\UsersAliasNewPostBody::class => UsersAliasNewPostBodyNormalizer::class,
+
+        \Braze\Model\UsersAliasNewPostBodyUserAliasesItem::class => UsersAliasNewPostBodyUserAliasesItemNormalizer::class,
+
+        \Braze\Model\UsersDeletePostBody::class => UsersDeletePostBodyNormalizer::class,
+
+        \Braze\Model\UsersDeletePostBodyUserAliasesItem::class => UsersDeletePostBodyUserAliasesItemNormalizer::class,
+
+        \Braze\Model\UsersIdentifyPostBody::class => UsersIdentifyPostBodyNormalizer::class,
+
+        \Braze\Model\UsersIdentifyPostBodyAliasesToIdentifyItem::class => UsersIdentifyPostBodyAliasesToIdentifyItemNormalizer::class,
+
+        \Braze\Model\UsersIdentifyPostBodyAliasesToIdentifyItemUserAlias::class => UsersIdentifyPostBodyAliasesToIdentifyItemUserAliasNormalizer::class,
+
+        \Braze\Model\UsersMergePostBody::class => UsersMergePostBodyNormalizer::class,
+
+        \Jane\Component\JsonSchemaRuntime\Reference::class => \Braze\Runtime\Normalizer\ReferenceNormalizer::class,
+    ];
+    protected $normalizersCache = [];
+
+    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
-        use DenormalizerAwareTrait;
-        use NormalizerAwareTrait;
-        use CheckArray;
-        use ValidatorTrait;
-        protected $normalizers = [
-            \Braze\Model\Error::class => ErrorNormalizer::class,
-
-            \Braze\Model\TemplatesEmailUpdatePostBody::class => TemplatesEmailUpdatePostBodyNormalizer::class,
-
-            \Braze\Model\UsersTrackPostBody::class => UsersTrackPostBodyNormalizer::class,
-
-            \Braze\Model\CatalogsPostBody::class => CatalogsPostBodyNormalizer::class,
-
-            \Braze\Model\CatalogsPostBodyCatalogsItem::class => CatalogsPostBodyCatalogsItemNormalizer::class,
-
-            \Braze\Model\CatalogsPostBodyCatalogsItemFieldsItem::class => CatalogsPostBodyCatalogsItemFieldsItemNormalizer::class,
-
-            \Braze\Model\CatalogsCatalogNameItemsPatchBody::class => CatalogsCatalogNameItemsPatchBodyNormalizer::class,
-
-            \Braze\Model\CatalogsCatalogNameItemsPatchBodyItemsItem::class => CatalogsCatalogNameItemsPatchBodyItemsItemNormalizer::class,
-
-            \Braze\Model\CatalogsCatalogNameItemsPostBody::class => CatalogsCatalogNameItemsPostBodyNormalizer::class,
-
-            \Braze\Model\CatalogsCatalogNameItemsPutBody::class => CatalogsCatalogNameItemsPutBodyNormalizer::class,
-
-            \Braze\Model\CatalogsCatalogNameItemsItemIdPatchBody::class => CatalogsCatalogNameItemsItemIdPatchBodyNormalizer::class,
-
-            \Braze\Model\CatalogsCatalogNameItemsItemIdPostBody::class => CatalogsCatalogNameItemsItemIdPostBodyNormalizer::class,
-
-            \Braze\Model\CatalogsCatalogNameItemsItemIdPutBody::class => CatalogsCatalogNameItemsItemIdPutBodyNormalizer::class,
-
-            \Braze\Model\EmailStatusPostBody::class => EmailStatusPostBodyNormalizer::class,
-
-            \Braze\Model\EmailBounceRemovePostBody::class => EmailBounceRemovePostBodyNormalizer::class,
-
-            \Braze\Model\EmailSpamRemovePostBody::class => EmailSpamRemovePostBodyNormalizer::class,
-
-            \Braze\Model\EmailBlocklistPostBody::class => EmailBlocklistPostBodyNormalizer::class,
-
-            \Braze\Model\EmailBlacklistPostBody::class => EmailBlacklistPostBodyNormalizer::class,
-
-            \Braze\Model\UsersExportIdsPostBody::class => UsersExportIdsPostBodyNormalizer::class,
-
-            \Braze\Model\UsersExportIdsPostBodyUserAliasesItem::class => UsersExportIdsPostBodyUserAliasesItemNormalizer::class,
-
-            \Braze\Model\UsersExportSegmentPostBody::class => UsersExportSegmentPostBodyNormalizer::class,
-
-            \Braze\Model\UsersExportGlobalControlGroupPostBody::class => UsersExportGlobalControlGroupPostBodyNormalizer::class,
-
-            \Braze\Model\MessagesLiveActivityUpdatePostBody::class => MessagesLiveActivityUpdatePostBodyNormalizer::class,
-
-            \Braze\Model\MessagesLiveActivityUpdatePostBodyContentState::class => MessagesLiveActivityUpdatePostBodyContentStateNormalizer::class,
-
-            \Braze\Model\MessagesLiveActivityUpdatePostBodyNotification::class => MessagesLiveActivityUpdatePostBodyNotificationNormalizer::class,
-
-            \Braze\Model\MessagesLiveActivityUpdatePostBodyNotificationAlert::class => MessagesLiveActivityUpdatePostBodyNotificationAlertNormalizer::class,
-
-            \Braze\Model\MessagesScheduleDeletePostBody::class => MessagesScheduleDeletePostBodyNormalizer::class,
-
-            \Braze\Model\CanvasTriggerScheduleDeletePostBody::class => CanvasTriggerScheduleDeletePostBodyNormalizer::class,
-
-            \Braze\Model\CampaignsTriggerScheduleDeletePostBody::class => CampaignsTriggerScheduleDeletePostBodyNormalizer::class,
-
-            \Braze\Model\MessagesScheduleCreatePostBody::class => MessagesScheduleCreatePostBodyNormalizer::class,
-
-            \Braze\Model\MessagesScheduleCreatePostBodyUserAliases::class => MessagesScheduleCreatePostBodyUserAliasesNormalizer::class,
-
-            \Braze\Model\MessagesScheduleCreatePostBodyAudience::class => MessagesScheduleCreatePostBodyAudienceNormalizer::class,
-
-            \Braze\Model\MessagesScheduleCreatePostBodySchedule::class => MessagesScheduleCreatePostBodyScheduleNormalizer::class,
-
-            \Braze\Model\MessagesScheduleCreatePostBodyMessages::class => MessagesScheduleCreatePostBodyMessagesNormalizer::class,
-
-            \Braze\Model\CampaignsTriggerScheduleCreatePostBody::class => CampaignsTriggerScheduleCreatePostBodyNormalizer::class,
-
-            \Braze\Model\CampaignsTriggerScheduleCreatePostBodyRecipientsItem::class => CampaignsTriggerScheduleCreatePostBodyRecipientsItemNormalizer::class,
-
-            \Braze\Model\CampaignsTriggerScheduleCreatePostBodyAudience::class => CampaignsTriggerScheduleCreatePostBodyAudienceNormalizer::class,
-
-            \Braze\Model\CampaignsTriggerScheduleCreatePostBodySchedule::class => CampaignsTriggerScheduleCreatePostBodyScheduleNormalizer::class,
-
-            \Braze\Model\CanvasTriggerScheduleCreatePostBody::class => CanvasTriggerScheduleCreatePostBodyNormalizer::class,
-
-            \Braze\Model\CanvasTriggerScheduleCreatePostBodyRecipientsItem::class => CanvasTriggerScheduleCreatePostBodyRecipientsItemNormalizer::class,
-
-            \Braze\Model\CanvasTriggerScheduleCreatePostBodyAudience::class => CanvasTriggerScheduleCreatePostBodyAudienceNormalizer::class,
-
-            \Braze\Model\CanvasTriggerScheduleCreatePostBodySchedule::class => CanvasTriggerScheduleCreatePostBodyScheduleNormalizer::class,
-
-            \Braze\Model\MessagesScheduleUpdatePostBody::class => MessagesScheduleUpdatePostBodyNormalizer::class,
-
-            \Braze\Model\MessagesScheduleUpdatePostBodySchedule::class => MessagesScheduleUpdatePostBodyScheduleNormalizer::class,
-
-            \Braze\Model\MessagesScheduleUpdatePostBodyMessages::class => MessagesScheduleUpdatePostBodyMessagesNormalizer::class,
-
-            \Braze\Model\MessagesScheduleUpdatePostBodyMessagesApplePush::class => MessagesScheduleUpdatePostBodyMessagesApplePushNormalizer::class,
-
-            \Braze\Model\MessagesScheduleUpdatePostBodyMessagesAndroidPush::class => MessagesScheduleUpdatePostBodyMessagesAndroidPushNormalizer::class,
-
-            \Braze\Model\MessagesScheduleUpdatePostBodyMessagesSms::class => MessagesScheduleUpdatePostBodyMessagesSmsNormalizer::class,
-
-            \Braze\Model\CampaignsTriggerScheduleUpdatePostBody::class => CampaignsTriggerScheduleUpdatePostBodyNormalizer::class,
-
-            \Braze\Model\CampaignsTriggerScheduleUpdatePostBodySchedule::class => CampaignsTriggerScheduleUpdatePostBodyScheduleNormalizer::class,
-
-            \Braze\Model\CanvasTriggerScheduleUpdatePostBody::class => CanvasTriggerScheduleUpdatePostBodyNormalizer::class,
-
-            \Braze\Model\CanvasTriggerScheduleUpdatePostBodySchedule::class => CanvasTriggerScheduleUpdatePostBodyScheduleNormalizer::class,
-
-            \Braze\Model\SendsIdCreatePostBody::class => SendsIdCreatePostBodyNormalizer::class,
-
-            \Braze\Model\MessagesSendPostBody::class => MessagesSendPostBodyNormalizer::class,
-
-            \Braze\Model\MessagesSendPostBodyUserAliases::class => MessagesSendPostBodyUserAliasesNormalizer::class,
-
-            \Braze\Model\MessagesSendPostBodyAudience::class => MessagesSendPostBodyAudienceNormalizer::class,
-
-            \Braze\Model\MessagesSendPostBodyMessages::class => MessagesSendPostBodyMessagesNormalizer::class,
-
-            \Braze\Model\TransactionalV1CampaignsCampaignIdSendPostBody::class => TransactionalV1CampaignsCampaignIdSendPostBodyNormalizer::class,
-
-            \Braze\Model\TransactionalV1CampaignsCampaignIdSendPostBodyTriggerProperties::class => TransactionalV1CampaignsCampaignIdSendPostBodyTriggerPropertiesNormalizer::class,
-
-            \Braze\Model\TransactionalV1CampaignsCampaignIdSendPostBodyRecipientItem::class => TransactionalV1CampaignsCampaignIdSendPostBodyRecipientItemNormalizer::class,
-
-            \Braze\Model\CampaignsTriggerSendPostBody::class => CampaignsTriggerSendPostBodyNormalizer::class,
-
-            \Braze\Model\CampaignsTriggerSendPostBodyAudience::class => CampaignsTriggerSendPostBodyAudienceNormalizer::class,
-
-            \Braze\Model\CampaignsTriggerSendPostBodyRecipientsItem::class => CampaignsTriggerSendPostBodyRecipientsItemNormalizer::class,
-
-            \Braze\Model\CampaignsTriggerSendPostBodyRecipientsItemUserAlias::class => CampaignsTriggerSendPostBodyRecipientsItemUserAliasNormalizer::class,
-
-            \Braze\Model\CampaignsTriggerSendPostBodyRecipientsItemAttributes::class => CampaignsTriggerSendPostBodyRecipientsItemAttributesNormalizer::class,
-
-            \Braze\Model\CanvasTriggerSendPostBody::class => CanvasTriggerSendPostBodyNormalizer::class,
-
-            \Braze\Model\CanvasTriggerSendPostBodyCanvasEntryProperties::class => CanvasTriggerSendPostBodyCanvasEntryPropertiesNormalizer::class,
-
-            \Braze\Model\CanvasTriggerSendPostBodyAudience::class => CanvasTriggerSendPostBodyAudienceNormalizer::class,
-
-            \Braze\Model\CanvasTriggerSendPostBodyRecipientsItem::class => CanvasTriggerSendPostBodyRecipientsItemNormalizer::class,
-
-            \Braze\Model\CanvasTriggerSendPostBodyRecipientsItemUserAlias::class => CanvasTriggerSendPostBodyRecipientsItemUserAliasNormalizer::class,
-
-            \Braze\Model\CanvasTriggerSendPostBodyRecipientsItemAttributes::class => CanvasTriggerSendPostBodyRecipientsItemAttributesNormalizer::class,
-
-            \Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBody::class => PreferenceCenterV1PreferenceCenterExternalIDPutBodyNormalizer::class,
-
-            \Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBodyTriggerProperties::class => PreferenceCenterV1PreferenceCenterExternalIDPutBodyTriggerPropertiesNormalizer::class,
-
-            \Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBodyRecipientItem::class => PreferenceCenterV1PreferenceCenterExternalIDPutBodyRecipientItemNormalizer::class,
-
-            \Braze\Model\PreferenceCenterV1PostBody::class => PreferenceCenterV1PostBodyNormalizer::class,
-
-            \Braze\Model\PreferenceCenterV1PostBodyOptions::class => PreferenceCenterV1PostBodyOptionsNormalizer::class,
-
-            \Braze\Model\ScimV2UsersIdPutBody::class => ScimV2UsersIdPutBodyNormalizer::class,
-
-            \Braze\Model\ScimV2UsersIdPutBodyName::class => ScimV2UsersIdPutBodyNameNormalizer::class,
-
-            \Braze\Model\ScimV2UsersIdPutBodyPermissions::class => ScimV2UsersIdPutBodyPermissionsNormalizer::class,
-
-            \Braze\Model\ScimV2UsersIdPutBodyPermissionsAppGroupItem::class => ScimV2UsersIdPutBodyPermissionsAppGroupItemNormalizer::class,
-
-            \Braze\Model\ScimV2UsersIdPutBodyPermissionsAppGroupItemTeamItem::class => ScimV2UsersIdPutBodyPermissionsAppGroupItemTeamItemNormalizer::class,
-
-            \Braze\Model\ScimV2UsersPostBody::class => ScimV2UsersPostBodyNormalizer::class,
-
-            \Braze\Model\ScimV2UsersPostBodyName::class => ScimV2UsersPostBodyNameNormalizer::class,
-
-            \Braze\Model\ScimV2UsersPostBodyPermissions::class => ScimV2UsersPostBodyPermissionsNormalizer::class,
-
-            \Braze\Model\ScimV2UsersPostBodyPermissionsAppGroupItem::class => ScimV2UsersPostBodyPermissionsAppGroupItemNormalizer::class,
-
-            \Braze\Model\ScimV2UsersPostBodyPermissionsAppGroupItemTeamItem::class => ScimV2UsersPostBodyPermissionsAppGroupItemTeamItemNormalizer::class,
-
-            \Braze\Model\SmsInvalidPhoneNumbersRemovePostBody::class => SmsInvalidPhoneNumbersRemovePostBodyNormalizer::class,
-
-            \Braze\Model\SubscriptionStatusSetPostBody::class => SubscriptionStatusSetPostBodyNormalizer::class,
-
-            \Braze\Model\V2SubscriptionStatusSetPostBody::class => V2SubscriptionStatusSetPostBodyNormalizer::class,
-
-            \Braze\Model\V2SubscriptionStatusSetPostBodySubscriptionGroupsItem::class => V2SubscriptionStatusSetPostBodySubscriptionGroupsItemNormalizer::class,
-
-            \Braze\Model\ContentBlocksCreatePostBody::class => ContentBlocksCreatePostBodyNormalizer::class,
-
-            \Braze\Model\ContentBlocksUpdatePostBody::class => ContentBlocksUpdatePostBodyNormalizer::class,
-
-            \Braze\Model\TemplatesEmailCreatePostBody::class => TemplatesEmailCreatePostBodyNormalizer::class,
-
-            \Braze\Model\UsersExternalIdsRenamePostBody::class => UsersExternalIdsRenamePostBodyNormalizer::class,
-
-            \Braze\Model\UsersExternalIdsRenamePostBodyExternalIdRenamesItem::class => UsersExternalIdsRenamePostBodyExternalIdRenamesItemNormalizer::class,
-
-            \Braze\Model\UsersExternalIdsRemovePostBody::class => UsersExternalIdsRemovePostBodyNormalizer::class,
-
-            \Braze\Model\UsersAliasUpdatePostBody::class => UsersAliasUpdatePostBodyNormalizer::class,
-
-            \Braze\Model\UsersAliasUpdatePostBodyAliasUpdatesItem::class => UsersAliasUpdatePostBodyAliasUpdatesItemNormalizer::class,
-
-            \Braze\Model\UsersAliasNewPostBody::class => UsersAliasNewPostBodyNormalizer::class,
-
-            \Braze\Model\UsersAliasNewPostBodyUserAliasesItem::class => UsersAliasNewPostBodyUserAliasesItemNormalizer::class,
-
-            \Braze\Model\UsersDeletePostBody::class => UsersDeletePostBodyNormalizer::class,
-
-            \Braze\Model\UsersDeletePostBodyUserAliasesItem::class => UsersDeletePostBodyUserAliasesItemNormalizer::class,
-
-            \Braze\Model\UsersIdentifyPostBody::class => UsersIdentifyPostBodyNormalizer::class,
-
-            \Braze\Model\UsersIdentifyPostBodyAliasesToIdentifyItem::class => UsersIdentifyPostBodyAliasesToIdentifyItemNormalizer::class,
-
-            \Braze\Model\UsersIdentifyPostBodyAliasesToIdentifyItemUserAlias::class => UsersIdentifyPostBodyAliasesToIdentifyItemUserAliasNormalizer::class,
-
-            \Braze\Model\UsersMergePostBody::class => UsersMergePostBodyNormalizer::class,
-
-            \Jane\Component\JsonSchemaRuntime\Reference::class => \Braze\Runtime\Normalizer\ReferenceNormalizer::class,
-        ];
-        protected $normalizersCache = [];
-
-        public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
-        {
-            return array_key_exists($type, $this->normalizers);
-        }
-
-        public function supportsNormalization($data, $format = null, array $context = []): bool
-        {
-            return is_object($data) && array_key_exists(get_class($data), $this->normalizers);
-        }
-
-        public function normalize(mixed $object, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
-        {
-            $normalizerClass = $this->normalizers[get_class($object)];
-            $normalizer = $this->getNormalizer($normalizerClass);
-
-            return $normalizer->normalize($object, $format, $context);
-        }
-
-        public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
-        {
-            $denormalizerClass = $this->normalizers[$type];
-            $denormalizer = $this->getNormalizer($denormalizerClass);
-
-            return $denormalizer->denormalize($data, $type, $format, $context);
-        }
-
-        private function getNormalizer(string $normalizerClass)
-        {
-            return $this->normalizersCache[$normalizerClass] ?? $this->initNormalizer($normalizerClass);
-        }
-
-        private function initNormalizer(string $normalizerClass)
-        {
-            $normalizer = new $normalizerClass();
-            $normalizer->setNormalizer($this->normalizer);
-            $normalizer->setDenormalizer($this->denormalizer);
-            $this->normalizersCache[$normalizerClass] = $normalizer;
-
-            return $normalizer;
-        }
-
-        public function getSupportedTypes(?string $format = null): array
-        {
-            return [
-                \Braze\Model\Error::class => false,
-                \Braze\Model\TemplatesEmailUpdatePostBody::class => false,
-                \Braze\Model\UsersTrackPostBody::class => false,
-                \Braze\Model\CatalogsPostBody::class => false,
-                \Braze\Model\CatalogsPostBodyCatalogsItem::class => false,
-                \Braze\Model\CatalogsPostBodyCatalogsItemFieldsItem::class => false,
-                \Braze\Model\CatalogsCatalogNameItemsPatchBody::class => false,
-                \Braze\Model\CatalogsCatalogNameItemsPatchBodyItemsItem::class => false,
-                \Braze\Model\CatalogsCatalogNameItemsPostBody::class => false,
-                \Braze\Model\CatalogsCatalogNameItemsPutBody::class => false,
-                \Braze\Model\CatalogsCatalogNameItemsItemIdPatchBody::class => false,
-                \Braze\Model\CatalogsCatalogNameItemsItemIdPostBody::class => false,
-                \Braze\Model\CatalogsCatalogNameItemsItemIdPutBody::class => false,
-                \Braze\Model\EmailStatusPostBody::class => false,
-                \Braze\Model\EmailBounceRemovePostBody::class => false,
-                \Braze\Model\EmailSpamRemovePostBody::class => false,
-                \Braze\Model\EmailBlocklistPostBody::class => false,
-                \Braze\Model\EmailBlacklistPostBody::class => false,
-                \Braze\Model\UsersExportIdsPostBody::class => false,
-                \Braze\Model\UsersExportIdsPostBodyUserAliasesItem::class => false,
-                \Braze\Model\UsersExportSegmentPostBody::class => false,
-                \Braze\Model\UsersExportGlobalControlGroupPostBody::class => false,
-                \Braze\Model\MessagesLiveActivityUpdatePostBody::class => false,
-                \Braze\Model\MessagesLiveActivityUpdatePostBodyContentState::class => false,
-                \Braze\Model\MessagesLiveActivityUpdatePostBodyNotification::class => false,
-                \Braze\Model\MessagesLiveActivityUpdatePostBodyNotificationAlert::class => false,
-                \Braze\Model\MessagesScheduleDeletePostBody::class => false,
-                \Braze\Model\CanvasTriggerScheduleDeletePostBody::class => false,
-                \Braze\Model\CampaignsTriggerScheduleDeletePostBody::class => false,
-                \Braze\Model\MessagesScheduleCreatePostBody::class => false,
-                \Braze\Model\MessagesScheduleCreatePostBodyUserAliases::class => false,
-                \Braze\Model\MessagesScheduleCreatePostBodyAudience::class => false,
-                \Braze\Model\MessagesScheduleCreatePostBodySchedule::class => false,
-                \Braze\Model\MessagesScheduleCreatePostBodyMessages::class => false,
-                \Braze\Model\CampaignsTriggerScheduleCreatePostBody::class => false,
-                \Braze\Model\CampaignsTriggerScheduleCreatePostBodyRecipientsItem::class => false,
-                \Braze\Model\CampaignsTriggerScheduleCreatePostBodyAudience::class => false,
-                \Braze\Model\CampaignsTriggerScheduleCreatePostBodySchedule::class => false,
-                \Braze\Model\CanvasTriggerScheduleCreatePostBody::class => false,
-                \Braze\Model\CanvasTriggerScheduleCreatePostBodyRecipientsItem::class => false,
-                \Braze\Model\CanvasTriggerScheduleCreatePostBodyAudience::class => false,
-                \Braze\Model\CanvasTriggerScheduleCreatePostBodySchedule::class => false,
-                \Braze\Model\MessagesScheduleUpdatePostBody::class => false,
-                \Braze\Model\MessagesScheduleUpdatePostBodySchedule::class => false,
-                \Braze\Model\MessagesScheduleUpdatePostBodyMessages::class => false,
-                \Braze\Model\MessagesScheduleUpdatePostBodyMessagesApplePush::class => false,
-                \Braze\Model\MessagesScheduleUpdatePostBodyMessagesAndroidPush::class => false,
-                \Braze\Model\MessagesScheduleUpdatePostBodyMessagesSms::class => false,
-                \Braze\Model\CampaignsTriggerScheduleUpdatePostBody::class => false,
-                \Braze\Model\CampaignsTriggerScheduleUpdatePostBodySchedule::class => false,
-                \Braze\Model\CanvasTriggerScheduleUpdatePostBody::class => false,
-                \Braze\Model\CanvasTriggerScheduleUpdatePostBodySchedule::class => false,
-                \Braze\Model\SendsIdCreatePostBody::class => false,
-                \Braze\Model\MessagesSendPostBody::class => false,
-                \Braze\Model\MessagesSendPostBodyUserAliases::class => false,
-                \Braze\Model\MessagesSendPostBodyAudience::class => false,
-                \Braze\Model\MessagesSendPostBodyMessages::class => false,
-                \Braze\Model\TransactionalV1CampaignsCampaignIdSendPostBody::class => false,
-                \Braze\Model\TransactionalV1CampaignsCampaignIdSendPostBodyTriggerProperties::class => false,
-                \Braze\Model\TransactionalV1CampaignsCampaignIdSendPostBodyRecipientItem::class => false,
-                \Braze\Model\CampaignsTriggerSendPostBody::class => false,
-                \Braze\Model\CampaignsTriggerSendPostBodyAudience::class => false,
-                \Braze\Model\CampaignsTriggerSendPostBodyRecipientsItem::class => false,
-                \Braze\Model\CampaignsTriggerSendPostBodyRecipientsItemUserAlias::class => false,
-                \Braze\Model\CampaignsTriggerSendPostBodyRecipientsItemAttributes::class => false,
-                \Braze\Model\CanvasTriggerSendPostBody::class => false,
-                \Braze\Model\CanvasTriggerSendPostBodyCanvasEntryProperties::class => false,
-                \Braze\Model\CanvasTriggerSendPostBodyAudience::class => false,
-                \Braze\Model\CanvasTriggerSendPostBodyRecipientsItem::class => false,
-                \Braze\Model\CanvasTriggerSendPostBodyRecipientsItemUserAlias::class => false,
-                \Braze\Model\CanvasTriggerSendPostBodyRecipientsItemAttributes::class => false,
-                \Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBody::class => false,
-                \Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBodyTriggerProperties::class => false,
-                \Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBodyRecipientItem::class => false,
-                \Braze\Model\PreferenceCenterV1PostBody::class => false,
-                \Braze\Model\PreferenceCenterV1PostBodyOptions::class => false,
-                \Braze\Model\ScimV2UsersIdPutBody::class => false,
-                \Braze\Model\ScimV2UsersIdPutBodyName::class => false,
-                \Braze\Model\ScimV2UsersIdPutBodyPermissions::class => false,
-                \Braze\Model\ScimV2UsersIdPutBodyPermissionsAppGroupItem::class => false,
-                \Braze\Model\ScimV2UsersIdPutBodyPermissionsAppGroupItemTeamItem::class => false,
-                \Braze\Model\ScimV2UsersPostBody::class => false,
-                \Braze\Model\ScimV2UsersPostBodyName::class => false,
-                \Braze\Model\ScimV2UsersPostBodyPermissions::class => false,
-                \Braze\Model\ScimV2UsersPostBodyPermissionsAppGroupItem::class => false,
-                \Braze\Model\ScimV2UsersPostBodyPermissionsAppGroupItemTeamItem::class => false,
-                \Braze\Model\SmsInvalidPhoneNumbersRemovePostBody::class => false,
-                \Braze\Model\SubscriptionStatusSetPostBody::class => false,
-                \Braze\Model\V2SubscriptionStatusSetPostBody::class => false,
-                \Braze\Model\V2SubscriptionStatusSetPostBodySubscriptionGroupsItem::class => false,
-                \Braze\Model\ContentBlocksCreatePostBody::class => false,
-                \Braze\Model\ContentBlocksUpdatePostBody::class => false,
-                \Braze\Model\TemplatesEmailCreatePostBody::class => false,
-                \Braze\Model\UsersExternalIdsRenamePostBody::class => false,
-                \Braze\Model\UsersExternalIdsRenamePostBodyExternalIdRenamesItem::class => false,
-                \Braze\Model\UsersExternalIdsRemovePostBody::class => false,
-                \Braze\Model\UsersAliasUpdatePostBody::class => false,
-                \Braze\Model\UsersAliasUpdatePostBodyAliasUpdatesItem::class => false,
-                \Braze\Model\UsersAliasNewPostBody::class => false,
-                \Braze\Model\UsersAliasNewPostBodyUserAliasesItem::class => false,
-                \Braze\Model\UsersDeletePostBody::class => false,
-                \Braze\Model\UsersDeletePostBodyUserAliasesItem::class => false,
-                \Braze\Model\UsersIdentifyPostBody::class => false,
-                \Braze\Model\UsersIdentifyPostBodyAliasesToIdentifyItem::class => false,
-                \Braze\Model\UsersIdentifyPostBodyAliasesToIdentifyItemUserAlias::class => false,
-                \Braze\Model\UsersMergePostBody::class => false,
-                \Jane\Component\JsonSchemaRuntime\Reference::class => false,
-            ];
-        }
+        return array_key_exists($type, $this->normalizers);
     }
-} else {
-    class JaneObjectNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
+
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
-        use DenormalizerAwareTrait;
-        use NormalizerAwareTrait;
-        use CheckArray;
-        use ValidatorTrait;
-        protected $normalizers = [
-            \Braze\Model\Error::class => ErrorNormalizer::class,
-
-            \Braze\Model\TemplatesEmailUpdatePostBody::class => TemplatesEmailUpdatePostBodyNormalizer::class,
-
-            \Braze\Model\UsersTrackPostBody::class => UsersTrackPostBodyNormalizer::class,
-
-            \Braze\Model\CatalogsPostBody::class => CatalogsPostBodyNormalizer::class,
-
-            \Braze\Model\CatalogsPostBodyCatalogsItem::class => CatalogsPostBodyCatalogsItemNormalizer::class,
-
-            \Braze\Model\CatalogsPostBodyCatalogsItemFieldsItem::class => CatalogsPostBodyCatalogsItemFieldsItemNormalizer::class,
-
-            \Braze\Model\CatalogsCatalogNameItemsPatchBody::class => CatalogsCatalogNameItemsPatchBodyNormalizer::class,
-
-            \Braze\Model\CatalogsCatalogNameItemsPatchBodyItemsItem::class => CatalogsCatalogNameItemsPatchBodyItemsItemNormalizer::class,
-
-            \Braze\Model\CatalogsCatalogNameItemsPostBody::class => CatalogsCatalogNameItemsPostBodyNormalizer::class,
-
-            \Braze\Model\CatalogsCatalogNameItemsPutBody::class => CatalogsCatalogNameItemsPutBodyNormalizer::class,
-
-            \Braze\Model\CatalogsCatalogNameItemsItemIdPatchBody::class => CatalogsCatalogNameItemsItemIdPatchBodyNormalizer::class,
-
-            \Braze\Model\CatalogsCatalogNameItemsItemIdPostBody::class => CatalogsCatalogNameItemsItemIdPostBodyNormalizer::class,
-
-            \Braze\Model\CatalogsCatalogNameItemsItemIdPutBody::class => CatalogsCatalogNameItemsItemIdPutBodyNormalizer::class,
-
-            \Braze\Model\EmailStatusPostBody::class => EmailStatusPostBodyNormalizer::class,
-
-            \Braze\Model\EmailBounceRemovePostBody::class => EmailBounceRemovePostBodyNormalizer::class,
-
-            \Braze\Model\EmailSpamRemovePostBody::class => EmailSpamRemovePostBodyNormalizer::class,
-
-            \Braze\Model\EmailBlocklistPostBody::class => EmailBlocklistPostBodyNormalizer::class,
-
-            \Braze\Model\EmailBlacklistPostBody::class => EmailBlacklistPostBodyNormalizer::class,
-
-            \Braze\Model\UsersExportIdsPostBody::class => UsersExportIdsPostBodyNormalizer::class,
-
-            \Braze\Model\UsersExportIdsPostBodyUserAliasesItem::class => UsersExportIdsPostBodyUserAliasesItemNormalizer::class,
-
-            \Braze\Model\UsersExportSegmentPostBody::class => UsersExportSegmentPostBodyNormalizer::class,
-
-            \Braze\Model\UsersExportGlobalControlGroupPostBody::class => UsersExportGlobalControlGroupPostBodyNormalizer::class,
-
-            \Braze\Model\MessagesLiveActivityUpdatePostBody::class => MessagesLiveActivityUpdatePostBodyNormalizer::class,
-
-            \Braze\Model\MessagesLiveActivityUpdatePostBodyContentState::class => MessagesLiveActivityUpdatePostBodyContentStateNormalizer::class,
-
-            \Braze\Model\MessagesLiveActivityUpdatePostBodyNotification::class => MessagesLiveActivityUpdatePostBodyNotificationNormalizer::class,
-
-            \Braze\Model\MessagesLiveActivityUpdatePostBodyNotificationAlert::class => MessagesLiveActivityUpdatePostBodyNotificationAlertNormalizer::class,
-
-            \Braze\Model\MessagesScheduleDeletePostBody::class => MessagesScheduleDeletePostBodyNormalizer::class,
-
-            \Braze\Model\CanvasTriggerScheduleDeletePostBody::class => CanvasTriggerScheduleDeletePostBodyNormalizer::class,
-
-            \Braze\Model\CampaignsTriggerScheduleDeletePostBody::class => CampaignsTriggerScheduleDeletePostBodyNormalizer::class,
-
-            \Braze\Model\MessagesScheduleCreatePostBody::class => MessagesScheduleCreatePostBodyNormalizer::class,
-
-            \Braze\Model\MessagesScheduleCreatePostBodyUserAliases::class => MessagesScheduleCreatePostBodyUserAliasesNormalizer::class,
-
-            \Braze\Model\MessagesScheduleCreatePostBodyAudience::class => MessagesScheduleCreatePostBodyAudienceNormalizer::class,
-
-            \Braze\Model\MessagesScheduleCreatePostBodySchedule::class => MessagesScheduleCreatePostBodyScheduleNormalizer::class,
-
-            \Braze\Model\MessagesScheduleCreatePostBodyMessages::class => MessagesScheduleCreatePostBodyMessagesNormalizer::class,
-
-            \Braze\Model\CampaignsTriggerScheduleCreatePostBody::class => CampaignsTriggerScheduleCreatePostBodyNormalizer::class,
-
-            \Braze\Model\CampaignsTriggerScheduleCreatePostBodyRecipientsItem::class => CampaignsTriggerScheduleCreatePostBodyRecipientsItemNormalizer::class,
-
-            \Braze\Model\CampaignsTriggerScheduleCreatePostBodyAudience::class => CampaignsTriggerScheduleCreatePostBodyAudienceNormalizer::class,
-
-            \Braze\Model\CampaignsTriggerScheduleCreatePostBodySchedule::class => CampaignsTriggerScheduleCreatePostBodyScheduleNormalizer::class,
-
-            \Braze\Model\CanvasTriggerScheduleCreatePostBody::class => CanvasTriggerScheduleCreatePostBodyNormalizer::class,
-
-            \Braze\Model\CanvasTriggerScheduleCreatePostBodyRecipientsItem::class => CanvasTriggerScheduleCreatePostBodyRecipientsItemNormalizer::class,
-
-            \Braze\Model\CanvasTriggerScheduleCreatePostBodyAudience::class => CanvasTriggerScheduleCreatePostBodyAudienceNormalizer::class,
-
-            \Braze\Model\CanvasTriggerScheduleCreatePostBodySchedule::class => CanvasTriggerScheduleCreatePostBodyScheduleNormalizer::class,
-
-            \Braze\Model\MessagesScheduleUpdatePostBody::class => MessagesScheduleUpdatePostBodyNormalizer::class,
-
-            \Braze\Model\MessagesScheduleUpdatePostBodySchedule::class => MessagesScheduleUpdatePostBodyScheduleNormalizer::class,
-
-            \Braze\Model\MessagesScheduleUpdatePostBodyMessages::class => MessagesScheduleUpdatePostBodyMessagesNormalizer::class,
-
-            \Braze\Model\MessagesScheduleUpdatePostBodyMessagesApplePush::class => MessagesScheduleUpdatePostBodyMessagesApplePushNormalizer::class,
-
-            \Braze\Model\MessagesScheduleUpdatePostBodyMessagesAndroidPush::class => MessagesScheduleUpdatePostBodyMessagesAndroidPushNormalizer::class,
-
-            \Braze\Model\MessagesScheduleUpdatePostBodyMessagesSms::class => MessagesScheduleUpdatePostBodyMessagesSmsNormalizer::class,
-
-            \Braze\Model\CampaignsTriggerScheduleUpdatePostBody::class => CampaignsTriggerScheduleUpdatePostBodyNormalizer::class,
-
-            \Braze\Model\CampaignsTriggerScheduleUpdatePostBodySchedule::class => CampaignsTriggerScheduleUpdatePostBodyScheduleNormalizer::class,
-
-            \Braze\Model\CanvasTriggerScheduleUpdatePostBody::class => CanvasTriggerScheduleUpdatePostBodyNormalizer::class,
-
-            \Braze\Model\CanvasTriggerScheduleUpdatePostBodySchedule::class => CanvasTriggerScheduleUpdatePostBodyScheduleNormalizer::class,
-
-            \Braze\Model\SendsIdCreatePostBody::class => SendsIdCreatePostBodyNormalizer::class,
-
-            \Braze\Model\MessagesSendPostBody::class => MessagesSendPostBodyNormalizer::class,
-
-            \Braze\Model\MessagesSendPostBodyUserAliases::class => MessagesSendPostBodyUserAliasesNormalizer::class,
-
-            \Braze\Model\MessagesSendPostBodyAudience::class => MessagesSendPostBodyAudienceNormalizer::class,
-
-            \Braze\Model\MessagesSendPostBodyMessages::class => MessagesSendPostBodyMessagesNormalizer::class,
-
-            \Braze\Model\TransactionalV1CampaignsCampaignIdSendPostBody::class => TransactionalV1CampaignsCampaignIdSendPostBodyNormalizer::class,
-
-            \Braze\Model\TransactionalV1CampaignsCampaignIdSendPostBodyTriggerProperties::class => TransactionalV1CampaignsCampaignIdSendPostBodyTriggerPropertiesNormalizer::class,
-
-            \Braze\Model\TransactionalV1CampaignsCampaignIdSendPostBodyRecipientItem::class => TransactionalV1CampaignsCampaignIdSendPostBodyRecipientItemNormalizer::class,
-
-            \Braze\Model\CampaignsTriggerSendPostBody::class => CampaignsTriggerSendPostBodyNormalizer::class,
-
-            \Braze\Model\CampaignsTriggerSendPostBodyAudience::class => CampaignsTriggerSendPostBodyAudienceNormalizer::class,
-
-            \Braze\Model\CampaignsTriggerSendPostBodyRecipientsItem::class => CampaignsTriggerSendPostBodyRecipientsItemNormalizer::class,
-
-            \Braze\Model\CampaignsTriggerSendPostBodyRecipientsItemUserAlias::class => CampaignsTriggerSendPostBodyRecipientsItemUserAliasNormalizer::class,
-
-            \Braze\Model\CampaignsTriggerSendPostBodyRecipientsItemAttributes::class => CampaignsTriggerSendPostBodyRecipientsItemAttributesNormalizer::class,
-
-            \Braze\Model\CanvasTriggerSendPostBody::class => CanvasTriggerSendPostBodyNormalizer::class,
-
-            \Braze\Model\CanvasTriggerSendPostBodyCanvasEntryProperties::class => CanvasTriggerSendPostBodyCanvasEntryPropertiesNormalizer::class,
-
-            \Braze\Model\CanvasTriggerSendPostBodyAudience::class => CanvasTriggerSendPostBodyAudienceNormalizer::class,
-
-            \Braze\Model\CanvasTriggerSendPostBodyRecipientsItem::class => CanvasTriggerSendPostBodyRecipientsItemNormalizer::class,
-
-            \Braze\Model\CanvasTriggerSendPostBodyRecipientsItemUserAlias::class => CanvasTriggerSendPostBodyRecipientsItemUserAliasNormalizer::class,
-
-            \Braze\Model\CanvasTriggerSendPostBodyRecipientsItemAttributes::class => CanvasTriggerSendPostBodyRecipientsItemAttributesNormalizer::class,
-
-            \Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBody::class => PreferenceCenterV1PreferenceCenterExternalIDPutBodyNormalizer::class,
-
-            \Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBodyTriggerProperties::class => PreferenceCenterV1PreferenceCenterExternalIDPutBodyTriggerPropertiesNormalizer::class,
-
-            \Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBodyRecipientItem::class => PreferenceCenterV1PreferenceCenterExternalIDPutBodyRecipientItemNormalizer::class,
-
-            \Braze\Model\PreferenceCenterV1PostBody::class => PreferenceCenterV1PostBodyNormalizer::class,
-
-            \Braze\Model\PreferenceCenterV1PostBodyOptions::class => PreferenceCenterV1PostBodyOptionsNormalizer::class,
-
-            \Braze\Model\ScimV2UsersIdPutBody::class => ScimV2UsersIdPutBodyNormalizer::class,
-
-            \Braze\Model\ScimV2UsersIdPutBodyName::class => ScimV2UsersIdPutBodyNameNormalizer::class,
-
-            \Braze\Model\ScimV2UsersIdPutBodyPermissions::class => ScimV2UsersIdPutBodyPermissionsNormalizer::class,
-
-            \Braze\Model\ScimV2UsersIdPutBodyPermissionsAppGroupItem::class => ScimV2UsersIdPutBodyPermissionsAppGroupItemNormalizer::class,
-
-            \Braze\Model\ScimV2UsersIdPutBodyPermissionsAppGroupItemTeamItem::class => ScimV2UsersIdPutBodyPermissionsAppGroupItemTeamItemNormalizer::class,
-
-            \Braze\Model\ScimV2UsersPostBody::class => ScimV2UsersPostBodyNormalizer::class,
-
-            \Braze\Model\ScimV2UsersPostBodyName::class => ScimV2UsersPostBodyNameNormalizer::class,
-
-            \Braze\Model\ScimV2UsersPostBodyPermissions::class => ScimV2UsersPostBodyPermissionsNormalizer::class,
-
-            \Braze\Model\ScimV2UsersPostBodyPermissionsAppGroupItem::class => ScimV2UsersPostBodyPermissionsAppGroupItemNormalizer::class,
-
-            \Braze\Model\ScimV2UsersPostBodyPermissionsAppGroupItemTeamItem::class => ScimV2UsersPostBodyPermissionsAppGroupItemTeamItemNormalizer::class,
-
-            \Braze\Model\SmsInvalidPhoneNumbersRemovePostBody::class => SmsInvalidPhoneNumbersRemovePostBodyNormalizer::class,
-
-            \Braze\Model\SubscriptionStatusSetPostBody::class => SubscriptionStatusSetPostBodyNormalizer::class,
-
-            \Braze\Model\V2SubscriptionStatusSetPostBody::class => V2SubscriptionStatusSetPostBodyNormalizer::class,
-
-            \Braze\Model\V2SubscriptionStatusSetPostBodySubscriptionGroupsItem::class => V2SubscriptionStatusSetPostBodySubscriptionGroupsItemNormalizer::class,
-
-            \Braze\Model\ContentBlocksCreatePostBody::class => ContentBlocksCreatePostBodyNormalizer::class,
-
-            \Braze\Model\ContentBlocksUpdatePostBody::class => ContentBlocksUpdatePostBodyNormalizer::class,
-
-            \Braze\Model\TemplatesEmailCreatePostBody::class => TemplatesEmailCreatePostBodyNormalizer::class,
-
-            \Braze\Model\UsersExternalIdsRenamePostBody::class => UsersExternalIdsRenamePostBodyNormalizer::class,
-
-            \Braze\Model\UsersExternalIdsRenamePostBodyExternalIdRenamesItem::class => UsersExternalIdsRenamePostBodyExternalIdRenamesItemNormalizer::class,
-
-            \Braze\Model\UsersExternalIdsRemovePostBody::class => UsersExternalIdsRemovePostBodyNormalizer::class,
-
-            \Braze\Model\UsersAliasUpdatePostBody::class => UsersAliasUpdatePostBodyNormalizer::class,
-
-            \Braze\Model\UsersAliasUpdatePostBodyAliasUpdatesItem::class => UsersAliasUpdatePostBodyAliasUpdatesItemNormalizer::class,
-
-            \Braze\Model\UsersAliasNewPostBody::class => UsersAliasNewPostBodyNormalizer::class,
-
-            \Braze\Model\UsersAliasNewPostBodyUserAliasesItem::class => UsersAliasNewPostBodyUserAliasesItemNormalizer::class,
-
-            \Braze\Model\UsersDeletePostBody::class => UsersDeletePostBodyNormalizer::class,
-
-            \Braze\Model\UsersDeletePostBodyUserAliasesItem::class => UsersDeletePostBodyUserAliasesItemNormalizer::class,
-
-            \Braze\Model\UsersIdentifyPostBody::class => UsersIdentifyPostBodyNormalizer::class,
-
-            \Braze\Model\UsersIdentifyPostBodyAliasesToIdentifyItem::class => UsersIdentifyPostBodyAliasesToIdentifyItemNormalizer::class,
-
-            \Braze\Model\UsersIdentifyPostBodyAliasesToIdentifyItemUserAlias::class => UsersIdentifyPostBodyAliasesToIdentifyItemUserAliasNormalizer::class,
-
-            \Braze\Model\UsersMergePostBody::class => UsersMergePostBodyNormalizer::class,
-
-            \Jane\Component\JsonSchemaRuntime\Reference::class => \Braze\Runtime\Normalizer\ReferenceNormalizer::class,
+        return is_object($data) && array_key_exists(get_class($data), $this->normalizers);
+    }
+
+    public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+    {
+        $normalizerClass = $this->normalizers[get_class($data)];
+        $normalizer = $this->getNormalizer($normalizerClass);
+
+        return $normalizer->normalize($data, $format, $context);
+    }
+
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
+    {
+        $denormalizerClass = $this->normalizers[$type];
+        $denormalizer = $this->getNormalizer($denormalizerClass);
+
+        return $denormalizer->denormalize($data, $type, $format, $context);
+    }
+
+    private function getNormalizer(string $normalizerClass)
+    {
+        return $this->normalizersCache[$normalizerClass] ?? $this->initNormalizer($normalizerClass);
+    }
+
+    private function initNormalizer(string $normalizerClass)
+    {
+        $normalizer = new $normalizerClass();
+        $normalizer->setNormalizer($this->normalizer);
+        $normalizer->setDenormalizer($this->denormalizer);
+        $this->normalizersCache[$normalizerClass] = $normalizer;
+
+        return $normalizer;
+    }
+
+    public function getSupportedTypes(?string $format = null): array
+    {
+        return [
+            \Braze\Model\Error::class => false,
+            \Braze\Model\TemplatesEmailUpdatePostBody::class => false,
+            \Braze\Model\UsersTrackPostBody::class => false,
+            \Braze\Model\CatalogsPostBody::class => false,
+            \Braze\Model\CatalogsPostBodyCatalogsItem::class => false,
+            \Braze\Model\CatalogsPostBodyCatalogsItemFieldsItem::class => false,
+            \Braze\Model\CatalogsCatalogNameItemsPatchBody::class => false,
+            \Braze\Model\CatalogsCatalogNameItemsPatchBodyItemsItem::class => false,
+            \Braze\Model\CatalogsCatalogNameItemsPostBody::class => false,
+            \Braze\Model\CatalogsCatalogNameItemsPutBody::class => false,
+            \Braze\Model\CatalogsCatalogNameItemsItemIdPatchBody::class => false,
+            \Braze\Model\CatalogsCatalogNameItemsItemIdPostBody::class => false,
+            \Braze\Model\CatalogsCatalogNameItemsItemIdPutBody::class => false,
+            \Braze\Model\EmailStatusPostBody::class => false,
+            \Braze\Model\EmailBounceRemovePostBody::class => false,
+            \Braze\Model\EmailSpamRemovePostBody::class => false,
+            \Braze\Model\EmailBlocklistPostBody::class => false,
+            \Braze\Model\EmailBlacklistPostBody::class => false,
+            \Braze\Model\UsersExportIdsPostBody::class => false,
+            \Braze\Model\UsersExportIdsPostBodyUserAliasesItem::class => false,
+            \Braze\Model\UsersExportSegmentPostBody::class => false,
+            \Braze\Model\UsersExportGlobalControlGroupPostBody::class => false,
+            \Braze\Model\MessagesLiveActivityUpdatePostBody::class => false,
+            \Braze\Model\MessagesLiveActivityUpdatePostBodyContentState::class => false,
+            \Braze\Model\MessagesLiveActivityUpdatePostBodyNotification::class => false,
+            \Braze\Model\MessagesLiveActivityUpdatePostBodyNotificationAlert::class => false,
+            \Braze\Model\MessagesScheduleDeletePostBody::class => false,
+            \Braze\Model\CanvasTriggerScheduleDeletePostBody::class => false,
+            \Braze\Model\CampaignsTriggerScheduleDeletePostBody::class => false,
+            \Braze\Model\MessagesScheduleCreatePostBody::class => false,
+            \Braze\Model\MessagesScheduleCreatePostBodyUserAliases::class => false,
+            \Braze\Model\MessagesScheduleCreatePostBodyAudience::class => false,
+            \Braze\Model\MessagesScheduleCreatePostBodySchedule::class => false,
+            \Braze\Model\MessagesScheduleCreatePostBodyMessages::class => false,
+            \Braze\Model\CampaignsTriggerScheduleCreatePostBody::class => false,
+            \Braze\Model\CampaignsTriggerScheduleCreatePostBodyRecipientsItem::class => false,
+            \Braze\Model\CampaignsTriggerScheduleCreatePostBodyAudience::class => false,
+            \Braze\Model\CampaignsTriggerScheduleCreatePostBodySchedule::class => false,
+            \Braze\Model\CanvasTriggerScheduleCreatePostBody::class => false,
+            \Braze\Model\CanvasTriggerScheduleCreatePostBodyRecipientsItem::class => false,
+            \Braze\Model\CanvasTriggerScheduleCreatePostBodyAudience::class => false,
+            \Braze\Model\CanvasTriggerScheduleCreatePostBodySchedule::class => false,
+            \Braze\Model\MessagesScheduleUpdatePostBody::class => false,
+            \Braze\Model\MessagesScheduleUpdatePostBodySchedule::class => false,
+            \Braze\Model\MessagesScheduleUpdatePostBodyMessages::class => false,
+            \Braze\Model\MessagesScheduleUpdatePostBodyMessagesApplePush::class => false,
+            \Braze\Model\MessagesScheduleUpdatePostBodyMessagesAndroidPush::class => false,
+            \Braze\Model\MessagesScheduleUpdatePostBodyMessagesSms::class => false,
+            \Braze\Model\CampaignsTriggerScheduleUpdatePostBody::class => false,
+            \Braze\Model\CampaignsTriggerScheduleUpdatePostBodySchedule::class => false,
+            \Braze\Model\CanvasTriggerScheduleUpdatePostBody::class => false,
+            \Braze\Model\CanvasTriggerScheduleUpdatePostBodySchedule::class => false,
+            \Braze\Model\SendsIdCreatePostBody::class => false,
+            \Braze\Model\MessagesSendPostBody::class => false,
+            \Braze\Model\MessagesSendPostBodyUserAliases::class => false,
+            \Braze\Model\MessagesSendPostBodyAudience::class => false,
+            \Braze\Model\MessagesSendPostBodyMessages::class => false,
+            \Braze\Model\TransactionalV1CampaignsCampaignIdSendPostBody::class => false,
+            \Braze\Model\TransactionalV1CampaignsCampaignIdSendPostBodyTriggerProperties::class => false,
+            \Braze\Model\TransactionalV1CampaignsCampaignIdSendPostBodyRecipientItem::class => false,
+            \Braze\Model\CampaignsTriggerSendPostBody::class => false,
+            \Braze\Model\CampaignsTriggerSendPostBodyAudience::class => false,
+            \Braze\Model\CampaignsTriggerSendPostBodyRecipientsItem::class => false,
+            \Braze\Model\CampaignsTriggerSendPostBodyRecipientsItemUserAlias::class => false,
+            \Braze\Model\CampaignsTriggerSendPostBodyRecipientsItemAttributes::class => false,
+            \Braze\Model\CanvasTriggerSendPostBody::class => false,
+            \Braze\Model\CanvasTriggerSendPostBodyCanvasEntryProperties::class => false,
+            \Braze\Model\CanvasTriggerSendPostBodyAudience::class => false,
+            \Braze\Model\CanvasTriggerSendPostBodyRecipientsItem::class => false,
+            \Braze\Model\CanvasTriggerSendPostBodyRecipientsItemUserAlias::class => false,
+            \Braze\Model\CanvasTriggerSendPostBodyRecipientsItemAttributes::class => false,
+            \Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBody::class => false,
+            \Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBodyTriggerProperties::class => false,
+            \Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBodyRecipientItem::class => false,
+            \Braze\Model\PreferenceCenterV1PostBody::class => false,
+            \Braze\Model\PreferenceCenterV1PostBodyOptions::class => false,
+            \Braze\Model\ScimV2UsersIdPutBody::class => false,
+            \Braze\Model\ScimV2UsersIdPutBodyName::class => false,
+            \Braze\Model\ScimV2UsersIdPutBodyPermissions::class => false,
+            \Braze\Model\ScimV2UsersIdPutBodyPermissionsAppGroupItem::class => false,
+            \Braze\Model\ScimV2UsersIdPutBodyPermissionsAppGroupItemTeamItem::class => false,
+            \Braze\Model\ScimV2UsersPostBody::class => false,
+            \Braze\Model\ScimV2UsersPostBodyName::class => false,
+            \Braze\Model\ScimV2UsersPostBodyPermissions::class => false,
+            \Braze\Model\ScimV2UsersPostBodyPermissionsAppGroupItem::class => false,
+            \Braze\Model\ScimV2UsersPostBodyPermissionsAppGroupItemTeamItem::class => false,
+            \Braze\Model\SmsInvalidPhoneNumbersRemovePostBody::class => false,
+            \Braze\Model\SubscriptionStatusSetPostBody::class => false,
+            \Braze\Model\V2SubscriptionStatusSetPostBody::class => false,
+            \Braze\Model\V2SubscriptionStatusSetPostBodySubscriptionGroupsItem::class => false,
+            \Braze\Model\ContentBlocksCreatePostBody::class => false,
+            \Braze\Model\ContentBlocksUpdatePostBody::class => false,
+            \Braze\Model\TemplatesEmailCreatePostBody::class => false,
+            \Braze\Model\UsersExternalIdsRenamePostBody::class => false,
+            \Braze\Model\UsersExternalIdsRenamePostBodyExternalIdRenamesItem::class => false,
+            \Braze\Model\UsersExternalIdsRemovePostBody::class => false,
+            \Braze\Model\UsersAliasUpdatePostBody::class => false,
+            \Braze\Model\UsersAliasUpdatePostBodyAliasUpdatesItem::class => false,
+            \Braze\Model\UsersAliasNewPostBody::class => false,
+            \Braze\Model\UsersAliasNewPostBodyUserAliasesItem::class => false,
+            \Braze\Model\UsersDeletePostBody::class => false,
+            \Braze\Model\UsersDeletePostBodyUserAliasesItem::class => false,
+            \Braze\Model\UsersIdentifyPostBody::class => false,
+            \Braze\Model\UsersIdentifyPostBodyAliasesToIdentifyItem::class => false,
+            \Braze\Model\UsersIdentifyPostBodyAliasesToIdentifyItemUserAlias::class => false,
+            \Braze\Model\UsersMergePostBody::class => false,
+            \Jane\Component\JsonSchemaRuntime\Reference::class => false,
         ];
-        protected $normalizersCache = [];
-
-        public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
-        {
-            return array_key_exists($type, $this->normalizers);
-        }
-
-        public function supportsNormalization($data, $format = null, array $context = []): bool
-        {
-            return is_object($data) && array_key_exists(get_class($data), $this->normalizers);
-        }
-
-        /**
-         * @return array|string|int|float|bool|\ArrayObject|null
-         */
-        public function normalize($object, $format = null, array $context = [])
-        {
-            $normalizerClass = $this->normalizers[get_class($object)];
-            $normalizer = $this->getNormalizer($normalizerClass);
-
-            return $normalizer->normalize($object, $format, $context);
-        }
-
-        public function denormalize($data, $type, $format = null, array $context = [])
-        {
-            $denormalizerClass = $this->normalizers[$type];
-            $denormalizer = $this->getNormalizer($denormalizerClass);
-
-            return $denormalizer->denormalize($data, $type, $format, $context);
-        }
-
-        private function getNormalizer(string $normalizerClass)
-        {
-            return $this->normalizersCache[$normalizerClass] ?? $this->initNormalizer($normalizerClass);
-        }
-
-        private function initNormalizer(string $normalizerClass)
-        {
-            $normalizer = new $normalizerClass();
-            $normalizer->setNormalizer($this->normalizer);
-            $normalizer->setDenormalizer($this->denormalizer);
-            $this->normalizersCache[$normalizerClass] = $normalizer;
-
-            return $normalizer;
-        }
-
-        public function getSupportedTypes(?string $format = null): array
-        {
-            return [
-                \Braze\Model\Error::class => false,
-                \Braze\Model\TemplatesEmailUpdatePostBody::class => false,
-                \Braze\Model\UsersTrackPostBody::class => false,
-                \Braze\Model\CatalogsPostBody::class => false,
-                \Braze\Model\CatalogsPostBodyCatalogsItem::class => false,
-                \Braze\Model\CatalogsPostBodyCatalogsItemFieldsItem::class => false,
-                \Braze\Model\CatalogsCatalogNameItemsPatchBody::class => false,
-                \Braze\Model\CatalogsCatalogNameItemsPatchBodyItemsItem::class => false,
-                \Braze\Model\CatalogsCatalogNameItemsPostBody::class => false,
-                \Braze\Model\CatalogsCatalogNameItemsPutBody::class => false,
-                \Braze\Model\CatalogsCatalogNameItemsItemIdPatchBody::class => false,
-                \Braze\Model\CatalogsCatalogNameItemsItemIdPostBody::class => false,
-                \Braze\Model\CatalogsCatalogNameItemsItemIdPutBody::class => false,
-                \Braze\Model\EmailStatusPostBody::class => false,
-                \Braze\Model\EmailBounceRemovePostBody::class => false,
-                \Braze\Model\EmailSpamRemovePostBody::class => false,
-                \Braze\Model\EmailBlocklistPostBody::class => false,
-                \Braze\Model\EmailBlacklistPostBody::class => false,
-                \Braze\Model\UsersExportIdsPostBody::class => false,
-                \Braze\Model\UsersExportIdsPostBodyUserAliasesItem::class => false,
-                \Braze\Model\UsersExportSegmentPostBody::class => false,
-                \Braze\Model\UsersExportGlobalControlGroupPostBody::class => false,
-                \Braze\Model\MessagesLiveActivityUpdatePostBody::class => false,
-                \Braze\Model\MessagesLiveActivityUpdatePostBodyContentState::class => false,
-                \Braze\Model\MessagesLiveActivityUpdatePostBodyNotification::class => false,
-                \Braze\Model\MessagesLiveActivityUpdatePostBodyNotificationAlert::class => false,
-                \Braze\Model\MessagesScheduleDeletePostBody::class => false,
-                \Braze\Model\CanvasTriggerScheduleDeletePostBody::class => false,
-                \Braze\Model\CampaignsTriggerScheduleDeletePostBody::class => false,
-                \Braze\Model\MessagesScheduleCreatePostBody::class => false,
-                \Braze\Model\MessagesScheduleCreatePostBodyUserAliases::class => false,
-                \Braze\Model\MessagesScheduleCreatePostBodyAudience::class => false,
-                \Braze\Model\MessagesScheduleCreatePostBodySchedule::class => false,
-                \Braze\Model\MessagesScheduleCreatePostBodyMessages::class => false,
-                \Braze\Model\CampaignsTriggerScheduleCreatePostBody::class => false,
-                \Braze\Model\CampaignsTriggerScheduleCreatePostBodyRecipientsItem::class => false,
-                \Braze\Model\CampaignsTriggerScheduleCreatePostBodyAudience::class => false,
-                \Braze\Model\CampaignsTriggerScheduleCreatePostBodySchedule::class => false,
-                \Braze\Model\CanvasTriggerScheduleCreatePostBody::class => false,
-                \Braze\Model\CanvasTriggerScheduleCreatePostBodyRecipientsItem::class => false,
-                \Braze\Model\CanvasTriggerScheduleCreatePostBodyAudience::class => false,
-                \Braze\Model\CanvasTriggerScheduleCreatePostBodySchedule::class => false,
-                \Braze\Model\MessagesScheduleUpdatePostBody::class => false,
-                \Braze\Model\MessagesScheduleUpdatePostBodySchedule::class => false,
-                \Braze\Model\MessagesScheduleUpdatePostBodyMessages::class => false,
-                \Braze\Model\MessagesScheduleUpdatePostBodyMessagesApplePush::class => false,
-                \Braze\Model\MessagesScheduleUpdatePostBodyMessagesAndroidPush::class => false,
-                \Braze\Model\MessagesScheduleUpdatePostBodyMessagesSms::class => false,
-                \Braze\Model\CampaignsTriggerScheduleUpdatePostBody::class => false,
-                \Braze\Model\CampaignsTriggerScheduleUpdatePostBodySchedule::class => false,
-                \Braze\Model\CanvasTriggerScheduleUpdatePostBody::class => false,
-                \Braze\Model\CanvasTriggerScheduleUpdatePostBodySchedule::class => false,
-                \Braze\Model\SendsIdCreatePostBody::class => false,
-                \Braze\Model\MessagesSendPostBody::class => false,
-                \Braze\Model\MessagesSendPostBodyUserAliases::class => false,
-                \Braze\Model\MessagesSendPostBodyAudience::class => false,
-                \Braze\Model\MessagesSendPostBodyMessages::class => false,
-                \Braze\Model\TransactionalV1CampaignsCampaignIdSendPostBody::class => false,
-                \Braze\Model\TransactionalV1CampaignsCampaignIdSendPostBodyTriggerProperties::class => false,
-                \Braze\Model\TransactionalV1CampaignsCampaignIdSendPostBodyRecipientItem::class => false,
-                \Braze\Model\CampaignsTriggerSendPostBody::class => false,
-                \Braze\Model\CampaignsTriggerSendPostBodyAudience::class => false,
-                \Braze\Model\CampaignsTriggerSendPostBodyRecipientsItem::class => false,
-                \Braze\Model\CampaignsTriggerSendPostBodyRecipientsItemUserAlias::class => false,
-                \Braze\Model\CampaignsTriggerSendPostBodyRecipientsItemAttributes::class => false,
-                \Braze\Model\CanvasTriggerSendPostBody::class => false,
-                \Braze\Model\CanvasTriggerSendPostBodyCanvasEntryProperties::class => false,
-                \Braze\Model\CanvasTriggerSendPostBodyAudience::class => false,
-                \Braze\Model\CanvasTriggerSendPostBodyRecipientsItem::class => false,
-                \Braze\Model\CanvasTriggerSendPostBodyRecipientsItemUserAlias::class => false,
-                \Braze\Model\CanvasTriggerSendPostBodyRecipientsItemAttributes::class => false,
-                \Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBody::class => false,
-                \Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBodyTriggerProperties::class => false,
-                \Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBodyRecipientItem::class => false,
-                \Braze\Model\PreferenceCenterV1PostBody::class => false,
-                \Braze\Model\PreferenceCenterV1PostBodyOptions::class => false,
-                \Braze\Model\ScimV2UsersIdPutBody::class => false,
-                \Braze\Model\ScimV2UsersIdPutBodyName::class => false,
-                \Braze\Model\ScimV2UsersIdPutBodyPermissions::class => false,
-                \Braze\Model\ScimV2UsersIdPutBodyPermissionsAppGroupItem::class => false,
-                \Braze\Model\ScimV2UsersIdPutBodyPermissionsAppGroupItemTeamItem::class => false,
-                \Braze\Model\ScimV2UsersPostBody::class => false,
-                \Braze\Model\ScimV2UsersPostBodyName::class => false,
-                \Braze\Model\ScimV2UsersPostBodyPermissions::class => false,
-                \Braze\Model\ScimV2UsersPostBodyPermissionsAppGroupItem::class => false,
-                \Braze\Model\ScimV2UsersPostBodyPermissionsAppGroupItemTeamItem::class => false,
-                \Braze\Model\SmsInvalidPhoneNumbersRemovePostBody::class => false,
-                \Braze\Model\SubscriptionStatusSetPostBody::class => false,
-                \Braze\Model\V2SubscriptionStatusSetPostBody::class => false,
-                \Braze\Model\V2SubscriptionStatusSetPostBodySubscriptionGroupsItem::class => false,
-                \Braze\Model\ContentBlocksCreatePostBody::class => false,
-                \Braze\Model\ContentBlocksUpdatePostBody::class => false,
-                \Braze\Model\TemplatesEmailCreatePostBody::class => false,
-                \Braze\Model\UsersExternalIdsRenamePostBody::class => false,
-                \Braze\Model\UsersExternalIdsRenamePostBodyExternalIdRenamesItem::class => false,
-                \Braze\Model\UsersExternalIdsRemovePostBody::class => false,
-                \Braze\Model\UsersAliasUpdatePostBody::class => false,
-                \Braze\Model\UsersAliasUpdatePostBodyAliasUpdatesItem::class => false,
-                \Braze\Model\UsersAliasNewPostBody::class => false,
-                \Braze\Model\UsersAliasNewPostBodyUserAliasesItem::class => false,
-                \Braze\Model\UsersDeletePostBody::class => false,
-                \Braze\Model\UsersDeletePostBodyUserAliasesItem::class => false,
-                \Braze\Model\UsersIdentifyPostBody::class => false,
-                \Braze\Model\UsersIdentifyPostBodyAliasesToIdentifyItem::class => false,
-                \Braze\Model\UsersIdentifyPostBodyAliasesToIdentifyItemUserAlias::class => false,
-                \Braze\Model\UsersMergePostBody::class => false,
-                \Jane\Component\JsonSchemaRuntime\Reference::class => false,
-            ];
-        }
     }
 }

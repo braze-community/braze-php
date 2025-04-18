@@ -13,7 +13,6 @@ namespace Braze\Normalizer;
 use Braze\Runtime\Normalizer\CheckArray;
 use Braze\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
-use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -21,235 +20,119 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
-    class CanvasTriggerScheduleCreatePostBodyNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
+class CanvasTriggerScheduleCreatePostBodyNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
+{
+    use DenormalizerAwareTrait;
+    use NormalizerAwareTrait;
+    use CheckArray;
+    use ValidatorTrait;
+
+    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
-        use DenormalizerAwareTrait;
-        use NormalizerAwareTrait;
-        use CheckArray;
-        use ValidatorTrait;
-
-        public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
-        {
-            return $type === \Braze\Model\CanvasTriggerScheduleCreatePostBody::class;
-        }
-
-        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
-        {
-            return is_object($data) && get_class($data) === \Braze\Model\CanvasTriggerScheduleCreatePostBody::class;
-        }
-
-        public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
-        {
-            if (isset($data['$ref'])) {
-                return new Reference($data['$ref'], $context['document-origin']);
-            }
-            if (isset($data['$recursiveRef'])) {
-                return new Reference($data['$recursiveRef'], $context['document-origin']);
-            }
-            $object = new \Braze\Model\CanvasTriggerScheduleCreatePostBody();
-            if (null === $data || false === \is_array($data)) {
-                return $object;
-            }
-            if (\array_key_exists('canvas_id', $data)) {
-                $object->setCanvasId($data['canvas_id']);
-                unset($data['canvas_id']);
-            }
-            if (\array_key_exists('recipients', $data)) {
-                $values = [];
-                foreach ($data['recipients'] as $value) {
-                    $values[] = $this->denormalizer->denormalize($value, \Braze\Model\CanvasTriggerScheduleCreatePostBodyRecipientsItem::class, 'json', $context);
-                }
-                $object->setRecipients($values);
-                unset($data['recipients']);
-            }
-            if (\array_key_exists('audience', $data)) {
-                $object->setAudience($this->denormalizer->denormalize($data['audience'], \Braze\Model\CanvasTriggerScheduleCreatePostBodyAudience::class, 'json', $context));
-                unset($data['audience']);
-            }
-            if (\array_key_exists('broadcast', $data)) {
-                $object->setBroadcast($data['broadcast']);
-                unset($data['broadcast']);
-            }
-            if (\array_key_exists('canvas_entry_properties', $data)) {
-                $values_1 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
-                foreach ($data['canvas_entry_properties'] as $key => $value_1) {
-                    $values_1[$key] = $value_1;
-                }
-                $object->setCanvasEntryProperties($values_1);
-                unset($data['canvas_entry_properties']);
-            }
-            if (\array_key_exists('schedule', $data)) {
-                $object->setSchedule($this->denormalizer->denormalize($data['schedule'], \Braze\Model\CanvasTriggerScheduleCreatePostBodySchedule::class, 'json', $context));
-                unset($data['schedule']);
-            }
-            foreach ($data as $key_1 => $value_2) {
-                if (preg_match('/.*/', (string) $key_1)) {
-                    $object[$key_1] = $value_2;
-                }
-            }
-
-            return $object;
-        }
-
-        public function normalize(mixed $object, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
-        {
-            $data = [];
-            if ($object->isInitialized('canvasId') && null !== $object->getCanvasId()) {
-                $data['canvas_id'] = $object->getCanvasId();
-            }
-            if ($object->isInitialized('recipients') && null !== $object->getRecipients()) {
-                $values = [];
-                foreach ($object->getRecipients() as $value) {
-                    $values[] = $this->normalizer->normalize($value, 'json', $context);
-                }
-                $data['recipients'] = $values;
-            }
-            if ($object->isInitialized('audience') && null !== $object->getAudience()) {
-                $data['audience'] = $this->normalizer->normalize($object->getAudience(), 'json', $context);
-            }
-            if ($object->isInitialized('broadcast') && null !== $object->getBroadcast()) {
-                $data['broadcast'] = $object->getBroadcast();
-            }
-            if ($object->isInitialized('canvasEntryProperties') && null !== $object->getCanvasEntryProperties()) {
-                $values_1 = [];
-                foreach ($object->getCanvasEntryProperties() as $key => $value_1) {
-                    $values_1[$key] = $value_1;
-                }
-                $data['canvas_entry_properties'] = $values_1;
-            }
-            if ($object->isInitialized('schedule') && null !== $object->getSchedule()) {
-                $data['schedule'] = $this->normalizer->normalize($object->getSchedule(), 'json', $context);
-            }
-            foreach ($object as $key_1 => $value_2) {
-                if (preg_match('/.*/', (string) $key_1)) {
-                    $data[$key_1] = $value_2;
-                }
-            }
-
-            return $data;
-        }
-
-        public function getSupportedTypes(?string $format = null): array
-        {
-            return [\Braze\Model\CanvasTriggerScheduleCreatePostBody::class => false];
-        }
+        return $type === \Braze\Model\CanvasTriggerScheduleCreatePostBody::class;
     }
-} else {
-    class CanvasTriggerScheduleCreatePostBodyNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
+
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
-        use DenormalizerAwareTrait;
-        use NormalizerAwareTrait;
-        use CheckArray;
-        use ValidatorTrait;
+        return is_object($data) && get_class($data) === \Braze\Model\CanvasTriggerScheduleCreatePostBody::class;
+    }
 
-        public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
-        {
-            return $type === \Braze\Model\CanvasTriggerScheduleCreatePostBody::class;
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
+    {
+        if (isset($data['$ref'])) {
+            return new Reference($data['$ref'], $context['document-origin']);
         }
-
-        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
-        {
-            return is_object($data) && get_class($data) === \Braze\Model\CanvasTriggerScheduleCreatePostBody::class;
+        if (isset($data['$recursiveRef'])) {
+            return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
-
-        public function denormalize($data, $type, $format = null, array $context = [])
-        {
-            if (isset($data['$ref'])) {
-                return new Reference($data['$ref'], $context['document-origin']);
-            }
-            if (isset($data['$recursiveRef'])) {
-                return new Reference($data['$recursiveRef'], $context['document-origin']);
-            }
-            $object = new \Braze\Model\CanvasTriggerScheduleCreatePostBody();
-            if (null === $data || false === \is_array($data)) {
-                return $object;
-            }
-            if (\array_key_exists('canvas_id', $data)) {
-                $object->setCanvasId($data['canvas_id']);
-                unset($data['canvas_id']);
-            }
-            if (\array_key_exists('recipients', $data)) {
-                $values = [];
-                foreach ($data['recipients'] as $value) {
-                    $values[] = $this->denormalizer->denormalize($value, \Braze\Model\CanvasTriggerScheduleCreatePostBodyRecipientsItem::class, 'json', $context);
-                }
-                $object->setRecipients($values);
-                unset($data['recipients']);
-            }
-            if (\array_key_exists('audience', $data)) {
-                $object->setAudience($this->denormalizer->denormalize($data['audience'], \Braze\Model\CanvasTriggerScheduleCreatePostBodyAudience::class, 'json', $context));
-                unset($data['audience']);
-            }
-            if (\array_key_exists('broadcast', $data)) {
-                $object->setBroadcast($data['broadcast']);
-                unset($data['broadcast']);
-            }
-            if (\array_key_exists('canvas_entry_properties', $data)) {
-                $values_1 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
-                foreach ($data['canvas_entry_properties'] as $key => $value_1) {
-                    $values_1[$key] = $value_1;
-                }
-                $object->setCanvasEntryProperties($values_1);
-                unset($data['canvas_entry_properties']);
-            }
-            if (\array_key_exists('schedule', $data)) {
-                $object->setSchedule($this->denormalizer->denormalize($data['schedule'], \Braze\Model\CanvasTriggerScheduleCreatePostBodySchedule::class, 'json', $context));
-                unset($data['schedule']);
-            }
-            foreach ($data as $key_1 => $value_2) {
-                if (preg_match('/.*/', (string) $key_1)) {
-                    $object[$key_1] = $value_2;
-                }
-            }
-
+        $object = new \Braze\Model\CanvasTriggerScheduleCreatePostBody();
+        if (\array_key_exists('broadcast', $data) && \is_int($data['broadcast'])) {
+            $data['broadcast'] = (bool) $data['broadcast'];
+        }
+        if (null === $data || false === \is_array($data)) {
             return $object;
         }
-
-        /**
-         * @return array|string|int|float|bool|\ArrayObject|null
-         */
-        public function normalize($object, $format = null, array $context = [])
-        {
-            $data = [];
-            if ($object->isInitialized('canvasId') && null !== $object->getCanvasId()) {
-                $data['canvas_id'] = $object->getCanvasId();
+        if (\array_key_exists('canvas_id', $data)) {
+            $object->setCanvasId($data['canvas_id']);
+            unset($data['canvas_id']);
+        }
+        if (\array_key_exists('recipients', $data)) {
+            $values = [];
+            foreach ($data['recipients'] as $value) {
+                $values[] = $this->denormalizer->denormalize($value, \Braze\Model\CanvasTriggerScheduleCreatePostBodyRecipientsItem::class, 'json', $context);
             }
-            if ($object->isInitialized('recipients') && null !== $object->getRecipients()) {
-                $values = [];
-                foreach ($object->getRecipients() as $value) {
-                    $values[] = $this->normalizer->normalize($value, 'json', $context);
-                }
-                $data['recipients'] = $values;
+            $object->setRecipients($values);
+            unset($data['recipients']);
+        }
+        if (\array_key_exists('audience', $data)) {
+            $object->setAudience($this->denormalizer->denormalize($data['audience'], \Braze\Model\CanvasTriggerScheduleCreatePostBodyAudience::class, 'json', $context));
+            unset($data['audience']);
+        }
+        if (\array_key_exists('broadcast', $data)) {
+            $object->setBroadcast($data['broadcast']);
+            unset($data['broadcast']);
+        }
+        if (\array_key_exists('canvas_entry_properties', $data)) {
+            $values_1 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+            foreach ($data['canvas_entry_properties'] as $key => $value_1) {
+                $values_1[$key] = $value_1;
             }
-            if ($object->isInitialized('audience') && null !== $object->getAudience()) {
-                $data['audience'] = $this->normalizer->normalize($object->getAudience(), 'json', $context);
+            $object->setCanvasEntryProperties($values_1);
+            unset($data['canvas_entry_properties']);
+        }
+        if (\array_key_exists('schedule', $data)) {
+            $object->setSchedule($this->denormalizer->denormalize($data['schedule'], \Braze\Model\CanvasTriggerScheduleCreatePostBodySchedule::class, 'json', $context));
+            unset($data['schedule']);
+        }
+        foreach ($data as $key_1 => $value_2) {
+            if (preg_match('/.*/', (string) $key_1)) {
+                $object[$key_1] = $value_2;
             }
-            if ($object->isInitialized('broadcast') && null !== $object->getBroadcast()) {
-                $data['broadcast'] = $object->getBroadcast();
-            }
-            if ($object->isInitialized('canvasEntryProperties') && null !== $object->getCanvasEntryProperties()) {
-                $values_1 = [];
-                foreach ($object->getCanvasEntryProperties() as $key => $value_1) {
-                    $values_1[$key] = $value_1;
-                }
-                $data['canvas_entry_properties'] = $values_1;
-            }
-            if ($object->isInitialized('schedule') && null !== $object->getSchedule()) {
-                $data['schedule'] = $this->normalizer->normalize($object->getSchedule(), 'json', $context);
-            }
-            foreach ($object as $key_1 => $value_2) {
-                if (preg_match('/.*/', (string) $key_1)) {
-                    $data[$key_1] = $value_2;
-                }
-            }
-
-            return $data;
         }
 
-        public function getSupportedTypes(?string $format = null): array
-        {
-            return [\Braze\Model\CanvasTriggerScheduleCreatePostBody::class => false];
+        return $object;
+    }
+
+    public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+    {
+        $dataArray = [];
+        if ($data->isInitialized('canvasId') && null !== $data->getCanvasId()) {
+            $dataArray['canvas_id'] = $data->getCanvasId();
         }
+        if ($data->isInitialized('recipients') && null !== $data->getRecipients()) {
+            $values = [];
+            foreach ($data->getRecipients() as $value) {
+                $values[] = $this->normalizer->normalize($value, 'json', $context);
+            }
+            $dataArray['recipients'] = $values;
+        }
+        if ($data->isInitialized('audience') && null !== $data->getAudience()) {
+            $dataArray['audience'] = $this->normalizer->normalize($data->getAudience(), 'json', $context);
+        }
+        if ($data->isInitialized('broadcast') && null !== $data->getBroadcast()) {
+            $dataArray['broadcast'] = $data->getBroadcast();
+        }
+        if ($data->isInitialized('canvasEntryProperties') && null !== $data->getCanvasEntryProperties()) {
+            $values_1 = [];
+            foreach ($data->getCanvasEntryProperties() as $key => $value_1) {
+                $values_1[$key] = $value_1;
+            }
+            $dataArray['canvas_entry_properties'] = $values_1;
+        }
+        if ($data->isInitialized('schedule') && null !== $data->getSchedule()) {
+            $dataArray['schedule'] = $this->normalizer->normalize($data->getSchedule(), 'json', $context);
+        }
+        foreach ($data as $key_1 => $value_2) {
+            if (preg_match('/.*/', (string) $key_1)) {
+                $dataArray[$key_1] = $value_2;
+            }
+        }
+
+        return $dataArray;
+    }
+
+    public function getSupportedTypes(?string $format = null): array
+    {
+        return [\Braze\Model\CanvasTriggerScheduleCreatePostBody::class => false];
     }
 }
