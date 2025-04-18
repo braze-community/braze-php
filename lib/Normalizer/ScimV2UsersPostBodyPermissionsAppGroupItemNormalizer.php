@@ -13,7 +13,6 @@ namespace Braze\Normalizer;
 use Braze\Runtime\Normalizer\CheckArray;
 use Braze\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
-use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -21,193 +20,95 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
-    class ScimV2UsersPostBodyPermissionsAppGroupItemNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
+class ScimV2UsersPostBodyPermissionsAppGroupItemNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
+{
+    use DenormalizerAwareTrait;
+    use NormalizerAwareTrait;
+    use CheckArray;
+    use ValidatorTrait;
+
+    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
-        use DenormalizerAwareTrait;
-        use NormalizerAwareTrait;
-        use CheckArray;
-        use ValidatorTrait;
-
-        public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
-        {
-            return $type === \Braze\Model\ScimV2UsersPostBodyPermissionsAppGroupItem::class;
-        }
-
-        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
-        {
-            return is_object($data) && get_class($data) === \Braze\Model\ScimV2UsersPostBodyPermissionsAppGroupItem::class;
-        }
-
-        public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
-        {
-            if (isset($data['$ref'])) {
-                return new Reference($data['$ref'], $context['document-origin']);
-            }
-            if (isset($data['$recursiveRef'])) {
-                return new Reference($data['$recursiveRef'], $context['document-origin']);
-            }
-            $object = new \Braze\Model\ScimV2UsersPostBodyPermissionsAppGroupItem();
-            if (null === $data || false === \is_array($data)) {
-                return $object;
-            }
-            if (\array_key_exists('appGroupName', $data)) {
-                $object->setAppGroupName($data['appGroupName']);
-                unset($data['appGroupName']);
-            }
-            if (\array_key_exists('appGroupPermissions', $data)) {
-                $values = [];
-                foreach ($data['appGroupPermissions'] as $value) {
-                    $values[] = $value;
-                }
-                $object->setAppGroupPermissions($values);
-                unset($data['appGroupPermissions']);
-            }
-            if (\array_key_exists('team', $data)) {
-                $values_1 = [];
-                foreach ($data['team'] as $value_1) {
-                    $values_1[] = $this->denormalizer->denormalize($value_1, \Braze\Model\ScimV2UsersPostBodyPermissionsAppGroupItemTeamItem::class, 'json', $context);
-                }
-                $object->setTeam($values_1);
-                unset($data['team']);
-            }
-            foreach ($data as $key => $value_2) {
-                if (preg_match('/.*/', (string) $key)) {
-                    $object[$key] = $value_2;
-                }
-            }
-
-            return $object;
-        }
-
-        public function normalize(mixed $object, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
-        {
-            $data = [];
-            if ($object->isInitialized('appGroupName') && null !== $object->getAppGroupName()) {
-                $data['appGroupName'] = $object->getAppGroupName();
-            }
-            if ($object->isInitialized('appGroupPermissions') && null !== $object->getAppGroupPermissions()) {
-                $values = [];
-                foreach ($object->getAppGroupPermissions() as $value) {
-                    $values[] = $value;
-                }
-                $data['appGroupPermissions'] = $values;
-            }
-            if ($object->isInitialized('team') && null !== $object->getTeam()) {
-                $values_1 = [];
-                foreach ($object->getTeam() as $value_1) {
-                    $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
-                }
-                $data['team'] = $values_1;
-            }
-            foreach ($object as $key => $value_2) {
-                if (preg_match('/.*/', (string) $key)) {
-                    $data[$key] = $value_2;
-                }
-            }
-
-            return $data;
-        }
-
-        public function getSupportedTypes(?string $format = null): array
-        {
-            return [\Braze\Model\ScimV2UsersPostBodyPermissionsAppGroupItem::class => false];
-        }
+        return $type === \Braze\Model\ScimV2UsersPostBodyPermissionsAppGroupItem::class;
     }
-} else {
-    class ScimV2UsersPostBodyPermissionsAppGroupItemNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
+
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
-        use DenormalizerAwareTrait;
-        use NormalizerAwareTrait;
-        use CheckArray;
-        use ValidatorTrait;
+        return is_object($data) && get_class($data) === \Braze\Model\ScimV2UsersPostBodyPermissionsAppGroupItem::class;
+    }
 
-        public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
-        {
-            return $type === \Braze\Model\ScimV2UsersPostBodyPermissionsAppGroupItem::class;
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
+    {
+        if (isset($data['$ref'])) {
+            return new Reference($data['$ref'], $context['document-origin']);
         }
-
-        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
-        {
-            return is_object($data) && get_class($data) === \Braze\Model\ScimV2UsersPostBodyPermissionsAppGroupItem::class;
+        if (isset($data['$recursiveRef'])) {
+            return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
-
-        public function denormalize($data, $type, $format = null, array $context = [])
-        {
-            if (isset($data['$ref'])) {
-                return new Reference($data['$ref'], $context['document-origin']);
-            }
-            if (isset($data['$recursiveRef'])) {
-                return new Reference($data['$recursiveRef'], $context['document-origin']);
-            }
-            $object = new \Braze\Model\ScimV2UsersPostBodyPermissionsAppGroupItem();
-            if (null === $data || false === \is_array($data)) {
-                return $object;
-            }
-            if (\array_key_exists('appGroupName', $data)) {
-                $object->setAppGroupName($data['appGroupName']);
-                unset($data['appGroupName']);
-            }
-            if (\array_key_exists('appGroupPermissions', $data)) {
-                $values = [];
-                foreach ($data['appGroupPermissions'] as $value) {
-                    $values[] = $value;
-                }
-                $object->setAppGroupPermissions($values);
-                unset($data['appGroupPermissions']);
-            }
-            if (\array_key_exists('team', $data)) {
-                $values_1 = [];
-                foreach ($data['team'] as $value_1) {
-                    $values_1[] = $this->denormalizer->denormalize($value_1, \Braze\Model\ScimV2UsersPostBodyPermissionsAppGroupItemTeamItem::class, 'json', $context);
-                }
-                $object->setTeam($values_1);
-                unset($data['team']);
-            }
-            foreach ($data as $key => $value_2) {
-                if (preg_match('/.*/', (string) $key)) {
-                    $object[$key] = $value_2;
-                }
-            }
-
+        $object = new \Braze\Model\ScimV2UsersPostBodyPermissionsAppGroupItem();
+        if (null === $data || false === \is_array($data)) {
             return $object;
         }
-
-        /**
-         * @return array|string|int|float|bool|\ArrayObject|null
-         */
-        public function normalize($object, $format = null, array $context = [])
-        {
-            $data = [];
-            if ($object->isInitialized('appGroupName') && null !== $object->getAppGroupName()) {
-                $data['appGroupName'] = $object->getAppGroupName();
+        if (\array_key_exists('appGroupName', $data)) {
+            $object->setAppGroupName($data['appGroupName']);
+            unset($data['appGroupName']);
+        }
+        if (\array_key_exists('appGroupPermissions', $data)) {
+            $values = [];
+            foreach ($data['appGroupPermissions'] as $value) {
+                $values[] = $value;
             }
-            if ($object->isInitialized('appGroupPermissions') && null !== $object->getAppGroupPermissions()) {
-                $values = [];
-                foreach ($object->getAppGroupPermissions() as $value) {
-                    $values[] = $value;
-                }
-                $data['appGroupPermissions'] = $values;
+            $object->setAppGroupPermissions($values);
+            unset($data['appGroupPermissions']);
+        }
+        if (\array_key_exists('team', $data)) {
+            $values_1 = [];
+            foreach ($data['team'] as $value_1) {
+                $values_1[] = $this->denormalizer->denormalize($value_1, \Braze\Model\ScimV2UsersPostBodyPermissionsAppGroupItemTeamItem::class, 'json', $context);
             }
-            if ($object->isInitialized('team') && null !== $object->getTeam()) {
-                $values_1 = [];
-                foreach ($object->getTeam() as $value_1) {
-                    $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
-                }
-                $data['team'] = $values_1;
+            $object->setTeam($values_1);
+            unset($data['team']);
+        }
+        foreach ($data as $key => $value_2) {
+            if (preg_match('/.*/', (string) $key)) {
+                $object[$key] = $value_2;
             }
-            foreach ($object as $key => $value_2) {
-                if (preg_match('/.*/', (string) $key)) {
-                    $data[$key] = $value_2;
-                }
-            }
-
-            return $data;
         }
 
-        public function getSupportedTypes(?string $format = null): array
-        {
-            return [\Braze\Model\ScimV2UsersPostBodyPermissionsAppGroupItem::class => false];
+        return $object;
+    }
+
+    public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+    {
+        $dataArray = [];
+        if ($data->isInitialized('appGroupName') && null !== $data->getAppGroupName()) {
+            $dataArray['appGroupName'] = $data->getAppGroupName();
         }
+        if ($data->isInitialized('appGroupPermissions') && null !== $data->getAppGroupPermissions()) {
+            $values = [];
+            foreach ($data->getAppGroupPermissions() as $value) {
+                $values[] = $value;
+            }
+            $dataArray['appGroupPermissions'] = $values;
+        }
+        if ($data->isInitialized('team') && null !== $data->getTeam()) {
+            $values_1 = [];
+            foreach ($data->getTeam() as $value_1) {
+                $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
+            }
+            $dataArray['team'] = $values_1;
+        }
+        foreach ($data as $key => $value_2) {
+            if (preg_match('/.*/', (string) $key)) {
+                $dataArray[$key] = $value_2;
+            }
+        }
+
+        return $dataArray;
+    }
+
+    public function getSupportedTypes(?string $format = null): array
+    {
+        return [\Braze\Model\ScimV2UsersPostBodyPermissionsAppGroupItem::class => false];
     }
 }

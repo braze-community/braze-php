@@ -13,7 +13,6 @@ namespace Braze\Normalizer;
 use Braze\Runtime\Normalizer\CheckArray;
 use Braze\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
-use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -21,259 +20,128 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
-    class MessagesSendPostBodyNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
+class MessagesSendPostBodyNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
+{
+    use DenormalizerAwareTrait;
+    use NormalizerAwareTrait;
+    use CheckArray;
+    use ValidatorTrait;
+
+    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
-        use DenormalizerAwareTrait;
-        use NormalizerAwareTrait;
-        use CheckArray;
-        use ValidatorTrait;
-
-        public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
-        {
-            return $type === \Braze\Model\MessagesSendPostBody::class;
-        }
-
-        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
-        {
-            return is_object($data) && get_class($data) === \Braze\Model\MessagesSendPostBody::class;
-        }
-
-        public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
-        {
-            if (isset($data['$ref'])) {
-                return new Reference($data['$ref'], $context['document-origin']);
-            }
-            if (isset($data['$recursiveRef'])) {
-                return new Reference($data['$recursiveRef'], $context['document-origin']);
-            }
-            $object = new \Braze\Model\MessagesSendPostBody();
-            if (null === $data || false === \is_array($data)) {
-                return $object;
-            }
-            if (\array_key_exists('broadcast', $data)) {
-                $object->setBroadcast($data['broadcast']);
-                unset($data['broadcast']);
-            }
-            if (\array_key_exists('external_user_ids', $data)) {
-                $object->setExternalUserIds($data['external_user_ids']);
-                unset($data['external_user_ids']);
-            }
-            if (\array_key_exists('user_aliases', $data)) {
-                $object->setUserAliases($this->denormalizer->denormalize($data['user_aliases'], \Braze\Model\MessagesSendPostBodyUserAliases::class, 'json', $context));
-                unset($data['user_aliases']);
-            }
-            if (\array_key_exists('segment_id', $data)) {
-                $object->setSegmentId($data['segment_id']);
-                unset($data['segment_id']);
-            }
-            if (\array_key_exists('audience', $data)) {
-                $object->setAudience($this->denormalizer->denormalize($data['audience'], \Braze\Model\MessagesSendPostBodyAudience::class, 'json', $context));
-                unset($data['audience']);
-            }
-            if (\array_key_exists('campaign_id', $data)) {
-                $object->setCampaignId($data['campaign_id']);
-                unset($data['campaign_id']);
-            }
-            if (\array_key_exists('send_id', $data)) {
-                $object->setSendId($data['send_id']);
-                unset($data['send_id']);
-            }
-            if (\array_key_exists('override_frequency_capping', $data)) {
-                $object->setOverrideFrequencyCapping($data['override_frequency_capping']);
-                unset($data['override_frequency_capping']);
-            }
-            if (\array_key_exists('recipient_subscription_state', $data)) {
-                $object->setRecipientSubscriptionState($data['recipient_subscription_state']);
-                unset($data['recipient_subscription_state']);
-            }
-            if (\array_key_exists('messages', $data)) {
-                $object->setMessages($this->denormalizer->denormalize($data['messages'], \Braze\Model\MessagesSendPostBodyMessages::class, 'json', $context));
-                unset($data['messages']);
-            }
-            foreach ($data as $key => $value) {
-                if (preg_match('/.*/', (string) $key)) {
-                    $object[$key] = $value;
-                }
-            }
-
-            return $object;
-        }
-
-        public function normalize(mixed $object, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
-        {
-            $data = [];
-            if ($object->isInitialized('broadcast') && null !== $object->getBroadcast()) {
-                $data['broadcast'] = $object->getBroadcast();
-            }
-            if ($object->isInitialized('externalUserIds') && null !== $object->getExternalUserIds()) {
-                $data['external_user_ids'] = $object->getExternalUserIds();
-            }
-            if ($object->isInitialized('userAliases') && null !== $object->getUserAliases()) {
-                $data['user_aliases'] = $this->normalizer->normalize($object->getUserAliases(), 'json', $context);
-            }
-            if ($object->isInitialized('segmentId') && null !== $object->getSegmentId()) {
-                $data['segment_id'] = $object->getSegmentId();
-            }
-            if ($object->isInitialized('audience') && null !== $object->getAudience()) {
-                $data['audience'] = $this->normalizer->normalize($object->getAudience(), 'json', $context);
-            }
-            if ($object->isInitialized('campaignId') && null !== $object->getCampaignId()) {
-                $data['campaign_id'] = $object->getCampaignId();
-            }
-            if ($object->isInitialized('sendId') && null !== $object->getSendId()) {
-                $data['send_id'] = $object->getSendId();
-            }
-            if ($object->isInitialized('overrideFrequencyCapping') && null !== $object->getOverrideFrequencyCapping()) {
-                $data['override_frequency_capping'] = $object->getOverrideFrequencyCapping();
-            }
-            if ($object->isInitialized('recipientSubscriptionState') && null !== $object->getRecipientSubscriptionState()) {
-                $data['recipient_subscription_state'] = $object->getRecipientSubscriptionState();
-            }
-            if ($object->isInitialized('messages') && null !== $object->getMessages()) {
-                $data['messages'] = $this->normalizer->normalize($object->getMessages(), 'json', $context);
-            }
-            foreach ($object as $key => $value) {
-                if (preg_match('/.*/', (string) $key)) {
-                    $data[$key] = $value;
-                }
-            }
-
-            return $data;
-        }
-
-        public function getSupportedTypes(?string $format = null): array
-        {
-            return [\Braze\Model\MessagesSendPostBody::class => false];
-        }
+        return $type === \Braze\Model\MessagesSendPostBody::class;
     }
-} else {
-    class MessagesSendPostBodyNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
+
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
-        use DenormalizerAwareTrait;
-        use NormalizerAwareTrait;
-        use CheckArray;
-        use ValidatorTrait;
+        return is_object($data) && get_class($data) === \Braze\Model\MessagesSendPostBody::class;
+    }
 
-        public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
-        {
-            return $type === \Braze\Model\MessagesSendPostBody::class;
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
+    {
+        if (isset($data['$ref'])) {
+            return new Reference($data['$ref'], $context['document-origin']);
         }
-
-        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
-        {
-            return is_object($data) && get_class($data) === \Braze\Model\MessagesSendPostBody::class;
+        if (isset($data['$recursiveRef'])) {
+            return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
-
-        public function denormalize($data, $type, $format = null, array $context = [])
-        {
-            if (isset($data['$ref'])) {
-                return new Reference($data['$ref'], $context['document-origin']);
-            }
-            if (isset($data['$recursiveRef'])) {
-                return new Reference($data['$recursiveRef'], $context['document-origin']);
-            }
-            $object = new \Braze\Model\MessagesSendPostBody();
-            if (null === $data || false === \is_array($data)) {
-                return $object;
-            }
-            if (\array_key_exists('broadcast', $data)) {
-                $object->setBroadcast($data['broadcast']);
-                unset($data['broadcast']);
-            }
-            if (\array_key_exists('external_user_ids', $data)) {
-                $object->setExternalUserIds($data['external_user_ids']);
-                unset($data['external_user_ids']);
-            }
-            if (\array_key_exists('user_aliases', $data)) {
-                $object->setUserAliases($this->denormalizer->denormalize($data['user_aliases'], \Braze\Model\MessagesSendPostBodyUserAliases::class, 'json', $context));
-                unset($data['user_aliases']);
-            }
-            if (\array_key_exists('segment_id', $data)) {
-                $object->setSegmentId($data['segment_id']);
-                unset($data['segment_id']);
-            }
-            if (\array_key_exists('audience', $data)) {
-                $object->setAudience($this->denormalizer->denormalize($data['audience'], \Braze\Model\MessagesSendPostBodyAudience::class, 'json', $context));
-                unset($data['audience']);
-            }
-            if (\array_key_exists('campaign_id', $data)) {
-                $object->setCampaignId($data['campaign_id']);
-                unset($data['campaign_id']);
-            }
-            if (\array_key_exists('send_id', $data)) {
-                $object->setSendId($data['send_id']);
-                unset($data['send_id']);
-            }
-            if (\array_key_exists('override_frequency_capping', $data)) {
-                $object->setOverrideFrequencyCapping($data['override_frequency_capping']);
-                unset($data['override_frequency_capping']);
-            }
-            if (\array_key_exists('recipient_subscription_state', $data)) {
-                $object->setRecipientSubscriptionState($data['recipient_subscription_state']);
-                unset($data['recipient_subscription_state']);
-            }
-            if (\array_key_exists('messages', $data)) {
-                $object->setMessages($this->denormalizer->denormalize($data['messages'], \Braze\Model\MessagesSendPostBodyMessages::class, 'json', $context));
-                unset($data['messages']);
-            }
-            foreach ($data as $key => $value) {
-                if (preg_match('/.*/', (string) $key)) {
-                    $object[$key] = $value;
-                }
-            }
-
+        $object = new \Braze\Model\MessagesSendPostBody();
+        if (null === $data || false === \is_array($data)) {
             return $object;
         }
-
-        /**
-         * @return array|string|int|float|bool|\ArrayObject|null
-         */
-        public function normalize($object, $format = null, array $context = [])
-        {
-            $data = [];
-            if ($object->isInitialized('broadcast') && null !== $object->getBroadcast()) {
-                $data['broadcast'] = $object->getBroadcast();
+        if (\array_key_exists('broadcast', $data)) {
+            $object->setBroadcast($data['broadcast']);
+            unset($data['broadcast']);
+        }
+        if (\array_key_exists('external_user_ids', $data)) {
+            $object->setExternalUserIds($data['external_user_ids']);
+            unset($data['external_user_ids']);
+        }
+        if (\array_key_exists('user_aliases', $data)) {
+            $object->setUserAliases($this->denormalizer->denormalize($data['user_aliases'], \Braze\Model\MessagesSendPostBodyUserAliases::class, 'json', $context));
+            unset($data['user_aliases']);
+        }
+        if (\array_key_exists('segment_id', $data)) {
+            $object->setSegmentId($data['segment_id']);
+            unset($data['segment_id']);
+        }
+        if (\array_key_exists('audience', $data)) {
+            $object->setAudience($this->denormalizer->denormalize($data['audience'], \Braze\Model\MessagesSendPostBodyAudience::class, 'json', $context));
+            unset($data['audience']);
+        }
+        if (\array_key_exists('campaign_id', $data)) {
+            $object->setCampaignId($data['campaign_id']);
+            unset($data['campaign_id']);
+        }
+        if (\array_key_exists('send_id', $data)) {
+            $object->setSendId($data['send_id']);
+            unset($data['send_id']);
+        }
+        if (\array_key_exists('override_frequency_capping', $data)) {
+            $object->setOverrideFrequencyCapping($data['override_frequency_capping']);
+            unset($data['override_frequency_capping']);
+        }
+        if (\array_key_exists('recipient_subscription_state', $data)) {
+            $object->setRecipientSubscriptionState($data['recipient_subscription_state']);
+            unset($data['recipient_subscription_state']);
+        }
+        if (\array_key_exists('messages', $data)) {
+            $object->setMessages($this->denormalizer->denormalize($data['messages'], \Braze\Model\MessagesSendPostBodyMessages::class, 'json', $context));
+            unset($data['messages']);
+        }
+        foreach ($data as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $object[$key] = $value;
             }
-            if ($object->isInitialized('externalUserIds') && null !== $object->getExternalUserIds()) {
-                $data['external_user_ids'] = $object->getExternalUserIds();
-            }
-            if ($object->isInitialized('userAliases') && null !== $object->getUserAliases()) {
-                $data['user_aliases'] = $this->normalizer->normalize($object->getUserAliases(), 'json', $context);
-            }
-            if ($object->isInitialized('segmentId') && null !== $object->getSegmentId()) {
-                $data['segment_id'] = $object->getSegmentId();
-            }
-            if ($object->isInitialized('audience') && null !== $object->getAudience()) {
-                $data['audience'] = $this->normalizer->normalize($object->getAudience(), 'json', $context);
-            }
-            if ($object->isInitialized('campaignId') && null !== $object->getCampaignId()) {
-                $data['campaign_id'] = $object->getCampaignId();
-            }
-            if ($object->isInitialized('sendId') && null !== $object->getSendId()) {
-                $data['send_id'] = $object->getSendId();
-            }
-            if ($object->isInitialized('overrideFrequencyCapping') && null !== $object->getOverrideFrequencyCapping()) {
-                $data['override_frequency_capping'] = $object->getOverrideFrequencyCapping();
-            }
-            if ($object->isInitialized('recipientSubscriptionState') && null !== $object->getRecipientSubscriptionState()) {
-                $data['recipient_subscription_state'] = $object->getRecipientSubscriptionState();
-            }
-            if ($object->isInitialized('messages') && null !== $object->getMessages()) {
-                $data['messages'] = $this->normalizer->normalize($object->getMessages(), 'json', $context);
-            }
-            foreach ($object as $key => $value) {
-                if (preg_match('/.*/', (string) $key)) {
-                    $data[$key] = $value;
-                }
-            }
-
-            return $data;
         }
 
-        public function getSupportedTypes(?string $format = null): array
-        {
-            return [\Braze\Model\MessagesSendPostBody::class => false];
+        return $object;
+    }
+
+    public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+    {
+        $dataArray = [];
+        if ($data->isInitialized('broadcast') && null !== $data->getBroadcast()) {
+            $dataArray['broadcast'] = $data->getBroadcast();
         }
+        if ($data->isInitialized('externalUserIds') && null !== $data->getExternalUserIds()) {
+            $dataArray['external_user_ids'] = $data->getExternalUserIds();
+        }
+        if ($data->isInitialized('userAliases') && null !== $data->getUserAliases()) {
+            $dataArray['user_aliases'] = $this->normalizer->normalize($data->getUserAliases(), 'json', $context);
+        }
+        if ($data->isInitialized('segmentId') && null !== $data->getSegmentId()) {
+            $dataArray['segment_id'] = $data->getSegmentId();
+        }
+        if ($data->isInitialized('audience') && null !== $data->getAudience()) {
+            $dataArray['audience'] = $this->normalizer->normalize($data->getAudience(), 'json', $context);
+        }
+        if ($data->isInitialized('campaignId') && null !== $data->getCampaignId()) {
+            $dataArray['campaign_id'] = $data->getCampaignId();
+        }
+        if ($data->isInitialized('sendId') && null !== $data->getSendId()) {
+            $dataArray['send_id'] = $data->getSendId();
+        }
+        if ($data->isInitialized('overrideFrequencyCapping') && null !== $data->getOverrideFrequencyCapping()) {
+            $dataArray['override_frequency_capping'] = $data->getOverrideFrequencyCapping();
+        }
+        if ($data->isInitialized('recipientSubscriptionState') && null !== $data->getRecipientSubscriptionState()) {
+            $dataArray['recipient_subscription_state'] = $data->getRecipientSubscriptionState();
+        }
+        if ($data->isInitialized('messages') && null !== $data->getMessages()) {
+            $dataArray['messages'] = $this->normalizer->normalize($data->getMessages(), 'json', $context);
+        }
+        foreach ($data as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $dataArray[$key] = $value;
+            }
+        }
+
+        return $dataArray;
+    }
+
+    public function getSupportedTypes(?string $format = null): array
+    {
+        return [\Braze\Model\MessagesSendPostBody::class => false];
     }
 }
