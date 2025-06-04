@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.4.0](https://github.com/braze-community/braze-php/compare/v2.3.0...v2.4.0) (2025-06-04)
+
+
+### Features
+
+* **lib:** generate code from braze-specification ([21eac42](https://github.com/braze-community/braze-php/commit/21eac42f5672c27ffcc98a85b64c32369271c9f0))
+
+
+### Bug Fixes
+
+* **lib:** change `$should_inline_css` type from string to bool ([bd7962c](https://github.com/braze-community/braze-php/commit/bd7962cdb12d0f8377c0c8d8b948ff77ca2b6799))
+
 ## [2.3.0](https://github.com/braze-community/braze-php/compare/v2.2.2...v2.3.0) (2025-04-18)
 
 
