@@ -17,7 +17,9 @@ class PostEmailBlocklist extends \Braze\Runtime\Client\BaseEndpoint implements \
     /**
      * > Use this endpoint to unsubscribe a user from email and mark them as hard bounced.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `email.blacklist` permission.
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key](https://braze.com/docs/api/api_key/) with the `email.blacklist` permission.
      *
      * ## Rate limit
      *

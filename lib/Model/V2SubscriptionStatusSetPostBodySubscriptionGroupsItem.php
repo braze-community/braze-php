@@ -32,7 +32,15 @@ class V2SubscriptionStatusSetPostBodySubscriptionGroupsItem extends \ArrayObject
     /**
      * @var list<string>
      */
+    protected $externalIds;
+    /**
+     * @var list<string>
+     */
     protected $emails;
+    /**
+     * @var list<string>
+     */
+    protected $phones;
 
     public function getSubscriptionGroupId(): string
     {
@@ -63,6 +71,25 @@ class V2SubscriptionStatusSetPostBodySubscriptionGroupsItem extends \ArrayObject
     /**
      * @return list<string>
      */
+    public function getExternalIds(): array
+    {
+        return $this->externalIds;
+    }
+
+    /**
+     * @param list<string> $externalIds
+     */
+    public function setExternalIds(array $externalIds): self
+    {
+        $this->initialized['externalIds'] = true;
+        $this->externalIds = $externalIds;
+
+        return $this;
+    }
+
+    /**
+     * @return list<string>
+     */
     public function getEmails(): array
     {
         return $this->emails;
@@ -75,6 +102,25 @@ class V2SubscriptionStatusSetPostBodySubscriptionGroupsItem extends \ArrayObject
     {
         $this->initialized['emails'] = true;
         $this->emails = $emails;
+
+        return $this;
+    }
+
+    /**
+     * @return list<string>
+     */
+    public function getPhones(): array
+    {
+        return $this->phones;
+    }
+
+    /**
+     * @param list<string> $phones
+     */
+    public function setPhones(array $phones): self
+    {
+        $this->initialized['phones'] = true;
+        $this->phones = $phones;
 
         return $this;
     }

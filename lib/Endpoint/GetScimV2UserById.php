@@ -16,9 +16,11 @@ class GetScimV2UserById extends \Braze\Runtime\Client\BaseEndpoint implements \B
     protected $id;
 
     /**
-     * > This endpoint allows you to look up an existing dashboard user account by specifying the resource `id` returned by the SCIM [`POST`](https://www.braze.com/docs/scim/post_create_user_account/) method.
+     * > Use this endpoint to look up an existing dashboard user account by specifying the resource `id` returned by the SCIM [&lt;code&gt;POST&lt;/code&gt;](https://www.braze.com/docs/scim/post_create_user_account/) method.
      *
-     * For information on how to obtain a SCIM token, visit [Automated user provisioning](https://www.braze.com/docs/scim/automated_user_provisioning/).
+     * ## Prerequisites
+     *
+     * To use this endpoint, you'll need a SCIM token. For more information, refer to [Automated user provisioning](https://www.braze.com/docs/scim/automated_user_provisioning/).
      *
      * ## Rate limit
      *
@@ -34,6 +36,16 @@ class GetScimV2UserById extends \Braze\Runtime\Client\BaseEndpoint implements \B
      *
      * There is no request body for this endpoint.
      *
+     * ## Example request
+     *
+     * ``` json
+     * curl --location --request GET 'https://rest.iad-01.braze.com/scim/v2/Users/dfa245b7-24195aec-887bb3ad-602b3340' \
+     * --header 'Content-Type: application/json' \
+     * --header 'X-Request-Origin: YOUR-REQUEST-ORIGIN-HERE' \
+     * --header 'Authorization: Bearer YOUR-API-KEY-HERE' \
+     *
+     * ```
+     *
      * ## Response
      *
      * ``` json
@@ -47,12 +59,32 @@ class GetScimV2UserById extends \Braze\Runtime\Client\BaseEndpoint implements \B
      * },
      * "department": "finance",
      * "lastSignInAt": "Thursday, January 1, 1970 12:00:00 AM",
+     * "createdAt": "Thursday, January 1, 1970 12:00:00 AM",
      * "permissions": {
      * "companyPermissions": ["manage_company_settings"],
+     * "roles": [
+     * {
+     * "roleName": "Another Test Role",
+     * "roleId": "23125dad23dfaae7,
+     * "appGroup": [
+     * {
+     * "appGroupId": "241adcd25adfabcded",
+     * "appGroupName": "Production Workspace",
+     * "appGroupPermissionSets": [
+     * {
+     * "appGroupPermissionSetName": "A Permission Set",
+     * "appGroupPermissionSetId": "dfa385109bc38",
+     * "permissions": ["basic_access","publish_cards"]
+     * }
+     * ]
+     * }
+     * ]
+     * }
+     * ],
      * "appGroup": [
      * {
      * "appGroupId": "241adcd25789fabcded",
-     * "appGroupName": "Test App Group",
+     * "appGroupName": "Test Workspace",
      * "appGroupPermissions": ["basic_access","send_campaigns_canvases"],
      * "team": [
      * {

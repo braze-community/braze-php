@@ -19,7 +19,7 @@ class GetFeedList extends \Braze\Runtime\Client\BaseEndpoint implements \Braze\R
      *
      * The cards are returned in groups of 100 sorted by time of creation (oldest to newest by default).
      *
-     * To use this endpoint, you’ll need to generate an API key with the `feed.list` permission.
+     * To use this endpoint, you’ll need to generate an API key with the `feed.list` permission.
      *
      * ## Rate limit
      *
@@ -34,10 +34,10 @@ class GetFeedList extends \Braze\Runtime\Client\BaseEndpoint implements \Braze\R
      * "message": (required, string) the status of the export, returns 'success' when completed without errors,
      * "cards" : [
      * {
-     * "id" : (string) Card API Identifier,
-     * "type" : (string) type of the card - NewsItem (classic cards), CaptionedImage, Banner or DevPick (cross-promotional cards),
-     * "title" : (string) title of the card,
-     * "tags" : (array) tag names associated with the card
+     * "id" : (string) the card API identifier,
+     * "type" : (string) type of the card - NewsItem (classic cards), CaptionedImage, Banner
+     * "title" : (string) the title of the card,
+     * "tags" : (array) the tag names associated with the card
      * },
      * ...
      * ]

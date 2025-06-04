@@ -17,28 +17,45 @@ class GetSubscriptionUserStatus extends \Braze\Runtime\Client\BaseEndpoint imple
     /**
      * > Use this endpoint to list and get the subscription groups of a certain user.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `subscription.groups.get` permission.
+     * ## Prequisites
      *
-     * If there are multiple users (multiple external IDs) who share the same email address, all users will be returned as a separate user (even if they have the same email address or subscription group).
+     * To use this endpoint, you’ll need an [API key](https://www.braze.com/docs/api/basics#rest-api-key/) with the `subscription.groups.get` permission.
      *
      * ## Rate limit
      *
      * We apply the default Braze rate limit of 250,000 requests per hour to this endpoint, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
+     * > If there are multiple users (multiple `external_ids`) who share the same email address, all users will be returned as a separate user (even if they have the same email address or subscription group).
+     *
+     *
+     * ## Example request
+     *
+     * ### Multiple users
+     *
+     * `https://rest.iad-03.braze.com/subscription/user/status?external_id[]=1&external_id[]=2`
+     *
+     * ### SMS and WhatsApp
+     *
+     * ``` json
+     * curl --location -g --request GET 'https://rest.iad-01.braze.com/subscription/user/status?external_id={{external_id}}&limit=100&offset=1&phone=+11112223333' \
+     * --header 'Authorization: Bearer YOUR-REST-API-KEY'
+     *
+     * ```
+     *
      * @param array $queryParameters {
      *
      * @var string $external_id (Required*) String
      *
-     * The `external_id` of the user (must include at least one and at most 50 `external_ids`)
+     * The external_id of the user (must include at least one and at most 50 external_ids)
      * @var int $limit (Optional) Integer
      *
-     * The limit on the maximum number of results returned. Default (and max) limit is 100.
+     * The limit on the maximum number of results returned. Default (and maximum) limit is 100.
      * @var int $offset (Optional) Integer
      *
      * Number of templates to skip before returning the rest of the templates that fit the search criteria
      * @var string $phone (Required*) String in [E.164](https://en.wikipedia.org/wiki/E.164) format
      *
-     * The phone number of the user. Must include at least one phone number (with a max of 50).
+     * The phone number of the user. Must include at least one phone number (with a maximum of 50).
      * }
      *
      * @param array $headerParameters {

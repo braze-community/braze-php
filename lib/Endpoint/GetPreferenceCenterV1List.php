@@ -17,7 +17,9 @@ class GetPreferenceCenterV1List extends \Braze\Runtime\Client\BaseEndpoint imple
     /**
      * > Use this endpoint to list your available preference centers.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `preference_center.list` permission.
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an API key with the `preference_center.list` permission.
      *
      * ## Rate limit
      *

@@ -15,13 +15,13 @@ class GetScimV2User extends \Braze\Runtime\Client\BaseEndpoint implements \Braze
     use \Braze\Runtime\Client\EndpointTrait;
 
     /**
-     * > This endpoint allows you to look up an existing dashboard user account by specifying their email in the filter query parameter.
+     * > Use this endpoint to look up an existing dashboard user account by specifying their email in the filter query parameter.
      *
-     * Note that when the query parameter is URL encoded it will read like this:
+     * Note that when the query parameter is URL encoded it will read like this: `/scim/v2/Users?filter=userName eq "user@test.com"`
      *
-     * `/scim/v2/Users?filter=userName eq "user@test.com"`
+     * ## Prerequisites
      *
-     * For information on how to obtain a SCIM token, visit [Automated user provisioning](https://www.braze.com/docs/scim/automated_user_provisioning/).
+     * To use this endpoint, you'll need a SCIM token. For more information, refer to [Automated user provisioning](https://www.braze.com/docs/scim/automated_user_provisioning/).
      *
      * ## Rate limit
      *
@@ -61,7 +61,7 @@ class GetScimV2User extends \Braze\Runtime\Client\BaseEndpoint implements \Braze
      * "appGroup": [
      * {
      * "appGroupId": "241adcd25789fabcded",
-     * "appGroupName": "Test App Group",
+     * "appGroupName": "Test Workspace",
      * "appGroupPermissions": ["basic_access","send_campaigns_canvases"],
      * "team": [
      * {

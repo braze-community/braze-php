@@ -17,13 +17,32 @@ class GetContentBlocksList extends \Braze\Runtime\Client\BaseEndpoint implements
     /**
      * > Use this endpoint to list your existing [Content Blocks](https://www.braze.com/docs/user_guide/engagement_tools/templates_and_media/content_blocks/) information.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `content_blocks.list` permission.
+     * ## Prerequisites
      *
-     * ### Rate limit
+     * To use this endpoint, you’ll need an [API key](https://www.braze.com/docs/api/api_key/) with the `content_blocks.list` permission.
+     *
+     * ## Rate limit
      *
      * We apply the default Braze rate limit of 250,000 requests per hour to this endpoint, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
-     * ### Response
+     * ## Request parameters
+     *
+     * | Parameter | Required | Data Type | Description |
+     * | --- | --- | --- | --- |
+     * | `modified_after` | Optional | String in [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) format | Retrieve only Content Blocks updated at or after the given time. |
+     * | `modified_before` | Optional | String in [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) format | Retrieve only Content Blocks updated at or before the given time. |
+     * | `limit` | Optional | Positive Number | Maximum number of Content Blocks to retrieve. Default to 100 if not provided, with a maximum acceptable value of 1000. |
+     * | `offset` | Optional | Positive Number | Number of Content Blocks to skip before returning rest of the templates that fit the search criteria. |
+     *
+     * ## Example request
+     *
+     * ``` json
+     * curl --location --request GET 'https://rest.iad-01.braze.com/content_blocks/list?modified_after=2020-01-01T01:01:01.000000&modified_before=2020-02-01T01:01:01.000000&limit=100&offset=1' \
+     * --header 'Authorization: Bearer YOUR-API-KEY-HERE'
+     *
+     * ```
+     *
+     * ## Response
      *
      * ``` json
      * Content-Type: application/json
@@ -32,14 +51,14 @@ class GetContentBlocksList extends \Braze\Runtime\Client\BaseEndpoint implements
      * "count": "integer",
      * "content_blocks": [
      * {
-     * "content_block_id": "string",
-     * "name": "string",
-     * "content_type": "html or text",
-     * "liquid_tag": "string",
-     * "inclusion_count" : "integer",
-     * "created_at": "time-in-iso",
-     * "last_edited": "time-in-iso",
-     * "tags" : "array of strings"
+     * "content_block_id": (string) the Content Block identifier,
+     * "name": (string) the name of the Content Block,
+     * "content_type": (string) the content type, html or text,
+     * "liquid_tag": (string) the Liquid tags,
+     * "inclusion_count" : (integer) the inclusion count,
+     * "created_at": (string) The time the Content Block was created in ISO 8601,
+     * "last_edited": (string) The time the Content Block was last edited in ISO 8601,
+     * "tags": (array) An array of tags formatted as strings,
      * }
      * ]
      * }

@@ -17,11 +17,11 @@ class GetSegmentsDataSeries extends \Braze\Runtime\Client\BaseEndpoint implement
     /**
      * > Use this endpoint to retrieve a daily series of the estimated size of a segment over time.
      *
-     * Note: If you are using our [older navigation](https://www.braze.com/docs/navigation), `segment_id` can be found at **Developer Console > API Settings**.
+     * ## Prerequisites
      *
-     * To use this endpoint, you’ll need to generate an API key with the `segments.data_series` permission.
+     * To use this endpoint, you’ll need an [API key](https://www.braze.com/docs/api/basics#rest-api-key/) with the `segments.data_series` permission.
      *
-     * ### Rate limit
+     * ## Rate limit
      *
      * We apply the default Braze rate limit of 250,000 requests per hour to this endpoint, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
@@ -51,7 +51,7 @@ class GetSegmentsDataSeries extends \Braze\Runtime\Client\BaseEndpoint implement
      *
      * See [Segment API identifier](https://www.braze.com/docs/api/identifier_types/).
      *
-     * The `segment_id` for a given segment can be found in your **Settings > Setup and Testing > API Keys.** within your Braze account or you can use the [Segment List Endpoint](https://www.braze.com/docs/api/endpoints/export/get_segment/).
+     * The `segment_id` for a given segment can be found on the [API Keys](https://www.braze.com/docs/user_guide/administrative/app_settings/api_settings_tab/) page within your Braze account or you can use the [Export segment list endpoint](https://www.braze.com/docs/api/endpoints/export/get_segment/).
      * @var int $length (Required) Integer
      *
      * Max number of days before `ending_at` to include in the returned series - must be between 1 and 100 (inclusive)

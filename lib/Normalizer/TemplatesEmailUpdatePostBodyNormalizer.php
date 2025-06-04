@@ -46,6 +46,9 @@ class TemplatesEmailUpdatePostBodyNormalizer implements DenormalizerInterface, N
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Braze\Model\TemplatesEmailUpdatePostBody();
+        if (\array_key_exists('should_inline_css', $data) && \is_int($data['should_inline_css'])) {
+            $data['should_inline_css'] = (bool) $data['should_inline_css'];
+        }
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
@@ -80,6 +83,10 @@ class TemplatesEmailUpdatePostBodyNormalizer implements DenormalizerInterface, N
             }
             $object->setTags($values);
             unset($data['tags']);
+        }
+        if (\array_key_exists('should_inline_css', $data)) {
+            $object->setShouldInlineCss($data['should_inline_css']);
+            unset($data['should_inline_css']);
         }
         foreach ($data as $key => $value_1) {
             if (preg_match('/.*/', (string) $key)) {
@@ -117,6 +124,9 @@ class TemplatesEmailUpdatePostBodyNormalizer implements DenormalizerInterface, N
                 $values[] = $value;
             }
             $dataArray['tags'] = $values;
+        }
+        if ($data->isInitialized('shouldInlineCss') && null !== $data->getShouldInlineCss()) {
+            $dataArray['should_inline_css'] = $data->getShouldInlineCss();
         }
         foreach ($data as $key => $value_1) {
             if (preg_match('/.*/', (string) $key)) {

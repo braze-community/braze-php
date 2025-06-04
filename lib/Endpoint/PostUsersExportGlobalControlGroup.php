@@ -17,12 +17,13 @@ class PostUsersExportGlobalControlGroup extends \Braze\Runtime\Client\BaseEndpoi
     /**
      * > Use this endpoint to export all users within a Global Control Group.
      *
-     * User data is exported as multiple files of user JSON objects separated by new lines (i.e., one JSON object per line).
+     * User data is exported as multiple files of user JSON objects separated by new lines (such as one JSON object per line).
      *
-     * > Warning: Individual custom attributes cannot be exported. However, all custom attributes can be exported by including custom_attributes in the fields_to_export array (e.g.,\[‘first_name’, ‘email’, ‘custom_attributes’\]).
+     * | Warning |
+     * | --- |
+     * | Individual custom attributes cannot be exported. However, all custom attributes can be exported by including `custom_attributes` in the `fields_to_export` array (for example, `[‘first_name’, ‘email’, ‘custom_attributes’]`). |
      *
-     *
-     * To use this endpoint, you’ll need to generate an API key with the `users.export.global_control_group` permission.
+     * To use this endpoint, you’ll need to generate an API key with the `users.export.global_control_group` permission.
      *
      * ## Rate limit
      *
@@ -37,7 +38,7 @@ class PostUsersExportGlobalControlGroup extends \Braze\Runtime\Client\BaseEndpoi
      * | Parameter | Required | Data Type | Description |
      * | --- | --- | --- | --- |
      * | `callback_endpoint` | Optional | String | Endpoint to post a download URL to when the export is available. |
-     * | `fields_to_export` | Required\* | Array of strings | Name of user data fields to export, you may also export custom attributes.  <br>  <br>\*Beginning April 2021, new accounts must specify specific fields to export. |
+     * | `fields_to_export` | Required\* | Array of strings | Name of user data fields to export, you may also export custom attributes.  <br>  <br>_\*Beginning April 2021, new accounts must specify specific fields to export._ |
      * | `output_format` | Optional | String | When using your own S3 bucket, allows to specify file format as `zip` or `gzip`. Defaults to ZIP file format. |
      *
      * ## Fields to export
@@ -93,8 +94,9 @@ class PostUsersExportGlobalControlGroup extends \Braze\Runtime\Client\BaseEndpoi
      *
      * User export object (we will include the least data possible - if a field is missing from the object it should be assumed to be null, false, or empty):
      *
-     * ```
+     * ``` json
      * {
+     * "created_at" : (string),
      * "external_id" : (string),
      * "user_aliases" : [
      * {
@@ -108,9 +110,9 @@ class PostUsersExportGlobalControlGroup extends \Braze\Runtime\Client\BaseEndpoi
      * "email" : (string),
      * "dob" : (string) date for the user's date of birth,
      * "home_city" : (string),
-     * "country" : (string),
+     * "country" : (string) ISO-3166-1 alpha-2 standard,
      * "phone" : (string),
-     * "language" : (string) ISO-639 two letter code,
+     * "language" : (string) ISO-639-1 standard,
      * "time_zone" : (string),
      * "last_coordinates" : (array of float) [lon, lat],
      * "gender" : (string) "M" | "F",
@@ -143,11 +145,10 @@ class PostUsersExportGlobalControlGroup extends \Braze\Runtime\Client\BaseEndpoi
      * "model" : (string),
      * "os" : (string),
      * "carrier" : (string),
-     * "idfv" : (string) only included for iOS devices,
+     * "idfv" : (string) only included for iOS devices when IDFV collection is enabled,
      * "idfa" : (string) only included for iOS devices when IDFA collection is enabled,
      * "google_ad_id" : (string) only included for Android devices when Google Play Advertising Identifier collection is enabled,
      * "roku_ad_id" : (string) only included for Roku devices,
-     * "windows_ad_id" : (string) only included for Windows devices,
      * "ad_tracking_enabled" : (bool)
      * },
      * ...
@@ -170,6 +171,7 @@ class PostUsersExportGlobalControlGroup extends \Braze\Runtime\Client\BaseEndpoi
      * ### Sample output
      *
      * ``` json
+     * {
      * {
      * "created_at" : "2020-07-10 15:00:00.000 UTC",
      * "external_id" : "A8i3mkd99",

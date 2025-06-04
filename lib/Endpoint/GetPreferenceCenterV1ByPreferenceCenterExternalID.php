@@ -18,7 +18,9 @@ class GetPreferenceCenterV1ByPreferenceCenterExternalID extends \Braze\Runtime\C
     /**
      * > Use this endpoint to view the details for your preference centers, including when it was created and updated.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `preference_center.get` permission.
+     * ## Prerequisites
+     *
+     * To use this endpoint, you'll need an API key with the `preference_center.get` permission.
      *
      * ## Rate limit
      *

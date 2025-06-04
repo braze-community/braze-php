@@ -57,17 +57,33 @@ class V2SubscriptionStatusSetPostBodySubscriptionGroupsItemNormalizer implements
             $object->setSubscriptionState($data['subscription_state']);
             unset($data['subscription_state']);
         }
-        if (\array_key_exists('emails', $data)) {
+        if (\array_key_exists('external_ids', $data)) {
             $values = [];
-            foreach ($data['emails'] as $value) {
+            foreach ($data['external_ids'] as $value) {
                 $values[] = $value;
             }
-            $object->setEmails($values);
+            $object->setExternalIds($values);
+            unset($data['external_ids']);
+        }
+        if (\array_key_exists('emails', $data)) {
+            $values_1 = [];
+            foreach ($data['emails'] as $value_1) {
+                $values_1[] = $value_1;
+            }
+            $object->setEmails($values_1);
             unset($data['emails']);
         }
-        foreach ($data as $key => $value_1) {
+        if (\array_key_exists('phones', $data)) {
+            $values_2 = [];
+            foreach ($data['phones'] as $value_2) {
+                $values_2[] = $value_2;
+            }
+            $object->setPhones($values_2);
+            unset($data['phones']);
+        }
+        foreach ($data as $key => $value_3) {
             if (preg_match('/.*/', (string) $key)) {
-                $object[$key] = $value_1;
+                $object[$key] = $value_3;
             }
         }
 
@@ -83,16 +99,30 @@ class V2SubscriptionStatusSetPostBodySubscriptionGroupsItemNormalizer implements
         if ($data->isInitialized('subscriptionState') && null !== $data->getSubscriptionState()) {
             $dataArray['subscription_state'] = $data->getSubscriptionState();
         }
-        if ($data->isInitialized('emails') && null !== $data->getEmails()) {
+        if ($data->isInitialized('externalIds') && null !== $data->getExternalIds()) {
             $values = [];
-            foreach ($data->getEmails() as $value) {
+            foreach ($data->getExternalIds() as $value) {
                 $values[] = $value;
             }
-            $dataArray['emails'] = $values;
+            $dataArray['external_ids'] = $values;
         }
-        foreach ($data as $key => $value_1) {
+        if ($data->isInitialized('emails') && null !== $data->getEmails()) {
+            $values_1 = [];
+            foreach ($data->getEmails() as $value_1) {
+                $values_1[] = $value_1;
+            }
+            $dataArray['emails'] = $values_1;
+        }
+        if ($data->isInitialized('phones') && null !== $data->getPhones()) {
+            $values_2 = [];
+            foreach ($data->getPhones() as $value_2) {
+                $values_2[] = $value_2;
+            }
+            $dataArray['phones'] = $values_2;
+        }
+        foreach ($data as $key => $value_3) {
             if (preg_match('/.*/', (string) $key)) {
-                $dataArray[$key] = $value_1;
+                $dataArray[$key] = $value_3;
             }
         }
 

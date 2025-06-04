@@ -18,13 +18,15 @@ class PostCatalogsByCatalogNameItem extends \Braze\Runtime\Client\BaseEndpoint i
     /**
      * > Use this endpoint to create multiple items in your catalog.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `catalogs.add_items` permission.
-     *
      * Each request can support up to 50 items. This endpoint is asynchronous.
+     *
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key](https://braze.com/docs/api/api_key/) with the `catalogs.add_items` permission.
      *
      * ## Rate limit
      *
-     * This endpoint has a shared rate limit of 100 requests per minute between all asynchronous catalog item endpoints, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
+     * This endpoint has a shared rate limit of 16,000 requests per minute between all asynchronous catalog item endpoints, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
      * ## Path parameters
      *
@@ -53,6 +55,14 @@ class PostCatalogsByCatalogNameItem extends \Braze\Runtime\Client\BaseEndpoint i
      * "Cuisine": "American",
      * "Rating": 5,
      * "Loyalty_Program": true,
+     * "Location": {
+     * "Latitude": 33.6112,
+     * "Longitude": -117.8711
+     * },
+     * "Top_Dishes": [
+     * "Hamburger",
+     * "Deluxe Cheeseburger"
+     * ],
      * "Created_At": "2022-11-01T09:03:19.967+00:00"
      * },
      * {
@@ -62,6 +72,14 @@ class PostCatalogsByCatalogNameItem extends \Braze\Runtime\Client\BaseEndpoint i
      * "Cuisine": "American",
      * "Rating": 10,
      * "Loyalty_Program": true,
+     * "Location": {
+     * "Latitude": 40.7413,
+     * "Longitude": -73.9764
+     * },
+     * "Top_Dishes": [
+     * "Hot Dog",
+     * "French Fries"
+     * ],
      * "Created_At": "2022-11-02T09:03:19.967+00:00"
      * },
      * {
@@ -71,6 +89,14 @@ class PostCatalogsByCatalogNameItem extends \Braze\Runtime\Client\BaseEndpoint i
      * "Cuisine": "American",
      * "Rating": 3,
      * "Loyalty_Program": false,
+     * "Location": {
+     * "Latitude": 40.7489,
+     * "Longitude": -73.9972
+     * },
+     * "Top_Dishes": [
+     * "Buffalo Wings",
+     * "Philly Cheesesteak"
+     * ],
      * "Created_At": "2022-11-03T09:03:19.967+00:00"
      * }
      * ]
@@ -130,7 +156,7 @@ class PostCatalogsByCatalogNameItem extends \Braze\Runtime\Client\BaseEndpoint i
      * | `invalid-fields` | Confirm that the fields in the request exist in the catalog. |
      * | `invalid-keys-in-value-object` | Item object keys can't include `.` or `$`. |
      * | `item-array-invalid` | `items` must be an array of objects. |
-     * | `items-missing-ids` | There are items that do not have item IDs. Check that each item has an item ID. |
+     * | `items-missing-ids` | Some items don't have item IDs. Check that each item has an item ID. |
      * | `items-too-large` | Item values can't exceed 5,000 characters. |
      * | `request-includes-too-many-items` | Your request has too many items. The item limit per request is 50. |
      * | `too-deep-nesting-in-value-object` | Item objects can't have more than 50 levels of nesting. |

@@ -19,9 +19,11 @@ class PatchCatalogsByCatalogNameItemByItemId extends \Braze\Runtime\Client\BaseE
     /**
      * > Use this endpoint to edit an item in your catalog.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `catalogs.update_item` permission.
+     * ## Prerequisites
      *
-     * ## Rate Limit
+     * To use this endpoint, you’ll need an [API key](https://braze.com/docs/api/api_key/) with the `catalogs.update_item` permission.
+     *
+     * ## Rate limit
      *
      * This endpoint has a shared rate limit of 50 requests per minute between all synchronous catalog item endpoints, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
@@ -49,12 +51,28 @@ class PatchCatalogsByCatalogNameItemByItemId extends \Braze\Runtime\Client\BaseE
      * {
      * "Name": "Restaurant",
      * "Loyalty_Program": false,
+     * "Location": {
+     * "Latitude": 33.6112,
+     * "Longitude": -117.8711
+     * },
+     * "Top_Dishes": {
+     * "$add": [
+     * "Biscuits",
+     * "Coleslaw"
+     * ],
+     * "$remove": [
+     * "French Fries"
+     * ]
+     * },
      * "Open_Time": "2021-09-03T09:03:19.967+00:00"
      * }
      * ]
      * }'
      *
      * ```
+     *
+     * > **Note:** The $`add` and `$remove` operators are only applicable to array type fields, and are only supported by PATCH endpoints.
+     *
      *
      * ## Response
      *

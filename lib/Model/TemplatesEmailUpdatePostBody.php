@@ -49,6 +49,10 @@ class TemplatesEmailUpdatePostBody extends \ArrayObject
      * @var list<string>
      */
     protected $tags;
+    /**
+     * @var bool
+     */
+    protected $shouldInlineCss;
 
     public function getEmailTemplateId(): string
     {
@@ -143,6 +147,19 @@ class TemplatesEmailUpdatePostBody extends \ArrayObject
     {
         $this->initialized['tags'] = true;
         $this->tags = $tags;
+
+        return $this;
+    }
+
+    public function getShouldInlineCss(): bool
+    {
+        return $this->shouldInlineCss;
+    }
+
+    public function setShouldInlineCss(bool $shouldInlineCss): self
+    {
+        $this->initialized['shouldInlineCss'] = true;
+        $this->shouldInlineCss = $shouldInlineCss;
 
         return $this;
     }

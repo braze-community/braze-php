@@ -15,13 +15,15 @@ class PostCanvasTriggerScheduleCreate extends \Braze\Runtime\Client\BaseEndpoint
     use \Braze\Runtime\Client\EndpointTrait;
 
     /**
-     * > Use this endpoint to schedule Canvas messages (up to 90 days in advance) via API-triggered delivery, allowing you to decide what action should trigger the message to be sent.
-     *
-     * To use this endpoint, you’ll need to generate an API key with the `canvas.trigger.schedule.create` permission.
+     * > Use this endpoint to schedule Canvas messages via API-triggered delivery, allowing you to decide what action should trigger the message to be sent.
      *
      * You can pass in `canvas_entry_properties` that will be templated into the messages sent by the first steps of the Canvas.
      *
      * Note that to send messages with this endpoint, you must have a [Canvas ID](https://www.braze.com/docs/api/identifier_types/#canvas-api-identifier) created when you build a Canvas.
+     *
+     * ### Prerequisites
+     *
+     * To use this endpoint, you’ll need an API key with the `canvas.trigger.schedule.create` permission.
      *
      * ### Rate limit
      *

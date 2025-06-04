@@ -17,13 +17,15 @@ class PostUsersAliasUpdate extends \Braze\Runtime\Client\BaseEndpoint implements
     /**
      * > Use this endpoint to update existing user aliases.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `users.alias.update` permission.
-     *
      * Up to 50 user aliases may be specified per request.
      *
-     * This endpoint does not guarantee the sequence of `alias_updates` objects being updated.
-     *
      * Updating a user alias requires `alias_label`, `old_alias_name`, and `new_alias_name` to be included in the update user alias object. If there is no user alias associated with the `alias_label` and `old_alias_name`, no alias will be updated. If the given `alias_label` and `old_alias_name` is found, then the `old_alias_name` will be updated to the `new_alias_name`.
+     *
+     **Note:** This endpoint does not guarantee the sequence of `alias_updates` objects being updated.
+     *
+     * ## Prerequisites
+     *
+     * To use this endpoint, you'll need an [API key](https://braze.com/docs/api/api_key/) with the `users.alias.update` permission.
      *
      * ## Rate limit
      *

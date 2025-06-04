@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class PreferenceCenterV1PreferenceCenterExternalIDPutBodyRecipientItem extends \ArrayObject
+class PreferenceCenterV1PreferenceCenterExternalIDPutBodyOptions extends \ArrayObject
 {
     /**
      * @var array
@@ -24,17 +24,17 @@ class PreferenceCenterV1PreferenceCenterExternalIDPutBodyRecipientItem extends \
     /**
      * @var string
      */
-    protected $externalUserId;
+    protected $metaViewportContent;
 
-    public function getExternalUserId(): string
+    public function getMetaViewportContent(): string
     {
-        return $this->externalUserId;
+        return $this->metaViewportContent;
     }
 
-    public function setExternalUserId(string $externalUserId): self
+    public function setMetaViewportContent(string $metaViewportContent): self
     {
-        $this->initialized['externalUserId'] = true;
-        $this->externalUserId = $externalUserId;
+        $this->initialized['metaViewportContent'] = true;
+        $this->metaViewportContent = $metaViewportContent;
 
         return $this;
     }

@@ -18,7 +18,9 @@ class PutPreferenceCenterV1ByPreferenceCenterExternalID extends \Braze\Runtime\C
     /**
      * > Use this endpoint to update a preference center.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `preference_center.update` permission.
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key ](https://www.braze.com/docs/api/basics#rest-api-key/) with the `preference_center.update` permission.
      *
      * ## Rate limit
      *
@@ -38,7 +40,7 @@ class PutPreferenceCenterV1ByPreferenceCenterExternalID extends \Braze\Runtime\C
      * | `preference_center_title` | Optional | String | The title for the preference center and confirmation pages. If a title is not specified, the title of the pages will default to "Preference Center". |
      * | `confirmation_page_html` | Required | String | The HTML for the confirmation page. |
      * | `state` | Optional | String | Choose `active` or `draft`. |
-     * | `options` | Optional | Object | Attributes: `meta-viewport-content`. When present, a `viewport` meta tag will be added to the page with `content=` . |
+     * | `options` | Optional | Object | Attributes:  <br>`meta-viewport-content`: When present, a `viewport` meta tag will be added to the page with `content=`  <br>  <br>`link-tags`: Set a favicon for the page. When set, a  tag with a rel attribute is added to the page. |
      *
      * ## Example request
      *

@@ -52,18 +52,14 @@ class CatalogsCatalogNameItemsPostBodyNormalizer implements DenormalizerInterfac
         if (\array_key_exists('items', $data)) {
             $values = [];
             foreach ($data['items'] as $value) {
-                $values_1 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
-                foreach ($value as $key => $value_1) {
-                    $values_1[$key] = $value_1;
-                }
-                $values[] = $values_1;
+                $values[] = $this->denormalizer->denormalize($value, \Braze\Model\CatalogsCatalogNameItemsPostBodyItemsItem::class, 'json', $context);
             }
             $object->setItems($values);
             unset($data['items']);
         }
-        foreach ($data as $key_1 => $value_2) {
-            if (preg_match('/.*/', (string) $key_1)) {
-                $object[$key_1] = $value_2;
+        foreach ($data as $key => $value_1) {
+            if (preg_match('/.*/', (string) $key)) {
+                $object[$key] = $value_1;
             }
         }
 
@@ -76,17 +72,13 @@ class CatalogsCatalogNameItemsPostBodyNormalizer implements DenormalizerInterfac
         if ($data->isInitialized('items') && null !== $data->getItems()) {
             $values = [];
             foreach ($data->getItems() as $value) {
-                $values_1 = [];
-                foreach ($value as $key => $value_1) {
-                    $values_1[$key] = $value_1;
-                }
-                $values[] = $values_1;
+                $values[] = $this->normalizer->normalize($value, 'json', $context);
             }
             $dataArray['items'] = $values;
         }
-        foreach ($data as $key_1 => $value_2) {
-            if (preg_match('/.*/', (string) $key_1)) {
-                $dataArray[$key_1] = $value_2;
+        foreach ($data as $key => $value_1) {
+            if (preg_match('/.*/', (string) $key)) {
+                $dataArray[$key] = $value_1;
             }
         }
 

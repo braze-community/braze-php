@@ -17,23 +17,19 @@ class PostUsersExportSegment extends \Braze\Runtime\Client\BaseEndpoint implemen
     /**
      * > Use this endpoint to export all the users within a segment.
      *
-     * User data is exported as multiple files of user JSON objects separated by new lines (i.e., one JSON object per line).
+     * | Important |
+     * | --- |
+     * | Beginning December 2021, the following changed for this API:  <br>  <br>1\. The fields_to_export field in this API request is required. The option to default to all fields has been removed.  <br>2\. The fields for custom_events, purchases, campaigns_received, and canvases_received only contain data from the last 90 days. |
      *
-     * Data is exported to an automatically generated URL, or to an S3 bucket if this integration is already set up.
+     * User data is exported as multiple files of user JSON objects separated by new lines (such as one JSON object per line). Data is exported to an automatically generated URL, or to an S3 bucket if this integration is already set up. This endpoint is currently not supported by Google Cloud Storage.
      *
-     * This endpoint is currently not supported by Google Cloud Storage.
-     *
-     * Note that a company may run at most one export per segment using this endpoint at a given time. Wait for your export to complete before retrying.
-     *
-     * > Beginning December 2021, the following changed for this API:
-     *
-     * > 1\. The fields_to_export field in this API request is required. The option to default to all fields has been removed.
-     * 2\. The fields for custom_events, purchases, campaigns_received, and canvases_received only contain data from the last 90 days.
-     *
+     * A company may run at most one export per segment using this endpoint at a given time. Wait for your export to complete before retrying.
      *
      * Note: If you are using our [older navigation](https://www.braze.com/docs/navigation), `segment_id` can be found at **Developer Console > API Settings**.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `users.export.segment` permission.
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an API key with the `users.export.segment` permission.
      *
      * ## Rate limit
      *
@@ -41,20 +37,47 @@ class PostUsersExportSegment extends \Braze\Runtime\Client\BaseEndpoint implemen
      *
      * ## Credential-based response details
      *
-     * For information regarding credentials-based response details, visit this [section](https://www.braze.com/docs/api/endpoints/export/user_data/post_users_segment/#credentials-based-response-details) in the Braze API docs.
+     * If you have added your [S3](https://www.braze.com/docs/partners/data_and_infrastructure_agility/cloud_storage/amazon_s3), [Azure](https://www.braze.com/docs/partners/data_and_infrastructure_agility/cloud_storage/microsoft_azure_blob_storage_for_currents/), or [Google Cloud Storage](https://www.braze.com/docs/partners/data_and_infrastructure_agility/cloud_storage/google_cloud_storage_for_currents/) credentials to Braze, then each file will be uploaded in your bucket as a ZIP file with the key format that looks like `segment-export/SEGMENT_ID/YYYY-MM-dd/RANDOM_UUID-TIMESTAMP_WHEN_EXPORT_STARTED/filename.zip`. If using Azure, make sure that you have the **Make this the default data export destination** box checked in the Azure partner overview page in Braze. Generally, we will create 1 file per 5,000 users to optimize processing. Exporting smaller segments within a large workspace may result in multiple files. You can then extract the files and concatenate all of the `json` files to a single file if needed. If you specify an `output_format` of `gzip`, then the file extension will be `.gz` instead of `.zip`.
+     *
+     * We strongly suggest setting up your own S3 or Azure credentials when using this endpoint to enforce your own bucket policies on the export. If you do not have your cloud storage credentials, the response to the request provides the URL where a ZIP file containing all the user files can be downloaded. The URL will only become a valid location after the export is ready.
+     *
+     * #### **Export pathing breakdown for ZIP**
+     *
+     **ZIP format:** `bucket-name/segment-export/SEGMENT_ID/YYYY-MM-dd/RANDOM_UUID-TIMESTAMP_WHEN_EXPORT_STARTED/filename.zip`
+     *
+     **Example ZIP:** `braze.docs.bucket/segment-export/abc56c0c-rd4a-pb0a-870pdf4db07q/2019-04-25/d9696570-dfb7-45ae-baa2-25e302r2da27-1556044807/114f0226319130e1a4770f2602b5639a.zip`
+     *
+     * | Property | Details | Shown in Example as |
+     * | --- | --- | --- |
+     * | `bucket-name` | `Fixed based on your bucket name.` | `braze.docs.bucket` |
+     * | `segment-export` | `Fixed.` | `segment-export` |
+     * | `SEGMENT_ID` | `Included in the export request.` | `abc56c0c-rd4a-pb0a-870pdf4db07q` |
+     * | `YYYY-MM-dd` | `The date the successful callback is received.` | `2019-04-25` |
+     * | `RANDOM_UUID` | `A random UUID generated by Braze at the time of the request.` | `d9696570-dfb7-45ae-baa2-25e302r2da27` |
+     * | `TIMESTAMP_WHEN_EXPORT_STARTED` | `Unix time (seconds since 2017-01-01:00:00:00Z) that the export was requested in UTC.` | `1556044807` |
+     * | `filename` | `Random per file.` | `114f0226319130e1a4770f2602b5639a` |
+     *
+     * Be aware that if you do not provide your cloud storage credentials, there is a limitation on the amount of data you can export from this endpoint. Depending on the fields you’re exporting and the number of users, the file transfer may fail if it is too large. A best practice is to specify which fields you want to export using `fields_to_export` and specify only the fields you need to keep the size of the transfer lower. If you are getting errors generating the file, consider breaking your user base into more segments based on a random bucket number (for example, create a segment where a random bucket number is less than 1,000 or between 1,000 and 2,000).
+     *
+     * In either scenario, you may optionally provide a `callback_endpoint` to be notified when the export is ready. If the `callback_endpoint` is provided, we will make a post request to the provided address when the download is ready. The body of the post will be “success”:true. If you have not added S3 credentials to Braze, then the body of the post will additionally have the attribute `url` with the download URL as the value.
+     *
+     * Larger user bases will result in longer export times. For example, an app with 20 million users could take an hour or more.
      *
      * ## Request parameters
      *
      * | Parameter | Required | Data Type | Description |
      * | --- | --- | --- | --- |
-     * | `segment_id` | Required | String | Identifier for the segment to be exported. See [segment identifier](https://www.braze.com/docs/api/identifier_types/).  <br>  <br>The segment_id for a given segment can be found in your **Settings > Setup and Testing > API Keys** within your Braze account or you can use the [Segment List Endpoint](https://www.braze.com/docs/api/endpoints/export/segments/get_segment/). |
+     * | `segment_id` | Required | String | Identifier for the segment to be exported. See [segment identifier](https://www.braze.com/docs/api/identifier_types/).  <br>  <br>The `segment_id` for a given segment can be found on the [API Keys](https://www.braze.com/docs/user_guide/administrative/app_settings/api_settings_tab/) page within your Braze account or you can use the [Segment List Endpoint](https://www.braze.com/docs/api/endpoints/export/segments/get_segment/). |
      * | `callback_endpoint` | Optional | String | Endpoint to post a download URL to when the export is available. |
-     * | `fields_to_export` | Required\* | Array of strings | Name of user data fields to export, you may also export custom attributes.  <br>  <br>\*Beginning April 2021, new accounts must specify specific fields to export. |
+     * | `fields_to_export` | Required\* | Array of strings | Name of user data fields to export, you may also export custom attributes.  <br>  <br>_\*Beginning April 2021, new accounts must specify specific fields to export._ |
+     * | `custom_attributes_to_export` | Optional | Array of strings | Name of specific custom attribute to export. Up to 500 custom attributes can be exported. To create and manage custom attributes in the dashboard, go to **Data Settings** > **Custom Attributes**. |
      * | `output_format` | Optional | String | When using your own S3 bucket, allows you to specify file format as `zip` or `gzip`. Defaults to ZIP file format. |
+     *
+     * If `custom_attributes` is included in the `fields_to_export` parameter, all custom attributes are exported regardless of what is in `custom_attributes_to_export`. If your goal is to export specific attributes, `custom_attributes` should not be included in the `fields_to_export` parameter. Instead, use the `custom_attributes_to_export` parameter.
      *
      * ### Fields to export
      *
-     * The following is a list of valid `fields_to_export`. Using `fields_to_export` to minimize the data returned can improve response time of this API endpoint:
+     * The following is a list of valid `fields_to_export`. Using `fields_to_export` to minimize the data returned can improve the response time of this API endpoint:
      *
      * | Field to export | Data type | Description |
      * | --- | --- | --- |
@@ -79,7 +102,7 @@ class PostUsersExportSegment extends \Braze\Runtime\Client\BaseEndpoint implemen
      * | `last_coordinates` | Array of floats | User's most recent device location, formatted as `[longitude, latitude]`. |
      * | `last_name` | String | User's last name. |
      * | `phone` | String | User's telephone number in E.164 format. |
-     * | `purchase`s | Array | Purchases this user has made in the last 90 days. |
+     * | `purchases` | Array | Purchases this user has made in the last 90 days. |
      * | `random_bucket` | Integer | User's [random bucket number](https:/www.braze.com/docs/user_guide/data_and_analytics/braze_currents/event_glossary/customer_behavior_events#random-bucket-number-event), used to create uniformly distributed segments of random users. |
      * | `time_zone` | String | User's time zone in the same format as the IANA Time Zone Database. |
      * | `total_revenue` | Float | Total revenue attributed to this user. Total revenue is calculated based on purchases the user made during conversion windows for the campaigns and Canvases they received. |
@@ -89,8 +112,12 @@ class PostUsersExportSegment extends \Braze\Runtime\Client\BaseEndpoint implemen
      * ### Important reminders
      *
      * - The fields for `custom_events`, `purchases`, `campaigns_received`, and `canvases_received` will contain only contain data from the last 90 days.
+     *
      * - Both `custom_events` and `purchases` contain fields for `first` and `count`. Both of these fields will reflect information from all time, and will not be limited to just data from the last 90 days. For example, if a particular user first did the event prior to 90 days ago, this will be accurately reflected in the `first` field, and the `count` field will take into account events that occurred prior to the last 90 days as well.
+     *
      * - The number of concurrent segment exports a company can run at the endpoint level is capped at 100. Attempts that surpass this limit will result in an error.
+     *
+     * - Attempting to export a segment a second time while the first export job is still running will result in a 429 error.
      *
      *
      * ### Response
@@ -108,7 +135,7 @@ class PostUsersExportSegment extends \Braze\Runtime\Client\BaseEndpoint implemen
      *
      * Once made available, the URL will only be valid for a few hours. As such, we highly recommend that you add your own S3 credentials to Braze.
      *
-     * ### Sample user export file output
+     * ### Example user export file output
      *
      * User export object (we will include the least data possible - if a field is missing from the object it should be assumed to be null, false, or empty):
      *
@@ -249,7 +276,7 @@ class PostUsersExportSegment extends \Braze\Runtime\Client\BaseEndpoint implemen
      *
      * ```
      *
-     * Sample output
+     * #### **Sample output**
      *
      * ``` json
      * {

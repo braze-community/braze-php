@@ -60,7 +60,7 @@ class GetPurchasesQuantitySeries extends \Braze\Runtime\Client\BaseEndpoint impl
      * @var int    $unit (Optional) String
      *             Unit of time between data points. Can be `day` or `hour`, defaults to `day`.
      * @var string $app_id (Optional) String
-     *             App API identifier retrieved from the Settings > Setup and Testing > API Keys to limit analytics to a specific app
+     *             App API identifier retrieved from the [API Keys](https://www.braze.com/docs/user_guide/administrative/app_settings/api_settings_tab/) page. If excluded, results for all apps in the workspace will be returned.
      * @var string $product (Optional) String
      *             Name of product to filter response by. If excluded, results for all apps will be returned.
      *             }

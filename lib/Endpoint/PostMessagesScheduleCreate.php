@@ -15,13 +15,15 @@ class PostMessagesScheduleCreate extends \Braze\Runtime\Client\BaseEndpoint impl
     use \Braze\Runtime\Client\EndpointTrait;
 
     /**
-     * > Use this endpoint to schedule a campaign, Canvas, or other message to be sent at a designated time (up to 90 days in the future) and provides you with an identifier to reference that message for updates.
-     *
-     * To use this endpoint, you’ll need to generate an API key with the `messages.schedule.create` permission.
+     * > Use this endpoint to schedule a campaign, Canvas, or other message to be sent at a designated time and provides you with an identifier to reference that message for updates.
      *
      * If you are targeting a segment, a record of your request will be stored in the [Developer Console](https://dashboard.braze.com/app_settings/developer_console/activitylog/) after all scheduled messages have been sent.
      *
-     * ### Rate limit
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an API key with the `messages.schedule.create` permission.
+     *
+     * ## Rate limit
      *
      * We apply the default Braze rate limit of 250,000 requests per hour to this endpoint, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
@@ -32,7 +34,7 @@ class PostMessagesScheduleCreate extends \Braze\Runtime\Client\BaseEndpoint impl
      * - An ad-hoc audience segment of any size, defined in the request as a [Connected Audience](https://www.braze.com/docs/api/objects_filters/connected_audience/) object
      *
      *
-     * ### Request parameters
+     * ## Request parameters
      *
      * | Parameter | Required | Data Type | Description |
      * | --- | --- | --- | --- |

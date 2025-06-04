@@ -16,20 +16,22 @@ class PostTransactionalV1CampaignsByCampaignIdSend extends \Braze\Runtime\Client
     protected $campaign_id;
 
     /**
-     * > Use this endpoint to send immediate, ad-hoc transactional messages to a designated user.
+     * > Use this endpoint to send immediate, one-off transactional messages to a designated user.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `transactional.send` permission.
-     *
-     * This endpoint is used alongside the creation of a [Transactional Email campaign](https://www.braze.com/docs/api/api_campaigns/transactional_campaigns) and corresponding campaign ID.
+     * This endpoint is used alongside the creation of a Braze [Transactional Email campaign](https://www.braze.com/docs/api/api_campaigns/transactional_campaigns) and corresponding campaign ID.
      *
      * > **Important:** Transactional Email is currently available as part of select Braze packages. Reach out to your Braze customer success manager for more details.
      *
      *
      * Similar to the [Send triggered campaign endpoint](https://www.braze.com/docs/api/endpoints/messaging/send_messages/post_send_triggered_campaigns/), this campaign type allows you to house message content inside of the Braze dashboard while dictating when and to whom a message is sent via your API. Unlike the Send triggered campaign endpoint, which accepts an audience or segment to send messages to, a request to this endpoint must specify a single user either by `external_user_id` or `user_alias`, as this campaign type is purpose-built for 1:1 messaging of alerts like order confirmations or password resets.
      *
+     * ## Prerequisites
+     *
+     * To use this endpoint, you'll need to generate an API key with the `transactional.send` permission.
+     *
      * ## Rate limit
      *
-     * Transactional Emails are not subject to a rate limit. Depending on your chosen package, a set number of Transactional Emails is covered per hour by SLA. Requests that exceed that rate will still send, but are not covered by SLA. 99.9% of emails will send in less than one minute.
+     * Braze Transactional Emails are not subject to a rate limit. Depending on your chosen package, a set number of transactional emails is covered per hour by SLA. Requests that exceed that rate will still send, but are not covered by SLA. 99.9% of emails will send in less than one minute.
      *
      * ## Path parameters
      *
@@ -41,7 +43,7 @@ class PostTransactionalV1CampaignsByCampaignIdSend extends \Braze\Runtime\Client
      *
      * | Parameter | Required | Data Type | Description |
      * | --- | --- | --- | --- |
-     * | `external_send_id` | Optional | String | A Base64 compatible string. Validated against the following regex `/^[a-zA-Z0-9-_+\/=]+$/`. This optional field allows you to pass an internal identifier for this particular send which will be included in events sent from the Transactional HTTP event postback. When passed, this identifier will also be used as a deduplication key, which Braze will store for 24 hours. Passing the same identifier in another request will not result in a new instance of a send by Braze for 24 hours. |
+     * | `external_send_id` | Optional | String | A Base64 compatible string. Validated against the following regex `/^[a-zA-Z0-9-_+\/=]+$/`.  <br>  <br>This optional field allows you to pass an internal identifier for this particular send which will be included in events sent from the Transactional HTTP event postback. When passed, this identifier will also be used as a deduplication key, which Braze will store for 24 hours.  <br>  <br>Passing the same identifier in another request will not result in a new instance of a send by Braze for 24 hours. |
      * | `trigger_properties` | Optional | Object | See [trigger properties](https://www.braze.com/docs/api/objects_filters/trigger_properties_object/). Personalization key-value pairs that will apply to the user in this request. |
      * | `recipients` | Required | Object | The user you are targeting this message to. Can contain `attributes` and a single `external_user_id` or `user_alias`.  <br>  <br>Note that if you provide an external user ID that doesn’t already exist in Braze, passing any fields to the `attributes` object will create this user profile in Braze and send this message to the newly created user.  <br>  <br>If you send multiple requests to the same user with different data in the `attributes` object, Braze will ensure that `first_name`, `last_name`, and `email` attributes will be updated synchronously and templated into your message. Custom attributes don’t have this same protection, so proceed with caution when updating a user through this API and passing different custom attribute values in quick succession. |
      *
@@ -84,9 +86,10 @@ class PostTransactionalV1CampaignsByCampaignIdSend extends \Braze\Runtime\Client
      *
      * In order to associate the incoming events to a particular instance of send, you can choose to either capture and store the Braze `dispatch_id` returned in the [API response](https://www.braze.com/docs/api/endpoints/messaging/send_messages/post_send_transactional_message/#example-response), or pass your own identifier to the `external_send_id` field. An example of a value you may choose to pass to that field may be an order ID, where after completing order 1234, an order confirmation message is triggered to the user through Braze, and `external_send_id : 1234` is included in the request. All following event postbacks such as `Sent` and `Delivered` will include `external_send_id : 1234` in the payload allowing you to confirm that user successfully received their order confirmation email.
      *
-     * To get started using the Transactional HTTP Event Postback, navigate to **Settings** > **Workspace Settings** > **Email Preferences**. in your Braze dashboard and input your desired URL to receive postbacks.
+     * To get started using the Transactional HTTP Event Postback, navigate to **Settings** > **Email Preferences** in your Braze dashboard and locate the section **Transactional Event Status Postback**. Input your desired URL to receive postbacks.
      *
-     * Note: If you are using our [older navigation](https://www.braze.com/docs/navigation), **Email Preferences** can be found at ****Manage Settings** > **Email Settings****.
+     * > **Note:** If you are using our [older navigation](https://www.braze.com/docs/navigation), **Email Preferences** can be found at ****Manage Settings** > **Email Settings****.
+     *
      *
      * ### Postback body
      *

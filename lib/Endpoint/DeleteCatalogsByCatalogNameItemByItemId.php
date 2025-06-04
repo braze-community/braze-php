@@ -19,7 +19,9 @@ class DeleteCatalogsByCatalogNameItemByItemId extends \Braze\Runtime\Client\Base
     /**
      * > Use this endpoint to delete an item in your catalog.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `catalogs.delete_item` permission.
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key](https://braze.com/docs/api/api_key/) with the `catalogs.delete_item` permission.
      *
      * ## Rate limit
      *

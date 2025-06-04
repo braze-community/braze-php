@@ -55,7 +55,7 @@ class GetKpiUninstallsDataSeries extends \Braze\Runtime\Client\BaseEndpoint impl
      * Date on which the data series should end. Defaults to time of the request.
      * @var string $app_id (Optional) String
      *
-     * App API identifier retrieved from **Settings > Setup and Testing > API Keys**. If excluded, results for all apps in workspace will be returned.
+     * App API identifier retrieved from the [API Keys](https://www.braze.com/docs/user_guide/administrative/app_settings/api_settings_tab/) page. If excluded, results for all apps in the workspace will be returned.
      * }
      *
      * @param array $headerParameters {

@@ -16,40 +16,73 @@ class PutCatalogsByCatalogNameItem extends \Braze\Runtime\Client\BaseEndpoint im
     protected $catalog_name;
 
     /**
-     * > Use this endpoint to send Canvas messages via API-triggered delivery.
+     * > Use this endpoint to update multiple items in your catalog.
      *
-     * To use this endpoint, you'll need to generate an API key with the `catalogs.replace_item` permission.
+     * If a catalog item doesn’t exist, this endpoint will create the item in your catalog. Each request can support up to 50 catalog items. This endpoint is asynchronous.
      *
-     * API-triggered Delivery allows you to store message content in the Braze dashboard while dictating when a message is sent, and to whom via your API.
+     * ## Prerequisites
      *
-     * Note that to send messages with this endpoint, you must have a [Canvas ID](https://www.braze.com/docs/api/identifier_types/#canvas-api-identifier), created when you build a Canvas.
+     * To use this endpoint, you'll need an [API key](https://braze.com/docs/api/api_key/) with the `catalogs.replace_item` permission.
      *
      * ## Rate limit
      *
-     * This endpoint has a shared rate limit of 50 requests per minute between all synchronous catalog item endpoints, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
+     * This endpoint has a shared rate limit of 16,000 requests per minute between all asynchronous catalog item endpoints, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
-     * ## Request parameters
+     * ## Path parameters
      *
      * | Parameter | Required | Data Type | Description |
      * | --- | --- | --- | --- |
      * | `catalog_name` | Required | String | Name of the catalog. |
-     * | `item_id` | Required | String | The ID of the catalog item. |
      *
      * ## Request parameters
      *
      * | Parameter | Required | Data Type | Description |
      * | --- | --- | --- | --- |
-     * | `items` | Required | Array | An array that contains item objects. The item objects should contain fields that exist in the catalog except for the `id` field. Only one item object is allowed per request. |
+     * | `items` | Required | Array | An array that contains item objects. Each object must have an ID. The item objects should contain fields that exist in the catalog. Up to 50 item objects are allowed per request. |
      *
      * ## Example request
      *
+     * ``` json
+     * curl --location --request PUT 'https://rest.iad-03.braze.com/catalogs/restaurants/items' \
+     * --header 'Content-Type: application/json' \
+     * --header 'Authorization: Bearer YOUR-REST-API-KEY' \
+     * --data-raw '{
+     * "items": [
+     * {
+     * "id": "restaurant1",
+     * "Name": "Restaurant",
+     * "Loyalty_Program": false,
+     * "Location": {
+     * "Latitude": 33.6112,
+     * "Longitude": -117.8711
+     * },
+     * "Top_Dishes": [
+     * "Hamburger",
+     * "Deluxe Cheeseburger"
+     * ],
+     * "Open_Time": "2021-09-03T09:03:19.967+00:00"
+     * },
+     * {
+     * "id": "restaurant3",
+     * "City": "San Francisco",
+     * "Rating": 2,
+     * "Top_Dishes": [
+     * "Hot Dog",
+     * "French Fries"
+     * ]
+     * }
+     * ]
+     * }'
+     *
+     * ```
+     *
      * ## Response
      *
-     * There are three status code responses for this endpoint: `200`, `400`, and `404`.
+     * There are three status code responses for this endpoint: `202`, `400`, and `404`.
      *
      * ### Example success response
      *
-     * The status code `200` could return the following response body.
+     * The status code `202` could return the following response body.
      *
      * ``` json
      * {
@@ -60,7 +93,7 @@ class PutCatalogsByCatalogNameItem extends \Braze\Runtime\Client\BaseEndpoint im
      *
      * ### Example error response
      *
-     * The status code `400` could return the following response body. Refer to [Troubleshooting](#troubleshooting) for more information about errors you may encounter.
+     * The status code `400` could return the following response body. Refer to [Troubleshooting](https://www.braze.com/docs/api/endpoints/catalogs/catalog_items/asynchronous/put_update_catalog_items/#troubleshooting) for more information about errors you may encounter.
      *
      * ``` json
      * {
@@ -92,12 +125,12 @@ class PutCatalogsByCatalogNameItem extends \Braze\Runtime\Client\BaseEndpoint im
      * | `ids_not_unique` | Check that each item ID is unique. |
      * | `ids_too_large` | Character limit for each item ID is 250 characters. |
      * | `item_array_invalid` | `items` must be an array of objects. |
-     * | `items_missing_ids` | Confirm that each item has an ID. |
+     * | `items_missing_ids` | Some items don't have item IDs. Confirm that each item has an ID. |
      * | `items_too_large` | Item values can't exceed 5,000 characters. |
      * | `invalid_ids` | Supported characters for item ID names are letters, numbers, hyphens, and underscores. |
      * | `invalid_fields` | Confirm that the fields in the request exist in the catalog. |
      * | `invalid_keys_in_value_object` | Item object keys can't include `.` or `$`. |
-     * | `too_deep_nesting_in_value_object` | Item objects can't have more than 50 levels of nesting.
+     * | `too_deep_nesting_in_value_object` | Item objects can't have more than 50 levels of nesting. |
      * | `request_includes_too_many_items` | Your request has too many items. The item limit per request is 50. |
      * | `unable_to_coerce_value` | Item types can't be converted. |
      *

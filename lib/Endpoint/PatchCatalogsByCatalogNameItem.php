@@ -18,13 +18,15 @@ class PatchCatalogsByCatalogNameItem extends \Braze\Runtime\Client\BaseEndpoint 
     /**
      * > Use this endpoint to delete multiple items in your catalog.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `catalogs.delete_items` permission.
-     *
      * Each request can support up to 50 items. This endpoint is asynchronous.
+     *
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key](https://braze.com/docs/api/api_key/) with the `catalogs.update_items` permission.
      *
      * ## Rate limit
      *
-     * This endpoint has a shared rate limit of 100 requests per minute between all asynchronous catalog item endpoints, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
+     * This endpoint has a shared rate limit of 16,000 requests per minute between all asynchronous catalog item endpoints, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
      * ## Path parameters
      *
@@ -36,23 +38,51 @@ class PatchCatalogsByCatalogNameItem extends \Braze\Runtime\Client\BaseEndpoint 
      *
      * | Parameter | Required | Data Type | Description |
      * | --- | --- | --- | --- |
-     * | `items` | Required | Array | An array that contains item objects. The item objects should contain an `id` referencing the items Braze should delete. Up to 50 item objects are allowed per request. |
+     * | `items` | Required | Array | An array that contains item objects. The item objects should contain fields that exist in the catalog. Up to 50 item objects are allowed per request. |
      *
      * ## Example request
      *
      * ```
-     * curl --location --request DELETE 'https://rest.iad-03.braze.com/catalogs/restaurants/items' \
+     * curl --location --request PATCH 'https://rest.iad-03.braze.com/catalogs/restaurants/items' \
      * --header 'Content-Type: application/json' \
      * --header 'Authorization: Bearer YOUR-REST-API-KEY' \
      * --data-raw '{
      * "items": [
-     * {"id": "restaurant1"},
-     * {"id": "restaurant2"},
-     * {"id": "restaurant3"}
+     * {
+     * "id": "restaurant1",
+     * "Name": "Restaurant",
+     * "Loyalty_Program": false,
+     * "Location": {
+     * "Latitude": 33.6112,
+     * "Longitude": -117.8711
+     * },
+     * "Top_Dishes": {
+     * "$add": [
+     * "Biscuits",
+     * "Coleslaw"
+     * ],
+     * "$remove": [
+     * "French Fries"
+     * ]
+     * },
+     * "Open_Time": "2021-09-03T09:03:19.967+00:00"
+     * },
+     * {
+     * "id": "restaurant3",
+     * "City": "San Francisco",
+     * "Rating": 2,
+     * "Top_Dishes": [
+     * "Buffalo Wings",
+     * "Philly Cheesesteak"
+     * ]
+     * }
      * ]
      * }'
      *
      * ```
+     *
+     * > **Note:** The $`add` and `$remove` operators are only applicable to array type fields, and are only supported by PATCH endpoints.
+     *
      *
      * ## Response
      *
@@ -77,13 +107,17 @@ class PatchCatalogsByCatalogNameItem extends \Braze\Runtime\Client\BaseEndpoint 
      * {
      * "errors": [
      * {
-     * "id": "items-missing-ids",
-     * "message": "There are 1 item(s) that do not have ids",
-     * "parameters": [],
-     * "parameter_values": []
+     * "id": "invalid-fields",
+     * "message": "Some of the fields given do not exist in the catalog",
+     * "parameters": [
+     * "id"
+     * ],
+     * "parameter_values": [
+     * "restaurant1"
+     * ]
      * }
      * ],
-     * "message": "Invalid Request",
+     * "message": "Invalid Request"
      * }
      *
      * ```
@@ -96,11 +130,17 @@ class PatchCatalogsByCatalogNameItem extends \Braze\Runtime\Client\BaseEndpoint 
      * | --- | --- |
      * | `catalog-not-found` | Check that the catalog name is valid. |
      * | `ids-too-large` | Item IDs can't be more than 250 characters. |
-     * | `ids-not-unique` | Check that the item IDs are unique in the request. |
      * | `ids-not-strings` | Item IDs must be of type string. |
-     * | `items-missing-ids` | There are items that do not have item IDs. Check that each item has an item ID. |
+     * | `ids-not-unique` | Item IDs must be unique in the request. |
      * | `invalid-ids` | Item IDs can only include letters, numbers, hyphens, and underscores. |
+     * | `invalid-fields` | Confirm that all fields you are sending in the API request already exist in the catalog. This is not related to the ID field mentioned in the error. |
+     * | `invalid-keys-in-value-object` | Item object keys can't include `.` or `$`. |
+     * | `items-missing-ids` | Some items don't have item IDs. Check that each item has an item ID. |
+     * | `item-array-invalid` | `items` must be an array of objects. |
+     * | `items-too-large` | Item values can't exceed 5,000 characters. |
      * | `request-includes-too-many-items` | Your request has too many items. The item limit per request is 50. |
+     * | `too-deep-nesting-in-value-object` | Item objects can't have more than 50 levels of nesting. |
+     * | `unable-to-coerce-value` | Item types can't be converted. |
      *
      * @param array $headerParameters {
      *

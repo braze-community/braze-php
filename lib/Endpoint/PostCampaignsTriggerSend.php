@@ -17,11 +17,13 @@ class PostCampaignsTriggerSend extends \Braze\Runtime\Client\BaseEndpoint implem
     /**
      * > Use this endpoint to send immediate, ad-hoc messages to designated users via API-triggered delivery.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `campaigns.trigger.send` permission.
-     *
      * API-triggered delivery allows you to house message content inside of the Braze dashboard while dictating when a message is sent, and to whom via your API.
      *
      * If you are targeting a segment, a record of your request will be stored in the [Developer Console](https://dashboard.braze.com/app_settings/developer_console/activitylog/). Note that to send messages with this endpoint, you must have a [campaign ID](https://www.braze.com/docs/api/identifier_types/) created when you build an [API-triggered campaign](https://www.braze.com/docs/api/api_campaigns/).
+     *
+     * ## Prerequisites
+     *
+     * To use this endpoint, you'll need to generate an API key with the `campaigns.trigger.send` permission.
      *
      * ## Rate limit
      *

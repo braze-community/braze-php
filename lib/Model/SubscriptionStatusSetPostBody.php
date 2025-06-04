@@ -30,13 +30,13 @@ class SubscriptionStatusSetPostBody extends \ArrayObject
      */
     protected $subscriptionState;
     /**
-     * @var string
+     * @var list<string>
      */
     protected $externalId;
     /**
      * @var list<string>
      */
-    protected $phone;
+    protected $email;
 
     public function getSubscriptionGroupId(): string
     {
@@ -64,12 +64,18 @@ class SubscriptionStatusSetPostBody extends \ArrayObject
         return $this;
     }
 
-    public function getExternalId(): string
+    /**
+     * @return list<string>
+     */
+    public function getExternalId(): array
     {
         return $this->externalId;
     }
 
-    public function setExternalId(string $externalId): self
+    /**
+     * @param list<string> $externalId
+     */
+    public function setExternalId(array $externalId): self
     {
         $this->initialized['externalId'] = true;
         $this->externalId = $externalId;
@@ -80,18 +86,18 @@ class SubscriptionStatusSetPostBody extends \ArrayObject
     /**
      * @return list<string>
      */
-    public function getPhone(): array
+    public function getEmail(): array
     {
-        return $this->phone;
+        return $this->email;
     }
 
     /**
-     * @param list<string> $phone
+     * @param list<string> $email
      */
-    public function setPhone(array $phone): self
+    public function setEmail(array $email): self
     {
-        $this->initialized['phone'] = true;
-        $this->phone = $phone;
+        $this->initialized['email'] = true;
+        $this->email = $email;
 
         return $this;
     }

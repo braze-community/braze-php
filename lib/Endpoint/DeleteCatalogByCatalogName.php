@@ -18,11 +18,13 @@ class DeleteCatalogByCatalogName extends \Braze\Runtime\Client\BaseEndpoint impl
     /**
      * > Use this endpoint to delete a catalog.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `catalogs.delete` permission.
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key](https://braze.com/docs/api/api_key/) with the `catalogs.delete` permission.
      *
      * ## Rate limit
      *
-     * This endpoint has a shared rate limit of 5 requests per minute between all synchronous catalog endpoints, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
+     * This endpoint has a shared rate limit of 50 requests per minute between all synchronous catalog endpoints, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
      * ## Path parameters
      *

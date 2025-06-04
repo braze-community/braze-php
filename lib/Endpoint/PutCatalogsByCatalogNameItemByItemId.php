@@ -19,9 +19,11 @@ class PutCatalogsByCatalogNameItemByItemId extends \Braze\Runtime\Client\BaseEnd
     /**
      * > Use this endpoint to update an item in your catalog.
      *
-     * To use this endpoint, you'll need to generate an API key with the `catalogs.replace_item` permission.
-     *
      * If the `item_id` isn't found, this endpoint will create the item. This endpoint is synchronous.
+     *
+     * ## Prerequisites
+     *
+     * To use this endpoint, you'll need an [API key](https://braze.com/docs/api/api_key/) with the `catalogs.replace_item` permission.
      *
      * ## Rate limit
      *
@@ -55,6 +57,10 @@ class PutCatalogsByCatalogNameItemByItemId extends \Braze\Runtime\Client\BaseEnd
      * "Latitude": 33.6112,
      * "Longitude": -117.8711
      * },
+     * "Top_Dishes": [
+     * "Hamburger",
+     * "Deluxe Cheeseburger"
+     * ],
      * "Open_Time": "2021-09-03T09:03:19.967+00:00"
      * }
      * ]
