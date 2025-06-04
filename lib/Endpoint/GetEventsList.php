@@ -17,7 +17,9 @@ class GetEventsList extends \Braze\Runtime\Client\BaseEndpoint implements \Braze
     /**
      * > Use this endpoint to export a list of custom events that have been recorded for your app. The event names are returned in groups of 250, sorted alphabetically.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `events.list` permission.
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key](https://braze.com/docs/api/api_key/) with the `events.list` permission.
      *
      * ## Rate limit
      *
@@ -42,7 +44,7 @@ class GetEventsList extends \Braze\Runtime\Client\BaseEndpoint implements \Braze
      *
      * ### Fatal error response codes
      *
-     * For status codes and associated error messages that will be returned if your request encounters a fatal error, reference [Fatal errors & responses](https://www.braze.com/docs/api/errors/#fatal-errors).
+     * For status codes and associated error messages that will be returned if your request encounters a fatal error, reference [Fatal errors &amp; responses](https://www.braze.com/docs/api/errors/#fatal-errors).
      *
      * > **Tip:** For help with CSV and API exports, visit [Export troubleshooting](https://www.braze.com/docs/user_guide/data_and_analytics/export_braze_data/export_troubleshooting/).
      *

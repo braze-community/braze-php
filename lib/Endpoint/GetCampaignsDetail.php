@@ -17,11 +17,14 @@ class GetCampaignsDetail extends \Braze\Runtime\Client\BaseEndpoint implements \
     /**
      * > Use this endpoint to retrieve relevant information on a specified campaign, which can be identified by the `campaign_id`.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `campaign.details` permission.
-     *
      * If you want to retrieve Canvas data, refer to the [Canvas Details](https://www.braze.com/docs/api/endpoints/export/canvas/get_canvas_details/) endpoint.
      *
-     * Note: If you are using our [older navigation](https://www.braze.com/docs/navigation), `campaign_id` can be found at **Developer Console** > **API Settings**
+     * > **Note:** If you are using our [older navigation](https://www.braze.com/docs/navigation), `campaign_id` can be found at **Developer Console** > **API Settings**
+     *
+     *
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an API key with the `campaign.details` permission.
      *
      * ## Rate limit
      *
@@ -45,6 +48,7 @@ class GetCampaignsDetail extends \Braze\Runtime\Client\BaseEndpoint implements \
      * "first_sent" : (string) the date and hour of first sent as ISO 8601 date,
      * "last_sent" : (string) the date and hour of last sent as ISO 8601 date,
      * "tags" : (array) the tag names associated with the campaign,
+     * "teams" : (array) the names of the Teams associated with the campaign,
      * "messages": {
      * "message_variation_id": (string) { // <=This is the actual id
      * "channel": (string) the channel type of the message, must be either email, ios_push, webhook, content_card, in-app_message, or sms,
@@ -57,11 +61,11 @@ class GetCampaignsDetail extends \Braze\Runtime\Client\BaseEndpoint implements \
      *
      * ```
      *
-     * ### Messages
+     * ### Messages by channel
      *
      * The `messages` response will contain information about each message. The following includes example message responses for each channel:
      *
-     * #### Push channels
+     * #### Push
      *
      * ``` json
      * {
@@ -72,7 +76,7 @@ class GetCampaignsDetail extends \Braze\Runtime\Client\BaseEndpoint implements \
      *
      * ```
      *
-     * #### Email channel
+     * #### Email
      *
      * ``` json
      * {
@@ -87,7 +91,7 @@ class GetCampaignsDetail extends \Braze\Runtime\Client\BaseEndpoint implements \
      *
      * ```
      *
-     * #### In-app message channel
+     * #### In-app message
      *
      * ``` json
      * {
@@ -116,7 +120,7 @@ class GetCampaignsDetail extends \Braze\Runtime\Client\BaseEndpoint implements \
      *
      * ```
      *
-     * #### Content Card channel
+     * #### Content Card
      *
      * ``` json
      * {
@@ -127,7 +131,7 @@ class GetCampaignsDetail extends \Braze\Runtime\Client\BaseEndpoint implements \
      *
      * ```
      *
-     * #### Webhook channel
+     * #### Webhook
      *
      * ``` json
      * {
@@ -141,7 +145,7 @@ class GetCampaignsDetail extends \Braze\Runtime\Client\BaseEndpoint implements \
      *
      * ```
      *
-     * #### SMS channel
+     * #### SMS
      *
      * ``` json
      * {
@@ -153,7 +157,41 @@ class GetCampaignsDetail extends \Braze\Runtime\Client\BaseEndpoint implements \
      *
      * ```
      *
-     * #### Control Messages
+     * #### WhatsApp
+     *
+     * ##### Template messages
+     *
+     * ``` json
+     * {
+     * "channel": "whats_app",
+     * "subscription_group_id": (string) the API ID of the subscription group selected in the WhatsApp message
+     * "from": (array) the list of strings of the numbers associated with the subscription group,
+     * "template_name": (string) the name of the WhatsApp template being sent,
+     * "template_language_code": (string) the language code of the WhatsApp template being sent,
+     * "header_variables": (array) the list of strings, if present, of Liquid variables being inserted into header of WhatsApp template being sent,
+     * "body_variables": (array) the list of strings, if present, of Liquid variables being inserted into body of WhatsApp template being sent,
+     * "button_variables": (array) the list of strings, if present, of Liquid variables being inserted into buttons of WhatsApp template being sent
+     * }
+     *
+     * ```
+     *
+     * ##### Response messages
+     *
+     * ``` json
+     * {
+     * "channel": "whats_app",
+     * "subscription_group_id": (string) the API ID of the subscription group selected in the WhatsApp message,
+     * "from": (array) list of strings of the numbers associated with the subscription group,
+     * "layout": (string) the name of the WhatsApp template being sent (text or media or quick-reply),
+     * "header_text": (string, optional) the text, if present, of the header of the message being sent,
+     * "body_text": (string, optional) the text, if present, of the body of the message being sent,
+     * "footer_text": (string, optional) the text, if present, of the footer of the message being sent,
+     * "buttons": (array) list of button objects in the message being sent ({"text": (string) the text of the button})
+     * }
+     *
+     * ```
+     *
+     * #### Control messages
      *
      * ``` json
      * {
@@ -163,7 +201,7 @@ class GetCampaignsDetail extends \Braze\Runtime\Client\BaseEndpoint implements \
      *
      * ```
      *
-     * ### Conversion Behaviors
+     * ### Conversion behaviors
      *
      * The `conversion_behaviors` array will contain information about each conversion event behavior set for the campaign. These behaviors are in order as set by the campaign. For example, Conversion Event A will be the first item in the array, Conversion Event B will be second, etc. The following lists example conversion event behavior responses:
      *

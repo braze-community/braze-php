@@ -16,9 +16,13 @@ class DeleteScimV2UserById extends \Braze\Runtime\Client\BaseEndpoint implements
     protected $id;
 
     /**
-     * > This endpoint allows you to permanently delete an existing dashboard user by specifying the resource `id` returned by the SCIM [`POST`](https://www.braze.com/docs/scim/post_create_user_account/) method.
+     * > Use this endpoint to permanently delete an existing dashboard user by specifying the resource `id` returned by the SCIM [&lt;code&gt;POST&lt;/code&gt;](https://www.braze.com/docs/scim/post_create_user_account/) method.
      *
-     * This is similar to deleting a user in the **Manage Users** section of the Braze dashboard. For information on how to obtain a SCIM token, visit [Automated user provisioning](https://www.braze.com/docs/scim/automated_user_provisioning/).
+     * This is similar to deleting a user in the **Manage Users** section of the Braze dashboard.
+     *
+     * ## Prerequisites
+     *
+     * To use this endpoint, you'll need a SCIM token. For more information, refer to [Automated user provisioning](https://www.braze.com/docs/scim/automated_user_provisioning/).
      *
      * ## Rate limit
      *
@@ -33,6 +37,16 @@ class DeleteScimV2UserById extends \Braze\Runtime\Client\BaseEndpoint implements
      * ## Request parameters
      *
      * There is no request body for this endpoint.
+     *
+     * ## Example request
+     *
+     * ``` json
+     * curl --location --request DELETE 'https://rest.iad-01.braze.com/scim/v2/Users/dfa245b7-24195aec-887bb3ad-602b3340' \
+     * --header 'Content-Type: application/json' \
+     * --header 'X-Request-Origin: YOUR-REQUEST-ORIGIN-HERE' \
+     * --header 'Authorization: Bearer YOUR-SCIM-TOKEN-HERE' \
+     *
+     * ```
      *
      * ## Response
      *

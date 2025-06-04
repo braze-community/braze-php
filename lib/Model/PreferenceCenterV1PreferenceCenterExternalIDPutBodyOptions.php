@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class CatalogsCatalogNameItemsPatchBodyItemsItem extends \ArrayObject
+class PreferenceCenterV1PreferenceCenterExternalIDPutBodyOptions extends \ArrayObject
 {
     /**
      * @var array
@@ -24,17 +24,17 @@ class CatalogsCatalogNameItemsPatchBodyItemsItem extends \ArrayObject
     /**
      * @var string
      */
-    protected $id;
+    protected $metaViewportContent;
 
-    public function getId(): string
+    public function getMetaViewportContent(): string
     {
-        return $this->id;
+        return $this->metaViewportContent;
     }
 
-    public function setId(string $id): self
+    public function setMetaViewportContent(string $metaViewportContent): self
     {
-        $this->initialized['id'] = true;
-        $this->id = $id;
+        $this->initialized['metaViewportContent'] = true;
+        $this->metaViewportContent = $metaViewportContent;
 
         return $this;
     }

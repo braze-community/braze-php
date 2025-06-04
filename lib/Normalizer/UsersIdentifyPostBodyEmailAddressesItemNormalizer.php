@@ -20,7 +20,7 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class PreferenceCenterV1PreferenceCenterExternalIDPutBodyTriggerPropertiesNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
+class UsersIdentifyPostBodyEmailAddressesItemNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
@@ -29,12 +29,12 @@ class PreferenceCenterV1PreferenceCenterExternalIDPutBodyTriggerPropertiesNormal
 
     public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
-        return $type === \Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBodyTriggerProperties::class;
+        return $type === \Braze\Model\UsersIdentifyPostBodyEmailAddressesItem::class;
     }
 
     public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
-        return is_object($data) && get_class($data) === \Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBodyTriggerProperties::class;
+        return is_object($data) && get_class($data) === \Braze\Model\UsersIdentifyPostBodyEmailAddressesItem::class;
     }
 
     public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
@@ -45,21 +45,29 @@ class PreferenceCenterV1PreferenceCenterExternalIDPutBodyTriggerPropertiesNormal
         if (isset($data['$recursiveRef'])) {
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
-        $object = new \Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBodyTriggerProperties();
+        $object = new \Braze\Model\UsersIdentifyPostBodyEmailAddressesItem();
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('example_string_property', $data)) {
-            $object->setExampleStringProperty($data['example_string_property']);
-            unset($data['example_string_property']);
+        if (\array_key_exists('external_id', $data)) {
+            $object->setExternalId($data['external_id']);
+            unset($data['external_id']);
         }
-        if (\array_key_exists('example_integer_property', $data)) {
-            $object->setExampleIntegerProperty($data['example_integer_property']);
-            unset($data['example_integer_property']);
+        if (\array_key_exists('email', $data)) {
+            $object->setEmail($data['email']);
+            unset($data['email']);
         }
-        foreach ($data as $key => $value) {
+        if (\array_key_exists('prioritization', $data)) {
+            $values = [];
+            foreach ($data['prioritization'] as $value) {
+                $values[] = $value;
+            }
+            $object->setPrioritization($values);
+            unset($data['prioritization']);
+        }
+        foreach ($data as $key => $value_1) {
             if (preg_match('/.*/', (string) $key)) {
-                $object[$key] = $value;
+                $object[$key] = $value_1;
             }
         }
 
@@ -69,15 +77,22 @@ class PreferenceCenterV1PreferenceCenterExternalIDPutBodyTriggerPropertiesNormal
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
-        if ($data->isInitialized('exampleStringProperty') && null !== $data->getExampleStringProperty()) {
-            $dataArray['example_string_property'] = $data->getExampleStringProperty();
+        if ($data->isInitialized('externalId') && null !== $data->getExternalId()) {
+            $dataArray['external_id'] = $data->getExternalId();
         }
-        if ($data->isInitialized('exampleIntegerProperty') && null !== $data->getExampleIntegerProperty()) {
-            $dataArray['example_integer_property'] = $data->getExampleIntegerProperty();
+        if ($data->isInitialized('email') && null !== $data->getEmail()) {
+            $dataArray['email'] = $data->getEmail();
         }
-        foreach ($data as $key => $value) {
+        if ($data->isInitialized('prioritization') && null !== $data->getPrioritization()) {
+            $values = [];
+            foreach ($data->getPrioritization() as $value) {
+                $values[] = $value;
+            }
+            $dataArray['prioritization'] = $values;
+        }
+        foreach ($data as $key => $value_1) {
             if (preg_match('/.*/', (string) $key)) {
-                $dataArray[$key] = $value;
+                $dataArray[$key] = $value_1;
             }
         }
 
@@ -86,6 +101,6 @@ class PreferenceCenterV1PreferenceCenterExternalIDPutBodyTriggerPropertiesNormal
 
     public function getSupportedTypes(?string $format = null): array
     {
-        return [\Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBodyTriggerProperties::class => false];
+        return [\Braze\Model\UsersIdentifyPostBodyEmailAddressesItem::class => false];
     }
 }

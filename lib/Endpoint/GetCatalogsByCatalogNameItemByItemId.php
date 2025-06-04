@@ -19,7 +19,9 @@ class GetCatalogsByCatalogNameItemByItemId extends \Braze\Runtime\Client\BaseEnd
     /**
      * > Use this endpoint to return a catalog item and its content.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `catalogs.get_item` permission.
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key](https://braze.com/docs/api/api_key/) with the `catalogs.get_item` permission.
      *
      * ## Rate limit
      *

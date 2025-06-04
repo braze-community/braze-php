@@ -17,7 +17,9 @@ class GetCanvasDataSummary extends \Braze\Runtime\Client\BaseEndpoint implements
     /**
      * > Use this endpoint to export rollups of time series data for a Canvas, providing a concise summary of a Canvas’ results.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `canvas.data_summary` permission.
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key](https://braze.com/docs/api/api_key/) with the `canvas.data_summary` permission.
      *
      * ## Rate limit
      *

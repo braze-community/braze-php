@@ -58,20 +58,24 @@ class SubscriptionStatusSetPostBodyNormalizer implements DenormalizerInterface, 
             unset($data['subscription_state']);
         }
         if (\array_key_exists('external_id', $data)) {
-            $object->setExternalId($data['external_id']);
-            unset($data['external_id']);
-        }
-        if (\array_key_exists('phone', $data)) {
             $values = [];
-            foreach ($data['phone'] as $value) {
+            foreach ($data['external_id'] as $value) {
                 $values[] = $value;
             }
-            $object->setPhone($values);
-            unset($data['phone']);
+            $object->setExternalId($values);
+            unset($data['external_id']);
         }
-        foreach ($data as $key => $value_1) {
+        if (\array_key_exists('email', $data)) {
+            $values_1 = [];
+            foreach ($data['email'] as $value_1) {
+                $values_1[] = $value_1;
+            }
+            $object->setEmail($values_1);
+            unset($data['email']);
+        }
+        foreach ($data as $key => $value_2) {
             if (preg_match('/.*/', (string) $key)) {
-                $object[$key] = $value_1;
+                $object[$key] = $value_2;
             }
         }
 
@@ -88,18 +92,22 @@ class SubscriptionStatusSetPostBodyNormalizer implements DenormalizerInterface, 
             $dataArray['subscription_state'] = $data->getSubscriptionState();
         }
         if ($data->isInitialized('externalId') && null !== $data->getExternalId()) {
-            $dataArray['external_id'] = $data->getExternalId();
-        }
-        if ($data->isInitialized('phone') && null !== $data->getPhone()) {
             $values = [];
-            foreach ($data->getPhone() as $value) {
+            foreach ($data->getExternalId() as $value) {
                 $values[] = $value;
             }
-            $dataArray['phone'] = $values;
+            $dataArray['external_id'] = $values;
         }
-        foreach ($data as $key => $value_1) {
+        if ($data->isInitialized('email') && null !== $data->getEmail()) {
+            $values_1 = [];
+            foreach ($data->getEmail() as $value_1) {
+                $values_1[] = $value_1;
+            }
+            $dataArray['email'] = $values_1;
+        }
+        foreach ($data as $key => $value_2) {
             if (preg_match('/.*/', (string) $key)) {
-                $dataArray[$key] = $value_1;
+                $dataArray[$key] = $value_2;
             }
         }
 

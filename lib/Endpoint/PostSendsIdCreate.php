@@ -17,9 +17,11 @@ class PostSendsIdCreate extends \Braze\Runtime\Client\BaseEndpoint implements \B
     /**
      * > Use this endpoint to create send IDs that can be used to send messages and track message performance programatically, without campaign creation for each send.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `sends.id.create` permission.
-     *
      * Using the send identifier to track and send messages is useful if you are planning to programmatically generate and send content.
+     *
+     * ## Prerequisites
+     *
+     * To use this endpoint, you'll need to generate an API key with the `sends.id.create` permission.
      *
      * ## Rate limit
      *
@@ -29,8 +31,8 @@ class PostSendsIdCreate extends \Braze\Runtime\Client\BaseEndpoint implements \B
      *
      * | Parameter | Required | Data Type | Description |
      * | --- | --- | --- | --- |
-     * | `campaign_id` | Required | String | See [campaign identifier]({{site.baseurl}}/api/identifier_types/). |
-     * | `send_id` | Optional | String | See [send identifier]({{site.baseurl}}/api/identifier_types/). |
+     * | `campaign_id` | Required | String | See [campaign identifier](https://www.braze.com/api/identifier_types/). |
+     * | `send_id` | Optional | String | See [send identifier](https://www.braze.com/api/identifier_types/). |
      *
      * ## Response
      *

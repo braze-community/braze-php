@@ -17,9 +17,7 @@ class PostUsersExternalIdsRemove extends \Braze\Runtime\Client\BaseEndpoint impl
     /**
      * > Use this endpoint to remove your users' old deprecated external IDs.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `users.external_ids.remove` permission.
-     *
-     * You can send up to 50 external IDs per request. You will need to create a new [API key](https://www.braze.com/docs/api/api_key/) with permissions for this endpoint.
+     * You can send up to 50 external IDs per request. To use this endpoint, you’ll need to generate an [API key](https://www.braze.com/docs/api/api_key/) with the `users.external_ids.remove` permission.
      *
      * > **Warning:** This endpoint completely removes the deprecated ID and cannot be undone. Using this endpoint to remove deprecated \`external_ids\` that are still associated with users in your system can permanently prevent you from finding those users' data.
      *
@@ -34,7 +32,7 @@ class PostUsersExternalIdsRemove extends \Braze\Runtime\Client\BaseEndpoint impl
      * | --- | --- | --- | --- |
      * | `external_ids` | Required | Array of strings | External identifiers for the users to remove |
      *
-     * > Important: Only deprecated IDs can be removed; attempting to remove a primary external ID will result in an error.
+     * > **Important:** Only deprecated IDs can be removed; attempting to remove a primary external ID will result in an error.
      *
      *
      * ## Response
@@ -44,8 +42,8 @@ class PostUsersExternalIdsRemove extends \Braze\Runtime\Client\BaseEndpoint impl
      * ``` json
      * {
      * "message" : (string) status message,
-     * "removed_ids" : (array of successful Remove Operations),
-     * "removal_errors": (array of any )
+     * "removed_ids" : (array of strings) successful remove operations,
+     * "removal_errors": (array of arrays) <minor error message>
      * }
      *
      * ```
@@ -53,9 +51,12 @@ class PostUsersExternalIdsRemove extends \Braze\Runtime\Client\BaseEndpoint impl
      * The `message` field will return `success` for any valid request. More specific errors are captured in the `removal_errors` array. The `message` field returns an error in the case of:
      *
      * - Invalid API key
+     *
      * - Empty `external_ids` array
+     *
      * - `external_ids` array with more than 50 items
-     * - Rate limit hit (>1,000 requests/minute)
+     *
+     * - Rate limit hit (more than 1,000 requests per minute)
      *
      * @param array $headerParameters {
      *

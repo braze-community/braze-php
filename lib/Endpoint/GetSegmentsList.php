@@ -19,9 +19,11 @@ class GetSegmentsList extends \Braze\Runtime\Client\BaseEndpoint implements \Bra
      *
      * The segments are returned in groups of 100 sorted by time of creation (oldest to newest by default). Archived segments are not included.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `segments.list` permission.
+     * ## Prerequisites
      *
-     * ### Rate limit
+     * To use this endpoint, you’ll need an [API key](https://www.braze.com/docs/api/basics#rest-api-key/) with the `segments.list` permission.
+     *
+     * ## Rate limit
      *
      * We apply the default Braze rate limit of 250,000 requests per hour to this endpoint, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *

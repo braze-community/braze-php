@@ -17,11 +17,13 @@ class PostCatalog extends \Braze\Runtime\Client\BaseEndpoint implements \Braze\R
     /**
      * > Use this endpoint to create a catalog.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `catalogs.create` permission.
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key](https://braze.com/docs/api/api_key/) with the `catalogs.create` permission.
      *
      * ## Rate limit
      *
-     * This endpoint has a shared rate limit of 5 requests per minute between all synchronous catalog endpoints, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
+     * This endpoint has a shared rate limit of 50 requests per minute between all synchronous catalog endpoints, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
      * ## Request parameters
      *
@@ -181,13 +183,14 @@ class PostCatalog extends \Braze\Runtime\Client\BaseEndpoint implements \Braze\R
      * | `too-many-catalog-atoms` | You can only create one catalog per request. |
      * | `too-many-fields` | Number of fields limit is 30. |
      *
+     * @param null  $requestBody
      * @param array $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
      *             }
      */
-    public function __construct(?\Braze\Model\CatalogsPostBody $requestBody = null, array $headerParameters = [])
+    public function __construct($requestBody = null, array $headerParameters = [])
     {
         $this->body = $requestBody;
         $this->headerParameters = $headerParameters;
@@ -205,10 +208,6 @@ class PostCatalog extends \Braze\Runtime\Client\BaseEndpoint implements \Braze\R
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        if ($this->body instanceof \Braze\Model\CatalogsPostBody) {
-            return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
-        }
-
         return [[], null];
     }
 

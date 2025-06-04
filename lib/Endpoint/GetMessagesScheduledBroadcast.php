@@ -17,9 +17,11 @@ class GetMessagesScheduledBroadcast extends \Braze\Runtime\Client\BaseEndpoint i
     /**
      * > Use this endpoint to return a JSON list of information about scheduled campaigns and entry Canvases between now and a designated `end_time` specified in the request.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `messages.schedule_broadcasts` permission.
+     * Daily, recurring messages will only appear once with their next occurrence. Results returned in this endpoint include campaigns and Canvases created and scheduled in the Braze dashboard.
      *
-     * Daily, recurring messages will only appear once with their next occurrence. Results returned in this endpoint are only for campaigns and Canvases created and scheduled in Braze.
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an API key with the `messages.schedule_broadcasts` permission.
      *
      * ### Rate limit
      *
@@ -33,7 +35,7 @@ class GetMessagesScheduledBroadcast extends \Braze\Runtime\Client\BaseEndpoint i
      * {
      * "scheduled_broadcasts": [
      * {
-     * "name" (string) the name of the scheduled boradcast,
+     * "name" (string) the name of the scheduled broadcast,
      * "id" (stings) the Canvas or campaign identifier,
      * "type" (string) the broadcast type either Canvas or Campaign,
      * "tags" (array) an array of tag names formatted as strings,

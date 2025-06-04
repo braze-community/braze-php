@@ -26,7 +26,7 @@ class TransactionalV1CampaignsCampaignIdSendPostBody extends \ArrayObject
      */
     protected $externalSendId;
     /**
-     * @var TransactionalV1CampaignsCampaignIdSendPostBodyTriggerProperties
+     * @var array<string, mixed>
      */
     protected $triggerProperties;
     /**
@@ -47,12 +47,18 @@ class TransactionalV1CampaignsCampaignIdSendPostBody extends \ArrayObject
         return $this;
     }
 
-    public function getTriggerProperties(): TransactionalV1CampaignsCampaignIdSendPostBodyTriggerProperties
+    /**
+     * @return array<string, mixed>
+     */
+    public function getTriggerProperties(): iterable
     {
         return $this->triggerProperties;
     }
 
-    public function setTriggerProperties(TransactionalV1CampaignsCampaignIdSendPostBodyTriggerProperties $triggerProperties): self
+    /**
+     * @param array<string, mixed> $triggerProperties
+     */
+    public function setTriggerProperties(iterable $triggerProperties): self
     {
         $this->initialized['triggerProperties'] = true;
         $this->triggerProperties = $triggerProperties;

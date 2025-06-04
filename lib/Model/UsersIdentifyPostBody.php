@@ -25,6 +25,14 @@ class UsersIdentifyPostBody extends \ArrayObject
      * @var list<UsersIdentifyPostBodyAliasesToIdentifyItem>
      */
     protected $aliasesToIdentify;
+    /**
+     * @var list<UsersIdentifyPostBodyEmailAddressesItem>
+     */
+    protected $emailAddresses;
+    /**
+     * @var string
+     */
+    protected $mergeBehavior;
 
     /**
      * @return list<UsersIdentifyPostBodyAliasesToIdentifyItem>
@@ -41,6 +49,38 @@ class UsersIdentifyPostBody extends \ArrayObject
     {
         $this->initialized['aliasesToIdentify'] = true;
         $this->aliasesToIdentify = $aliasesToIdentify;
+
+        return $this;
+    }
+
+    /**
+     * @return list<UsersIdentifyPostBodyEmailAddressesItem>
+     */
+    public function getEmailAddresses(): array
+    {
+        return $this->emailAddresses;
+    }
+
+    /**
+     * @param list<UsersIdentifyPostBodyEmailAddressesItem> $emailAddresses
+     */
+    public function setEmailAddresses(array $emailAddresses): self
+    {
+        $this->initialized['emailAddresses'] = true;
+        $this->emailAddresses = $emailAddresses;
+
+        return $this;
+    }
+
+    public function getMergeBehavior(): string
+    {
+        return $this->mergeBehavior;
+    }
+
+    public function setMergeBehavior(string $mergeBehavior): self
+    {
+        $this->initialized['mergeBehavior'] = true;
+        $this->mergeBehavior = $mergeBehavior;
 
         return $this;
     }

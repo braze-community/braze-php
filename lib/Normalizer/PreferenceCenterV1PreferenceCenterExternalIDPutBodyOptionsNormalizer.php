@@ -20,7 +20,7 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class TransactionalV1CampaignsCampaignIdSendPostBodyTriggerPropertiesNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
+class PreferenceCenterV1PreferenceCenterExternalIDPutBodyOptionsNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
@@ -29,12 +29,12 @@ class TransactionalV1CampaignsCampaignIdSendPostBodyTriggerPropertiesNormalizer 
 
     public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
-        return $type === \Braze\Model\TransactionalV1CampaignsCampaignIdSendPostBodyTriggerProperties::class;
+        return $type === \Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBodyOptions::class;
     }
 
     public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
-        return is_object($data) && get_class($data) === \Braze\Model\TransactionalV1CampaignsCampaignIdSendPostBodyTriggerProperties::class;
+        return is_object($data) && get_class($data) === \Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBodyOptions::class;
     }
 
     public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
@@ -45,17 +45,13 @@ class TransactionalV1CampaignsCampaignIdSendPostBodyTriggerPropertiesNormalizer 
         if (isset($data['$recursiveRef'])) {
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
-        $object = new \Braze\Model\TransactionalV1CampaignsCampaignIdSendPostBodyTriggerProperties();
+        $object = new \Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBodyOptions();
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('example_string_property', $data)) {
-            $object->setExampleStringProperty($data['example_string_property']);
-            unset($data['example_string_property']);
-        }
-        if (\array_key_exists('example_integer_property', $data)) {
-            $object->setExampleIntegerProperty($data['example_integer_property']);
-            unset($data['example_integer_property']);
+        if (\array_key_exists('meta-viewport-content', $data)) {
+            $object->setMetaViewportContent($data['meta-viewport-content']);
+            unset($data['meta-viewport-content']);
         }
         foreach ($data as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
@@ -69,11 +65,8 @@ class TransactionalV1CampaignsCampaignIdSendPostBodyTriggerPropertiesNormalizer 
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
-        if ($data->isInitialized('exampleStringProperty') && null !== $data->getExampleStringProperty()) {
-            $dataArray['example_string_property'] = $data->getExampleStringProperty();
-        }
-        if ($data->isInitialized('exampleIntegerProperty') && null !== $data->getExampleIntegerProperty()) {
-            $dataArray['example_integer_property'] = $data->getExampleIntegerProperty();
+        if ($data->isInitialized('metaViewportContent') && null !== $data->getMetaViewportContent()) {
+            $dataArray['meta-viewport-content'] = $data->getMetaViewportContent();
         }
         foreach ($data as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
@@ -86,6 +79,6 @@ class TransactionalV1CampaignsCampaignIdSendPostBodyTriggerPropertiesNormalizer 
 
     public function getSupportedTypes(?string $format = null): array
     {
-        return [\Braze\Model\TransactionalV1CampaignsCampaignIdSendPostBodyTriggerProperties::class => false];
+        return [\Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBodyOptions::class => false];
     }
 }

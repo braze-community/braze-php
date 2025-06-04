@@ -17,21 +17,26 @@ class PostUsersTrack extends \Braze\Runtime\Client\BaseEndpoint implements \Braz
     /**
      * > Use this endpoint to record custom events, purchases, and update user profile attributes.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `users.track` permission.
-     *
      **Note:** Braze processes the data passed via API at face value and customers should only pass deltas (changing data) to minimize unnecessary data point consumption. To read more, refer to [Data points](https://www.braze.com/docs/user_guide/onboarding_with_braze/data_points#data-points).
+     *
+     * ## Prerequisites
+     *
+     * To use this endpoint, you'll need an [API key](https://braze.com/docs/api/api_key/) with the `users.track` permission.
      *
      * Customers using the API for server-to-server calls may need to allowlist `rest.iad-01.braze.com` if they’re behind a firewall.
      *
-     * ### Rate limit
+     * ## Rate limit
      *
-     * We apply a base speed limit of 50,000 requests per minute to this endpoint for all customers. Each request to the `/users/track` endpoint can contain up to 75 events, 75 attribute updates, and 75 purchases. Each component (event, attribute, and purchase arrays), can update up to 75 users each for a max of 225 individual data points. Each update can also belong to the same user for a max of 225 updates to a single user in a request.
+     * Starting on October 28th, 2024, we apply a base speed limit of 3,000 requests per three seconds to this endpoint for all customers. Each `/users/track` request can contain up to 75 event objects, 75 attribute objects, and 75 purchase objects. Each object (event, attribute, and purchase arrays) can update one user each. In total, this means a maximum of 225 users can be updated in a single call. In addition, a single user profile can be updated by multiple objects.
+     *
+     * Different limits apply to customers who have purchased **Monthly Active Users - CY 24-25**. For details on these limits, see [Monthly Active Users - CY 24-25 limits](https://www.braze.com/docs/api/endpoints/user_data/post_user_track/#monthly-active-users-cy-24-25).
      *
      * See our page on [API rate limits](https://www.braze.com/docs/api/api_limits/) for details, and reach out to your customer success manager if you need your limit increased.
      *
-     * ### Request parameters
+     * ## Request parameters
      *
-     * For each of the request components listed in the following table, one of `external_id`, `user_alias`, or `braze_id` is required.
+     * > **Important:** For each request component listed in the following table, one of `external_id`, `user_alias`, `braze_id`, `email`, or `phone` is required.
+     *
      *
      * | Parameter | Required | Data Type | Description |
      * | --- | --- | --- | --- |
@@ -39,11 +44,175 @@ class PostUsersTrack extends \Braze\Runtime\Client\BaseEndpoint implements \Braz
      * | `events` | Optional | Array of event objects | See [events object](https://www.braze.com/docs/api/objects_filters/event_object/) |
      * | `purchases` | Optional | Array of purchase objects | See [purchases object](https://www.braze.com/docs/api/objects_filters/purchase_object/) |
      *
-     * ## User track responses
+     * ## Example requests
      *
-     * Upon using any of the aforementioned API requests you should receive one of the following three general responses:
+     * ### Update a user profile by email address
      *
-     * #### Successful message
+     * You can update a user profile by email address using the `/users/track` endpoint.
+     *
+     * ```
+     * curl --location --request POST 'https://rest.iad-01.braze.com/users/track' \
+     * --header 'Content-Type: application/json' \
+     * --header 'Authorization: Bearer YOUR_REST_API_KEY' \
+     * --data-raw '{
+     * "attributes": [
+     * {
+     * "email": "test@braze.com",
+     * "string_attribute": "fruit",
+     * "boolean_attribute_1": true,
+     * "integer_attribute": 26,
+     * "array_attribute": [
+     * "banana",
+     * "apple"
+     * ]
+     * }
+     * ],
+     * "events": [
+     * {
+     * "email": "test@braze.com",
+     * "app_id": "your_app_identifier",
+     * "name": "rented_movie",
+     * "time": "2022-12-06T19:20:45+01:00",
+     * "properties": {
+     * "release": {
+     * "studio": "FilmStudio",
+     * "year": "2022"
+     * },
+     * "cast": [
+     * {
+     * "name": "Actor1"
+     * },
+     * {
+     * "name": "Actor2"
+     * }
+     * ]
+     * }
+     * },
+     * {
+     * "user_alias": {
+     * "alias_name": "device123",
+     * "alias_label": "my_device_identifier"
+     * },
+     * "app_id": "your_app_identifier",
+     * "name": "rented_movie",
+     * "time": "2013-07-16T19:20:50+01:00"
+     * }
+     * ],
+     * "purchases": [
+     * {
+     * "email": "test@braze.com",
+     * "app_id": "your_app_identifier",
+     * "product_id": "product_name",
+     * "currency": "USD",
+     * "price": 12.12,
+     * "quantity": 6,
+     * "time": "2017-05-12T18:47:12Z",
+     * "properties": {
+     * "color": "red",
+     * "monogram": "ABC",
+     * "checkout_duration": 180,
+     * "size": "Large",
+     * "brand": "Backpack Locker"
+     * }
+     * }
+     * ]
+     * }'
+     *
+     * ```
+     *
+     * ### Update a user profile by phone number
+     *
+     * You can update a user profile by phone number using the `/users/track` endpoint. This endpoint only works if you include a valid phone number.
+     *
+     * > **Important:**
+     * If you include a request with both `email` and `phone`, Braze will use the email as the identifier.
+     *
+     *
+     * ```
+     * curl --location --request POST 'https://rest.iad-01.braze.com/users/track' \
+     * --header 'Content-Type: application/json' \
+     * --header 'Authorization: Bearer YOUR_REST_API_KEY' \
+     * --data-raw '{
+     * "attributes": [
+     * {
+     * "phone": "+15043277269",
+     * "string_attribute": "fruit",
+     * "boolean_attribute_1": true,
+     * "integer_attribute": 25,
+     * "array_attribute": [
+     * "banana",
+     * "apple"
+     * ]
+     * }
+     * ],
+     * }'
+     *
+     * ```
+     *
+     * ### Set subscription groups
+     *
+     * This example shows how to create a user and set their subscription group within the user attributes object.
+     *
+     * Updating the subscription status with this endpoint will update the user specified by their `external_id` (such as User1) and update the subscription status of any users with the same email as that user (User1).
+     *
+     * ```
+     * curl --location --request POST 'https://rest.iad-01.braze.com/users/track' \
+     * --header 'Content-Type: application/json' \
+     * --header 'Authorization: Bearer YOUR_REST_API_KEY' \
+     * --data-raw '{
+     * "attributes": [
+     * {
+     * "external_id": "user_identifier",
+     * "email": "example@email.com",
+     * "email_subscribe": "subscribed",
+     * "subscription_groups": [{
+     * "subscription_group_id": "subscription_group_identifier_1",
+     * "subscription_state": "unsubscribed"
+     * },
+     * {
+     * "subscription_group_id": "subscription_group_identifier_2",
+     * "subscription_state": "subscribed"
+     * },
+     * {
+     * "subscription_group_id": "subscription_group_identifier_3",
+     * "subscription_state": "subscribed"
+     * }
+     * ]
+     * }
+     * ]
+     * }'
+     *
+     * ```
+     *
+     * ### Example request to create an alias-only user
+     *
+     * You can use the `/users/track` endpoint to create a new alias-only user by setting the `_update_existing_only` key with a value of `false` in the body of the request. If this value is omitted, the alias-only user profile will not be created. Using an alias-only user guarantees that one profile with that alias will exist. This is especially helpful when building a new integration as it prevents the creation of duplicate user profiles.
+     *
+     * ```
+     * curl --location --request POST 'https://rest.iad-01.braze.com/users/track' \
+     * --header 'Content-Type: application/json' \
+     * --header 'Authorization: Bearer YOUR_REST_API_KEY' \
+     * --data-raw '{
+     * {
+     * "attributes": [
+     * {
+     * "_update_existing_only": false,
+     * "user_alias": {
+     * "alias_name": "example_name",
+     * "alias_label": "example_label"
+     * },
+     * "email": "email@example.com"
+     * }
+     * ],
+     * }'
+     *
+     * ```
+     *
+     * ## Responses
+     *
+     * When using any of the aforementioned API requests, you should receive one of the following three general responses: a [successful message](https://www.braze.com/docs/api/endpoints/user_data/post_user_track/#successful-message), a [successful message with non-fatal errors](https://www.braze.com/docs/api/endpoints/user_data/post_user_track/#successful-message-with-non-fatal-errors), or a [message with fatal errors](https://www.braze.com/docs/api/endpoints/user_data/post_user_track/#message-with-fatal-errors).
+     *
+     * ### Successful message
      *
      * Successful messages will be met with the following response:
      *
@@ -57,30 +226,34 @@ class PostUsersTrack extends \Braze\Runtime\Client\BaseEndpoint implements \Braz
      *
      * ```
      *
-     * #### Successful message with non-fatal errors
+     * ### Successful message with non-fatal errors
      *
-     * If your message is successful but has non-fatal errors such as one invalid event object out of a long list of events, then you will receive the following response:
+     * If your message is successful but has non-fatal errors, such as one invalid event object out of a long list of events, then you will receive the following response:
      *
      * ``` json
      * {
      * "message" : "success",
      * "errors" : [
      * {
+     * <minor error message>
      * }
      * ]
      * }
      *
      * ```
      *
-     * #### Message with fatal errors
+     * For success messages, any data not affected by an error in the `errors` array will still be processed.
      *
-     * In the case of a success, any data that was not affected by an error in the `errors` array will still be processed. If your message has a fatal error you will receive the following response:
+     * ### Message with fatal errors
+     *
+     * If your message has a fatal error, you will receive the following response:
      *
      * ``` json
      * {
-     * "message" : ,
+     * "message" : <fatal error message>,
      * "errors" : [
      * {
+     * <fatal error message>
      * }
      * ]
      * }
@@ -89,45 +262,51 @@ class PostUsersTrack extends \Braze\Runtime\Client\BaseEndpoint implements \Braz
      *
      * ### Fatal error response codes
      *
-     * For status codes and associated error messages that will be returned if your request encounters a fatal error, reference [Fatal errors & responses](https://www.braze.com/api/errors/#fatal-errors).
+     * For status codes and associated error messages that will be returned if your request encounters a fatal error, reference [Fatal errors &amp; responses](https://www.braze.com/api/errors/#fatal-errors).
      *
-     * If you receive the error “provided external_id is blacklisted and disallowed”, your request may have included a “dummy user”. For more information, refer to [Spam blocking](https://www.braze.com/docs/user_guide/data_and_analytics/user_data_collection/user_archival/#spam-blocking).
+     * If you receive the error “provided external_id is blacklisted and disallowed”, your request may have included a “dummy user.” For more information, refer to [Spam blocking](https://www.braze.com/docs/user_guide/data_and_analytics/user_data_collection/user_archival/#spam-blocking).
      *
-     * ### Creating an alias-only user profile
+     * ## Frequently asked questions
      *
-     * Keep the following nuances in mind when using the `/users/track` endpoint:
+     * > **Important:**
      *
-     * You can use the `/users/track` endpoint to create a new alias-only user by setting the `_update_existing_only` key with a value of `false` in the body of the request. If this value is omitted, the alias-only user profile will not be created. Using an alias-only user guarantees that one profile with that alias will exist. This is especially helpful when building a new integration as it prevents the creation of duplicate user profiles.
+     * > Do not send legally required transactional emails to SMS gateways as there’s a strong likelihood that those emails will not be delivered.
      *
-     * ### Importing legacy user data
+     * Although emails you send using a phone number and the provider’s gateway domain (known as an MM3) can result in the email being received as an SMS (text) message, some of our email providers do not support this behavior. For example, if you send an email to a T-Mobile phone number (such as “9999999999@tmomail.net”), your SMS message would be sent to whoever owns that phone number on the T-Mobile network.
      *
-     * You may submit data through the Braze API for a user who has not yet used your mobile app in order to generate a user profile. If the user subsequently uses the application all information following their identification via the SDK will be merged with the existing user profile you created via the API call. Any user behavior that is recorded anonymously by the SDK prior to identification will be lost upon merging with the existing API-generated user profile.
+     * Keep in mind that even though these emails may not be delivered to the SMS gateway, they will still count towards your email billing. To avoid sending emails to unsupported gateways, review the [list of unsupported gateway domain names](https://www.fcc.gov/consumer-governmental-affairs/about-bureau/consumer-policy-division/can-spam/domain-name-downloads).
      *
-     * The segmentation tool will include these users regardless of whether they have engaged with the app. If you want to exclude users uploaded via the User API who have not yet engaged with the app, simply add the filter: `Session Count > 0`.
      *
-     * ### Making bulk updates
+     * ### What happens when multiple profiles with the same email address are found?
      *
-     * If you have a use case where you need to make batch updates to the `users/track` endpoint, we recommend adding the bulk update header so that Braze can properly identify, observe, and route your request.
+     * If the `external_id` exists, the most recently updated profile with an external ID will be prioritized for updates. If the `external_id` doesn’t exist, the most recently updated profile will be prioritized for updates.
      *
-     * Refer to the following sample request with the `X-Braze-Bulk` header:
+     * ### What happens if no profile with the email address currently exists?
      *
-     * ``` json
-     * curl --location --request POST 'https://rest.iad-01.braze.com/users/track' \
-     * --header 'Content-Type: application/json' \
-     * --header 'X-Braze-Bulk: true' \
-     * --header 'Authorization: Bearer YOUR-API-KEY-HERE' \
-     * --data-raw '{ "attributes": [ ], "events": [ ], "purchases": [ ] }'
+     * A new profile will be created, and an email-only user will be created. An alias will not be created. The email field will be set to test@braze.com, as noted in the example request for updating a user profile by email address.
      *
-     * ```
+     * ### How do you use `/users/track` to import legacy user data?
      *
-     * Warning: When the `X-Braze-Bulk` header is present with any value, Braze will consider the request a bulk request. Set the value to `true`. Currently, setting the value to `false` does not disable the header—it will still be treated as if it were true.
+     * You may submit data through the Braze API for a user who has not yet used your mobile app to generate a user profile. If the user subsequently uses the application all information following their identification using the SDK will be merged with the existing user profile you created using the API call. Any user behavior recorded anonymously by the SDK before identification will be lost upon merging with the existing API-generated user profile.
      *
-     * #### Use cases
+     * The segmentation tool will include these users regardless of whether they have engaged with the app. If you want to exclude users uploaded using the User API who have not yet engaged with the app, add the `Session Count > 0` filter.
      *
-     * Consider the following use cases where you may use the bulk update header:
+     * ### How does `/users/track` handle duplicate events?
      *
-     * - A daily job where multiple users’ custom attributes are updated via the `/users/track` endpoint.
-     * - An ad-hoc user data backfill script which updates user information via the `/users/track` endpoint.
+     * Each event object in the events array represents a single occurrence of a custom event by a user at a designated time. This means each event ingested into Braze has its own event ID, so “duplicate” events are treated as separate, unique events.
+     *
+     * ## Monthly Active Users CY 24-25
+     *
+     * For customers who have purchased Monthly Active Users - CY 24-25, Braze manages different rate limits on its `/users/track` endpoint:
+     *
+     * - Hourly rate limits are set according to the expected data ingestion activity on your account, which may correspond to the number of monthly active users you have purchased, industry, seasonality, or other factors.
+     *
+     * - In addition to the limit on requests per hour, Braze also imposes a burst limit on the number of requests allowed per second.
+     *
+     * - Each request may batch up to 50 updates combined across attribute, event, or purchase objects.
+     *
+     *
+     * Current limits based on expected ingestion can be found in the dashboard under **Settings** > **APIs and Identifiers** > **API limits**. We may modify rate limits to protect system stability or allow for increased data throughput on your account. Please contact Braze Support or your customer success manager for questions or concerns regarding hourly or per-second request limit and the needs of your business.
      *
      * @param array $headerParameters {
      *

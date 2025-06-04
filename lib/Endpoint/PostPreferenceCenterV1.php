@@ -15,11 +15,13 @@ class PostPreferenceCenterV1 extends \Braze\Runtime\Client\BaseEndpoint implemen
     use \Braze\Runtime\Client\EndpointTrait;
 
     /**
-     * > Use this endpoint to create a preference center to allow users to manage their notification preferences for email campaigns.
+     * > Use this endpoint to create a preference center to allow users to manage their notification preferences for your email campaigns.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `preference_center.update` permission.
+     * Refer to [Create a preference center with API](https://www.braze.com/docs/user_guide/message_building_by_channel/email/preference_center/overview/#create-a-preference-center-via-api) for steps on how to build an API-generated preference center.
      *
-     * Check out [Creating a preference center via API](https://www.braze.com/docs/user_guide/message_building_by_channel/email/preference_center/) for details on how to include this in your email campaigns.
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an API key with the `preference_center.update` permission.
      *
      * ## Rate limit
      *
@@ -36,7 +38,7 @@ class PostPreferenceCenterV1 extends \Braze\Runtime\Client\BaseEndpoint implemen
      * | `state` | Optional | String | Choose `active` or `draft`. Defaults to `active` if not specified. |
      * | `options` | Optional | Object | Attributes: `meta-viewport-content`. When present, a `viewport` meta tag will be added to the page with `content=` . |
      *
-     * > **Note:** The preference center name can't be edited once created.
+     * > **Note:** The preference center name can't be edited after it's created.
      *
      *
      * ### Liquid tags
@@ -47,18 +49,20 @@ class PostPreferenceCenterV1 extends \Braze\Runtime\Client\BaseEndpoint implemen
      *
      * | Liquid | Description |
      * | --- | --- |
-     * | `{{subscribed_state.${email_global}}}` | Get the global email subscribed state for the user (i.e., "opted_in", "subscribed", or "unsubscribed". |
-     * | `{{subscribed_state.${}}}` | Get the subscribed state of the specified subscription group for the user (i.e., "subscribed" or "unsubscribed"). |
+     * | `{{subscribed_state.${email_global}}}` | Get the global email subscribed state for the user (such as "opted_in", "subscribed", or "unsubscribed"). |
+     * | `{{subscribed_state.${}}}` |  |
      *
      * #### Form inputs and action
      *
      * | Liquid | Description |
      * | --- | --- |
-     * | `{% form_field_name :email_global_state %}` | Indicates that a specific form input element corresponds to the user's global email subscribed state. The user's selection state should be "opted_in", "subscribed", or "unsubscribed" when the form is submitted with selection data for the global email subscribed state. If it's a checkbox, the user will either be "opted_in" or "unsubscribed". For a hidden input, the "subscribed" state will also be valid. |
+     * | `{% form_field_name :email_global_state %}` | Indicates that a specific form input element corresponds to the user’s global email subscribed state. The user’s selection state should be “opted_in”, “subscribed”, or “unsubscribed” when the form is submitted with selection data for the global email subscribed state. If it’s a checkbox, the user will either be “opted_in” or “unsubscribed”. For a hidden input, the “subscribed” state will also be valid. |
      * | `{% form_field_name :subscription_group %}` | Indicates that a specific form input element corresponds to a given subscription group. The user's selection state should be either "subscribed" or "unsubscribed" when the form is submitted with selection data for a specific subscription group. |
      * | `{{preference_center_submit_url}}` | Generates URL for form submission. |
      *
-     * ## Example response
+     * ## Example responses
+     *
+     * ### Create preference center
      *
      * ```
      * {
@@ -67,6 +71,164 @@ class PostPreferenceCenterV1 extends \Braze\Runtime\Client\BaseEndpoint implemen
      * "created_at": "2022-09-22T18:28:07+00:00",
      * "message": "success"
      * }
+     *
+     * ```
+     *
+     * ### HTML with form inputs
+     *
+     * ```
+     * %3C!doctype%20html%3E
+     * <html lang="en">
+     * <head>
+     * <meta name="robots" content="noindex" />
+     * <title>Email Preferences</title>
+     * <script type="text/javascript">
+     * %20%20%20%20%20%20window.onload%20%3D%20()%20%3D%3E%20%7B
+     * %20%20%20%20%20%20%20%20const%20globalUnsubscribed%20%3D%20%26%23x27%3B%7B%7Bsubscribed_state.%24%7Bemail_global%7D%7D%7D%26%23x27%3B%20%3D%3D%20%22unsubscribed%22%3B
+     * %20%20%20%20%20%20%20%20const%20globalSubscribedValue%20%3D%20%26%23x27%3B%7B%7Bsubscribed_state.%24%7Bemail_global%7D%7D%7D%26%23x27%3B%20%3D%3D%20%22opted_in%22%20%3F%20%22opted_in%22%20%3A%20%22subscribed%22%3B
+     * %20%20%20%20%20%20%20%20const%20idStates%20%3D%20%5B
+     * %20%20%20%20%20%20%20%20%20%20%2F%2F%20input%20format%3A%20%5BAPI_ID%2C%20%26%23x27%3B%7B%7Bsubscribed_state.%24%7BAPI_ID%7D%7D%7D%26%23x27%3B%20%3D%3D%20%22subscribed%22%5D%5B%5D
+     * %20%20%20%20%20%20%20%20%20%20%5B%26%23x27%3B3d2ae07a-f2ff-4318-bdff-e394f2d3a4ec%26%23x27%3B%2C%20%26%23x27%3B%7B%7Bsubscribed_state.%24%7B3d2ae07a-f2ff-4318-bdff-e394f2d3a4ec%7D%7D%7D%26%23x27%3B%20%3D%3D%20%26%23x27%3Bsubscribed%26%23x27%3B%5D%2C%5B%26%23x27%3B7d89bdc3-4aa1-4592-8b8a-4c8b7161c875%26%23x27%3B%2C%20%26%23x27%3B%7B%7Bsubscribed_state.%24%7B7d89bdc3-4aa1-4592-8b8a-4c8b7161c875%7D%7D%7D%26%23x27%3B%20%3D%3D%20%26%23x27%3Bsubscribed%26%23x27%3B%5D%2C%5B%26%23x27%3B5444d32e-2815-4258-964c-b9690d4ccb94%26%23x27%3B%2C%20%26%23x27%3B%7B%7Bsubscribed_state.%24%7B5444d32e-2815-4258-964c-b9690d4ccb94%7D%7D%7D%26%23x27%3B%20%3D%3D%20%26%23x27%3Bsubscribed%26%23x27%3B%5D
+     * %20%20%20%20%20%20%20%20%5D%3B
+     * %20%20%20%20%20%20%20%20const%20setState%20%3D%20(id%2C%20subscribed)%20%3D%3E%20%7B
+     * %20%20%20%20%20%20%20%20%20%20document.querySelector(%60%23checkbox-%24%7Bid%7D%60).checked%20%3D%20subscribed%3B
+     * %20%20%20%20%20%20%20%20%20%20document.querySelector(%60%23value-%24%7Bid%7D%60).value%20%3D%20subscribed%20%3F%20%22subscribed%22%20%3A%20%22unsubscribed%22%3B
+     * %20%20%20%20%20%20%20%20%7D%3B
+     * %20%20%20%20%20%20%20%20const%20setGlobal%20%3D%20(unsubscribed)%20%3D%3E%20%7B
+     * %20%20%20%20%20%20%20%20%20%20document.querySelector(%60%23checkbox-global%60).checked%20%3D%20unsubscribed%3B
+     * %20%20%20%20%20%20%20%20%20%20document.querySelector(%60%23value-global%60).value%20%3D%20unsubscribed%20%3F%20%22unsubscribed%22%20%3A%20globalSubscribedValue%3B
+     * %20%20%20%20%20%20%20%20%20%20idStates.forEach((%5Bid%5D)%20%3D%3E%20%7B
+     * %20%20%20%20%20%20%20%20%20%20%20%20document.querySelector(%60%23checkbox-%24%7Bid%7D%60).disabled%20%3D%20unsubscribed%3B
+     * %20%20%20%20%20%20%20%20%20%20%7D)%3B
+     * %20%20%20%20%20%20%20%20%7D%3B
+     * %20%20%20%20%20%20%20%20idStates.forEach((%5Bid%2C%20state%5D)%20%3D%3E%20%7B
+     * %20%20%20%20%20%20%20%20%20%20setState(id%2C%20state)%3B
+     * %20%20%20%20%20%20%20%20%20%20document.querySelector(%60%23checkbox-%24%7Bid%7D%60).onchange%20%3D%20((e)%20%3D%3E%20%7B
+     * %20%20%20%20%20%20%20%20%20%20%20%20setState(id%2C%20e.target.checked)%3B
+     * %20%20%20%20%20%20%20%20%20%20%7D)%3B
+     * %20%20%20%20%20%20%20%20%7D)%3B
+     * %20%20%20%20%20%20%20%20setGlobal(globalUnsubscribed)%3B
+     * %20%20%20%20%20%20%20%20document.querySelector(%60%23checkbox-global%60).onchange%20%3D%20((e)%20%3D%3E%20%7B
+     * %20%20%20%20%20%20%20%20%20%20setGlobal(e.target.checked)%3B
+     * %20%20%20%20%20%20%20%20%7D)%3B
+     * %20%20%20%20%20%20%7D%3B
+     * </script>
+     * <style>
+     * %20%20%20%20%20%20body%20%7B
+     * %20%20%20%20%20%20%20%20background%3A%20%23fff%3B
+     * %20%20%20%20%20%20%20%20margin%3A%200%3B
+     * %20%20%20%20%20%20%7D
+     * %20%20%20%20%20%20%40media%20(max-width%3A%20600px)%20%7B
+     * %20%20%20%20%20%20%20%20.main-container%20%7B
+     * %20%20%20%20%20%20%20%20%20%20margin-top%3A%200%3B
+     * %20%20%20%20%20%20%20%20%20%20width%3A%20100%25%3B
+     * %20%20%20%20%20%20%20%20%7D
+     * %20%20%20%20%20%20%20%20.main-container%20.content%20.email-input%20%7B
+     * %20%20%20%20%20%20%20%20%20%20width%3A%20100%25%3B
+     * %20%20%20%20%20%20%20%20%7D
+     * %20%20%20%20%20%20%7D
+     * </style>
+     * </head>
+     * <body class="vsc-initialized" style="margin: 0" bgcolor="#fff">
+     * %20%20%20%20%3Cdiv
+     * %20%20%20%20%20%20class%3D%22main-container%22
+     * %20%20%20%20%20%20style%3D%22
+     * %20%20%20%20%20%20%20%20background-color%3A%20%23fff%3B
+     * %20%20%20%20%20%20%20%20color%3A%20%23333335%3B
+     * %20%20%20%20%20%20%20%20font-family%3A
+     * %20%20%20%20%20%20%20%20%20%20Sailec%20W00%20Medium%2C
+     * %20%20%20%20%20%20%20%20%20%20helvetica%2C
+     * %20%20%20%20%20%20%20%20%20%20arial%2C
+     * %20%20%20%20%20%20%20%20%20%20sans-serif%3B
+     * %20%20%20%20%20%20%20%20margin-left%3A%20auto%3B
+     * %20%20%20%20%20%20%20%20margin-right%3A%20auto%3B
+     * %20%20%20%20%20%20%20%20margin-top%3A%2030px%3B
+     * %20%20%20%20%20%20%20%20width%3A%20600px%3B
+     * %20%20%20%20%20%20%20%20padding%3A%2015px%200%205px%3B
+     * %20%20%20%20%20%20%22
+     * %20%20%20%20%3E
+     * <div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="content" style="margin-left: 20px; margin-right: 20px">
+     * <div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27;>
+     * %20%20%20%20%20%20%20%20%20%20%3Ch1
+     * %20%20%20%20%20%20%20%20%20%20%20%20style%3D%22color%3A%20%233accdd%3B%20font-size%3A%2027px%3B%20font-weight%3A%20400%3B%20margin-bottom%3A%2040px%3B%20margin-top%3A%200%22
+     * %20%20%20%20%20%20%20%20%20%20%20%20align%3D%22center%22
+     * %20%20%20%20%20%20%20%20%20%20%3E
+     * %20%20%20%20%20%20%20%20%20%20%20%20Manage%20Email%20Preferences
+     * </h1>
+     * <p class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="intro-text" style="font-size: 14px; margin-bottom: 20px" align="center">
+     * %20%20%20%20%20%20%20%20%20%20%20%20Select%20the%20emails%20that%20you%20want%20to%20receive.
+     * </p>
+     * </div>
+     * <form action="{{preference_center_submit_url}}" method="post" accept-charset="UTF-8">
+     * <div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27;>
+     * <h3 class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; style="font-size: 15px; margin-bottom: 15px; margin-left: 5px; margin-top: 40px">
+     * Email Address: <span class="displayed-email" style="font-weight: 400">{{${email_address}}}</span>
+     * </h3>
+     * </div>
+     * <div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="subscription-groups-holder" style="margin-bottom: 20px"><div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="row" style="border-top-width: 1px; border-top-color: #dddde2; border-top-style: solid; background-color: #fff; padding: 15px 10px 14px;border-bottom: 1px solid rgb(221, 221, 226);">
+     * <label style="color: #27368f; cursor: pointer; font-size: 15px; font-weight: 700;">
+     * <input type="checkbox" id="checkbox-3d2ae07a-f2ff-4318-bdff-e394f2d3a4ec" class="sub_group" style="margin-right: 4px;">
+     * <input type="hidden" name="{% form_field_name :subscription_group 3d2ae07a-f2ff-4318-bdff-e394f2d3a4ec %}" id="value-3d2ae07a-f2ff-4318-bdff-e394f2d3a4ec" />
+     * %20%20%20%20Sub%20Group%201
+     * </label>
+     * <p class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="subscription-group" style="font-size: 13px; line-height: 1.4em; min-height: 20px; padding-right: 20px; margin: 0 0 3px 23px;">
+     * </p>
+     * </div>
+     * <div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="row" style="border-top-width: 1px; border-top-color: #dddde2; border-top-style: solid; background-color: #fff; padding: 15px 10px 14px;border-bottom: 1px solid rgb(221, 221, 226);">
+     * <label style="color: #27368f; cursor: pointer; font-size: 15px; font-weight: 700;">
+     * <input type="checkbox" id="checkbox-7d89bdc3-4aa1-4592-8b8a-4c8b7161c875" class="sub_group" style="margin-right: 4px;">
+     * <input type="hidden" name="{% form_field_name :subscription_group 7d89bdc3-4aa1-4592-8b8a-4c8b7161c875 %}" id="value-7d89bdc3-4aa1-4592-8b8a-4c8b7161c875" />
+     * %20%20%20%20Sub%20Group%202
+     * </label>
+     * <p class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="subscription-group" style="font-size: 13px; line-height: 1.4em; min-height: 20px; padding-right: 20px; margin: 0 0 3px 23px;">
+     * </p>
+     * </div>
+     * <div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="row" style="border-top-width: 1px; border-top-color: #dddde2; border-top-style: solid; background-color: #fff; padding: 15px 10px 14px;border-bottom: 1px solid rgb(221, 221, 226);">
+     * <label style="color: #27368f; cursor: pointer; font-size: 15px; font-weight: 700;">
+     * <input type="checkbox" id="checkbox-5444d32e-2815-4258-964c-b9690d4ccb94" class="sub_group" style="margin-right: 4px;">
+     * <input type="hidden" name="{% form_field_name :subscription_group 5444d32e-2815-4258-964c-b9690d4ccb94 %}" id="value-5444d32e-2815-4258-964c-b9690d4ccb94" />
+     * %20%20%20%20Sub%20Group%203
+     * </label>
+     * <p class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="subscription-group" style="font-size: 13px; line-height: 1.4em; min-height: 20px; padding-right: 20px; margin: 0 0 3px 23px;">
+     * </p>
+     * </div>
+     * </div>
+     * <div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="unsub-all" style="cursor: pointer; font-size: 13px; margin-bottom: 20px" align="center">
+     * <label>
+     * <input type="checkbox" id="checkbox-global" />
+     * %20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cinput
+     * %20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20type%3D%22hidden%22
+     * %20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20id%3D%22value-global%22
+     * %20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20name%3D%22%7B%25%20form_field_name%20%3Aemail_global_state%20%25%7D%22
+     * %20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%3E
+     * <i class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27;> Unsubscribe from all of the above types of emails </i>
+     * </label>
+     * </div>
+     * <div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27;>
+     * %20%20%20%20%20%20%20%20%20%20%20%20%3Cinput
+     * %20%20%20%20%20%20%20%20%20%20%20%20%20%20class%3D%22save%22
+     * %20%20%20%20%20%20%20%20%20%20%20%20%20%20type%3D%22submit%22
+     * %20%20%20%20%20%20%20%20%20%20%20%20%20%20value%3D%22Save%22
+     * %20%20%20%20%20%20%20%20%20%20%20%20%20%20style%3D%22
+     * %20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20background-color%3A%20rgb(71%2C%20204%2C%20163)%3B
+     * %20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20color%3A%20%23fff%3B
+     * %20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20cursor%3A%20pointer%3B
+     * %20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20display%3A%20block%3B
+     * %20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20font-size%3A%2016px%3B
+     * %20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20text-align%3A%20center%3B
+     * %20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20text-decoration%3A%20none%3B
+     * %20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20width%3A%20200px%3B
+     * %20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20margin%3A%200%20auto%2020px%3B
+     * %20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20padding%3A%2012px%3B
+     * %20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20border-style%3A%20none%3B
+     * %20%20%20%20%20%20%20%20%20%20%20%20%20%20%22
+     * %20%20%20%20%20%20%20%20%20%20%20%20%2F%3E
+     * </div>
+     * </form>
+     * </div>
+     * </div>
+     * </body>
+     * </html>
      *
      * ```
      *

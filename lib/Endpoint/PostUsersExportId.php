@@ -17,9 +17,11 @@ class PostUsersExportId extends \Braze\Runtime\Client\BaseEndpoint implements \B
     /**
      * > Use this endpoint to export data from any user profile by specifying a user identifier.
      *
-     * Up to 50 `external_ids` or `user_aliases` can be included in a single request. Should you want to specify `device_id` or `email_address` only one of either identifier can be included per request.
+     * Up to 50 `external_ids` or `user_aliases` can be included in a single request. Should you want to specify `device_id`, `email_address` , or `phone`, only one of any identifier can be included per request.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `users.export.ids` permission.
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key](https://www.braze.com/docs/api/basics#rest-api-key/) with the `users.export.ids` permission.
      *
      * ## Rate limit
      *
@@ -71,6 +73,10 @@ class PostUsersExportId extends \Braze\Runtime\Client\BaseEndpoint implements \B
      * | `uninstalled_at` | Timestamp | Date and time the user uninstalls the app. Omitted if the app has not been uninstalled. |
      * | `user_aliases` | Object | [User aliases object](https:/www.braze.com/docs/api/objects_filters/user_alias_object#user-alias-object-specification) containing the `alias_name` and `alias_label`, if exists. |
      *
+     * Be aware that the `/users/export/ids` endpoint will pull together the entire user profile for this user, including data such as all campaigns and Canvases received, all custom events performed, all purchases made, and all custom attributes. As a result, this endpoint is slower than other REST API endpoints.
+     *
+     * Depending on the data requested, this API endpoint may not be sufficient to meet your needs due to the 2,500 requests per minute rate limit. If you anticipate using this endpoint regularly to export users, instead consider exporting users by segment, which is asynchronous and more optimized for larger data pulls.
+     *
      * ### Response
      *
      * ``` json
@@ -86,12 +92,13 @@ class PostUsersExportId extends \Braze\Runtime\Client\BaseEndpoint implements \B
      *
      * For an example of the data that is accessible via this endpoint see the following example.
      *
-     * ### Sample user export file output
+     * ### Example user export file output
      *
      * User export object (we will include the least data possible - if a field is missing from the object it should be assumed to be null, false, or empty):
      *
      * ``` json
      * {
+     * "created_at": (string),
      * "external_id" : (string),
      * "user_aliases" : [
      * {
@@ -105,9 +112,9 @@ class PostUsersExportId extends \Braze\Runtime\Client\BaseEndpoint implements \B
      * "email" : (string),
      * "dob" : (string) date for the user's date of birth,
      * "home_city" : (string),
-     * "country" : (string),
+     * "country" : (string) ISO-3166-1 alpha-2 standard,
      * "phone" : (string),
-     * "language" : (string) ISO-639 two letter code,
+     * "language" : (string) ISO-639-1 standard,
      * "time_zone" : (string),
      * "last_coordinates" : (array of float) [lon, lat],
      * "gender" : (string) "M" | "F",
@@ -142,11 +149,10 @@ class PostUsersExportId extends \Braze\Runtime\Client\BaseEndpoint implements \B
      * "model" : (string),
      * "os" : (string),
      * "carrier" : (string),
-     * "idfv" : (string) only included for iOS devices,
+     * "idfv" : (string) only included for iOS devices when IDFV collection is enabled,
      * "idfa" : (string) only included for iOS devices when IDFA collection is enabled,
      * "google_ad_id" : (string) only included for Android devices when Google Play Advertising Identifier collection is enabled,
      * "roku_ad_id" : (string) only included for Roku devices,
-     * "windows_ad_id" : (string) only included for Windows devices,
      * "ad_tracking_enabled" : (bool)
      * },
      * ...
@@ -174,7 +180,8 @@ class PostUsersExportId extends \Braze\Runtime\Client\BaseEndpoint implements \B
      * {
      * "name" : (string),
      * "last_received" : (string) date,
-     * "engaged" : {
+     * "engaged" :
+     * {
      * "opened_email" : (bool),
      * "opened_push" : (bool),
      * "clicked_email" : (bool),

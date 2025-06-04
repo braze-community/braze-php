@@ -58,7 +58,7 @@ class GetSessionsDataSeries extends \Braze\Runtime\Client\BaseEndpoint implement
      * Date on which the data series should end. Defaults to time of the request.
      * @var string $app_id (Optional) String
      *
-     * App API identifier retrieved from the **Settings > Setup and Testing > API Keys** to limit analytics to a specific app
+     * App API identifier retrieved from the [API Keys](https://www.braze.com/docs/user_guide/administrative/app_settings/api_settings_tab/) page to limit analytics to a specific app.
      * @var string $segment_id (Required) String
      *
      * See [Segment API identifier](https://www.braze.com/docs/api/identifier_types/). Segment ID indicating the analytics-enabled segment for which sessions should be returned.

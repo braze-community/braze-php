@@ -17,7 +17,9 @@ class PostMessagesScheduleDelete extends \Braze\Runtime\Client\BaseEndpoint impl
     /**
      * > Use this endpoint to cancel a message that you previously scheduled before it has been sent.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `messages.schedule.delete` permission.
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an API key with the `messages.schedule.delete` permission.
      *
      * ### Rate limit
      *

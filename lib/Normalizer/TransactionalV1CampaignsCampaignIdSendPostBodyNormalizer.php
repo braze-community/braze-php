@@ -54,20 +54,24 @@ class TransactionalV1CampaignsCampaignIdSendPostBodyNormalizer implements Denorm
             unset($data['external_send_id']);
         }
         if (\array_key_exists('trigger_properties', $data)) {
-            $object->setTriggerProperties($this->denormalizer->denormalize($data['trigger_properties'], \Braze\Model\TransactionalV1CampaignsCampaignIdSendPostBodyTriggerProperties::class, 'json', $context));
+            $values = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+            foreach ($data['trigger_properties'] as $key => $value) {
+                $values[$key] = $value;
+            }
+            $object->setTriggerProperties($values);
             unset($data['trigger_properties']);
         }
         if (\array_key_exists('recipient', $data)) {
-            $values = [];
-            foreach ($data['recipient'] as $value) {
-                $values[] = $this->denormalizer->denormalize($value, \Braze\Model\TransactionalV1CampaignsCampaignIdSendPostBodyRecipientItem::class, 'json', $context);
+            $values_1 = [];
+            foreach ($data['recipient'] as $value_1) {
+                $values_1[] = $this->denormalizer->denormalize($value_1, \Braze\Model\TransactionalV1CampaignsCampaignIdSendPostBodyRecipientItem::class, 'json', $context);
             }
-            $object->setRecipient($values);
+            $object->setRecipient($values_1);
             unset($data['recipient']);
         }
-        foreach ($data as $key => $value_1) {
-            if (preg_match('/.*/', (string) $key)) {
-                $object[$key] = $value_1;
+        foreach ($data as $key_1 => $value_2) {
+            if (preg_match('/.*/', (string) $key_1)) {
+                $object[$key_1] = $value_2;
             }
         }
 
@@ -81,18 +85,22 @@ class TransactionalV1CampaignsCampaignIdSendPostBodyNormalizer implements Denorm
             $dataArray['external_send_id'] = $data->getExternalSendId();
         }
         if ($data->isInitialized('triggerProperties') && null !== $data->getTriggerProperties()) {
-            $dataArray['trigger_properties'] = $this->normalizer->normalize($data->getTriggerProperties(), 'json', $context);
+            $values = [];
+            foreach ($data->getTriggerProperties() as $key => $value) {
+                $values[$key] = $value;
+            }
+            $dataArray['trigger_properties'] = $values;
         }
         if ($data->isInitialized('recipient') && null !== $data->getRecipient()) {
-            $values = [];
-            foreach ($data->getRecipient() as $value) {
-                $values[] = $this->normalizer->normalize($value, 'json', $context);
+            $values_1 = [];
+            foreach ($data->getRecipient() as $value_1) {
+                $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
             }
-            $dataArray['recipient'] = $values;
+            $dataArray['recipient'] = $values_1;
         }
-        foreach ($data as $key => $value_1) {
-            if (preg_match('/.*/', (string) $key)) {
-                $dataArray[$key] = $value_1;
+        foreach ($data as $key_1 => $value_2) {
+            if (preg_match('/.*/', (string) $key_1)) {
+                $dataArray[$key_1] = $value_2;
             }
         }
 

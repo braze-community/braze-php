@@ -17,23 +17,37 @@ class PostUsersAliasNew extends \Braze\Runtime\Client\BaseEndpoint implements \B
     /**
      * > Use this endpoint to add new user aliases for existing identified users, or to create new unidentified users.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `users.alias.new` permission.
-     *
      * Up to 50 user aliases may be specified per request.
      *
-     **Adding a user alias for an existing user** requires an `external_id` to be included in the new user alias object. If the `external_id` is present in the object but there is no user with that `external_id`, the alias will not be added to any users. If an `external_id` is not present, a user will still be created but will need to be identified later. You can do this using the "Identifying Users" and the `users/identify` endpoint.
+     **Adding a user alias for an existing user** requires an `external_id` to be included in the new user alias object. If the `external_id` is present in the object but there is no user with that `external_id`, the alias will not be added to any users. If an `external_id` is not present, a user will still be created but will need to be identified later. You can do this using the “Identifying Users” and the `users/identify` endpoint.
      *
-     **Creating a new alias-only user** requires the `external_id` to be omitted from the new user alias object. Once the user is created, use the `/users/track` endpoint to associate the alias-only user with attributes, events, and purchases, and the `/users/identify` endpoint to identify the user with an `external_id`.
+     **Creating a new alias-only user** requires the `external_id` to be omitted from the new user alias object. After the user is created, use the `/users/track` endpoint to associate the alias-only user with attributes, events, and purchases, and the `/users/identify` endpoint to identify the user with an `external_id`.
+     *
+     * ## Prerequisites
+     *
+     * To use this endpoint, you'll need an [API key](https://braze.com/docs/api/api_key/) with the `users.alias.new` permission.
      *
      * ### Rate limit
      *
-     * For customers who onboarded with Braze on or after September 16, 2021, we apply a shared rate limit of 20,000 requests per minute to this endpoint. This rate limit is shared with the `/users/delete` and `/users/identify` endpoints, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
+     * For customers who onboarded with Braze on or after September 16, 2021, we apply a shared rate limit of 20,000 requests per minute to this endpoint. This rate limit is shared with the `/users/delete`, `/users/identify`, `/users/merge`, and `/users/alias/update` endpoints, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
      * ### Request parameters
      *
      * | Parameter | Required | Data Type | Description |
      * | --- | --- | --- | --- |
      * | `user_aliases` | Required | Array of new user alias objects | See [user alias object](https://www.braze.com/docs/api/objects_filters/user_alias_object/).  <br>  <br>For more information on `alias_name` and `alias_label`, check out our [User Aliases](https://www.braze.com/docs/user_guide/data_and_analytics/user_data_collection/user_profile_lifecycle/#user-aliases) documentation. |
+     *
+     * ### Response
+     *
+     * ``` json
+     *
+     * Content-Type: application/json
+     * Authorization: Bearer YOUR_REST_API_KEY
+     * {
+     * "aliases_processed": 1,
+     * "message": "success"
+     * }
+     * ```
      *
      * @param array $headerParameters {
      *

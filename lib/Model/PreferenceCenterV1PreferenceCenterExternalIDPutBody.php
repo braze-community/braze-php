@@ -24,57 +24,85 @@ class PreferenceCenterV1PreferenceCenterExternalIDPutBody extends \ArrayObject
     /**
      * @var string
      */
-    protected $externalSendId;
+    protected $name;
     /**
-     * @var PreferenceCenterV1PreferenceCenterExternalIDPutBodyTriggerProperties
+     * @var string
      */
-    protected $triggerProperties;
+    protected $preferenceCenterTitle;
     /**
-     * @var list<PreferenceCenterV1PreferenceCenterExternalIDPutBodyRecipientItem>
+     * @var string
      */
-    protected $recipient;
+    protected $preferenceCenterPageHtml;
+    /**
+     * @var string
+     */
+    protected $confirmationPageHtml;
+    /**
+     * @var PreferenceCenterV1PreferenceCenterExternalIDPutBodyOptions
+     */
+    protected $options;
 
-    public function getExternalSendId(): string
+    public function getName(): string
     {
-        return $this->externalSendId;
+        return $this->name;
     }
 
-    public function setExternalSendId(string $externalSendId): self
+    public function setName(string $name): self
     {
-        $this->initialized['externalSendId'] = true;
-        $this->externalSendId = $externalSendId;
+        $this->initialized['name'] = true;
+        $this->name = $name;
 
         return $this;
     }
 
-    public function getTriggerProperties(): PreferenceCenterV1PreferenceCenterExternalIDPutBodyTriggerProperties
+    public function getPreferenceCenterTitle(): string
     {
-        return $this->triggerProperties;
+        return $this->preferenceCenterTitle;
     }
 
-    public function setTriggerProperties(PreferenceCenterV1PreferenceCenterExternalIDPutBodyTriggerProperties $triggerProperties): self
+    public function setPreferenceCenterTitle(string $preferenceCenterTitle): self
     {
-        $this->initialized['triggerProperties'] = true;
-        $this->triggerProperties = $triggerProperties;
+        $this->initialized['preferenceCenterTitle'] = true;
+        $this->preferenceCenterTitle = $preferenceCenterTitle;
 
         return $this;
     }
 
-    /**
-     * @return list<PreferenceCenterV1PreferenceCenterExternalIDPutBodyRecipientItem>
-     */
-    public function getRecipient(): array
+    public function getPreferenceCenterPageHtml(): string
     {
-        return $this->recipient;
+        return $this->preferenceCenterPageHtml;
     }
 
-    /**
-     * @param list<PreferenceCenterV1PreferenceCenterExternalIDPutBodyRecipientItem> $recipient
-     */
-    public function setRecipient(array $recipient): self
+    public function setPreferenceCenterPageHtml(string $preferenceCenterPageHtml): self
     {
-        $this->initialized['recipient'] = true;
-        $this->recipient = $recipient;
+        $this->initialized['preferenceCenterPageHtml'] = true;
+        $this->preferenceCenterPageHtml = $preferenceCenterPageHtml;
+
+        return $this;
+    }
+
+    public function getConfirmationPageHtml(): string
+    {
+        return $this->confirmationPageHtml;
+    }
+
+    public function setConfirmationPageHtml(string $confirmationPageHtml): self
+    {
+        $this->initialized['confirmationPageHtml'] = true;
+        $this->confirmationPageHtml = $confirmationPageHtml;
+
+        return $this;
+    }
+
+    public function getOptions(): PreferenceCenterV1PreferenceCenterExternalIDPutBodyOptions
+    {
+        return $this->options;
+    }
+
+    public function setOptions(PreferenceCenterV1PreferenceCenterExternalIDPutBodyOptions $options): self
+    {
+        $this->initialized['options'] = true;
+        $this->options = $options;
 
         return $this;
     }

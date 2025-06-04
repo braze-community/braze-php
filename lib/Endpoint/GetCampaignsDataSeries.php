@@ -19,13 +19,16 @@ class GetCampaignsDataSeries extends \Braze\Runtime\Client\BaseEndpoint implemen
      *
      * Data returned includes how many messages were sent, opened, clicked, or converted by messaging channel.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `campaigns.data_series` permission.
+     * > **Note:** If you are using our [older navigation](https://www.braze.com/docs/navigation), `campaign_id` can be found at **Developer Console > API Settings**.
      *
-     * Note: If you are using our [older navigation](https://www.braze.com/docs/navigation), `campaign_id` can be found at **Developer Console > API Settings**.
+     *
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key](https://braze.com/docs/api/api_key/) with the `campaigns.data_series` permission.
      *
      * ## Rate limit
      *
-     * We apply the default Braze rate limit of 250,000 requests per hour to this endpoint, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
+     * This endpoint has a rate limit of 50,000 requests per minute, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
      * ## Responses
      *

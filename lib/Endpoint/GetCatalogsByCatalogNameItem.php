@@ -18,7 +18,9 @@ class GetCatalogsByCatalogNameItem extends \Braze\Runtime\Client\BaseEndpoint im
     /**
      * > Use this endpoint to return multiple catalog items and their content.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `catalogs.get_items` permission.
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key](https://braze.com/docs/api/api_key/) with the `catalogs.get_items` permission.
      *
      * ## Rate limit
      *
@@ -37,6 +39,10 @@ class GetCatalogsByCatalogNameItem extends \Braze\Runtime\Client\BaseEndpoint im
      * | Parameter | Required | Data Type | Description |
      * | --- | --- | --- | --- |
      * | `cursor` | Optional | String | Determines the pagination of the catalog items. |
+     *
+     * ## Request parameters
+     *
+     * There is no request body for this endpoint.
      *
      * ## Example requests
      *
@@ -66,12 +72,13 @@ class GetCatalogsByCatalogNameItem extends \Braze\Runtime\Client\BaseEndpoint im
      *
      * The status code `200` could return the following response header and body.
      *
-     * {% alert note %}
-     * The `Link` header won't exist if the catalog has less than or equal to 50 items. For calls without a cursor, `prev` will not show. When looking at the last page of items, `next` will not show.
-     * {% endalert %}
+     * >
+     **Note:** The `Link` header won't exist if the catalog has less than or equal to 50 items. For calls without a cursor, `prev` will not show. When looking at the last page of items, `next` will not show.
+     *
+     *
      *
      * ```
-     * Link: ; rel="prev",; rel="next"
+     * Link: </catalogs/all_restaurants/items?cursor=c2tpcDow>; rel="prev",</catalogs/all_restaurants/items?cursor=c2tpcDoxMDA=>; rel="next"
      *
      * ```
      *

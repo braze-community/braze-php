@@ -17,27 +17,45 @@ class PostContentBlocksCreate extends \Braze\Runtime\Client\BaseEndpoint impleme
     /**
      * > Use this endpoint to create a [Content Block](https://www.braze.com/docs/user_guide/engagement_tools/templates_and_media/content_blocks/).
      *
-     * To use this endpoint, you’ll need to generate an API key with the `content_blocks.create` permission.
+     * ## Prerequisites
      *
-     * ### Rate limit
+     * To use this endpoint, you’ll need an [API key](https://www.braze.com/docs/api/api_key/) with the `content_blocks.create` permission.
+     *
+     * ## Rate limit
      *
      * We apply the default Braze rate limit of 250,000 requests per hour to this endpoint, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
-     * ### Request parameters
+     * ## Request parameters
      *
      * | Parameter | Required | Data Type | Description |
      * | --- | --- | --- | --- |
-     * | `name` | Required | String | Name of the content block. Must be less than 100 characters. |
-     * | `description` | Optional | String | Description of the content block. Must be less than 250 characters. |
+     * | `name` | Required | String | Name of the Content Block. Must be less than 100 characters. |
+     * | `description` | Optional | String | Description of the Content Block. Must be less than 250 characters. |
      * | `content` | Required | String | HTML or text content within the Content Block. |
      * | `state` | Optional | String | Choose `active` or `draft`. Defaults to `active` if not specified. |
      * | `tags` | Optional | Array of strings | [Tags](https://www.braze.com/docs/user_guide/administrative/app_settings/manage_app_group/tags/) must already exist. |
      *
-     * ### Response
+     * ## Example request
+     *
+     * ``` json
+     * Copiedcurl --location --request POST 'https://rest.iad-01.braze.com/content_blocks/create' \
+     * --header 'Content-Type: application/json' \
+     * --header 'Authorization: Bearer YOUR_REST_API_KEY' \
+     * --data-raw '{
+     * "name": "content_block",
+     * "description": "This is my Content Block",
+     * "content": "HTML content within block",
+     * "state": "draft",
+     * "tags": ["marketing"]
+     * }'
+     *
+     * ```
+     *
+     * ## Response
      *
      * ``` json
      * Content-Type: application/json
-     * Authorization: Bearer YOUR-REST-API-KEY
+     * Authorization: Bearer YOUR_REST_API_KEY
      * {
      * "content_block_id": (string) Your newly generated block id,
      * "liquid_tag": (string) The generated block tag from the Content Block name,
@@ -63,10 +81,10 @@ class PostContentBlocksCreate extends \Braze\Runtime\Client\BaseEndpoint impleme
      * | `Content Block description must be shorter than 250 characters` |  |
      * | `Content Block name cannot be blank` |  |
      * | `Content Block name must be shorter than 100 characters` |  |
-     * | `Content Block name can only contain alphanumeric characters` | Content Block names can include any of the following characters: the letters (capitalized or lowercase) `A` through `Z`, the numbers `0` through `9`, dashes `-`, and underscores `_`. It cannot contain non-alphanumeric characters like emojis, `!`, `@`, `~`, `&`, and other "special" characters. |
+     * | `Content Block name can only contain alphanumeric characters` | Content Block names can include any of the following characters: the letters (capitalized or lowercase) `A` through `Z`, the numbers `0` through `9`, dashes `-`, and underscores `_`. It cannot contain non-alphanumeric characters like emojis, `!`, `@`, `~`, `&`, and other “special” characters. |
      * | `Content Block with this name already exists` | Try a different name. |
      * | `Content Block state must be either active or draft` |  |
-     * | `Tags must be an array` | Tags must be formatted as an array of strings, for example `["marketing", "promotional", "transactional"]`. |
+     * | `Tags must be an array` | Tags must be formatted as an array of strings, for example `["marketing", "promotional", "transactional"]`. |
      * | `All tags must be strings` | Make sure your tags are encapsulated in quotes (`""`). |
      * | `Some tags could not be found` | To add a tag when creating a Content Block, the tag must already exist in Braze. |
      *

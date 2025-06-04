@@ -28,22 +28,6 @@ class JaneObjectNormalizer implements DenormalizerInterface, NormalizerInterface
     protected $normalizers = [
         \Braze\Model\Error::class => ErrorNormalizer::class,
 
-        \Braze\Model\TemplatesEmailUpdatePostBody::class => TemplatesEmailUpdatePostBodyNormalizer::class,
-
-        \Braze\Model\UsersTrackPostBody::class => UsersTrackPostBodyNormalizer::class,
-
-        \Braze\Model\CatalogsPostBody::class => CatalogsPostBodyNormalizer::class,
-
-        \Braze\Model\CatalogsPostBodyCatalogsItem::class => CatalogsPostBodyCatalogsItemNormalizer::class,
-
-        \Braze\Model\CatalogsPostBodyCatalogsItemFieldsItem::class => CatalogsPostBodyCatalogsItemFieldsItemNormalizer::class,
-
-        \Braze\Model\CatalogsCatalogNameItemsPatchBody::class => CatalogsCatalogNameItemsPatchBodyNormalizer::class,
-
-        \Braze\Model\CatalogsCatalogNameItemsPatchBodyItemsItem::class => CatalogsCatalogNameItemsPatchBodyItemsItemNormalizer::class,
-
-        \Braze\Model\CatalogsCatalogNameItemsPostBody::class => CatalogsCatalogNameItemsPostBodyNormalizer::class,
-
         \Braze\Model\CatalogsCatalogNameItemsPutBody::class => CatalogsCatalogNameItemsPutBodyNormalizer::class,
 
         \Braze\Model\CatalogsCatalogNameItemsItemIdPatchBody::class => CatalogsCatalogNameItemsItemIdPatchBodyNormalizer::class,
@@ -142,8 +126,6 @@ class JaneObjectNormalizer implements DenormalizerInterface, NormalizerInterface
 
         \Braze\Model\TransactionalV1CampaignsCampaignIdSendPostBody::class => TransactionalV1CampaignsCampaignIdSendPostBodyNormalizer::class,
 
-        \Braze\Model\TransactionalV1CampaignsCampaignIdSendPostBodyTriggerProperties::class => TransactionalV1CampaignsCampaignIdSendPostBodyTriggerPropertiesNormalizer::class,
-
         \Braze\Model\TransactionalV1CampaignsCampaignIdSendPostBodyRecipientItem::class => TransactionalV1CampaignsCampaignIdSendPostBodyRecipientItemNormalizer::class,
 
         \Braze\Model\CampaignsTriggerSendPostBody::class => CampaignsTriggerSendPostBodyNormalizer::class,
@@ -170,9 +152,7 @@ class JaneObjectNormalizer implements DenormalizerInterface, NormalizerInterface
 
         \Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBody::class => PreferenceCenterV1PreferenceCenterExternalIDPutBodyNormalizer::class,
 
-        \Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBodyTriggerProperties::class => PreferenceCenterV1PreferenceCenterExternalIDPutBodyTriggerPropertiesNormalizer::class,
-
-        \Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBodyRecipientItem::class => PreferenceCenterV1PreferenceCenterExternalIDPutBodyRecipientItemNormalizer::class,
+        \Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBodyOptions::class => PreferenceCenterV1PreferenceCenterExternalIDPutBodyOptionsNormalizer::class,
 
         \Braze\Model\PreferenceCenterV1PostBody::class => PreferenceCenterV1PostBodyNormalizer::class,
 
@@ -212,29 +192,35 @@ class JaneObjectNormalizer implements DenormalizerInterface, NormalizerInterface
 
         \Braze\Model\TemplatesEmailCreatePostBody::class => TemplatesEmailCreatePostBodyNormalizer::class,
 
+        \Braze\Model\TemplatesEmailUpdatePostBody::class => TemplatesEmailUpdatePostBodyNormalizer::class,
+
         \Braze\Model\UsersExternalIdsRenamePostBody::class => UsersExternalIdsRenamePostBodyNormalizer::class,
 
         \Braze\Model\UsersExternalIdsRenamePostBodyExternalIdRenamesItem::class => UsersExternalIdsRenamePostBodyExternalIdRenamesItemNormalizer::class,
 
         \Braze\Model\UsersExternalIdsRemovePostBody::class => UsersExternalIdsRemovePostBodyNormalizer::class,
 
-        \Braze\Model\UsersAliasUpdatePostBody::class => UsersAliasUpdatePostBodyNormalizer::class,
-
-        \Braze\Model\UsersAliasUpdatePostBodyAliasUpdatesItem::class => UsersAliasUpdatePostBodyAliasUpdatesItemNormalizer::class,
-
         \Braze\Model\UsersAliasNewPostBody::class => UsersAliasNewPostBodyNormalizer::class,
 
         \Braze\Model\UsersAliasNewPostBodyUserAliasesItem::class => UsersAliasNewPostBodyUserAliasesItemNormalizer::class,
 
-        \Braze\Model\UsersDeletePostBody::class => UsersDeletePostBodyNormalizer::class,
+        \Braze\Model\UsersAliasUpdatePostBody::class => UsersAliasUpdatePostBodyNormalizer::class,
 
-        \Braze\Model\UsersDeletePostBodyUserAliasesItem::class => UsersDeletePostBodyUserAliasesItemNormalizer::class,
+        \Braze\Model\UsersAliasUpdatePostBodyAliasUpdatesItem::class => UsersAliasUpdatePostBodyAliasUpdatesItemNormalizer::class,
 
         \Braze\Model\UsersIdentifyPostBody::class => UsersIdentifyPostBodyNormalizer::class,
 
         \Braze\Model\UsersIdentifyPostBodyAliasesToIdentifyItem::class => UsersIdentifyPostBodyAliasesToIdentifyItemNormalizer::class,
 
         \Braze\Model\UsersIdentifyPostBodyAliasesToIdentifyItemUserAlias::class => UsersIdentifyPostBodyAliasesToIdentifyItemUserAliasNormalizer::class,
+
+        \Braze\Model\UsersIdentifyPostBodyEmailAddressesItem::class => UsersIdentifyPostBodyEmailAddressesItemNormalizer::class,
+
+        \Braze\Model\UsersTrackPostBody::class => UsersTrackPostBodyNormalizer::class,
+
+        \Braze\Model\UsersDeletePostBody::class => UsersDeletePostBodyNormalizer::class,
+
+        \Braze\Model\UsersDeletePostBodyUserAliasesItem::class => UsersDeletePostBodyUserAliasesItemNormalizer::class,
 
         \Braze\Model\UsersMergePostBody::class => UsersMergePostBodyNormalizer::class,
 
@@ -287,14 +273,6 @@ class JaneObjectNormalizer implements DenormalizerInterface, NormalizerInterface
     {
         return [
             \Braze\Model\Error::class => false,
-            \Braze\Model\TemplatesEmailUpdatePostBody::class => false,
-            \Braze\Model\UsersTrackPostBody::class => false,
-            \Braze\Model\CatalogsPostBody::class => false,
-            \Braze\Model\CatalogsPostBodyCatalogsItem::class => false,
-            \Braze\Model\CatalogsPostBodyCatalogsItemFieldsItem::class => false,
-            \Braze\Model\CatalogsCatalogNameItemsPatchBody::class => false,
-            \Braze\Model\CatalogsCatalogNameItemsPatchBodyItemsItem::class => false,
-            \Braze\Model\CatalogsCatalogNameItemsPostBody::class => false,
             \Braze\Model\CatalogsCatalogNameItemsPutBody::class => false,
             \Braze\Model\CatalogsCatalogNameItemsItemIdPatchBody::class => false,
             \Braze\Model\CatalogsCatalogNameItemsItemIdPostBody::class => false,
@@ -344,7 +322,6 @@ class JaneObjectNormalizer implements DenormalizerInterface, NormalizerInterface
             \Braze\Model\MessagesSendPostBodyAudience::class => false,
             \Braze\Model\MessagesSendPostBodyMessages::class => false,
             \Braze\Model\TransactionalV1CampaignsCampaignIdSendPostBody::class => false,
-            \Braze\Model\TransactionalV1CampaignsCampaignIdSendPostBodyTriggerProperties::class => false,
             \Braze\Model\TransactionalV1CampaignsCampaignIdSendPostBodyRecipientItem::class => false,
             \Braze\Model\CampaignsTriggerSendPostBody::class => false,
             \Braze\Model\CampaignsTriggerSendPostBodyAudience::class => false,
@@ -358,8 +335,7 @@ class JaneObjectNormalizer implements DenormalizerInterface, NormalizerInterface
             \Braze\Model\CanvasTriggerSendPostBodyRecipientsItemUserAlias::class => false,
             \Braze\Model\CanvasTriggerSendPostBodyRecipientsItemAttributes::class => false,
             \Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBody::class => false,
-            \Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBodyTriggerProperties::class => false,
-            \Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBodyRecipientItem::class => false,
+            \Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBodyOptions::class => false,
             \Braze\Model\PreferenceCenterV1PostBody::class => false,
             \Braze\Model\PreferenceCenterV1PostBodyOptions::class => false,
             \Braze\Model\ScimV2UsersIdPutBody::class => false,
@@ -379,18 +355,21 @@ class JaneObjectNormalizer implements DenormalizerInterface, NormalizerInterface
             \Braze\Model\ContentBlocksCreatePostBody::class => false,
             \Braze\Model\ContentBlocksUpdatePostBody::class => false,
             \Braze\Model\TemplatesEmailCreatePostBody::class => false,
+            \Braze\Model\TemplatesEmailUpdatePostBody::class => false,
             \Braze\Model\UsersExternalIdsRenamePostBody::class => false,
             \Braze\Model\UsersExternalIdsRenamePostBodyExternalIdRenamesItem::class => false,
             \Braze\Model\UsersExternalIdsRemovePostBody::class => false,
-            \Braze\Model\UsersAliasUpdatePostBody::class => false,
-            \Braze\Model\UsersAliasUpdatePostBodyAliasUpdatesItem::class => false,
             \Braze\Model\UsersAliasNewPostBody::class => false,
             \Braze\Model\UsersAliasNewPostBodyUserAliasesItem::class => false,
-            \Braze\Model\UsersDeletePostBody::class => false,
-            \Braze\Model\UsersDeletePostBodyUserAliasesItem::class => false,
+            \Braze\Model\UsersAliasUpdatePostBody::class => false,
+            \Braze\Model\UsersAliasUpdatePostBodyAliasUpdatesItem::class => false,
             \Braze\Model\UsersIdentifyPostBody::class => false,
             \Braze\Model\UsersIdentifyPostBodyAliasesToIdentifyItem::class => false,
             \Braze\Model\UsersIdentifyPostBodyAliasesToIdentifyItemUserAlias::class => false,
+            \Braze\Model\UsersIdentifyPostBodyEmailAddressesItem::class => false,
+            \Braze\Model\UsersTrackPostBody::class => false,
+            \Braze\Model\UsersDeletePostBody::class => false,
+            \Braze\Model\UsersDeletePostBodyUserAliasesItem::class => false,
             \Braze\Model\UsersMergePostBody::class => false,
             \Jane\Component\JsonSchemaRuntime\Reference::class => false,
         ];

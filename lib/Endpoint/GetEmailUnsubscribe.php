@@ -19,11 +19,14 @@ class GetEmailUnsubscribe extends \Braze\Runtime\Client\BaseEndpoint implements 
      *
      * You can use this endpoint to set up a bi-directional sync between Braze and other email systems or your own database.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `email.unsubscribe` permission.
+     * > **Note:** You must provide an `end_date`, as well as either an `email` or a `start_date`.
      *
-     **Note:** You must provide an `end_date`, as well as either an `email` or a `start_date`.
      *
      * If your date range has more than `limit` number of unsubscribes, you will need to make multiple API calls, each time increasing the `offset` until a call returns either fewer than `limit` or zero results.
+     *
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key](https://braze.com/docs/api/api_key/) with the `email.unsubscribe` permission.
      *
      * ## Rate limit
      *

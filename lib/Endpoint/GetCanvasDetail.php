@@ -17,7 +17,9 @@ class GetCanvasDetail extends \Braze\Runtime\Client\BaseEndpoint implements \Bra
     /**
      * > Use this endpoint to export metadata about a Canvas, such as the name, time created, current status, and more.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `canvas.details` permission.
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key](https://braze.com/docs/api/api_key/) with the `canvas.details` permission.
      *
      * ## Rate limit
      *
@@ -25,42 +27,53 @@ class GetCanvasDetail extends \Braze\Runtime\Client\BaseEndpoint implements \Bra
      *
      * ## Response
      *
-     * Note: All Canvas steps have a next_paths field, which is an array of `{name, next_step_id}` data. For full steps and Message steps, the `next_step_ids` field will be present, but will not contain data for other Canvas Flow steps.
+     * > **Note:** All Canvas steps have a next_paths field, which is an array of `{name, next_step_id}` data. For full steps and Message steps, the `next_step_ids` field will be present, but will not contain data for other Canvas Flow steps.
+     *
      *
      * ``` json
      * Content-Type: application/json
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
-     * "created_at": (string) date created as ISO 8601 date,
-     * "updated_at": (string) date updated as ISO 8601 date,
-     * "name": (string) Canvas name,
-     * "description": (string) Canvas description,
+     * "created_at": (string) the date created as ISO 8601 date,
+     * "updated_at": (string) the date updated as ISO 8601 date,
+     * "name": (string) the Canvas name,
+     * "description": (string) the Canvas description,
      * "archived": (boolean) whether this Canvas is archived,
      * "draft": (boolean) whether this Canvas is a draft,
-     * "schedule_type": (string) type of scheduling action,
-     * "first_entry": (string) date of first entry as ISO 8601 date,
-     * "last_entry": (string) date of last entry as ISO 8601 date,
+     * "schedule_type": (string) the type of scheduling action,
+     * "first_entry": (string) the date of first entry as ISO 8601 date,
+     * "last_entry": (string) the date of last entry as ISO 8601 date,
      * "channels": (array of strings) step channels used with Canvas,
      * "variants": [
      * {
-     * "name": (string) name of variant,
-     * "id": (string) API identifier of the variant,
-     * "first_step_ids": (array of strings) API identifiers for first steps in variant,
-     * "first_step_id": (string) API identifier of first step in variant (deprecated in November 2017, only included if the variant has only one first step)
+     * "name": (string) the name of variant,
+     * "id": (string) the API identifier of the variant,
+     * "first_step_ids": (array of strings) the API identifiers for first steps in variant,
+     * "first_step_id": (string) the API identifier of first step in variant (deprecated in November 2017, only included if the variant has only one first step)
      * },
      * ... (more variations)
      * ],
-     * "tags": (array of strings) tag names associated with the Canvas,
+     * "tags": (array of strings) the tag names associated with the Canvas,
+     * "teams" : (array) the names of the Teams associated with the Canvas,
      * "steps": [
      * {
-     * "name": (string) name of step,
-     * "id": (string) API identifier of the step,
-     * "next_step_ids": (array of strings) API identifiers of steps following step,
-     * "channels": (array of strings) channels used in step,
+     * "name": (string) the name of step,
+     * "type" (string) the type of Canvas component,
+     * "id": (string) the API identifier of the step,
+     * "next_step_ids": (array of strings) IDs for next steps that are full steps or Message steps,
+     * "next_paths": { (array of objects)
+     * // for Decision Splits, this property should evaluate to "Yes" or "No"
+     * // for Audience Path and Action Paths, this property should evaluate to the group name
+     * // for Experiment Paths, this property should evaluate to the path name
+     * // for other steps, this property should evaluate to "null"
+     * "name": (string) name the name of step,
+     * "next_step_id": (string) IDs for next steps that are full steps or Message steps,
+     * }
+     * "channels": (array of strings) the channels used in step,
      * "messages": {
      * "message_variation_id": (string) {  // <=This is the actual id
-     * "channel": (string) channel type of the message (eg., "email"),
-     * ... channel-specific fields for this message, see Campaign Details Endpoint API Response for example message responses ...
+     * "channel": (string) the channel type of the message (for example, "email"),
+     * // channel-specific fields for this message, see Campaign Details endpoint API Response for example message responses
      * }
      * }
      * },
