@@ -15,13 +15,13 @@ class GetSendsDataSeries extends \Braze\Runtime\Client\BaseEndpoint implements \
     use \Braze\Runtime\Client\EndpointTrait;
 
     /**
-     * > Use this endpoint to retrieve a daily series of various stats for a tracked `send_id`.
+     * > Use this endpoint to retrieve a daily series of various stats for a tracked `send_id` for API campaigns.
      *
-     * Braze stores send analytics for 14 days after the send.
+     * Braze stores send analytics for 14 days after the send. Campaign conversions will be attributed toward the most recent `send_id` that a given user has received from the campaign.
      *
-     * Campaign conversions will be attributed towards the most recent send id that a given user has received from the campaign.
+     * ## Prerequisites
      *
-     * To use this endpoint, you’ll need to generate an API key with the `sends.data_series` permission.
+     * This endpoint is for API campaigns only. To use this endpoint, you'll need an [API key](https://www.braze.com/docs/api/basics#rest-api-key/) with the `sends.data_series` permission.
      *
      * ## Rate limit
      *

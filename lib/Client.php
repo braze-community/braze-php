@@ -13,210 +13,15 @@ namespace Braze;
 class Client extends Runtime\Client\Client
 {
     /**
-     * > Use this endpoint to update email templates on the Braze dashboard.
-     *
-     * To use this endpoint, you’ll need to generate an API key with the `templates.email.update` permission.
-     *
-     * You can access an email template’s `email_template_id` by navigating to it on the **Templates & Media** page. The [Create email template endpoint](https://www.braze.com/docs/api/endpoints/templates/email_templates/post_create_email_template/) will also return an `email_template_id` reference.
-     *
-     * All fields other than the `email_template_id` are optional, but you must specify at least one field to update.
-     *
-     * ### Rate limit
-     *
-     * We apply the default Braze rate limit of 250,000 requests per hour to this endpoint, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
-     *
-     * ### Request parameters
-     *
-     * | Parameter | Required | Data Type | Description |
-     * | --- | --- | --- | --- |
-     * | `email_template_id` | Required | String | Your [email template's API identifier](https://www.braze.com/docs/api/identifier_types/). |
-     * | `template_name` | Optional | String | Name of your email template. |
-     * | `subject` | Optional | String | Email template subject line. |
-     * | `body` | Optional | String | Email template body that may include HTML. |
-     * | `plaintext_body` | Optional | String | A plaintext version of the email template body. |
-     * | `preheader` | Optional | String | Email preheader used to generate previews in some clients. |
-     * | `tags` | Optional | String | [Tags](https://www.braze.com/docs/user_guide/administrative/app_settings/manage_app_group/tags/) must already exist. |
-     * | `should_inline_css` | Optional | Boolean | Enables or disables the `inline_css` feature per template. If not provided, Braze will use the default setting for the AppGroup. One of `true` or `false` is expected. |
-     *
-     * ### Possible errors
-     *
-     * The following table lists possible returned errors and their associated troubleshooting steps, if applicable.
-     *
-     * | Error | Troubleshooting |
-     * | --- | --- |
-     * | Template name is required |  |
-     * | Tags must be an array | Tags must be formatted as an array of strings, for example `["marketing", "promotional", "transactional"]`. |
-     * | All tags must be strings | Make sure your tags are encapsulated in quotes (`""`). |
-     * | Some tags could not be found | To add a tag when creating an email template, the tag must already exist in Braze. |
-     * | Invalid value for `should_inline_css`. One of `true` or `false` was expected | This parameter only accepts boolean values (true or false). Make sure the value for `should_inline_css` is not encapsulated in quotes (`""`), which causes the value to be sent as a string instead. |
-     *
-     * @param array $headerParameters {
-     *
-     * @var string $Content-Type
-     * @var string $Authorization
-     *             }
-     *
-     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
-     *
-     * @return \Psr\Http\Message\ResponseInterface|null
-     *
-     * @throws Exception\PostTemplatesEmailUpdateBadRequestException
-     * @throws Exception\PostTemplatesEmailUpdateUnauthorizedException
-     * @throws Exception\PostTemplatesEmailUpdateForbiddenException
-     * @throws Exception\PostTemplatesEmailUpdateNotFoundException
-     * @throws Exception\PostTemplatesEmailUpdateTooManyRequestsException
-     * @throws Exception\PostTemplatesEmailUpdateInternalServerErrorException
-     */
-    public function postTemplatesEmailUpdate(?Model\TemplatesEmailUpdatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
-    {
-        return $this->executeEndpoint(new Endpoint\PostTemplatesEmailUpdate($requestBody, $headerParameters), $fetch);
-    }
-
-    /**
-     * > Use this endpoint to record custom events, purchases, and update user profile attributes.
-     *
-     * To use this endpoint, you’ll need to generate an API key with the `users.track` permission.
-     *
-     **Note:** Braze processes the data passed via API at face value and customers should only pass deltas (changing data) to minimize unnecessary data point consumption. To read more, refer to [Data points](https://www.braze.com/docs/user_guide/onboarding_with_braze/data_points#data-points).
-     *
-     * Customers using the API for server-to-server calls may need to allowlist `rest.iad-01.braze.com` if they’re behind a firewall.
-     *
-     * ### Rate limit
-     *
-     * We apply a base speed limit of 50,000 requests per minute to this endpoint for all customers. Each request to the `/users/track` endpoint can contain up to 75 events, 75 attribute updates, and 75 purchases. Each component (event, attribute, and purchase arrays), can update up to 75 users each for a max of 225 individual data points. Each update can also belong to the same user for a max of 225 updates to a single user in a request.
-     *
-     * See our page on [API rate limits](https://www.braze.com/docs/api/api_limits/) for details, and reach out to your customer success manager if you need your limit increased.
-     *
-     * ### Request parameters
-     *
-     * For each of the request components listed in the following table, one of `external_id`, `user_alias`, or `braze_id` is required.
-     *
-     * | Parameter | Required | Data Type | Description |
-     * | --- | --- | --- | --- |
-     * | `attributes` | Optional | Array of attributes objects | See [user attributes object](https://www.braze.com/docs/api/objects_filters/user_attributes_object/) |
-     * | `events` | Optional | Array of event objects | See [events object](https://www.braze.com/docs/api/objects_filters/event_object/) |
-     * | `purchases` | Optional | Array of purchase objects | See [purchases object](https://www.braze.com/docs/api/objects_filters/purchase_object/) |
-     *
-     * ## User track responses
-     *
-     * Upon using any of the aforementioned API requests you should receive one of the following three general responses:
-     *
-     * #### Successful message
-     *
-     * Successful messages will be met with the following response:
-     *
-     * ``` json
-     * {
-     * "message" : "success",
-     * "attributes_processed" : (optional, integer), if attributes are included in the request, this will return an integer of the number of external_ids with attributes that were queued to be processed,
-     * "events_processed" : (optional, integer), if events are included in the request, this will return an integer of the number of events that were queued to be processed,
-     * "purchases_processed" : (optional, integer), if purchases are included in the request, this will return an integer of the number of purchases that were queued to be processed,
-     * }
-     *
-     * ```
-     *
-     * #### Successful message with non-fatal errors
-     *
-     * If your message is successful but has non-fatal errors such as one invalid event object out of a long list of events, then you will receive the following response:
-     *
-     * ``` json
-     * {
-     * "message" : "success",
-     * "errors" : [
-     * {
-     * }
-     * ]
-     * }
-     *
-     * ```
-     *
-     * #### Message with fatal errors
-     *
-     * In the case of a success, any data that was not affected by an error in the `errors` array will still be processed. If your message has a fatal error you will receive the following response:
-     *
-     * ``` json
-     * {
-     * "message" : ,
-     * "errors" : [
-     * {
-     * }
-     * ]
-     * }
-     *
-     * ```
-     *
-     * ### Fatal error response codes
-     *
-     * For status codes and associated error messages that will be returned if your request encounters a fatal error, reference [Fatal errors & responses](https://www.braze.com/api/errors/#fatal-errors).
-     *
-     * If you receive the error “provided external_id is blacklisted and disallowed”, your request may have included a “dummy user”. For more information, refer to [Spam blocking](https://www.braze.com/docs/user_guide/data_and_analytics/user_data_collection/user_archival/#spam-blocking).
-     *
-     * ### Creating an alias-only user profile
-     *
-     * Keep the following nuances in mind when using the `/users/track` endpoint:
-     *
-     * You can use the `/users/track` endpoint to create a new alias-only user by setting the `_update_existing_only` key with a value of `false` in the body of the request. If this value is omitted, the alias-only user profile will not be created. Using an alias-only user guarantees that one profile with that alias will exist. This is especially helpful when building a new integration as it prevents the creation of duplicate user profiles.
-     *
-     * ### Importing legacy user data
-     *
-     * You may submit data through the Braze API for a user who has not yet used your mobile app in order to generate a user profile. If the user subsequently uses the application all information following their identification via the SDK will be merged with the existing user profile you created via the API call. Any user behavior that is recorded anonymously by the SDK prior to identification will be lost upon merging with the existing API-generated user profile.
-     *
-     * The segmentation tool will include these users regardless of whether they have engaged with the app. If you want to exclude users uploaded via the User API who have not yet engaged with the app, simply add the filter: `Session Count > 0`.
-     *
-     * ### Making bulk updates
-     *
-     * If you have a use case where you need to make batch updates to the `users/track` endpoint, we recommend adding the bulk update header so that Braze can properly identify, observe, and route your request.
-     *
-     * Refer to the following sample request with the `X-Braze-Bulk` header:
-     *
-     * ``` json
-     * curl --location --request POST 'https://rest.iad-01.braze.com/users/track' \
-     * --header 'Content-Type: application/json' \
-     * --header 'X-Braze-Bulk: true' \
-     * --header 'Authorization: Bearer YOUR-API-KEY-HERE' \
-     * --data-raw '{ "attributes": [ ], "events": [ ], "purchases": [ ] }'
-     *
-     * ```
-     *
-     * Warning: When the `X-Braze-Bulk` header is present with any value, Braze will consider the request a bulk request. Set the value to `true`. Currently, setting the value to `false` does not disable the header—it will still be treated as if it were true.
-     *
-     * #### Use cases
-     *
-     * Consider the following use cases where you may use the bulk update header:
-     *
-     * - A daily job where multiple users’ custom attributes are updated via the `/users/track` endpoint.
-     * - An ad-hoc user data backfill script which updates user information via the `/users/track` endpoint.
-     *
-     * @param array $headerParameters {
-     *
-     * @var string $Content-Type
-     * @var string $Authorization
-     *             }
-     *
-     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
-     *
-     * @return \Psr\Http\Message\ResponseInterface|null
-     *
-     * @throws Exception\PostUsersTrackBadRequestException
-     * @throws Exception\PostUsersTrackUnauthorizedException
-     * @throws Exception\PostUsersTrackForbiddenException
-     * @throws Exception\PostUsersTrackNotFoundException
-     * @throws Exception\PostUsersTrackTooManyRequestsException
-     * @throws Exception\PostUsersTrackInternalServerErrorException
-     */
-    public function postUsersTrack(?Model\UsersTrackPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
-    {
-        return $this->executeEndpoint(new Endpoint\PostUsersTrack($requestBody, $headerParameters), $fetch);
-    }
-
-    /**
      * > Use this endpoint to delete a catalog.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `catalogs.delete` permission.
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key](https://braze.com/docs/api/api_key/) with the `catalogs.delete` permission.
      *
      * ## Rate limit
      *
-     * This endpoint has a shared rate limit of 5 requests per minute between all synchronous catalog endpoints, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
+     * This endpoint has a shared rate limit of 50 requests per minute between all synchronous catalog endpoints, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
      * ## Path parameters
      *
@@ -295,11 +100,13 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to return a list of catalogs in a workspace.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `catalogs.get` permission.
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key](https://braze.com/docs/api/api_key/) with the `catalogs.get` permission.
      *
      * ## Rate limit
      *
-     * This endpoint has a shared rate limit of 5 requests per minute between all synchronous catalog endpoints, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
+     * This endpoint has a shared rate limit of 50 requests per minute between all synchronous catalog endpoints, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
      * ## Path and request parameters
      *
@@ -418,11 +225,13 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to create a catalog.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `catalogs.create` permission.
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key](https://braze.com/docs/api/api_key/) with the `catalogs.create` permission.
      *
      * ## Rate limit
      *
-     * This endpoint has a shared rate limit of 5 requests per minute between all synchronous catalog endpoints, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
+     * This endpoint has a shared rate limit of 50 requests per minute between all synchronous catalog endpoints, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
      * ## Request parameters
      *
@@ -607,13 +416,15 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to delete multiple items in your catalog.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `catalogs.delete_items` permission.
-     *
      * Each request can support up to 50 items. This endpoint is asynchronous.
+     *
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key](https://braze.com/docs/api/api_key/) with the `catalogs.delete_items` permission.
      *
      * ## Rate limit
      *
-     * This endpoint has a shared rate limit of 100 requests per minute between all asynchronous catalog item endpoints, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
+     * This endpoint has a shared rate limit of 16,000 requests per minute between all asynchronous catalog item endpoints, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
      * ## Path parameters
      *
@@ -687,7 +498,7 @@ class Client extends Runtime\Client\Client
      * | `ids-too-large` | Item IDs can't be more than 250 characters. |
      * | `ids-not-unique` | Check that the item IDs are unique in the request. |
      * | `ids-not-strings` | Item IDs must be of type string. |
-     * | `items-missing-ids` | There are items that do not have item IDs. Check that each item has an item ID. |
+     * | `items-missing-ids` | Some items don't have item IDs. Check that each item has an item ID. |
      * | `invalid-ids` | Item IDs can only include letters, numbers, hyphens, and underscores. |
      * | `request-includes-too-many-items` | Your request has too many items. The item limit per request is 50. |
      *
@@ -716,7 +527,9 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to return multiple catalog items and their content.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `catalogs.get_items` permission.
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key](https://braze.com/docs/api/api_key/) with the `catalogs.get_items` permission.
      *
      * ## Rate limit
      *
@@ -735,6 +548,10 @@ class Client extends Runtime\Client\Client
      * | Parameter | Required | Data Type | Description |
      * | --- | --- | --- | --- |
      * | `cursor` | Optional | String | Determines the pagination of the catalog items. |
+     *
+     * ## Request parameters
+     *
+     * There is no request body for this endpoint.
      *
      * ## Example requests
      *
@@ -764,12 +581,13 @@ class Client extends Runtime\Client\Client
      *
      * The status code `200` could return the following response header and body.
      *
-     * {% alert note %}
-     * The `Link` header won't exist if the catalog has less than or equal to 50 items. For calls without a cursor, `prev` will not show. When looking at the last page of items, `next` will not show.
-     * {% endalert %}
+     * >
+     **Note:** The `Link` header won't exist if the catalog has less than or equal to 50 items. For calls without a cursor, `prev` will not show. When looking at the last page of items, `next` will not show.
+     *
+     *
      *
      * ```
-     * Link: ; rel="prev",; rel="next"
+     * Link: </catalogs/all_restaurants/items?cursor=c2tpcDow>; rel="prev",</catalogs/all_restaurants/items?cursor=c2tpcDoxMDA=>; rel="next"
      *
      * ```
      *
@@ -866,13 +684,15 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to delete multiple items in your catalog.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `catalogs.delete_items` permission.
-     *
      * Each request can support up to 50 items. This endpoint is asynchronous.
+     *
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key](https://braze.com/docs/api/api_key/) with the `catalogs.update_items` permission.
      *
      * ## Rate limit
      *
-     * This endpoint has a shared rate limit of 100 requests per minute between all asynchronous catalog item endpoints, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
+     * This endpoint has a shared rate limit of 16,000 requests per minute between all asynchronous catalog item endpoints, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
      * ## Path parameters
      *
@@ -884,23 +704,51 @@ class Client extends Runtime\Client\Client
      *
      * | Parameter | Required | Data Type | Description |
      * | --- | --- | --- | --- |
-     * | `items` | Required | Array | An array that contains item objects. The item objects should contain an `id` referencing the items Braze should delete. Up to 50 item objects are allowed per request. |
+     * | `items` | Required | Array | An array that contains item objects. The item objects should contain fields that exist in the catalog. Up to 50 item objects are allowed per request. |
      *
      * ## Example request
      *
      * ```
-     * curl --location --request DELETE 'https://rest.iad-03.braze.com/catalogs/restaurants/items' \
+     * curl --location --request PATCH 'https://rest.iad-03.braze.com/catalogs/restaurants/items' \
      * --header 'Content-Type: application/json' \
      * --header 'Authorization: Bearer YOUR-REST-API-KEY' \
      * --data-raw '{
      * "items": [
-     * {"id": "restaurant1"},
-     * {"id": "restaurant2"},
-     * {"id": "restaurant3"}
+     * {
+     * "id": "restaurant1",
+     * "Name": "Restaurant",
+     * "Loyalty_Program": false,
+     * "Location": {
+     * "Latitude": 33.6112,
+     * "Longitude": -117.8711
+     * },
+     * "Top_Dishes": {
+     * "$add": [
+     * "Biscuits",
+     * "Coleslaw"
+     * ],
+     * "$remove": [
+     * "French Fries"
+     * ]
+     * },
+     * "Open_Time": "2021-09-03T09:03:19.967+00:00"
+     * },
+     * {
+     * "id": "restaurant3",
+     * "City": "San Francisco",
+     * "Rating": 2,
+     * "Top_Dishes": [
+     * "Buffalo Wings",
+     * "Philly Cheesesteak"
+     * ]
+     * }
      * ]
      * }'
      *
      * ```
+     *
+     * > **Note:** The $`add` and `$remove` operators are only applicable to array type fields, and are only supported by PATCH endpoints.
+     *
      *
      * ## Response
      *
@@ -925,13 +773,17 @@ class Client extends Runtime\Client\Client
      * {
      * "errors": [
      * {
-     * "id": "items-missing-ids",
-     * "message": "There are 1 item(s) that do not have ids",
-     * "parameters": [],
-     * "parameter_values": []
+     * "id": "invalid-fields",
+     * "message": "Some of the fields given do not exist in the catalog",
+     * "parameters": [
+     * "id"
+     * ],
+     * "parameter_values": [
+     * "restaurant1"
+     * ]
      * }
      * ],
-     * "message": "Invalid Request",
+     * "message": "Invalid Request"
      * }
      *
      * ```
@@ -944,11 +796,17 @@ class Client extends Runtime\Client\Client
      * | --- | --- |
      * | `catalog-not-found` | Check that the catalog name is valid. |
      * | `ids-too-large` | Item IDs can't be more than 250 characters. |
-     * | `ids-not-unique` | Check that the item IDs are unique in the request. |
      * | `ids-not-strings` | Item IDs must be of type string. |
-     * | `items-missing-ids` | There are items that do not have item IDs. Check that each item has an item ID. |
+     * | `ids-not-unique` | Item IDs must be unique in the request. |
      * | `invalid-ids` | Item IDs can only include letters, numbers, hyphens, and underscores. |
+     * | `invalid-fields` | Confirm that all fields you are sending in the API request already exist in the catalog. This is not related to the ID field mentioned in the error. |
+     * | `invalid-keys-in-value-object` | Item object keys can't include `.` or `$`. |
+     * | `items-missing-ids` | Some items don't have item IDs. Check that each item has an item ID. |
+     * | `item-array-invalid` | `items` must be an array of objects. |
+     * | `items-too-large` | Item values can't exceed 5,000 characters. |
      * | `request-includes-too-many-items` | Your request has too many items. The item limit per request is 50. |
+     * | `too-deep-nesting-in-value-object` | Item objects can't have more than 50 levels of nesting. |
+     * | `unable-to-coerce-value` | Item types can't be converted. |
      *
      * @param array $headerParameters {
      *
@@ -975,13 +833,15 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to create multiple items in your catalog.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `catalogs.add_items` permission.
-     *
      * Each request can support up to 50 items. This endpoint is asynchronous.
+     *
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key](https://braze.com/docs/api/api_key/) with the `catalogs.add_items` permission.
      *
      * ## Rate limit
      *
-     * This endpoint has a shared rate limit of 100 requests per minute between all asynchronous catalog item endpoints, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
+     * This endpoint has a shared rate limit of 16,000 requests per minute between all asynchronous catalog item endpoints, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
      * ## Path parameters
      *
@@ -1010,6 +870,14 @@ class Client extends Runtime\Client\Client
      * "Cuisine": "American",
      * "Rating": 5,
      * "Loyalty_Program": true,
+     * "Location": {
+     * "Latitude": 33.6112,
+     * "Longitude": -117.8711
+     * },
+     * "Top_Dishes": [
+     * "Hamburger",
+     * "Deluxe Cheeseburger"
+     * ],
      * "Created_At": "2022-11-01T09:03:19.967+00:00"
      * },
      * {
@@ -1019,6 +887,14 @@ class Client extends Runtime\Client\Client
      * "Cuisine": "American",
      * "Rating": 10,
      * "Loyalty_Program": true,
+     * "Location": {
+     * "Latitude": 40.7413,
+     * "Longitude": -73.9764
+     * },
+     * "Top_Dishes": [
+     * "Hot Dog",
+     * "French Fries"
+     * ],
      * "Created_At": "2022-11-02T09:03:19.967+00:00"
      * },
      * {
@@ -1028,6 +904,14 @@ class Client extends Runtime\Client\Client
      * "Cuisine": "American",
      * "Rating": 3,
      * "Loyalty_Program": false,
+     * "Location": {
+     * "Latitude": 40.7489,
+     * "Longitude": -73.9972
+     * },
+     * "Top_Dishes": [
+     * "Buffalo Wings",
+     * "Philly Cheesesteak"
+     * ],
      * "Created_At": "2022-11-03T09:03:19.967+00:00"
      * }
      * ]
@@ -1087,7 +971,7 @@ class Client extends Runtime\Client\Client
      * | `invalid-fields` | Confirm that the fields in the request exist in the catalog. |
      * | `invalid-keys-in-value-object` | Item object keys can't include `.` or `$`. |
      * | `item-array-invalid` | `items` must be an array of objects. |
-     * | `items-missing-ids` | There are items that do not have item IDs. Check that each item has an item ID. |
+     * | `items-missing-ids` | Some items don't have item IDs. Check that each item has an item ID. |
      * | `items-too-large` | Item values can't exceed 5,000 characters. |
      * | `request-includes-too-many-items` | Your request has too many items. The item limit per request is 50. |
      * | `too-deep-nesting-in-value-object` | Item objects can't have more than 50 levels of nesting. |
@@ -1116,40 +1000,73 @@ class Client extends Runtime\Client\Client
     }
 
     /**
-     * > Use this endpoint to send Canvas messages via API-triggered delivery.
+     * > Use this endpoint to update multiple items in your catalog.
      *
-     * To use this endpoint, you'll need to generate an API key with the `catalogs.replace_item` permission.
+     * If a catalog item doesn’t exist, this endpoint will create the item in your catalog. Each request can support up to 50 catalog items. This endpoint is asynchronous.
      *
-     * API-triggered Delivery allows you to store message content in the Braze dashboard while dictating when a message is sent, and to whom via your API.
+     * ## Prerequisites
      *
-     * Note that to send messages with this endpoint, you must have a [Canvas ID](https://www.braze.com/docs/api/identifier_types/#canvas-api-identifier), created when you build a Canvas.
+     * To use this endpoint, you'll need an [API key](https://braze.com/docs/api/api_key/) with the `catalogs.replace_item` permission.
      *
      * ## Rate limit
      *
-     * This endpoint has a shared rate limit of 50 requests per minute between all synchronous catalog item endpoints, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
+     * This endpoint has a shared rate limit of 16,000 requests per minute between all asynchronous catalog item endpoints, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
-     * ## Request parameters
+     * ## Path parameters
      *
      * | Parameter | Required | Data Type | Description |
      * | --- | --- | --- | --- |
      * | `catalog_name` | Required | String | Name of the catalog. |
-     * | `item_id` | Required | String | The ID of the catalog item. |
      *
      * ## Request parameters
      *
      * | Parameter | Required | Data Type | Description |
      * | --- | --- | --- | --- |
-     * | `items` | Required | Array | An array that contains item objects. The item objects should contain fields that exist in the catalog except for the `id` field. Only one item object is allowed per request. |
+     * | `items` | Required | Array | An array that contains item objects. Each object must have an ID. The item objects should contain fields that exist in the catalog. Up to 50 item objects are allowed per request. |
      *
      * ## Example request
      *
+     * ``` json
+     * curl --location --request PUT 'https://rest.iad-03.braze.com/catalogs/restaurants/items' \
+     * --header 'Content-Type: application/json' \
+     * --header 'Authorization: Bearer YOUR-REST-API-KEY' \
+     * --data-raw '{
+     * "items": [
+     * {
+     * "id": "restaurant1",
+     * "Name": "Restaurant",
+     * "Loyalty_Program": false,
+     * "Location": {
+     * "Latitude": 33.6112,
+     * "Longitude": -117.8711
+     * },
+     * "Top_Dishes": [
+     * "Hamburger",
+     * "Deluxe Cheeseburger"
+     * ],
+     * "Open_Time": "2021-09-03T09:03:19.967+00:00"
+     * },
+     * {
+     * "id": "restaurant3",
+     * "City": "San Francisco",
+     * "Rating": 2,
+     * "Top_Dishes": [
+     * "Hot Dog",
+     * "French Fries"
+     * ]
+     * }
+     * ]
+     * }'
+     *
+     * ```
+     *
      * ## Response
      *
-     * There are three status code responses for this endpoint: `200`, `400`, and `404`.
+     * There are three status code responses for this endpoint: `202`, `400`, and `404`.
      *
      * ### Example success response
      *
-     * The status code `200` could return the following response body.
+     * The status code `202` could return the following response body.
      *
      * ``` json
      * {
@@ -1160,7 +1077,7 @@ class Client extends Runtime\Client\Client
      *
      * ### Example error response
      *
-     * The status code `400` could return the following response body. Refer to [Troubleshooting](#troubleshooting) for more information about errors you may encounter.
+     * The status code `400` could return the following response body. Refer to [Troubleshooting](https://www.braze.com/docs/api/endpoints/catalogs/catalog_items/asynchronous/put_update_catalog_items/#troubleshooting) for more information about errors you may encounter.
      *
      * ``` json
      * {
@@ -1192,12 +1109,12 @@ class Client extends Runtime\Client\Client
      * | `ids_not_unique` | Check that each item ID is unique. |
      * | `ids_too_large` | Character limit for each item ID is 250 characters. |
      * | `item_array_invalid` | `items` must be an array of objects. |
-     * | `items_missing_ids` | Confirm that each item has an ID. |
+     * | `items_missing_ids` | Some items don't have item IDs. Confirm that each item has an ID. |
      * | `items_too_large` | Item values can't exceed 5,000 characters. |
      * | `invalid_ids` | Supported characters for item ID names are letters, numbers, hyphens, and underscores. |
      * | `invalid_fields` | Confirm that the fields in the request exist in the catalog. |
      * | `invalid_keys_in_value_object` | Item object keys can't include `.` or `$`. |
-     * | `too_deep_nesting_in_value_object` | Item objects can't have more than 50 levels of nesting.
+     * | `too_deep_nesting_in_value_object` | Item objects can't have more than 50 levels of nesting. |
      * | `request_includes_too_many_items` | Your request has too many items. The item limit per request is 50. |
      * | `unable_to_coerce_value` | Item types can't be converted. |
      *
@@ -1226,7 +1143,9 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to delete an item in your catalog.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `catalogs.delete_item` permission.
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key](https://braze.com/docs/api/api_key/) with the `catalogs.delete_item` permission.
      *
      * ## Rate limit
      *
@@ -1325,7 +1244,9 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to return a catalog item and its content.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `catalogs.get_item` permission.
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key](https://braze.com/docs/api/api_key/) with the `catalogs.get_item` permission.
      *
      * ## Rate limit
      *
@@ -1434,9 +1355,11 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to edit an item in your catalog.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `catalogs.update_item` permission.
+     * ## Prerequisites
      *
-     * ## Rate Limit
+     * To use this endpoint, you’ll need an [API key](https://braze.com/docs/api/api_key/) with the `catalogs.update_item` permission.
+     *
+     * ## Rate limit
      *
      * This endpoint has a shared rate limit of 50 requests per minute between all synchronous catalog item endpoints, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
@@ -1464,12 +1387,28 @@ class Client extends Runtime\Client\Client
      * {
      * "Name": "Restaurant",
      * "Loyalty_Program": false,
+     * "Location": {
+     * "Latitude": 33.6112,
+     * "Longitude": -117.8711
+     * },
+     * "Top_Dishes": {
+     * "$add": [
+     * "Biscuits",
+     * "Coleslaw"
+     * ],
+     * "$remove": [
+     * "French Fries"
+     * ]
+     * },
      * "Open_Time": "2021-09-03T09:03:19.967+00:00"
      * }
      * ]
      * }'
      *
      * ```
+     *
+     * > **Note:** The $`add` and `$remove` operators are only applicable to array type fields, and are only supported by PATCH endpoints.
+     *
      *
      * ## Response
      *
@@ -1555,7 +1494,9 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to create an item in your catalog.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `catalogs.create_item` permission.
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key](https://braze.com/docs/api/api_key/) with the `catalogs.create_item` permission.
      *
      * ## Rate limit
      *
@@ -1574,9 +1515,10 @@ class Client extends Runtime\Client\Client
      * | --- | --- | --- | --- |
      * | `items` | Required | Array | An array that contains item objects. The item objects should contain all of the fields in the catalog except for the `id` field. Only one item object is allowed per request. |
      *
-     * ## Example Request
+     * ## Example request
      *
      * ```
+     * curl --location --request POST 'https://rest.iad-03.braze.com/catalogs/restaurants/items/restaurant1' \
      * curl --location --request POST 'https://rest.iad-03.braze.com/catalogs/restaurants/items/restaurant1' \
      * --header 'Content-Type: application/json' \
      * --header 'Authorization: Bearer YOUR-REST-API-KEY' \
@@ -1588,6 +1530,14 @@ class Client extends Runtime\Client\Client
      * "Cuisine": "American",
      * "Rating": 5,
      * "Loyalty_Program": true,
+     * "Location": {
+     * "Latitude": 33.6112,
+     * "Longitude": -117.8711
+     * },
+     * "Top_Dishes": [
+     * "Hamburger",
+     * "Deluxe Cheeseburger"
+     * ],
      * "Created_At": "2022-11-01T09:03:19.967+00:00"
      * }
      * ]
@@ -1618,13 +1568,13 @@ class Client extends Runtime\Client\Client
      * {
      * "errors": [
      * {
-     * "id": "fields-do-not-match",
-     * "message": "Fields do not match with fields on the catalog",
+     * "id": "invalid-fields",
+     * "message": "Some of the fields given do not exist in the catalog",
      * "parameters": [
      * "id"
      * ],
      * "parameter_values": [
-     * "restaurant2"
+     * "restaurant1"
      * ]
      * }
      * ],
@@ -1681,9 +1631,11 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to update an item in your catalog.
      *
-     * To use this endpoint, you'll need to generate an API key with the `catalogs.replace_item` permission.
-     *
      * If the `item_id` isn't found, this endpoint will create the item. This endpoint is synchronous.
+     *
+     * ## Prerequisites
+     *
+     * To use this endpoint, you'll need an [API key](https://braze.com/docs/api/api_key/) with the `catalogs.replace_item` permission.
      *
      * ## Rate limit
      *
@@ -1717,6 +1669,10 @@ class Client extends Runtime\Client\Client
      * "Latitude": 33.6112,
      * "Longitude": -117.8711
      * },
+     * "Top_Dishes": [
+     * "Hamburger",
+     * "Deluxe Cheeseburger"
+     * ],
      * "Open_Time": "2021-09-03T09:03:19.967+00:00"
      * }
      * ]
@@ -1810,11 +1766,14 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to pull a list of email addresses that have “hard bounced” your email messages within a certain time frame.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `email.hard_bounces` permission.
+     * > **Note:** You must provide an `end_date`, as well as either an `email` or a `start_date`. If you provide all three, `start_date`, `end_date`, and an `email`, we prioritize the emails given and disregard the date range.
      *
-     **Note:** You must provide an `end_date`, as well as either an `email` or a `start_date`. If you provide all three, `start_date`, `end_date`, and an `email`, we prioritize the emails given and disregard the date range.
      *
      * If your date range has more than `limit` number of hard bounces, you will need to make multiple API calls, each time increasing the `offset` until a call returns either fewer than `limit` or zero results.
+     *
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key](https://braze.com/docs/api/api_key/) with the `email.hard_bounces` permission.
      *
      * ## Rate limit
      *
@@ -1906,11 +1865,14 @@ class Client extends Runtime\Client\Client
      *
      * You can use this endpoint to set up a bi-directional sync between Braze and other email systems or your own database.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `email.unsubscribe` permission.
+     * > **Note:** You must provide an `end_date`, as well as either an `email` or a `start_date`.
      *
-     **Note:** You must provide an `end_date`, as well as either an `email` or a `start_date`.
      *
      * If your date range has more than `limit` number of unsubscribes, you will need to make multiple API calls, each time increasing the `offset` until a call returns either fewer than `limit` or zero results.
+     *
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key](https://braze.com/docs/api/api_key/) with the `email.unsubscribe` permission.
      *
      * ## Rate limit
      *
@@ -1999,7 +1961,9 @@ class Client extends Runtime\Client\Client
      *
      * You can set the email subscription state for an email address that is not yet associated with any of your users within Braze. When that email address is subsequently associated with a user, the email subscription state that you uploaded will be automatically set.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `email.status` permission.
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key](https://braze.com/docs/api/api_key/) with the `email.status` permission.
      *
      * ## Rate limit
      *
@@ -2035,11 +1999,11 @@ class Client extends Runtime\Client\Client
     }
 
     /**
-     * > Use this endpoint to remove email addresses from your Braze bounce list.
+     * > Use this endpoint to remove email addresses from your Braze bounce list and bounce list maintained by your email provider.
      *
-     * We will also remove them from the bounce list maintained by your email provider.
+     * ## Prerequisites
      *
-     * To use this endpoint, you’ll need to generate an API key with the `email.bounce.remove` permission.
+     * To use this endpoint, you’ll need an [API key](https://braze.com/docs/api/api_key/) with the `email.bounce.remove` permission.
      *
      * ## Rate limit
      *
@@ -2074,11 +2038,11 @@ class Client extends Runtime\Client\Client
     }
 
     /**
-     * > Use this endpoint to remove email addresses from your Braze spam list.
+     * > Use this endpoint to remove email addresses from your Braze spam list and spam list maintained by your email provider.
      *
-     * We will also remove them from the spam list maintained by your email provider.
+     * ## Prerequisites
      *
-     * To use this endpoint, you’ll need to generate an API key with the `email.spam.remove` permission.
+     * To use this endpoint, you’ll need an [API key](https://braze.com/docs/api/api_key/) with the `email.spam.remove` permission.
      *
      * ## Rate limit
      *
@@ -2115,7 +2079,9 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to unsubscribe a user from email and mark them as hard bounced.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `email.blacklist` permission.
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key](https://braze.com/docs/api/api_key/) with the `email.blacklist` permission.
      *
      * ## Rate limit
      *
@@ -2152,7 +2118,9 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to unsubscribe a user from email and mark them as hard bounced.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `email.blacklist` permission.
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key](https://braze.com/docs/api/api_key/) with the `email.blacklist` permission.
      *
      * ## Rate limit
      *
@@ -2191,13 +2159,16 @@ class Client extends Runtime\Client\Client
      *
      * Data returned includes how many messages were sent, opened, clicked, or converted by messaging channel.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `campaigns.data_series` permission.
+     * > **Note:** If you are using our [older navigation](https://www.braze.com/docs/navigation), `campaign_id` can be found at **Developer Console > API Settings**.
      *
-     * Note: If you are using our [older navigation](https://www.braze.com/docs/navigation), `campaign_id` can be found at **Developer Console > API Settings**.
+     *
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key](https://braze.com/docs/api/api_key/) with the `campaigns.data_series` permission.
      *
      * ## Rate limit
      *
-     * We apply the default Braze rate limit of 250,000 requests per hour to this endpoint, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
+     * This endpoint has a rate limit of 50,000 requests per minute, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
      * ## Responses
      *
@@ -2408,11 +2379,14 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to retrieve relevant information on a specified campaign, which can be identified by the `campaign_id`.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `campaign.details` permission.
-     *
      * If you want to retrieve Canvas data, refer to the [Canvas Details](https://www.braze.com/docs/api/endpoints/export/canvas/get_canvas_details/) endpoint.
      *
-     * Note: If you are using our [older navigation](https://www.braze.com/docs/navigation), `campaign_id` can be found at **Developer Console** > **API Settings**
+     * > **Note:** If you are using our [older navigation](https://www.braze.com/docs/navigation), `campaign_id` can be found at **Developer Console** > **API Settings**
+     *
+     *
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an API key with the `campaign.details` permission.
      *
      * ## Rate limit
      *
@@ -2436,6 +2410,7 @@ class Client extends Runtime\Client\Client
      * "first_sent" : (string) the date and hour of first sent as ISO 8601 date,
      * "last_sent" : (string) the date and hour of last sent as ISO 8601 date,
      * "tags" : (array) the tag names associated with the campaign,
+     * "teams" : (array) the names of the Teams associated with the campaign,
      * "messages": {
      * "message_variation_id": (string) { // <=This is the actual id
      * "channel": (string) the channel type of the message, must be either email, ios_push, webhook, content_card, in-app_message, or sms,
@@ -2448,11 +2423,11 @@ class Client extends Runtime\Client\Client
      *
      * ```
      *
-     * ### Messages
+     * ### Messages by channel
      *
      * The `messages` response will contain information about each message. The following includes example message responses for each channel:
      *
-     * #### Push channels
+     * #### Push
      *
      * ``` json
      * {
@@ -2463,7 +2438,7 @@ class Client extends Runtime\Client\Client
      *
      * ```
      *
-     * #### Email channel
+     * #### Email
      *
      * ``` json
      * {
@@ -2478,7 +2453,7 @@ class Client extends Runtime\Client\Client
      *
      * ```
      *
-     * #### In-app message channel
+     * #### In-app message
      *
      * ``` json
      * {
@@ -2507,7 +2482,7 @@ class Client extends Runtime\Client\Client
      *
      * ```
      *
-     * #### Content Card channel
+     * #### Content Card
      *
      * ``` json
      * {
@@ -2518,7 +2493,7 @@ class Client extends Runtime\Client\Client
      *
      * ```
      *
-     * #### Webhook channel
+     * #### Webhook
      *
      * ``` json
      * {
@@ -2532,7 +2507,7 @@ class Client extends Runtime\Client\Client
      *
      * ```
      *
-     * #### SMS channel
+     * #### SMS
      *
      * ``` json
      * {
@@ -2544,7 +2519,41 @@ class Client extends Runtime\Client\Client
      *
      * ```
      *
-     * #### Control Messages
+     * #### WhatsApp
+     *
+     * ##### Template messages
+     *
+     * ``` json
+     * {
+     * "channel": "whats_app",
+     * "subscription_group_id": (string) the API ID of the subscription group selected in the WhatsApp message
+     * "from": (array) the list of strings of the numbers associated with the subscription group,
+     * "template_name": (string) the name of the WhatsApp template being sent,
+     * "template_language_code": (string) the language code of the WhatsApp template being sent,
+     * "header_variables": (array) the list of strings, if present, of Liquid variables being inserted into header of WhatsApp template being sent,
+     * "body_variables": (array) the list of strings, if present, of Liquid variables being inserted into body of WhatsApp template being sent,
+     * "button_variables": (array) the list of strings, if present, of Liquid variables being inserted into buttons of WhatsApp template being sent
+     * }
+     *
+     * ```
+     *
+     * ##### Response messages
+     *
+     * ``` json
+     * {
+     * "channel": "whats_app",
+     * "subscription_group_id": (string) the API ID of the subscription group selected in the WhatsApp message,
+     * "from": (array) list of strings of the numbers associated with the subscription group,
+     * "layout": (string) the name of the WhatsApp template being sent (text or media or quick-reply),
+     * "header_text": (string, optional) the text, if present, of the header of the message being sent,
+     * "body_text": (string, optional) the text, if present, of the body of the message being sent,
+     * "footer_text": (string, optional) the text, if present, of the footer of the message being sent,
+     * "buttons": (array) list of button objects in the message being sent ({"text": (string) the text of the button})
+     * }
+     *
+     * ```
+     *
+     * #### Control messages
      *
      * ``` json
      * {
@@ -2554,7 +2563,7 @@ class Client extends Runtime\Client\Client
      *
      * ```
      *
-     * ### Conversion Behaviors
+     * ### Conversion behaviors
      *
      * The `conversion_behaviors` array will contain information about each conversion event behavior set for the campaign. These behaviors are in order as set by the campaign. For example, Conversion Event A will be the first item in the array, Conversion Event B will be second, etc. The following lists example conversion event behavior responses:
      *
@@ -2669,7 +2678,9 @@ class Client extends Runtime\Client\Client
      *
      * The campaigns are returned in groups of 100 sorted by time of creation (oldest to newest by default).
      *
-     * To use this endpoint, you’ll need to generate an API key with the `campaigns.list` permission.
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an API key with the `campaigns.list` permission.
      *
      * ## Rate limit
      *
@@ -2739,13 +2750,13 @@ class Client extends Runtime\Client\Client
     }
 
     /**
-     * > Use this endpoint to retrieve a daily series of various stats for a tracked `send_id`.
+     * > Use this endpoint to retrieve a daily series of various stats for a tracked `send_id` for API campaigns.
      *
-     * Braze stores send analytics for 14 days after the send.
+     * Braze stores send analytics for 14 days after the send. Campaign conversions will be attributed toward the most recent `send_id` that a given user has received from the campaign.
      *
-     * Campaign conversions will be attributed towards the most recent send id that a given user has received from the campaign.
+     * ## Prerequisites
      *
-     * To use this endpoint, you’ll need to generate an API key with the `sends.data_series` permission.
+     * This endpoint is for API campaigns only. To use this endpoint, you'll need an [API key](https://www.braze.com/docs/api/basics#rest-api-key/) with the `sends.data_series` permission.
      *
      * ## Rate limit
      *
@@ -2840,7 +2851,9 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to export time series data for a Canvas.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `canvas.data_series` permission.
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an API key with the `canvas.data_series` permission.
      *
      * ## Rate limit
      *
@@ -2958,7 +2971,9 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to export rollups of time series data for a Canvas, providing a concise summary of a Canvas’ results.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `canvas.data_summary` permission.
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key](https://braze.com/docs/api/api_key/) with the `canvas.data_summary` permission.
      *
      * ## Rate limit
      *
@@ -3068,7 +3083,9 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to export metadata about a Canvas, such as the name, time created, current status, and more.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `canvas.details` permission.
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key](https://braze.com/docs/api/api_key/) with the `canvas.details` permission.
      *
      * ## Rate limit
      *
@@ -3076,42 +3093,53 @@ class Client extends Runtime\Client\Client
      *
      * ## Response
      *
-     * Note: All Canvas steps have a next_paths field, which is an array of `{name, next_step_id}` data. For full steps and Message steps, the `next_step_ids` field will be present, but will not contain data for other Canvas Flow steps.
+     * > **Note:** All Canvas steps have a next_paths field, which is an array of `{name, next_step_id}` data. For full steps and Message steps, the `next_step_ids` field will be present, but will not contain data for other Canvas Flow steps.
+     *
      *
      * ``` json
      * Content-Type: application/json
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
-     * "created_at": (string) date created as ISO 8601 date,
-     * "updated_at": (string) date updated as ISO 8601 date,
-     * "name": (string) Canvas name,
-     * "description": (string) Canvas description,
+     * "created_at": (string) the date created as ISO 8601 date,
+     * "updated_at": (string) the date updated as ISO 8601 date,
+     * "name": (string) the Canvas name,
+     * "description": (string) the Canvas description,
      * "archived": (boolean) whether this Canvas is archived,
      * "draft": (boolean) whether this Canvas is a draft,
-     * "schedule_type": (string) type of scheduling action,
-     * "first_entry": (string) date of first entry as ISO 8601 date,
-     * "last_entry": (string) date of last entry as ISO 8601 date,
+     * "schedule_type": (string) the type of scheduling action,
+     * "first_entry": (string) the date of first entry as ISO 8601 date,
+     * "last_entry": (string) the date of last entry as ISO 8601 date,
      * "channels": (array of strings) step channels used with Canvas,
      * "variants": [
      * {
-     * "name": (string) name of variant,
-     * "id": (string) API identifier of the variant,
-     * "first_step_ids": (array of strings) API identifiers for first steps in variant,
-     * "first_step_id": (string) API identifier of first step in variant (deprecated in November 2017, only included if the variant has only one first step)
+     * "name": (string) the name of variant,
+     * "id": (string) the API identifier of the variant,
+     * "first_step_ids": (array of strings) the API identifiers for first steps in variant,
+     * "first_step_id": (string) the API identifier of first step in variant (deprecated in November 2017, only included if the variant has only one first step)
      * },
      * ... (more variations)
      * ],
-     * "tags": (array of strings) tag names associated with the Canvas,
+     * "tags": (array of strings) the tag names associated with the Canvas,
+     * "teams" : (array) the names of the Teams associated with the Canvas,
      * "steps": [
      * {
-     * "name": (string) name of step,
-     * "id": (string) API identifier of the step,
-     * "next_step_ids": (array of strings) API identifiers of steps following step,
-     * "channels": (array of strings) channels used in step,
+     * "name": (string) the name of step,
+     * "type" (string) the type of Canvas component,
+     * "id": (string) the API identifier of the step,
+     * "next_step_ids": (array of strings) IDs for next steps that are full steps or Message steps,
+     * "next_paths": { (array of objects)
+     * // for Decision Splits, this property should evaluate to "Yes" or "No"
+     * // for Audience Path and Action Paths, this property should evaluate to the group name
+     * // for Experiment Paths, this property should evaluate to the path name
+     * // for other steps, this property should evaluate to "null"
+     * "name": (string) name the name of step,
+     * "next_step_id": (string) IDs for next steps that are full steps or Message steps,
+     * }
+     * "channels": (array of strings) the channels used in step,
      * "messages": {
      * "message_variation_id": (string) {  // <=This is the actual id
-     * "channel": (string) channel type of the message (eg., "email"),
-     * ... channel-specific fields for this message, see Campaign Details Endpoint API Response for example message responses ...
+     * "channel": (string) the channel type of the message (for example, "email"),
+     * // channel-specific fields for this message, see Campaign Details endpoint API Response for example message responses
      * }
      * }
      * },
@@ -3159,7 +3187,9 @@ class Client extends Runtime\Client\Client
      *
      * Archived Canvases will not be included in the API response unless the `include_archived` field is specified. Canvases that are stopped but not archived, however, will be returned by default.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `canvas.list` permission.
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key](https://braze.com/docs/api/api_key/) with the `canvas.list` permission.
      *
      * ## Rate limit
      *
@@ -3230,7 +3260,9 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to export a list of custom events that have been recorded for your app. The event names are returned in groups of 250, sorted alphabetically.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `events.list` permission.
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key](https://braze.com/docs/api/api_key/) with the `events.list` permission.
      *
      * ## Rate limit
      *
@@ -3255,7 +3287,7 @@ class Client extends Runtime\Client\Client
      *
      * ### Fatal error response codes
      *
-     * For status codes and associated error messages that will be returned if your request encounters a fatal error, reference [Fatal errors & responses](https://www.braze.com/docs/api/errors/#fatal-errors).
+     * For status codes and associated error messages that will be returned if your request encounters a fatal error, reference [Fatal errors &amp; responses](https://www.braze.com/docs/api/errors/#fatal-errors).
      *
      * > **Tip:** For help with CSV and API exports, visit [Export troubleshooting](https://www.braze.com/docs/user_guide/data_and_analytics/export_braze_data/export_troubleshooting/).
      *
@@ -3290,9 +3322,9 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to retrieve a series of the number of occurrences of a custom event in your app over a designated time period.
      *
-     * Note: If you are using our [older navigation](https://www.braze.com/docs/navigation), `app_id` can be found at**Developer Console** > **API Settings**
+     * ## Prerequisites
      *
-     * To use this endpoint, you’ll need to generate an API key with the `events.data_series` permission.
+     * To use this endpoint, you’ll need an [API key](https://braze.com/docs/api/api_key/) with the `events.data_series` permission.
      *
      * ## Rate limit
      *
@@ -3318,7 +3350,7 @@ class Client extends Runtime\Client\Client
      *
      * ### Fatal error response codes
      *
-     * For status codes and associated error messages that will be returned if your request encounters a fatal error, reference [Fatal errors & responses](https://www.braze.com/docs/api/errors/#fatal-errors).
+     * For status codes and associated error messages that will be returned if your request encounters a fatal error, reference [Fatal errors &amp; responses](https://www.braze.com/docs/api/errors/#fatal-errors).
      *
      * > **Tip:** For help with CSV and API exports, visit [Export troubleshooting](https://www.braze.com/docs/user_guide/data_and_analytics/export_braze_data/export_troubleshooting/).
      *
@@ -3338,7 +3370,9 @@ class Client extends Runtime\Client\Client
      * Date on which the data series should end. Defaults to time of the request.
      * @var string $app_id (Optional) String
      *
-     * App API identifier retrieved from **Settings > Setup and Testing > API Keys** to limit analytics to a specific app
+     * App API identifier retrieved from the [API Keys](https://www.braze.com/docs/user_guide/administrative/app_settings/api_settings_tab/) page to limit analytics to a specific app.
+     *
+     * Note: If you are using our [older navigation](https://www.braze.com/docs/navigation), `app_id` can be found at **Developer Console** > **API Settings**
      * @var string $segment_id (Optional) String
      *
      * See [Segment API identifier](https://www.braze.com/docs/api/identifier_types/). Segment ID indicating the analytics-enabled segment for which event analytics should be returned.
@@ -3406,7 +3440,7 @@ class Client extends Runtime\Client\Client
      * Date on which the data series should end. Defaults to time of the request.
      * @var string $app_id (Optional) String
      *
-     * App API identifier retrieved from **Settings > Setup and Testing > API Keys**. If excluded, results for all apps in workspace will be returned.
+     * App API identifier retrieved from the [API Keys](https://www.braze.com/docs/user_guide/administrative/app_settings/api_settings_tab/) page. If excluded, results for all apps in the workspace will be returned.
      * }
      *
      * @param array $headerParameters {
@@ -3470,7 +3504,7 @@ class Client extends Runtime\Client\Client
      *             Date on which the data series should end. Defaults to time of the request.
      * @var string $app_id (Optional) String
      *
-     * App API identifier retrieved from **Settings > Setup and Testing > API Keys**. If excluded, results for all apps in workspace will be returned.
+     * App API identifier retrieved from the [API Keys](https://www.braze.com/docs/user_guide/administrative/app_settings/api_settings_tab/) page. If excluded, results for all apps in the workspace will be returned.
      * }
      *
      * @param array $headerParameters {
@@ -3535,7 +3569,7 @@ class Client extends Runtime\Client\Client
      * Date on which the data series should end. Defaults to time of the request.
      * @var string $app_id (Optional) String
      *
-     * App API identifier retrieved from **Settings > Setup and Testing > API Keys**. If excluded, results for all apps in workspace will be returned.
+     * App API identifier retrieved from the [API Keys](https://www.braze.com/docs/user_guide/administrative/app_settings/api_settings_tab/) page. If excluded, results for all apps in the workspace will be returned.
      * }
      *
      * @param array $headerParameters {
@@ -3600,7 +3634,7 @@ class Client extends Runtime\Client\Client
      * Date on which the data series should end. Defaults to time of the request.
      * @var string $app_id (Optional) String
      *
-     * App API identifier retrieved from **Settings > Setup and Testing > API Keys**. If excluded, results for all apps in workspace will be returned.
+     * App API identifier retrieved from the [API Keys](https://www.braze.com/docs/user_guide/administrative/app_settings/api_settings_tab/) page. If excluded, results for all apps in the workspace will be returned.
      * }
      *
      * @param array $headerParameters {
@@ -3769,7 +3803,7 @@ class Client extends Runtime\Client\Client
      *
      * The cards are returned in groups of 100 sorted by time of creation (oldest to newest by default).
      *
-     * To use this endpoint, you’ll need to generate an API key with the `feed.list` permission.
+     * To use this endpoint, you’ll need to generate an API key with the `feed.list` permission.
      *
      * ## Rate limit
      *
@@ -3784,10 +3818,10 @@ class Client extends Runtime\Client\Client
      * "message": (required, string) the status of the export, returns 'success' when completed without errors,
      * "cards" : [
      * {
-     * "id" : (string) Card API Identifier,
-     * "type" : (string) type of the card - NewsItem (classic cards), CaptionedImage, Banner or DevPick (cross-promotional cards),
-     * "title" : (string) title of the card,
-     * "tags" : (array) tag names associated with the card
+     * "id" : (string) the card API identifier,
+     * "type" : (string) type of the card - NewsItem (classic cards), CaptionedImage, Banner
+     * "title" : (string) the title of the card,
+     * "tags" : (array) the tag names associated with the card
      * },
      * ...
      * ]
@@ -3933,7 +3967,7 @@ class Client extends Runtime\Client\Client
      * @var int    $unit (Optional) String
      *             Unit of time between data points. Can be `day` or `hour`, defaults to `day`.
      * @var string $app_id (Optional) String
-     *             App API identifier retrieved from the Settings > Setup and Testing > API Keys to limit analytics to a specific app
+     *             App API identifier retrieved from the [API Keys](https://www.braze.com/docs/user_guide/administrative/app_settings/api_settings_tab/) page. If excluded, results for all apps in the workspace will be returned.
      * @var string $product (Optional) String
      *             Name of product to filter response by. If excluded, results for all apps will be returned.
      *             }
@@ -4036,9 +4070,11 @@ class Client extends Runtime\Client\Client
      *
      * The segments are returned in groups of 100 sorted by time of creation (oldest to newest by default). Archived segments are not included.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `segments.list` permission.
+     * ## Prerequisites
      *
-     * ### Rate limit
+     * To use this endpoint, you’ll need an [API key](https://www.braze.com/docs/api/basics#rest-api-key/) with the `segments.list` permission.
+     *
+     * ## Rate limit
      *
      * We apply the default Braze rate limit of 250,000 requests per hour to this endpoint, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
@@ -4101,11 +4137,11 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to retrieve a daily series of the estimated size of a segment over time.
      *
-     * Note: If you are using our [older navigation](https://www.braze.com/docs/navigation), `segment_id` can be found at **Developer Console > API Settings**.
+     * ## Prerequisites
      *
-     * To use this endpoint, you’ll need to generate an API key with the `segments.data_series` permission.
+     * To use this endpoint, you’ll need an [API key](https://www.braze.com/docs/api/basics#rest-api-key/) with the `segments.data_series` permission.
      *
-     * ### Rate limit
+     * ## Rate limit
      *
      * We apply the default Braze rate limit of 250,000 requests per hour to this endpoint, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
@@ -4135,7 +4171,7 @@ class Client extends Runtime\Client\Client
      *
      * See [Segment API identifier](https://www.braze.com/docs/api/identifier_types/).
      *
-     * The `segment_id` for a given segment can be found in your **Settings > Setup and Testing > API Keys.** within your Braze account or you can use the [Segment List Endpoint](https://www.braze.com/docs/api/endpoints/export/get_segment/).
+     * The `segment_id` for a given segment can be found on the [API Keys](https://www.braze.com/docs/user_guide/administrative/app_settings/api_settings_tab/) page within your Braze account or you can use the [Export segment list endpoint](https://www.braze.com/docs/api/endpoints/export/get_segment/).
      * @var int $length (Required) Integer
      *
      * Max number of days before `ending_at` to include in the returned series - must be between 1 and 100 (inclusive)
@@ -4168,9 +4204,9 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to retrieve relevant information on a segment, which can be identified by the `segment_id`.
      *
-     * Note: If you are using our [older navigation](https://www.braze.com/docs/navigation), `segment_id` can be found at **Developer Console > API Settings**.
+     * ## Prerequisites
      *
-     * To use this endpoint, you’ll need to generate an API key with the `segments.details` permission.
+     * To use this endpoint, you’ll need an [API key](https://www.braze.com/docs/api/basics#rest-api-key/) with the `segments.details` permission.
      *
      * ## Rate limit
      *
@@ -4183,12 +4219,13 @@ class Client extends Runtime\Client\Client
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
      * "message": (required, string) the status of the export, returns 'success' when completed without errors,
-     * "created_at" : (string) date created as ISO 8601 date,
-     * "updated_at" : (string) date last updated as ISO 8601 date,
-     * "name" : (string) segment name,
-     * "description" : (string) human-readable description of filters,
-     * "text_description" : (string) segment description,
-     * "tags" : (array) tag names associated with the segment
+     * "created_at" : (string) the date created as ISO 8601 date,
+     * "updated_at" : (string) the date last updated as ISO 8601 date,
+     * "name" : (string) the segment name,
+     * "description" : (string) a human-readable description of filters,
+     * "text_description" : (string) the segment description,
+     * "tags" : (array) the tag names associated with the segment formatted as strings,
+     * "teams" : (array) the names of the Teams associated with the campaign
      * }
      *
      * ```
@@ -4201,7 +4238,7 @@ class Client extends Runtime\Client\Client
      *
      * See [Segment API identifier](https://www.braze.com/docs/api/identifier_types/).
      *
-     * The `segment_id` for a given segment can be found in your **Settings > Setup and Testing > API Keys** within your Braze account or you can use the [Segment List Endpoint](https://www.braze.com/docs/api/endpoints/export/get_segment/).
+     * The `segment_id` for a given segment can be found on the [API Keys](https://www.braze.com/docs/user_guide/administrative/app_settings/api_settings_tab/) page within your Braze account or you can use the [Export segment list endpoint](https://www.braze.com/docs/api/endpoints/export/get_segment/).
      * }
      *
      * @param array $headerParameters {
@@ -4269,7 +4306,7 @@ class Client extends Runtime\Client\Client
      * Date on which the data series should end. Defaults to time of the request.
      * @var string $app_id (Optional) String
      *
-     * App API identifier retrieved from the **Settings > Setup and Testing > API Keys** to limit analytics to a specific app
+     * App API identifier retrieved from the [API Keys](https://www.braze.com/docs/user_guide/administrative/app_settings/api_settings_tab/) page to limit analytics to a specific app.
      * @var string $segment_id (Required) String
      *
      * See [Segment API identifier](https://www.braze.com/docs/api/identifier_types/). Segment ID indicating the analytics-enabled segment for which sessions should be returned.
@@ -4299,9 +4336,11 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to export data from any user profile by specifying a user identifier.
      *
-     * Up to 50 `external_ids` or `user_aliases` can be included in a single request. Should you want to specify `device_id` or `email_address` only one of either identifier can be included per request.
+     * Up to 50 `external_ids` or `user_aliases` can be included in a single request. Should you want to specify `device_id`, `email_address` , or `phone`, only one of any identifier can be included per request.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `users.export.ids` permission.
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key](https://www.braze.com/docs/api/basics#rest-api-key/) with the `users.export.ids` permission.
      *
      * ## Rate limit
      *
@@ -4353,6 +4392,10 @@ class Client extends Runtime\Client\Client
      * | `uninstalled_at` | Timestamp | Date and time the user uninstalls the app. Omitted if the app has not been uninstalled. |
      * | `user_aliases` | Object | [User aliases object](https:/www.braze.com/docs/api/objects_filters/user_alias_object#user-alias-object-specification) containing the `alias_name` and `alias_label`, if exists. |
      *
+     * Be aware that the `/users/export/ids` endpoint will pull together the entire user profile for this user, including data such as all campaigns and Canvases received, all custom events performed, all purchases made, and all custom attributes. As a result, this endpoint is slower than other REST API endpoints.
+     *
+     * Depending on the data requested, this API endpoint may not be sufficient to meet your needs due to the 2,500 requests per minute rate limit. If you anticipate using this endpoint regularly to export users, instead consider exporting users by segment, which is asynchronous and more optimized for larger data pulls.
+     *
      * ### Response
      *
      * ``` json
@@ -4368,12 +4411,13 @@ class Client extends Runtime\Client\Client
      *
      * For an example of the data that is accessible via this endpoint see the following example.
      *
-     * ### Sample user export file output
+     * ### Example user export file output
      *
      * User export object (we will include the least data possible - if a field is missing from the object it should be assumed to be null, false, or empty):
      *
      * ``` json
      * {
+     * "created_at": (string),
      * "external_id" : (string),
      * "user_aliases" : [
      * {
@@ -4387,9 +4431,9 @@ class Client extends Runtime\Client\Client
      * "email" : (string),
      * "dob" : (string) date for the user's date of birth,
      * "home_city" : (string),
-     * "country" : (string),
+     * "country" : (string) ISO-3166-1 alpha-2 standard,
      * "phone" : (string),
-     * "language" : (string) ISO-639 two letter code,
+     * "language" : (string) ISO-639-1 standard,
      * "time_zone" : (string),
      * "last_coordinates" : (array of float) [lon, lat],
      * "gender" : (string) "M" | "F",
@@ -4424,11 +4468,10 @@ class Client extends Runtime\Client\Client
      * "model" : (string),
      * "os" : (string),
      * "carrier" : (string),
-     * "idfv" : (string) only included for iOS devices,
+     * "idfv" : (string) only included for iOS devices when IDFV collection is enabled,
      * "idfa" : (string) only included for iOS devices when IDFA collection is enabled,
      * "google_ad_id" : (string) only included for Android devices when Google Play Advertising Identifier collection is enabled,
      * "roku_ad_id" : (string) only included for Roku devices,
-     * "windows_ad_id" : (string) only included for Windows devices,
      * "ad_tracking_enabled" : (bool)
      * },
      * ...
@@ -4456,7 +4499,8 @@ class Client extends Runtime\Client\Client
      * {
      * "name" : (string),
      * "last_received" : (string) date,
-     * "engaged" : {
+     * "engaged" :
+     * {
      * "opened_email" : (bool),
      * "opened_push" : (bool),
      * "clicked_email" : (bool),
@@ -4675,23 +4719,19 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to export all the users within a segment.
      *
-     * User data is exported as multiple files of user JSON objects separated by new lines (i.e., one JSON object per line).
+     * | Important |
+     * | --- |
+     * | Beginning December 2021, the following changed for this API:  <br>  <br>1\. The fields_to_export field in this API request is required. The option to default to all fields has been removed.  <br>2\. The fields for custom_events, purchases, campaigns_received, and canvases_received only contain data from the last 90 days. |
      *
-     * Data is exported to an automatically generated URL, or to an S3 bucket if this integration is already set up.
+     * User data is exported as multiple files of user JSON objects separated by new lines (such as one JSON object per line). Data is exported to an automatically generated URL, or to an S3 bucket if this integration is already set up. This endpoint is currently not supported by Google Cloud Storage.
      *
-     * This endpoint is currently not supported by Google Cloud Storage.
-     *
-     * Note that a company may run at most one export per segment using this endpoint at a given time. Wait for your export to complete before retrying.
-     *
-     * > Beginning December 2021, the following changed for this API:
-     *
-     * > 1\. The fields_to_export field in this API request is required. The option to default to all fields has been removed.
-     * 2\. The fields for custom_events, purchases, campaigns_received, and canvases_received only contain data from the last 90 days.
-     *
+     * A company may run at most one export per segment using this endpoint at a given time. Wait for your export to complete before retrying.
      *
      * Note: If you are using our [older navigation](https://www.braze.com/docs/navigation), `segment_id` can be found at **Developer Console > API Settings**.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `users.export.segment` permission.
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an API key with the `users.export.segment` permission.
      *
      * ## Rate limit
      *
@@ -4699,20 +4739,47 @@ class Client extends Runtime\Client\Client
      *
      * ## Credential-based response details
      *
-     * For information regarding credentials-based response details, visit this [section](https://www.braze.com/docs/api/endpoints/export/user_data/post_users_segment/#credentials-based-response-details) in the Braze API docs.
+     * If you have added your [S3](https://www.braze.com/docs/partners/data_and_infrastructure_agility/cloud_storage/amazon_s3), [Azure](https://www.braze.com/docs/partners/data_and_infrastructure_agility/cloud_storage/microsoft_azure_blob_storage_for_currents/), or [Google Cloud Storage](https://www.braze.com/docs/partners/data_and_infrastructure_agility/cloud_storage/google_cloud_storage_for_currents/) credentials to Braze, then each file will be uploaded in your bucket as a ZIP file with the key format that looks like `segment-export/SEGMENT_ID/YYYY-MM-dd/RANDOM_UUID-TIMESTAMP_WHEN_EXPORT_STARTED/filename.zip`. If using Azure, make sure that you have the **Make this the default data export destination** box checked in the Azure partner overview page in Braze. Generally, we will create 1 file per 5,000 users to optimize processing. Exporting smaller segments within a large workspace may result in multiple files. You can then extract the files and concatenate all of the `json` files to a single file if needed. If you specify an `output_format` of `gzip`, then the file extension will be `.gz` instead of `.zip`.
+     *
+     * We strongly suggest setting up your own S3 or Azure credentials when using this endpoint to enforce your own bucket policies on the export. If you do not have your cloud storage credentials, the response to the request provides the URL where a ZIP file containing all the user files can be downloaded. The URL will only become a valid location after the export is ready.
+     *
+     * #### **Export pathing breakdown for ZIP**
+     *
+     **ZIP format:** `bucket-name/segment-export/SEGMENT_ID/YYYY-MM-dd/RANDOM_UUID-TIMESTAMP_WHEN_EXPORT_STARTED/filename.zip`
+     *
+     **Example ZIP:** `braze.docs.bucket/segment-export/abc56c0c-rd4a-pb0a-870pdf4db07q/2019-04-25/d9696570-dfb7-45ae-baa2-25e302r2da27-1556044807/114f0226319130e1a4770f2602b5639a.zip`
+     *
+     * | Property | Details | Shown in Example as |
+     * | --- | --- | --- |
+     * | `bucket-name` | `Fixed based on your bucket name.` | `braze.docs.bucket` |
+     * | `segment-export` | `Fixed.` | `segment-export` |
+     * | `SEGMENT_ID` | `Included in the export request.` | `abc56c0c-rd4a-pb0a-870pdf4db07q` |
+     * | `YYYY-MM-dd` | `The date the successful callback is received.` | `2019-04-25` |
+     * | `RANDOM_UUID` | `A random UUID generated by Braze at the time of the request.` | `d9696570-dfb7-45ae-baa2-25e302r2da27` |
+     * | `TIMESTAMP_WHEN_EXPORT_STARTED` | `Unix time (seconds since 2017-01-01:00:00:00Z) that the export was requested in UTC.` | `1556044807` |
+     * | `filename` | `Random per file.` | `114f0226319130e1a4770f2602b5639a` |
+     *
+     * Be aware that if you do not provide your cloud storage credentials, there is a limitation on the amount of data you can export from this endpoint. Depending on the fields you’re exporting and the number of users, the file transfer may fail if it is too large. A best practice is to specify which fields you want to export using `fields_to_export` and specify only the fields you need to keep the size of the transfer lower. If you are getting errors generating the file, consider breaking your user base into more segments based on a random bucket number (for example, create a segment where a random bucket number is less than 1,000 or between 1,000 and 2,000).
+     *
+     * In either scenario, you may optionally provide a `callback_endpoint` to be notified when the export is ready. If the `callback_endpoint` is provided, we will make a post request to the provided address when the download is ready. The body of the post will be “success”:true. If you have not added S3 credentials to Braze, then the body of the post will additionally have the attribute `url` with the download URL as the value.
+     *
+     * Larger user bases will result in longer export times. For example, an app with 20 million users could take an hour or more.
      *
      * ## Request parameters
      *
      * | Parameter | Required | Data Type | Description |
      * | --- | --- | --- | --- |
-     * | `segment_id` | Required | String | Identifier for the segment to be exported. See [segment identifier](https://www.braze.com/docs/api/identifier_types/).  <br>  <br>The segment_id for a given segment can be found in your **Settings > Setup and Testing > API Keys** within your Braze account or you can use the [Segment List Endpoint](https://www.braze.com/docs/api/endpoints/export/segments/get_segment/). |
+     * | `segment_id` | Required | String | Identifier for the segment to be exported. See [segment identifier](https://www.braze.com/docs/api/identifier_types/).  <br>  <br>The `segment_id` for a given segment can be found on the [API Keys](https://www.braze.com/docs/user_guide/administrative/app_settings/api_settings_tab/) page within your Braze account or you can use the [Segment List Endpoint](https://www.braze.com/docs/api/endpoints/export/segments/get_segment/). |
      * | `callback_endpoint` | Optional | String | Endpoint to post a download URL to when the export is available. |
-     * | `fields_to_export` | Required\* | Array of strings | Name of user data fields to export, you may also export custom attributes.  <br>  <br>\*Beginning April 2021, new accounts must specify specific fields to export. |
+     * | `fields_to_export` | Required\* | Array of strings | Name of user data fields to export, you may also export custom attributes.  <br>  <br>_\*Beginning April 2021, new accounts must specify specific fields to export._ |
+     * | `custom_attributes_to_export` | Optional | Array of strings | Name of specific custom attribute to export. Up to 500 custom attributes can be exported. To create and manage custom attributes in the dashboard, go to **Data Settings** > **Custom Attributes**. |
      * | `output_format` | Optional | String | When using your own S3 bucket, allows you to specify file format as `zip` or `gzip`. Defaults to ZIP file format. |
+     *
+     * If `custom_attributes` is included in the `fields_to_export` parameter, all custom attributes are exported regardless of what is in `custom_attributes_to_export`. If your goal is to export specific attributes, `custom_attributes` should not be included in the `fields_to_export` parameter. Instead, use the `custom_attributes_to_export` parameter.
      *
      * ### Fields to export
      *
-     * The following is a list of valid `fields_to_export`. Using `fields_to_export` to minimize the data returned can improve response time of this API endpoint:
+     * The following is a list of valid `fields_to_export`. Using `fields_to_export` to minimize the data returned can improve the response time of this API endpoint:
      *
      * | Field to export | Data type | Description |
      * | --- | --- | --- |
@@ -4737,7 +4804,7 @@ class Client extends Runtime\Client\Client
      * | `last_coordinates` | Array of floats | User's most recent device location, formatted as `[longitude, latitude]`. |
      * | `last_name` | String | User's last name. |
      * | `phone` | String | User's telephone number in E.164 format. |
-     * | `purchase`s | Array | Purchases this user has made in the last 90 days. |
+     * | `purchases` | Array | Purchases this user has made in the last 90 days. |
      * | `random_bucket` | Integer | User's [random bucket number](https:/www.braze.com/docs/user_guide/data_and_analytics/braze_currents/event_glossary/customer_behavior_events#random-bucket-number-event), used to create uniformly distributed segments of random users. |
      * | `time_zone` | String | User's time zone in the same format as the IANA Time Zone Database. |
      * | `total_revenue` | Float | Total revenue attributed to this user. Total revenue is calculated based on purchases the user made during conversion windows for the campaigns and Canvases they received. |
@@ -4747,8 +4814,12 @@ class Client extends Runtime\Client\Client
      * ### Important reminders
      *
      * - The fields for `custom_events`, `purchases`, `campaigns_received`, and `canvases_received` will contain only contain data from the last 90 days.
+     *
      * - Both `custom_events` and `purchases` contain fields for `first` and `count`. Both of these fields will reflect information from all time, and will not be limited to just data from the last 90 days. For example, if a particular user first did the event prior to 90 days ago, this will be accurately reflected in the `first` field, and the `count` field will take into account events that occurred prior to the last 90 days as well.
+     *
      * - The number of concurrent segment exports a company can run at the endpoint level is capped at 100. Attempts that surpass this limit will result in an error.
+     *
+     * - Attempting to export a segment a second time while the first export job is still running will result in a 429 error.
      *
      *
      * ### Response
@@ -4766,7 +4837,7 @@ class Client extends Runtime\Client\Client
      *
      * Once made available, the URL will only be valid for a few hours. As such, we highly recommend that you add your own S3 credentials to Braze.
      *
-     * ### Sample user export file output
+     * ### Example user export file output
      *
      * User export object (we will include the least data possible - if a field is missing from the object it should be assumed to be null, false, or empty):
      *
@@ -4907,7 +4978,7 @@ class Client extends Runtime\Client\Client
      *
      * ```
      *
-     * Sample output
+     * #### **Sample output**
      *
      * ``` json
      * {
@@ -5073,12 +5144,13 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to export all users within a Global Control Group.
      *
-     * User data is exported as multiple files of user JSON objects separated by new lines (i.e., one JSON object per line).
+     * User data is exported as multiple files of user JSON objects separated by new lines (such as one JSON object per line).
      *
-     * > Warning: Individual custom attributes cannot be exported. However, all custom attributes can be exported by including custom_attributes in the fields_to_export array (e.g.,\[‘first_name’, ‘email’, ‘custom_attributes’\]).
+     * | Warning |
+     * | --- |
+     * | Individual custom attributes cannot be exported. However, all custom attributes can be exported by including `custom_attributes` in the `fields_to_export` array (for example, `[‘first_name’, ‘email’, ‘custom_attributes’]`). |
      *
-     *
-     * To use this endpoint, you’ll need to generate an API key with the `users.export.global_control_group` permission.
+     * To use this endpoint, you’ll need to generate an API key with the `users.export.global_control_group` permission.
      *
      * ## Rate limit
      *
@@ -5093,7 +5165,7 @@ class Client extends Runtime\Client\Client
      * | Parameter | Required | Data Type | Description |
      * | --- | --- | --- | --- |
      * | `callback_endpoint` | Optional | String | Endpoint to post a download URL to when the export is available. |
-     * | `fields_to_export` | Required\* | Array of strings | Name of user data fields to export, you may also export custom attributes.  <br>  <br>\*Beginning April 2021, new accounts must specify specific fields to export. |
+     * | `fields_to_export` | Required\* | Array of strings | Name of user data fields to export, you may also export custom attributes.  <br>  <br>_\*Beginning April 2021, new accounts must specify specific fields to export._ |
      * | `output_format` | Optional | String | When using your own S3 bucket, allows to specify file format as `zip` or `gzip`. Defaults to ZIP file format. |
      *
      * ## Fields to export
@@ -5149,8 +5221,9 @@ class Client extends Runtime\Client\Client
      *
      * User export object (we will include the least data possible - if a field is missing from the object it should be assumed to be null, false, or empty):
      *
-     * ```
+     * ``` json
      * {
+     * "created_at" : (string),
      * "external_id" : (string),
      * "user_aliases" : [
      * {
@@ -5164,9 +5237,9 @@ class Client extends Runtime\Client\Client
      * "email" : (string),
      * "dob" : (string) date for the user's date of birth,
      * "home_city" : (string),
-     * "country" : (string),
+     * "country" : (string) ISO-3166-1 alpha-2 standard,
      * "phone" : (string),
-     * "language" : (string) ISO-639 two letter code,
+     * "language" : (string) ISO-639-1 standard,
      * "time_zone" : (string),
      * "last_coordinates" : (array of float) [lon, lat],
      * "gender" : (string) "M" | "F",
@@ -5199,11 +5272,10 @@ class Client extends Runtime\Client\Client
      * "model" : (string),
      * "os" : (string),
      * "carrier" : (string),
-     * "idfv" : (string) only included for iOS devices,
+     * "idfv" : (string) only included for iOS devices when IDFV collection is enabled,
      * "idfa" : (string) only included for iOS devices when IDFA collection is enabled,
      * "google_ad_id" : (string) only included for Android devices when Google Play Advertising Identifier collection is enabled,
      * "roku_ad_id" : (string) only included for Roku devices,
-     * "windows_ad_id" : (string) only included for Windows devices,
      * "ad_tracking_enabled" : (bool)
      * },
      * ...
@@ -5226,6 +5298,7 @@ class Client extends Runtime\Client\Client
      * ### Sample output
      *
      * ``` json
+     * {
      * {
      * "created_at" : "2020-07-10 15:00:00.000 UTC",
      * "external_id" : "A8i3mkd99",
@@ -5327,30 +5400,32 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to update and end [Live Activities](https://www.braze.com/docs/developer_guide/platform_integration_guides/swift/live_activities/live_activities/) displayed by your iOS app. This endpoint requires additional setup.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `messages.live_activity.update` permission.
+     * After you register a Live Activity, you can pass a JSON payload to update your Apple Push Notification service (APNs). See Apple’s documentation on [updating your Live Activity with push notification payloads](https://developer.apple.com/documentation/activitykit/updating-and-ending-your-live-activity-with-activitykit-push-notifications) for more information.
      *
-     * Before using this endpoint, you must register an activity with the Braze Swift SDK using the [`launchActivity`](https://braze-inc.github.io/braze-swift-sdk/documentation/brazekit/braze/liveactivities-swift.class/launchactivity(pushtokentag:activity:fileid:line:)) method. Required request parameters will be defined during this step. Refer to [Live Activities](https://www.braze.com/docs/developer_guide/platform_integration_guides/swift/live_activities/live_activities/) for more information on registration.
+     * ## Prerequisites
      *
-     * Once you have registered your activity, pass a JSON payload with updates to the Apple Push Notification service (APNs) through this endpoint. See Apple’s documentation on [updating your Live Activity with push notification payloads](https://developer.apple.com/documentation/activitykit/updating-and-ending-your-live-activity-with-activitykit-push-notifications) for more information.
+     * To use this endpoint, you’ll need to complete the following:
      *
-     * > **Tip:** For help with CSV and API exports, visit [Export troubleshooting](https://www.braze.com/docs/user_guide/data_and_analytics/export_braze_data/export_troubleshooting/).
+     * - Generate an API key with the `messages.live_activity.update` permission.
+     *
+     * - Register a Live Activity [remotely](https://www.braze.com/docs/developer_guide/platform_integration_guides/swift/live_activities/live_activities/?tab=remote#step-2-start-the-activity) or [locally](https://www.braze.com/docs/developer_guide/platform_integration_guides/swift/live_activities/live_activities/?tab=local#step-2-start-the-activity) using the Braze Swift SDK.
      *
      *
      * ## Rate limit
      *
-     * We apply the default Braze rate limit of 250,000 requests per hour to this endpoint, as documented in API rate limits.
+     * We apply the default Braze rate limit of 250,000 requests per hour to this endpoint, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
      * ## Request parameters
      *
      * | Parameter | Required | Data Type | Description |
      * | --- | --- | --- | --- |
-     * | `app_id` | Required | String | App [API identifier]({{site.baseurl}}/api/identifier_types/#the-app-identifier) retrieved from **Settings > Setup and Testing > API Keys.** |
-     * | `activity_id` | Required | String | When you register your Live Activity using [`launchActivity`](https://braze-inc.github.io/braze-swift-sdk/documentation/brazekit/braze/liveactivities-swift.class), you use the `pushTokenTag` parameter to name the Activity's push token to a custom string.  <br>  <br>Set `activity_id` to this custom string to define which Live Activity you want to update. |
+     * | `app_id` | Required | String | App [API identifier](https://www.braze.com/docs/api/identifier_types/#the-app-identifier) retrieved from the [API Keys](https://www.braze.com/docs/user_guide/administrative/app_settings/api_settings_tab/) page. |
+     * | `activity_id` | Required | String | When you register your Live Activity using [<code>launchActivity</code>](https://braze-inc.github.io/braze-swift-sdk/documentation/brazekit/braze/liveactivities-swift.class), you use the `pushTokenTag` parameter to name the Activity's push token to a custom string.  <br>  <br>Set `activity_id` to this custom string to define which Live Activity you want to update. |
      * | `content_state` | Required | Object | You define the `ContentState` parameters when you create your Live Activity. Pass the updated values for your `ContentState` using this object.  <br>  <br>The format of this request must match the shape you initially defined. |
      * | `end_activity` | Optional | Boolean | If `true`, this request ends the Live Activity. |
      * | `dismissal_date` | Optional | Datetime  <br>([ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) string) | This parameter defines the time to remove the Live Activity from the user's UI. If this time is in the past, the Live Activity will be removed immediately. |
      * | `stale_date` | Optional | Datetime  <br>([ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) string) | This parameter tells the system when the Live Activity content is marked as outdated in the user's UI. |
-     * | `notification` | Optional | Object | <br><br>  <br>  <br>  <br>  <br>  <br>  <br>Include an [`apple_push`]({{site.baseurl}}/api/objects_filters/messaging/apple_object/) object to define a push notification. This behavior of this push notification depends on if the user is active or if the user is using a proxy device. {::nomarkdown}  <br>  <br>  <br>  <br><br><ul><li><p>If a <code>notification</code> is included and the user is active on their iPhone when the update is delivered, the updated Live Activity UI will slide down and display like a push notification.</p></li><li><p>If a <code>notification</code> is included and the user is not active on their iPhone, their screen will light up to display the updated Live Activity UI on their lock screen.</p></li><li><p>The <code>notification alert</code> will not display as a standard push notification. Additionally, if a user has a proxy device, like an Apple Watch, the <code>alert</code> will be displayed there.</p></li></ul><br><br> |
+     * | `notification` | Optional | Object | Include an [<code>apple_push</code>](https://www.braze.com/docs/api/objects_filters/messaging/apple_object/) object to define a push notification. This behavior of this push notification depends on if the user is active or if the user is using a proxy device. {::nomarkdown}  <br>  <br>  <br>  <br>  <br>  <br>\- If a `notification` is included and the user is active on their iPhone when the update is delivered, the updated Live Activity UI will slide down and display like a push notification.  <br>\- If a `notification` is included and the user is not active on their iPhone, their screen will light up to display the updated Live Activity UI on their lock screen.  <br>\- The `notification alert` will not display as a standard push notification. Additionally, if a user has a proxy device, like an Apple Watch, the `alert` will be displayed there. |
      *
      * ## Response
      *
@@ -5369,7 +5444,7 @@ class Client extends Runtime\Client\Client
      *
      * ### Example error response
      *
-     * The `4XX` class of status code indicates a client error. Refer to the [API errors and responses article]({{site.baseurl}}/api/errors/) for more information about errors you may encounter.
+     * The `4XX` class of status code indicates a client error. Refer to the [API errors and responses article](https://www.braze.com/docs/api/errors/) for more information about errors you may encounter.
      *
      * The status code `400` could return the following response body.
      *
@@ -5405,9 +5480,11 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to return a JSON list of information about scheduled campaigns and entry Canvases between now and a designated `end_time` specified in the request.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `messages.schedule_broadcasts` permission.
+     * Daily, recurring messages will only appear once with their next occurrence. Results returned in this endpoint include campaigns and Canvases created and scheduled in the Braze dashboard.
      *
-     * Daily, recurring messages will only appear once with their next occurrence. Results returned in this endpoint are only for campaigns and Canvases created and scheduled in Braze.
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an API key with the `messages.schedule_broadcasts` permission.
      *
      * ### Rate limit
      *
@@ -5421,7 +5498,7 @@ class Client extends Runtime\Client\Client
      * {
      * "scheduled_broadcasts": [
      * {
-     * "name" (string) the name of the scheduled boradcast,
+     * "name" (string) the name of the scheduled broadcast,
      * "id" (stings) the Canvas or campaign identifier,
      * "type" (string) the broadcast type either Canvas or Campaign,
      * "tags" (array) an array of tag names formatted as strings,
@@ -5464,7 +5541,9 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to cancel a message that you previously scheduled before it has been sent.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `messages.schedule.delete` permission.
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an API key with the `messages.schedule.delete` permission.
      *
      * ### Rate limit
      *
@@ -5501,9 +5580,11 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to cancel a Canvas message that you previously scheduled via API-triggered before it has been sent.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `canvas.trigger.schedule.delete` permission.
-     *
      * Scheduled messages or triggers that are deleted very close to or during the time they were supposed to be sent will be updated with best efforts, so last-second deletions could be applied to all, some, or none of your targeted users.
+     *
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an API key with the `canvas.trigger.schedule.delete` permission.
      *
      * ### Rate limit
      *
@@ -5539,9 +5620,11 @@ class Client extends Runtime\Client\Client
     /**
      * > The delete schedule endpoint allows you to cancel a message that you previously scheduled API-triggered Canvases before it has been sent.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `campaigns.trigger.schedule.delete` permission.
-     *
      * Scheduled messages or triggers that are deleted very close to or during the time they were supposed to be sent will be updated with best efforts, so last-second deletions could be applied to all, some, or none of your targeted users.
+     *
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need to generate an API key with the `campaigns.trigger.schedule.delete` permission.
      *
      * ### Rate limit
      *
@@ -5577,13 +5660,15 @@ class Client extends Runtime\Client\Client
     }
 
     /**
-     * > Use this endpoint to schedule a campaign, Canvas, or other message to be sent at a designated time (up to 90 days in the future) and provides you with an identifier to reference that message for updates.
-     *
-     * To use this endpoint, you’ll need to generate an API key with the `messages.schedule.create` permission.
+     * > Use this endpoint to schedule a campaign, Canvas, or other message to be sent at a designated time and provides you with an identifier to reference that message for updates.
      *
      * If you are targeting a segment, a record of your request will be stored in the [Developer Console](https://dashboard.braze.com/app_settings/developer_console/activitylog/) after all scheduled messages have been sent.
      *
-     * ### Rate limit
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an API key with the `messages.schedule.create` permission.
+     *
+     * ## Rate limit
      *
      * We apply the default Braze rate limit of 250,000 requests per hour to this endpoint, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
@@ -5594,7 +5679,7 @@ class Client extends Runtime\Client\Client
      * - An ad-hoc audience segment of any size, defined in the request as a [Connected Audience](https://www.braze.com/docs/api/objects_filters/connected_audience/) object
      *
      *
-     * ### Request parameters
+     * ## Request parameters
      *
      * | Parameter | Required | Data Type | Description |
      * | --- | --- | --- | --- |
@@ -5641,15 +5726,17 @@ class Client extends Runtime\Client\Client
     }
 
     /**
-     * > Use this endpoint to send dashboard created campaign messages (up to 90 days in advance) via API-triggered delivery, allowing you to decide what action should trigger the message to be sent.
-     *
-     * To use this endpoint, you’ll need to generate an API key with the `campaigns.trigger.schedule.create` permission.
+     * > Use this endpoint to send dashboard created campaign messages via API-triggered delivery, allowing you to decide what action should trigger the message to be sent.
      *
      * You can pass in `trigger_properties` that will be templated into the message itself.
      *
      * Note that to send messages with this endpoint, you must have a [Campaign ID](https://www.braze.com/docs/api/identifier_types/), created when you build an [API-Triggered Campaign](https://www.braze.com/docs/api/api_campaigns/).
      *
-     * ### Rate limit
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an API key with the `campaigns.trigger.schedule.create` permission.
+     *
+     * ## Rate limit
      *
      * We apply the default Braze rate limit of 250,000 requests per hour to this endpoint, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
@@ -5660,7 +5747,7 @@ class Client extends Runtime\Client\Client
      * - An ad-hoc audience segment of any size, defined in the request as a [Connected Audience](https://www.braze.com/docs/api/objects_filters/connected_audience/) object
      *
      *
-     * ### Request parameters
+     * ## Request parameters
      *
      * | Parameter | Required | Data Type | Description |
      * | --- | --- | --- | --- |
@@ -5711,13 +5798,15 @@ class Client extends Runtime\Client\Client
     }
 
     /**
-     * > Use this endpoint to schedule Canvas messages (up to 90 days in advance) via API-triggered delivery, allowing you to decide what action should trigger the message to be sent.
-     *
-     * To use this endpoint, you’ll need to generate an API key with the `canvas.trigger.schedule.create` permission.
+     * > Use this endpoint to schedule Canvas messages via API-triggered delivery, allowing you to decide what action should trigger the message to be sent.
      *
      * You can pass in `canvas_entry_properties` that will be templated into the messages sent by the first steps of the Canvas.
      *
      * Note that to send messages with this endpoint, you must have a [Canvas ID](https://www.braze.com/docs/api/identifier_types/#canvas-api-identifier) created when you build a Canvas.
+     *
+     * ### Prerequisites
+     *
+     * To use this endpoint, you’ll need an API key with the `canvas.trigger.schedule.create` permission.
      *
      * ### Rate limit
      *
@@ -5767,21 +5856,53 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to update scheduled messages.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `messages.schedule.update` permission.
-     *
      * This endpoint accepts updates to either the `schedule` or `messages` parameter or both. Your request must contain at least one of those two keys.
      *
-     * ### Rate limit
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an API key with the `messages.schedule.update` permission.
+     *
+     * ## Rate limit
      *
      * We apply the default Braze rate limit of 250,000 requests per hour to this endpoint, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
-     * ### Request parameters
+     * ## Request parameters
      *
      * | Parameter | Required | Data Type | Description |
      * | --- | --- | --- | --- |
      * | `schedule_id` | Required | String | The `schedule_id` to update (obtained from the response to create schedule). |
      * | `schedule` | Optional | Object | See [schedule object](https://www.braze.com/docs/api/objects_filters/schedule_object/). |
      * | `messages` | Optional | Object | See available [message objects](https://www.braze.com/docs/api/objects_filters/#messaging-objects). |
+     *
+     * ## Example request
+     *
+     * ``` json
+     * curl --location --request POST 'https://rest.iad-01.braze.com/messages/schedule/update' \
+     * --header 'Content-Type: application/json' \
+     * --header 'Authorization: Bearer YOUR-REST-API-KEY' \
+     * --data-raw '{
+     * "schedule_id": "schedule_identifier",
+     * "schedule": {
+     * "time": "2017-05-24T20:30:36Z"
+     * },
+     * "messages": {
+     * "apple_push": {
+     * "alert": "Updated Message!",
+     * "badge": 1
+     * },
+     * "android_push": {
+     * "title": "Updated title!",
+     * "alert": "Updated message!"
+     * },
+     * "sms": {
+     * "subscription_group_id": "subscription_group_identifier",
+     * "message_variation_id": "message_variation_identifier",
+     * "body": "This is my SMS body.",
+     * "app_id": "app_identifier"
+     * }
+     * }
+     * }'
+     * ```
      *
      * @param array $headerParameters {
      *
@@ -5808,25 +5929,43 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to update scheduled API-triggered campaigns created in the dashboard, allowing you to decide what action should trigger the message to be sent.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `campaigns.trigger.schedule.update` permission.
-     *
      * You can pass in `trigger_properties` that will be templated into the message itself.
      *
      * Note that to send messages with this endpoint, you must have a campaign ID, created when you build an [API-triggered campaign](https://www.braze.com/docs/api/api_campaigns/).
      *
      * Any schedule will completely overwrite the one that you provided in the create schedule request or in previous update schedule requests. For example, if you originally provide `"schedule" : {"time" : "2015-02-20T13:14:47", "in_local_time" : true}` and then in your update you provide `"schedule" : {"time" : "2015-02-20T14:14:47"}`, your message will now be sent at the provided time in UTC, not in the user's local time. Scheduled triggers that are updated very close to or during the time they were supposed to be sent will be updated with best efforts, so last-second changes could be applied to all, some, or none of your targeted users.
      *
-     * ### Rate limit
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an API key with the `campaigns.trigger.schedule.update` permission.
+     *
+     * ## Rate limit
      *
      * We apply the default Braze rate limit of 250,000 requests per hour to this endpoint, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
-     * ### Request parameters
+     * ## Request parameters
      *
      * | Parameter | Required | Data Type | Description |
      * | --- | --- | --- | --- |
      * | `campaign_id` | Required | String | See [campaign identifier](https://www.braze.com/docs/api/identifier_types/) |
      * | `schedule_id` | Optional | String | The `schedule_id` to update (obtained from the response to create schedule). |
      * | `schedule` | Required | Object | See [schedule object](https://www.braze.com/docs/api/objects_filters/schedule_object/). |
+     *
+     * ## Example request
+     *
+     * ``` json
+     * curl --location --request POST 'https://rest.iad-01.braze.com/campaigns/trigger/schedule/update' \
+     * --header 'Content-Type: application/json' \
+     * --header 'Authorization: Bearer YOUR-REST-API-KEY' \
+     * --data-raw '{
+     * "campaign_id": "campaign_identifier",
+     * "schedule_id": "schedule_identifier",
+     * "schedule": {
+     * "time": "2017-05-24T21:30:00Z",
+     * "in_local_time": true
+     * }
+     * }'
+     * ```
      *
      * @param array $headerParameters {
      *
@@ -5853,19 +5992,38 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to update scheduled API-triggered Canvases that were created in the dashboard.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `canvas.trigger.schedule.update` permission.
-     *
      * This allows you to decide what action should trigger the message to be sent. You can pass in `trigger_properties` that will be templated into the message itself.
      *
      * Note that to send messages with this endpoint, you must have a Canvas ID, created when you build a [Canvas](https://www.braze.com/docs/api/identifier_types/#canvas-api-identifier).
      *
      * Any schedule will completely overwrite the one that you provided in the create schedule request or in previous update schedule requests. For example, if you originally provide `"schedule" : {"time" : "2015-02-20T13:14:47", "in_local_time" : true}` and then in your update you provide `"schedule" : {"time" : "2015-02-20T14:14:47"}`, your message will now be sent at the provided time in UTC, not in the user's local time. Scheduled triggers that are updated very close to or during the time they were supposed to be sent will be updated with best efforts, so last-second changes could be applied to all, some, or none of your targeted users.
      *
-     * ### Rate limit
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an API key with the `canvas.trigger.schedule.update` permission.
+     *
+     * ## Rate limit
      *
      * We apply the default Braze rate limit of 250,000 requests per hour to this endpoint, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
-     * ### Request parameters
+     * ## Request body
+     *
+     * ``` json
+     * Content-Type: application/json
+     * Authorization: Bearer YOUR-REST-API-KEY
+     * ```
+     *
+     * ``` json
+     * {
+     * "canvas_id": (required, string) see Canvas identifier,
+     * "schedule_id": (required, string) the `schedule_id` to update (obtained from the response to create schedule),
+     * "schedule": {
+     * // required, see create schedule documentation
+     * }
+     * }
+     * ```
+     *
+     * ## Request parameters
      *
      * | Parameter | Required | Data Type | Description |
      * | --- | --- | --- | --- |
@@ -5898,9 +6056,11 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to create send IDs that can be used to send messages and track message performance programatically, without campaign creation for each send.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `sends.id.create` permission.
-     *
      * Using the send identifier to track and send messages is useful if you are planning to programmatically generate and send content.
+     *
+     * ## Prerequisites
+     *
+     * To use this endpoint, you'll need to generate an API key with the `sends.id.create` permission.
      *
      * ## Rate limit
      *
@@ -5910,8 +6070,8 @@ class Client extends Runtime\Client\Client
      *
      * | Parameter | Required | Data Type | Description |
      * | --- | --- | --- | --- |
-     * | `campaign_id` | Required | String | See [campaign identifier]({{site.baseurl}}/api/identifier_types/). |
-     * | `send_id` | Optional | String | See [send identifier]({{site.baseurl}}/api/identifier_types/). |
+     * | `campaign_id` | Required | String | See [campaign identifier](https://www.braze.com/api/identifier_types/). |
+     * | `send_id` | Optional | String | See [send identifier](https://www.braze.com/api/identifier_types/). |
      *
      * ## Response
      *
@@ -5950,13 +6110,15 @@ class Client extends Runtime\Client\Client
     }
 
     /**
-     * > Use this endpoint to send immediate, ad-hoc messages to designated users via the Braze API.
-     *
-     * To use this endpoint, you’ll need to generate an API key with the `messages.send` permission.
+     * > Use this endpoint to send immediate messages to designated users via the Braze API.
      *
      * Be sure to include Messaging Objects in your body to complete your requests.
      *
      * If you are targeting a segment, a record of your request will be stored in the [Developer Console](https://dashboard.braze.com/app_settings/developer_console/activitylog/).
+     *
+     * ## Prerequisites
+     *
+     * To use this endpoint, you'll need to generate an API key with the `messages.send` permission.
      *
      * ## Rate limit
      *
@@ -5965,7 +6127,9 @@ class Client extends Runtime\Client\Client
      * Braze endpoints support [batching API requests](https://www.braze.com/docs/api/api_limits/#batching-api-requests). A single request to the messaging endpoints can reach any of the following:
      *
      * - Up to 50 specific `external_ids`, each with individual message parameters
+     *
      * - A segment of any size created in the Braze dashboard, specified by its `segment_id`
+     *
      * - An ad-hoc audience segment of any size, defined in the request as a [Connected Audience](https://www.braze.com/docs/api/objects_filters/connected_audience/) object
      *
      *
@@ -5986,7 +6150,7 @@ class Client extends Runtime\Client\Client
      *
      * ## Response details
      *
-     * Message sending endpoint responses will include the message’s `dispatch_id` for reference back to the dispatch of the message. The `dispatch_id` is the id of the message dispatch (unique id for each ‘transmission’ sent from the Braze platform). For more, information refer to [Dispatch ID behavior](https://www.braze.com/docs/help/help_articles/data/dispatch_id/).
+     * Message sending endpoint responses will include the message’s `dispatch_id` for reference back to the dispatch of the message. The `dispatch_id` is the ID of the message dispatch, meaning the unique ID for each “transmission” sent from Braze. For more information, refer to [Dispatch ID behavior](https://www.braze.com/docs/help/help_articles/data/dispatch_id/).
      *
      * @param array $headerParameters {
      *
@@ -6011,20 +6175,22 @@ class Client extends Runtime\Client\Client
     }
 
     /**
-     * > Use this endpoint to send immediate, ad-hoc transactional messages to a designated user.
+     * > Use this endpoint to send immediate, one-off transactional messages to a designated user.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `transactional.send` permission.
-     *
-     * This endpoint is used alongside the creation of a [Transactional Email campaign](https://www.braze.com/docs/api/api_campaigns/transactional_campaigns) and corresponding campaign ID.
+     * This endpoint is used alongside the creation of a Braze [Transactional Email campaign](https://www.braze.com/docs/api/api_campaigns/transactional_campaigns) and corresponding campaign ID.
      *
      * > **Important:** Transactional Email is currently available as part of select Braze packages. Reach out to your Braze customer success manager for more details.
      *
      *
      * Similar to the [Send triggered campaign endpoint](https://www.braze.com/docs/api/endpoints/messaging/send_messages/post_send_triggered_campaigns/), this campaign type allows you to house message content inside of the Braze dashboard while dictating when and to whom a message is sent via your API. Unlike the Send triggered campaign endpoint, which accepts an audience or segment to send messages to, a request to this endpoint must specify a single user either by `external_user_id` or `user_alias`, as this campaign type is purpose-built for 1:1 messaging of alerts like order confirmations or password resets.
      *
+     * ## Prerequisites
+     *
+     * To use this endpoint, you'll need to generate an API key with the `transactional.send` permission.
+     *
      * ## Rate limit
      *
-     * Transactional Emails are not subject to a rate limit. Depending on your chosen package, a set number of Transactional Emails is covered per hour by SLA. Requests that exceed that rate will still send, but are not covered by SLA. 99.9% of emails will send in less than one minute.
+     * Braze Transactional Emails are not subject to a rate limit. Depending on your chosen package, a set number of transactional emails is covered per hour by SLA. Requests that exceed that rate will still send, but are not covered by SLA. 99.9% of emails will send in less than one minute.
      *
      * ## Path parameters
      *
@@ -6036,7 +6202,7 @@ class Client extends Runtime\Client\Client
      *
      * | Parameter | Required | Data Type | Description |
      * | --- | --- | --- | --- |
-     * | `external_send_id` | Optional | String | A Base64 compatible string. Validated against the following regex `/^[a-zA-Z0-9-_+\/=]+$/`. This optional field allows you to pass an internal identifier for this particular send which will be included in events sent from the Transactional HTTP event postback. When passed, this identifier will also be used as a deduplication key, which Braze will store for 24 hours. Passing the same identifier in another request will not result in a new instance of a send by Braze for 24 hours. |
+     * | `external_send_id` | Optional | String | A Base64 compatible string. Validated against the following regex `/^[a-zA-Z0-9-_+\/=]+$/`.  <br>  <br>This optional field allows you to pass an internal identifier for this particular send which will be included in events sent from the Transactional HTTP event postback. When passed, this identifier will also be used as a deduplication key, which Braze will store for 24 hours.  <br>  <br>Passing the same identifier in another request will not result in a new instance of a send by Braze for 24 hours. |
      * | `trigger_properties` | Optional | Object | See [trigger properties](https://www.braze.com/docs/api/objects_filters/trigger_properties_object/). Personalization key-value pairs that will apply to the user in this request. |
      * | `recipients` | Required | Object | The user you are targeting this message to. Can contain `attributes` and a single `external_user_id` or `user_alias`.  <br>  <br>Note that if you provide an external user ID that doesn’t already exist in Braze, passing any fields to the `attributes` object will create this user profile in Braze and send this message to the newly created user.  <br>  <br>If you send multiple requests to the same user with different data in the `attributes` object, Braze will ensure that `first_name`, `last_name`, and `email` attributes will be updated synchronously and templated into your message. Custom attributes don’t have this same protection, so proceed with caution when updating a user through this API and passing different custom attribute values in quick succession. |
      *
@@ -6079,9 +6245,10 @@ class Client extends Runtime\Client\Client
      *
      * In order to associate the incoming events to a particular instance of send, you can choose to either capture and store the Braze `dispatch_id` returned in the [API response](https://www.braze.com/docs/api/endpoints/messaging/send_messages/post_send_transactional_message/#example-response), or pass your own identifier to the `external_send_id` field. An example of a value you may choose to pass to that field may be an order ID, where after completing order 1234, an order confirmation message is triggered to the user through Braze, and `external_send_id : 1234` is included in the request. All following event postbacks such as `Sent` and `Delivered` will include `external_send_id : 1234` in the payload allowing you to confirm that user successfully received their order confirmation email.
      *
-     * To get started using the Transactional HTTP Event Postback, navigate to **Settings** > **Workspace Settings** > **Email Preferences**. in your Braze dashboard and input your desired URL to receive postbacks.
+     * To get started using the Transactional HTTP Event Postback, navigate to **Settings** > **Email Preferences** in your Braze dashboard and locate the section **Transactional Event Status Postback**. Input your desired URL to receive postbacks.
      *
-     * Note: If you are using our [older navigation](https://www.braze.com/docs/navigation), **Email Preferences** can be found at ****Manage Settings** > **Email Settings****.
+     * > **Note:** If you are using our [older navigation](https://www.braze.com/docs/navigation), **Email Preferences** can be found at ****Manage Settings** > **Email Settings****.
+     *
      *
      * ### Postback body
      *
@@ -6240,11 +6407,13 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to send immediate, ad-hoc messages to designated users via API-triggered delivery.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `campaigns.trigger.send` permission.
-     *
      * API-triggered delivery allows you to house message content inside of the Braze dashboard while dictating when a message is sent, and to whom via your API.
      *
      * If you are targeting a segment, a record of your request will be stored in the [Developer Console](https://dashboard.braze.com/app_settings/developer_console/activitylog/). Note that to send messages with this endpoint, you must have a [campaign ID](https://www.braze.com/docs/api/identifier_types/) created when you build an [API-triggered campaign](https://www.braze.com/docs/api/api_campaigns/).
+     *
+     * ## Prerequisites
+     *
+     * To use this endpoint, you'll need to generate an API key with the `campaigns.trigger.send` permission.
      *
      * ## Rate limit
      *
@@ -6381,9 +6550,11 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to generate a URL for a preference center.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `preference_center.user.get` permission.
-     *
      * Each preference center URL is unique to each user.
+     *
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an API key with the `preference_center.user.get` permission.
      *
      * ## Rate limit
      *
@@ -6395,6 +6566,13 @@ class Client extends Runtime\Client\Client
      * | --- | --- | --- | --- |
      * | `preferenceCenterExternalID` | Required | String | The ID for your preference center. |
      * | `userID` | Required | String | The user ID. |
+     *
+     * ## Request parameters
+     *
+     * | **Parameter** | **Required** | **Data Type** | **Description** |
+     * | --- | --- | --- | --- |
+     * | `preference_center_api_id` | Required | String | The ID for your preference center. |
+     * | `external_id` | Required | String | The external ID for a user. |
      *
      * ## Example request
      *
@@ -6443,7 +6621,9 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to list your available preference centers.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `preference_center.list` permission.
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an API key with the `preference_center.list` permission.
      *
      * ## Rate limit
      *
@@ -6519,7 +6699,9 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to view the details for your preference centers, including when it was created and updated.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `preference_center.get` permission.
+     * ## Prerequisites
+     *
+     * To use this endpoint, you'll need an API key with the `preference_center.get` permission.
      *
      * ## Rate limit
      *
@@ -6587,7 +6769,9 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to update a preference center.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `preference_center.update` permission.
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key ](https://www.braze.com/docs/api/basics#rest-api-key/) with the `preference_center.update` permission.
      *
      * ## Rate limit
      *
@@ -6607,7 +6791,7 @@ class Client extends Runtime\Client\Client
      * | `preference_center_title` | Optional | String | The title for the preference center and confirmation pages. If a title is not specified, the title of the pages will default to "Preference Center". |
      * | `confirmation_page_html` | Required | String | The HTML for the confirmation page. |
      * | `state` | Optional | String | Choose `active` or `draft`. |
-     * | `options` | Optional | Object | Attributes: `meta-viewport-content`. When present, a `viewport` meta tag will be added to the page with `content=` . |
+     * | `options` | Optional | Object | Attributes:  <br>`meta-viewport-content`: When present, a `viewport` meta tag will be added to the page with `content=`  <br>  <br>`link-tags`: Set a favicon for the page. When set, a  tag with a rel attribute is added to the page. |
      *
      * ## Example request
      *
@@ -6661,11 +6845,13 @@ class Client extends Runtime\Client\Client
     }
 
     /**
-     * > Use this endpoint to create a preference center to allow users to manage their notification preferences for email campaigns.
+     * > Use this endpoint to create a preference center to allow users to manage their notification preferences for your email campaigns.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `preference_center.update` permission.
+     * Refer to [Create a preference center with API](https://www.braze.com/docs/user_guide/message_building_by_channel/email/preference_center/overview/#create-a-preference-center-via-api) for steps on how to build an API-generated preference center.
      *
-     * Check out [Creating a preference center via API](https://www.braze.com/docs/user_guide/message_building_by_channel/email/preference_center/) for details on how to include this in your email campaigns.
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an API key with the `preference_center.update` permission.
      *
      * ## Rate limit
      *
@@ -6682,7 +6868,7 @@ class Client extends Runtime\Client\Client
      * | `state` | Optional | String | Choose `active` or `draft`. Defaults to `active` if not specified. |
      * | `options` | Optional | Object | Attributes: `meta-viewport-content`. When present, a `viewport` meta tag will be added to the page with `content=` . |
      *
-     * > **Note:** The preference center name can't be edited once created.
+     * > **Note:** The preference center name can't be edited after it's created.
      *
      *
      * ### Liquid tags
@@ -6693,18 +6879,20 @@ class Client extends Runtime\Client\Client
      *
      * | Liquid | Description |
      * | --- | --- |
-     * | `{{subscribed_state.${email_global}}}` | Get the global email subscribed state for the user (i.e., "opted_in", "subscribed", or "unsubscribed". |
-     * | `{{subscribed_state.${}}}` | Get the subscribed state of the specified subscription group for the user (i.e., "subscribed" or "unsubscribed"). |
+     * | `{{subscribed_state.${email_global}}}` | Get the global email subscribed state for the user (such as "opted_in", "subscribed", or "unsubscribed"). |
+     * | `{{subscribed_state.${}}}` |  |
      *
      * #### Form inputs and action
      *
      * | Liquid | Description |
      * | --- | --- |
-     * | `{% form_field_name :email_global_state %}` | Indicates that a specific form input element corresponds to the user's global email subscribed state. The user's selection state should be "opted_in", "subscribed", or "unsubscribed" when the form is submitted with selection data for the global email subscribed state. If it's a checkbox, the user will either be "opted_in" or "unsubscribed". For a hidden input, the "subscribed" state will also be valid. |
+     * | `{% form_field_name :email_global_state %}` | Indicates that a specific form input element corresponds to the user’s global email subscribed state. The user’s selection state should be “opted_in”, “subscribed”, or “unsubscribed” when the form is submitted with selection data for the global email subscribed state. If it’s a checkbox, the user will either be “opted_in” or “unsubscribed”. For a hidden input, the “subscribed” state will also be valid. |
      * | `{% form_field_name :subscription_group %}` | Indicates that a specific form input element corresponds to a given subscription group. The user's selection state should be either "subscribed" or "unsubscribed" when the form is submitted with selection data for a specific subscription group. |
      * | `{{preference_center_submit_url}}` | Generates URL for form submission. |
      *
-     * ## Example response
+     * ## Example responses
+     *
+     * ### Create preference center
      *
      * ```
      * {
@@ -6713,6 +6901,164 @@ class Client extends Runtime\Client\Client
      * "created_at": "2022-09-22T18:28:07+00:00",
      * "message": "success"
      * }
+     *
+     * ```
+     *
+     * ### HTML with form inputs
+     *
+     * ```
+     * %3C!doctype%20html%3E
+     * <html lang="en">
+     * <head>
+     * <meta name="robots" content="noindex" />
+     * <title>Email Preferences</title>
+     * <script type="text/javascript">
+     * %20%20%20%20%20%20window.onload%20%3D%20()%20%3D%3E%20%7B
+     * %20%20%20%20%20%20%20%20const%20globalUnsubscribed%20%3D%20%26%23x27%3B%7B%7Bsubscribed_state.%24%7Bemail_global%7D%7D%7D%26%23x27%3B%20%3D%3D%20%22unsubscribed%22%3B
+     * %20%20%20%20%20%20%20%20const%20globalSubscribedValue%20%3D%20%26%23x27%3B%7B%7Bsubscribed_state.%24%7Bemail_global%7D%7D%7D%26%23x27%3B%20%3D%3D%20%22opted_in%22%20%3F%20%22opted_in%22%20%3A%20%22subscribed%22%3B
+     * %20%20%20%20%20%20%20%20const%20idStates%20%3D%20%5B
+     * %20%20%20%20%20%20%20%20%20%20%2F%2F%20input%20format%3A%20%5BAPI_ID%2C%20%26%23x27%3B%7B%7Bsubscribed_state.%24%7BAPI_ID%7D%7D%7D%26%23x27%3B%20%3D%3D%20%22subscribed%22%5D%5B%5D
+     * %20%20%20%20%20%20%20%20%20%20%5B%26%23x27%3B3d2ae07a-f2ff-4318-bdff-e394f2d3a4ec%26%23x27%3B%2C%20%26%23x27%3B%7B%7Bsubscribed_state.%24%7B3d2ae07a-f2ff-4318-bdff-e394f2d3a4ec%7D%7D%7D%26%23x27%3B%20%3D%3D%20%26%23x27%3Bsubscribed%26%23x27%3B%5D%2C%5B%26%23x27%3B7d89bdc3-4aa1-4592-8b8a-4c8b7161c875%26%23x27%3B%2C%20%26%23x27%3B%7B%7Bsubscribed_state.%24%7B7d89bdc3-4aa1-4592-8b8a-4c8b7161c875%7D%7D%7D%26%23x27%3B%20%3D%3D%20%26%23x27%3Bsubscribed%26%23x27%3B%5D%2C%5B%26%23x27%3B5444d32e-2815-4258-964c-b9690d4ccb94%26%23x27%3B%2C%20%26%23x27%3B%7B%7Bsubscribed_state.%24%7B5444d32e-2815-4258-964c-b9690d4ccb94%7D%7D%7D%26%23x27%3B%20%3D%3D%20%26%23x27%3Bsubscribed%26%23x27%3B%5D
+     * %20%20%20%20%20%20%20%20%5D%3B
+     * %20%20%20%20%20%20%20%20const%20setState%20%3D%20(id%2C%20subscribed)%20%3D%3E%20%7B
+     * %20%20%20%20%20%20%20%20%20%20document.querySelector(%60%23checkbox-%24%7Bid%7D%60).checked%20%3D%20subscribed%3B
+     * %20%20%20%20%20%20%20%20%20%20document.querySelector(%60%23value-%24%7Bid%7D%60).value%20%3D%20subscribed%20%3F%20%22subscribed%22%20%3A%20%22unsubscribed%22%3B
+     * %20%20%20%20%20%20%20%20%7D%3B
+     * %20%20%20%20%20%20%20%20const%20setGlobal%20%3D%20(unsubscribed)%20%3D%3E%20%7B
+     * %20%20%20%20%20%20%20%20%20%20document.querySelector(%60%23checkbox-global%60).checked%20%3D%20unsubscribed%3B
+     * %20%20%20%20%20%20%20%20%20%20document.querySelector(%60%23value-global%60).value%20%3D%20unsubscribed%20%3F%20%22unsubscribed%22%20%3A%20globalSubscribedValue%3B
+     * %20%20%20%20%20%20%20%20%20%20idStates.forEach((%5Bid%5D)%20%3D%3E%20%7B
+     * %20%20%20%20%20%20%20%20%20%20%20%20document.querySelector(%60%23checkbox-%24%7Bid%7D%60).disabled%20%3D%20unsubscribed%3B
+     * %20%20%20%20%20%20%20%20%20%20%7D)%3B
+     * %20%20%20%20%20%20%20%20%7D%3B
+     * %20%20%20%20%20%20%20%20idStates.forEach((%5Bid%2C%20state%5D)%20%3D%3E%20%7B
+     * %20%20%20%20%20%20%20%20%20%20setState(id%2C%20state)%3B
+     * %20%20%20%20%20%20%20%20%20%20document.querySelector(%60%23checkbox-%24%7Bid%7D%60).onchange%20%3D%20((e)%20%3D%3E%20%7B
+     * %20%20%20%20%20%20%20%20%20%20%20%20setState(id%2C%20e.target.checked)%3B
+     * %20%20%20%20%20%20%20%20%20%20%7D)%3B
+     * %20%20%20%20%20%20%20%20%7D)%3B
+     * %20%20%20%20%20%20%20%20setGlobal(globalUnsubscribed)%3B
+     * %20%20%20%20%20%20%20%20document.querySelector(%60%23checkbox-global%60).onchange%20%3D%20((e)%20%3D%3E%20%7B
+     * %20%20%20%20%20%20%20%20%20%20setGlobal(e.target.checked)%3B
+     * %20%20%20%20%20%20%20%20%7D)%3B
+     * %20%20%20%20%20%20%7D%3B
+     * </script>
+     * <style>
+     * %20%20%20%20%20%20body%20%7B
+     * %20%20%20%20%20%20%20%20background%3A%20%23fff%3B
+     * %20%20%20%20%20%20%20%20margin%3A%200%3B
+     * %20%20%20%20%20%20%7D
+     * %20%20%20%20%20%20%40media%20(max-width%3A%20600px)%20%7B
+     * %20%20%20%20%20%20%20%20.main-container%20%7B
+     * %20%20%20%20%20%20%20%20%20%20margin-top%3A%200%3B
+     * %20%20%20%20%20%20%20%20%20%20width%3A%20100%25%3B
+     * %20%20%20%20%20%20%20%20%7D
+     * %20%20%20%20%20%20%20%20.main-container%20.content%20.email-input%20%7B
+     * %20%20%20%20%20%20%20%20%20%20width%3A%20100%25%3B
+     * %20%20%20%20%20%20%20%20%7D
+     * %20%20%20%20%20%20%7D
+     * </style>
+     * </head>
+     * <body class="vsc-initialized" style="margin: 0" bgcolor="#fff">
+     * %20%20%20%20%3Cdiv
+     * %20%20%20%20%20%20class%3D%22main-container%22
+     * %20%20%20%20%20%20style%3D%22
+     * %20%20%20%20%20%20%20%20background-color%3A%20%23fff%3B
+     * %20%20%20%20%20%20%20%20color%3A%20%23333335%3B
+     * %20%20%20%20%20%20%20%20font-family%3A
+     * %20%20%20%20%20%20%20%20%20%20Sailec%20W00%20Medium%2C
+     * %20%20%20%20%20%20%20%20%20%20helvetica%2C
+     * %20%20%20%20%20%20%20%20%20%20arial%2C
+     * %20%20%20%20%20%20%20%20%20%20sans-serif%3B
+     * %20%20%20%20%20%20%20%20margin-left%3A%20auto%3B
+     * %20%20%20%20%20%20%20%20margin-right%3A%20auto%3B
+     * %20%20%20%20%20%20%20%20margin-top%3A%2030px%3B
+     * %20%20%20%20%20%20%20%20width%3A%20600px%3B
+     * %20%20%20%20%20%20%20%20padding%3A%2015px%200%205px%3B
+     * %20%20%20%20%20%20%22
+     * %20%20%20%20%3E
+     * <div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="content" style="margin-left: 20px; margin-right: 20px">
+     * <div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27;>
+     * %20%20%20%20%20%20%20%20%20%20%3Ch1
+     * %20%20%20%20%20%20%20%20%20%20%20%20style%3D%22color%3A%20%233accdd%3B%20font-size%3A%2027px%3B%20font-weight%3A%20400%3B%20margin-bottom%3A%2040px%3B%20margin-top%3A%200%22
+     * %20%20%20%20%20%20%20%20%20%20%20%20align%3D%22center%22
+     * %20%20%20%20%20%20%20%20%20%20%3E
+     * %20%20%20%20%20%20%20%20%20%20%20%20Manage%20Email%20Preferences
+     * </h1>
+     * <p class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="intro-text" style="font-size: 14px; margin-bottom: 20px" align="center">
+     * %20%20%20%20%20%20%20%20%20%20%20%20Select%20the%20emails%20that%20you%20want%20to%20receive.
+     * </p>
+     * </div>
+     * <form action="{{preference_center_submit_url}}" method="post" accept-charset="UTF-8">
+     * <div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27;>
+     * <h3 class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; style="font-size: 15px; margin-bottom: 15px; margin-left: 5px; margin-top: 40px">
+     * Email Address: <span class="displayed-email" style="font-weight: 400">{{${email_address}}}</span>
+     * </h3>
+     * </div>
+     * <div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="subscription-groups-holder" style="margin-bottom: 20px"><div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="row" style="border-top-width: 1px; border-top-color: #dddde2; border-top-style: solid; background-color: #fff; padding: 15px 10px 14px;border-bottom: 1px solid rgb(221, 221, 226);">
+     * <label style="color: #27368f; cursor: pointer; font-size: 15px; font-weight: 700;">
+     * <input type="checkbox" id="checkbox-3d2ae07a-f2ff-4318-bdff-e394f2d3a4ec" class="sub_group" style="margin-right: 4px;">
+     * <input type="hidden" name="{% form_field_name :subscription_group 3d2ae07a-f2ff-4318-bdff-e394f2d3a4ec %}" id="value-3d2ae07a-f2ff-4318-bdff-e394f2d3a4ec" />
+     * %20%20%20%20Sub%20Group%201
+     * </label>
+     * <p class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="subscription-group" style="font-size: 13px; line-height: 1.4em; min-height: 20px; padding-right: 20px; margin: 0 0 3px 23px;">
+     * </p>
+     * </div>
+     * <div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="row" style="border-top-width: 1px; border-top-color: #dddde2; border-top-style: solid; background-color: #fff; padding: 15px 10px 14px;border-bottom: 1px solid rgb(221, 221, 226);">
+     * <label style="color: #27368f; cursor: pointer; font-size: 15px; font-weight: 700;">
+     * <input type="checkbox" id="checkbox-7d89bdc3-4aa1-4592-8b8a-4c8b7161c875" class="sub_group" style="margin-right: 4px;">
+     * <input type="hidden" name="{% form_field_name :subscription_group 7d89bdc3-4aa1-4592-8b8a-4c8b7161c875 %}" id="value-7d89bdc3-4aa1-4592-8b8a-4c8b7161c875" />
+     * %20%20%20%20Sub%20Group%202
+     * </label>
+     * <p class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="subscription-group" style="font-size: 13px; line-height: 1.4em; min-height: 20px; padding-right: 20px; margin: 0 0 3px 23px;">
+     * </p>
+     * </div>
+     * <div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="row" style="border-top-width: 1px; border-top-color: #dddde2; border-top-style: solid; background-color: #fff; padding: 15px 10px 14px;border-bottom: 1px solid rgb(221, 221, 226);">
+     * <label style="color: #27368f; cursor: pointer; font-size: 15px; font-weight: 700;">
+     * <input type="checkbox" id="checkbox-5444d32e-2815-4258-964c-b9690d4ccb94" class="sub_group" style="margin-right: 4px;">
+     * <input type="hidden" name="{% form_field_name :subscription_group 5444d32e-2815-4258-964c-b9690d4ccb94 %}" id="value-5444d32e-2815-4258-964c-b9690d4ccb94" />
+     * %20%20%20%20Sub%20Group%203
+     * </label>
+     * <p class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="subscription-group" style="font-size: 13px; line-height: 1.4em; min-height: 20px; padding-right: 20px; margin: 0 0 3px 23px;">
+     * </p>
+     * </div>
+     * </div>
+     * <div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="unsub-all" style="cursor: pointer; font-size: 13px; margin-bottom: 20px" align="center">
+     * <label>
+     * <input type="checkbox" id="checkbox-global" />
+     * %20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cinput
+     * %20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20type%3D%22hidden%22
+     * %20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20id%3D%22value-global%22
+     * %20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20name%3D%22%7B%25%20form_field_name%20%3Aemail_global_state%20%25%7D%22
+     * %20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%3E
+     * <i class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27;> Unsubscribe from all of the above types of emails </i>
+     * </label>
+     * </div>
+     * <div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27;>
+     * %20%20%20%20%20%20%20%20%20%20%20%20%3Cinput
+     * %20%20%20%20%20%20%20%20%20%20%20%20%20%20class%3D%22save%22
+     * %20%20%20%20%20%20%20%20%20%20%20%20%20%20type%3D%22submit%22
+     * %20%20%20%20%20%20%20%20%20%20%20%20%20%20value%3D%22Save%22
+     * %20%20%20%20%20%20%20%20%20%20%20%20%20%20style%3D%22
+     * %20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20background-color%3A%20rgb(71%2C%20204%2C%20163)%3B
+     * %20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20color%3A%20%23fff%3B
+     * %20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20cursor%3A%20pointer%3B
+     * %20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20display%3A%20block%3B
+     * %20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20font-size%3A%2016px%3B
+     * %20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20text-align%3A%20center%3B
+     * %20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20text-decoration%3A%20none%3B
+     * %20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20width%3A%20200px%3B
+     * %20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20margin%3A%200%20auto%2020px%3B
+     * %20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20padding%3A%2012px%3B
+     * %20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20border-style%3A%20none%3B
+     * %20%20%20%20%20%20%20%20%20%20%20%20%20%20%22
+     * %20%20%20%20%20%20%20%20%20%20%20%20%2F%3E
+     * </div>
+     * </form>
+     * </div>
+     * </div>
+     * </body>
+     * </html>
      *
      * ```
      *
@@ -6739,9 +7085,13 @@ class Client extends Runtime\Client\Client
     }
 
     /**
-     * > This endpoint allows you to permanently delete an existing dashboard user by specifying the resource `id` returned by the SCIM [`POST`](https://www.braze.com/docs/scim/post_create_user_account/) method.
+     * > Use this endpoint to permanently delete an existing dashboard user by specifying the resource `id` returned by the SCIM [&lt;code&gt;POST&lt;/code&gt;](https://www.braze.com/docs/scim/post_create_user_account/) method.
      *
-     * This is similar to deleting a user in the **Manage Users** section of the Braze dashboard. For information on how to obtain a SCIM token, visit [Automated user provisioning](https://www.braze.com/docs/scim/automated_user_provisioning/).
+     * This is similar to deleting a user in the **Manage Users** section of the Braze dashboard.
+     *
+     * ## Prerequisites
+     *
+     * To use this endpoint, you'll need a SCIM token. For more information, refer to [Automated user provisioning](https://www.braze.com/docs/scim/automated_user_provisioning/).
      *
      * ## Rate limit
      *
@@ -6756,6 +7106,16 @@ class Client extends Runtime\Client\Client
      * ## Request parameters
      *
      * There is no request body for this endpoint.
+     *
+     * ## Example request
+     *
+     * ``` json
+     * curl --location --request DELETE 'https://rest.iad-01.braze.com/scim/v2/Users/dfa245b7-24195aec-887bb3ad-602b3340' \
+     * --header 'Content-Type: application/json' \
+     * --header 'X-Request-Origin: YOUR-REQUEST-ORIGIN-HERE' \
+     * --header 'Authorization: Bearer YOUR-SCIM-TOKEN-HERE' \
+     *
+     * ```
      *
      * ## Response
      *
@@ -6799,9 +7159,11 @@ class Client extends Runtime\Client\Client
     }
 
     /**
-     * > This endpoint allows you to look up an existing dashboard user account by specifying the resource `id` returned by the SCIM [`POST`](https://www.braze.com/docs/scim/post_create_user_account/) method.
+     * > Use this endpoint to look up an existing dashboard user account by specifying the resource `id` returned by the SCIM [&lt;code&gt;POST&lt;/code&gt;](https://www.braze.com/docs/scim/post_create_user_account/) method.
      *
-     * For information on how to obtain a SCIM token, visit [Automated user provisioning](https://www.braze.com/docs/scim/automated_user_provisioning/).
+     * ## Prerequisites
+     *
+     * To use this endpoint, you'll need a SCIM token. For more information, refer to [Automated user provisioning](https://www.braze.com/docs/scim/automated_user_provisioning/).
      *
      * ## Rate limit
      *
@@ -6817,6 +7179,16 @@ class Client extends Runtime\Client\Client
      *
      * There is no request body for this endpoint.
      *
+     * ## Example request
+     *
+     * ``` json
+     * curl --location --request GET 'https://rest.iad-01.braze.com/scim/v2/Users/dfa245b7-24195aec-887bb3ad-602b3340' \
+     * --header 'Content-Type: application/json' \
+     * --header 'X-Request-Origin: YOUR-REQUEST-ORIGIN-HERE' \
+     * --header 'Authorization: Bearer YOUR-API-KEY-HERE' \
+     *
+     * ```
+     *
      * ## Response
      *
      * ``` json
@@ -6830,12 +7202,32 @@ class Client extends Runtime\Client\Client
      * },
      * "department": "finance",
      * "lastSignInAt": "Thursday, January 1, 1970 12:00:00 AM",
+     * "createdAt": "Thursday, January 1, 1970 12:00:00 AM",
      * "permissions": {
      * "companyPermissions": ["manage_company_settings"],
+     * "roles": [
+     * {
+     * "roleName": "Another Test Role",
+     * "roleId": "23125dad23dfaae7,
+     * "appGroup": [
+     * {
+     * "appGroupId": "241adcd25adfabcded",
+     * "appGroupName": "Production Workspace",
+     * "appGroupPermissionSets": [
+     * {
+     * "appGroupPermissionSetName": "A Permission Set",
+     * "appGroupPermissionSetId": "dfa385109bc38",
+     * "permissions": ["basic_access","publish_cards"]
+     * }
+     * ]
+     * }
+     * ]
+     * }
+     * ],
      * "appGroup": [
      * {
      * "appGroupId": "241adcd25789fabcded",
-     * "appGroupName": "Test App Group",
+     * "appGroupName": "Test Workspace",
      * "appGroupPermissions": ["basic_access","send_campaigns_canvases"],
      * "team": [
      * {
@@ -6875,11 +7267,15 @@ class Client extends Runtime\Client\Client
     }
 
     /**
-     * > This endpoint allows you to update an existing dashboard user account by specifying the resource `id` returned by the SCIM [`POST`](https://www.braze.com/docs/scim/post_create_user_account/) method.
+     * > Use this endpoint to update an existing dashboard user account by specifying the resource `id` returned by the SCIM [&lt;code&gt;POST&lt;/code&gt;](https://www.braze.com/docs/scim/post_create_user_account/) method.
      *
-     * It allows you to update of given and family names, permissions (for setting permissions at the company, app group, and team level) and department. For information on how to obtain a SCIM token, visit [Automated user provisioning](https://www.braze.com/docs/scim/automated_user_provisioning/).
+     * It allows you to update of given and family names, permissions (for setting permissions at the company, app group, and team level) and department.
      *
      * For security reasons, `userName` (email address) cannot be updated through this endpoint. If you would like to change the `userName` (email address) for a user, contact [Support](https://www.braze.com/docs/support_contact/).
+     *
+     * ## Prerequisites
+     *
+     * To use this endpoint, you'll need a SCIM token. For more information, refer to [Automated user provisioning](https://www.braze.com/docs/scim/automated_user_provisioning/).
      *
      * ## Rate limit
      *
@@ -6897,8 +7293,8 @@ class Client extends Runtime\Client\Client
      * | --- | --- | --- | --- |
      * | `schemas` | Required | Array of strings | Expected SCIM 2.0 schema name for user object. |
      * | `name` | Required | JSON object | This object contains the user's given name and family name. |
-     * | `department` | Required | String | Valid department string from the [department string documentation]({{site.baseurl}}/scim_api_appendix/#department-strings). |
-     * | `permissions` | Required | JSON object | Permissions object as described in the [permissions object documentation]({{site.baseurl}}/scim_api_appendix/#permissions-object). |
+     * | `department` | Required | String | Valid department string from the [department string documentation](https://{{site.baseurl}}/scim_api_appendix/#department-strings). |
+     * | `permissions` | Required | JSON object | Permissions object as described in the [permissions object documentation](https://{{site.baseurl}}/scim_api_appendix/#permissions-object). |
      *
      * ## Response
      *
@@ -6973,13 +7369,13 @@ class Client extends Runtime\Client\Client
     }
 
     /**
-     * > This endpoint allows you to look up an existing dashboard user account by specifying their email in the filter query parameter.
+     * > Use this endpoint to look up an existing dashboard user account by specifying their email in the filter query parameter.
      *
-     * Note that when the query parameter is URL encoded it will read like this:
+     * Note that when the query parameter is URL encoded it will read like this: `/scim/v2/Users?filter=userName eq "user@test.com"`
      *
-     * `/scim/v2/Users?filter=userName eq "user@test.com"`
+     * ## Prerequisites
      *
-     * For information on how to obtain a SCIM token, visit [Automated user provisioning](https://www.braze.com/docs/scim/automated_user_provisioning/).
+     * To use this endpoint, you'll need a SCIM token. For more information, refer to [Automated user provisioning](https://www.braze.com/docs/scim/automated_user_provisioning/).
      *
      * ## Rate limit
      *
@@ -7019,7 +7415,7 @@ class Client extends Runtime\Client\Client
      * "appGroup": [
      * {
      * "appGroupId": "241adcd25789fabcded",
-     * "appGroupName": "Test App Group",
+     * "appGroupName": "Test Workspace",
      * "appGroupPermissions": ["basic_access","send_campaigns_canvases"],
      * "team": [
      * {
@@ -7066,9 +7462,11 @@ class Client extends Runtime\Client\Client
     }
 
     /**
-     * > This endpoint allows you to create a new dashboard user account by specifying email, given and family names, permissions (for setting permissions at the company, app group, and team level).
+     * > Use this endpoint to create a new dashboard user account by specifying email, given and family names, permissions (for setting permissions at the company, app group, and team level).
      *
-     * For information on how to obtain a SCIM token, visit [Automated user provisioning](https://www.braze.com/docs/scim/automated_user_provisioning/).
+     * ## Prerequisites
+     *
+     * To use this endpoint, you'll need a SCIM token. For more information, refer to [Automated user provisioning](https://www.braze.com/docs/scim/automated_user_provisioning/).
      *
      * ## Rate limit
      *
@@ -7081,8 +7479,8 @@ class Client extends Runtime\Client\Client
      * | `schemas` | Required | Array of strings | Expected SCIM 2.0 schema name for user object. |
      * | `userName` | Required | String | The user’s email address. |
      * | `name` | Required | JSON object | This object contains the user's given name and family name. |
-     * | `department` | Required | String | Valid department string from the [department string documentation]({{site.baseurl}}/scim_api_appendix/#department-strings). |
-     * | `permissions` | Required | JSON object | Permissions object as described in the [permissions object documentation]({{site.baseurl}}/scim_api_appendix/#permissions-object). |
+     * | `department` | Required | String | Valid department string from the [department string documentation](https://{{site.baseurl}}/scim_api_appendix/#department-strings). |
+     * | `permissions` | Required | JSON object | Permissions object as described in the [permissions object documentation](https://{{site.baseurl}}/scim_api_appendix/#permissions-object). |
      *
      * ## Response
      *
@@ -7160,15 +7558,37 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to pull a list of phone numbers that have been deemed “invalid” within a certain time frame.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `sms.invalid_phone_numbers` permission.
+     * ## Prerequisites
      *
-     * - If you provide a `start_date`, an `end_date`, and `phone_numbers`, we prioritize the given phone numbers and disregard the date range.
-     * - If your date range has more than the `limit` number of invalid phone numbers, you will need to make multiple API calls with increasing the `offset` each time until a call returns either fewer than `limit` or zero results.
-     *
+     * To use this endpoint, you’ll need an [API key](https://www.braze.com/docs/api/basics#rest-api-key/) with the `sms.invalid_phone_numbers` permission.
      *
      * ## Rate limit
      *
      * We apply the default Braze rate limit of 250,000 requests per hour to this endpoint, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
+     *
+     * ## Request parameters
+     *
+     * |  | Required | Data Type | Description |
+     * | --- | --- | --- | --- |
+     * | `start_date` | Optional  <br>(see note) | String in YYYY-MM-DD format | Start date of the range to retrieve invalid phone numbers, must be earlier than `end_date`. This is treated as midnight in UTC time by the API. |
+     * | `end_date` | Optional  <br>(see note) | String in YYYY-MM-DD format | End date of the range to retrieve invalid phone numbers. This is treated as midnight in UTC time by the API. |
+     * | `limit` | Optional | Integer | Optional field to limit the number of results returned. Defaults to 100, maximum is 500. |
+     * | `offset` | Optional | Integer | Optional beginning point in the list to retrieve from. |
+     * | `phone_numbers` | Optional  <br>(see note) | Array of Strings in e.164 format | If provided, we will return the phone number if it has been found to be invalid. |
+     * | `reason` | Optional  <br>(see note) | String | Available values are “provider_error” (provider error indicates phone cannot receive SMS) or “deactivated” (phone number has been deactivated). If omitted, all reasons are returned. |
+     *
+     * - You must provide either a `start_date` and an `end_date` OR `phone_numbers`. If you provide all three, `start_date`, `end_date`, and `phone_numbers`, we prioritize the given phone numbers and disregard the date range.
+     *
+     * - If your date range has more than the `limit` number of invalid phone numbers, you will need to make multiple API calls with increasing the `offset` each time until a call returns either fewer than `limit` or zero results.
+     *
+     *
+     * ## Example request
+     *
+     * ``` json
+     * curl --location --request GET 'https://rest.iad-01.braze.com/sms/invalid_phone_numbers?start_date=2019-01-01&end_date=2019-02-01&limit=100&offset=1&phone_numbers[]=12345678901' \
+     * --header 'Authorization: Bearer YOUR-API-KEY-HERE'
+     *
+     * ```
      *
      * ## Response
      *
@@ -7180,16 +7600,19 @@ class Client extends Runtime\Client\Client
      * {
      * "sms": [
      * {
-     * "phone": "12345678900",
-     * "invalid_detected_at": "2016-08-25 15:24:32 +0000"
+     * "phone": (string) phone number in e.164 format,
+     * "invalid_detected_at": (string) the time the invalid number was detected in ISO 8601
+     * "reason" : "provider_error"
      * },
      * {
-     * "phone": "12345678901",
-     * "invalid_detected_at": "2016-08-24 17:41:58 +0000"
+     * "phone": (string) phone number in e.164 format,
+     * "invalid_detected_at": (string) the time the invalid number was detected in ISO 8601
+     * "reason" : "deactivated"
      * },
      * {
-     * "phone": "12345678902",
-     * "invalid_detected_at": "2016-08-24 12:01:13 +0000"
+     * "phone": (string) phone number in e.164 format,
+     * "invalid_detected_at": (string) the time the invalid number was detected in ISO 8601
+     * "reason" : "provider_error"
      * }
      * ],
      * "message": "success"
@@ -7200,16 +7623,23 @@ class Client extends Runtime\Client\Client
      * @param array $queryParameters {
      *
      * @var string $start_date (Optional*) String in YYYY-MM-DD format
-     *             Start date of the range to retrieve invalid phone numbers, must be earlier than `end_date`. This is treated as midnight in UTC time by the API.
-     * @var string $end_date (Optional*) String in YYYY-MM-DD format
-     *             End date of the range to retrieve invalid phone numbers. This is treated as midnight in UTC time by the API.
-     * @var int    $limit (Optional) Integer
-     *             Optional field to limit the number of results returned. Defaults to 100, maximum is 500.
-     * @var int    $offset (Optional) Integer
-     *             Optional beginning point in the list to retrieve from
-     * @var int    $phone_numbers (Optional*) Array of Strings in e.164 format
-     *             If provided, we will return the phone number if it has been found to be invalid.
      *
+     * Start date of the range to retrieve invalid phone numbers, must be earlier than `end_date`. This is treated as midnight in UTC time by the API.
+     * @var string $end_date (Optional*) String in YYYY-MM-DD format
+     *
+     * End date of the range to retrieve invalid phone numbers. This is treated as midnight in UTC time by the API.
+     * @var int $limit (Optional) Integer
+     *
+     * Optional field to limit the number of results returned. Defaults to 100, maximum is 500.
+     * @var int $offset (Optional) Integer
+     *
+     * Optional beginning point in the list to retrieve from
+     * @var int $phone_numbers (Optional*) Array of Strings in e.164 format
+     *
+     * If provided, we will return the phone number if it has been found to be invalid.
+     * @var string $reason (Optional) String
+     *
+     * Available values are “provider_error” (provider error indicates phone cannot receive SMS) or “deactivated” (phone number has been deactivated). If omitted, all reasons are returned.
      * }
      *
      * @param array $headerParameters {
@@ -7236,19 +7666,33 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to remove “invalid” phone numbers from Braze’s invalid list.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `sms.invalid_phone_numbers.remove` permission.
-     *
      * This can be used to re-validate phone numbers after they have been marked as invalid.
+     *
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key](https://www.braze.com/docs/api/basics#rest-api-key/) with the `sms.invalid_phone_numbers.remove` permission.
      *
      * ## Rate limit
      *
-     * We apply the default Braze rate limit of 250,000 requests per hour to this endpoint, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
+     * We apply the default Braze rate limit of 250,000 requests per hour to this endpoint, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
      * ## Request parameters
      *
      * | Parameter | Required | Data Type | Description |
      * | --- | --- | --- | --- |
      * | `phone_number` | Required | Array of strings in e.164 format | An array of up to 50 phone numbers to modify. |
+     *
+     * ## Example request
+     *
+     * ``` json
+     * curl --location --request POST 'https://rest.iad-01.braze.com/sms/invalid_phone_numbers/remove' \
+     * --header 'Content-Type: application/json' \
+     * --header 'Authorization: Bearer YOUR-REST-API-KEY' \
+     * --data-raw '{
+     * "phone_numbers" : ["12183095514","14255551212"]
+     * }'
+     *
+     * ```
      *
      * @param array $headerParameters {
      *
@@ -7275,30 +7719,44 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to get the subscription state of a user in a subscription group.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `subscription.status.get` permission.
-     *
      * These groups will be available on the **Subscription Group** page. The response from this endpoint will include the external ID and either subscribed, unsubscribed, or unknown for the specific subscription group requested in the API call. This can be used to update the subscription group state in subsequent API calls or to be displayed on a hosted web page.
      *
-     * \*Either `external_id` or `phone` are required. When both are submitted, only the external_id is used for querying and the phone number is applied to that user.
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key](https://www.braze.com/docs/api/basics#rest-api-key/) with the `subscription.status.get` permission.
      *
      * ## Rate limit
      *
      * We apply the default Braze rate limit of 250,000 requests per hour to this endpoint, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
-     * ## Response
+     * ## Request parameters
      *
-     * All successful responses will return `subscribed`, `unsubscribed`, or `unknown` depending on status and user history with the subscription group.
+     * | Parameter | Required | Data Type | Description |
+     * | --- | --- | --- | --- |
+     * | [<code>subscription_group_id</code>](https://www.braze.com/docs/api/identifier_types/?tab=subscription%20group%20ids) | Required | String | The `id` of your subscription group. |
+     * | `external_id` | Required\* | String | The `external_id` of the user (must include at least one and at most 50 `external_ids`).  <br>  <br>When both an `external_id` and `email`/`phone` are submitted, only the `external_id`(s) provided will be applied to the result query. |
+     * | `phone` | Required\* | String in [E.164](https://en.wikipedia.org/wiki/E.164) format | The phone number of the user. If email is not included, you must include at least one phone number (with a maximum of 50).  <br>  <br>Submitting both an email address and phone number (with no `external_id`) will result in an error. |
+     *
+     * One of `external_id` or `email` or `phone` is required for each user.
+     *
+     * - For SMS and WhatsApp subscription groups, either `external_id` or `phone` is required. When both are submitted, only the `external_id` is used for querying and the phone number is applied to that user.
+     *
+     *
+     * ## Example request
+     *
+     * ### Multiple users
      *
      * ``` json
-     * Content-Type: application/json
-     * Authorization: Bearer YOUR-REST-API-KEY
-     * {
-     * "status": {
-     * "1": "Unsubscribed",
-     * "2": "Subscribed"
-     * },
-     * "message": "success"
-     * }
+     * 1
+     * https://rest.iad-03.braze.com/subscription/status/get?subscription_group_id={{subscription_group_id}}&external_id[]=1&external_id[]=2
+     *
+     * ```
+     *
+     * ### SMS and WhatsApp
+     *
+     * ``` json
+     * curl --location -g --request GET 'https://rest.iad-01.braze.com/subscription/status/get?subscription_group_id={{subscription_group_id}}&phone=+11112223333' \
+     * --header 'Authorization: Bearer YOUR-REST-API-KEY'
      *
      * ```
      *
@@ -7311,10 +7769,12 @@ class Client extends Runtime\Client\Client
      *
      * The `external_id` of the user (must include at least one and at most 50 `external_ids`).
      *
-     * When both an `external_id` and `phone` are submitted, only the external_id(s) provided will be applied to the result query.
+     * When both an `external_id` and `email`/`phone` are submitted, only the `external_id`(s) provided will be applied to the result query.
      * @var string $phone (Required*) String in [E.164](https://en.wikipedia.org/wiki/E.164) format
      *
-     * The phone number of the user (must include at least one phone number and at most 50 phone numbers).
+     * The phone number of the user. If email is not included, you must include at least one phone number (with a maximum of 50).
+     *
+     * Submitting both an email address and phone number (with no `external_id`) will result in an error.
      * }
      *
      * @param array $headerParameters {
@@ -7341,28 +7801,45 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to list and get the subscription groups of a certain user.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `subscription.groups.get` permission.
+     * ## Prequisites
      *
-     * If there are multiple users (multiple external IDs) who share the same email address, all users will be returned as a separate user (even if they have the same email address or subscription group).
+     * To use this endpoint, you’ll need an [API key](https://www.braze.com/docs/api/basics#rest-api-key/) with the `subscription.groups.get` permission.
      *
      * ## Rate limit
      *
      * We apply the default Braze rate limit of 250,000 requests per hour to this endpoint, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
+     * > If there are multiple users (multiple `external_ids`) who share the same email address, all users will be returned as a separate user (even if they have the same email address or subscription group).
+     *
+     *
+     * ## Example request
+     *
+     * ### Multiple users
+     *
+     * `https://rest.iad-03.braze.com/subscription/user/status?external_id[]=1&external_id[]=2`
+     *
+     * ### SMS and WhatsApp
+     *
+     * ``` json
+     * curl --location -g --request GET 'https://rest.iad-01.braze.com/subscription/user/status?external_id={{external_id}}&limit=100&offset=1&phone=+11112223333' \
+     * --header 'Authorization: Bearer YOUR-REST-API-KEY'
+     *
+     * ```
+     *
      * @param array $queryParameters {
      *
      * @var string $external_id (Required*) String
      *
-     * The `external_id` of the user (must include at least one and at most 50 `external_ids`)
+     * The external_id of the user (must include at least one and at most 50 external_ids)
      * @var int $limit (Optional) Integer
      *
-     * The limit on the maximum number of results returned. Default (and max) limit is 100.
+     * The limit on the maximum number of results returned. Default (and maximum) limit is 100.
      * @var int $offset (Optional) Integer
      *
      * Number of templates to skip before returning the rest of the templates that fit the search criteria
      * @var string $phone (Required*) String in [E.164](https://en.wikipedia.org/wiki/E.164) format
      *
-     * The phone number of the user. Must include at least one phone number (with a max of 50).
+     * The phone number of the user. Must include at least one phone number (with a maximum of 50).
      * }
      *
      * @param array $headerParameters {
@@ -7389,17 +7866,13 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to batch update the subscription state of up to 50 users on the Braze dashboard.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `subscription.status.set` permission.
+     * ## Prerequisites
      *
-     * You can access a subscription group’s `subscription_group_id` by navigating to the **Subscription Group** page.
+     * To use this endpoint, you’ll need an [API key](https://www.braze.com/docs/api/basics#rest-api-key/) with the `subscription.status.set` permission.
      *
-     * Tip: When creating new users via the [/users/track](https://www.braze.com/docs/api/endpoints/user_data/post_user_track/) endpoint, you can set subscription groups within the user attributes object, which allows you to create a user and set the subscription group state in one API call.
+     * ## Rate limit
      *
-     * \*Only `external_id` or `phone` is accepted for SMS subscription groups.
-     *
-     * ### Rate limit
-     *
-     * For customers who onboarded with Braze on or after January 6, 2022, we apply a rate limit of 5,000 requests per minute shared across the `/subscription/status/set` and `/v2/subscription/status/set` endpoint as documented in [API rate limits](http://localhost:4000/docs/api/api_limits/).
+     * This endpoint has a rate limit of 5,000 requests per minute shared across the `/subscription/status/set` and `/v2/subscription/status/set` endpoint as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
      * ### Request parameters
      *
@@ -7408,9 +7881,42 @@ class Client extends Runtime\Client\Client
      * | `subscription_group_id` | Required | String | The `id` of your subscription group. |
      * | `subscription_state` | Required | String | Available values are `unsubscribed` (not in subscription group) or `subscribed` (in subscription group). |
      * | `external_id` | Required\* | Array of strings | The `external_id` of the user or users, may include up to 50 `id`s. |
-     * | `phone` | Required\* | String in [E.164](https://en.wikipedia.org/wiki/E.164) format | The phone number of the user, can be passed as an array of strings. Must include at least one phone number (with a max of 50). |
+     * | `phone` | Required\* | String in [E.164](https://en.wikipedia.org/wiki/E.164) format | The phone number of the user, can be passed as an array of strings. Must include at least one phone number (with a max of 50).  <br>  <br>If multiple users (`external_id`) in the same workspace share the same phone number, then all users that share the phone number are updated with the same subscription group changes. |
      *
-     * ### Example successful response
+     * This property should not be used for updating a user’s profile information. Use the [/users/track](https://www.braze.com/docs/api/endpoints/user_data/post_user_track/) property instead.
+     *
+     * > When creating new users via the [/users/track](https://www.braze.com/docs/api/endpoints/user_data/post_user_track/) endpoint, you can set subscription groups within the user attributes object, which allows you to create a user and set the subscription group state in one API call.
+     *
+     *
+     * ## Example requests
+     *
+     * ### SMS **and RCS**
+     *
+     * ``` json
+     * curl --location --request POST 'https://rest.iad-01.braze.com/subscription/status/set' \
+     * --header 'Content-Type: application/json' \
+     * --header 'Authorization: Bearer YOUR-REST-API-KEY' \
+     * --data-raw '{
+     * "subscription_group_id": "504e09e6-ffa4-4b31-96c3-c05d50d903cf",
+     * "subscription_state": "unsubscribed",
+     * "external_id": [
+     * "user1",
+     * "user2"
+     * ],
+     * "emails": [
+     * "test1@braze.com",
+     * "test2@braze.com"
+     * ],
+     * "phones": [
+     * "+445555555555",
+     * "+445555555556"
+     * ]
+     * }
+     * '
+     *
+     * ```
+     *
+     * ## Example success response
      *
      * The status code `201` could return the following response body.
      *
@@ -7421,13 +7927,13 @@ class Client extends Runtime\Client\Client
      *
      * ```
      *
-     * Important: The endpoint only accepts the `email` or `phone` value, not both. If given both, you will receive this response: `{"message":"Either an email address or a phone number should be provided, but not both."}`
+     * > The endpoint only accepts the `email` or `phone` value, not both. If given both, you will receive this response: `{"message":"Either an email address or a phone number should be provided, but not both."}`
      *
      * @param array $headerParameters {
      *
-     * @var string $Content-Type
-     * @var string $Authorization
-     *             }
+     * @var string-Type
+     * @var string
+     *                  }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -7448,13 +7954,13 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to batch update the subscription state of up to 50 users on the Braze dashboard.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `subscription.status.set` permission.
+     * To use this endpoint, you’ll need to generate an API key with the `subscription.status.set` permission.
      *
      * You can access a subscription group’s `subscription_group_id` by navigating to the **Subscriptions Group** page.
      *
      * ## Rate limit
      *
-     * For customers who onboarded with Braze on or after January 6, 2022, we apply a rate limit of 5,000 requests per minute shared across the `/subscription/status/set` and `/v2/subscription/status/set` endpoint as documented in [API rate limits](http://localhost:4000/docs/api/api_limits/).
+     * This endpoint has a rate limit of 5,000 requests per minute shared across the`/subscription/status/set` and `/v2/subscription/status/set` endpoint as documented in [API rate limits](http://localhost:4000/docs/api/api_limits/).
      *
      * ## Request parameters
      *
@@ -7463,7 +7969,39 @@ class Client extends Runtime\Client\Client
      * | `subscription_group_id` | Required | String | The `id` of your subscription group. |
      * | `subscription_state` | Required | String | Available values are `unsubscribed` (not in subscription group) or `subscribed` (in subscription group). |
      * | `external_ids` | Required\* | Array of strings | The `external_id` of the user or users, may include up to 50 `id`s. |
-     * | `phones` | Required\* | String in [E.164](https://en.wikipedia.org/wiki/E.164) format | The phone numbers of the user, can be passed as an array of strings. Must include at least one phone number (with a max of 50). |
+     * | `phones` | Required\* | String in [E.164](https://en.wikipedia.org/wiki/E.164) format | The phone numbers of the user, can be passed as an array of strings. Must include at least one phone number (with a max of 50).  <br>  <br>If multiple users (`external_id`) in the same workspace share the same phone number, then all users that share the phone number are updated with the same subscription group changes. |
+     *
+     * ### Example requests
+     *
+     * #### SMS
+     *
+     * ``` json
+     * curl --location --request POST 'https://rest.iad-01.braze.com/subscription/status/set' \
+     * --header 'Content-Type: application/json' \
+     * --header 'Authorization: Bearer YOUR-REST-API-KEY' \
+     * --data-raw '{
+     * "subscription_groups": [
+     * {
+     * "subscription_group_id": "504e09e6-ffa4-4b31-96c3-c05d50d903cf",
+     * "subscription_state": "unsubscribed",
+     * "external_ids": [
+     * "user1",
+     * "user2"
+     * ],
+     * "emails": [
+     * "test1@braze.com",
+     * "test2@braze.com"
+     * ],
+     * "phones": [
+     * "+445555555555",
+     * "+445555555556"
+     * ]
+     * }
+     * ]
+     * }
+     * '
+     *
+     * ```
      *
      * ### Example successful response
      *
@@ -7478,9 +8016,9 @@ class Client extends Runtime\Client\Client
      *
      * @param array $headerParameters {
      *
-     * @var string $Content-Type
-     * @var string $Authorization
-     *             }
+     * @var string-Type
+     * @var string
+     *                  }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -7501,13 +8039,32 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to list your existing [Content Blocks](https://www.braze.com/docs/user_guide/engagement_tools/templates_and_media/content_blocks/) information.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `content_blocks.list` permission.
+     * ## Prerequisites
      *
-     * ### Rate limit
+     * To use this endpoint, you’ll need an [API key](https://www.braze.com/docs/api/api_key/) with the `content_blocks.list` permission.
+     *
+     * ## Rate limit
      *
      * We apply the default Braze rate limit of 250,000 requests per hour to this endpoint, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
-     * ### Response
+     * ## Request parameters
+     *
+     * | Parameter | Required | Data Type | Description |
+     * | --- | --- | --- | --- |
+     * | `modified_after` | Optional | String in [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) format | Retrieve only Content Blocks updated at or after the given time. |
+     * | `modified_before` | Optional | String in [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) format | Retrieve only Content Blocks updated at or before the given time. |
+     * | `limit` | Optional | Positive Number | Maximum number of Content Blocks to retrieve. Default to 100 if not provided, with a maximum acceptable value of 1000. |
+     * | `offset` | Optional | Positive Number | Number of Content Blocks to skip before returning rest of the templates that fit the search criteria. |
+     *
+     * ## Example request
+     *
+     * ``` json
+     * curl --location --request GET 'https://rest.iad-01.braze.com/content_blocks/list?modified_after=2020-01-01T01:01:01.000000&modified_before=2020-02-01T01:01:01.000000&limit=100&offset=1' \
+     * --header 'Authorization: Bearer YOUR-API-KEY-HERE'
+     *
+     * ```
+     *
+     * ## Response
      *
      * ``` json
      * Content-Type: application/json
@@ -7516,14 +8073,14 @@ class Client extends Runtime\Client\Client
      * "count": "integer",
      * "content_blocks": [
      * {
-     * "content_block_id": "string",
-     * "name": "string",
-     * "content_type": "html or text",
-     * "liquid_tag": "string",
-     * "inclusion_count" : "integer",
-     * "created_at": "time-in-iso",
-     * "last_edited": "time-in-iso",
-     * "tags" : "array of strings"
+     * "content_block_id": (string) the Content Block identifier,
+     * "name": (string) the name of the Content Block,
+     * "content_type": (string) the content type, html or text,
+     * "liquid_tag": (string) the Liquid tags,
+     * "inclusion_count" : (integer) the inclusion count,
+     * "created_at": (string) The time the Content Block was created in ISO 8601,
+     * "last_edited": (string) The time the Content Block was last edited in ISO 8601,
+     * "tags": (array) An array of tags formatted as strings,
      * }
      * ]
      * }
@@ -7585,30 +8142,46 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to call information for your existing [Content Blocks](https://www.braze.com/docs/user_guide/engagement_tools/templates_and_media/content_blocks/).
      *
-     * To use this endpoint, you’ll need to generate an API key with the `content_blocks.info` permission.
+     * ## Prerequisites
      *
-     **Note:** If you are using our [older navigation](https://www.braze.com/docs/navigation), `content_block_id`can be found at ****Developer Console** > **API Settings****.
+     * To use this endpoint, you’ll need an [API key](https://www.braze.com/docs/api/api_key/) with the `content_blocks.info` permission.
      *
-     * ### Rate limit
+     * ## Rate limit
      *
      * We apply the default Braze rate limit of 250,000 requests per hour to this endpoint, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
-     * ### Response
+     * ## Request parameters
+     *
+     * | Parameter | Required | Data Type | Description |
+     * | --- | --- | --- | --- |
+     * | `content_block_id` | Required | String | The Content Block identifier.  <br>  <br>You can find this by either listing Content Block information through an API call or going to the [API Keys](https://www.braze.com/docs/user_guide/administrative/app_settings/api_settings_tab/) page, then scrolling to the bottom and searching for your Content Block API identifier. |
+     * | `include_inclusion_data` | Optional | Boolean | When set to `true`, the API returns back the Message Variation API identifier of campaigns and Canvases where this Content Block is included, to be used in subsequent calls. The results exclude archived or deleted campaigns or Canvases. |
+     *
+     * ## Example request
+     *
+     * ``` json
+     * curl --location -g --request GET 'https://rest.iad-01.braze.com/content_blocks/info?content_block_id={{content_block_id}}&include_inclusion_data=false' \
+     * --header 'Authorization: Bearer YOUR-REST-API-KEY'
+     *
+     * ```
+     *
+     * ## Response
      *
      * ``` json
      * Content-Type: application/json
      * Authorization: Bearer YOUR_REST_API_KEY
      * {
-     * "content_block_id": "string",
-     * "name": "string",
-     * "content": "string",
-     * "description": "string",
-     * "content_type": "html or text",
-     * "tags":  "array of strings",
-     * "created_at": "time-in-iso",
-     * "last_edited": "time-in-iso",
-     * "inclusion_count" : "integer",
-     * "message": "success"
+     * "content_block_id": (string) the Content Block identifier,
+     * "name": (string) the name of the Content Block,
+     * "content": (string) the content in the Content Block,
+     * "description": (string) the Content Block description,
+     * "content_type": (string) the content type, html or text,
+     * "tags": (array) An array of tags formatted as strings,
+     * "created_at": (string) The time the Content Block was created in ISO 8601,
+     * "last_edited": (string) The time the Content Block was last edited in ISO 8601,
+     * "inclusion_count" : (integer) the inclusion count,
+     * "inclusion_data": (array) the inclusion data,
+     * "message": "success",
      * }
      *
      * ```
@@ -7622,18 +8195,19 @@ class Client extends Runtime\Client\Client
      * | `Content Block ID cannot be blank` | Make sure that a Content Block is listed in your request and is encapsulated in quotes (`""`). |
      * | `Content Block ID is invalid for this App Group` | This Content Block doesn't exist or is in a different company account or app group. |
      * | `Content Block has been deleted—content not available` | This Content Block, though it may have existed earlier, has been deleted. |
-     * | `Include Inclusion Data—error` | This parameter only accepts boolean values (true or false). Make sure the value for `include_inclusion_data` is not encapsulated in quotes (`""`), which causes the value to be sent as a string instead. See [request parameters](#request-parameters) for details. |
+     * | `Include Inclusion Data—error` | This parameter only accepts boolean values (true or false). Make sure the value for `include_inclusion_data` is not encapsulated in quotes (`""`), which causes the value to be sent as a string instead. See request headers for details. |
      *
      * @param array $queryParameters {
      *
      * @var string $content_block_id (Required) String
      *
-     * The content block identifier.
+     * The Content Block identifier.
      *
-     * You can find this by either listing content block information through an API call or going to **Settings > Setup and Testing > API Keys**, then scrolling to the bottom and searching for your content block API identifier.
+     * You can find this by either listing Content Block information through an API call or going to the API Keys page, then scrolling to the bottom and searching for your Content Block API identifier.
      * @var bool $include_inclusion_data (Optional) Boolean
      *
-     * When set to `true`, the API returns back the Message Variation API identifier of campaigns and Canvases where this content block is included, to be used in subsequent calls. The results exclude archived or deleted Campaigns or Canvases.
+     * When set to `true`, the API returns back the Message Variation API identifier of campaigns and Canvases where this Content Block is included, to be used in subsequent calls. The results exclude archived or deleted campaigns or Canvases.
+     *
      * }
      *
      * @param array $headerParameters {
@@ -7660,27 +8234,45 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to create a [Content Block](https://www.braze.com/docs/user_guide/engagement_tools/templates_and_media/content_blocks/).
      *
-     * To use this endpoint, you’ll need to generate an API key with the `content_blocks.create` permission.
+     * ## Prerequisites
      *
-     * ### Rate limit
+     * To use this endpoint, you’ll need an [API key](https://www.braze.com/docs/api/api_key/) with the `content_blocks.create` permission.
+     *
+     * ## Rate limit
      *
      * We apply the default Braze rate limit of 250,000 requests per hour to this endpoint, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
-     * ### Request parameters
+     * ## Request parameters
      *
      * | Parameter | Required | Data Type | Description |
      * | --- | --- | --- | --- |
-     * | `name` | Required | String | Name of the content block. Must be less than 100 characters. |
-     * | `description` | Optional | String | Description of the content block. Must be less than 250 characters. |
+     * | `name` | Required | String | Name of the Content Block. Must be less than 100 characters. |
+     * | `description` | Optional | String | Description of the Content Block. Must be less than 250 characters. |
      * | `content` | Required | String | HTML or text content within the Content Block. |
      * | `state` | Optional | String | Choose `active` or `draft`. Defaults to `active` if not specified. |
      * | `tags` | Optional | Array of strings | [Tags](https://www.braze.com/docs/user_guide/administrative/app_settings/manage_app_group/tags/) must already exist. |
      *
-     * ### Response
+     * ## Example request
+     *
+     * ``` json
+     * Copiedcurl --location --request POST 'https://rest.iad-01.braze.com/content_blocks/create' \
+     * --header 'Content-Type: application/json' \
+     * --header 'Authorization: Bearer YOUR_REST_API_KEY' \
+     * --data-raw '{
+     * "name": "content_block",
+     * "description": "This is my Content Block",
+     * "content": "HTML content within block",
+     * "state": "draft",
+     * "tags": ["marketing"]
+     * }'
+     *
+     * ```
+     *
+     * ## Response
      *
      * ``` json
      * Content-Type: application/json
-     * Authorization: Bearer YOUR-REST-API-KEY
+     * Authorization: Bearer YOUR_REST_API_KEY
      * {
      * "content_block_id": (string) Your newly generated block id,
      * "liquid_tag": (string) The generated block tag from the Content Block name,
@@ -7706,10 +8298,10 @@ class Client extends Runtime\Client\Client
      * | `Content Block description must be shorter than 250 characters` |  |
      * | `Content Block name cannot be blank` |  |
      * | `Content Block name must be shorter than 100 characters` |  |
-     * | `Content Block name can only contain alphanumeric characters` | Content Block names can include any of the following characters: the letters (capitalized or lowercase) `A` through `Z`, the numbers `0` through `9`, dashes `-`, and underscores `_`. It cannot contain non-alphanumeric characters like emojis, `!`, `@`, `~`, `&`, and other "special" characters. |
+     * | `Content Block name can only contain alphanumeric characters` | Content Block names can include any of the following characters: the letters (capitalized or lowercase) `A` through `Z`, the numbers `0` through `9`, dashes `-`, and underscores `_`. It cannot contain non-alphanumeric characters like emojis, `!`, `@`, `~`, `&`, and other “special” characters. |
      * | `Content Block with this name already exists` | Try a different name. |
      * | `Content Block state must be either active or draft` |  |
-     * | `Tags must be an array` | Tags must be formatted as an array of strings, for example `["marketing", "promotional", "transactional"]`. |
+     * | `Tags must be an array` | Tags must be formatted as an array of strings, for example `["marketing", "promotional", "transactional"]`. |
      * | `All tags must be strings` | Make sure your tags are encapsulated in quotes (`""`). |
      * | `Some tags could not be found` | To add a tag when creating a Content Block, the tag must already exist in Braze. |
      *
@@ -7738,13 +8330,15 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to update a [Content Block](https://www.braze.com/docs/user_guide/engagement_tools/templates_and_media/content_blocks/).
      *
-     * To use this endpoint, you’ll need to generate an API key with the `content_blocks.update` permission.
+     * ## Prerequisites
      *
-     * ### Rate limit
+     * To use this endpoint, you’ll need an [API key](https://www.braze.com/docs/api/api_key/) with the `content_blocks.update` permission.
      *
-     * We apply the default Braze rate limit of 250,000 requests per hour to this endpoint, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/)
+     * ## Rate limit
      *
-     * ### Request parameters
+     * We apply the default Braze rate limit of 250,000 requests per hour to this endpoint, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
+     *
+     * ## Request parameters
      *
      * | Parameter | Required | Data Type | Description |
      * | --- | --- | --- | --- |
@@ -7755,11 +8349,28 @@ class Client extends Runtime\Client\Client
      * | `state` | Optional | String | Choose `active` or `draft`. Defaults to `active` if not specified. |
      * | `tags` | Optional | Array of strings | [Tags](https://www.braze.com/docs/user_guide/administrative/app_settings/manage_app_group/tags/) must already exist. |
      *
-     * ### Response
+     * ## Example request
+     *
+     * ``` json
+     * curl --location --request POST 'https://rest.iad-01.braze.com/content_blocks/update' \
+     * --header 'Content-Type: application/json' \
+     * --header 'Authorization: Bearer YOUR_REST_API_KEY' \
+     * --data-raw '{
+     * "content_block_id" :"content_block_id",
+     * "name": "content_block",
+     * "description": "This is my Content Block",
+     * "content": "HTML or text content within block",
+     * "state": "draft",
+     * "tags": ["marketing"]
+     * }'
+     *
+     * ```
+     *
+     * ## Response
      *
      * ``` json
      * Content-Type: application/json
-     * Authorization: Bearer YOUR-REST-API-KEY
+     * Authorization: Bearer YOUR_REST_API_KEY
      * {
      * "content_block_id": (string) Your newly generated block id,
      * "liquid_tag": (string) The generated block tag from the Content Block name,
@@ -7785,12 +8396,12 @@ class Client extends Runtime\Client\Client
      * | `Content Block description must be shorter than 250 characters` |  |
      * | `Content Block name cannot be blank` |  |
      * | `Content Block name must be shorter than 100 characters` |  |
-     * | `Content Block name can only contain alphanumeric characters` | Content Block names can include any of the following characters: the letters (capitalized or lowercase) `A` through `Z`, the numbers `0` through `9`, dashes `-`, and underscores `_`. It cannot contain non-alphanumeric characters like emojis, `!`, `@`, `~`, `&`, and other "special" characters. |
+     * | `Content Block name can only contain alphanumeric characters` | Content Block names can include any of the following characters: the letters (capitalized or lowercase) `A` through `Z`, the numbers `0` through `9`, dashes `-`, and underscores `_`. It cannot contain non-alphanumeric characters like emojis, `!`, `@`, `~`, `&`, and other “special” characters. |
      * | `Content Block with this name already exists` | Try a different name. |
      * | `Content Block name cannot be updated for active Content Blocks` |  |
      * | `Content Block state must be either active or draft` |  |
      * | `Active Content Block can not be updated to Draft. Create a new Content Block.` |  |
-     * | `Tags must be an array` | Tags must be formatted as an array of strings, for example `["marketing", "promotional", "transactional"]`. |
+     * | `Tags must be an array` | Tags must be formatted as an array of strings, for example `["marketing", "promotional", "transactional"]`. |
      * | `All tags must be strings` | Make sure your tags are encapsulated in quotes (`""`). |
      * | `Some tags could not be found` | To add a tag when creating a Content Block, the tag must already exist in Braze. |
      *
@@ -7819,25 +8430,45 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to get a list of available templates in your Braze account.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `templates.email.list` permission.
+     * ## Prerequisites
      *
-     * ### Rate limit
+     * To use this endpoint, you'll need an [API key](https://braze.com/docs/api/api_key/) with the `templates.email.list` permission.
+     *
+     * ## Rate limit
      *
      * We apply the default Braze rate limit of 250,000 requests per hour to this endpoint, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
-     * ### Response
+     * ## Request parameters
      *
-     * > **Important:** Templates built using the Drag & Drop Editor for email are not provided in this response.
+     * | Parameter | Required | Data Type | Description |
+     * | --- | --- | --- | --- |
+     * | `modified_after` | Optional | String in [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) format | Retrieve only templates updated at or after the given time. |
+     * | `modified_before` | Optional | String in [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) format | Retrieve only templates updated at or before the given time. |
+     * | `limit` | Optional | Positive number | Maximum number of templates to retrieve. Default to 100 if not provided, with a maximum acceptable value of 1000. |
+     * | `offset` | Optional | Positive number | Number of templates to skip before returning rest of the templates that fit the search criteria. |
      *
+     * ## Example request
      *
      * ``` json
+     * curl --location --request GET 'https://rest.iad-01.braze.com/templates/email/list?modified_after=2020-01-01T01:01:01.000000&modified_before=2020-02-01T01:01:01.000000&limit=1&offset=0' \
+     * --header 'Authorization: Bearer YOUR_REST_API_KEY'
+     *
+     * ```
+     *
+     * ## Response
+     *
+     **Important:** Templates built using the drag-and-drop editor for email are not provided in this response.
+     *
+     * ``` json
+     * Content-Type: application/json
+     * Authorization: Bearer YOUR_REST_API_KEY
      * {
-     * "count": number of templates returned
+     * "count": the number of templates returned
      * "templates": [template with the following properties]:
      * "email_template_id": (string) your email template's API Identifier,
      * "template_name": (string) the name of your email template,
-     * "created_at": (string, in ISO 8601),
-     * "updated_at": (string, in ISO 8601),
+     * "created_at": (string) the time the email was created at in ISO 8601,
+     * "updated_at": (string) the time the email was updated in ISO 8601,
      * "tags": (array of strings) tags appended to the template
      * }
      *
@@ -7883,37 +8514,52 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to get information on your email templates.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `templates.email.info` permission.
+     **Important:** Templates built using the drag-and-drop editor are not accepted.
      *
-     * > **Important:** Templates built using the drag-and-drop editor for email are not accepted.
+     * ## Prerequisites
      *
+     * To use this endpoint, you’ll need an [API key](https://www.braze.com/docs/api/api_key/) with the `templates.email.info` permission.
      *
-     * ### Rate limit
+     * ## Rate limit
      *
-     * We apply the default Braze rate limit of 250,000 requests per hour to this endpoint, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
+     * We apply the default Braze rate limit of 250,000 requests per hour to this endpoint, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
-     * ### Response
+     * ## Request parameters
+     *
+     * | Parameter | Required | Data Type | Description |
+     * | --- | --- | --- | --- |
+     * | `email_template_id` | Required | String | See [email template API identifier](https://www.braze.com/docs/api/identifier_types/). |
+     *
+     * ## Example request
+     *
+     * ``` json
+     * curl --location -g --request GET 'https://rest.iad-01.braze.com/templates/email/info?email_template_id={{email_template_id}}' \
+     * --header 'Authorization: Bearer YOUR_REST_API_KEY'
+     *
+     * ```
+     *
+     * ## Response
      *
      * ``` json
      * Content-Type: application/json
-     * Authorization: Bearer YOUR-REST-API-KEY
+     * Authorization: Bearer YOUR_REST_API_KEY
      * {
-     * "email_template_id": (string) your email template's API Identifier,
-     * "template_name": (string) the name of your email template,
-     * "description": (string) email template description,
-     * "subject": (string) the email template subject line,
-     * "preheader": (optional, string) the email preheader used to generate previews in some clients),
-     * "body": (optional, string) the email template body that may include HTML,
-     * "plaintext_body": (optional, string) a plaintext version of the email template body,
-     * "should_inline_css": (optional, boolean) whether there is inline CSS in the body of the template - defaults to the css inlining value for the App Group,
-     * "tags": (string) tag names,
-     * "created_at": (string, in ISO 8601),
-     * "updated_at": (string, in ISO 8601)
+     * "email_template_id": (string) Your email template's API Identifier,
+     * "template_name": (string) The name of your email template,
+     * "description": (string) The email template description,
+     * "subject": (string) The email template subject line,
+     * "preheader": (optional, string) The email preheader used to generate previews in some clients),
+     * "body": (optional, string) The email template body that may include HTML,
+     * "plaintext_body": (optional, string) A plaintext version of the email template body,
+     * "should_inline_css": (optional, boolean) Whether there is inline CSS in the body of the template - defaults to the css inlining value for the workspace,
+     * "tags": (string) Tag names,
+     * "created_at": (string) The time the email was created at in ISO 8601,
+     * "updated_at": (string) The time the email was updated in ISO 8601
      * }
      *
      * ```
      *
-     * Images in this response will show in the `body` variable as HTML.
+     * Images in this response will show in the `body` variable as HTML.
      *
      * @param array $queryParameters {
      *
@@ -7946,17 +8592,19 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to create email templates on the Braze dashboard.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `templates.email.create` permission.
-     *
      * These templates will be available on the **Templates & Media** page. The response from this endpoint will include a field for `email_template_id`, which can be used to update the template in subsequent API calls.
      *
-     * Users’ email subscription status can be updated and retrieved via Braze using a RESTful API. You can use the API to set up bi-directional sync between Braze and other email systems or your own database. All API requests are made over HTTPS.
+     * Users’ email subscription status can be updated and retrieved with Braze using a RESTful API. You can use the API to set up bi-directional sync between Braze and other email systems or your own database. All API requests are made over HTTPS.
      *
-     * ### Rate limit
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key](https://www.braze.com/docs/api/api_key/) with the `templates.email.create` permission.
+     *
+     * ## Rate limit
      *
      * We apply the default Braze rate limit of 250,000 requests per hour to this endpoint, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
-     * ### Request parameters
+     * ## Request parameters
      *
      * | Parameter | Required | Data Type | Description |
      * | --- | --- | --- | --- |
@@ -7968,7 +8616,24 @@ class Client extends Runtime\Client\Client
      * | `tags` | Optional | String | [Tags](https://www.braze.com/docs/user_guide/administrative/app_settings/manage_app_group/tags/) must already exist. |
      * | `should_inline_css` | Optional | Boolean | Enables or disables the `inline_css` feature per template. If not provided, Braze will use the default setting for the app group. One of `true` or `false` is expected. |
      *
-     * ### Possible errors
+     * ## Example request
+     *
+     * ``` json
+     * Copiedcurl --location --request POST 'https://rest.iad-01.braze.com/templates/email/create' \
+     * --header 'Content-Type: application/json' \
+     * --header 'Authorization: Bearer YOUR_REST_API_KEY' \
+     * --data-raw '{
+     * "template_name": "email_template_name",
+     * "subject": "Welcome to my email template!",
+     * "body": "This is the text within my email body and https://www.braze.com/ here is a link to Braze.com.",
+     * "plaintext_body": "This is the text within my email body and here is a link to https://www.braze.com/.",
+     * "preheader": "My preheader is pretty cool.",
+     * "tags": ["Tag1", "Tag2"]
+     * }'
+     *
+     * ```
+     *
+     * ## Possible errors
      *
      * The following table lists possible returned errors and their associated troubleshooting steps, if applicable.
      *
@@ -7978,8 +8643,19 @@ class Client extends Runtime\Client\Client
      * | Tags must be an array | Tags must be formatted as an array of strings, for example `["marketing", "promotional", "transactional"]`. |
      * | All tags must be strings | Make sure your tags are encapsulated in quotes (`""`). |
      * | Some tags could not be found | To add a tag when creating an email template, the tag must already exist in Braze. |
-     * | Email must have valid Content Block names | The email contains Content Blocks that don't exist in this environment. |
+     * | Email must have valid Content Block names | The email might contain Content Blocks that don’t exist in this environment. |
      * | Invalid value for `should_inline_css`. One of `true` or `false` was expected | This parameter only accepts boolean values (true or false). Make sure the value for `should_inline_css` is not encapsulated in quotes (`""`), which causes the value to be sent as a string instead. |
+     *
+     * @param array $queryParameters {
+     *
+     * @var string $template_name (Required) String
+     * @var string $subject (Required) String
+     * @var string $body (Required) String
+     * @var string $plaintext_body (Optional) String
+     * @var string $preheader (Optional) String
+     * @var string $tags (Optional) String
+     * @var string $should_inline_css (Optional) Boolean
+     *             }
      *
      * @param array $headerParameters {
      *
@@ -7998,24 +8674,130 @@ class Client extends Runtime\Client\Client
      * @throws Exception\PostTemplatesEmailCreateTooManyRequestsException
      * @throws Exception\PostTemplatesEmailCreateInternalServerErrorException
      */
-    public function postTemplatesEmailCreate(?Model\TemplatesEmailCreatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postTemplatesEmailCreate(?Model\TemplatesEmailCreatePostBody $requestBody = null, array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PostTemplatesEmailCreate($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PostTemplatesEmailCreate($requestBody, $queryParameters, $headerParameters), $fetch);
+    }
+
+    /**
+     * > Use this endpoint to update email templates on the Braze dashboard.
+     *
+     * You can access an email template’s `email_template_id` by navigating to it on the **Templates & Media** page. The [Create email template endpoint](https://www.braze.com/docs/api/endpoints/templates/email_templates/post_create_email_template/) will also return an `email_template_id` reference.
+     *
+     * All fields other than the `email_template_id` are optional, but you must specify at least one field to update.
+     *
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key](https://www.braze.com/docs/api/api_key/) with the `templates.email.update` permission.
+     *
+     * ## Rate limit
+     *
+     * We apply the default Braze rate limit of 250,000 requests per hour to this endpoint, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
+     *
+     * ## Request parameters
+     *
+     * | Parameter | Required | Data Type | Description |
+     * | --- | --- | --- | --- |
+     * | `email_template_id` | Required | String | Your [email template’s API identifier](https://www.braze.com/docs/api/identifier_types/). |
+     * | `template_name` | Optional | String | Name of your email template. |
+     * | `subject` | Optional | String | Email template subject line. |
+     * | `body` | Optional | String | Email template body that may include HTML. |
+     * | `plaintext_body` | Optional | String | A plaintext version of the email template body. |
+     * | `preheader` | Optional | String | Email preheader used to generate previews in some clients. |
+     * | `tags` | Optional | String | [Tags](https://www.braze.com/docs/user_guide/administrative/app_settings/manage_app_group/tags/) must already exist. |
+     * | `should_inline_css` | Optional | Boolean | Enables or disables the `inline_css` feature per template. If not provided, Braze will use the default setting for the AppGroup. One of `true` or `false` is expected. |
+     *
+     * ### Troubleshooting
+     *
+     * The following table lists possible returned errors and their associated troubleshooting steps, if applicable.
+     *
+     * | Error | Troubleshooting |
+     * | --- | --- |
+     * | Template name is required |  |
+     * | Tags must be an array | Tags must be formatted as an array of strings, for example `["marketing", "promotional", "transactional"]`. |
+     * | All tags must be strings | Make sure your tags are encapsulated in quotes (`""`). |
+     * | Some tags could not be found | To add a tag when creating an email template, the tag must already exist in Braze. |
+     * | Invalid value for `should_inline_css`. One of `true` or `false` was expected | This parameter only accepts boolean values (true or false). Make sure the value for `should_inline_css` is not encapsulated in quotes (`""`), which causes the value to be sent as a string instead. |
+     *
+     * ## Example request
+     *
+     * ``` json
+     * curl --location --request POST 'https://rest.iad-01.braze.com/templates/email/update' \
+     * --header 'Content-Type: application/json' \
+     * --header 'Authorization: Bearer YOUR_REST_API_KEY' \
+     * --data-raw '{
+     * "email_template_id": "email_template_id",
+     * "template_name": "Weekly Newsletter",
+     * "subject": "This Week'\''s Styles",
+     * "body": "Check out this week'\''s digital lookbook to inspire your outfits. Take a look at https://www.braze.com/",
+     * "plaintext_body": "This is the updated text within my email body and here is a link to https://www.braze.com/.",
+     * "preheader": "We want you to have the best looks this summer",
+     * "tags": ["Tag1", "Tag2"]
+     * }'
+     *
+     * ```
+     *
+     * ## Troubleshooting
+     *
+     * The following table lists possible returned errors and their associated troubleshooting steps, if applicable.
+     *
+     * | Error | Troubleshooting |
+     * | --- | --- |
+     * | Template name is required | Enter a template name. |
+     * | Tags must be an array | Tags must be formatted as an array of strings, for example `["marketing", "promotional", "transactional"]`. |
+     * | All tags must be strings | Make sure your tags are encapsulated in quotes (`""`). |
+     * | Some tags could not be found | To add a tag when creating an email template, the tag must already exist in Braze. |
+     * | Invalid value for `should_inline_css`. One of `true` or `false` was expected | This parameter only accepts boolean values (true or false). Make sure the value for `should_inline_css` is not encapsulated in quotes (`""`), which causes the value to be sent as a string instead. |
+     *
+     * @param array $queryParameters {
+     *
+     * @var string $email_template_id (Required) String
+     * @var string $template_name (Optional) String
+     * @var string $subject (Optional) String
+     * @var string $body (Optional) String
+     * @var string $plaintext_body (Optional) String
+     * @var string $preheader (Optional) String
+     * @var string $tags (Optional) String
+     * @var string $should_inline_css (Optional) Boolean
+     *             }
+     *
+     * @param array $headerParameters {
+     *
+     * @var string $Content-Type
+     * @var string $Authorization
+     *             }
+     *
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws Exception\PostTemplatesEmailUpdateBadRequestException
+     * @throws Exception\PostTemplatesEmailUpdateUnauthorizedException
+     * @throws Exception\PostTemplatesEmailUpdateForbiddenException
+     * @throws Exception\PostTemplatesEmailUpdateNotFoundException
+     * @throws Exception\PostTemplatesEmailUpdateTooManyRequestsException
+     * @throws Exception\PostTemplatesEmailUpdateInternalServerErrorException
+     */
+    public function postTemplatesEmailUpdate(?Model\TemplatesEmailUpdatePostBody $requestBody = null, array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new Endpoint\PostTemplatesEmailUpdate($requestBody, $queryParameters, $headerParameters), $fetch);
     }
 
     /**
      * > Use this endpoint to rename your users’ external IDs.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `users.external_ids.rename` permission.
+     * You can send up to 50 rename objects per request.
      *
-     * You can send up to 50 rename objects per request. You will need to create a new [API key](https://www.braze.com/docs/api/api_key/) with permissions for this endpoint.
+     * This endpoint sets a new (primary) `external_id` for the user and deprecates their existing `external_id`. This means that the user can be identified by either `external_id` until the deprecated one is removed. Having multiple external IDs allows for a migration period so that older versions of your apps that use the previous external ID naming schema don’t break.
      *
-     * This endpoint sets a new (primary) `external_id` for the user and deprecates their existing `external_id`. This means that the user can be identified by either `external_id` until the deprecated one is removed. Having multiple external IDs allows for a migration period so that older versions of your apps that use the previous external ID naming schema don't break.
+     * After your old naming schema is no longer in use, we highly recommend removing deprecated external IDs using the [<code>/users/external_ids/remove</code>&nbsp;endpoint](https://www.braze.com/docs/api/endpoints/user_data/external_id_migration/post_external_ids_remove).
      *
-     * After your old naming schema is no longer in use, we highly recommend removing deprecated external IDs using the [`/users/external_ids/remove` endpoint](https://www.braze.com/docs/api/endpoints/user_data/external_id_migration/post_external_ids_remove).
+     * > **Warning:** Make sure to remove deprecated external IDs with the `/users/external_ids/remove` endpoint instead of `/users/delete`. Sending a request to `/users/delete` with the deprecated external ID deletes the user profile entirely and cannot be undone.
      *
-     * > **Warning:** Make sure to remove deprecated external IDs with the
      *
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key](https://www.braze.com/docs/api/api_key/) with the `users.external_ids.rename` permission.
      *
      * ## Rate limit
      *
@@ -8025,11 +8807,15 @@ class Client extends Runtime\Client\Client
      *
      * | Parameter | Required | Data Type | Description |
      * | --- | --- | --- | --- |
-     * | `external_id_renames` | Required | Array of external ID rename objects | View request example and the following limitations for structure of external ID rename object |
+     * | `external_id_renames` | Required | Array of external identifier rename objects | View request example and the following limitations for structure of external ID rename object |
      *
-     * - The `current_external_id` must be the user’s primary ID, and cannot be a deprecated ID
-     * - The `new_external_id` must not already be in use as either a primary ID or a deprecated ID
-     * - The `current_external_id` and `new_external_id` cannot be the same
+     * Note the following:
+     *
+     * - The `current_external_id` must be the user’s primary ID, and cannot be a deprecated ID.
+     *
+     * - The `new_external_id` must not already be in use as either a primary ID or a deprecated ID.
+     *
+     * - The `current_external_id` and `new_external_id` cannot be the same.
      *
      *
      * ## Response
@@ -8039,8 +8825,8 @@ class Client extends Runtime\Client\Client
      * ``` json
      * {
      * "message" : (string) status message,
-     * "external_ids" : (array of successful Rename Operations),
-     * "rename_errors": (array of any )
+     * "external_ids" : (array of strings) successful rename operations,
+     * "rename_errors": (array of arrays) <minor error message>
      * }
      *
      * ```
@@ -8048,26 +8834,34 @@ class Client extends Runtime\Client\Client
      * The `message` field will return `success` for any valid request. More specific errors are captured in the `rename_errors` array. The `message` field returns an error in the case of:
      *
      * - Invalid API key
+     *
      * - Empty `external_id_renames` array
+     *
      * - `external_id_renames` array with more than 50 objects
-     * - Rate limit hit (>1,000 requests/minute)
+     *
+     * - Rate limit hit (more than 1,000 requests per minute)
      *
      *
      * ## Frequently Asked Questions
      *
-     **Does this impact MAU?**
+     * ### **Does this impact MAU?**
+     *
      * No, since the number of users will stay the same, they’ll just have a new `external_id`.
      *
-     **Does user behavior change historically?**
+     * ### **Does user behavior change historically?**
+     *
      * No, since the user is still the same user, and all their historical behavior is still connected to them.
      *
-     **Can it be run on dev/staging app groups?**
+     * ### **Can it be run on development or staging app groups?**
+     *
      * Yes. In fact, we highly recommend running a test migration on a staging or development app group, and ensuring everything has gone smoothly before executing on production data.
      *
-     **Does this consume data points?**
+     * ### **Does this consume data points?**
+     *
      * This feature does not cost data points.
      *
-     **What is the recommended deprecation period?**
+     * ### **What is the recommended deprecation period?**
+     *
      * We have no hard limit on how long you can keep deprecated external IDs around, but we highly recommend removing them once there is no longer a need to reference users by the deprecated ID.
      *
      * @param array $headerParameters {
@@ -8095,9 +8889,7 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to remove your users' old deprecated external IDs.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `users.external_ids.remove` permission.
-     *
-     * You can send up to 50 external IDs per request. You will need to create a new [API key](https://www.braze.com/docs/api/api_key/) with permissions for this endpoint.
+     * You can send up to 50 external IDs per request. To use this endpoint, you’ll need to generate an [API key](https://www.braze.com/docs/api/api_key/) with the `users.external_ids.remove` permission.
      *
      * > **Warning:** This endpoint completely removes the deprecated ID and cannot be undone. Using this endpoint to remove deprecated \`external_ids\` that are still associated with users in your system can permanently prevent you from finding those users' data.
      *
@@ -8112,7 +8904,7 @@ class Client extends Runtime\Client\Client
      * | --- | --- | --- | --- |
      * | `external_ids` | Required | Array of strings | External identifiers for the users to remove |
      *
-     * > Important: Only deprecated IDs can be removed; attempting to remove a primary external ID will result in an error.
+     * > **Important:** Only deprecated IDs can be removed; attempting to remove a primary external ID will result in an error.
      *
      *
      * ## Response
@@ -8122,8 +8914,8 @@ class Client extends Runtime\Client\Client
      * ``` json
      * {
      * "message" : (string) status message,
-     * "removed_ids" : (array of successful Remove Operations),
-     * "removal_errors": (array of any )
+     * "removed_ids" : (array of strings) successful remove operations,
+     * "removal_errors": (array of arrays) <minor error message>
      * }
      *
      * ```
@@ -8131,9 +8923,12 @@ class Client extends Runtime\Client\Client
      * The `message` field will return `success` for any valid request. More specific errors are captured in the `removal_errors` array. The `message` field returns an error in the case of:
      *
      * - Invalid API key
+     *
      * - Empty `external_ids` array
+     *
      * - `external_ids` array with more than 50 items
-     * - Rate limit hit (>1,000 requests/minute)
+     *
+     * - Rate limit hit (more than 1,000 requests per minute)
      *
      * @param array $headerParameters {
      *
@@ -8158,15 +8953,74 @@ class Client extends Runtime\Client\Client
     }
 
     /**
-     * > Use this endpoint to update existing user aliases.
-     *
-     * To use this endpoint, you’ll need to generate an API key with the `users.alias.update` permission.
+     * > Use this endpoint to add new user aliases for existing identified users, or to create new unidentified users.
      *
      * Up to 50 user aliases may be specified per request.
      *
-     * This endpoint does not guarantee the sequence of `alias_updates` objects being updated.
+     **Adding a user alias for an existing user** requires an `external_id` to be included in the new user alias object. If the `external_id` is present in the object but there is no user with that `external_id`, the alias will not be added to any users. If an `external_id` is not present, a user will still be created but will need to be identified later. You can do this using the “Identifying Users” and the `users/identify` endpoint.
+     *
+     **Creating a new alias-only user** requires the `external_id` to be omitted from the new user alias object. After the user is created, use the `/users/track` endpoint to associate the alias-only user with attributes, events, and purchases, and the `/users/identify` endpoint to identify the user with an `external_id`.
+     *
+     * ## Prerequisites
+     *
+     * To use this endpoint, you'll need an [API key](https://braze.com/docs/api/api_key/) with the `users.alias.new` permission.
+     *
+     * ### Rate limit
+     *
+     * For customers who onboarded with Braze on or after September 16, 2021, we apply a shared rate limit of 20,000 requests per minute to this endpoint. This rate limit is shared with the `/users/delete`, `/users/identify`, `/users/merge`, and `/users/alias/update` endpoints, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
+     *
+     * ### Request parameters
+     *
+     * | Parameter | Required | Data Type | Description |
+     * | --- | --- | --- | --- |
+     * | `user_aliases` | Required | Array of new user alias objects | See [user alias object](https://www.braze.com/docs/api/objects_filters/user_alias_object/).  <br>  <br>For more information on `alias_name` and `alias_label`, check out our [User Aliases](https://www.braze.com/docs/user_guide/data_and_analytics/user_data_collection/user_profile_lifecycle/#user-aliases) documentation. |
+     *
+     * ### Response
+     *
+     * ``` json
+     *
+     * Content-Type: application/json
+     * Authorization: Bearer YOUR_REST_API_KEY
+     * {
+     * "aliases_processed": 1,
+     * "message": "success"
+     * }
+     * ```
+     *
+     * @param array $headerParameters {
+     *
+     * @var string $Content-Type
+     * @var string $Authorization
+     *             }
+     *
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws Exception\PostUsersAliasNewBadRequestException
+     * @throws Exception\PostUsersAliasNewUnauthorizedException
+     * @throws Exception\PostUsersAliasNewForbiddenException
+     * @throws Exception\PostUsersAliasNewNotFoundException
+     * @throws Exception\PostUsersAliasNewTooManyRequestsException
+     * @throws Exception\PostUsersAliasNewInternalServerErrorException
+     */
+    public function postUsersAliasNew(?Model\UsersAliasNewPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new Endpoint\PostUsersAliasNew($requestBody, $headerParameters), $fetch);
+    }
+
+    /**
+     * > Use this endpoint to update existing user aliases.
+     *
+     * Up to 50 user aliases may be specified per request.
      *
      * Updating a user alias requires `alias_label`, `old_alias_name`, and `new_alias_name` to be included in the update user alias object. If there is no user alias associated with the `alias_label` and `old_alias_name`, no alias will be updated. If the given `alias_label` and `old_alias_name` is found, then the `old_alias_name` will be updated to the `new_alias_name`.
+     *
+     **Note:** This endpoint does not guarantee the sequence of `alias_updates` objects being updated.
+     *
+     * ## Prerequisites
+     *
+     * To use this endpoint, you'll need an [API key](https://braze.com/docs/api/api_key/) with the `users.alias.update` permission.
      *
      * ## Rate limit
      *
@@ -8212,176 +9066,160 @@ class Client extends Runtime\Client\Client
     }
 
     /**
-     * > Use this endpoint to add new user aliases for existing identified users, or to create new unidentified users.
+     * > Use this endpoint to identify an unidentified (alias-only or email-only) user using the provided external ID.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `users.alias.new` permission.
+     * ## How it works
      *
-     * Up to 50 user aliases may be specified per request.
+     * Calling `/users/identify` combines a user profile that is identified by an alias (alias-only profile) or email address (email-only profile) with a user profile that has an `external_id` (identified profile), then removes the alias-only profile.
      *
-     **Adding a user alias for an existing user** requires an `external_id` to be included in the new user alias object. If the `external_id` is present in the object but there is no user with that `external_id`, the alias will not be added to any users. If an `external_id` is not present, a user will still be created but will need to be identified later. You can do this using the "Identifying Users" and the `users/identify` endpoint.
+     * Identifying a user requires an `external_id` to be included in the `aliases_to_identify` or `emails_to_identify` object. If there isn’t a user with that `external_id`, the `external_id` will be added to the aliased user’s record, and the user will be considered identified.
      *
-     **Creating a new alias-only user** requires the `external_id` to be omitted from the new user alias object. Once the user is created, use the `/users/track` endpoint to associate the alias-only user with attributes, events, and purchases, and the `/users/identify` endpoint to identify the user with an `external_id`.
+     * Note the following:
      *
-     * ### Rate limit
+     * - When these subsequent associations are made with the `merge_behavior` field set to `none`, only the push tokens and message history associated with the user alias are retained; any attributes, events, or purchases will be “orphaned” and not available on the identified user. One workaround is to export the aliased user’s data before identification using the [<code>/users/export/ids</code>&nbsp;endpoint](https://www.braze.com/docs/api/endpoints/export/user_data/post_users_identifier/), then re-associate the attributes, events, and purchases with the identified user.
      *
-     * For customers who onboarded with Braze on or after September 16, 2021, we apply a shared rate limit of 20,000 requests per minute to this endpoint. This rate limit is shared with the `/users/delete` and `/users/identify` endpoints, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
-     *
-     * ### Request parameters
-     *
-     * | Parameter | Required | Data Type | Description |
-     * | --- | --- | --- | --- |
-     * | `user_aliases` | Required | Array of new user alias objects | See [user alias object](https://www.braze.com/docs/api/objects_filters/user_alias_object/).  <br>  <br>For more information on `alias_name` and `alias_label`, check out our [User Aliases](https://www.braze.com/docs/user_guide/data_and_analytics/user_data_collection/user_profile_lifecycle/#user-aliases) documentation. |
-     *
-     * @param array $headerParameters {
-     *
-     * @var string $Content-Type
-     * @var string $Authorization
-     *             }
-     *
-     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
-     *
-     * @return \Psr\Http\Message\ResponseInterface|null
-     *
-     * @throws Exception\PostUsersAliasNewBadRequestException
-     * @throws Exception\PostUsersAliasNewUnauthorizedException
-     * @throws Exception\PostUsersAliasNewForbiddenException
-     * @throws Exception\PostUsersAliasNewNotFoundException
-     * @throws Exception\PostUsersAliasNewTooManyRequestsException
-     * @throws Exception\PostUsersAliasNewInternalServerErrorException
-     */
-    public function postUsersAliasNew(?Model\UsersAliasNewPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
-    {
-        return $this->executeEndpoint(new Endpoint\PostUsersAliasNew($requestBody, $headerParameters), $fetch);
-    }
-
-    /**
-     * > Use this endpoint to delete any user profile by specifying a known user identifier.
-     *
-     * To use this endpoint, you’ll need to generate an API key with the `users.delete` permission.
-     *
-     * Up to 50 `external_ids`, `user_aliases`, or `braze_ids` can be included in a single request. Only one of `external_ids`, `user_aliases`, or `braze_ids` can be included in a single request.
-     *
-     * > **Important:** Deleting user profiles cannot be undone. It will permanently remove users which may cause discrepancies in your data. Learn more about what happens when you [delete a user profile via API](https://braze.com/docs/help/help_articles/api/delete_user/) in our Help documentation.
+     * - When associations are made with the `merge_behavior` field set to `merge`, this endpoint will merge [specific fields](https://www.braze.com/docs/api/endpoints/user_data/post_user_identify#merge) found on the anonymous user to the identified user.
      *
      *
-     * ### Rate limit
-     *
-     * For customers who onboarded with Braze on or after September 16, 2021, we apply a shared rate limit of 20,000 requests per minute to this endpoint. This rate limit is shared with the `/users/alias/new` and `/users/identify` endpoints, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
-     *
-     * ### Request parameter
-     *
-     * | Parameter | Required | Data Type | Description |
-     * | --- | --- | --- | --- |
-     * | `external_ids` | Optional | Array of strings | External identifiers for the users to delete. |
-     * | `user_aliases` | Optional | Array of user alias object | [User aliases](https://www.braze.com/docs/api/objects_filters/user_alias_object/) for the users to delete. |
-     * | `braze_ids` | Optional | Array of strings | Braze user identifiers for the users to delete. |
-     *
-     * @param array $headerParameters {
-     *
-     * @var string $Content-Type
-     * @var string $Authorization
-     *             }
-     *
-     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
-     *
-     * @return \Psr\Http\Message\ResponseInterface|null
-     *
-     * @throws Exception\PostUsersDeleteBadRequestException
-     * @throws Exception\PostUsersDeleteUnauthorizedException
-     * @throws Exception\PostUsersDeleteForbiddenException
-     * @throws Exception\PostUsersDeleteNotFoundException
-     * @throws Exception\PostUsersDeleteTooManyRequestsException
-     * @throws Exception\PostUsersDeleteInternalServerErrorException
-     */
-    public function postUsersDelete(?Model\UsersDeletePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
-    {
-        return $this->executeEndpoint(new Endpoint\PostUsersDelete($requestBody, $headerParameters), $fetch);
-    }
-
-    /**
-     * > Use this endpoint to identify an unidentified (alias-only) user.
-     *
-     * To use this endpoint, you’ll need to generate an API key with the `users.identify` permission.
-     *
-     * Calling `/users/identify` combines the alias-only profile with the identified profile and removes the alias-only profile.
-     *
-     * Identifying a user requires an `external_id` to be included in the `aliases_to_identify` object. If there is no user with that `external_id`, the `external_id` will simply be added to the aliased user's record, and the user will be considered identified. You can add up to 50 user aliases per request.
-     *
-     * Subsequently, you can associate multiple additional user aliases with a single `external_id`.
-     *
-     * - When these subsequent associations are made with the `merge_behavior` field set to `none`, only the push tokens and message history associated with the user alias are retained; any attributes, events, or purchases will be "orphaned" and not available on the identified user. One workaround is to export the aliased user's data before identification using the [`/users/export/ids` endpoint](https://www.braze.com/docs/api/endpoints/export/user_data/post_users_identifier/), then re-associate the attributes, events, and purchases with the identified user.
-     * - When associations are made with the `merge_behavior` field set to `merge`, this endpoint will merge [specific fields](#merge) found on the anonymous user to the identified user.
+     * > **Tip**: To prevent unexpected loss of data when identifying users, we highly recommend that you first refer to [data collection best practices](https://www.braze.com/docs/user_guide/data_and_analytics/user_data_collection/best_practices/#capturing-user-data-when-alias-only-user-info-is-already-present) to learn about capturing user data when alias-only user info is already present.
      *
      *
-     * > Note: To prevent unexpected loss of data when identifying users, we highly recommend that you first refer to [data collection best practices](https://www.braze.com/docs/user_guide/data_and_analytics/user_data_collection/best_practices/#capturing-user-data-when-alias-only-user-info-is-already-present) to learn about capturing user data when alias-only user info is already present.
+     * ## Prerequisites
      *
+     * To use this endpoint, you'll need an [API key](https://braze.com/docs/api/api_key/) with the `users.identify` permission.
      *
-     * ### Rate limit
+     * ## Rate limit
      *
-     * For customers who onboarded with Braze on or after September 16, 2021, we apply a shared rate limit of 20,000 requests per minute to this endpoint. This rate limit is shared with the `/users/delete` and `/users/alias/new` endpoints, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
+     * For customers who onboarded with Braze on or after September 16, 2021, we apply a shared rate limit of 20,000 requests per minute to this endpoint. This rate limit is shared with the `/users/delete`, `/users/identify`, `/users/merge`, and `/users/alias/update` endpoints, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
-     * ### Parameters
+     * ## Request parameters
      *
      * | Parameter | Required | Data Type | Description |
      * | --- | --- | --- | --- |
      * | `aliases_to_identify` | Required | Array of aliases to identify object | See [alias to identify object](https://www.braze.com/docs/api/objects_filters/aliases_to_identify/) and [user alias object](https://www.braze.com/docs/api/objects_filters/user_alias_object/). |
+     * | `emails_to_identify` | Required | Array of aliases to identify object | See [Identifying users by email](https://www.braze.com/docs/api/endpoints/user_data/post_user_identify/#identifying-users-by-email). |
      * | `merge_behavior` | Optional | String | One of `none` or `merge` is expected. |
      *
      * #### Merge_behavior field
      *
-     * Setting the `merge_behavior` field to `merge` sets the endpoint to merge any of the following fields found **exclusively** on the anonymous user to the identified user.
+     * Setting the `merge_behavior` field to `merge` sets the endpoint to merge the following list of fields found **exclusively** on the anonymous user to the identified user. Setting the field to `none` will not merge any user data to the identified user profile.
      *
      * - First name
+     *
      * - Last name
+     *
      * - Email
+     *
      * - Gender
+     *
      * - Date of birth
+     *
      * - Phone number
+     *
      * - Time zone
+     *
      * - Home city
+     *
      * - Country
+     *
      * - Language
+     *
      * - Session count (the sum of sessions from both profiles)
+     *
      * - Date of first session (Braze will pick the earlier date of the two dates)
+     *
      * - Date of last session (Braze will pick the later date of the two dates)
+     *
      * - Custom attributes
+     *
      * - Custom event and purchase event data (excluding event properties)
+     *
      * - Custom event and purchase event properties for "X times in Y days" segmentation (where X<=50 and Y<=30)
+     *
      * - Segmentable custom events summary
+     *
      * - Event count (the sum from both profiles)
+     *
      * - Event first occurred (Braze will pick the earlier date of the two dates)
+     *
      * - Event last occurred (Braze will pick the later date of the two dates)
+     *
      * - In-app purchase total in cents (the sum from both profiles)
+     *
      * - Total number of purchases (the sum from both profiles)
+     *
      * - Date of first purchase (Braze will pick the earlier date of the two dates)
+     *
      * - Date of last purchase (Braze will pick the later date of the two dates)
+     *
      * - App summaries
+     *
      * - Last_X_at fields (Braze will update the fields if the orphaned profile fields are more recent)
+     *
      * - Campaign summaries (Braze will pick the most recent date fields)
+     *
      * - Workflow summaries (Braze will pick the most recent date fields)
+     *
      * - Message and message engagement history
      *
-     *
-     * Any of the following fields found on the anonymous user to the identified user:
-     *
      * - Custom event and purchase event count and first date and last date timestamps
-     * - These merged fields will update "for X events in Y days" filters. For purchase events, these filters include "number of purchases in Y days" and "money spent in last Y days".
      *
-     * Session data will only be merged if the app exists on both user profiles. For example, if our target user doesn't have an app summary for "ABCApp" but our original user does, the target user will have the "ABCApp" app summary on their profile after the merge.
+     * - These merged fields will update “for X events in Y days” filters. For purchase events, these filters include “number of purchases in Y days” and “money spent in last Y days”.
      *
-     * Setting the field to `none` will not merge any user data to the identified user profile.
+     * - Session data if the app exists on both user profiles
      *
-     * ### Aliases to Identify object specification
+     * - For example, if our target user doesn’t have an app summary for “ABCApp” but our original user does, the target user will have the “ABCApp” app summary on their profile after the merge.
      *
-     * ``` json
+     *
+     * ### Identifying users by email
+     *
+     * If an `email` is specified as an identifier, an additional `prioritization` value is required in the identifier. The `prioritization` should be an array specifying which user to merge if there are multiple users found. `prioritization` is an ordered array, meaning if more than one user matches from a prioritization, then merging will not occur.
+     *
+     * The allowed values for the array are: `identified`, `unidentified`, `most_recently_updated`. `most_recently_updated` refers to prioritizing the most recently updated user.
+     *
+     * Only one of the following options may exist in the prioritization array at a time:
+     *
+     * - `identified` refers to prioritizing a user with an `external_id`
+     *
+     * - `unidentified` refers to prioritizing a user without an `external_id`
+     *
+     *
+     * ## Request example
+     *
+     * ```
+     * curl --location --request POST 'https://rest.iad-01.braze.com/users/identify' \
+     * --header 'Content-Type: application/json' \
+     * --header 'Authorization: Bearer YOUR_REST_API_KEY' \
+     * --data-raw '{
+     * "aliases_to_identify": [
      * {
-     * "external_id" : (required, string) see External User ID below,
-     * // external_ids for users that do not exist will return a non-fatal error.
-     * // See Server Responses for details.
-     * "user_alias" : {
-     * "alias_name" : (required, string),
-     * "alias_label" : (required, string)
+     * "external_id": "external_identifier",
+     * "user_alias": {
+     * "alias_name": "example_alias",
+     * "alias_label": "example_label"
      * }
+     * }
+     * ],
+     * "emails_to_identify": [
+     * {
+     * "external_id": "external_identifier_2",
+     * "email": "john.smith@braze.com",
+     * "prioritization": ["unidentified", "most_recently_updated"]
+     * }
+     * ]
+     * "merge_behavior": "merge"
+     * }'
+     *
+     * ```
+     *
+     * ## Response
+     *
+     * ```
+     * Content-Type: application/json
+     * Authorization: Bearer YOUR_REST_API_KEY
+     * {
+     * "aliases_processed": 1,
+     * "message": "success"
      * }
      *
      * ```
@@ -8409,11 +9247,400 @@ class Client extends Runtime\Client\Client
     }
 
     /**
+     * > Use this endpoint to record custom events, purchases, and update user profile attributes.
+     *
+     **Note:** Braze processes the data passed via API at face value and customers should only pass deltas (changing data) to minimize unnecessary data point consumption. To read more, refer to [Data points](https://www.braze.com/docs/user_guide/onboarding_with_braze/data_points#data-points).
+     *
+     * ## Prerequisites
+     *
+     * To use this endpoint, you'll need an [API key](https://braze.com/docs/api/api_key/) with the `users.track` permission.
+     *
+     * Customers using the API for server-to-server calls may need to allowlist `rest.iad-01.braze.com` if they’re behind a firewall.
+     *
+     * ## Rate limit
+     *
+     * Starting on October 28th, 2024, we apply a base speed limit of 3,000 requests per three seconds to this endpoint for all customers. Each `/users/track` request can contain up to 75 event objects, 75 attribute objects, and 75 purchase objects. Each object (event, attribute, and purchase arrays) can update one user each. In total, this means a maximum of 225 users can be updated in a single call. In addition, a single user profile can be updated by multiple objects.
+     *
+     * Different limits apply to customers who have purchased **Monthly Active Users - CY 24-25**. For details on these limits, see [Monthly Active Users - CY 24-25 limits](https://www.braze.com/docs/api/endpoints/user_data/post_user_track/#monthly-active-users-cy-24-25).
+     *
+     * See our page on [API rate limits](https://www.braze.com/docs/api/api_limits/) for details, and reach out to your customer success manager if you need your limit increased.
+     *
+     * ## Request parameters
+     *
+     * > **Important:** For each request component listed in the following table, one of `external_id`, `user_alias`, `braze_id`, `email`, or `phone` is required.
+     *
+     *
+     * | Parameter | Required | Data Type | Description |
+     * | --- | --- | --- | --- |
+     * | `attributes` | Optional | Array of attributes objects | See [user attributes object](https://www.braze.com/docs/api/objects_filters/user_attributes_object/) |
+     * | `events` | Optional | Array of event objects | See [events object](https://www.braze.com/docs/api/objects_filters/event_object/) |
+     * | `purchases` | Optional | Array of purchase objects | See [purchases object](https://www.braze.com/docs/api/objects_filters/purchase_object/) |
+     *
+     * ## Example requests
+     *
+     * ### Update a user profile by email address
+     *
+     * You can update a user profile by email address using the `/users/track` endpoint.
+     *
+     * ```
+     * curl --location --request POST 'https://rest.iad-01.braze.com/users/track' \
+     * --header 'Content-Type: application/json' \
+     * --header 'Authorization: Bearer YOUR_REST_API_KEY' \
+     * --data-raw '{
+     * "attributes": [
+     * {
+     * "email": "test@braze.com",
+     * "string_attribute": "fruit",
+     * "boolean_attribute_1": true,
+     * "integer_attribute": 26,
+     * "array_attribute": [
+     * "banana",
+     * "apple"
+     * ]
+     * }
+     * ],
+     * "events": [
+     * {
+     * "email": "test@braze.com",
+     * "app_id": "your_app_identifier",
+     * "name": "rented_movie",
+     * "time": "2022-12-06T19:20:45+01:00",
+     * "properties": {
+     * "release": {
+     * "studio": "FilmStudio",
+     * "year": "2022"
+     * },
+     * "cast": [
+     * {
+     * "name": "Actor1"
+     * },
+     * {
+     * "name": "Actor2"
+     * }
+     * ]
+     * }
+     * },
+     * {
+     * "user_alias": {
+     * "alias_name": "device123",
+     * "alias_label": "my_device_identifier"
+     * },
+     * "app_id": "your_app_identifier",
+     * "name": "rented_movie",
+     * "time": "2013-07-16T19:20:50+01:00"
+     * }
+     * ],
+     * "purchases": [
+     * {
+     * "email": "test@braze.com",
+     * "app_id": "your_app_identifier",
+     * "product_id": "product_name",
+     * "currency": "USD",
+     * "price": 12.12,
+     * "quantity": 6,
+     * "time": "2017-05-12T18:47:12Z",
+     * "properties": {
+     * "color": "red",
+     * "monogram": "ABC",
+     * "checkout_duration": 180,
+     * "size": "Large",
+     * "brand": "Backpack Locker"
+     * }
+     * }
+     * ]
+     * }'
+     *
+     * ```
+     *
+     * ### Update a user profile by phone number
+     *
+     * You can update a user profile by phone number using the `/users/track` endpoint. This endpoint only works if you include a valid phone number.
+     *
+     * > **Important:**
+     * If you include a request with both `email` and `phone`, Braze will use the email as the identifier.
+     *
+     *
+     * ```
+     * curl --location --request POST 'https://rest.iad-01.braze.com/users/track' \
+     * --header 'Content-Type: application/json' \
+     * --header 'Authorization: Bearer YOUR_REST_API_KEY' \
+     * --data-raw '{
+     * "attributes": [
+     * {
+     * "phone": "+15043277269",
+     * "string_attribute": "fruit",
+     * "boolean_attribute_1": true,
+     * "integer_attribute": 25,
+     * "array_attribute": [
+     * "banana",
+     * "apple"
+     * ]
+     * }
+     * ],
+     * }'
+     *
+     * ```
+     *
+     * ### Set subscription groups
+     *
+     * This example shows how to create a user and set their subscription group within the user attributes object.
+     *
+     * Updating the subscription status with this endpoint will update the user specified by their `external_id` (such as User1) and update the subscription status of any users with the same email as that user (User1).
+     *
+     * ```
+     * curl --location --request POST 'https://rest.iad-01.braze.com/users/track' \
+     * --header 'Content-Type: application/json' \
+     * --header 'Authorization: Bearer YOUR_REST_API_KEY' \
+     * --data-raw '{
+     * "attributes": [
+     * {
+     * "external_id": "user_identifier",
+     * "email": "example@email.com",
+     * "email_subscribe": "subscribed",
+     * "subscription_groups": [{
+     * "subscription_group_id": "subscription_group_identifier_1",
+     * "subscription_state": "unsubscribed"
+     * },
+     * {
+     * "subscription_group_id": "subscription_group_identifier_2",
+     * "subscription_state": "subscribed"
+     * },
+     * {
+     * "subscription_group_id": "subscription_group_identifier_3",
+     * "subscription_state": "subscribed"
+     * }
+     * ]
+     * }
+     * ]
+     * }'
+     *
+     * ```
+     *
+     * ### Example request to create an alias-only user
+     *
+     * You can use the `/users/track` endpoint to create a new alias-only user by setting the `_update_existing_only` key with a value of `false` in the body of the request. If this value is omitted, the alias-only user profile will not be created. Using an alias-only user guarantees that one profile with that alias will exist. This is especially helpful when building a new integration as it prevents the creation of duplicate user profiles.
+     *
+     * ```
+     * curl --location --request POST 'https://rest.iad-01.braze.com/users/track' \
+     * --header 'Content-Type: application/json' \
+     * --header 'Authorization: Bearer YOUR_REST_API_KEY' \
+     * --data-raw '{
+     * {
+     * "attributes": [
+     * {
+     * "_update_existing_only": false,
+     * "user_alias": {
+     * "alias_name": "example_name",
+     * "alias_label": "example_label"
+     * },
+     * "email": "email@example.com"
+     * }
+     * ],
+     * }'
+     *
+     * ```
+     *
+     * ## Responses
+     *
+     * When using any of the aforementioned API requests, you should receive one of the following three general responses: a [successful message](https://www.braze.com/docs/api/endpoints/user_data/post_user_track/#successful-message), a [successful message with non-fatal errors](https://www.braze.com/docs/api/endpoints/user_data/post_user_track/#successful-message-with-non-fatal-errors), or a [message with fatal errors](https://www.braze.com/docs/api/endpoints/user_data/post_user_track/#message-with-fatal-errors).
+     *
+     * ### Successful message
+     *
+     * Successful messages will be met with the following response:
+     *
+     * ``` json
+     * {
+     * "message" : "success",
+     * "attributes_processed" : (optional, integer), if attributes are included in the request, this will return an integer of the number of external_ids with attributes that were queued to be processed,
+     * "events_processed" : (optional, integer), if events are included in the request, this will return an integer of the number of events that were queued to be processed,
+     * "purchases_processed" : (optional, integer), if purchases are included in the request, this will return an integer of the number of purchases that were queued to be processed,
+     * }
+     *
+     * ```
+     *
+     * ### Successful message with non-fatal errors
+     *
+     * If your message is successful but has non-fatal errors, such as one invalid event object out of a long list of events, then you will receive the following response:
+     *
+     * ``` json
+     * {
+     * "message" : "success",
+     * "errors" : [
+     * {
+     * <minor error message>
+     * }
+     * ]
+     * }
+     *
+     * ```
+     *
+     * For success messages, any data not affected by an error in the `errors` array will still be processed.
+     *
+     * ### Message with fatal errors
+     *
+     * If your message has a fatal error, you will receive the following response:
+     *
+     * ``` json
+     * {
+     * "message" : <fatal error message>,
+     * "errors" : [
+     * {
+     * <fatal error message>
+     * }
+     * ]
+     * }
+     *
+     * ```
+     *
+     * ### Fatal error response codes
+     *
+     * For status codes and associated error messages that will be returned if your request encounters a fatal error, reference [Fatal errors &amp; responses](https://www.braze.com/api/errors/#fatal-errors).
+     *
+     * If you receive the error “provided external_id is blacklisted and disallowed”, your request may have included a “dummy user.” For more information, refer to [Spam blocking](https://www.braze.com/docs/user_guide/data_and_analytics/user_data_collection/user_archival/#spam-blocking).
+     *
+     * ## Frequently asked questions
+     *
+     * > **Important:**
+     *
+     * > Do not send legally required transactional emails to SMS gateways as there’s a strong likelihood that those emails will not be delivered.
+     *
+     * Although emails you send using a phone number and the provider’s gateway domain (known as an MM3) can result in the email being received as an SMS (text) message, some of our email providers do not support this behavior. For example, if you send an email to a T-Mobile phone number (such as “9999999999@tmomail.net”), your SMS message would be sent to whoever owns that phone number on the T-Mobile network.
+     *
+     * Keep in mind that even though these emails may not be delivered to the SMS gateway, they will still count towards your email billing. To avoid sending emails to unsupported gateways, review the [list of unsupported gateway domain names](https://www.fcc.gov/consumer-governmental-affairs/about-bureau/consumer-policy-division/can-spam/domain-name-downloads).
+     *
+     *
+     * ### What happens when multiple profiles with the same email address are found?
+     *
+     * If the `external_id` exists, the most recently updated profile with an external ID will be prioritized for updates. If the `external_id` doesn’t exist, the most recently updated profile will be prioritized for updates.
+     *
+     * ### What happens if no profile with the email address currently exists?
+     *
+     * A new profile will be created, and an email-only user will be created. An alias will not be created. The email field will be set to test@braze.com, as noted in the example request for updating a user profile by email address.
+     *
+     * ### How do you use `/users/track` to import legacy user data?
+     *
+     * You may submit data through the Braze API for a user who has not yet used your mobile app to generate a user profile. If the user subsequently uses the application all information following their identification using the SDK will be merged with the existing user profile you created using the API call. Any user behavior recorded anonymously by the SDK before identification will be lost upon merging with the existing API-generated user profile.
+     *
+     * The segmentation tool will include these users regardless of whether they have engaged with the app. If you want to exclude users uploaded using the User API who have not yet engaged with the app, add the `Session Count > 0` filter.
+     *
+     * ### How does `/users/track` handle duplicate events?
+     *
+     * Each event object in the events array represents a single occurrence of a custom event by a user at a designated time. This means each event ingested into Braze has its own event ID, so “duplicate” events are treated as separate, unique events.
+     *
+     * ## Monthly Active Users CY 24-25
+     *
+     * For customers who have purchased Monthly Active Users - CY 24-25, Braze manages different rate limits on its `/users/track` endpoint:
+     *
+     * - Hourly rate limits are set according to the expected data ingestion activity on your account, which may correspond to the number of monthly active users you have purchased, industry, seasonality, or other factors.
+     *
+     * - In addition to the limit on requests per hour, Braze also imposes a burst limit on the number of requests allowed per second.
+     *
+     * - Each request may batch up to 50 updates combined across attribute, event, or purchase objects.
+     *
+     *
+     * Current limits based on expected ingestion can be found in the dashboard under **Settings** > **APIs and Identifiers** > **API limits**. We may modify rate limits to protect system stability or allow for increased data throughput on your account. Please contact Braze Support or your customer success manager for questions or concerns regarding hourly or per-second request limit and the needs of your business.
+     *
+     * @param array $headerParameters {
+     *
+     * @var string $Content-Type
+     * @var string $Authorization
+     *             }
+     *
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws Exception\PostUsersTrackBadRequestException
+     * @throws Exception\PostUsersTrackUnauthorizedException
+     * @throws Exception\PostUsersTrackForbiddenException
+     * @throws Exception\PostUsersTrackNotFoundException
+     * @throws Exception\PostUsersTrackTooManyRequestsException
+     * @throws Exception\PostUsersTrackInternalServerErrorException
+     */
+    public function postUsersTrack(?Model\UsersTrackPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new Endpoint\PostUsersTrack($requestBody, $headerParameters), $fetch);
+    }
+
+    /**
+     * > Use this endpoint to delete any user profile by specifying a known user identifier.
+     *
+     * Up to 50 `external_ids`, `user_aliases`, `braze_ids`, or `email_addresses` can be included in a single request. Only one of `external_ids`, `user_aliases`, `braze_ids`, or `email_addresses` can be included in a single request.
+     *
+     * > **Warning:** Deleting user profiles cannot be undone. It will permanently remove users which may cause discrepancies in your data. Learn more about what happens when you [delete a user profile using the API](https://github.com/braze-inc/braze-docs/blob/develop/_docs/_api/endpoints/user_data/%7B%7Bsite.baseurl%7D%7D/help/help_articles/api/delete_user) in our Help documentation.
+     *
+     *
+     * ## Prerequisites
+     *
+     * To use this endpoint, you'll need an [API key](https://braze.com/docs/api/api_key/) with the `users.delete` permission.
+     *
+     * ## Rate limit
+     *
+     * For customers who onboarded with Braze on or after September 16, 2021, we apply a shared rate limit of 20,000 requests per minute to this endpoint. This rate limit is shared with the `/users/delete`, `/users/identify`, `/users/merge`, and `/users/alias/update` endpoints, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
+     *
+     * ### Request parameter
+     *
+     * | Parameter | Required | Data Type | Description |
+     * | --- | --- | --- | --- |
+     * | `external_ids` | Optional | Array of strings | External identifiers for the users to delete. |
+     * | `user_aliases` | Optional | Array of user alias object | [User aliases](https://www.braze.com/docs/api/objects_filters/user_alias_object/) for the users to delete. |
+     * | `braze_ids` | Optional | Array of strings | Braze user identifiers for the users to delete. |
+     * | `email_addresses` | Optional | Array of strings | User emails for the users to delete. Refer to [Deleting users by email](https://www.braze.com/docs/api/endpoints/user_data/post_user_delete/#deleting-users-by-email) for more information. |
+     *
+     * ## Deleting users by email
+     *
+     * If an `email` is specified as an identifier, an additional `prioritization` value is required in the identifier. The `prioritization` is an ordered array and should specify which user to delete if multiple users are found. This means deleting users will not occur if more than one user matches a prioritization.
+     *
+     * The allowed values for the array are: `identified`, `unidentified`, `most_recently_updated`. `most_recently_updated` refers to prioritizing the most recently updated user.
+     *
+     * Only one of the following options may exist in the prioritization array at a time:
+     *
+     * - `identified` refers to prioritizing a user with an `external_id`
+     *
+     * - `unidentified` refers to prioritizing a user without an `external_id`
+     *
+     *
+     * ## Response
+     *
+     * ``` json
+     * Content-Type: application/json
+     * Authorization: Bearer YOUR_REST_API_KEY
+     * {
+     * "deleted" : (required, integer) number of user IDs queued for deletion
+     * }
+     *
+     * ```
+     *
+     * @param array $headerParameters {
+     *
+     * @var string $Content-Type
+     * @var string $Authorization
+     *             }
+     *
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws Exception\PostUsersDeleteBadRequestException
+     * @throws Exception\PostUsersDeleteUnauthorizedException
+     * @throws Exception\PostUsersDeleteForbiddenException
+     * @throws Exception\PostUsersDeleteNotFoundException
+     * @throws Exception\PostUsersDeleteTooManyRequestsException
+     * @throws Exception\PostUsersDeleteInternalServerErrorException
+     */
+    public function postUsersDelete(?Model\UsersDeletePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new Endpoint\PostUsersDelete($requestBody, $headerParameters), $fetch);
+    }
+
+    /**
      * > Use this endpoint to merge one user into another user.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `users.merge` permission.
-     *
      * Up to 50 merges may be specified per request. This endpoint is asynchronous.
+     *
+     * ## Prerequisites
+     *
+     * To use this endpoint, you'll need an [API key](https://braze.com/docs/api/api_key/) with the `users.merge` permission.
      *
      * ## Rate limit
      *
@@ -8423,85 +9650,97 @@ class Client extends Runtime\Client\Client
      *
      * | Parameter | Required | Data Type | Description |
      * | --- | --- | --- | --- |
-     * | `merge_updates` | Required | Array | An object array. Each object should contain an `identifier_to_merge` object and an `identifier_to_keep` object, which should each reference a user either by `external_id` or `user_alias`. Both users being merged must be identified using the same method. |
+     * | `merge_updates` | Required | Array | An object array. Each object should contain an `identifier_to_merge` object and an `identifier_to_keep` object, which should each reference a user either by external_id, `user_alias` or `email`. |
      *
-     * ### Merge_updates behavior
+     * ### Merge behavior
      *
-     * This endpoint will merge any of the following fields found exclusively on the original user to the target user.
+     * The behavior documented below is true for all Braze features that _are not_ powered by Snowflake. User merges won’t be reflected for the **Messaging History** tab, Segment Extensions, Query Builder, and Currents.
+     *
+     * > **Important**: The endpoint does not guarantee the sequence of `merge_updates` objects being updated.
+     *
+     *
+     * This endpoint will merge any of the following fields if they're not found on the target user:
      *
      * - First name
+     *
      * - Last name
+     *
      * - Email
+     *
      * - Gender
+     *
      * - Date of birth
+     *
      * - Phone number
+     *
      * - Time zone
+     *
      * - Home city
+     *
      * - Country
+     *
      * - Language
+     *
      * - Session count (the sum of sessions from both profiles)
+     *
      * - Date of first session (Braze will pick the earlier date of the two dates)
+     *
      * - Date of last session (Braze will pick the later date of the two dates)
-     * - Custom attributes
-     * - Custom event and purchase event data (excluding event properties)
-     * - Custom event and purchase event properties for "X times in Y days" segmentation (where X<=50 and Y<=30)
+     *
+     * - Custom attributes (existing custom attributes on the target profile are retained and will include custom attributes that didn’t exist on the target profile)
+     *
+     * - Custom event and purchase event data
+     *
+     * - Custom event and purchase event properties for “X times in Y days” segmentation (where X<=50 and Y<=30)
+     *
      * - Segmentable custom events summary
+     *
      * - Event count (the sum from both profiles)
+     *
      * - Event first occurred (Braze will pick the earlier date of the two dates)
+     *
      * - Event last occurred (Braze will pick the later date of the two dates)
+     *
      * - In-app purchase total in cents (the sum from both profiles)
+     *
      * - Total number of purchases (the sum from both profiles)
+     *
      * - Date of first purchase (Braze will pick the earlier date of the two dates)
+     *
      * - Date of last purchase (Braze will pick the later date of the two dates)
+     *
      * - App summaries
+     *
      * - Last_X_at fields (Braze will update the fields if the orphaned profile fields are more recent)
-     * - Campaign summaries (Braze will pick the most recent date fields)
+     *
+     * - Campaign interaction data (Braze will pick the most recent date fields)
+     *
      * - Workflow summaries (Braze will pick the most recent date fields)
      *
+     * - Message and message engagement history
      *
-     * Any of the following fields found on one user to the other user:
+     * - Session data will only be merged if the app exists on both user profiles
      *
-     * - Custom event and purchase event count and first date and last date timestamps
-     * - These merged fields will update "for X events in Y days" filters. For purchase events, these filters include "number of purchases in Y days" and "money spent in last Y days".
      *
-     * Session data will only be merged if the app exists on both user profiles. For example, if our target user doesn't have an app summary for "ABCApp" but our original user does, the target user will have the "ABCApp" app summary on their profile after the merge. Note that message and message engagement history aren't retained after both user profiles are merged.
+     * > **Note:** When merging users, using the `/users/merge` endpoint works the same way as using the [&lt;code&gt;changeUser()&lt;/code&gt;&amp;nbsp;method](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#changeuser).
      *
-     * The endpoint does not guarantee the sequence of `merge_updates` objects being updated.
      *
-     * ## Example request
+     * #### Custom event date and purchase event date behavior
      *
-     * ```
-     * curl --location --request POST 'https://rest.iad-03.braze.com/users/merge' \
-     * --header 'Content-Type: application/json' \
-     * --header 'Authorization: Bearer YOUR-REST-API-KEY' \
-     * --data-raw '{
-     * "merge_updates": [
-     * {
-     * "identifier_to_merge": {
-     * "external_id": "old-user1"
-     * },
-     * "identifier_to_keep": {
-     * "external_id": "current-user1"
-     * }
-     * },
-     * {
-     * "identifier_to_merge": {
-     * "user_alias": {
-     * "alias_name": "old-user2@example.com",
-     * "alias_label": "email"
-     * }
-     * },
-     * "identifier_to_keep": {
-     * "user_alias": {
-     * "alias_name": "current-user2@example.com",
-     * "alias_label": "email"
-     * }
-     * }
-     * }
-     * ]
-     * }'
+     * Note that these merged fields will update “for X events in Y days” filters. For purchase events, these filters include “number of purchases in Y days” and “money spent in last Y days”.
      *
-     * ```
+     * ### Merging users by email or phone number
+     *
+     * If an `email` or `phone` is specified as an identifier, an additional `prioritization` value is required in the identifier. The `prioritization` should be an array specifying which user to merge if there are multiple users found. `prioritization` is an ordered array, meaning if more than one user matches from a prioritization, then merging will not occur.
+     *
+     * The allowed values for the array are: `identified`, `unidentified`, `most_recently_updated`. `most_recently_updated` refers to prioritizing the most recently updated user.
+     *
+     * Only one of the following options may exist in the prioritization array at a time:
+     *
+     * - `identified` refers to prioritizing a user with an `external_id`
+     *
+     * - `unidentified` refers to prioritizing a user without an `external_id`
+     *
      *
      * ## Response
      *
@@ -8520,7 +9759,7 @@ class Client extends Runtime\Client\Client
      *
      * ### Example error response
      *
-     * The status code `400` could return the following response body. Refer to Troubleshooting (below) for more information about errors you may encounter.
+     * The status code `400` could return the following response body. Refer to Troubleshooting for more information about errors you may encounter.
      *
      * ``` json
      * {
@@ -8535,11 +9774,10 @@ class Client extends Runtime\Client\Client
      *
      * | Error | Troubleshooting |
      * | --- | --- |
-     * | `'merge_updates' must be an array of objects` | Ensure that `merge_updates` is an array of objects. |
+     * | `'merge_updates' must be an array of objects` | Check that `merge_updates` is an array of objects. |
      * | `a single request may not contain more than 50 merge updates` | You can only specify up to 50 merge updates in a single request. |
      * | `identifiers must be objects with an 'external_id' property that is a string, or 'user_alias' property that is an object` | Check the identifiers in your request. |
-     * | `identifiers must be objects of the same type` | Ensure that the identifier object types match. |
-     * | `'merge_updates' must only have 'identifier_to_merge' and 'identifier_to_keep'` | Ensure that `merge_updates` only contains the two objects `identifier_to_merge` and `identifier_to_keep`. |
+     * | `'merge_updates' must only have 'identifier_to_merge' and 'identifier_to_keep'` | Check that `merge_updates` only contains the two objects `identifier_to_merge` and `identifier_to_keep`. |
      *
      * @param array $headerParameters {
      *

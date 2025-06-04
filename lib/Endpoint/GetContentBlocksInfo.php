@@ -17,30 +17,46 @@ class GetContentBlocksInfo extends \Braze\Runtime\Client\BaseEndpoint implements
     /**
      * > Use this endpoint to call information for your existing [Content Blocks](https://www.braze.com/docs/user_guide/engagement_tools/templates_and_media/content_blocks/).
      *
-     * To use this endpoint, you’ll need to generate an API key with the `content_blocks.info` permission.
+     * ## Prerequisites
      *
-     **Note:** If you are using our [older navigation](https://www.braze.com/docs/navigation), `content_block_id`can be found at ****Developer Console** > **API Settings****.
+     * To use this endpoint, you’ll need an [API key](https://www.braze.com/docs/api/api_key/) with the `content_blocks.info` permission.
      *
-     * ### Rate limit
+     * ## Rate limit
      *
      * We apply the default Braze rate limit of 250,000 requests per hour to this endpoint, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
-     * ### Response
+     * ## Request parameters
+     *
+     * | Parameter | Required | Data Type | Description |
+     * | --- | --- | --- | --- |
+     * | `content_block_id` | Required | String | The Content Block identifier.  <br>  <br>You can find this by either listing Content Block information through an API call or going to the [API Keys](https://www.braze.com/docs/user_guide/administrative/app_settings/api_settings_tab/) page, then scrolling to the bottom and searching for your Content Block API identifier. |
+     * | `include_inclusion_data` | Optional | Boolean | When set to `true`, the API returns back the Message Variation API identifier of campaigns and Canvases where this Content Block is included, to be used in subsequent calls. The results exclude archived or deleted campaigns or Canvases. |
+     *
+     * ## Example request
+     *
+     * ``` json
+     * curl --location -g --request GET 'https://rest.iad-01.braze.com/content_blocks/info?content_block_id={{content_block_id}}&include_inclusion_data=false' \
+     * --header 'Authorization: Bearer YOUR-REST-API-KEY'
+     *
+     * ```
+     *
+     * ## Response
      *
      * ``` json
      * Content-Type: application/json
      * Authorization: Bearer YOUR_REST_API_KEY
      * {
-     * "content_block_id": "string",
-     * "name": "string",
-     * "content": "string",
-     * "description": "string",
-     * "content_type": "html or text",
-     * "tags":  "array of strings",
-     * "created_at": "time-in-iso",
-     * "last_edited": "time-in-iso",
-     * "inclusion_count" : "integer",
-     * "message": "success"
+     * "content_block_id": (string) the Content Block identifier,
+     * "name": (string) the name of the Content Block,
+     * "content": (string) the content in the Content Block,
+     * "description": (string) the Content Block description,
+     * "content_type": (string) the content type, html or text,
+     * "tags": (array) An array of tags formatted as strings,
+     * "created_at": (string) The time the Content Block was created in ISO 8601,
+     * "last_edited": (string) The time the Content Block was last edited in ISO 8601,
+     * "inclusion_count" : (integer) the inclusion count,
+     * "inclusion_data": (array) the inclusion data,
+     * "message": "success",
      * }
      *
      * ```
@@ -54,18 +70,19 @@ class GetContentBlocksInfo extends \Braze\Runtime\Client\BaseEndpoint implements
      * | `Content Block ID cannot be blank` | Make sure that a Content Block is listed in your request and is encapsulated in quotes (`""`). |
      * | `Content Block ID is invalid for this App Group` | This Content Block doesn't exist or is in a different company account or app group. |
      * | `Content Block has been deleted—content not available` | This Content Block, though it may have existed earlier, has been deleted. |
-     * | `Include Inclusion Data—error` | This parameter only accepts boolean values (true or false). Make sure the value for `include_inclusion_data` is not encapsulated in quotes (`""`), which causes the value to be sent as a string instead. See [request parameters](#request-parameters) for details. |
+     * | `Include Inclusion Data—error` | This parameter only accepts boolean values (true or false). Make sure the value for `include_inclusion_data` is not encapsulated in quotes (`""`), which causes the value to be sent as a string instead. See request headers for details. |
      *
      * @param array $queryParameters {
      *
      * @var string $content_block_id (Required) String
      *
-     * The content block identifier.
+     * The Content Block identifier.
      *
-     * You can find this by either listing content block information through an API call or going to **Settings > Setup and Testing > API Keys**, then scrolling to the bottom and searching for your content block API identifier.
+     * You can find this by either listing Content Block information through an API call or going to the API Keys page, then scrolling to the bottom and searching for your Content Block API identifier.
      * @var bool $include_inclusion_data (Optional) Boolean
      *
-     * When set to `true`, the API returns back the Message Variation API identifier of campaigns and Canvases where this content block is included, to be used in subsequent calls. The results exclude archived or deleted Campaigns or Canvases.
+     * When set to `true`, the API returns back the Message Variation API identifier of campaigns and Canvases where this Content Block is included, to be used in subsequent calls. The results exclude archived or deleted campaigns or Canvases.
+     *
      * }
      *
      * @param array $headerParameters {

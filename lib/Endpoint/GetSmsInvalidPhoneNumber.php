@@ -17,15 +17,37 @@ class GetSmsInvalidPhoneNumber extends \Braze\Runtime\Client\BaseEndpoint implem
     /**
      * > Use this endpoint to pull a list of phone numbers that have been deemed “invalid” within a certain time frame.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `sms.invalid_phone_numbers` permission.
+     * ## Prerequisites
      *
-     * - If you provide a `start_date`, an `end_date`, and `phone_numbers`, we prioritize the given phone numbers and disregard the date range.
-     * - If your date range has more than the `limit` number of invalid phone numbers, you will need to make multiple API calls with increasing the `offset` each time until a call returns either fewer than `limit` or zero results.
-     *
+     * To use this endpoint, you’ll need an [API key](https://www.braze.com/docs/api/basics#rest-api-key/) with the `sms.invalid_phone_numbers` permission.
      *
      * ## Rate limit
      *
      * We apply the default Braze rate limit of 250,000 requests per hour to this endpoint, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
+     *
+     * ## Request parameters
+     *
+     * |  | Required | Data Type | Description |
+     * | --- | --- | --- | --- |
+     * | `start_date` | Optional  <br>(see note) | String in YYYY-MM-DD format | Start date of the range to retrieve invalid phone numbers, must be earlier than `end_date`. This is treated as midnight in UTC time by the API. |
+     * | `end_date` | Optional  <br>(see note) | String in YYYY-MM-DD format | End date of the range to retrieve invalid phone numbers. This is treated as midnight in UTC time by the API. |
+     * | `limit` | Optional | Integer | Optional field to limit the number of results returned. Defaults to 100, maximum is 500. |
+     * | `offset` | Optional | Integer | Optional beginning point in the list to retrieve from. |
+     * | `phone_numbers` | Optional  <br>(see note) | Array of Strings in e.164 format | If provided, we will return the phone number if it has been found to be invalid. |
+     * | `reason` | Optional  <br>(see note) | String | Available values are “provider_error” (provider error indicates phone cannot receive SMS) or “deactivated” (phone number has been deactivated). If omitted, all reasons are returned. |
+     *
+     * - You must provide either a `start_date` and an `end_date` OR `phone_numbers`. If you provide all three, `start_date`, `end_date`, and `phone_numbers`, we prioritize the given phone numbers and disregard the date range.
+     *
+     * - If your date range has more than the `limit` number of invalid phone numbers, you will need to make multiple API calls with increasing the `offset` each time until a call returns either fewer than `limit` or zero results.
+     *
+     *
+     * ## Example request
+     *
+     * ``` json
+     * curl --location --request GET 'https://rest.iad-01.braze.com/sms/invalid_phone_numbers?start_date=2019-01-01&end_date=2019-02-01&limit=100&offset=1&phone_numbers[]=12345678901' \
+     * --header 'Authorization: Bearer YOUR-API-KEY-HERE'
+     *
+     * ```
      *
      * ## Response
      *
@@ -37,16 +59,19 @@ class GetSmsInvalidPhoneNumber extends \Braze\Runtime\Client\BaseEndpoint implem
      * {
      * "sms": [
      * {
-     * "phone": "12345678900",
-     * "invalid_detected_at": "2016-08-25 15:24:32 +0000"
+     * "phone": (string) phone number in e.164 format,
+     * "invalid_detected_at": (string) the time the invalid number was detected in ISO 8601
+     * "reason" : "provider_error"
      * },
      * {
-     * "phone": "12345678901",
-     * "invalid_detected_at": "2016-08-24 17:41:58 +0000"
+     * "phone": (string) phone number in e.164 format,
+     * "invalid_detected_at": (string) the time the invalid number was detected in ISO 8601
+     * "reason" : "deactivated"
      * },
      * {
-     * "phone": "12345678902",
-     * "invalid_detected_at": "2016-08-24 12:01:13 +0000"
+     * "phone": (string) phone number in e.164 format,
+     * "invalid_detected_at": (string) the time the invalid number was detected in ISO 8601
+     * "reason" : "provider_error"
      * }
      * ],
      * "message": "success"
@@ -57,16 +82,23 @@ class GetSmsInvalidPhoneNumber extends \Braze\Runtime\Client\BaseEndpoint implem
      * @param array $queryParameters {
      *
      * @var string $start_date (Optional*) String in YYYY-MM-DD format
-     *             Start date of the range to retrieve invalid phone numbers, must be earlier than `end_date`. This is treated as midnight in UTC time by the API.
-     * @var string $end_date (Optional*) String in YYYY-MM-DD format
-     *             End date of the range to retrieve invalid phone numbers. This is treated as midnight in UTC time by the API.
-     * @var int    $limit (Optional) Integer
-     *             Optional field to limit the number of results returned. Defaults to 100, maximum is 500.
-     * @var int    $offset (Optional) Integer
-     *             Optional beginning point in the list to retrieve from
-     * @var int    $phone_numbers (Optional*) Array of Strings in e.164 format
-     *             If provided, we will return the phone number if it has been found to be invalid.
      *
+     * Start date of the range to retrieve invalid phone numbers, must be earlier than `end_date`. This is treated as midnight in UTC time by the API.
+     * @var string $end_date (Optional*) String in YYYY-MM-DD format
+     *
+     * End date of the range to retrieve invalid phone numbers. This is treated as midnight in UTC time by the API.
+     * @var int $limit (Optional) Integer
+     *
+     * Optional field to limit the number of results returned. Defaults to 100, maximum is 500.
+     * @var int $offset (Optional) Integer
+     *
+     * Optional beginning point in the list to retrieve from
+     * @var int $phone_numbers (Optional*) Array of Strings in e.164 format
+     *
+     * If provided, we will return the phone number if it has been found to be invalid.
+     * @var string $reason (Optional) String
+     *
+     * Available values are “provider_error” (provider error indicates phone cannot receive SMS) or “deactivated” (phone number has been deactivated). If omitted, all reasons are returned.
      * }
      *
      * @param array $headerParameters {
@@ -103,7 +135,7 @@ class GetSmsInvalidPhoneNumber extends \Braze\Runtime\Client\BaseEndpoint implem
     protected function getQueryOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getQueryOptionsResolver();
-        $optionsResolver->setDefined(['start_date', 'end_date', 'limit', 'offset', 'phone_numbers']);
+        $optionsResolver->setDefined(['start_date', 'end_date', 'limit', 'offset', 'phone_numbers', 'reason']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
         $optionsResolver->addAllowedTypes('start_date', ['string']);
@@ -111,6 +143,7 @@ class GetSmsInvalidPhoneNumber extends \Braze\Runtime\Client\BaseEndpoint implem
         $optionsResolver->addAllowedTypes('limit', ['int']);
         $optionsResolver->addAllowedTypes('offset', ['int']);
         $optionsResolver->addAllowedTypes('phone_numbers', ['int']);
+        $optionsResolver->addAllowedTypes('reason', ['string']);
 
         return $optionsResolver;
     }

@@ -17,25 +17,45 @@ class GetTemplatesEmailList extends \Braze\Runtime\Client\BaseEndpoint implement
     /**
      * > Use this endpoint to get a list of available templates in your Braze account.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `templates.email.list` permission.
+     * ## Prerequisites
      *
-     * ### Rate limit
+     * To use this endpoint, you'll need an [API key](https://braze.com/docs/api/api_key/) with the `templates.email.list` permission.
+     *
+     * ## Rate limit
      *
      * We apply the default Braze rate limit of 250,000 requests per hour to this endpoint, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
-     * ### Response
+     * ## Request parameters
      *
-     * > **Important:** Templates built using the Drag & Drop Editor for email are not provided in this response.
+     * | Parameter | Required | Data Type | Description |
+     * | --- | --- | --- | --- |
+     * | `modified_after` | Optional | String in [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) format | Retrieve only templates updated at or after the given time. |
+     * | `modified_before` | Optional | String in [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) format | Retrieve only templates updated at or before the given time. |
+     * | `limit` | Optional | Positive number | Maximum number of templates to retrieve. Default to 100 if not provided, with a maximum acceptable value of 1000. |
+     * | `offset` | Optional | Positive number | Number of templates to skip before returning rest of the templates that fit the search criteria. |
      *
+     * ## Example request
      *
      * ``` json
+     * curl --location --request GET 'https://rest.iad-01.braze.com/templates/email/list?modified_after=2020-01-01T01:01:01.000000&modified_before=2020-02-01T01:01:01.000000&limit=1&offset=0' \
+     * --header 'Authorization: Bearer YOUR_REST_API_KEY'
+     *
+     * ```
+     *
+     * ## Response
+     *
+     **Important:** Templates built using the drag-and-drop editor for email are not provided in this response.
+     *
+     * ``` json
+     * Content-Type: application/json
+     * Authorization: Bearer YOUR_REST_API_KEY
      * {
-     * "count": number of templates returned
+     * "count": the number of templates returned
      * "templates": [template with the following properties]:
      * "email_template_id": (string) your email template's API Identifier,
      * "template_name": (string) the name of your email template,
-     * "created_at": (string, in ISO 8601),
-     * "updated_at": (string, in ISO 8601),
+     * "created_at": (string) the time the email was created at in ISO 8601,
+     * "updated_at": (string) the time the email was updated in ISO 8601,
      * "tags": (array of strings) tags appended to the template
      * }
      *

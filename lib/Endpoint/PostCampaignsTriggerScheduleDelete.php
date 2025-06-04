@@ -17,9 +17,11 @@ class PostCampaignsTriggerScheduleDelete extends \Braze\Runtime\Client\BaseEndpo
     /**
      * > The delete schedule endpoint allows you to cancel a message that you previously scheduled API-triggered Canvases before it has been sent.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `campaigns.trigger.schedule.delete` permission.
-     *
      * Scheduled messages or triggers that are deleted very close to or during the time they were supposed to be sent will be updated with best efforts, so last-second deletions could be applied to all, some, or none of your targeted users.
+     *
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need to generate an API key with the `campaigns.trigger.schedule.delete` permission.
      *
      * ### Rate limit
      *

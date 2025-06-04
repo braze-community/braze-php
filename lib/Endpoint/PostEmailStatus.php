@@ -19,7 +19,9 @@ class PostEmailStatus extends \Braze\Runtime\Client\BaseEndpoint implements \Bra
      *
      * You can set the email subscription state for an email address that is not yet associated with any of your users within Braze. When that email address is subsequently associated with a user, the email subscription state that you uploaded will be automatically set.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `email.status` permission.
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key](https://braze.com/docs/api/api_key/) with the `email.status` permission.
      *
      * ## Rate limit
      *

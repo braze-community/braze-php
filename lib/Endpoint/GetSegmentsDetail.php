@@ -17,9 +17,9 @@ class GetSegmentsDetail extends \Braze\Runtime\Client\BaseEndpoint implements \B
     /**
      * > Use this endpoint to retrieve relevant information on a segment, which can be identified by the `segment_id`.
      *
-     * Note: If you are using our [older navigation](https://www.braze.com/docs/navigation), `segment_id` can be found at **Developer Console > API Settings**.
+     * ## Prerequisites
      *
-     * To use this endpoint, you’ll need to generate an API key with the `segments.details` permission.
+     * To use this endpoint, you’ll need an [API key](https://www.braze.com/docs/api/basics#rest-api-key/) with the `segments.details` permission.
      *
      * ## Rate limit
      *
@@ -32,12 +32,13 @@ class GetSegmentsDetail extends \Braze\Runtime\Client\BaseEndpoint implements \B
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
      * "message": (required, string) the status of the export, returns 'success' when completed without errors,
-     * "created_at" : (string) date created as ISO 8601 date,
-     * "updated_at" : (string) date last updated as ISO 8601 date,
-     * "name" : (string) segment name,
-     * "description" : (string) human-readable description of filters,
-     * "text_description" : (string) segment description,
-     * "tags" : (array) tag names associated with the segment
+     * "created_at" : (string) the date created as ISO 8601 date,
+     * "updated_at" : (string) the date last updated as ISO 8601 date,
+     * "name" : (string) the segment name,
+     * "description" : (string) a human-readable description of filters,
+     * "text_description" : (string) the segment description,
+     * "tags" : (array) the tag names associated with the segment formatted as strings,
+     * "teams" : (array) the names of the Teams associated with the campaign
      * }
      *
      * ```
@@ -50,7 +51,7 @@ class GetSegmentsDetail extends \Braze\Runtime\Client\BaseEndpoint implements \B
      *
      * See [Segment API identifier](https://www.braze.com/docs/api/identifier_types/).
      *
-     * The `segment_id` for a given segment can be found in your **Settings > Setup and Testing > API Keys** within your Braze account or you can use the [Segment List Endpoint](https://www.braze.com/docs/api/endpoints/export/get_segment/).
+     * The `segment_id` for a given segment can be found on the [API Keys](https://www.braze.com/docs/user_guide/administrative/app_settings/api_settings_tab/) page within your Braze account or you can use the [Export segment list endpoint](https://www.braze.com/docs/api/endpoints/export/get_segment/).
      * }
      *
      * @param array $headerParameters {

@@ -17,16 +17,18 @@ class PostUsersExternalIdsRename extends \Braze\Runtime\Client\BaseEndpoint impl
     /**
      * > Use this endpoint to rename your users’ external IDs.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `users.external_ids.rename` permission.
+     * You can send up to 50 rename objects per request.
      *
-     * You can send up to 50 rename objects per request. You will need to create a new [API key](https://www.braze.com/docs/api/api_key/) with permissions for this endpoint.
+     * This endpoint sets a new (primary) `external_id` for the user and deprecates their existing `external_id`. This means that the user can be identified by either `external_id` until the deprecated one is removed. Having multiple external IDs allows for a migration period so that older versions of your apps that use the previous external ID naming schema don’t break.
      *
-     * This endpoint sets a new (primary) `external_id` for the user and deprecates their existing `external_id`. This means that the user can be identified by either `external_id` until the deprecated one is removed. Having multiple external IDs allows for a migration period so that older versions of your apps that use the previous external ID naming schema don't break.
+     * After your old naming schema is no longer in use, we highly recommend removing deprecated external IDs using the [<code>/users/external_ids/remove</code>&nbsp;endpoint](https://www.braze.com/docs/api/endpoints/user_data/external_id_migration/post_external_ids_remove).
      *
-     * After your old naming schema is no longer in use, we highly recommend removing deprecated external IDs using the [`/users/external_ids/remove` endpoint](https://www.braze.com/docs/api/endpoints/user_data/external_id_migration/post_external_ids_remove).
+     * > **Warning:** Make sure to remove deprecated external IDs with the `/users/external_ids/remove` endpoint instead of `/users/delete`. Sending a request to `/users/delete` with the deprecated external ID deletes the user profile entirely and cannot be undone.
      *
-     * > **Warning:** Make sure to remove deprecated external IDs with the
      *
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key](https://www.braze.com/docs/api/api_key/) with the `users.external_ids.rename` permission.
      *
      * ## Rate limit
      *
@@ -36,11 +38,15 @@ class PostUsersExternalIdsRename extends \Braze\Runtime\Client\BaseEndpoint impl
      *
      * | Parameter | Required | Data Type | Description |
      * | --- | --- | --- | --- |
-     * | `external_id_renames` | Required | Array of external ID rename objects | View request example and the following limitations for structure of external ID rename object |
+     * | `external_id_renames` | Required | Array of external identifier rename objects | View request example and the following limitations for structure of external ID rename object |
      *
-     * - The `current_external_id` must be the user’s primary ID, and cannot be a deprecated ID
-     * - The `new_external_id` must not already be in use as either a primary ID or a deprecated ID
-     * - The `current_external_id` and `new_external_id` cannot be the same
+     * Note the following:
+     *
+     * - The `current_external_id` must be the user’s primary ID, and cannot be a deprecated ID.
+     *
+     * - The `new_external_id` must not already be in use as either a primary ID or a deprecated ID.
+     *
+     * - The `current_external_id` and `new_external_id` cannot be the same.
      *
      *
      * ## Response
@@ -50,8 +56,8 @@ class PostUsersExternalIdsRename extends \Braze\Runtime\Client\BaseEndpoint impl
      * ``` json
      * {
      * "message" : (string) status message,
-     * "external_ids" : (array of successful Rename Operations),
-     * "rename_errors": (array of any )
+     * "external_ids" : (array of strings) successful rename operations,
+     * "rename_errors": (array of arrays) <minor error message>
      * }
      *
      * ```
@@ -59,26 +65,34 @@ class PostUsersExternalIdsRename extends \Braze\Runtime\Client\BaseEndpoint impl
      * The `message` field will return `success` for any valid request. More specific errors are captured in the `rename_errors` array. The `message` field returns an error in the case of:
      *
      * - Invalid API key
+     *
      * - Empty `external_id_renames` array
+     *
      * - `external_id_renames` array with more than 50 objects
-     * - Rate limit hit (>1,000 requests/minute)
+     *
+     * - Rate limit hit (more than 1,000 requests per minute)
      *
      *
      * ## Frequently Asked Questions
      *
-     **Does this impact MAU?**
+     * ### **Does this impact MAU?**
+     *
      * No, since the number of users will stay the same, they’ll just have a new `external_id`.
      *
-     **Does user behavior change historically?**
+     * ### **Does user behavior change historically?**
+     *
      * No, since the user is still the same user, and all their historical behavior is still connected to them.
      *
-     **Can it be run on dev/staging app groups?**
+     * ### **Can it be run on development or staging app groups?**
+     *
      * Yes. In fact, we highly recommend running a test migration on a staging or development app group, and ensuring everything has gone smoothly before executing on production data.
      *
-     **Does this consume data points?**
+     * ### **Does this consume data points?**
+     *
      * This feature does not cost data points.
      *
-     **What is the recommended deprecation period?**
+     * ### **What is the recommended deprecation period?**
+     *
      * We have no hard limit on how long you can keep deprecated external IDs around, but we highly recommend removing them once there is no longer a need to reference users by the deprecated ID.
      *
      * @param array $headerParameters {

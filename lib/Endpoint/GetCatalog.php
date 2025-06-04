@@ -17,11 +17,13 @@ class GetCatalog extends \Braze\Runtime\Client\BaseEndpoint implements \Braze\Ru
     /**
      * > Use this endpoint to return a list of catalogs in a workspace.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `catalogs.get` permission.
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key](https://braze.com/docs/api/api_key/) with the `catalogs.get` permission.
      *
      * ## Rate limit
      *
-     * This endpoint has a shared rate limit of 5 requests per minute between all synchronous catalog endpoints, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
+     * This endpoint has a shared rate limit of 50 requests per minute between all synchronous catalog endpoints, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
      * ## Path and request parameters
      *

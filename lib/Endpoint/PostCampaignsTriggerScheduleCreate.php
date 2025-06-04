@@ -15,15 +15,17 @@ class PostCampaignsTriggerScheduleCreate extends \Braze\Runtime\Client\BaseEndpo
     use \Braze\Runtime\Client\EndpointTrait;
 
     /**
-     * > Use this endpoint to send dashboard created campaign messages (up to 90 days in advance) via API-triggered delivery, allowing you to decide what action should trigger the message to be sent.
-     *
-     * To use this endpoint, you’ll need to generate an API key with the `campaigns.trigger.schedule.create` permission.
+     * > Use this endpoint to send dashboard created campaign messages via API-triggered delivery, allowing you to decide what action should trigger the message to be sent.
      *
      * You can pass in `trigger_properties` that will be templated into the message itself.
      *
      * Note that to send messages with this endpoint, you must have a [Campaign ID](https://www.braze.com/docs/api/identifier_types/), created when you build an [API-Triggered Campaign](https://www.braze.com/docs/api/api_campaigns/).
      *
-     * ### Rate limit
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an API key with the `campaigns.trigger.schedule.create` permission.
+     *
+     * ## Rate limit
      *
      * We apply the default Braze rate limit of 250,000 requests per hour to this endpoint, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
@@ -34,7 +36,7 @@ class PostCampaignsTriggerScheduleCreate extends \Braze\Runtime\Client\BaseEndpo
      * - An ad-hoc audience segment of any size, defined in the request as a [Connected Audience](https://www.braze.com/docs/api/objects_filters/connected_audience/) object
      *
      *
-     * ### Request parameters
+     * ## Request parameters
      *
      * | Parameter | Required | Data Type | Description |
      * | --- | --- | --- | --- |

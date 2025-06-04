@@ -17,21 +17,53 @@ class PostMessagesScheduleUpdate extends \Braze\Runtime\Client\BaseEndpoint impl
     /**
      * > Use this endpoint to update scheduled messages.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `messages.schedule.update` permission.
-     *
      * This endpoint accepts updates to either the `schedule` or `messages` parameter or both. Your request must contain at least one of those two keys.
      *
-     * ### Rate limit
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an API key with the `messages.schedule.update` permission.
+     *
+     * ## Rate limit
      *
      * We apply the default Braze rate limit of 250,000 requests per hour to this endpoint, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
-     * ### Request parameters
+     * ## Request parameters
      *
      * | Parameter | Required | Data Type | Description |
      * | --- | --- | --- | --- |
      * | `schedule_id` | Required | String | The `schedule_id` to update (obtained from the response to create schedule). |
      * | `schedule` | Optional | Object | See [schedule object](https://www.braze.com/docs/api/objects_filters/schedule_object/). |
      * | `messages` | Optional | Object | See available [message objects](https://www.braze.com/docs/api/objects_filters/#messaging-objects). |
+     *
+     * ## Example request
+     *
+     * ``` json
+     * curl --location --request POST 'https://rest.iad-01.braze.com/messages/schedule/update' \
+     * --header 'Content-Type: application/json' \
+     * --header 'Authorization: Bearer YOUR-REST-API-KEY' \
+     * --data-raw '{
+     * "schedule_id": "schedule_identifier",
+     * "schedule": {
+     * "time": "2017-05-24T20:30:36Z"
+     * },
+     * "messages": {
+     * "apple_push": {
+     * "alert": "Updated Message!",
+     * "badge": 1
+     * },
+     * "android_push": {
+     * "title": "Updated title!",
+     * "alert": "Updated message!"
+     * },
+     * "sms": {
+     * "subscription_group_id": "subscription_group_identifier",
+     * "message_variation_id": "message_variation_identifier",
+     * "body": "This is my SMS body.",
+     * "app_id": "app_identifier"
+     * }
+     * }
+     * }'
+     * ```
      *
      * @param array $headerParameters {
      *

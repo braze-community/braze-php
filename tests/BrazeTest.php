@@ -8,17 +8,24 @@ use Braze\Exception\ApiException;
 use Braze\Exception\UnauthorizedException;
 use Braze\Model\MessagesSendPostBody;
 
+use function Spatie\Snapshots\assertMatchesSnapshot;
+
 it('gets client from Braze class', function (): void {
     $braze = new Braze('https://rest.iad-01.braze.com', 'API_KEY');
     $client = $braze->client;
     expect($client)->toBeInstanceOf(Client::class);
-    expect(method_exists($client, 'deleteCatalogByCatalogName'))->toBeTrue();
+    expect(method_exists($client, 'postMessagesSend'))->toBeTrue();
 });
 
 it('gets client from Client::create', function (): void {
     $client = Client::create();
     expect($client)->toBeInstanceOf(Client::class);
-    expect(method_exists($client, 'deleteCatalogsByCatalogNameItem'))->toBeTrue();
+    expect(method_exists($client, 'postMessagesSend'))->toBeTrue();
+});
+
+it('has client methods', function (): void {
+    $braze = new Braze('https://rest.iad-01.braze.com', 'API_KEY');
+    assertMatchesSnapshot(get_class_methods($braze->client));
 });
 
 it('throws error for invalid API key', function (): void {

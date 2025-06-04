@@ -15,13 +15,15 @@ class PostMessagesSend extends \Braze\Runtime\Client\BaseEndpoint implements \Br
     use \Braze\Runtime\Client\EndpointTrait;
 
     /**
-     * > Use this endpoint to send immediate, ad-hoc messages to designated users via the Braze API.
-     *
-     * To use this endpoint, you’ll need to generate an API key with the `messages.send` permission.
+     * > Use this endpoint to send immediate messages to designated users via the Braze API.
      *
      * Be sure to include Messaging Objects in your body to complete your requests.
      *
      * If you are targeting a segment, a record of your request will be stored in the [Developer Console](https://dashboard.braze.com/app_settings/developer_console/activitylog/).
+     *
+     * ## Prerequisites
+     *
+     * To use this endpoint, you'll need to generate an API key with the `messages.send` permission.
      *
      * ## Rate limit
      *
@@ -30,7 +32,9 @@ class PostMessagesSend extends \Braze\Runtime\Client\BaseEndpoint implements \Br
      * Braze endpoints support [batching API requests](https://www.braze.com/docs/api/api_limits/#batching-api-requests). A single request to the messaging endpoints can reach any of the following:
      *
      * - Up to 50 specific `external_ids`, each with individual message parameters
+     *
      * - A segment of any size created in the Braze dashboard, specified by its `segment_id`
+     *
      * - An ad-hoc audience segment of any size, defined in the request as a [Connected Audience](https://www.braze.com/docs/api/objects_filters/connected_audience/) object
      *
      *
@@ -51,7 +55,7 @@ class PostMessagesSend extends \Braze\Runtime\Client\BaseEndpoint implements \Br
      *
      * ## Response details
      *
-     * Message sending endpoint responses will include the message’s `dispatch_id` for reference back to the dispatch of the message. The `dispatch_id` is the id of the message dispatch (unique id for each ‘transmission’ sent from the Braze platform). For more, information refer to [Dispatch ID behavior](https://www.braze.com/docs/help/help_articles/data/dispatch_id/).
+     * Message sending endpoint responses will include the message’s `dispatch_id` for reference back to the dispatch of the message. The `dispatch_id` is the ID of the message dispatch, meaning the unique ID for each “transmission” sent from Braze. For more information, refer to [Dispatch ID behavior](https://www.braze.com/docs/help/help_articles/data/dispatch_id/).
      *
      * @param array $headerParameters {
      *

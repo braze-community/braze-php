@@ -19,7 +19,9 @@ class PostCatalogsByCatalogNameItemByItemId extends \Braze\Runtime\Client\BaseEn
     /**
      * > Use this endpoint to create an item in your catalog.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `catalogs.create_item` permission.
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key](https://braze.com/docs/api/api_key/) with the `catalogs.create_item` permission.
      *
      * ## Rate limit
      *
@@ -38,9 +40,10 @@ class PostCatalogsByCatalogNameItemByItemId extends \Braze\Runtime\Client\BaseEn
      * | --- | --- | --- | --- |
      * | `items` | Required | Array | An array that contains item objects. The item objects should contain all of the fields in the catalog except for the `id` field. Only one item object is allowed per request. |
      *
-     * ## Example Request
+     * ## Example request
      *
      * ```
+     * curl --location --request POST 'https://rest.iad-03.braze.com/catalogs/restaurants/items/restaurant1' \
      * curl --location --request POST 'https://rest.iad-03.braze.com/catalogs/restaurants/items/restaurant1' \
      * --header 'Content-Type: application/json' \
      * --header 'Authorization: Bearer YOUR-REST-API-KEY' \
@@ -52,6 +55,14 @@ class PostCatalogsByCatalogNameItemByItemId extends \Braze\Runtime\Client\BaseEn
      * "Cuisine": "American",
      * "Rating": 5,
      * "Loyalty_Program": true,
+     * "Location": {
+     * "Latitude": 33.6112,
+     * "Longitude": -117.8711
+     * },
+     * "Top_Dishes": [
+     * "Hamburger",
+     * "Deluxe Cheeseburger"
+     * ],
      * "Created_At": "2022-11-01T09:03:19.967+00:00"
      * }
      * ]
@@ -82,13 +93,13 @@ class PostCatalogsByCatalogNameItemByItemId extends \Braze\Runtime\Client\BaseEn
      * {
      * "errors": [
      * {
-     * "id": "fields-do-not-match",
-     * "message": "Fields do not match with fields on the catalog",
+     * "id": "invalid-fields",
+     * "message": "Some of the fields given do not exist in the catalog",
      * "parameters": [
      * "id"
      * ],
      * "parameter_values": [
-     * "restaurant2"
+     * "restaurant1"
      * ]
      * }
      * ],

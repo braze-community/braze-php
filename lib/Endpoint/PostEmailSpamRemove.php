@@ -15,11 +15,11 @@ class PostEmailSpamRemove extends \Braze\Runtime\Client\BaseEndpoint implements 
     use \Braze\Runtime\Client\EndpointTrait;
 
     /**
-     * > Use this endpoint to remove email addresses from your Braze spam list.
+     * > Use this endpoint to remove email addresses from your Braze spam list and spam list maintained by your email provider.
      *
-     * We will also remove them from the spam list maintained by your email provider.
+     * ## Prerequisites
      *
-     * To use this endpoint, you’ll need to generate an API key with the `email.spam.remove` permission.
+     * To use this endpoint, you’ll need an [API key](https://braze.com/docs/api/api_key/) with the `email.spam.remove` permission.
      *
      * ## Rate limit
      *

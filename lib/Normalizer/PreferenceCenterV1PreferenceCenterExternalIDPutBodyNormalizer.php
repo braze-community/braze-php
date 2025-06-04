@@ -49,25 +49,29 @@ class PreferenceCenterV1PreferenceCenterExternalIDPutBodyNormalizer implements D
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('external_send_id', $data)) {
-            $object->setExternalSendId($data['external_send_id']);
-            unset($data['external_send_id']);
+        if (\array_key_exists('name', $data)) {
+            $object->setName($data['name']);
+            unset($data['name']);
         }
-        if (\array_key_exists('trigger_properties', $data)) {
-            $object->setTriggerProperties($this->denormalizer->denormalize($data['trigger_properties'], \Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBodyTriggerProperties::class, 'json', $context));
-            unset($data['trigger_properties']);
+        if (\array_key_exists('preference_center_title', $data)) {
+            $object->setPreferenceCenterTitle($data['preference_center_title']);
+            unset($data['preference_center_title']);
         }
-        if (\array_key_exists('recipient', $data)) {
-            $values = [];
-            foreach ($data['recipient'] as $value) {
-                $values[] = $this->denormalizer->denormalize($value, \Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBodyRecipientItem::class, 'json', $context);
-            }
-            $object->setRecipient($values);
-            unset($data['recipient']);
+        if (\array_key_exists('preference_center_page_html', $data)) {
+            $object->setPreferenceCenterPageHtml($data['preference_center_page_html']);
+            unset($data['preference_center_page_html']);
         }
-        foreach ($data as $key => $value_1) {
+        if (\array_key_exists('confirmation_page_html', $data)) {
+            $object->setConfirmationPageHtml($data['confirmation_page_html']);
+            unset($data['confirmation_page_html']);
+        }
+        if (\array_key_exists('options', $data)) {
+            $object->setOptions($this->denormalizer->denormalize($data['options'], \Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBodyOptions::class, 'json', $context));
+            unset($data['options']);
+        }
+        foreach ($data as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
-                $object[$key] = $value_1;
+                $object[$key] = $value;
             }
         }
 
@@ -77,22 +81,24 @@ class PreferenceCenterV1PreferenceCenterExternalIDPutBodyNormalizer implements D
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
-        if ($data->isInitialized('externalSendId') && null !== $data->getExternalSendId()) {
-            $dataArray['external_send_id'] = $data->getExternalSendId();
+        if ($data->isInitialized('name') && null !== $data->getName()) {
+            $dataArray['name'] = $data->getName();
         }
-        if ($data->isInitialized('triggerProperties') && null !== $data->getTriggerProperties()) {
-            $dataArray['trigger_properties'] = $this->normalizer->normalize($data->getTriggerProperties(), 'json', $context);
+        if ($data->isInitialized('preferenceCenterTitle') && null !== $data->getPreferenceCenterTitle()) {
+            $dataArray['preference_center_title'] = $data->getPreferenceCenterTitle();
         }
-        if ($data->isInitialized('recipient') && null !== $data->getRecipient()) {
-            $values = [];
-            foreach ($data->getRecipient() as $value) {
-                $values[] = $this->normalizer->normalize($value, 'json', $context);
-            }
-            $dataArray['recipient'] = $values;
+        if ($data->isInitialized('preferenceCenterPageHtml') && null !== $data->getPreferenceCenterPageHtml()) {
+            $dataArray['preference_center_page_html'] = $data->getPreferenceCenterPageHtml();
         }
-        foreach ($data as $key => $value_1) {
+        if ($data->isInitialized('confirmationPageHtml') && null !== $data->getConfirmationPageHtml()) {
+            $dataArray['confirmation_page_html'] = $data->getConfirmationPageHtml();
+        }
+        if ($data->isInitialized('options') && null !== $data->getOptions()) {
+            $dataArray['options'] = $this->normalizer->normalize($data->getOptions(), 'json', $context);
+        }
+        foreach ($data as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
-                $dataArray[$key] = $value_1;
+                $dataArray[$key] = $value;
             }
         }
 

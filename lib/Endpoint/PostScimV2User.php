@@ -15,9 +15,11 @@ class PostScimV2User extends \Braze\Runtime\Client\BaseEndpoint implements \Braz
     use \Braze\Runtime\Client\EndpointTrait;
 
     /**
-     * > This endpoint allows you to create a new dashboard user account by specifying email, given and family names, permissions (for setting permissions at the company, app group, and team level).
+     * > Use this endpoint to create a new dashboard user account by specifying email, given and family names, permissions (for setting permissions at the company, app group, and team level).
      *
-     * For information on how to obtain a SCIM token, visit [Automated user provisioning](https://www.braze.com/docs/scim/automated_user_provisioning/).
+     * ## Prerequisites
+     *
+     * To use this endpoint, you'll need a SCIM token. For more information, refer to [Automated user provisioning](https://www.braze.com/docs/scim/automated_user_provisioning/).
      *
      * ## Rate limit
      *
@@ -30,8 +32,8 @@ class PostScimV2User extends \Braze\Runtime\Client\BaseEndpoint implements \Braz
      * | `schemas` | Required | Array of strings | Expected SCIM 2.0 schema name for user object. |
      * | `userName` | Required | String | The user’s email address. |
      * | `name` | Required | JSON object | This object contains the user's given name and family name. |
-     * | `department` | Required | String | Valid department string from the [department string documentation]({{site.baseurl}}/scim_api_appendix/#department-strings). |
-     * | `permissions` | Required | JSON object | Permissions object as described in the [permissions object documentation]({{site.baseurl}}/scim_api_appendix/#permissions-object). |
+     * | `department` | Required | String | Valid department string from the [department string documentation](https://{{site.baseurl}}/scim_api_appendix/#department-strings). |
+     * | `permissions` | Required | JSON object | Permissions object as described in the [permissions object documentation](https://{{site.baseurl}}/scim_api_appendix/#permissions-object). |
      *
      * ## Response
      *

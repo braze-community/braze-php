@@ -17,37 +17,52 @@ class GetTemplatesEmailInfo extends \Braze\Runtime\Client\BaseEndpoint implement
     /**
      * > Use this endpoint to get information on your email templates.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `templates.email.info` permission.
+     **Important:** Templates built using the drag-and-drop editor are not accepted.
      *
-     * > **Important:** Templates built using the drag-and-drop editor for email are not accepted.
+     * ## Prerequisites
      *
+     * To use this endpoint, you’ll need an [API key](https://www.braze.com/docs/api/api_key/) with the `templates.email.info` permission.
      *
-     * ### Rate limit
+     * ## Rate limit
      *
-     * We apply the default Braze rate limit of 250,000 requests per hour to this endpoint, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
+     * We apply the default Braze rate limit of 250,000 requests per hour to this endpoint, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
-     * ### Response
+     * ## Request parameters
+     *
+     * | Parameter | Required | Data Type | Description |
+     * | --- | --- | --- | --- |
+     * | `email_template_id` | Required | String | See [email template API identifier](https://www.braze.com/docs/api/identifier_types/). |
+     *
+     * ## Example request
+     *
+     * ``` json
+     * curl --location -g --request GET 'https://rest.iad-01.braze.com/templates/email/info?email_template_id={{email_template_id}}' \
+     * --header 'Authorization: Bearer YOUR_REST_API_KEY'
+     *
+     * ```
+     *
+     * ## Response
      *
      * ``` json
      * Content-Type: application/json
-     * Authorization: Bearer YOUR-REST-API-KEY
+     * Authorization: Bearer YOUR_REST_API_KEY
      * {
-     * "email_template_id": (string) your email template's API Identifier,
-     * "template_name": (string) the name of your email template,
-     * "description": (string) email template description,
-     * "subject": (string) the email template subject line,
-     * "preheader": (optional, string) the email preheader used to generate previews in some clients),
-     * "body": (optional, string) the email template body that may include HTML,
-     * "plaintext_body": (optional, string) a plaintext version of the email template body,
-     * "should_inline_css": (optional, boolean) whether there is inline CSS in the body of the template - defaults to the css inlining value for the App Group,
-     * "tags": (string) tag names,
-     * "created_at": (string, in ISO 8601),
-     * "updated_at": (string, in ISO 8601)
+     * "email_template_id": (string) Your email template's API Identifier,
+     * "template_name": (string) The name of your email template,
+     * "description": (string) The email template description,
+     * "subject": (string) The email template subject line,
+     * "preheader": (optional, string) The email preheader used to generate previews in some clients),
+     * "body": (optional, string) The email template body that may include HTML,
+     * "plaintext_body": (optional, string) A plaintext version of the email template body,
+     * "should_inline_css": (optional, boolean) Whether there is inline CSS in the body of the template - defaults to the css inlining value for the workspace,
+     * "tags": (string) Tag names,
+     * "created_at": (string) The time the email was created at in ISO 8601,
+     * "updated_at": (string) The time the email was updated in ISO 8601
      * }
      *
      * ```
      *
-     * Images in this response will show in the `body` variable as HTML.
+     * Images in this response will show in the `body` variable as HTML.
      *
      * @param array $queryParameters {
      *

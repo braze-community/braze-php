@@ -17,13 +17,13 @@ class PostV2SubscriptionStatusSet extends \Braze\Runtime\Client\BaseEndpoint imp
     /**
      * > Use this endpoint to batch update the subscription state of up to 50 users on the Braze dashboard.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `subscription.status.set` permission.
+     * To use this endpoint, you’ll need to generate an API key with the `subscription.status.set` permission.
      *
      * You can access a subscription group’s `subscription_group_id` by navigating to the **Subscriptions Group** page.
      *
      * ## Rate limit
      *
-     * For customers who onboarded with Braze on or after January 6, 2022, we apply a rate limit of 5,000 requests per minute shared across the `/subscription/status/set` and `/v2/subscription/status/set` endpoint as documented in [API rate limits](http://localhost:4000/docs/api/api_limits/).
+     * This endpoint has a rate limit of 5,000 requests per minute shared across the`/subscription/status/set` and `/v2/subscription/status/set` endpoint as documented in [API rate limits](http://localhost:4000/docs/api/api_limits/).
      *
      * ## Request parameters
      *
@@ -32,7 +32,39 @@ class PostV2SubscriptionStatusSet extends \Braze\Runtime\Client\BaseEndpoint imp
      * | `subscription_group_id` | Required | String | The `id` of your subscription group. |
      * | `subscription_state` | Required | String | Available values are `unsubscribed` (not in subscription group) or `subscribed` (in subscription group). |
      * | `external_ids` | Required\* | Array of strings | The `external_id` of the user or users, may include up to 50 `id`s. |
-     * | `phones` | Required\* | String in [E.164](https://en.wikipedia.org/wiki/E.164) format | The phone numbers of the user, can be passed as an array of strings. Must include at least one phone number (with a max of 50). |
+     * | `phones` | Required\* | String in [E.164](https://en.wikipedia.org/wiki/E.164) format | The phone numbers of the user, can be passed as an array of strings. Must include at least one phone number (with a max of 50).  <br>  <br>If multiple users (`external_id`) in the same workspace share the same phone number, then all users that share the phone number are updated with the same subscription group changes. |
+     *
+     * ### Example requests
+     *
+     * #### SMS
+     *
+     * ``` json
+     * curl --location --request POST 'https://rest.iad-01.braze.com/subscription/status/set' \
+     * --header 'Content-Type: application/json' \
+     * --header 'Authorization: Bearer YOUR-REST-API-KEY' \
+     * --data-raw '{
+     * "subscription_groups": [
+     * {
+     * "subscription_group_id": "504e09e6-ffa4-4b31-96c3-c05d50d903cf",
+     * "subscription_state": "unsubscribed",
+     * "external_ids": [
+     * "user1",
+     * "user2"
+     * ],
+     * "emails": [
+     * "test1@braze.com",
+     * "test2@braze.com"
+     * ],
+     * "phones": [
+     * "+445555555555",
+     * "+445555555556"
+     * ]
+     * }
+     * ]
+     * }
+     * '
+     *
+     * ```
      *
      * ### Example successful response
      *
@@ -47,9 +79,9 @@ class PostV2SubscriptionStatusSet extends \Braze\Runtime\Client\BaseEndpoint imp
      *
      * @param array $headerParameters {
      *
-     * @var string $Content-Type
-     * @var string $Authorization
-     *             }
+     * @var string-Type
+     * @var string
+     *                  }
      */
     public function __construct(?\Braze\Model\V2SubscriptionStatusSetPostBody $requestBody = null, array $headerParameters = [])
     {

@@ -19,9 +19,11 @@ class GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserID extends \Braz
     /**
      * > Use this endpoint to generate a URL for a preference center.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `preference_center.user.get` permission.
-     *
      * Each preference center URL is unique to each user.
+     *
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an API key with the `preference_center.user.get` permission.
      *
      * ## Rate limit
      *
@@ -33,6 +35,13 @@ class GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserID extends \Braz
      * | --- | --- | --- | --- |
      * | `preferenceCenterExternalID` | Required | String | The ID for your preference center. |
      * | `userID` | Required | String | The user ID. |
+     *
+     * ## Request parameters
+     *
+     * | **Parameter** | **Required** | **Data Type** | **Description** |
+     * | --- | --- | --- | --- |
+     * | `preference_center_api_id` | Required | String | The ID for your preference center. |
+     * | `external_id` | Required | String | The external ID for a user. |
      *
      * ## Example request
      *
@@ -77,7 +86,7 @@ class GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserID extends \Braz
 
     public function getUri(): string
     {
-        return str_replace(['{PreferenceCenterExternalID}', '{UserID}'], [$this->PreferenceCenterExternalID, $this->UserID], '/preference_center_v1/{PreferenceCenterExternalID}/url/{UserID}');
+        return str_replace(['{PreferenceCenterExternalID}', '{UserID}'], [$this->PreferenceCenterExternalID, $this->UserID], '/preference_center/v1/{PreferenceCenterExternalID}/url/{UserID}');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array

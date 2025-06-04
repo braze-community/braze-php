@@ -15,11 +15,11 @@ class PostEmailBounceRemove extends \Braze\Runtime\Client\BaseEndpoint implement
     use \Braze\Runtime\Client\EndpointTrait;
 
     /**
-     * > Use this endpoint to remove email addresses from your Braze bounce list.
+     * > Use this endpoint to remove email addresses from your Braze bounce list and bounce list maintained by your email provider.
      *
-     * We will also remove them from the bounce list maintained by your email provider.
+     * ## Prerequisites
      *
-     * To use this endpoint, you’ll need to generate an API key with the `email.bounce.remove` permission.
+     * To use this endpoint, you’ll need an [API key](https://braze.com/docs/api/api_key/) with the `email.bounce.remove` permission.
      *
      * ## Rate limit
      *

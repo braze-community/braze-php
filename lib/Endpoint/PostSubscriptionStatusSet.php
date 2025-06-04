@@ -17,17 +17,13 @@ class PostSubscriptionStatusSet extends \Braze\Runtime\Client\BaseEndpoint imple
     /**
      * > Use this endpoint to batch update the subscription state of up to 50 users on the Braze dashboard.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `subscription.status.set` permission.
+     * ## Prerequisites
      *
-     * You can access a subscription group’s `subscription_group_id` by navigating to the **Subscription Group** page.
+     * To use this endpoint, you’ll need an [API key](https://www.braze.com/docs/api/basics#rest-api-key/) with the `subscription.status.set` permission.
      *
-     * Tip: When creating new users via the [/users/track](https://www.braze.com/docs/api/endpoints/user_data/post_user_track/) endpoint, you can set subscription groups within the user attributes object, which allows you to create a user and set the subscription group state in one API call.
+     * ## Rate limit
      *
-     * \*Only `external_id` or `phone` is accepted for SMS subscription groups.
-     *
-     * ### Rate limit
-     *
-     * For customers who onboarded with Braze on or after January 6, 2022, we apply a rate limit of 5,000 requests per minute shared across the `/subscription/status/set` and `/v2/subscription/status/set` endpoint as documented in [API rate limits](http://localhost:4000/docs/api/api_limits/).
+     * This endpoint has a rate limit of 5,000 requests per minute shared across the `/subscription/status/set` and `/v2/subscription/status/set` endpoint as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
      * ### Request parameters
      *
@@ -36,9 +32,42 @@ class PostSubscriptionStatusSet extends \Braze\Runtime\Client\BaseEndpoint imple
      * | `subscription_group_id` | Required | String | The `id` of your subscription group. |
      * | `subscription_state` | Required | String | Available values are `unsubscribed` (not in subscription group) or `subscribed` (in subscription group). |
      * | `external_id` | Required\* | Array of strings | The `external_id` of the user or users, may include up to 50 `id`s. |
-     * | `phone` | Required\* | String in [E.164](https://en.wikipedia.org/wiki/E.164) format | The phone number of the user, can be passed as an array of strings. Must include at least one phone number (with a max of 50). |
+     * | `phone` | Required\* | String in [E.164](https://en.wikipedia.org/wiki/E.164) format | The phone number of the user, can be passed as an array of strings. Must include at least one phone number (with a max of 50).  <br>  <br>If multiple users (`external_id`) in the same workspace share the same phone number, then all users that share the phone number are updated with the same subscription group changes. |
      *
-     * ### Example successful response
+     * This property should not be used for updating a user’s profile information. Use the [/users/track](https://www.braze.com/docs/api/endpoints/user_data/post_user_track/) property instead.
+     *
+     * > When creating new users via the [/users/track](https://www.braze.com/docs/api/endpoints/user_data/post_user_track/) endpoint, you can set subscription groups within the user attributes object, which allows you to create a user and set the subscription group state in one API call.
+     *
+     *
+     * ## Example requests
+     *
+     * ### SMS **and RCS**
+     *
+     * ``` json
+     * curl --location --request POST 'https://rest.iad-01.braze.com/subscription/status/set' \
+     * --header 'Content-Type: application/json' \
+     * --header 'Authorization: Bearer YOUR-REST-API-KEY' \
+     * --data-raw '{
+     * "subscription_group_id": "504e09e6-ffa4-4b31-96c3-c05d50d903cf",
+     * "subscription_state": "unsubscribed",
+     * "external_id": [
+     * "user1",
+     * "user2"
+     * ],
+     * "emails": [
+     * "test1@braze.com",
+     * "test2@braze.com"
+     * ],
+     * "phones": [
+     * "+445555555555",
+     * "+445555555556"
+     * ]
+     * }
+     * '
+     *
+     * ```
+     *
+     * ## Example success response
      *
      * The status code `201` could return the following response body.
      *
@@ -49,13 +78,13 @@ class PostSubscriptionStatusSet extends \Braze\Runtime\Client\BaseEndpoint imple
      *
      * ```
      *
-     * Important: The endpoint only accepts the `email` or `phone` value, not both. If given both, you will receive this response: `{"message":"Either an email address or a phone number should be provided, but not both."}`
+     * > The endpoint only accepts the `email` or `phone` value, not both. If given both, you will receive this response: `{"message":"Either an email address or a phone number should be provided, but not both."}`
      *
      * @param array $headerParameters {
      *
-     * @var string $Content-Type
-     * @var string $Authorization
-     *             }
+     * @var string-Type
+     * @var string
+     *                  }
      */
     public function __construct(?\Braze\Model\SubscriptionStatusSetPostBody $requestBody = null, array $headerParameters = [])
     {

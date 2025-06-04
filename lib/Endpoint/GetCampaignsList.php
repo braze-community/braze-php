@@ -19,7 +19,9 @@ class GetCampaignsList extends \Braze\Runtime\Client\BaseEndpoint implements \Br
      *
      * The campaigns are returned in groups of 100 sorted by time of creation (oldest to newest by default).
      *
-     * To use this endpoint, you’ll need to generate an API key with the `campaigns.list` permission.
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an API key with the `campaigns.list` permission.
      *
      * ## Rate limit
      *

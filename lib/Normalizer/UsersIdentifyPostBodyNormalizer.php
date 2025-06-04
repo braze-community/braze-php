@@ -57,9 +57,21 @@ class UsersIdentifyPostBodyNormalizer implements DenormalizerInterface, Normaliz
             $object->setAliasesToIdentify($values);
             unset($data['aliases_to_identify']);
         }
-        foreach ($data as $key => $value_1) {
+        if (\array_key_exists('email_addresses', $data)) {
+            $values_1 = [];
+            foreach ($data['email_addresses'] as $value_1) {
+                $values_1[] = $this->denormalizer->denormalize($value_1, \Braze\Model\UsersIdentifyPostBodyEmailAddressesItem::class, 'json', $context);
+            }
+            $object->setEmailAddresses($values_1);
+            unset($data['email_addresses']);
+        }
+        if (\array_key_exists('merge_behavior', $data)) {
+            $object->setMergeBehavior($data['merge_behavior']);
+            unset($data['merge_behavior']);
+        }
+        foreach ($data as $key => $value_2) {
             if (preg_match('/.*/', (string) $key)) {
-                $object[$key] = $value_1;
+                $object[$key] = $value_2;
             }
         }
 
@@ -76,9 +88,19 @@ class UsersIdentifyPostBodyNormalizer implements DenormalizerInterface, Normaliz
             }
             $dataArray['aliases_to_identify'] = $values;
         }
-        foreach ($data as $key => $value_1) {
+        if ($data->isInitialized('emailAddresses') && null !== $data->getEmailAddresses()) {
+            $values_1 = [];
+            foreach ($data->getEmailAddresses() as $value_1) {
+                $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
+            }
+            $dataArray['email_addresses'] = $values_1;
+        }
+        if ($data->isInitialized('mergeBehavior') && null !== $data->getMergeBehavior()) {
+            $dataArray['merge_behavior'] = $data->getMergeBehavior();
+        }
+        foreach ($data as $key => $value_2) {
             if (preg_match('/.*/', (string) $key)) {
-                $dataArray[$key] = $value_1;
+                $dataArray[$key] = $value_2;
             }
         }
 

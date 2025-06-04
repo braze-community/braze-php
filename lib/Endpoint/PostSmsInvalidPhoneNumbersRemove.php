@@ -17,19 +17,33 @@ class PostSmsInvalidPhoneNumbersRemove extends \Braze\Runtime\Client\BaseEndpoin
     /**
      * > Use this endpoint to remove “invalid” phone numbers from Braze’s invalid list.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `sms.invalid_phone_numbers.remove` permission.
-     *
      * This can be used to re-validate phone numbers after they have been marked as invalid.
+     *
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key](https://www.braze.com/docs/api/basics#rest-api-key/) with the `sms.invalid_phone_numbers.remove` permission.
      *
      * ## Rate limit
      *
-     * We apply the default Braze rate limit of 250,000 requests per hour to this endpoint, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
+     * We apply the default Braze rate limit of 250,000 requests per hour to this endpoint, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
      * ## Request parameters
      *
      * | Parameter | Required | Data Type | Description |
      * | --- | --- | --- | --- |
      * | `phone_number` | Required | Array of strings in e.164 format | An array of up to 50 phone numbers to modify. |
+     *
+     * ## Example request
+     *
+     * ``` json
+     * curl --location --request POST 'https://rest.iad-01.braze.com/sms/invalid_phone_numbers/remove' \
+     * --header 'Content-Type: application/json' \
+     * --header 'Authorization: Bearer YOUR-REST-API-KEY' \
+     * --data-raw '{
+     * "phone_numbers" : ["12183095514","14255551212"]
+     * }'
+     *
+     * ```
      *
      * @param array $headerParameters {
      *

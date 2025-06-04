@@ -17,30 +17,32 @@ class PostTemplatesEmailUpdate extends \Braze\Runtime\Client\BaseEndpoint implem
     /**
      * > Use this endpoint to update email templates on the Braze dashboard.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `templates.email.update` permission.
+     * You can access an email template’s `email_template_id` by navigating to it on the **Templates & Media** page. The [Create email template endpoint](https://www.braze.com/docs/api/endpoints/templates/email_templates/post_create_email_template/) will also return an `email_template_id` reference.
      *
-     * You can access an email template’s `email_template_id` by navigating to it on the **Templates & Media** page. The [Create email template endpoint](https://www.braze.com/docs/api/endpoints/templates/email_templates/post_create_email_template/) will also return an `email_template_id` reference.
+     * All fields other than the `email_template_id` are optional, but you must specify at least one field to update.
      *
-     * All fields other than the `email_template_id` are optional, but you must specify at least one field to update.
+     * ## Prerequisites
      *
-     * ### Rate limit
+     * To use this endpoint, you’ll need an [API key](https://www.braze.com/docs/api/api_key/) with the `templates.email.update` permission.
      *
-     * We apply the default Braze rate limit of 250,000 requests per hour to this endpoint, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
+     * ## Rate limit
      *
-     * ### Request parameters
+     * We apply the default Braze rate limit of 250,000 requests per hour to this endpoint, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
+     *
+     * ## Request parameters
      *
      * | Parameter | Required | Data Type | Description |
      * | --- | --- | --- | --- |
-     * | `email_template_id` | Required | String | Your [email template's API identifier](https://www.braze.com/docs/api/identifier_types/). |
+     * | `email_template_id` | Required | String | Your [email template’s API identifier](https://www.braze.com/docs/api/identifier_types/). |
      * | `template_name` | Optional | String | Name of your email template. |
      * | `subject` | Optional | String | Email template subject line. |
      * | `body` | Optional | String | Email template body that may include HTML. |
      * | `plaintext_body` | Optional | String | A plaintext version of the email template body. |
      * | `preheader` | Optional | String | Email preheader used to generate previews in some clients. |
-     * | `tags` | Optional | String | [Tags](https://www.braze.com/docs/user_guide/administrative/app_settings/manage_app_group/tags/) must already exist. |
-     * | `should_inline_css` | Optional | Boolean | Enables or disables the `inline_css` feature per template. If not provided, Braze will use the default setting for the AppGroup. One of `true` or `false` is expected. |
+     * | `tags` | Optional | String | [Tags](https://www.braze.com/docs/user_guide/administrative/app_settings/manage_app_group/tags/) must already exist. |
+     * | `should_inline_css` | Optional | Boolean | Enables or disables the `inline_css` feature per template. If not provided, Braze will use the default setting for the AppGroup. One of `true` or `false` is expected. |
      *
-     * ### Possible errors
+     * ### Troubleshooting
      *
      * The following table lists possible returned errors and their associated troubleshooting steps, if applicable.
      *
@@ -52,15 +54,58 @@ class PostTemplatesEmailUpdate extends \Braze\Runtime\Client\BaseEndpoint implem
      * | Some tags could not be found | To add a tag when creating an email template, the tag must already exist in Braze. |
      * | Invalid value for `should_inline_css`. One of `true` or `false` was expected | This parameter only accepts boolean values (true or false). Make sure the value for `should_inline_css` is not encapsulated in quotes (`""`), which causes the value to be sent as a string instead. |
      *
+     * ## Example request
+     *
+     * ``` json
+     * curl --location --request POST 'https://rest.iad-01.braze.com/templates/email/update' \
+     * --header 'Content-Type: application/json' \
+     * --header 'Authorization: Bearer YOUR_REST_API_KEY' \
+     * --data-raw '{
+     * "email_template_id": "email_template_id",
+     * "template_name": "Weekly Newsletter",
+     * "subject": "This Week'\''s Styles",
+     * "body": "Check out this week'\''s digital lookbook to inspire your outfits. Take a look at https://www.braze.com/",
+     * "plaintext_body": "This is the updated text within my email body and here is a link to https://www.braze.com/.",
+     * "preheader": "We want you to have the best looks this summer",
+     * "tags": ["Tag1", "Tag2"]
+     * }'
+     *
+     * ```
+     *
+     * ## Troubleshooting
+     *
+     * The following table lists possible returned errors and their associated troubleshooting steps, if applicable.
+     *
+     * | Error | Troubleshooting |
+     * | --- | --- |
+     * | Template name is required | Enter a template name. |
+     * | Tags must be an array | Tags must be formatted as an array of strings, for example `["marketing", "promotional", "transactional"]`. |
+     * | All tags must be strings | Make sure your tags are encapsulated in quotes (`""`). |
+     * | Some tags could not be found | To add a tag when creating an email template, the tag must already exist in Braze. |
+     * | Invalid value for `should_inline_css`. One of `true` or `false` was expected | This parameter only accepts boolean values (true or false). Make sure the value for `should_inline_css` is not encapsulated in quotes (`""`), which causes the value to be sent as a string instead. |
+     *
+     * @param array $queryParameters {
+     *
+     * @var string $email_template_id (Required) String
+     * @var string $template_name (Optional) String
+     * @var string $subject (Optional) String
+     * @var string $body (Optional) String
+     * @var string $plaintext_body (Optional) String
+     * @var string $preheader (Optional) String
+     * @var string $tags (Optional) String
+     * @var string $should_inline_css (Optional) Boolean
+     *             }
+     *
      * @param array $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
      *             }
      */
-    public function __construct(?\Braze\Model\TemplatesEmailUpdatePostBody $requestBody = null, array $headerParameters = [])
+    public function __construct(?\Braze\Model\TemplatesEmailUpdatePostBody $requestBody = null, array $queryParameters = [], array $headerParameters = [])
     {
         $this->body = $requestBody;
+        $this->queryParameters = $queryParameters;
         $this->headerParameters = $headerParameters;
     }
 
@@ -86,6 +131,24 @@ class PostTemplatesEmailUpdate extends \Braze\Runtime\Client\BaseEndpoint implem
     public function getExtraHeaders(): array
     {
         return ['Accept' => ['application/json']];
+    }
+
+    protected function getQueryOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
+    {
+        $optionsResolver = parent::getQueryOptionsResolver();
+        $optionsResolver->setDefined(['email_template_id', 'template_name', 'subject', 'body', 'plaintext_body', 'preheader', 'tags', 'should_inline_css']);
+        $optionsResolver->setRequired([]);
+        $optionsResolver->setDefaults([]);
+        $optionsResolver->addAllowedTypes('email_template_id', ['string']);
+        $optionsResolver->addAllowedTypes('template_name', ['string']);
+        $optionsResolver->addAllowedTypes('subject', ['string']);
+        $optionsResolver->addAllowedTypes('body', ['string']);
+        $optionsResolver->addAllowedTypes('plaintext_body', ['string']);
+        $optionsResolver->addAllowedTypes('preheader', ['string']);
+        $optionsResolver->addAllowedTypes('tags', ['string']);
+        $optionsResolver->addAllowedTypes('should_inline_css', ['string']);
+
+        return $optionsResolver;
     }
 
     protected function getHeadersOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver

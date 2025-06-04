@@ -21,7 +21,9 @@ class GetCanvasList extends \Braze\Runtime\Client\BaseEndpoint implements \Braze
      *
      * Archived Canvases will not be included in the API response unless the `include_archived` field is specified. Canvases that are stopped but not archived, however, will be returned by default.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `canvas.list` permission.
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key](https://braze.com/docs/api/api_key/) with the `canvas.list` permission.
      *
      * ## Rate limit
      *

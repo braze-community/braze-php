@@ -17,11 +17,14 @@ class GetEmailHardBounce extends \Braze\Runtime\Client\BaseEndpoint implements \
     /**
      * > Use this endpoint to pull a list of email addresses that have “hard bounced” your email messages within a certain time frame.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `email.hard_bounces` permission.
+     * > **Note:** You must provide an `end_date`, as well as either an `email` or a `start_date`. If you provide all three, `start_date`, `end_date`, and an `email`, we prioritize the emails given and disregard the date range.
      *
-     **Note:** You must provide an `end_date`, as well as either an `email` or a `start_date`. If you provide all three, `start_date`, `end_date`, and an `email`, we prioritize the emails given and disregard the date range.
      *
      * If your date range has more than `limit` number of hard bounces, you will need to make multiple API calls, each time increasing the `offset` until a call returns either fewer than `limit` or zero results.
+     *
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an [API key](https://braze.com/docs/api/api_key/) with the `email.hard_bounces` permission.
      *
      * ## Rate limit
      *

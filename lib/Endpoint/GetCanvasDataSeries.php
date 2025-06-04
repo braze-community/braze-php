@@ -17,7 +17,9 @@ class GetCanvasDataSeries extends \Braze\Runtime\Client\BaseEndpoint implements 
     /**
      * > Use this endpoint to export time series data for a Canvas.
      *
-     * To use this endpoint, you’ll need to generate an API key with the `canvas.data_series` permission.
+     * ## Prerequisites
+     *
+     * To use this endpoint, you’ll need an API key with the `canvas.data_series` permission.
      *
      * ## Rate limit
      *

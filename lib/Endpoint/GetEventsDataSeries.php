@@ -17,9 +17,9 @@ class GetEventsDataSeries extends \Braze\Runtime\Client\BaseEndpoint implements 
     /**
      * > Use this endpoint to retrieve a series of the number of occurrences of a custom event in your app over a designated time period.
      *
-     * Note: If you are using our [older navigation](https://www.braze.com/docs/navigation), `app_id` can be found at**Developer Console** > **API Settings**
+     * ## Prerequisites
      *
-     * To use this endpoint, you’ll need to generate an API key with the `events.data_series` permission.
+     * To use this endpoint, you’ll need an [API key](https://braze.com/docs/api/api_key/) with the `events.data_series` permission.
      *
      * ## Rate limit
      *
@@ -45,7 +45,7 @@ class GetEventsDataSeries extends \Braze\Runtime\Client\BaseEndpoint implements 
      *
      * ### Fatal error response codes
      *
-     * For status codes and associated error messages that will be returned if your request encounters a fatal error, reference [Fatal errors & responses](https://www.braze.com/docs/api/errors/#fatal-errors).
+     * For status codes and associated error messages that will be returned if your request encounters a fatal error, reference [Fatal errors &amp; responses](https://www.braze.com/docs/api/errors/#fatal-errors).
      *
      * > **Tip:** For help with CSV and API exports, visit [Export troubleshooting](https://www.braze.com/docs/user_guide/data_and_analytics/export_braze_data/export_troubleshooting/).
      *
@@ -65,7 +65,9 @@ class GetEventsDataSeries extends \Braze\Runtime\Client\BaseEndpoint implements 
      * Date on which the data series should end. Defaults to time of the request.
      * @var string $app_id (Optional) String
      *
-     * App API identifier retrieved from **Settings > Setup and Testing > API Keys** to limit analytics to a specific app
+     * App API identifier retrieved from the [API Keys](https://www.braze.com/docs/user_guide/administrative/app_settings/api_settings_tab/) page to limit analytics to a specific app.
+     *
+     * Note: If you are using our [older navigation](https://www.braze.com/docs/navigation), `app_id` can be found at **Developer Console** > **API Settings**
      * @var string $segment_id (Optional) String
      *
      * See [Segment API identifier](https://www.braze.com/docs/api/identifier_types/). Segment ID indicating the analytics-enabled segment for which event analytics should be returned.
