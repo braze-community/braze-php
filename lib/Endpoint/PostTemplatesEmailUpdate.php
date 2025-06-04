@@ -93,7 +93,7 @@ class PostTemplatesEmailUpdate extends \Braze\Runtime\Client\BaseEndpoint implem
      * @var string $plaintext_body (Optional) String
      * @var string $preheader (Optional) String
      * @var string $tags (Optional) String
-     * @var string $should_inline_css (Optional) Boolean
+     * @var bool   $should_inline_css (Optional) Boolean
      *             }
      *
      * @param array $headerParameters {
@@ -146,7 +146,7 @@ class PostTemplatesEmailUpdate extends \Braze\Runtime\Client\BaseEndpoint implem
         $optionsResolver->addAllowedTypes('plaintext_body', ['string']);
         $optionsResolver->addAllowedTypes('preheader', ['string']);
         $optionsResolver->addAllowedTypes('tags', ['string']);
-        $optionsResolver->addAllowedTypes('should_inline_css', ['string']);
+        $optionsResolver->addAllowedTypes('should_inline_css', ['bool']);
 
         return $optionsResolver;
     }

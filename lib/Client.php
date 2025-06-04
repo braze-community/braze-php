@@ -8654,7 +8654,7 @@ class Client extends Runtime\Client\Client
      * @var string $plaintext_body (Optional) String
      * @var string $preheader (Optional) String
      * @var string $tags (Optional) String
-     * @var string $should_inline_css (Optional) Boolean
+     * @var bool   $should_inline_css (Optional) Boolean
      *             }
      *
      * @param array $headerParameters {
@@ -8758,7 +8758,7 @@ class Client extends Runtime\Client\Client
      * @var string $plaintext_body (Optional) String
      * @var string $preheader (Optional) String
      * @var string $tags (Optional) String
-     * @var string $should_inline_css (Optional) Boolean
+     * @var bool   $should_inline_css (Optional) Boolean
      *             }
      *
      * @param array $headerParameters {
