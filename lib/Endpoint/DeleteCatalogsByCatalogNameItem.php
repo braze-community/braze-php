@@ -110,9 +110,10 @@ class DeleteCatalogsByCatalogNameItem extends \Braze\Runtime\Client\BaseEndpoint
      * @var string $Authorization
      *             }
      */
-    public function __construct(string $catalogName, array $headerParameters = [])
+    public function __construct(string $catalogName, ?\Braze\Model\CatalogsCatalogNameItemsDeleteBody $requestBody = null, array $headerParameters = [])
     {
         $this->catalog_name = $catalogName;
+        $this->body = $requestBody;
         $this->headerParameters = $headerParameters;
     }
 
@@ -128,6 +129,10 @@ class DeleteCatalogsByCatalogNameItem extends \Braze\Runtime\Client\BaseEndpoint
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
+        if ($this->body instanceof \Braze\Model\CatalogsCatalogNameItemsDeleteBody) {
+            return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
+        }
+
         return [[], null];
     }
 
