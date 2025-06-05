@@ -57,7 +57,11 @@ class CanvasTriggerSendPostBodyNormalizer implements DenormalizerInterface, Norm
             unset($data['canvas_id']);
         }
         if (\array_key_exists('canvas_entry_properties', $data)) {
-            $object->setCanvasEntryProperties($this->denormalizer->denormalize($data['canvas_entry_properties'], \Braze\Model\CanvasTriggerSendPostBodyCanvasEntryProperties::class, 'json', $context));
+            $values = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+            foreach ($data['canvas_entry_properties'] as $key => $value) {
+                $values[$key] = $value;
+            }
+            $object->setCanvasEntryProperties($values);
             unset($data['canvas_entry_properties']);
         }
         if (\array_key_exists('broadcast', $data)) {
@@ -69,16 +73,16 @@ class CanvasTriggerSendPostBodyNormalizer implements DenormalizerInterface, Norm
             unset($data['audience']);
         }
         if (\array_key_exists('recipients', $data)) {
-            $values = [];
-            foreach ($data['recipients'] as $value) {
-                $values[] = $this->denormalizer->denormalize($value, \Braze\Model\CanvasTriggerSendPostBodyRecipientsItem::class, 'json', $context);
+            $values_1 = [];
+            foreach ($data['recipients'] as $value_1) {
+                $values_1[] = $this->denormalizer->denormalize($value_1, \Braze\Model\CanvasTriggerSendPostBodyRecipientsItem::class, 'json', $context);
             }
-            $object->setRecipients($values);
+            $object->setRecipients($values_1);
             unset($data['recipients']);
         }
-        foreach ($data as $key => $value_1) {
-            if (preg_match('/.*/', (string) $key)) {
-                $object[$key] = $value_1;
+        foreach ($data as $key_1 => $value_2) {
+            if (preg_match('/.*/', (string) $key_1)) {
+                $object[$key_1] = $value_2;
             }
         }
 
@@ -92,7 +96,11 @@ class CanvasTriggerSendPostBodyNormalizer implements DenormalizerInterface, Norm
             $dataArray['canvas_id'] = $data->getCanvasId();
         }
         if ($data->isInitialized('canvasEntryProperties') && null !== $data->getCanvasEntryProperties()) {
-            $dataArray['canvas_entry_properties'] = $this->normalizer->normalize($data->getCanvasEntryProperties(), 'json', $context);
+            $values = [];
+            foreach ($data->getCanvasEntryProperties() as $key => $value) {
+                $values[$key] = $value;
+            }
+            $dataArray['canvas_entry_properties'] = $values;
         }
         if ($data->isInitialized('broadcast') && null !== $data->getBroadcast()) {
             $dataArray['broadcast'] = $data->getBroadcast();
@@ -101,15 +109,15 @@ class CanvasTriggerSendPostBodyNormalizer implements DenormalizerInterface, Norm
             $dataArray['audience'] = $this->normalizer->normalize($data->getAudience(), 'json', $context);
         }
         if ($data->isInitialized('recipients') && null !== $data->getRecipients()) {
-            $values = [];
-            foreach ($data->getRecipients() as $value) {
-                $values[] = $this->normalizer->normalize($value, 'json', $context);
+            $values_1 = [];
+            foreach ($data->getRecipients() as $value_1) {
+                $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
             }
-            $dataArray['recipients'] = $values;
+            $dataArray['recipients'] = $values_1;
         }
-        foreach ($data as $key => $value_1) {
-            if (preg_match('/.*/', (string) $key)) {
-                $dataArray[$key] = $value_1;
+        foreach ($data as $key_1 => $value_2) {
+            if (preg_match('/.*/', (string) $key_1)) {
+                $dataArray[$key_1] = $value_2;
             }
         }
 

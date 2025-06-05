@@ -154,8 +154,6 @@ class JaneObjectNormalizer implements DenormalizerInterface, NormalizerInterface
 
         \Braze\Model\CanvasTriggerSendPostBody::class => CanvasTriggerSendPostBodyNormalizer::class,
 
-        \Braze\Model\CanvasTriggerSendPostBodyCanvasEntryProperties::class => CanvasTriggerSendPostBodyCanvasEntryPropertiesNormalizer::class,
-
         \Braze\Model\CanvasTriggerSendPostBodyAudience::class => CanvasTriggerSendPostBodyAudienceNormalizer::class,
 
         \Braze\Model\CanvasTriggerSendPostBodyRecipientsItem::class => CanvasTriggerSendPostBodyRecipientsItemNormalizer::class,
@@ -350,7 +348,6 @@ class JaneObjectNormalizer implements DenormalizerInterface, NormalizerInterface
             \Braze\Model\CampaignsTriggerSendPostBodyRecipientsItemUserAlias::class => false,
             \Braze\Model\CampaignsTriggerSendPostBodyRecipientsItemAttributes::class => false,
             \Braze\Model\CanvasTriggerSendPostBody::class => false,
-            \Braze\Model\CanvasTriggerSendPostBodyCanvasEntryProperties::class => false,
             \Braze\Model\CanvasTriggerSendPostBodyAudience::class => false,
             \Braze\Model\CanvasTriggerSendPostBodyRecipientsItem::class => false,
             \Braze\Model\CanvasTriggerSendPostBodyRecipientsItemUserAlias::class => false,
