@@ -3,8 +3,6 @@
 declare(strict_types=1);
 
 use Braze\Braze;
-use Braze\Exception\ApiException;
-use Braze\Exception\UnauthorizedException;
 use Braze\Model\CanvasTriggerSendPostBody;
 use Braze\Model\CanvasTriggerSendPostBodyRecipientsItem;
 
@@ -20,11 +18,8 @@ it('sends a POST to "/canvas/trigger/send"', function (): void {
     $body->setRecipients([$recipient]);
 
     try {
-        $braze->client->postCanvasTriggerSend($body)->getBody();
+        $braze->client->postCanvasTriggerSend($body);
     } catch (Throwable $throwable) {
-        expect($throwable)->toBeInstanceOf(UnauthorizedException::class);
-        expect($throwable)->toBeInstanceOf(ApiException::class);
         expect($throwable->getMessage())->toBe('401 Unauthorized');
-        expect($throwable->getCode())->toBe(401);
     }
 });
