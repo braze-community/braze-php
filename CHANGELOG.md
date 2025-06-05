@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.1](https://github.com/braze-community/braze-php/compare/v2.4.0...v2.4.1) (2025-06-05)
+
+
+### Bug Fixes
+
+* **Model:** ensure CanvasTriggerSendPostBody is an object ([33b0cc0](https://github.com/braze-community/braze-php/commit/33b0cc00750cf14dd72d351f852a2540f11e875d)), closes [#152](https://github.com/braze-community/braze-php/issues/152)
+
 ## [2.4.0](https://github.com/braze-community/braze-php/compare/v2.3.0...v2.4.0) (2025-06-04)
 
 
