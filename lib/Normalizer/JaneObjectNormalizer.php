@@ -34,6 +34,10 @@ class JaneObjectNormalizer implements DenormalizerInterface, NormalizerInterface
 
         \Braze\Model\CatalogsPostBodyCatalogsItemFieldsItem::class => CatalogsPostBodyCatalogsItemFieldsItemNormalizer::class,
 
+        \Braze\Model\CatalogsCatalogNameItemsDeleteBody::class => CatalogsCatalogNameItemsDeleteBodyNormalizer::class,
+
+        \Braze\Model\CatalogsCatalogNameItemsDeleteBodyItemsItem::class => CatalogsCatalogNameItemsDeleteBodyItemsItemNormalizer::class,
+
         \Braze\Model\CatalogsCatalogNameItemsPatchBody::class => CatalogsCatalogNameItemsPatchBodyNormalizer::class,
 
         \Braze\Model\CatalogsCatalogNameItemsPatchBodyItemsItem::class => CatalogsCatalogNameItemsPatchBodyItemsItemNormalizer::class,
@@ -288,6 +292,8 @@ class JaneObjectNormalizer implements DenormalizerInterface, NormalizerInterface
             \Braze\Model\CatalogsPostBody::class => false,
             \Braze\Model\CatalogsPostBodyCatalogsItem::class => false,
             \Braze\Model\CatalogsPostBodyCatalogsItemFieldsItem::class => false,
+            \Braze\Model\CatalogsCatalogNameItemsDeleteBody::class => false,
+            \Braze\Model\CatalogsCatalogNameItemsDeleteBodyItemsItem::class => false,
             \Braze\Model\CatalogsCatalogNameItemsPatchBody::class => false,
             \Braze\Model\CatalogsCatalogNameItemsPatchBodyItemsItem::class => false,
             \Braze\Model\CatalogsCatalogNameItemsPostBody::class => false,

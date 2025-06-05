@@ -519,9 +519,9 @@ class Client extends Runtime\Client\Client
      * @throws Exception\DeleteCatalogsByCatalogNameItemTooManyRequestsException
      * @throws Exception\DeleteCatalogsByCatalogNameItemInternalServerErrorException
      */
-    public function deleteCatalogsByCatalogNameItem(string $catalogName, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function deleteCatalogsByCatalogNameItem(string $catalogName, ?Model\CatalogsCatalogNameItemsDeleteBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\DeleteCatalogsByCatalogNameItem($catalogName, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\DeleteCatalogsByCatalogNameItem($catalogName, $requestBody, $headerParameters), $fetch);
     }
 
     /**
