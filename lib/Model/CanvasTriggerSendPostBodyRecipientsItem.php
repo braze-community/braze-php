@@ -34,7 +34,7 @@ class CanvasTriggerSendPostBodyRecipientsItem extends \ArrayObject
      */
     protected $triggerProperties;
     /**
-     * @var string
+     * @var array<string, mixed>
      */
     protected $canvasEntryProperties;
     /**
@@ -91,12 +91,18 @@ class CanvasTriggerSendPostBodyRecipientsItem extends \ArrayObject
         return $this;
     }
 
-    public function getCanvasEntryProperties(): string
+    /**
+     * @return array<string, mixed>
+     */
+    public function getCanvasEntryProperties(): iterable
     {
         return $this->canvasEntryProperties;
     }
 
-    public function setCanvasEntryProperties(string $canvasEntryProperties): self
+    /**
+     * @param array<string, mixed> $canvasEntryProperties
+     */
+    public function setCanvasEntryProperties(iterable $canvasEntryProperties): self
     {
         $this->initialized['canvasEntryProperties'] = true;
         $this->canvasEntryProperties = $canvasEntryProperties;

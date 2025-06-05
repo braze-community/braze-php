@@ -69,7 +69,11 @@ class CanvasTriggerSendPostBodyRecipientsItemNormalizer implements DenormalizerI
             unset($data['trigger_properties']);
         }
         if (\array_key_exists('canvas_entry_properties', $data)) {
-            $object->setCanvasEntryProperties($data['canvas_entry_properties']);
+            $values_1 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+            foreach ($data['canvas_entry_properties'] as $key_1 => $value_1) {
+                $values_1[$key_1] = $value_1;
+            }
+            $object->setCanvasEntryProperties($values_1);
             unset($data['canvas_entry_properties']);
         }
         if (\array_key_exists('send_to_existing_only', $data)) {
@@ -80,9 +84,9 @@ class CanvasTriggerSendPostBodyRecipientsItemNormalizer implements DenormalizerI
             $object->setAttributes($this->denormalizer->denormalize($data['attributes'], \Braze\Model\CanvasTriggerSendPostBodyRecipientsItemAttributes::class, 'json', $context));
             unset($data['attributes']);
         }
-        foreach ($data as $key_1 => $value_1) {
-            if (preg_match('/.*/', (string) $key_1)) {
-                $object[$key_1] = $value_1;
+        foreach ($data as $key_2 => $value_2) {
+            if (preg_match('/.*/', (string) $key_2)) {
+                $object[$key_2] = $value_2;
             }
         }
 
@@ -106,7 +110,11 @@ class CanvasTriggerSendPostBodyRecipientsItemNormalizer implements DenormalizerI
             $dataArray['trigger_properties'] = $values;
         }
         if ($data->isInitialized('canvasEntryProperties') && null !== $data->getCanvasEntryProperties()) {
-            $dataArray['canvas_entry_properties'] = $data->getCanvasEntryProperties();
+            $values_1 = [];
+            foreach ($data->getCanvasEntryProperties() as $key_1 => $value_1) {
+                $values_1[$key_1] = $value_1;
+            }
+            $dataArray['canvas_entry_properties'] = $values_1;
         }
         if ($data->isInitialized('sendToExistingOnly') && null !== $data->getSendToExistingOnly()) {
             $dataArray['send_to_existing_only'] = $data->getSendToExistingOnly();
@@ -114,9 +122,9 @@ class CanvasTriggerSendPostBodyRecipientsItemNormalizer implements DenormalizerI
         if ($data->isInitialized('attributes') && null !== $data->getAttributes()) {
             $dataArray['attributes'] = $this->normalizer->normalize($data->getAttributes(), 'json', $context);
         }
-        foreach ($data as $key_1 => $value_1) {
-            if (preg_match('/.*/', (string) $key_1)) {
-                $dataArray[$key_1] = $value_1;
+        foreach ($data as $key_2 => $value_2) {
+            if (preg_match('/.*/', (string) $key_2)) {
+                $dataArray[$key_2] = $value_2;
             }
         }
 
