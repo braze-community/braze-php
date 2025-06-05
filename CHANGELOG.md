@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.2](https://github.com/braze-community/braze-php/compare/v2.4.1...v2.4.2) (2025-06-05)
+
+
+### Bug Fixes
+
+* **Model:** add requestBody to deleteCatalogsByCatalogNameItem ([5f7234e](https://github.com/braze-community/braze-php/commit/5f7234eeb62a3173e698b769911efb265050bc66)), closes [#160](https://github.com/braze-community/braze-php/issues/160)
+
 ## [2.4.1](https://github.com/braze-community/braze-php/compare/v2.4.0...v2.4.1) (2025-06-05)
 
 
