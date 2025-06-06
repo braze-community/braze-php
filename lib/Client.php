@@ -7719,6 +7719,8 @@ class Client extends Runtime\Client\Client
     /**
      * > Use this endpoint to get the subscription state of a user in a subscription group.
      *
+     * To use this endpoint, you’ll need to generate an API key with the `subscription.status.get` permission.
+     *
      * These groups will be available on the **Subscription Group** page. The response from this endpoint will include the external ID and either subscribed, unsubscribed, or unknown for the specific subscription group requested in the API call. This can be used to update the subscription group state in subsequent API calls or to be displayed on a hosted web page.
      *
      * ## Prerequisites
@@ -7735,11 +7737,11 @@ class Client extends Runtime\Client\Client
      * | --- | --- | --- | --- |
      * | [<code>subscription_group_id</code>](https://www.braze.com/docs/api/identifier_types/?tab=subscription%20group%20ids) | Required | String | The `id` of your subscription group. |
      * | `external_id` | Required\* | String | The `external_id` of the user (must include at least one and at most 50 `external_ids`).  <br>  <br>When both an `external_id` and `email`/`phone` are submitted, only the `external_id`(s) provided will be applied to the result query. |
-     * | `phone` | Required\* | String in [E.164](https://en.wikipedia.org/wiki/E.164) format | The phone number of the user. If email is not included, you must include at least one phone number (with a maximum of 50).  <br>  <br>Submitting both an email address and phone number (with no `external_id`) will result in an error. |
+     * | `email` | Required\* | String | The email address of the user. It can be passed as an array of strings with a maximum of 50.  <br>  <br>Submitting both an email address and phone number (with no `external_id`) will result in an error. |
      *
      * One of `external_id` or `email` or `phone` is required for each user.
      *
-     * - For SMS and WhatsApp subscription groups, either `external_id` or `phone` is required. When both are submitted, only the `external_id` is used for querying and the phone number is applied to that user.
+     * - For email subscription groups, either `external_id` or `email` is required. When both are submitted, only the `external_id` is used for the query and the email address is applied to that user.
      *
      *
      * ## Example request
@@ -7752,11 +7754,28 @@ class Client extends Runtime\Client\Client
      *
      * ```
      *
-     * ### SMS and WhatsApp
+     * ### Email
      *
      * ``` json
-     * curl --location -g --request GET 'https://rest.iad-01.braze.com/subscription/status/get?subscription_group_id={{subscription_group_id}}&phone=+11112223333' \
+     * curl --location -g --request GET 'https://rest.iad-01.braze.com/subscription/status/get?subscription_group_id={{subscription_group_id}}&email=example@braze.com' \
      * --header 'Authorization: Bearer YOUR-REST-API-KEY'
+     *
+     * ```
+     *
+     * ## Response
+     *
+     * All successful responses will return `Subscribed`, `Unsubscribed`, or `Unknown` depending on status and user history with the subscription group.
+     *
+     * ``` json
+     * Content-Type: application/json
+     * Authorization: Bearer YOUR-REST-API-KEY
+     * {
+     * "status": {
+     * "1": "Unsubscribed",
+     * "2": "Subscribed"
+     * },
+     * "message": "success"
+     * }
      *
      * ```
      *
@@ -7770,6 +7789,11 @@ class Client extends Runtime\Client\Client
      * The `external_id` of the user (must include at least one and at most 50 `external_ids`).
      *
      * When both an `external_id` and `email`/`phone` are submitted, only the `external_id`(s) provided will be applied to the result query.
+     * @var string $email (Required* ) String
+     *
+     * The email address of the user. It can be passed as an array of strings with a maximum of 50.
+     *
+     * Submitting both an email address and phone number (with no `external_id`) will result in an error.
      * @var string $phone (Required*) String in [E.164](https://en.wikipedia.org/wiki/E.164) format
      *
      * The phone number of the user. If email is not included, you must include at least one phone number (with a maximum of 50).
@@ -7809,28 +7833,30 @@ class Client extends Runtime\Client\Client
      *
      * We apply the default Braze rate limit of 250,000 requests per hour to this endpoint, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
-     * > If there are multiple users (multiple `external_ids`) who share the same email address, all users will be returned as a separate user (even if they have the same email address or subscription group).
-     *
-     *
      * ## Example request
      *
      * ### Multiple users
      *
      * `https://rest.iad-03.braze.com/subscription/user/status?external_id[]=1&external_id[]=2`
      *
-     * ### SMS and WhatsApp
+     * ### Email
      *
      * ``` json
-     * curl --location -g --request GET 'https://rest.iad-01.braze.com/subscription/user/status?external_id={{external_id}}&limit=100&offset=1&phone=+11112223333' \
+     * curl --location -g --request GET 'https://rest.iad-01.braze.com/subscription/user/status?external_id={{external_id}}&email=example@braze.com&limit=100&offset=0' \
      * --header 'Authorization: Bearer YOUR-REST-API-KEY'
      *
      * ```
      *
      * @param array $queryParameters {
      *
-     * @var string $external_id (Required*) String
+     * @var string $external_id (Required) String
      *
-     * The external_id of the user (must include at least one and at most 50 external_ids)
+     * The `external_id` of the user. Must include at least one and at most 50 `external_ids`.
+     *
+     * If there are multiple users (multiple `external_ids`) who share the same email address, all users will be returned as a separate user (even if they have the same email address or subscription group).
+     * @var string $email (Required) String
+     *
+     * The email address of the user, can be passed as an array of strings. Must include at least one email address (with a maximum of 50).
      * @var int $limit (Optional) Integer
      *
      * The limit on the maximum number of results returned. Default (and maximum) limit is 100.
