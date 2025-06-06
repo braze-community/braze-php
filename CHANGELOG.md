@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.5](https://github.com/braze-community/braze-php/compare/v2.4.4...v2.4.5) (2025-06-06)
+
+
+### Bug Fixes
+
+* **Model:** fix type in MessagesScheduleCreatePostBody ([06e11e9](https://github.com/braze-community/braze-php/commit/06e11e96f5aacc61ce34305f9d75c9edc217a37b))
+
 ## [2.4.4](https://github.com/braze-community/braze-php/compare/v2.4.3...v2.4.4) (2025-06-06)
 
 
