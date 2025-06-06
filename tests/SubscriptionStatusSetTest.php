@@ -9,17 +9,17 @@ it('sends a POST to "/v2/subscription/status/set"', function (): void {
     $braze = new Braze('https://rest.iad-02.braze.com', 'API_KEY');
 
     // https://www.braze.com/docs/api/endpoints/subscription_groups/post_update_user_subscription_group_status_v2/#request-body
-    $group = [
+    $body = new V2SubscriptionStatusSetPostBody();
+
+    $body->setSubscriptionGroups([
         'subscription_group_id' => 'restaurant1',
         'subscription_state' => 'subscribed',
         'external_ids' => ['id1'],
         'id' => 'restaurant1',
         'emails' => ['john@example.com'],
         'phones' => ['1234567890'],
-    ];
-
-    $body = new V2SubscriptionStatusSetPostBody(['subscription_groups' => [$group]]);
-    $body->setSubscriptionGroups($group);
+    ]);
+    expect($body->getSubscriptionGroups())->toBeTruthy();
 
     try {
         $braze->client->postV2SubscriptionStatusSet($body);
