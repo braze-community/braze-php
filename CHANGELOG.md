@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.6](https://github.com/braze-community/braze-php/compare/v2.4.5...v2.4.6) (2025-06-06)
+
+
+### Bug Fixes
+
+* **Model:** correct externalUserIds type in MessagesSendPostBody ([df20856](https://github.com/braze-community/braze-php/commit/df208562378ec11d56e8cf5b6937ba4c6818ca4e))
+
 ## [2.4.5](https://github.com/braze-community/braze-php/compare/v2.4.4...v2.4.5) (2025-06-06)
 
 
