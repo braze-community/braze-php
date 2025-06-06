@@ -25,28 +25,30 @@ class GetSubscriptionUserStatus extends \Braze\Runtime\Client\BaseEndpoint imple
      *
      * We apply the default Braze rate limit of 250,000 requests per hour to this endpoint, as documented in [API rate limits](https://www.braze.com/docs/api/api_limits/).
      *
-     * > If there are multiple users (multiple `external_ids`) who share the same email address, all users will be returned as a separate user (even if they have the same email address or subscription group).
-     *
-     *
      * ## Example request
      *
      * ### Multiple users
      *
      * `https://rest.iad-03.braze.com/subscription/user/status?external_id[]=1&external_id[]=2`
      *
-     * ### SMS and WhatsApp
+     * ### Email
      *
      * ``` json
-     * curl --location -g --request GET 'https://rest.iad-01.braze.com/subscription/user/status?external_id={{external_id}}&limit=100&offset=1&phone=+11112223333' \
+     * curl --location -g --request GET 'https://rest.iad-01.braze.com/subscription/user/status?external_id={{external_id}}&email=example@braze.com&limit=100&offset=0' \
      * --header 'Authorization: Bearer YOUR-REST-API-KEY'
      *
      * ```
      *
      * @param array $queryParameters {
      *
-     * @var string $external_id (Required*) String
+     * @var string $external_id (Required) String
      *
-     * The external_id of the user (must include at least one and at most 50 external_ids)
+     * The `external_id` of the user. Must include at least one and at most 50 `external_ids`.
+     *
+     * If there are multiple users (multiple `external_ids`) who share the same email address, all users will be returned as a separate user (even if they have the same email address or subscription group).
+     * @var string $email (Required) String
+     *
+     * The email address of the user, can be passed as an array of strings. Must include at least one email address (with a maximum of 50).
      * @var int $limit (Optional) Integer
      *
      * The limit on the maximum number of results returned. Default (and maximum) limit is 100.
@@ -92,10 +94,11 @@ class GetSubscriptionUserStatus extends \Braze\Runtime\Client\BaseEndpoint imple
     protected function getQueryOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getQueryOptionsResolver();
-        $optionsResolver->setDefined(['external_id', 'limit', 'offset', 'phone']);
+        $optionsResolver->setDefined(['external_id', 'email', 'limit', 'offset', 'phone']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
         $optionsResolver->addAllowedTypes('external_id', ['string']);
+        $optionsResolver->addAllowedTypes('email', ['string']);
         $optionsResolver->addAllowedTypes('limit', ['int']);
         $optionsResolver->addAllowedTypes('offset', ['int']);
         $optionsResolver->addAllowedTypes('phone', ['string']);
