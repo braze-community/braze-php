@@ -26,7 +26,7 @@ class MessagesSendPostBody extends \ArrayObject
      */
     protected $broadcast;
     /**
-     * @var string
+     * @var list<string>
      */
     protected $externalUserIds;
     /**
@@ -75,12 +75,18 @@ class MessagesSendPostBody extends \ArrayObject
         return $this;
     }
 
-    public function getExternalUserIds(): string
+    /**
+     * @return list<string>
+     */
+    public function getExternalUserIds(): array
     {
         return $this->externalUserIds;
     }
 
-    public function setExternalUserIds(string $externalUserIds): self
+    /**
+     * @param list<string> $externalUserIds
+     */
+    public function setExternalUserIds(array $externalUserIds): self
     {
         $this->initialized['externalUserIds'] = true;
         $this->externalUserIds = $externalUserIds;
