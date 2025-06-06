@@ -60,7 +60,11 @@ class MessagesScheduleCreatePostBodyNormalizer implements DenormalizerInterface,
             unset($data['broadcast']);
         }
         if (\array_key_exists('external_user_ids', $data)) {
-            $object->setExternalUserIds($data['external_user_ids']);
+            $values = [];
+            foreach ($data['external_user_ids'] as $value) {
+                $values[] = $value;
+            }
+            $object->setExternalUserIds($values);
             unset($data['external_user_ids']);
         }
         if (\array_key_exists('user_aliases', $data)) {
@@ -99,9 +103,9 @@ class MessagesScheduleCreatePostBodyNormalizer implements DenormalizerInterface,
             $object->setMessages($this->denormalizer->denormalize($data['messages'], \Braze\Model\MessagesScheduleCreatePostBodyMessages::class, 'json', $context));
             unset($data['messages']);
         }
-        foreach ($data as $key => $value) {
+        foreach ($data as $key => $value_1) {
             if (preg_match('/.*/', (string) $key)) {
-                $object[$key] = $value;
+                $object[$key] = $value_1;
             }
         }
 
@@ -115,7 +119,11 @@ class MessagesScheduleCreatePostBodyNormalizer implements DenormalizerInterface,
             $dataArray['broadcast'] = $data->getBroadcast();
         }
         if ($data->isInitialized('externalUserIds') && null !== $data->getExternalUserIds()) {
-            $dataArray['external_user_ids'] = $data->getExternalUserIds();
+            $values = [];
+            foreach ($data->getExternalUserIds() as $value) {
+                $values[] = $value;
+            }
+            $dataArray['external_user_ids'] = $values;
         }
         if ($data->isInitialized('userAliases') && null !== $data->getUserAliases()) {
             $dataArray['user_aliases'] = $this->normalizer->normalize($data->getUserAliases(), 'json', $context);
@@ -144,9 +152,9 @@ class MessagesScheduleCreatePostBodyNormalizer implements DenormalizerInterface,
         if ($data->isInitialized('messages') && null !== $data->getMessages()) {
             $dataArray['messages'] = $this->normalizer->normalize($data->getMessages(), 'json', $context);
         }
-        foreach ($data as $key => $value) {
+        foreach ($data as $key => $value_1) {
             if (preg_match('/.*/', (string) $key)) {
-                $dataArray[$key] = $value;
+                $dataArray[$key] = $value_1;
             }
         }
 
