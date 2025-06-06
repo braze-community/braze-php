@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.3](https://github.com/braze-community/braze-php/compare/v2.4.2...v2.4.3) (2025-06-06)
+
+
+### Bug Fixes
+
+* **lib:** add `email` to allowed params for subscription status GET ([7c949d0](https://github.com/braze-community/braze-php/commit/7c949d03187f2d0c53cfab944538ead2f7893303)), closes [#164](https://github.com/braze-community/braze-php/issues/164)
+
 ## [2.4.2](https://github.com/braze-community/braze-php/compare/v2.4.1...v2.4.2) (2025-06-05)
 
 
