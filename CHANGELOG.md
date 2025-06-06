@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.4](https://github.com/braze-community/braze-php/compare/v2.4.3...v2.4.4) (2025-06-06)
+
+
+### Bug Fixes
+
+* **Model:** add missing request body to UsersIdentifyPostBody ([2e315f9](https://github.com/braze-community/braze-php/commit/2e315f9609f66c6a5dba42cd06c7fcf9404f0eed)), closes [#163](https://github.com/braze-community/braze-php/issues/163)
+
 ## [2.4.3](https://github.com/braze-community/braze-php/compare/v2.4.2...v2.4.3) (2025-06-06)
 
 
