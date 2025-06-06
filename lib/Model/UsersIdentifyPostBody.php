@@ -26,9 +26,13 @@ class UsersIdentifyPostBody extends \ArrayObject
      */
     protected $aliasesToIdentify;
     /**
-     * @var list<UsersIdentifyPostBodyEmailAddressesItem>
+     * @var list<UsersIdentifyPostBodyEmailsToIdentifyItem>
      */
-    protected $emailAddresses;
+    protected $emailsToIdentify;
+    /**
+     * @var list<UsersIdentifyPostBodyPhoneNumbersToIdentifyItem>
+     */
+    protected $phoneNumbersToIdentify;
     /**
      * @var string
      */
@@ -54,20 +58,39 @@ class UsersIdentifyPostBody extends \ArrayObject
     }
 
     /**
-     * @return list<UsersIdentifyPostBodyEmailAddressesItem>
+     * @return list<UsersIdentifyPostBodyEmailsToIdentifyItem>
      */
-    public function getEmailAddresses(): array
+    public function getEmailsToIdentify(): array
     {
-        return $this->emailAddresses;
+        return $this->emailsToIdentify;
     }
 
     /**
-     * @param list<UsersIdentifyPostBodyEmailAddressesItem> $emailAddresses
+     * @param list<UsersIdentifyPostBodyEmailsToIdentifyItem> $emailsToIdentify
      */
-    public function setEmailAddresses(array $emailAddresses): self
+    public function setEmailsToIdentify(array $emailsToIdentify): self
     {
-        $this->initialized['emailAddresses'] = true;
-        $this->emailAddresses = $emailAddresses;
+        $this->initialized['emailsToIdentify'] = true;
+        $this->emailsToIdentify = $emailsToIdentify;
+
+        return $this;
+    }
+
+    /**
+     * @return list<UsersIdentifyPostBodyPhoneNumbersToIdentifyItem>
+     */
+    public function getPhoneNumbersToIdentify(): array
+    {
+        return $this->phoneNumbersToIdentify;
+    }
+
+    /**
+     * @param list<UsersIdentifyPostBodyPhoneNumbersToIdentifyItem> $phoneNumbersToIdentify
+     */
+    public function setPhoneNumbersToIdentify(array $phoneNumbersToIdentify): self
+    {
+        $this->initialized['phoneNumbersToIdentify'] = true;
+        $this->phoneNumbersToIdentify = $phoneNumbersToIdentify;
 
         return $this;
     }

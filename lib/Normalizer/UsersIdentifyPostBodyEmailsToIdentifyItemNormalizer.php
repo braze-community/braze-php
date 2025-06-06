@@ -20,7 +20,7 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class UsersIdentifyPostBodyEmailAddressesItemNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
+class UsersIdentifyPostBodyEmailsToIdentifyItemNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
@@ -29,12 +29,12 @@ class UsersIdentifyPostBodyEmailAddressesItemNormalizer implements DenormalizerI
 
     public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
-        return $type === \Braze\Model\UsersIdentifyPostBodyEmailAddressesItem::class;
+        return $type === \Braze\Model\UsersIdentifyPostBodyEmailsToIdentifyItem::class;
     }
 
     public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
-        return is_object($data) && get_class($data) === \Braze\Model\UsersIdentifyPostBodyEmailAddressesItem::class;
+        return is_object($data) && get_class($data) === \Braze\Model\UsersIdentifyPostBodyEmailsToIdentifyItem::class;
     }
 
     public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
@@ -45,7 +45,7 @@ class UsersIdentifyPostBodyEmailAddressesItemNormalizer implements DenormalizerI
         if (isset($data['$recursiveRef'])) {
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
-        $object = new \Braze\Model\UsersIdentifyPostBodyEmailAddressesItem();
+        $object = new \Braze\Model\UsersIdentifyPostBodyEmailsToIdentifyItem();
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
@@ -101,6 +101,6 @@ class UsersIdentifyPostBodyEmailAddressesItemNormalizer implements DenormalizerI
 
     public function getSupportedTypes(?string $format = null): array
     {
-        return [\Braze\Model\UsersIdentifyPostBodyEmailAddressesItem::class => false];
+        return [\Braze\Model\UsersIdentifyPostBodyEmailsToIdentifyItem::class => false];
     }
 }

@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class UsersIdentifyPostBodyEmailAddressesItem extends \ArrayObject
+class UsersIdentifyPostBodyEmailsToIdentifyItem extends \ArrayObject
 {
     /**
      * @var array

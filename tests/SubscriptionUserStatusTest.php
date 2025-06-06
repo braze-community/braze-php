@@ -13,7 +13,7 @@ it('sends a GET to "/subscription/user/status"', function (): void {
         'email' => 'john@example.com',
         'limit' => 100,
         'offset' => 0,
-        'phone' => '+1234567890',
+        'phone' => '+12345678901',
     ];
 
     try {
