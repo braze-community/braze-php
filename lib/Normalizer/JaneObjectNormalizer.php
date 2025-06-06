@@ -230,7 +230,9 @@ class JaneObjectNormalizer implements DenormalizerInterface, NormalizerInterface
 
         \Braze\Model\UsersIdentifyPostBodyAliasesToIdentifyItemUserAlias::class => UsersIdentifyPostBodyAliasesToIdentifyItemUserAliasNormalizer::class,
 
-        \Braze\Model\UsersIdentifyPostBodyEmailAddressesItem::class => UsersIdentifyPostBodyEmailAddressesItemNormalizer::class,
+        \Braze\Model\UsersIdentifyPostBodyEmailsToIdentifyItem::class => UsersIdentifyPostBodyEmailsToIdentifyItemNormalizer::class,
+
+        \Braze\Model\UsersIdentifyPostBodyPhoneNumbersToIdentifyItem::class => UsersIdentifyPostBodyPhoneNumbersToIdentifyItemNormalizer::class,
 
         \Braze\Model\UsersTrackPostBody::class => UsersTrackPostBodyNormalizer::class,
 
@@ -390,7 +392,8 @@ class JaneObjectNormalizer implements DenormalizerInterface, NormalizerInterface
             \Braze\Model\UsersIdentifyPostBody::class => false,
             \Braze\Model\UsersIdentifyPostBodyAliasesToIdentifyItem::class => false,
             \Braze\Model\UsersIdentifyPostBodyAliasesToIdentifyItemUserAlias::class => false,
-            \Braze\Model\UsersIdentifyPostBodyEmailAddressesItem::class => false,
+            \Braze\Model\UsersIdentifyPostBodyEmailsToIdentifyItem::class => false,
+            \Braze\Model\UsersIdentifyPostBodyPhoneNumbersToIdentifyItem::class => false,
             \Braze\Model\UsersTrackPostBody::class => false,
             \Braze\Model\UsersDeletePostBody::class => false,
             \Braze\Model\UsersDeletePostBodyUserAliasesItem::class => false,

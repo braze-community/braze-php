@@ -57,21 +57,29 @@ class UsersIdentifyPostBodyNormalizer implements DenormalizerInterface, Normaliz
             $object->setAliasesToIdentify($values);
             unset($data['aliases_to_identify']);
         }
-        if (\array_key_exists('email_addresses', $data)) {
+        if (\array_key_exists('emails_to_identify', $data)) {
             $values_1 = [];
-            foreach ($data['email_addresses'] as $value_1) {
-                $values_1[] = $this->denormalizer->denormalize($value_1, \Braze\Model\UsersIdentifyPostBodyEmailAddressesItem::class, 'json', $context);
+            foreach ($data['emails_to_identify'] as $value_1) {
+                $values_1[] = $this->denormalizer->denormalize($value_1, \Braze\Model\UsersIdentifyPostBodyEmailsToIdentifyItem::class, 'json', $context);
             }
-            $object->setEmailAddresses($values_1);
-            unset($data['email_addresses']);
+            $object->setEmailsToIdentify($values_1);
+            unset($data['emails_to_identify']);
+        }
+        if (\array_key_exists('phone_numbers_to_identify', $data)) {
+            $values_2 = [];
+            foreach ($data['phone_numbers_to_identify'] as $value_2) {
+                $values_2[] = $this->denormalizer->denormalize($value_2, \Braze\Model\UsersIdentifyPostBodyPhoneNumbersToIdentifyItem::class, 'json', $context);
+            }
+            $object->setPhoneNumbersToIdentify($values_2);
+            unset($data['phone_numbers_to_identify']);
         }
         if (\array_key_exists('merge_behavior', $data)) {
             $object->setMergeBehavior($data['merge_behavior']);
             unset($data['merge_behavior']);
         }
-        foreach ($data as $key => $value_2) {
+        foreach ($data as $key => $value_3) {
             if (preg_match('/.*/', (string) $key)) {
-                $object[$key] = $value_2;
+                $object[$key] = $value_3;
             }
         }
 
@@ -88,19 +96,26 @@ class UsersIdentifyPostBodyNormalizer implements DenormalizerInterface, Normaliz
             }
             $dataArray['aliases_to_identify'] = $values;
         }
-        if ($data->isInitialized('emailAddresses') && null !== $data->getEmailAddresses()) {
+        if ($data->isInitialized('emailsToIdentify') && null !== $data->getEmailsToIdentify()) {
             $values_1 = [];
-            foreach ($data->getEmailAddresses() as $value_1) {
+            foreach ($data->getEmailsToIdentify() as $value_1) {
                 $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
             }
-            $dataArray['email_addresses'] = $values_1;
+            $dataArray['emails_to_identify'] = $values_1;
+        }
+        if ($data->isInitialized('phoneNumbersToIdentify') && null !== $data->getPhoneNumbersToIdentify()) {
+            $values_2 = [];
+            foreach ($data->getPhoneNumbersToIdentify() as $value_2) {
+                $values_2[] = $this->normalizer->normalize($value_2, 'json', $context);
+            }
+            $dataArray['phone_numbers_to_identify'] = $values_2;
         }
         if ($data->isInitialized('mergeBehavior') && null !== $data->getMergeBehavior()) {
             $dataArray['merge_behavior'] = $data->getMergeBehavior();
         }
-        foreach ($data as $key => $value_2) {
+        foreach ($data as $key => $value_3) {
             if (preg_match('/.*/', (string) $key)) {
-                $dataArray[$key] = $value_2;
+                $dataArray[$key] = $value_3;
             }
         }
 
