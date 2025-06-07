@@ -64,24 +64,27 @@ $braze = new Braze('YOUR_API_URL', 'YOUR_API_KEY');
 $client = $braze->client;
 ```
 
-Send a message to your user:
+[Send a message](https://www.braze.com/docs/api/endpoints/messaging/send_messages/post_send_messages) to your user:
 
 ```php
 use Braze\Braze;
 use Braze\Model\MessagesSendPostBody;
+use Braze\Model\MessagesSendPostBodyMessages;
 
 $braze = new Braze('YOUR_API_URL', 'YOUR_API_KEY');
 
-$braze->client->postMessagesSend(new MessagesSendPostBody([
-    'external_user_ids' => ['your_external_user_id'],
-    'messages' => [
-        'email' => [
-            'app_id' => 'your_app_id',
-            'from' => 'Company <company@example.com>',
-            'email_template_id' => 'your_email_template_id',
-        ],
-    ],
-]));
+$body = new MessagesSendPostBody();
+$body->setExternalUserIds(['your_external_user_id']);
+
+$messages = new MessagesSendPostBodyMessages();
+$messages->setEmail([
+    'app_id' => 'your_app_id',
+    'from' => 'Company <company@example.com>',
+    'email_template_id' => 'your_email_template_id',
+]);
+$body->setMessages($messages);
+
+$response = $braze->client->postMessagesSend($body)->getBody();
 ```
 
 Handle an API error:
@@ -92,7 +95,7 @@ use Braze\Braze;
 $braze = new Braze('YOUR_API_URL', 'YOUR_API_KEY');
 
 try {
-    $braze->client->getCatalog();
+    $response = $braze->client->getCatalog()->getBody();
 } catch (Throwable $exception) {
     echo $exception->getMessage();
     echo $exception->getCode();
