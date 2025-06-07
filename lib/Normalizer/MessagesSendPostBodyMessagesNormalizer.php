@@ -50,40 +50,72 @@ class MessagesSendPostBodyMessagesNormalizer implements DenormalizerInterface, N
             return $object;
         }
         if (\array_key_exists('android_push', $data)) {
-            $object->setAndroidPush($data['android_push']);
+            $values = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+            foreach ($data['android_push'] as $key => $value) {
+                $values[$key] = $value;
+            }
+            $object->setAndroidPush($values);
             unset($data['android_push']);
         }
         if (\array_key_exists('apple_push', $data)) {
-            $object->setApplePush($data['apple_push']);
+            $values_1 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+            foreach ($data['apple_push'] as $key_1 => $value_1) {
+                $values_1[$key_1] = $value_1;
+            }
+            $object->setApplePush($values_1);
             unset($data['apple_push']);
         }
         if (\array_key_exists('content_card', $data)) {
-            $object->setContentCard($data['content_card']);
+            $values_2 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+            foreach ($data['content_card'] as $key_2 => $value_2) {
+                $values_2[$key_2] = $value_2;
+            }
+            $object->setContentCard($values_2);
             unset($data['content_card']);
         }
         if (\array_key_exists('email', $data)) {
-            $object->setEmail($data['email']);
+            $values_3 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+            foreach ($data['email'] as $key_3 => $value_3) {
+                $values_3[$key_3] = $value_3;
+            }
+            $object->setEmail($values_3);
             unset($data['email']);
         }
         if (\array_key_exists('kindle_push', $data)) {
-            $object->setKindlePush($data['kindle_push']);
+            $values_4 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+            foreach ($data['kindle_push'] as $key_4 => $value_4) {
+                $values_4[$key_4] = $value_4;
+            }
+            $object->setKindlePush($values_4);
             unset($data['kindle_push']);
         }
         if (\array_key_exists('web_push', $data)) {
-            $object->setWebPush($data['web_push']);
+            $values_5 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+            foreach ($data['web_push'] as $key_5 => $value_5) {
+                $values_5[$key_5] = $value_5;
+            }
+            $object->setWebPush($values_5);
             unset($data['web_push']);
         }
         if (\array_key_exists('windows_phone8_push', $data)) {
-            $object->setWindowsPhone8Push($data['windows_phone8_push']);
+            $values_6 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+            foreach ($data['windows_phone8_push'] as $key_6 => $value_6) {
+                $values_6[$key_6] = $value_6;
+            }
+            $object->setWindowsPhone8Push($values_6);
             unset($data['windows_phone8_push']);
         }
         if (\array_key_exists('windows_universal_push', $data)) {
-            $object->setWindowsUniversalPush($data['windows_universal_push']);
+            $values_7 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+            foreach ($data['windows_universal_push'] as $key_7 => $value_7) {
+                $values_7[$key_7] = $value_7;
+            }
+            $object->setWindowsUniversalPush($values_7);
             unset($data['windows_universal_push']);
         }
-        foreach ($data as $key => $value) {
-            if (preg_match('/.*/', (string) $key)) {
-                $object[$key] = $value;
+        foreach ($data as $key_8 => $value_8) {
+            if (preg_match('/.*/', (string) $key_8)) {
+                $object[$key_8] = $value_8;
             }
         }
 
@@ -94,32 +126,64 @@ class MessagesSendPostBodyMessagesNormalizer implements DenormalizerInterface, N
     {
         $dataArray = [];
         if ($data->isInitialized('androidPush') && null !== $data->getAndroidPush()) {
-            $dataArray['android_push'] = $data->getAndroidPush();
+            $values = [];
+            foreach ($data->getAndroidPush() as $key => $value) {
+                $values[$key] = $value;
+            }
+            $dataArray['android_push'] = $values;
         }
         if ($data->isInitialized('applePush') && null !== $data->getApplePush()) {
-            $dataArray['apple_push'] = $data->getApplePush();
+            $values_1 = [];
+            foreach ($data->getApplePush() as $key_1 => $value_1) {
+                $values_1[$key_1] = $value_1;
+            }
+            $dataArray['apple_push'] = $values_1;
         }
         if ($data->isInitialized('contentCard') && null !== $data->getContentCard()) {
-            $dataArray['content_card'] = $data->getContentCard();
+            $values_2 = [];
+            foreach ($data->getContentCard() as $key_2 => $value_2) {
+                $values_2[$key_2] = $value_2;
+            }
+            $dataArray['content_card'] = $values_2;
         }
         if ($data->isInitialized('email') && null !== $data->getEmail()) {
-            $dataArray['email'] = $data->getEmail();
+            $values_3 = [];
+            foreach ($data->getEmail() as $key_3 => $value_3) {
+                $values_3[$key_3] = $value_3;
+            }
+            $dataArray['email'] = $values_3;
         }
         if ($data->isInitialized('kindlePush') && null !== $data->getKindlePush()) {
-            $dataArray['kindle_push'] = $data->getKindlePush();
+            $values_4 = [];
+            foreach ($data->getKindlePush() as $key_4 => $value_4) {
+                $values_4[$key_4] = $value_4;
+            }
+            $dataArray['kindle_push'] = $values_4;
         }
         if ($data->isInitialized('webPush') && null !== $data->getWebPush()) {
-            $dataArray['web_push'] = $data->getWebPush();
+            $values_5 = [];
+            foreach ($data->getWebPush() as $key_5 => $value_5) {
+                $values_5[$key_5] = $value_5;
+            }
+            $dataArray['web_push'] = $values_5;
         }
         if ($data->isInitialized('windowsPhone8Push') && null !== $data->getWindowsPhone8Push()) {
-            $dataArray['windows_phone8_push'] = $data->getWindowsPhone8Push();
+            $values_6 = [];
+            foreach ($data->getWindowsPhone8Push() as $key_6 => $value_6) {
+                $values_6[$key_6] = $value_6;
+            }
+            $dataArray['windows_phone8_push'] = $values_6;
         }
         if ($data->isInitialized('windowsUniversalPush') && null !== $data->getWindowsUniversalPush()) {
-            $dataArray['windows_universal_push'] = $data->getWindowsUniversalPush();
+            $values_7 = [];
+            foreach ($data->getWindowsUniversalPush() as $key_7 => $value_7) {
+                $values_7[$key_7] = $value_7;
+            }
+            $dataArray['windows_universal_push'] = $values_7;
         }
-        foreach ($data as $key => $value) {
-            if (preg_match('/.*/', (string) $key)) {
-                $dataArray[$key] = $value;
+        foreach ($data as $key_8 => $value_8) {
+            if (preg_match('/.*/', (string) $key_8)) {
+                $dataArray[$key_8] = $value_8;
             }
         }
 
