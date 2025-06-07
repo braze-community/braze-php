@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.7](https://github.com/braze-community/braze-php/compare/v2.4.6...v2.4.7) (2025-06-07)
+
+
+### Bug Fixes
+
+* **Model:** fix messages type in MessagesSendPostBodyMessages ([e09496b](https://github.com/braze-community/braze-php/commit/e09496ba8f9ba635c908e6c31837faf203c927e9))
+
 ## [2.4.6](https://github.com/braze-community/braze-php/compare/v2.4.5...v2.4.6) (2025-06-06)
 
 
