@@ -22,44 +22,50 @@ class MessagesSendPostBodyMessages extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * @var string
+     * @var array<string, mixed>
      */
     protected $androidPush;
     /**
-     * @var string
+     * @var array<string, mixed>
      */
     protected $applePush;
     /**
-     * @var string
+     * @var array<string, mixed>
      */
     protected $contentCard;
     /**
-     * @var string
+     * @var array<string, mixed>
      */
     protected $email;
     /**
-     * @var string
+     * @var array<string, mixed>
      */
     protected $kindlePush;
     /**
-     * @var string
+     * @var array<string, mixed>
      */
     protected $webPush;
     /**
-     * @var string
+     * @var array<string, mixed>
      */
     protected $windowsPhone8Push;
     /**
-     * @var string
+     * @var array<string, mixed>
      */
     protected $windowsUniversalPush;
 
-    public function getAndroidPush(): string
+    /**
+     * @return array<string, mixed>
+     */
+    public function getAndroidPush(): iterable
     {
         return $this->androidPush;
     }
 
-    public function setAndroidPush(string $androidPush): self
+    /**
+     * @param array<string, mixed> $androidPush
+     */
+    public function setAndroidPush(iterable $androidPush): self
     {
         $this->initialized['androidPush'] = true;
         $this->androidPush = $androidPush;
@@ -67,12 +73,18 @@ class MessagesSendPostBodyMessages extends \ArrayObject
         return $this;
     }
 
-    public function getApplePush(): string
+    /**
+     * @return array<string, mixed>
+     */
+    public function getApplePush(): iterable
     {
         return $this->applePush;
     }
 
-    public function setApplePush(string $applePush): self
+    /**
+     * @param array<string, mixed> $applePush
+     */
+    public function setApplePush(iterable $applePush): self
     {
         $this->initialized['applePush'] = true;
         $this->applePush = $applePush;
@@ -80,12 +92,18 @@ class MessagesSendPostBodyMessages extends \ArrayObject
         return $this;
     }
 
-    public function getContentCard(): string
+    /**
+     * @return array<string, mixed>
+     */
+    public function getContentCard(): iterable
     {
         return $this->contentCard;
     }
 
-    public function setContentCard(string $contentCard): self
+    /**
+     * @param array<string, mixed> $contentCard
+     */
+    public function setContentCard(iterable $contentCard): self
     {
         $this->initialized['contentCard'] = true;
         $this->contentCard = $contentCard;
@@ -93,12 +111,18 @@ class MessagesSendPostBodyMessages extends \ArrayObject
         return $this;
     }
 
-    public function getEmail(): string
+    /**
+     * @return array<string, mixed>
+     */
+    public function getEmail(): iterable
     {
         return $this->email;
     }
 
-    public function setEmail(string $email): self
+    /**
+     * @param array<string, mixed> $email
+     */
+    public function setEmail(iterable $email): self
     {
         $this->initialized['email'] = true;
         $this->email = $email;
@@ -106,12 +130,18 @@ class MessagesSendPostBodyMessages extends \ArrayObject
         return $this;
     }
 
-    public function getKindlePush(): string
+    /**
+     * @return array<string, mixed>
+     */
+    public function getKindlePush(): iterable
     {
         return $this->kindlePush;
     }
 
-    public function setKindlePush(string $kindlePush): self
+    /**
+     * @param array<string, mixed> $kindlePush
+     */
+    public function setKindlePush(iterable $kindlePush): self
     {
         $this->initialized['kindlePush'] = true;
         $this->kindlePush = $kindlePush;
@@ -119,12 +149,18 @@ class MessagesSendPostBodyMessages extends \ArrayObject
         return $this;
     }
 
-    public function getWebPush(): string
+    /**
+     * @return array<string, mixed>
+     */
+    public function getWebPush(): iterable
     {
         return $this->webPush;
     }
 
-    public function setWebPush(string $webPush): self
+    /**
+     * @param array<string, mixed> $webPush
+     */
+    public function setWebPush(iterable $webPush): self
     {
         $this->initialized['webPush'] = true;
         $this->webPush = $webPush;
@@ -132,12 +168,18 @@ class MessagesSendPostBodyMessages extends \ArrayObject
         return $this;
     }
 
-    public function getWindowsPhone8Push(): string
+    /**
+     * @return array<string, mixed>
+     */
+    public function getWindowsPhone8Push(): iterable
     {
         return $this->windowsPhone8Push;
     }
 
-    public function setWindowsPhone8Push(string $windowsPhone8Push): self
+    /**
+     * @param array<string, mixed> $windowsPhone8Push
+     */
+    public function setWindowsPhone8Push(iterable $windowsPhone8Push): self
     {
         $this->initialized['windowsPhone8Push'] = true;
         $this->windowsPhone8Push = $windowsPhone8Push;
@@ -145,12 +187,18 @@ class MessagesSendPostBodyMessages extends \ArrayObject
         return $this;
     }
 
-    public function getWindowsUniversalPush(): string
+    /**
+     * @return array<string, mixed>
+     */
+    public function getWindowsUniversalPush(): iterable
     {
         return $this->windowsUniversalPush;
     }
 
-    public function setWindowsUniversalPush(string $windowsUniversalPush): self
+    /**
+     * @param array<string, mixed> $windowsUniversalPush
+     */
+    public function setWindowsUniversalPush(iterable $windowsUniversalPush): self
     {
         $this->initialized['windowsUniversalPush'] = true;
         $this->windowsUniversalPush = $windowsUniversalPush;
