@@ -27,7 +27,7 @@ jobs:
         run: composer build
 
       - name: Git commit and push
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v6
         with:
           commit_message: 'feat(lib): generate code from braze-specification'
           add_options: '-A'
