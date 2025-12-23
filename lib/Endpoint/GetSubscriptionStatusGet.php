@@ -50,7 +50,7 @@ class GetSubscriptionStatusGet extends \Braze\Runtime\Client\BaseEndpoint implem
      * 1
      * https://rest.iad-03.braze.com/subscription/status/get?subscription_group_id={{subscription_group_id}}&external_id[]=1&external_id[]=2
      *
-     * ```
+     *  ```
      *
      * ### Email
      *
@@ -58,7 +58,7 @@ class GetSubscriptionStatusGet extends \Braze\Runtime\Client\BaseEndpoint implem
      * curl --location -g --request GET 'https://rest.iad-01.braze.com/subscription/status/get?subscription_group_id={{subscription_group_id}}&email=example@braze.com' \
      * --header 'Authorization: Bearer YOUR-REST-API-KEY'
      *
-     * ```
+     *  ```
      *
      * ## Response
      *
@@ -68,14 +68,14 @@ class GetSubscriptionStatusGet extends \Braze\Runtime\Client\BaseEndpoint implem
      * Content-Type: application/json
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
-     * "status": {
-     * "1": "Unsubscribed",
-     * "2": "Subscribed"
-     * },
-     * "message": "success"
+     *   "status": {
+     *     "1": "Unsubscribed",
+     *     "2": "Subscribed"
+     *   },
+     *   "message": "success"
      * }
      *
-     * ```
+     *  ```
      *
      * @param array $queryParameters {
      *
@@ -165,29 +165,29 @@ class GetSubscriptionStatusGet extends \Braze\Runtime\Client\BaseEndpoint implem
      * @throws \Braze\Exception\GetSubscriptionStatusGetTooManyRequestsException
      * @throws \Braze\Exception\GetSubscriptionStatusGetInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();
-        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (200 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return json_decode($body);
         }
-        if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (400 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetSubscriptionStatusGetBadRequestException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (401 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetSubscriptionStatusGetUnauthorizedException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (403 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetSubscriptionStatusGetForbiddenException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (404 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetSubscriptionStatusGetNotFoundException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (429 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (429 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetSubscriptionStatusGetTooManyRequestsException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (500 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetSubscriptionStatusGetInternalServerErrorException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
     }

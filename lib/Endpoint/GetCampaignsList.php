@@ -33,20 +33,20 @@ class GetCampaignsList extends \Braze\Runtime\Client\BaseEndpoint implements \Br
      * Content-Type: application/json
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
-     * "message": (required, string) the status of the export, returns 'success' when completed without errors,
-     * "campaigns" : [
-     * {
-     * "id" : (string) Campaign API Identifier,
-     * "last_edited": (ISO 8601 string) the last edited time for the message
-     * "name" : (string) campaign name,
-     * "is_api_campaign" : (boolean) whether the campaign is an API Campaign,
-     * "tags" : (array) tag names associated with the campaign
-     * },
-     * ...
-     * ]
+     *     "message": (required, string) the status of the export, returns 'success' when completed without errors,
+     *     "campaigns" : [
+     *         {
+     *             "id" : (string) Campaign API Identifier,
+     *             "last_edited": (ISO 8601 string) the last edited time for the message
+     *             "name" : (string) campaign name,
+     *             "is_api_campaign" : (boolean) whether the campaign is an API Campaign,
+     *             "tags" : (array) tag names associated with the campaign
+     *         },
+     *         ...
+     *     ]
      * }
      *
-     * ```
+     *  ```
      *
      * > **Tip:** For help with CSV and API exports, visit [Export troubleshooting](https://www.braze.com/docs/user_guide/data_and_analytics/export_braze_data/export_troubleshooting/).
      *
@@ -135,29 +135,29 @@ class GetCampaignsList extends \Braze\Runtime\Client\BaseEndpoint implements \Br
      * @throws \Braze\Exception\GetCampaignsListTooManyRequestsException
      * @throws \Braze\Exception\GetCampaignsListInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();
-        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (200 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return json_decode($body);
         }
-        if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (400 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetCampaignsListBadRequestException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (401 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetCampaignsListUnauthorizedException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (403 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetCampaignsListForbiddenException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (404 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetCampaignsListNotFoundException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (429 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (429 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetCampaignsListTooManyRequestsException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (500 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetCampaignsListInternalServerErrorException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
     }

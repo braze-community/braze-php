@@ -31,19 +31,19 @@ class GetFeedDetail extends \Braze\Runtime\Client\BaseEndpoint implements \Braze
      * Content-Type: application/json
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
-     * "message": (required, string) The status of the export, returns 'success' when completed without errors,
-     * "created_at" : (string) Date created as ISO 8601 date,
-     * "updated_at" : (string) Date last updated as ISO 8601 date,
-     * "name" : (string) Card name,
-     * "publish_at" : (string) Date card was published as ISO 8601 date,
-     * "end_at" : (string) Date card will stop displaying for users as ISO 8601 date,
-     * "tags" : (array) Tag names associated with the card,
-     * "title" : (string) Title of the card,
-     * "image_url" : (string) Image URL used by this card,
-     * "extras" : (dictionary) Dictionary containing key-value pair data attached to this card,
-     * "description" : (string) Description text used by this card,
-     * "archived": (boolean) whether this Card is archived,
-     * "draft": (boolean) whether this Card is a draft,
+     *     "message": (required, string) The status of the export, returns 'success' when completed without errors,
+     *     "created_at" : (string) Date created as ISO 8601 date,
+     *     "updated_at" : (string) Date last updated as ISO 8601 date,
+     *     "name" : (string) Card name,
+     *     "publish_at" : (string) Date card was published as ISO 8601 date,
+     *     "end_at" : (string) Date card will stop displaying for users as ISO 8601 date,
+     *     "tags" : (array) Tag names associated with the card,
+     *     "title" : (string) Title of the card,
+     *     "image_url" : (string) Image URL used by this card,
+     *     "extras" : (dictionary) Dictionary containing key-value pair data attached to this card,
+     *     "description" : (string) Description text used by this card,
+     *     "archived": (boolean) whether this Card is archived,
+     *     "draft": (boolean) whether this Card is a draft,
      * }
      *
      * ```
@@ -122,29 +122,29 @@ class GetFeedDetail extends \Braze\Runtime\Client\BaseEndpoint implements \Braze
      * @throws \Braze\Exception\GetFeedDetailTooManyRequestsException
      * @throws \Braze\Exception\GetFeedDetailInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();
-        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (200 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return json_decode($body);
         }
-        if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (400 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetFeedDetailBadRequestException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (401 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetFeedDetailUnauthorizedException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (403 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetFeedDetailForbiddenException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (404 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetFeedDetailNotFoundException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (429 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (429 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetFeedDetailTooManyRequestsException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (500 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetFeedDetailInternalServerErrorException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
     }

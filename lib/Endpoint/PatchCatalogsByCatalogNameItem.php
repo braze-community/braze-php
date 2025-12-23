@@ -47,39 +47,39 @@ class PatchCatalogsByCatalogNameItem extends \Braze\Runtime\Client\BaseEndpoint 
      * --header 'Content-Type: application/json' \
      * --header 'Authorization: Bearer YOUR-REST-API-KEY' \
      * --data-raw '{
-     * "items": [
-     * {
-     * "id": "restaurant1",
-     * "Name": "Restaurant",
-     * "Loyalty_Program": false,
-     * "Location": {
-     * "Latitude": 33.6112,
-     * "Longitude": -117.8711
-     * },
-     * "Top_Dishes": {
-     * "$add": [
-     * "Biscuits",
-     * "Coleslaw"
-     * ],
-     * "$remove": [
-     * "French Fries"
-     * ]
-     * },
-     * "Open_Time": "2021-09-03T09:03:19.967+00:00"
-     * },
-     * {
-     * "id": "restaurant3",
-     * "City": "San Francisco",
-     * "Rating": 2,
-     * "Top_Dishes": [
-     * "Buffalo Wings",
-     * "Philly Cheesesteak"
-     * ]
-     * }
-     * ]
+     *   "items": [
+     *     {
+     *       "id": "restaurant1",
+     *       "Name": "Restaurant",
+     *       "Loyalty_Program": false,
+     *       "Location": {
+     *         "Latitude": 33.6112,
+     *         "Longitude": -117.8711
+     *       },
+     *       "Top_Dishes": {
+     *         "$add": [
+     *           "Biscuits",
+     *           "Coleslaw"
+     *         ],
+     *         "$remove": [
+     *           "French Fries"
+     *         ]
+     *       },
+     *       "Open_Time": "2021-09-03T09:03:19.967+00:00"
+     *     },
+     *     {
+     *       "id": "restaurant3",
+     *       "City": "San Francisco",
+     *       "Rating": 2,
+     *       "Top_Dishes": [
+     *         "Buffalo Wings",
+     *         "Philly Cheesesteak"
+     *       ]
+     *     }
+     *   ]
      * }'
      *
-     * ```
+     *  ```
      *
      * > **Note:** The $`add` and `$remove` operators are only applicable to array type fields, and are only supported by PATCH endpoints.
      *
@@ -94,10 +94,10 @@ class PatchCatalogsByCatalogNameItem extends \Braze\Runtime\Client\BaseEndpoint 
      *
      * ``` json
      * {
-     * "message": "success"
+     *   "message": "success"
      * }
      *
-     * ```
+     *  ```
      *
      * ### Example error response
      *
@@ -105,22 +105,22 @@ class PatchCatalogsByCatalogNameItem extends \Braze\Runtime\Client\BaseEndpoint 
      *
      * ``` json
      * {
-     * "errors": [
-     * {
-     * "id": "invalid-fields",
-     * "message": "Some of the fields given do not exist in the catalog",
-     * "parameters": [
-     * "id"
-     * ],
-     * "parameter_values": [
-     * "restaurant1"
-     * ]
-     * }
-     * ],
-     * "message": "Invalid Request"
+     *   "errors": [
+     *     {
+     *       "id": "invalid-fields",
+     *       "message": "Some of the fields given do not exist in the catalog",
+     *       "parameters": [
+     *         "id"
+     *       ],
+     *       "parameter_values": [
+     *         "restaurant1"
+     *       ]
+     *     }
+     *   ],
+     *   "message": "Invalid Request"
      * }
      *
-     * ```
+     *  ```
      *
      * ## Troubleshooting
      *
@@ -148,7 +148,7 @@ class PatchCatalogsByCatalogNameItem extends \Braze\Runtime\Client\BaseEndpoint 
      * @var string $Authorization
      *             }
      */
-    public function __construct(string $catalogName, ?\Braze\Model\CatalogsCatalogNameItemsPatchBody $requestBody = null, array $headerParameters = [])
+    public function __construct(string $catalogName, \Braze\Model\CatalogsCatalogNameItemsPatchBody $requestBody = null, array $headerParameters = [])
     {
         $this->catalog_name = $catalogName;
         $this->body = $requestBody;
@@ -201,29 +201,29 @@ class PatchCatalogsByCatalogNameItem extends \Braze\Runtime\Client\BaseEndpoint 
      * @throws \Braze\Exception\PatchCatalogsByCatalogNameItemTooManyRequestsException
      * @throws \Braze\Exception\PatchCatalogsByCatalogNameItemInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();
-        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (200 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return json_decode($body);
         }
-        if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (400 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PatchCatalogsByCatalogNameItemBadRequestException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (401 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PatchCatalogsByCatalogNameItemUnauthorizedException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (403 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PatchCatalogsByCatalogNameItemForbiddenException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (404 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PatchCatalogsByCatalogNameItemNotFoundException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (429 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (429 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PatchCatalogsByCatalogNameItemTooManyRequestsException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (500 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PatchCatalogsByCatalogNameItemInternalServerErrorException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
     }

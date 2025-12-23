@@ -27,17 +27,17 @@ class CampaignsTriggerScheduleUpdatePostBodyNormalizer implements DenormalizerIn
     use CheckArray;
     use ValidatorTrait;
 
-    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
+    public function supportsDenormalization(mixed $data, string $type, string $format = null, array $context = []): bool
     {
         return $type === \Braze\Model\CampaignsTriggerScheduleUpdatePostBody::class;
     }
 
-    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+    public function supportsNormalization(mixed $data, string $format = null, array $context = []): bool
     {
         return is_object($data) && get_class($data) === \Braze\Model\CampaignsTriggerScheduleUpdatePostBody::class;
     }
 
-    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
+    public function denormalize(mixed $data, string $type, string $format = null, array $context = []): mixed
     {
         if (isset($data['$ref'])) {
             return new Reference($data['$ref'], $context['document-origin']);
@@ -70,7 +70,7 @@ class CampaignsTriggerScheduleUpdatePostBodyNormalizer implements DenormalizerIn
         return $object;
     }
 
-    public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+    public function normalize(mixed $data, string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
         if ($data->isInitialized('campaignId') && null !== $data->getCampaignId()) {
@@ -91,7 +91,7 @@ class CampaignsTriggerScheduleUpdatePostBodyNormalizer implements DenormalizerIn
         return $dataArray;
     }
 
-    public function getSupportedTypes(?string $format = null): array
+    public function getSupportedTypes(string $format = null): array
     {
         return [\Braze\Model\CampaignsTriggerScheduleUpdatePostBody::class => false];
     }

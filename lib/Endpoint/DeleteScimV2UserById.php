@@ -46,7 +46,7 @@ class DeleteScimV2UserById extends \Braze\Runtime\Client\BaseEndpoint implements
      * --header 'X-Request-Origin: YOUR-REQUEST-ORIGIN-HERE' \
      * --header 'Authorization: Bearer YOUR-SCIM-TOKEN-HERE' \
      *
-     * ```
+     *  ```
      *
      * ## Response
      *
@@ -56,7 +56,7 @@ class DeleteScimV2UserById extends \Braze\Runtime\Client\BaseEndpoint implements
      * HTTP/1.1 204 Not Found
      * Content-Type: text/html; charset=UTF-8
      *
-     * ```
+     *  ```
      *
      * If a developer with this ID doesn’t exist in Braze, the endpoint will respond with:
      *
@@ -64,7 +64,7 @@ class DeleteScimV2UserById extends \Braze\Runtime\Client\BaseEndpoint implements
      * HTTP/1.1 404 Not Found Content-Type: text/html; charset=UTF-8
      * { "schemas": ["urn:ietf:params:scim:api:messages:2.0:Error"], "detail": "User not found", "status": 404 }
      *
-     * ```
+     *  ```
      *
      * @param array $headerParameters {
      *
@@ -122,29 +122,29 @@ class DeleteScimV2UserById extends \Braze\Runtime\Client\BaseEndpoint implements
      * @throws \Braze\Exception\DeleteScimV2UserByIdTooManyRequestsException
      * @throws \Braze\Exception\DeleteScimV2UserByIdInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();
-        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (200 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return json_decode($body);
         }
-        if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (400 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\DeleteScimV2UserByIdBadRequestException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (401 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\DeleteScimV2UserByIdUnauthorizedException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (403 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\DeleteScimV2UserByIdForbiddenException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (404 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\DeleteScimV2UserByIdNotFoundException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (429 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (429 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\DeleteScimV2UserByIdTooManyRequestsException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (500 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\DeleteScimV2UserByIdInternalServerErrorException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
     }

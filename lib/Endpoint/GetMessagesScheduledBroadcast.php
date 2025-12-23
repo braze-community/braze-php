@@ -33,19 +33,19 @@ class GetMessagesScheduledBroadcast extends \Braze\Runtime\Client\BaseEndpoint i
      * Content-Type: application/json
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
-     * "scheduled_broadcasts": [
-     * {
-     * "name" (string) the name of the scheduled broadcast,
-     * "id" (stings) the Canvas or campaign identifier,
-     * "type" (string) the broadcast type either Canvas or Campaign,
-     * "tags" (array) an array of tag names formatted as strings,
-     * "next_send_time" (string) The next send time formatted in ISO 8601, may also include time zone if not local/intelligent delivery,
-     * "schedule_type" (string) The schedule type, either local_time_zones, intelligent_delivery or the name of your company's time zone,
-     * },
-     * ]
+     *   "scheduled_broadcasts": [
+     *     {
+     *       "name" (string) the name of the scheduled broadcast,
+     *       "id" (stings) the Canvas or campaign identifier,
+     *       "type" (string) the broadcast type either Canvas or Campaign,
+     *       "tags" (array) an array of tag names formatted as strings,
+     *       "next_send_time" (string) The next send time formatted in ISO 8601, may also include time zone if not local/intelligent delivery,
+     *       "schedule_type" (string) The schedule type, either local_time_zones, intelligent_delivery or the name of your company's time zone,
+     *     },
+     *   ]
      * }
      *
-     * ```
+     *  ```
      *
      * @param array $queryParameters {
      *
@@ -117,29 +117,29 @@ class GetMessagesScheduledBroadcast extends \Braze\Runtime\Client\BaseEndpoint i
      * @throws \Braze\Exception\GetMessagesScheduledBroadcastTooManyRequestsException
      * @throws \Braze\Exception\GetMessagesScheduledBroadcastInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();
-        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (200 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return json_decode($body);
         }
-        if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (400 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetMessagesScheduledBroadcastBadRequestException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (401 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetMessagesScheduledBroadcastUnauthorizedException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (403 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetMessagesScheduledBroadcastForbiddenException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (404 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetMessagesScheduledBroadcastNotFoundException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (429 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (429 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetMessagesScheduledBroadcastTooManyRequestsException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (500 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetMessagesScheduledBroadcastInternalServerErrorException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
     }

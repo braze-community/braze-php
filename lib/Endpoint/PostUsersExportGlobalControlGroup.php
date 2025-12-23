@@ -81,12 +81,12 @@ class PostUsersExportGlobalControlGroup extends \Braze\Runtime\Client\BaseEndpoi
      * Content-Type: application/json
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
-     * "message": (required, string) the status of the export, returns 'success' when completed without errors,
-     * "object_prefix": (required, string) the filename prefix that will be used for the JSON file produced by this export, e.g.,'bb8e2a91-c4aa-478b-b3f2-a4ee91731ad1-1464728599',
-     * "url" : (optional, string) the URL where the segment export data can be downloaded if you do not have your own S3 credentials
+     *     "message": (required, string) the status of the export, returns 'success' when completed without errors,
+     *     "object_prefix": (required, string) the filename prefix that will be used for the JSON file produced by this export, e.g.,'bb8e2a91-c4aa-478b-b3f2-a4ee91731ad1-1464728599',
+     *     "url" : (optional, string) the URL where the segment export data can be downloaded if you do not have your own S3 credentials
      * }
      *
-     * ```
+     *  ```
      *
      * Once made available, the URL will only be valid for a few hours. As such, we highly recommend that you add your own S3 credentials to Braze.
      *
@@ -96,157 +96,157 @@ class PostUsersExportGlobalControlGroup extends \Braze\Runtime\Client\BaseEndpoi
      *
      * ``` json
      * {
-     * "created_at" : (string),
-     * "external_id" : (string),
-     * "user_aliases" : [
-     * {
-     * "alias_name" : (string),
-     * "alias_label" : (string)
-     * }
-     * ],
-     * "braze_id": (string),
-     * "first_name" : (string),
-     * "last_name" : (string),
-     * "email" : (string),
-     * "dob" : (string) date for the user's date of birth,
-     * "home_city" : (string),
-     * "country" : (string) ISO-3166-1 alpha-2 standard,
-     * "phone" : (string),
-     * "language" : (string) ISO-639-1 standard,
-     * "time_zone" : (string),
-     * "last_coordinates" : (array of float) [lon, lat],
-     * "gender" : (string) "M" | "F",
-     * "total_revenue" : (float),
-     * "attributed_campaign" : (string),
-     * "attributed_source" : (string),
-     * "attributed_adgroup" : (string),
-     * "attributed_ad" : (string),
-     * "custom_attributes" : (object) custom attribute key-value pairs,
-     * "custom_events" : [
-     * {
-     * "name" : (string),
-     * "first" : (string) date,
-     * "last" : (string) date,
-     * "count" : (int)
-     * },
-     * ...
-     * ],
-     * "purchases" : [
-     * {
-     * "name" : (string),
-     * "first" : (string) date,
-     * "last" : (string) date,
-     * "count" : (int)
-     * },
-     * ...
-     * ],
-     * "devices" : [
-     * {
-     * "model" : (string),
-     * "os" : (string),
-     * "carrier" : (string),
-     * "idfv" : (string) only included for iOS devices when IDFV collection is enabled,
-     * "idfa" : (string) only included for iOS devices when IDFA collection is enabled,
-     * "google_ad_id" : (string) only included for Android devices when Google Play Advertising Identifier collection is enabled,
-     * "roku_ad_id" : (string) only included for Roku devices,
-     * "ad_tracking_enabled" : (bool)
-     * },
-     * ...
-     * ],
-     * "apps" : [
-     * {
-     * "name" : (string),
-     * "platform" : (string),
-     * "version" : (string),
-     * "sessions" : (string),
-     * "first_used" : (string) date,
-     * "last_used" : (string) date
-     * },
-     * ...
-     * ],
+     *     "created_at" : (string),
+     *     "external_id" : (string),
+     *     "user_aliases" : [
+     *       {
+     *         "alias_name" : (string),
+     *         "alias_label" : (string)
+     *       }
+     *     ],
+     *     "braze_id": (string),
+     *     "first_name" : (string),
+     *     "last_name" : (string),
+     *     "email" : (string),
+     *     "dob" : (string) date for the user's date of birth,
+     *     "home_city" : (string),
+     *     "country" : (string) ISO-3166-1 alpha-2 standard,
+     *     "phone" : (string),
+     *     "language" : (string) ISO-639-1 standard,
+     *     "time_zone" : (string),
+     *     "last_coordinates" : (array of float) [lon, lat],
+     *     "gender" : (string) "M" | "F",
+     *     "total_revenue" : (float),
+     *     "attributed_campaign" : (string),
+     *     "attributed_source" : (string),
+     *     "attributed_adgroup" : (string),
+     *     "attributed_ad" : (string),
+     *     "custom_attributes" : (object) custom attribute key-value pairs,
+     *     "custom_events" : [
+     *       {
+     *         "name" : (string),
+     *         "first" : (string) date,
+     *         "last" : (string) date,
+     *         "count" : (int)
+     *       },
+     *       ...
+     *     ],
+     *     "purchases" : [
+     *       {
+     *         "name" : (string),
+     *         "first" : (string) date,
+     *         "last" : (string) date,
+     *          "count" : (int)
+     *       },
+     *       ...
+     *     ],
+     *     "devices" : [
+     *       {
+     *         "model" : (string),
+     *         "os" : (string),
+     *         "carrier" : (string),
+     *         "idfv" : (string) only included for iOS devices when IDFV collection is enabled,
+     *         "idfa" : (string) only included for iOS devices when IDFA collection is enabled,
+     *         "google_ad_id" : (string) only included for Android devices when Google Play Advertising Identifier collection is enabled,
+     *         "roku_ad_id" : (string) only included for Roku devices,
+     *         "ad_tracking_enabled" : (bool)
+     *       },
+     *       ...
+     *     ],
+     *     "apps" : [
+     *       {
+     *         "name" : (string),
+     *         "platform" : (string),
+     *         "version" : (string),
+     *         "sessions" : (string),
+     *         "first_used" : (string) date,
+     *         "last_used" : (string) date
+     *       },
+     *       ...
+     *     ],
      * }
      *
-     * ```
+     *  ```
      *
      * ### Sample output
      *
      * ``` json
      * {
      * {
-     * "created_at" : "2020-07-10 15:00:00.000 UTC",
-     * "external_id" : "A8i3mkd99",
-     * "user_aliases" : [
-     * {
-     * "alias_name" : "user_123",
-     * "alias_label" : "amplitude_id"
-     * }
-     * ],
-     * "braze_id": "5fbd99bac125ca40511f2cb1",
-     * "random_bucket" : 2365,
-     * "first_name" : "Jane",
-     * "last_name" : "Doe",
-     * "email" : "example@braze.com",
-     * "dob" : "1980-12-21",
-     * "home_city" : "Chicago",
-     * "country" : "US",
-     * "phone" : "+442071838750",
-     * "language" : "en",
-     * "time_zone" : "Eastern Time (US & Canada)",
-     * "last_coordinates" : [41.84157636433568, -87.83520818508256],
-     * "gender" : "F",
-     * "total_revenue" : 65,
-     * "attributed_campaign" : "braze_test_campaign_072219",
-     * "attributed_source" : "braze_test_source_072219",
-     * "attributed_adgroup" : "braze_test_adgroup_072219",
-     * "attributed_ad" : "braze_test_ad_072219",
-     * "custom_attributes":
-     * {
-     * "loyaltyId": "37c98b9d-9a7f-4b2f-a125-d873c5152856",
-     * "loyaltyPoints": "321",
-     * "loyaltyPointsNumber": 107
-     * },
-     * "custom_events": [
-     * {
-     * "name": "Loyalty Acknowledgement",
-     * "first": "2021-06-28T17:02:43.032Z",
-     * "last": "2021-06-28T17:02:43.032Z",
-     * "count": 1
-     * },
-     * ...
-     * ],
-     * "purchases": [
-     * {
-     * "name": "item_40834",
-     * "first": "2021-09-05T03:45:50.540Z",
-     * "last": "2022-06-03T17:30:41.201Z",
-     * "count": 10
-     * },
-     * ...
-     * ],
-     * "devices": [
-     * {
-     * "model": "Pixel XL",
-     * "os": "Android (Q)",
-     * "carrier": null,
-     * "device_id": "312ef2c1-83db-4789-967-554545a1bf7a",
-     * "ad_tracking_enabled": true
-     * },
-     * ...
-     * ],
-     * "apps": [
-     * {
-     * "name": "MovieCannon",
-     * "platform": "Android",
-     * "version": "3.29.0",
-     * "sessions": 1129,
-     * "first_used": "2020-02-02T19:56:19.142Z",
-     * "last_used": "2021-11-11T00:25:19.201Z"
-     * },
-     * ...
-     * ],
+     *     "created_at" : "2020-07-10 15:00:00.000 UTC",
+     *     "external_id" : "A8i3mkd99",
+     *     "user_aliases" : [
+     *       {
+     *         "alias_name" : "user_123",
+     *         "alias_label" : "amplitude_id"
+     *       }
+     *     ],
+     *     "braze_id": "5fbd99bac125ca40511f2cb1",
+     *     "random_bucket" : 2365,
+     *     "first_name" : "Jane",
+     *     "last_name" : "Doe",
+     *     "email" : "example@braze.com",
+     *     "dob" : "1980-12-21",
+     *     "home_city" : "Chicago",
+     *     "country" : "US",
+     *     "phone" : "+442071838750",
+     *     "language" : "en",
+     *     "time_zone" : "Eastern Time (US & Canada)",
+     *     "last_coordinates" : [41.84157636433568, -87.83520818508256],
+     *     "gender" : "F",
+     *     "total_revenue" : 65,
+     *     "attributed_campaign" : "braze_test_campaign_072219",
+     *     "attributed_source" : "braze_test_source_072219",
+     *     "attributed_adgroup" : "braze_test_adgroup_072219",
+     *     "attributed_ad" : "braze_test_ad_072219",
+     *     "custom_attributes":
+     *       {
+     *         "loyaltyId": "37c98b9d-9a7f-4b2f-a125-d873c5152856",
+     *         "loyaltyPoints": "321",
+     *         "loyaltyPointsNumber": 107
+     *       },
+     *     "custom_events": [
+     *       {
+     *           "name": "Loyalty Acknowledgement",
+     *           "first": "2021-06-28T17:02:43.032Z",
+     *           "last": "2021-06-28T17:02:43.032Z",
+     *           "count": 1
+     *       },
+     *       ...
+     *     ],
+     *     "purchases": [
+     *       {
+     *         "name": "item_40834",
+     *         "first": "2021-09-05T03:45:50.540Z",
+     *         "last": "2022-06-03T17:30:41.201Z",
+     *         "count": 10
+     *       },
+     *       ...
+     *     ],
+     *     "devices": [
+     *       {
+     *         "model": "Pixel XL",
+     *         "os": "Android (Q)",
+     *         "carrier": null,
+     *         "device_id": "312ef2c1-83db-4789-967-554545a1bf7a",
+     *         "ad_tracking_enabled": true
+     *       },
+     *       ...
+     *     ],
+     *     "apps": [
+     *       {
+     *         "name": "MovieCannon",
+     *         "platform": "Android",
+     *         "version": "3.29.0",
+     *         "sessions": 1129,
+     *         "first_used": "2020-02-02T19:56:19.142Z",
+     *         "last_used": "2021-11-11T00:25:19.201Z"
+     *       },
+     *       ...
+     *     ],
      * }
      *
-     * ```
+     *  ```
      *
      * @param array $headerParameters {
      *
@@ -254,7 +254,7 @@ class PostUsersExportGlobalControlGroup extends \Braze\Runtime\Client\BaseEndpoi
      * @var string $Authorization
      *             }
      */
-    public function __construct(?\Braze\Model\UsersExportGlobalControlGroupPostBody $requestBody = null, array $headerParameters = [])
+    public function __construct(\Braze\Model\UsersExportGlobalControlGroupPostBody $requestBody = null, array $headerParameters = [])
     {
         $this->body = $requestBody;
         $this->headerParameters = $headerParameters;
@@ -306,32 +306,32 @@ class PostUsersExportGlobalControlGroup extends \Braze\Runtime\Client\BaseEndpoi
      * @throws \Braze\Exception\PostUsersExportGlobalControlGroupTooManyRequestsException
      * @throws \Braze\Exception\PostUsersExportGlobalControlGroupInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();
-        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (200 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return json_decode($body);
         }
-        if (is_null($contentType) === false && (201 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (201 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return json_decode($body);
         }
-        if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (400 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostUsersExportGlobalControlGroupBadRequestException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (401 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostUsersExportGlobalControlGroupUnauthorizedException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (403 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostUsersExportGlobalControlGroupForbiddenException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (404 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostUsersExportGlobalControlGroupNotFoundException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (429 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (429 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostUsersExportGlobalControlGroupTooManyRequestsException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (500 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostUsersExportGlobalControlGroupInternalServerErrorException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
     }

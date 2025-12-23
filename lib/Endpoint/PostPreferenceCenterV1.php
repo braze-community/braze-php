@@ -66,23 +66,23 @@ class PostPreferenceCenterV1 extends \Braze\Runtime\Client\BaseEndpoint implemen
      *
      * ```
      * {
-     * "preference_center_api_id": "preference_center_api_id_example",
-     * "liquid_tag": "{{preference_center.${MyPreferenceCenter2022-09-22}}}",
-     * "created_at": "2022-09-22T18:28:07+00:00",
-     * "message": "success"
+     *   "preference_center_api_id": "preference_center_api_id_example",
+     *   "liquid_tag": "{{preference_center.${MyPreferenceCenter2022-09-22}}}",
+     *   "created_at": "2022-09-22T18:28:07+00:00",
+     *   "message": "success"
      * }
      *
-     * ```
+     *  ```
      *
      * ### HTML with form inputs
      *
      * ```
      * %3C!doctype%20html%3E
      * <html lang="en">
-     * <head>
-     * <meta name="robots" content="noindex" />
-     * <title>Email Preferences</title>
-     * <script type="text/javascript">
+     *   <head>
+     *     <meta name="robots" content="noindex" />
+     *     <title>Email Preferences</title>
+     *     <script type="text/javascript">
      * %20%20%20%20%20%20window.onload%20%3D%20()%20%3D%3E%20%7B
      * %20%20%20%20%20%20%20%20const%20globalUnsubscribed%20%3D%20%26%23x27%3B%7B%7Bsubscribed_state.%24%7Bemail_global%7D%7D%7D%26%23x27%3B%20%3D%3D%20%22unsubscribed%22%3B
      * %20%20%20%20%20%20%20%20const%20globalSubscribedValue%20%3D%20%26%23x27%3B%7B%7Bsubscribed_state.%24%7Bemail_global%7D%7D%7D%26%23x27%3B%20%3D%3D%20%22opted_in%22%20%3F%20%22opted_in%22%20%3A%20%22subscribed%22%3B
@@ -112,8 +112,8 @@ class PostPreferenceCenterV1 extends \Braze\Runtime\Client\BaseEndpoint implemen
      * %20%20%20%20%20%20%20%20%20%20setGlobal(e.target.checked)%3B
      * %20%20%20%20%20%20%20%20%7D)%3B
      * %20%20%20%20%20%20%7D%3B
-     * </script>
-     * <style>
+     *     </script>
+     *     <style>
      * %20%20%20%20%20%20body%20%7B
      * %20%20%20%20%20%20%20%20background%3A%20%23fff%3B
      * %20%20%20%20%20%20%20%20margin%3A%200%3B
@@ -127,9 +127,9 @@ class PostPreferenceCenterV1 extends \Braze\Runtime\Client\BaseEndpoint implemen
      * %20%20%20%20%20%20%20%20%20%20width%3A%20100%25%3B
      * %20%20%20%20%20%20%20%20%7D
      * %20%20%20%20%20%20%7D
-     * </style>
-     * </head>
-     * <body class="vsc-initialized" style="margin: 0" bgcolor="#fff">
+     *     </style>
+     *   </head>
+     *   <body class="vsc-initialized" style="margin: 0" bgcolor="#fff">
      * %20%20%20%20%3Cdiv
      * %20%20%20%20%20%20class%3D%22main-container%22
      * %20%20%20%20%20%20style%3D%22
@@ -147,64 +147,64 @@ class PostPreferenceCenterV1 extends \Braze\Runtime\Client\BaseEndpoint implemen
      * %20%20%20%20%20%20%20%20padding%3A%2015px%200%205px%3B
      * %20%20%20%20%20%20%22
      * %20%20%20%20%3E
-     * <div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="content" style="margin-left: 20px; margin-right: 20px">
-     * <div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27;>
+     *       <div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="content" style="margin-left: 20px; margin-right: 20px">
+     *         <div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27;>
      * %20%20%20%20%20%20%20%20%20%20%3Ch1
      * %20%20%20%20%20%20%20%20%20%20%20%20style%3D%22color%3A%20%233accdd%3B%20font-size%3A%2027px%3B%20font-weight%3A%20400%3B%20margin-bottom%3A%2040px%3B%20margin-top%3A%200%22
      * %20%20%20%20%20%20%20%20%20%20%20%20align%3D%22center%22
      * %20%20%20%20%20%20%20%20%20%20%3E
      * %20%20%20%20%20%20%20%20%20%20%20%20Manage%20Email%20Preferences
-     * </h1>
-     * <p class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="intro-text" style="font-size: 14px; margin-bottom: 20px" align="center">
+     *           </h1>
+     *           <p class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="intro-text" style="font-size: 14px; margin-bottom: 20px" align="center">
      * %20%20%20%20%20%20%20%20%20%20%20%20Select%20the%20emails%20that%20you%20want%20to%20receive.
-     * </p>
-     * </div>
-     * <form action="{{preference_center_submit_url}}" method="post" accept-charset="UTF-8">
-     * <div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27;>
-     * <h3 class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; style="font-size: 15px; margin-bottom: 15px; margin-left: 5px; margin-top: 40px">
-     * Email Address: <span class="displayed-email" style="font-weight: 400">{{${email_address}}}</span>
-     * </h3>
-     * </div>
-     * <div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="subscription-groups-holder" style="margin-bottom: 20px"><div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="row" style="border-top-width: 1px; border-top-color: #dddde2; border-top-style: solid; background-color: #fff; padding: 15px 10px 14px;border-bottom: 1px solid rgb(221, 221, 226);">
-     * <label style="color: #27368f; cursor: pointer; font-size: 15px; font-weight: 700;">
-     * <input type="checkbox" id="checkbox-3d2ae07a-f2ff-4318-bdff-e394f2d3a4ec" class="sub_group" style="margin-right: 4px;">
-     * <input type="hidden" name="{% form_field_name :subscription_group 3d2ae07a-f2ff-4318-bdff-e394f2d3a4ec %}" id="value-3d2ae07a-f2ff-4318-bdff-e394f2d3a4ec" />
+     *           </p>
+     *         </div>
+     *         <form action="{{preference_center_submit_url}}" method="post" accept-charset="UTF-8">
+     *           <div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27;>
+     *             <h3 class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; style="font-size: 15px; margin-bottom: 15px; margin-left: 5px; margin-top: 40px">
+     *               Email Address: <span class="displayed-email" style="font-weight: 400">{{${email_address}}}</span>
+     *             </h3>
+     *           </div>
+     *           <div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="subscription-groups-holder" style="margin-bottom: 20px"><div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="row" style="border-top-width: 1px; border-top-color: #dddde2; border-top-style: solid; background-color: #fff; padding: 15px 10px 14px;border-bottom: 1px solid rgb(221, 221, 226);">
+     *   <label style="color: #27368f; cursor: pointer; font-size: 15px; font-weight: 700;">
+     *     <input type="checkbox" id="checkbox-3d2ae07a-f2ff-4318-bdff-e394f2d3a4ec" class="sub_group" style="margin-right: 4px;">
+     *     <input type="hidden" name="{% form_field_name :subscription_group 3d2ae07a-f2ff-4318-bdff-e394f2d3a4ec %}" id="value-3d2ae07a-f2ff-4318-bdff-e394f2d3a4ec" />
      * %20%20%20%20Sub%20Group%201
-     * </label>
-     * <p class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="subscription-group" style="font-size: 13px; line-height: 1.4em; min-height: 20px; padding-right: 20px; margin: 0 0 3px 23px;">
-     * </p>
+     *   </label>
+     *   <p class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="subscription-group" style="font-size: 13px; line-height: 1.4em; min-height: 20px; padding-right: 20px; margin: 0 0 3px 23px;">
+     *   </p>
      * </div>
      * <div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="row" style="border-top-width: 1px; border-top-color: #dddde2; border-top-style: solid; background-color: #fff; padding: 15px 10px 14px;border-bottom: 1px solid rgb(221, 221, 226);">
-     * <label style="color: #27368f; cursor: pointer; font-size: 15px; font-weight: 700;">
-     * <input type="checkbox" id="checkbox-7d89bdc3-4aa1-4592-8b8a-4c8b7161c875" class="sub_group" style="margin-right: 4px;">
-     * <input type="hidden" name="{% form_field_name :subscription_group 7d89bdc3-4aa1-4592-8b8a-4c8b7161c875 %}" id="value-7d89bdc3-4aa1-4592-8b8a-4c8b7161c875" />
+     *   <label style="color: #27368f; cursor: pointer; font-size: 15px; font-weight: 700;">
+     *     <input type="checkbox" id="checkbox-7d89bdc3-4aa1-4592-8b8a-4c8b7161c875" class="sub_group" style="margin-right: 4px;">
+     *     <input type="hidden" name="{% form_field_name :subscription_group 7d89bdc3-4aa1-4592-8b8a-4c8b7161c875 %}" id="value-7d89bdc3-4aa1-4592-8b8a-4c8b7161c875" />
      * %20%20%20%20Sub%20Group%202
-     * </label>
-     * <p class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="subscription-group" style="font-size: 13px; line-height: 1.4em; min-height: 20px; padding-right: 20px; margin: 0 0 3px 23px;">
-     * </p>
+     *   </label>
+     *   <p class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="subscription-group" style="font-size: 13px; line-height: 1.4em; min-height: 20px; padding-right: 20px; margin: 0 0 3px 23px;">
+     *   </p>
      * </div>
      * <div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="row" style="border-top-width: 1px; border-top-color: #dddde2; border-top-style: solid; background-color: #fff; padding: 15px 10px 14px;border-bottom: 1px solid rgb(221, 221, 226);">
-     * <label style="color: #27368f; cursor: pointer; font-size: 15px; font-weight: 700;">
-     * <input type="checkbox" id="checkbox-5444d32e-2815-4258-964c-b9690d4ccb94" class="sub_group" style="margin-right: 4px;">
-     * <input type="hidden" name="{% form_field_name :subscription_group 5444d32e-2815-4258-964c-b9690d4ccb94 %}" id="value-5444d32e-2815-4258-964c-b9690d4ccb94" />
+     *   <label style="color: #27368f; cursor: pointer; font-size: 15px; font-weight: 700;">
+     *     <input type="checkbox" id="checkbox-5444d32e-2815-4258-964c-b9690d4ccb94" class="sub_group" style="margin-right: 4px;">
+     *     <input type="hidden" name="{% form_field_name :subscription_group 5444d32e-2815-4258-964c-b9690d4ccb94 %}" id="value-5444d32e-2815-4258-964c-b9690d4ccb94" />
      * %20%20%20%20Sub%20Group%203
-     * </label>
-     * <p class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="subscription-group" style="font-size: 13px; line-height: 1.4em; min-height: 20px; padding-right: 20px; margin: 0 0 3px 23px;">
-     * </p>
+     *   </label>
+     *   <p class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="subscription-group" style="font-size: 13px; line-height: 1.4em; min-height: 20px; padding-right: 20px; margin: 0 0 3px 23px;">
+     *   </p>
      * </div>
      * </div>
-     * <div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="unsub-all" style="cursor: pointer; font-size: 13px; margin-bottom: 20px" align="center">
-     * <label>
-     * <input type="checkbox" id="checkbox-global" />
+     *           <div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="unsub-all" style="cursor: pointer; font-size: 13px; margin-bottom: 20px" align="center">
+     *             <label>
+     *               <input type="checkbox" id="checkbox-global" />
      * %20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cinput
      * %20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20type%3D%22hidden%22
      * %20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20id%3D%22value-global%22
      * %20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20name%3D%22%7B%25%20form_field_name%20%3Aemail_global_state%20%25%7D%22
      * %20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%3E
-     * <i class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27;> Unsubscribe from all of the above types of emails </i>
-     * </label>
-     * </div>
-     * <div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27;>
+     *               <i class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27;> Unsubscribe from all of the above types of emails </i>
+     *             </label>
+     *           </div>
+     *           <div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27;>
      * %20%20%20%20%20%20%20%20%20%20%20%20%3Cinput
      * %20%20%20%20%20%20%20%20%20%20%20%20%20%20class%3D%22save%22
      * %20%20%20%20%20%20%20%20%20%20%20%20%20%20type%3D%22submit%22
@@ -223,14 +223,14 @@ class PostPreferenceCenterV1 extends \Braze\Runtime\Client\BaseEndpoint implemen
      * %20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20border-style%3A%20none%3B
      * %20%20%20%20%20%20%20%20%20%20%20%20%20%20%22
      * %20%20%20%20%20%20%20%20%20%20%20%20%2F%3E
-     * </div>
-     * </form>
-     * </div>
-     * </div>
-     * </body>
+     *           </div>
+     *         </form>
+     *       </div>
+     *     </div>
+     *   </body>
      * </html>
      *
-     * ```
+     *  ```
      *
      * @param array $headerParameters {
      *
@@ -238,7 +238,7 @@ class PostPreferenceCenterV1 extends \Braze\Runtime\Client\BaseEndpoint implemen
      * @var string $Authorization
      *             }
      */
-    public function __construct(?\Braze\Model\PreferenceCenterV1PostBody $requestBody = null, array $headerParameters = [])
+    public function __construct(\Braze\Model\PreferenceCenterV1PostBody $requestBody = null, array $headerParameters = [])
     {
         $this->body = $requestBody;
         $this->headerParameters = $headerParameters;
@@ -290,32 +290,32 @@ class PostPreferenceCenterV1 extends \Braze\Runtime\Client\BaseEndpoint implemen
      * @throws \Braze\Exception\PostPreferenceCenterV1TooManyRequestsException
      * @throws \Braze\Exception\PostPreferenceCenterV1InternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();
-        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (200 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return json_decode($body);
         }
-        if (is_null($contentType) === false && (201 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (201 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return json_decode($body);
         }
-        if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (400 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostPreferenceCenterV1BadRequestException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (401 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostPreferenceCenterV1UnauthorizedException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (403 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostPreferenceCenterV1ForbiddenException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (404 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostPreferenceCenterV1NotFoundException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (429 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (429 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostPreferenceCenterV1TooManyRequestsException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (500 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostPreferenceCenterV1InternalServerErrorException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
     }

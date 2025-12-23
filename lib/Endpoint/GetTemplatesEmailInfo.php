@@ -17,7 +17,7 @@ class GetTemplatesEmailInfo extends \Braze\Runtime\Client\BaseEndpoint implement
     /**
      * > Use this endpoint to get information on your email templates.
      *
-     **Important:** Templates built using the drag-and-drop editor are not accepted.
+     * **Important:** Templates built using the drag-and-drop editor are not accepted.
      *
      * ## Prerequisites
      *
@@ -39,7 +39,7 @@ class GetTemplatesEmailInfo extends \Braze\Runtime\Client\BaseEndpoint implement
      * curl --location -g --request GET 'https://rest.iad-01.braze.com/templates/email/info?email_template_id={{email_template_id}}' \
      * --header 'Authorization: Bearer YOUR_REST_API_KEY'
      *
-     * ```
+     *  ```
      *
      * ## Response
      *
@@ -47,20 +47,20 @@ class GetTemplatesEmailInfo extends \Braze\Runtime\Client\BaseEndpoint implement
      * Content-Type: application/json
      * Authorization: Bearer YOUR_REST_API_KEY
      * {
-     * "email_template_id": (string) Your email template's API Identifier,
-     * "template_name": (string) The name of your email template,
-     * "description": (string) The email template description,
-     * "subject": (string) The email template subject line,
-     * "preheader": (optional, string) The email preheader used to generate previews in some clients),
-     * "body": (optional, string) The email template body that may include HTML,
-     * "plaintext_body": (optional, string) A plaintext version of the email template body,
-     * "should_inline_css": (optional, boolean) Whether there is inline CSS in the body of the template - defaults to the css inlining value for the workspace,
-     * "tags": (string) Tag names,
-     * "created_at": (string) The time the email was created at in ISO 8601,
-     * "updated_at": (string) The time the email was updated in ISO 8601
+     *   "email_template_id": (string) Your email template's API Identifier,
+     *   "template_name": (string) The name of your email template,
+     *   "description": (string) The email template description,
+     *   "subject": (string) The email template subject line,
+     *   "preheader": (optional, string) The email preheader used to generate previews in some clients),
+     *   "body": (optional, string) The email template body that may include HTML,
+     *   "plaintext_body": (optional, string) A plaintext version of the email template body,
+     *   "should_inline_css": (optional, boolean) Whether there is inline CSS in the body of the template - defaults to the css inlining value for the workspace,
+     *   "tags": (string) Tag names,
+     *   "created_at": (string) The time the email was created at in ISO 8601,
+     *   "updated_at": (string) The time the email was updated in ISO 8601
      * }
      *
-     * ```
+     *  ```
      *
      * Images in this response will show in the `body` variable as HTML.
      *
@@ -134,29 +134,29 @@ class GetTemplatesEmailInfo extends \Braze\Runtime\Client\BaseEndpoint implement
      * @throws \Braze\Exception\GetTemplatesEmailInfoTooManyRequestsException
      * @throws \Braze\Exception\GetTemplatesEmailInfoInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();
-        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (200 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return json_decode($body);
         }
-        if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (400 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetTemplatesEmailInfoBadRequestException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (401 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetTemplatesEmailInfoUnauthorizedException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (403 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetTemplatesEmailInfoForbiddenException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (404 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetTemplatesEmailInfoNotFoundException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (429 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (429 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetTemplatesEmailInfoTooManyRequestsException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (500 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetTemplatesEmailInfoInternalServerErrorException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
     }

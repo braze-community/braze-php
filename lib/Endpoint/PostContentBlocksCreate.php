@@ -42,14 +42,14 @@ class PostContentBlocksCreate extends \Braze\Runtime\Client\BaseEndpoint impleme
      * --header 'Content-Type: application/json' \
      * --header 'Authorization: Bearer YOUR_REST_API_KEY' \
      * --data-raw '{
-     * "name": "content_block",
-     * "description": "This is my Content Block",
-     * "content": "HTML content within block",
-     * "state": "draft",
-     * "tags": ["marketing"]
+     *   "name": "content_block",
+     *   "description": "This is my Content Block",
+     *   "content": "HTML content within block",
+     *   "state": "draft",
+     *   "tags": ["marketing"]
      * }'
      *
-     * ```
+     *  ```
      *
      * ## Response
      *
@@ -57,13 +57,13 @@ class PostContentBlocksCreate extends \Braze\Runtime\Client\BaseEndpoint impleme
      * Content-Type: application/json
      * Authorization: Bearer YOUR_REST_API_KEY
      * {
-     * "content_block_id": (string) Your newly generated block id,
-     * "liquid_tag": (string) The generated block tag from the Content Block name,
-     * "created_at": (string) The time the Content Block was created in ISO 8601,
-     * "message": "success"
+     *   "content_block_id": (string) Your newly generated block id,
+     *   "liquid_tag": (string) The generated block tag from the Content Block name,
+     *   "created_at": (string) The time the Content Block was created in ISO 8601,
+     *   "message": "success"
      * }
      *
-     * ```
+     *  ```
      *
      * ## Troubleshooting
      *
@@ -94,7 +94,7 @@ class PostContentBlocksCreate extends \Braze\Runtime\Client\BaseEndpoint impleme
      * @var string $Authorization
      *             }
      */
-    public function __construct(?\Braze\Model\ContentBlocksCreatePostBody $requestBody = null, array $headerParameters = [])
+    public function __construct(\Braze\Model\ContentBlocksCreatePostBody $requestBody = null, array $headerParameters = [])
     {
         $this->body = $requestBody;
         $this->headerParameters = $headerParameters;
@@ -146,32 +146,32 @@ class PostContentBlocksCreate extends \Braze\Runtime\Client\BaseEndpoint impleme
      * @throws \Braze\Exception\PostContentBlocksCreateTooManyRequestsException
      * @throws \Braze\Exception\PostContentBlocksCreateInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();
-        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (200 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return json_decode($body);
         }
-        if (is_null($contentType) === false && (201 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (201 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return json_decode($body);
         }
-        if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (400 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostContentBlocksCreateBadRequestException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (401 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostContentBlocksCreateUnauthorizedException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (403 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostContentBlocksCreateForbiddenException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (404 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostContentBlocksCreateNotFoundException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (429 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (429 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostContentBlocksCreateTooManyRequestsException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (500 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostContentBlocksCreateInternalServerErrorException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
     }

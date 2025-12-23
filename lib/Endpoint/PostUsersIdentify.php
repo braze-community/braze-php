@@ -87,11 +87,11 @@ class PostUsersIdentify extends \Braze\Runtime\Client\BaseEndpoint implements \B
      *
      * - Segmentable custom events summary
      *
-     * - Event count (the sum from both profiles)
+     *     - Event count (the sum from both profiles)
      *
-     * - Event first occurred (Braze will pick the earlier date of the two dates)
+     *     - Event first occurred (Braze will pick the earlier date of the two dates)
      *
-     * - Event last occurred (Braze will pick the later date of the two dates)
+     *     - Event last occurred (Braze will pick the later date of the two dates)
      *
      * - In-app purchase total in cents (the sum from both profiles)
      *
@@ -113,11 +113,11 @@ class PostUsersIdentify extends \Braze\Runtime\Client\BaseEndpoint implements \B
      *
      * - Custom event and purchase event count and first date and last date timestamps
      *
-     * - These merged fields will update “for X events in Y days” filters. For purchase events, these filters include “number of purchases in Y days” and “money spent in last Y days”.
+     *     - These merged fields will update “for X events in Y days” filters. For purchase events, these filters include “number of purchases in Y days” and “money spent in last Y days”.
      *
      * - Session data if the app exists on both user profiles
      *
-     * - For example, if our target user doesn’t have an app summary for “ABCApp” but our original user does, the target user will have the “ABCApp” app summary on their profile after the merge.
+     *     - For example, if our target user doesn’t have an app summary for “ABCApp” but our original user does, the target user will have the “ABCApp” app summary on their profile after the merge.
      *
      *
      * ### Identifying users by email
@@ -140,26 +140,26 @@ class PostUsersIdentify extends \Braze\Runtime\Client\BaseEndpoint implements \B
      * --header 'Content-Type: application/json' \
      * --header 'Authorization: Bearer YOUR_REST_API_KEY' \
      * --data-raw '{
-     * "aliases_to_identify": [
-     * {
-     * "external_id": "external_identifier",
-     * "user_alias": {
-     * "alias_name": "example_alias",
-     * "alias_label": "example_label"
-     * }
-     * }
-     * ],
-     * "emails_to_identify": [
-     * {
-     * "external_id": "external_identifier_2",
-     * "email": "john.smith@braze.com",
-     * "prioritization": ["unidentified", "most_recently_updated"]
-     * }
-     * ]
-     * "merge_behavior": "merge"
+     *   "aliases_to_identify": [
+     *     {
+     *       "external_id": "external_identifier",
+     *       "user_alias": {
+     *           "alias_name": "example_alias",
+     *           "alias_label": "example_label"
+     *       }
+     *     }
+     *   ],
+     *   "emails_to_identify": [
+     *     {
+     *       "external_id": "external_identifier_2",
+     *       "email": "john.smith@braze.com",
+     *       "prioritization": ["unidentified", "most_recently_updated"]
+     *     }
+     *   ]
+     *   "merge_behavior": "merge"
      * }'
      *
-     * ```
+     *  ```
      *
      * ## Response
      *
@@ -167,11 +167,11 @@ class PostUsersIdentify extends \Braze\Runtime\Client\BaseEndpoint implements \B
      * Content-Type: application/json
      * Authorization: Bearer YOUR_REST_API_KEY
      * {
-     * "aliases_processed": 1,
-     * "message": "success"
+     *     "aliases_processed": 1,
+     *     "message": "success"
      * }
      *
-     * ```
+     *  ```
      *
      * @param array $headerParameters {
      *
@@ -179,7 +179,7 @@ class PostUsersIdentify extends \Braze\Runtime\Client\BaseEndpoint implements \B
      * @var string $Authorization
      *             }
      */
-    public function __construct(?\Braze\Model\UsersIdentifyPostBody $requestBody = null, array $headerParameters = [])
+    public function __construct(\Braze\Model\UsersIdentifyPostBody $requestBody = null, array $headerParameters = [])
     {
         $this->body = $requestBody;
         $this->headerParameters = $headerParameters;
@@ -231,32 +231,32 @@ class PostUsersIdentify extends \Braze\Runtime\Client\BaseEndpoint implements \B
      * @throws \Braze\Exception\PostUsersIdentifyTooManyRequestsException
      * @throws \Braze\Exception\PostUsersIdentifyInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();
-        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (200 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return json_decode($body);
         }
-        if (is_null($contentType) === false && (201 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (201 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return json_decode($body);
         }
-        if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (400 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostUsersIdentifyBadRequestException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (401 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostUsersIdentifyUnauthorizedException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (403 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostUsersIdentifyForbiddenException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (404 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostUsersIdentifyNotFoundException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (429 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (429 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostUsersIdentifyTooManyRequestsException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (500 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostUsersIdentifyInternalServerErrorException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
     }

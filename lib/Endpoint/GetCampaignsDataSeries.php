@@ -38,87 +38,87 @@ class GetCampaignsDataSeries extends \Braze\Runtime\Client\BaseEndpoint implemen
      * Content-Type: application/json
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
-     * "message": (required, string) the status of the export, returns 'success' when completed without errors,
-     * "data" : [
-     * {
-     * "time" : (string) date as ISO 8601 date,
-     * "messages" : {
-     * "ios_push" : [
-     * {
-     * "variation_name": "iOS_Push",
-     * "sent" : (int),
-     * "direct_opens" : (int),
-     * "total_opens" : (int),
-     * "bounces" : (int),
-     * "body_clicks" : (int)
-     * "revenue": 0,
-     * "unique_recipients": 1,
-     * "conversions": 0,
-     * "conversions_by_send_time": 0,
-     * "conversions1": 0,
-     * "conversions1_by_send_time": 0,
-     * "conversions2": 0,
-     * "conversions2_by_send_time": 0,
-     * "conversions3": 0,
-     * "conversions3_by_send_time": 0,
-     * "carousel_slide_[NUM]_[TITLE]_click": (optional, int),
-     * "notif_button_[NUM]_[TITLE]_click": (optional, int)
-     * }
-     * ],
-     * "android_push" : [
-     * {
-     * "sent" : (int),
-     * "direct_opens" : (int),
-     * "total_opens" : (int),
-     * "bounces" : (int),
-     * "body_clicks" : (int)
-     * }
-     * ],
-     * "webhook": [
-     * {
-     * "sent": (int),
-     * "errors": (int)
-     * }
-     * ],
-     * "email" : [
-     * {
-     * "sent": (int),
-     * "opens": (int),
-     * "unique_opens": (int),
-     * "clicks": (int),
-     * "unique_clicks": (int),
-     * "unsubscribes": (int),
-     * "bounces": (int),
-     * "delivered": (int),
-     * "reported_spam": (int)
-     * }
-     * ],
-     * "sms" : [
-     * {
-     * "sent": (int),
-     * "delivered": (int),
-     * "undelivered": (int),
-     * "delivery_failed": (int)
-     * }
-     * ]
-     * },
-     * "conversions_by_send_time": (optional, int),
-     * "conversions1_by_send_time": (optional, int),
-     * "conversions2_by_send_time": (optional, int),
-     * "conversions3_by_send_time": (optional, int),
-     * "conversions": (int),
-     * "conversions1": (optional, int),
-     * "conversions2": (optional, int),
-     * "conversions3": (optional, int),
-     * "unique_recipients": (int),
-     * "revenue": (optional, float)
-     * },
-     * ...
-     * ],
-     * ...
+     *     "message": (required, string) the status of the export, returns 'success' when completed without errors,
+     *     "data" : [
+     *         {
+     *             "time" : (string) date as ISO 8601 date,
+     *             "messages" : {
+     *                 "ios_push" : [
+     *                     {
+     *                       "variation_name": "iOS_Push",
+     *                       "sent" : (int),
+     *                       "direct_opens" : (int),
+     *                       "total_opens" : (int),
+     *                       "bounces" : (int),
+     *                       "body_clicks" : (int)
+     *                       "revenue": 0,
+     *                       "unique_recipients": 1,
+     *                       "conversions": 0,
+     *                       "conversions_by_send_time": 0,
+     *                       "conversions1": 0,
+     *                       "conversions1_by_send_time": 0,
+     *                       "conversions2": 0,
+     *                       "conversions2_by_send_time": 0,
+     *                       "conversions3": 0,
+     *                       "conversions3_by_send_time": 0,
+     *                       "carousel_slide_[NUM]_[TITLE]_click": (optional, int),
+     *                       "notif_button_[NUM]_[TITLE]_click": (optional, int)
+     *                     }
+     *                 ],
+     *                 "android_push" : [
+     *                     {
+     *                       "sent" : (int),
+     *                       "direct_opens" : (int),
+     *                       "total_opens" : (int),
+     *                       "bounces" : (int),
+     *                       "body_clicks" : (int)
+     *                     }
+     *                 ],
+     *                 "webhook": [
+     *                     {
+     *                       "sent": (int),
+     *                       "errors": (int)
+     *                     }
+     *                 ],
+     *                 "email" : [
+     *                     {
+     *                       "sent": (int),
+     *                       "opens": (int),
+     *                       "unique_opens": (int),
+     *                       "clicks": (int),
+     *                       "unique_clicks": (int),
+     *                       "unsubscribes": (int),
+     *                       "bounces": (int),
+     *                       "delivered": (int),
+     *                       "reported_spam": (int)
+     *                     }
+     *                 ],
+     *                 "sms" : [
+     *                   {
+     *                     "sent": (int),
+     *                     "delivered": (int),
+     *                     "undelivered": (int),
+     *                     "delivery_failed": (int)
+     *                   }
+     *                 ]
+     *               },
+     *            "conversions_by_send_time": (optional, int),
+     *            "conversions1_by_send_time": (optional, int),
+     *            "conversions2_by_send_time": (optional, int),
+     *            "conversions3_by_send_time": (optional, int),
+     *            "conversions": (int),
+     *            "conversions1": (optional, int),
+     *            "conversions2": (optional, int),
+     *            "conversions3": (optional, int),
+     *            "unique_recipients": (int),
+     *            "revenue": (optional, float)
+     *         },
+     *         ...
+     *     ],
+     *     ...
      * }
      *
-     * ```
+     *  ```
      *
      * ### Multivariate response
      *
@@ -126,75 +126,75 @@ class GetCampaignsDataSeries extends \Braze\Runtime\Client\BaseEndpoint implemen
      * Content-Type: application/json
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
-     * "data" : [
-     * {
-     * "time" : (string) date as ISO 8601 date,
-     * "conversions" : (int),
-     * "revenue": (float),
-     * "conversions_by_send_time": (int),
-     * "messages" : {
-     * "trigger_in_app_message": [{
-     * "variation_name": (optional, string),
-     * "impressions": (int),
-     * "clicks": (int),
-     * "first_button_clicks": (int),
-     * "second_button_clicks": (int),
-     * "revenue": (optional, float),,
-     * "unique_recipients": (int),
-     * "conversions": (optional, int),
-     * "conversions_by_send_time": (optional, int),
-     * "conversions1": (optional, int),
-     * "conversions1_by_send_time": (optional, int),
-     * "conversions2": (optional, int),
-     * "conversions2_by_send_time": (optional, int),
-     * "conversions3": (optional, int),
-     * "conversions3_by_send_time": (optional, int)
-     * }, {
-     * "variation_name": (optional, string),
-     * "impressions": (int),
-     * "clicks": (int),
-     * "first_button_clicks": (int),
-     * "second_button_clicks": (int),
-     * "revenue": (optional, float),,
-     * "unique_recipients": (int),
-     * "conversions": (optional, int),
-     * "conversions_by_send_time": (optional, int),
-     * "conversions1": (optional, int),
-     * "conversions1_by_send_time": (optional, int),
-     * "conversions2": (optional, int),
-     * "conversions2_by_send_time": (optional, int),
-     * "conversions3": (optional, int).
-     * "conversions3_by_send_time": (optional, int)
-     * }, {
-     * "variation_name": (optional, string),
-     * "revenue": (optional, float),,
-     * "unique_recipients": (int),
-     * "conversions": (optional, int),
-     * "conversions_by_send_time": (optional, int),
-     * "conversions1": (optional, int),
-     * "conversions1_by_send_time": (optional, int),
-     * "conversions2": (optional, int),
-     * "conversions2_by_send_time": (optional, int),
-     * "conversions3": (optional, int),
-     * "conversions3_by_send_time": (optional, int),
-     * "enrolled": (optional, int)
-     * }]
-     * },
-     * "conversions_by_send_time": (optional, int),
-     * "conversions1_by_send_time": (optional, int),
-     * "conversions2_by_send_time": (optional, int),
-     * "conversions3_by_send_time": (optional, int),
-     * "conversions": (optional, int,
-     * "conversions1": (optional, int),
-     * "conversions2": (optional, int),
-     * "conversions3": (optional, int),
-     * "unique_recipients": (int),
-     * "revenue": (optional, float)
-     * }],
-     * ...
+     *     "data" : [
+     *         {
+     *             "time" : (string) date as ISO 8601 date,
+     *             "conversions" : (int),
+     *             "revenue": (float),
+     *             "conversions_by_send_time": (int),
+     *             "messages" : {
+     *                "trigger_in_app_message": [{
+     *                       "variation_name": (optional, string),
+     *                       "impressions": (int),
+     *                       "clicks": (int),
+     *                       "first_button_clicks": (int),
+     *                       "second_button_clicks": (int),
+     *                       "revenue": (optional, float),,
+     *                       "unique_recipients": (int),
+     *                       "conversions": (optional, int),
+     *                       "conversions_by_send_time": (optional, int),
+     *                       "conversions1": (optional, int),
+     *                       "conversions1_by_send_time": (optional, int),
+     *                       "conversions2": (optional, int),
+     *                       "conversions2_by_send_time": (optional, int),
+     *                       "conversions3": (optional, int),
+     *                       "conversions3_by_send_time": (optional, int)
+     *                   }, {
+     *                       "variation_name": (optional, string),
+     *                       "impressions": (int),
+     *                       "clicks": (int),
+     *                       "first_button_clicks": (int),
+     *                       "second_button_clicks": (int),
+     *                       "revenue": (optional, float),,
+     *                       "unique_recipients": (int),
+     *                       "conversions": (optional, int),
+     *                       "conversions_by_send_time": (optional, int),
+     *                       "conversions1": (optional, int),
+     *                       "conversions1_by_send_time": (optional, int),
+     *                       "conversions2": (optional, int),
+     *                       "conversions2_by_send_time": (optional, int),
+     *                       "conversions3": (optional, int).
+     *                       "conversions3_by_send_time": (optional, int)
+     *                   }, {
+     *                       "variation_name": (optional, string),
+     *                       "revenue": (optional, float),,
+     *                       "unique_recipients": (int),
+     *                       "conversions": (optional, int),
+     *                       "conversions_by_send_time": (optional, int),
+     *                       "conversions1": (optional, int),
+     *                       "conversions1_by_send_time": (optional, int),
+     *                       "conversions2": (optional, int),
+     *                       "conversions2_by_send_time": (optional, int),
+     *                       "conversions3": (optional, int),
+     *                       "conversions3_by_send_time": (optional, int),
+     *                       "enrolled": (optional, int)
+     *                   }]
+     *               },
+     *               "conversions_by_send_time": (optional, int),
+     *               "conversions1_by_send_time": (optional, int),
+     *               "conversions2_by_send_time": (optional, int),
+     *               "conversions3_by_send_time": (optional, int),
+     *               "conversions": (optional, int,
+     *               "conversions1": (optional, int),
+     *               "conversions2": (optional, int),
+     *               "conversions3": (optional, int),
+     *               "unique_recipients": (int),
+     *               "revenue": (optional, float)
+     *          }],
+     *          ...
      * }
      *
-     * ```
+     *  ```
      *
      * Possible message types are `email`, `in_app_message`, `webhook`, `android_push`, ios_push, `kindle_push`, `web_push`. All push message types will have the same statistics shown for `android_push`.
      *
@@ -280,29 +280,29 @@ class GetCampaignsDataSeries extends \Braze\Runtime\Client\BaseEndpoint implemen
      * @throws \Braze\Exception\GetCampaignsDataSeriesTooManyRequestsException
      * @throws \Braze\Exception\GetCampaignsDataSeriesInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();
-        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (200 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return json_decode($body);
         }
-        if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (400 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetCampaignsDataSeriesBadRequestException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (401 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetCampaignsDataSeriesUnauthorizedException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (403 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetCampaignsDataSeriesForbiddenException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (404 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetCampaignsDataSeriesNotFoundException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (429 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (429 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetCampaignsDataSeriesTooManyRequestsException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (500 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetCampaignsDataSeriesInternalServerErrorException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
     }

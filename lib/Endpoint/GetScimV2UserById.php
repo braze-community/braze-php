@@ -44,61 +44,61 @@ class GetScimV2UserById extends \Braze\Runtime\Client\BaseEndpoint implements \B
      * --header 'X-Request-Origin: YOUR-REQUEST-ORIGIN-HERE' \
      * --header 'Authorization: Bearer YOUR-API-KEY-HERE' \
      *
-     * ```
+     *  ```
      *
      * ## Response
      *
      * ``` json
      * {
-     * "schemas": ["urn:ietf:params:scim:schemas:core:2.0:User"],
-     * "id": "dfa245b7-24195aec-887bb3ad-602b3340",
-     * "userName": "user@test.com",
-     * "name": {
-     * "givenName": "Test",
-     * "familyName": "User"
-     * },
-     * "department": "finance",
-     * "lastSignInAt": "Thursday, January 1, 1970 12:00:00 AM",
-     * "createdAt": "Thursday, January 1, 1970 12:00:00 AM",
-     * "permissions": {
-     * "companyPermissions": ["manage_company_settings"],
-     * "roles": [
-     * {
-     * "roleName": "Another Test Role",
-     * "roleId": "23125dad23dfaae7,
-     * "appGroup": [
-     * {
-     * "appGroupId": "241adcd25adfabcded",
-     * "appGroupName": "Production Workspace",
-     * "appGroupPermissionSets": [
-     * {
-     * "appGroupPermissionSetName": "A Permission Set",
-     * "appGroupPermissionSetId": "dfa385109bc38",
-     * "permissions": ["basic_access","publish_cards"]
-     * }
-     * ]
-     * }
-     * ]
-     * }
-     * ],
-     * "appGroup": [
-     * {
-     * "appGroupId": "241adcd25789fabcded",
-     * "appGroupName": "Test Workspace",
-     * "appGroupPermissions": ["basic_access","send_campaigns_canvases"],
-     * "team": [
-     * {
-     * "teamId": "241adcd25789fabcded",
-     * "teamName": "Test Team",
-     * "teamPermissions": ["admin"]
-     * }
-     * ]
-     * }
-     * ]
-     * }
+     *     "schemas": ["urn:ietf:params:scim:schemas:core:2.0:User"],
+     *     "id": "dfa245b7-24195aec-887bb3ad-602b3340",
+     *     "userName": "user@test.com",
+     *     "name": {
+     *         "givenName": "Test",
+     *         "familyName": "User"
+     *     },
+     *     "department": "finance",
+     *     "lastSignInAt": "Thursday, January 1, 1970 12:00:00 AM",
+     *     "createdAt": "Thursday, January 1, 1970 12:00:00 AM",
+     *     "permissions": {
+     *         "companyPermissions": ["manage_company_settings"],
+     *         "roles": [
+     *             {
+     *                 "roleName": "Another Test Role",
+     *                 "roleId": "23125dad23dfaae7,
+     *                 "appGroup": [
+     *                     {
+     *                         "appGroupId": "241adcd25adfabcded",
+     *                         "appGroupName": "Production Workspace",
+     *                         "appGroupPermissionSets": [
+     *                             {
+     *                                 "appGroupPermissionSetName": "A Permission Set",
+     *                                 "appGroupPermissionSetId": "dfa385109bc38",
+     *                                 "permissions": ["basic_access","publish_cards"]
+     *                             }
+     *                         ]
+     *                     }
+     *                 ]
+     *             }
+     *         ],
+     *         "appGroup": [
+     *             {
+     *                 "appGroupId": "241adcd25789fabcded",
+     *                 "appGroupName": "Test Workspace",
+     *                 "appGroupPermissions": ["basic_access","send_campaigns_canvases"],
+     *                 "team": [
+     *                     {
+     *                          "teamId": "241adcd25789fabcded",
+     *                          "teamName": "Test Team",
+     *                          "teamPermissions": ["admin"]
+     *                     }
+     *                 ]
+     *             }
+     *         ]
+     *     }
      * }
      *
-     * ```
+     *  ```
      *
      * @param array $headerParameters {
      *
@@ -156,29 +156,29 @@ class GetScimV2UserById extends \Braze\Runtime\Client\BaseEndpoint implements \B
      * @throws \Braze\Exception\GetScimV2UserByIdTooManyRequestsException
      * @throws \Braze\Exception\GetScimV2UserByIdInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();
-        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (200 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return json_decode($body);
         }
-        if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (400 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetScimV2UserByIdBadRequestException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (401 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetScimV2UserByIdUnauthorizedException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (403 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetScimV2UserByIdForbiddenException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (404 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetScimV2UserByIdNotFoundException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (429 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (429 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetScimV2UserByIdTooManyRequestsException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (500 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetScimV2UserByIdInternalServerErrorException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
     }

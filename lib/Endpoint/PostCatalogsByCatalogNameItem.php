@@ -47,62 +47,62 @@ class PostCatalogsByCatalogNameItem extends \Braze\Runtime\Client\BaseEndpoint i
      * --header 'Content-Type: application/json' \
      * --header 'Authorization: Bearer YOUR-REST-API-KEY' \
      * --data-raw '{
-     * "items": [
-     * {
-     * "id": "restaurant1",
-     * "Name": "Restaurant1",
-     * "City": "New York",
-     * "Cuisine": "American",
-     * "Rating": 5,
-     * "Loyalty_Program": true,
-     * "Location": {
-     * "Latitude": 33.6112,
-     * "Longitude": -117.8711
-     * },
-     * "Top_Dishes": [
-     * "Hamburger",
-     * "Deluxe Cheeseburger"
-     * ],
-     * "Created_At": "2022-11-01T09:03:19.967+00:00"
-     * },
-     * {
-     * "id": "restaurant2",
-     * "Name": "Restaurant2",
-     * "City": "New York",
-     * "Cuisine": "American",
-     * "Rating": 10,
-     * "Loyalty_Program": true,
-     * "Location": {
-     * "Latitude": 40.7413,
-     * "Longitude": -73.9764
-     * },
-     * "Top_Dishes": [
-     * "Hot Dog",
-     * "French Fries"
-     * ],
-     * "Created_At": "2022-11-02T09:03:19.967+00:00"
-     * },
-     * {
-     * "id": "restaurant3",
-     * "Name": "Restaurant3",
-     * "City": "New York",
-     * "Cuisine": "American",
-     * "Rating": 3,
-     * "Loyalty_Program": false,
-     * "Location": {
-     * "Latitude": 40.7489,
-     * "Longitude": -73.9972
-     * },
-     * "Top_Dishes": [
-     * "Buffalo Wings",
-     * "Philly Cheesesteak"
-     * ],
-     * "Created_At": "2022-11-03T09:03:19.967+00:00"
-     * }
-     * ]
+     *   "items": [
+     *     {
+     *       "id": "restaurant1",
+     *       "Name": "Restaurant1",
+     *       "City": "New York",
+     *       "Cuisine": "American",
+     *       "Rating": 5,
+     *       "Loyalty_Program": true,
+     *       "Location": {
+     *         "Latitude": 33.6112,
+     *         "Longitude": -117.8711
+     *       },
+     *       "Top_Dishes": [
+     *         "Hamburger",
+     *         "Deluxe Cheeseburger"
+     *       ],
+     *       "Created_At": "2022-11-01T09:03:19.967+00:00"
+     *     },
+     *     {
+     *       "id": "restaurant2",
+     *       "Name": "Restaurant2",
+     *       "City": "New York",
+     *       "Cuisine": "American",
+     *       "Rating": 10,
+     *       "Loyalty_Program": true,
+     *       "Location": {
+     *         "Latitude": 40.7413,
+     *         "Longitude": -73.9764
+     *       },
+     *       "Top_Dishes": [
+     *         "Hot Dog",
+     *         "French Fries"
+     *       ],
+     *       "Created_At": "2022-11-02T09:03:19.967+00:00"
+     *     },
+     *     {
+     *       "id": "restaurant3",
+     *       "Name": "Restaurant3",
+     *       "City": "New York",
+     *       "Cuisine": "American",
+     *       "Rating": 3,
+     *       "Loyalty_Program": false,
+     *       "Location": {
+     *         "Latitude": 40.7489,
+     *         "Longitude": -73.9972
+     *       },
+     *       "Top_Dishes": [
+     *         "Buffalo Wings",
+     *         "Philly Cheesesteak"
+     *       ],
+     *       "Created_At": "2022-11-03T09:03:19.967+00:00"
+     *     }
+     *   ]
      * }'
      *
-     * ```
+     *  ```
      *
      * ## Response
      *
@@ -114,10 +114,10 @@ class PostCatalogsByCatalogNameItem extends \Braze\Runtime\Client\BaseEndpoint i
      *
      * ``` json
      * {
-     * "message": "success"
+     *   "message": "success"
      * }
      *
-     * ```
+     *  ```
      *
      * ### Example error response
      *
@@ -125,22 +125,22 @@ class PostCatalogsByCatalogNameItem extends \Braze\Runtime\Client\BaseEndpoint i
      *
      * ``` json
      * {
-     * "errors": [
-     * {
-     * "id": "fields-do-not-match",
-     * "message": "Fields do not match with fields on the catalog",
-     * "parameters": [
-     * "id"
-     * ],
-     * "parameter_values": [
-     * "restaurant2"
-     * ]
-     * }
-     * ],
-     * "message": "Invalid Request"
+     *   "errors": [
+     *     {
+     *       "id": "fields-do-not-match",
+     *       "message": "Fields do not match with fields on the catalog",
+     *       "parameters": [
+     *         "id"
+     *       ],
+     *       "parameter_values": [
+     *         "restaurant2"
+     *       ]
+     *     }
+     *   ],
+     *   "message": "Invalid Request"
      * }
      *
-     * ```
+     *  ```
      *
      * ## Troubleshooting
      *
@@ -168,7 +168,7 @@ class PostCatalogsByCatalogNameItem extends \Braze\Runtime\Client\BaseEndpoint i
      * @var string $Authorization
      *             }
      */
-    public function __construct(string $catalogName, ?\Braze\Model\CatalogsCatalogNameItemsPostBody $requestBody = null, array $headerParameters = [])
+    public function __construct(string $catalogName, \Braze\Model\CatalogsCatalogNameItemsPostBody $requestBody = null, array $headerParameters = [])
     {
         $this->catalog_name = $catalogName;
         $this->body = $requestBody;
@@ -221,32 +221,32 @@ class PostCatalogsByCatalogNameItem extends \Braze\Runtime\Client\BaseEndpoint i
      * @throws \Braze\Exception\PostCatalogsByCatalogNameItemTooManyRequestsException
      * @throws \Braze\Exception\PostCatalogsByCatalogNameItemInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();
-        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (200 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return json_decode($body);
         }
-        if (is_null($contentType) === false && (201 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (201 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return json_decode($body);
         }
-        if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (400 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostCatalogsByCatalogNameItemBadRequestException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (401 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostCatalogsByCatalogNameItemUnauthorizedException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (403 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostCatalogsByCatalogNameItemForbiddenException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (404 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostCatalogsByCatalogNameItemNotFoundException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (429 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (429 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostCatalogsByCatalogNameItemTooManyRequestsException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (500 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostCatalogsByCatalogNameItemInternalServerErrorException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
     }

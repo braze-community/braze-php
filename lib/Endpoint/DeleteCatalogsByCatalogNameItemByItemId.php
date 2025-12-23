@@ -45,7 +45,7 @@ class DeleteCatalogsByCatalogNameItemByItemId extends \Braze\Runtime\Client\Base
      * --header 'Content-Type: application/json' \
      * --header 'Authorization: Bearer YOUR-REST-API-KEY'
      *
-     * ```
+     *  ```
      *
      * ## Response
      *
@@ -57,10 +57,10 @@ class DeleteCatalogsByCatalogNameItemByItemId extends \Braze\Runtime\Client\Base
      *
      * ``` json
      * {
-     * "message": "success"
+     *   "message": "success"
      * }
      *
-     * ```
+     *  ```
      *
      * ### Example error response
      *
@@ -68,22 +68,22 @@ class DeleteCatalogsByCatalogNameItemByItemId extends \Braze\Runtime\Client\Base
      *
      * ``` json
      * {
-     * "errors": [
-     * {
-     * "id": "item-not-found",
-     * "message": "Could not find item",
-     * "parameters": [
-     * "item_id"
-     * ],
-     * "parameter_values": [
-     * "restaurant34"
-     * ]
-     * }
-     * ],
-     * "message": "Invalid Request"
+     *   "errors": [
+     *     {
+     *       "id": "item-not-found",
+     *       "message": "Could not find item",
+     *       "parameters": [
+     *         "item_id"
+     *       ],
+     *       "parameter_values": [
+     *         "restaurant34"
+     *       ]
+     *     }
+     *   ],
+     *   "message": "Invalid Request"
      * }
      *
-     * ```
+     *  ```
      *
      * ## Troubleshooting
      *
@@ -150,29 +150,29 @@ class DeleteCatalogsByCatalogNameItemByItemId extends \Braze\Runtime\Client\Base
      * @throws \Braze\Exception\DeleteCatalogsByCatalogNameItemByItemIdTooManyRequestsException
      * @throws \Braze\Exception\DeleteCatalogsByCatalogNameItemByItemIdInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();
-        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (200 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return json_decode($body);
         }
-        if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (400 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\DeleteCatalogsByCatalogNameItemByItemIdBadRequestException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (401 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\DeleteCatalogsByCatalogNameItemByItemIdUnauthorizedException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (403 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\DeleteCatalogsByCatalogNameItemByItemIdForbiddenException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (404 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\DeleteCatalogsByCatalogNameItemByItemIdNotFoundException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (429 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (429 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\DeleteCatalogsByCatalogNameItemByItemIdTooManyRequestsException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (500 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\DeleteCatalogsByCatalogNameItemByItemIdInternalServerErrorException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
     }

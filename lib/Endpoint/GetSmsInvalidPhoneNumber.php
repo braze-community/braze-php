@@ -47,7 +47,7 @@ class GetSmsInvalidPhoneNumber extends \Braze\Runtime\Client\BaseEndpoint implem
      * curl --location --request GET 'https://rest.iad-01.braze.com/sms/invalid_phone_numbers?start_date=2019-01-01&end_date=2019-02-01&limit=100&offset=1&phone_numbers[]=12345678901' \
      * --header 'Authorization: Bearer YOUR-API-KEY-HERE'
      *
-     * ```
+     *  ```
      *
      * ## Response
      *
@@ -57,27 +57,27 @@ class GetSmsInvalidPhoneNumber extends \Braze\Runtime\Client\BaseEndpoint implem
      * Content-Type: application/json
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
-     * "sms": [
-     * {
-     * "phone": (string) phone number in e.164 format,
-     * "invalid_detected_at": (string) the time the invalid number was detected in ISO 8601
-     * "reason" : "provider_error"
-     * },
-     * {
-     * "phone": (string) phone number in e.164 format,
-     * "invalid_detected_at": (string) the time the invalid number was detected in ISO 8601
-     * "reason" : "deactivated"
-     * },
-     * {
-     * "phone": (string) phone number in e.164 format,
-     * "invalid_detected_at": (string) the time the invalid number was detected in ISO 8601
-     * "reason" : "provider_error"
-     * }
-     * ],
-     * "message": "success"
+     *   "sms": [
+     *     {
+     *       "phone": (string) phone number in e.164 format,
+     *       "invalid_detected_at": (string) the time the invalid number was detected in ISO 8601
+     *       "reason" : "provider_error"
+     *     },
+     *     {
+     *       "phone": (string) phone number in e.164 format,
+     *       "invalid_detected_at": (string) the time the invalid number was detected in ISO 8601
+     *       "reason" : "deactivated"
+     *     },
+     *     {
+     *       "phone": (string) phone number in e.164 format,
+     *       "invalid_detected_at": (string) the time the invalid number was detected in ISO 8601
+     *       "reason" : "provider_error"
+     *     }
+     *   ],
+     *   "message": "success"
      * }
      *
-     * ```
+     *  ```
      *
      * @param array $queryParameters {
      *
@@ -169,29 +169,29 @@ class GetSmsInvalidPhoneNumber extends \Braze\Runtime\Client\BaseEndpoint implem
      * @throws \Braze\Exception\GetSmsInvalidPhoneNumberTooManyRequestsException
      * @throws \Braze\Exception\GetSmsInvalidPhoneNumberInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();
-        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (200 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return json_decode($body);
         }
-        if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (400 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetSmsInvalidPhoneNumberBadRequestException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (401 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetSmsInvalidPhoneNumberUnauthorizedException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (403 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetSmsInvalidPhoneNumberForbiddenException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (404 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetSmsInvalidPhoneNumberNotFoundException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (429 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (429 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetSmsInvalidPhoneNumberTooManyRequestsException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (500 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetSmsInvalidPhoneNumberInternalServerErrorException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
     }

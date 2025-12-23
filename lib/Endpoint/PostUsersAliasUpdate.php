@@ -21,7 +21,7 @@ class PostUsersAliasUpdate extends \Braze\Runtime\Client\BaseEndpoint implements
      *
      * Updating a user alias requires `alias_label`, `old_alias_name`, and `new_alias_name` to be included in the update user alias object. If there is no user alias associated with the `alias_label` and `old_alias_name`, no alias will be updated. If the given `alias_label` and `old_alias_name` is found, then the `old_alias_name` will be updated to the `new_alias_name`.
      *
-     **Note:** This endpoint does not guarantee the sequence of `alias_updates` objects being updated.
+     * **Note:** This endpoint does not guarantee the sequence of `alias_updates` objects being updated.
      *
      * ## Prerequisites
      *
@@ -41,12 +41,12 @@ class PostUsersAliasUpdate extends \Braze\Runtime\Client\BaseEndpoint implements
      *
      * ``` json
      * {
-     * "alias_label" : (required, string),
-     * "old_alias_name" : (required, string),
-     * "new_alias_name" : (required, string)
+     *   "alias_label" : (required, string),
+     *   "old_alias_name" : (required, string),
+     *   "new_alias_name" : (required, string)
      * }
      *
-     * ```
+     *  ```
      *
      * @param array $headerParameters {
      *
@@ -54,7 +54,7 @@ class PostUsersAliasUpdate extends \Braze\Runtime\Client\BaseEndpoint implements
      * @var string $Authorization
      *             }
      */
-    public function __construct(?\Braze\Model\UsersAliasUpdatePostBody $requestBody = null, array $headerParameters = [])
+    public function __construct(\Braze\Model\UsersAliasUpdatePostBody $requestBody = null, array $headerParameters = [])
     {
         $this->body = $requestBody;
         $this->headerParameters = $headerParameters;
@@ -106,32 +106,32 @@ class PostUsersAliasUpdate extends \Braze\Runtime\Client\BaseEndpoint implements
      * @throws \Braze\Exception\PostUsersAliasUpdateTooManyRequestsException
      * @throws \Braze\Exception\PostUsersAliasUpdateInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();
-        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (200 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return json_decode($body);
         }
-        if (is_null($contentType) === false && (201 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (201 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return json_decode($body);
         }
-        if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (400 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostUsersAliasUpdateBadRequestException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (401 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostUsersAliasUpdateUnauthorizedException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (403 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostUsersAliasUpdateForbiddenException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (404 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostUsersAliasUpdateNotFoundException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (429 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (429 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostUsersAliasUpdateTooManyRequestsException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (500 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostUsersAliasUpdateInternalServerErrorException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
     }

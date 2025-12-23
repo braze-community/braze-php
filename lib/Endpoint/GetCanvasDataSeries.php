@@ -31,56 +31,56 @@ class GetCanvasDataSeries extends \Braze\Runtime\Client\BaseEndpoint implements 
      * Content-Type: application/json
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
-     * "data": {
-     * "name": (string) Canvas name,
-     * "stats": [
-     * {
-     * "time": (string) date as ISO 8601 date,
-     * "total_stats": {
-     * "revenue": (float),
-     * "conversions": (int),
-     * "conversions_by_entry_time": (int),
-     * "entries": (int)
-     * },
-     * "variant_stats": (optional) {
-     * "00000000-0000-0000-0000-0000000000000": (API identifier for variant) {
-     * "name": (string) name of variant,
-     * "revenue": (int),
-     * "conversions": (int),
-     * "conversions_by_entry_time": (int),
-     * "entries": (int)
-     * },
-     * ... (more variants)
-     * },
-     * "step_stats": (optional) {
-     * "00000000-0000-0000-0000-0000000000000": (API identifier for step) {
-     * "name": (string) name of step,
-     * "revenue": (float),
-     * "conversions": (int),
-     * "conversions_by_entry_time": (int),
-     * "messages": {
-     * "email": [
-     * {
-     * "sent": (int),
-     * "opens": (int),
-     * "unique_opens": (int),
-     * "clicks": (int),
-     * ... (more stats)
-     * }
-     * ],
-     * ... (more channels)
-     * }
-     * },
-     * ... (more steps)
-     * }
-     * },
-     * ... (more stats by time)
-     * ]
-     * },
-     * "message": (required, string) the status of the export, returns 'success' when completed without errors
+     *   "data": {
+     *     "name": (string) Canvas name,
+     *     "stats": [
+     *       {
+     *         "time": (string) date as ISO 8601 date,
+     *         "total_stats": {
+     *           "revenue": (float),
+     *           "conversions": (int),
+     *           "conversions_by_entry_time": (int),
+     *           "entries": (int)
+     *         },
+     *         "variant_stats": (optional) {
+     *           "00000000-0000-0000-0000-0000000000000": (API identifier for variant) {
+     *             "name": (string) name of variant,
+     *             "revenue": (int),
+     *             "conversions": (int),
+     *             "conversions_by_entry_time": (int),
+     *             "entries": (int)
+     *           },
+     *           ... (more variants)
+     *         },
+     *         "step_stats": (optional) {
+     *           "00000000-0000-0000-0000-0000000000000": (API identifier for step) {
+     *             "name": (string) name of step,
+     *             "revenue": (float),
+     *             "conversions": (int),
+     *             "conversions_by_entry_time": (int),
+     *             "messages": {
+     *               "email": [
+     *                 {
+     *                   "sent": (int),
+     *                   "opens": (int),
+     *                   "unique_opens": (int),
+     *                   "clicks": (int),
+     *                   ... (more stats)
+     *                 }
+     *               ],
+     *               ... (more channels)
+     *             }
+     *           },
+     *           ... (more steps)
+     *         }
+     *       },
+     *       ... (more stats by time)
+     *     ]
+     *   },
+     *   "message": (required, string) the status of the export, returns 'success' when completed without errors
      * }
      *
-     * ```
+     *  ```
      *
      * > **Tip:** For help with CSV and API exports, visit [Export troubleshooting](https://www.braze.com/docs/user_guide/data_and_analytics/export_braze_data/export_troubleshooting/).
      *
@@ -182,29 +182,29 @@ class GetCanvasDataSeries extends \Braze\Runtime\Client\BaseEndpoint implements 
      * @throws \Braze\Exception\GetCanvasDataSeriesTooManyRequestsException
      * @throws \Braze\Exception\GetCanvasDataSeriesInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();
-        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (200 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return json_decode($body);
         }
-        if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (400 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetCanvasDataSeriesBadRequestException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (401 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetCanvasDataSeriesUnauthorizedException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (403 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetCanvasDataSeriesForbiddenException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (404 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetCanvasDataSeriesNotFoundException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (429 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (429 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetCanvasDataSeriesTooManyRequestsException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (500 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetCanvasDataSeriesInternalServerErrorException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
     }
