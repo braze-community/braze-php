@@ -17,10 +17,16 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
 
+      - name: Get php-cs-fixer version
+        id: php-cs-fixer
+        run: |
+          VERSION=$(jq -r '."require-dev"."friendsofphp/php-cs-fixer"' composer.json)
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          tools: php-cs-fixer:3
+          tools: php-cs-fixer:${{ steps.php-cs-fixer.outputs.version }}
 
       - name: Run php-cs-fixer
         run: php-cs-fixer fix .
