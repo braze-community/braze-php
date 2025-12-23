@@ -13,7 +13,7 @@ PHP library for [Braze](https://www.braze.com/). The code is generated from the 
 
 ### Version
 
-PHP >=8.0
+PHP >=8.1
 
 ### API URL
 
