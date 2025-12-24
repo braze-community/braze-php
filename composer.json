@@ -48,7 +48,8 @@
         "build": [
             "composer update",
             "vendor/bin/jane-openapi generate",
-            "cp src/Braze.php lib/Braze.php"
+            "cp src/Braze.php lib/Braze.php",
+            "patch -N lib/Runtime/Client/BaseEndpoint.php < patches/BaseEndpoint.php.diff || true"
         ],
         "clean": [
             "rm -rf lib/"

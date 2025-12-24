@@ -10,7 +10,7 @@ it('sends a GET to "/subscription/user/status"', function (): void {
     // https://www.braze.com/docs/api/endpoints/subscription_groups/get_list_user_subscription_groups/#request-parameters
     $params = [
         'external_id' => 'id1',
-        'email' => 'john@example.com',
+        'email' => 'braze@example.com',
         'limit' => 100,
         'offset' => 0,
         'phone' => '+12345678901',
