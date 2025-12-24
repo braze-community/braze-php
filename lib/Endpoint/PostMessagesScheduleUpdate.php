@@ -42,28 +42,28 @@ class PostMessagesScheduleUpdate extends \Braze\Runtime\Client\BaseEndpoint impl
      * --header 'Content-Type: application/json' \
      * --header 'Authorization: Bearer YOUR-REST-API-KEY' \
      * --data-raw '{
-     * "schedule_id": "schedule_identifier",
-     * "schedule": {
-     * "time": "2017-05-24T20:30:36Z"
-     * },
-     * "messages": {
-     * "apple_push": {
-     * "alert": "Updated Message!",
-     * "badge": 1
-     * },
-     * "android_push": {
-     * "title": "Updated title!",
-     * "alert": "Updated message!"
-     * },
-     * "sms": {
-     * "subscription_group_id": "subscription_group_identifier",
-     * "message_variation_id": "message_variation_identifier",
-     * "body": "This is my SMS body.",
-     * "app_id": "app_identifier"
-     * }
-     * }
+     *   "schedule_id": "schedule_identifier",
+     *   "schedule": {
+     *     "time": "2017-05-24T20:30:36Z"
+     *    },
+     *   "messages": {
+     *     "apple_push": {
+     *       "alert": "Updated Message!",
+     *       "badge": 1
+     *     },
+     *     "android_push": {
+     *       "title": "Updated title!",
+     *       "alert": "Updated message!"
+     *     },
+     *     "sms": {
+     *       "subscription_group_id": "subscription_group_identifier",
+     *       "message_variation_id": "message_variation_identifier",
+     *       "body": "This is my SMS body.",
+     *       "app_id": "app_identifier"
+     *     }
+     *   }
      * }'
-     * ```
+     *  ```
      *
      * @param array $headerParameters {
      *
@@ -71,7 +71,7 @@ class PostMessagesScheduleUpdate extends \Braze\Runtime\Client\BaseEndpoint impl
      * @var string $Authorization
      *             }
      */
-    public function __construct(?\Braze\Model\MessagesScheduleUpdatePostBody $requestBody = null, array $headerParameters = [])
+    public function __construct(\Braze\Model\MessagesScheduleUpdatePostBody $requestBody = null, array $headerParameters = [])
     {
         $this->body = $requestBody;
         $this->headerParameters = $headerParameters;
@@ -123,32 +123,32 @@ class PostMessagesScheduleUpdate extends \Braze\Runtime\Client\BaseEndpoint impl
      * @throws \Braze\Exception\PostMessagesScheduleUpdateTooManyRequestsException
      * @throws \Braze\Exception\PostMessagesScheduleUpdateInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();
-        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (200 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return json_decode($body);
         }
-        if (is_null($contentType) === false && (201 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (201 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return json_decode($body);
         }
-        if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (400 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostMessagesScheduleUpdateBadRequestException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (401 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostMessagesScheduleUpdateUnauthorizedException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (403 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostMessagesScheduleUpdateForbiddenException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (404 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostMessagesScheduleUpdateNotFoundException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (429 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (429 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostMessagesScheduleUpdateTooManyRequestsException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (500 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostMessagesScheduleUpdateInternalServerErrorException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
     }

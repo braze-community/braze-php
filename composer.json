@@ -21,13 +21,13 @@
         }
     ],
     "require": {
-        "jane-php/open-api-runtime": "7.8.1",
-        "php": ">=8.0"
+        "jane-php/open-api-runtime": "7.10.2",
+        "php": ">=8.1"
     },
     "require-dev": {
-        "jane-php/open-api-3": "7.8.1",
+        "jane-php/open-api-3": "7.10.2",
         "nyholm/psr7": "^1.8",
-        "friendsofphp/php-cs-fixer": "^3.22",
+        "friendsofphp/php-cs-fixer": "3.22",
         "pestphp/pest": "^1.23 || ^2.0",
         "php-http/guzzle7-adapter": "^1.0",
         "symfony/http-kernel": "^6.4",
@@ -48,7 +48,8 @@
         "build": [
             "composer update",
             "vendor/bin/jane-openapi generate",
-            "cp src/Braze.php lib/Braze.php"
+            "cp src/Braze.php lib/Braze.php",
+            "patch -N lib/Runtime/Client/BaseEndpoint.php < patches/BaseEndpoint.php.diff || true"
         ],
         "clean": [
             "rm -rf lib/"

@@ -40,7 +40,7 @@ class GetContentBlocksList extends \Braze\Runtime\Client\BaseEndpoint implements
      * curl --location --request GET 'https://rest.iad-01.braze.com/content_blocks/list?modified_after=2020-01-01T01:01:01.000000&modified_before=2020-02-01T01:01:01.000000&limit=100&offset=1' \
      * --header 'Authorization: Bearer YOUR-API-KEY-HERE'
      *
-     * ```
+     *  ```
      *
      * ## Response
      *
@@ -48,22 +48,22 @@ class GetContentBlocksList extends \Braze\Runtime\Client\BaseEndpoint implements
      * Content-Type: application/json
      * Authorization: Bearer YOUR_REST_API_KEY
      * {
-     * "count": "integer",
-     * "content_blocks": [
-     * {
-     * "content_block_id": (string) the Content Block identifier,
-     * "name": (string) the name of the Content Block,
-     * "content_type": (string) the content type, html or text,
-     * "liquid_tag": (string) the Liquid tags,
-     * "inclusion_count" : (integer) the inclusion count,
-     * "created_at": (string) The time the Content Block was created in ISO 8601,
-     * "last_edited": (string) The time the Content Block was last edited in ISO 8601,
-     * "tags": (array) An array of tags formatted as strings,
-     * }
-     * ]
+     *   "count": "integer",
+     *   "content_blocks": [
+     *     {
+     *       "content_block_id": (string) the Content Block identifier,
+     *       "name": (string) the name of the Content Block,
+     *       "content_type": (string) the content type, html or text,
+     *       "liquid_tag": (string) the Liquid tags,
+     *       "inclusion_count" : (integer) the inclusion count,
+     *       "created_at": (string) The time the Content Block was created in ISO 8601,
+     *       "last_edited": (string) The time the Content Block was last edited in ISO 8601,
+     *       "tags": (array) An array of tags formatted as strings,
+     *     }
+     *   ]
      * }
      *
-     * ```
+     *  ```
      *
      * ## Troubleshooting
      *
@@ -162,29 +162,29 @@ class GetContentBlocksList extends \Braze\Runtime\Client\BaseEndpoint implements
      * @throws \Braze\Exception\GetContentBlocksListTooManyRequestsException
      * @throws \Braze\Exception\GetContentBlocksListInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();
-        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (200 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return json_decode($body);
         }
-        if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (400 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetContentBlocksListBadRequestException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (401 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetContentBlocksListUnauthorizedException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (403 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetContentBlocksListForbiddenException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (404 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetContentBlocksListNotFoundException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (429 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (429 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetContentBlocksListTooManyRequestsException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (500 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetContentBlocksListInternalServerErrorException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
     }

@@ -40,26 +40,26 @@ class GetTemplatesEmailList extends \Braze\Runtime\Client\BaseEndpoint implement
      * curl --location --request GET 'https://rest.iad-01.braze.com/templates/email/list?modified_after=2020-01-01T01:01:01.000000&modified_before=2020-02-01T01:01:01.000000&limit=1&offset=0' \
      * --header 'Authorization: Bearer YOUR_REST_API_KEY'
      *
-     * ```
+     *  ```
      *
      * ## Response
      *
-     **Important:** Templates built using the drag-and-drop editor for email are not provided in this response.
+     * **Important:** Templates built using the drag-and-drop editor for email are not provided in this response.
      *
      * ``` json
      * Content-Type: application/json
      * Authorization: Bearer YOUR_REST_API_KEY
      * {
-     * "count": the number of templates returned
-     * "templates": [template with the following properties]:
-     * "email_template_id": (string) your email template's API Identifier,
-     * "template_name": (string) the name of your email template,
-     * "created_at": (string) the time the email was created at in ISO 8601,
-     * "updated_at": (string) the time the email was updated in ISO 8601,
-     * "tags": (array of strings) tags appended to the template
+     *   "count": the number of templates returned
+     *   "templates": [template with the following properties]:
+     *     "email_template_id": (string) your email template's API Identifier,
+     *     "template_name": (string) the name of your email template,
+     *     "created_at": (string) the time the email was created at in ISO 8601,
+     *     "updated_at": (string) the time the email was updated in ISO 8601,
+     *     "tags": (array of strings) tags appended to the template
      * }
      *
-     * ```
+     *  ```
      *
      * @param array $queryParameters {
      *
@@ -143,29 +143,29 @@ class GetTemplatesEmailList extends \Braze\Runtime\Client\BaseEndpoint implement
      * @throws \Braze\Exception\GetTemplatesEmailListTooManyRequestsException
      * @throws \Braze\Exception\GetTemplatesEmailListInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();
-        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (200 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return json_decode($body);
         }
-        if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (400 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetTemplatesEmailListBadRequestException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (401 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetTemplatesEmailListUnauthorizedException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (403 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetTemplatesEmailListForbiddenException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (404 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetTemplatesEmailListNotFoundException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (429 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (429 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetTemplatesEmailListTooManyRequestsException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (500 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetTemplatesEmailListInternalServerErrorException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
     }

@@ -27,17 +27,17 @@ class ErrorNormalizer implements DenormalizerInterface, NormalizerInterface, Den
     use CheckArray;
     use ValidatorTrait;
 
-    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
+    public function supportsDenormalization(mixed $data, string $type, string $format = null, array $context = []): bool
     {
         return $type === \Braze\Model\Error::class;
     }
 
-    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+    public function supportsNormalization(mixed $data, string $format = null, array $context = []): bool
     {
         return is_object($data) && get_class($data) === \Braze\Model\Error::class;
     }
 
-    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
+    public function denormalize(mixed $data, string $type, string $format = null, array $context = []): mixed
     {
         if (isset($data['$ref'])) {
             return new Reference($data['$ref'], $context['document-origin']);
@@ -70,7 +70,7 @@ class ErrorNormalizer implements DenormalizerInterface, NormalizerInterface, Den
         return $object;
     }
 
-    public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+    public function normalize(mixed $data, string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
         if ($data->isInitialized('message') && null !== $data->getMessage()) {
@@ -92,7 +92,7 @@ class ErrorNormalizer implements DenormalizerInterface, NormalizerInterface, Den
         return $dataArray;
     }
 
-    public function getSupportedTypes(?string $format = null): array
+    public function getSupportedTypes(string $format = null): array
     {
         return [\Braze\Model\Error::class => false];
     }

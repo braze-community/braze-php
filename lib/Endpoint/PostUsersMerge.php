@@ -76,11 +76,11 @@ class PostUsersMerge extends \Braze\Runtime\Client\BaseEndpoint implements \Braz
      *
      * - Segmentable custom events summary
      *
-     * - Event count (the sum from both profiles)
+     *     - Event count (the sum from both profiles)
      *
-     * - Event first occurred (Braze will pick the earlier date of the two dates)
+     *     - Event first occurred (Braze will pick the earlier date of the two dates)
      *
-     * - Event last occurred (Braze will pick the later date of the two dates)
+     *     - Event last occurred (Braze will pick the later date of the two dates)
      *
      * - In-app purchase total in cents (the sum from both profiles)
      *
@@ -133,10 +133,10 @@ class PostUsersMerge extends \Braze\Runtime\Client\BaseEndpoint implements \Braz
      *
      * ``` json
      * {
-     * "message": "success"
+     *   "message": "success"
      * }
      *
-     * ```
+     *  ```
      *
      * ### Example error response
      *
@@ -144,10 +144,10 @@ class PostUsersMerge extends \Braze\Runtime\Client\BaseEndpoint implements \Braz
      *
      * ``` json
      * {
-     * "message": "'merge_updates' must be an array of objects"
+     *   "message": "'merge_updates' must be an array of objects"
      * }
      *
-     * ```
+     *  ```
      *
      * ## Troubleshooting
      *
@@ -166,7 +166,7 @@ class PostUsersMerge extends \Braze\Runtime\Client\BaseEndpoint implements \Braz
      * @var string $Authorization
      *             }
      */
-    public function __construct(?\Braze\Model\UsersMergePostBody $requestBody = null, array $headerParameters = [])
+    public function __construct(\Braze\Model\UsersMergePostBody $requestBody = null, array $headerParameters = [])
     {
         $this->body = $requestBody;
         $this->headerParameters = $headerParameters;
@@ -218,32 +218,32 @@ class PostUsersMerge extends \Braze\Runtime\Client\BaseEndpoint implements \Braz
      * @throws \Braze\Exception\PostUsersMergeTooManyRequestsException
      * @throws \Braze\Exception\PostUsersMergeInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();
-        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (200 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return json_decode($body);
         }
-        if (is_null($contentType) === false && (201 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (201 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return json_decode($body);
         }
-        if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (400 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostUsersMergeBadRequestException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (401 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostUsersMergeUnauthorizedException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (403 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostUsersMergeForbiddenException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (404 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostUsersMergeNotFoundException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (429 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (429 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostUsersMergeTooManyRequestsException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (500 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostUsersMergeInternalServerErrorException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
     }

@@ -36,30 +36,30 @@ class GetCampaignsDetail extends \Braze\Runtime\Client\BaseEndpoint implements \
      * Content-Type: application/json
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
-     * "message": (required, string) the status of the export, returns 'success' when completed without errors,
-     * "created_at" : (string) the date created as ISO 8601 date,
-     * "updated_at" : (string) the date last updated as ISO 8601 date,
-     * "archived": (boolean) whether this campaign is archived,
-     * "draft": (boolean) whether this campaign is a draft,
-     * "name" : (string) the campaign name,
-     * "description" : (string) the campaign description,
-     * "schedule_type" : (string) the type of scheduling action,
-     * "channels" : (array) the list of channels to send via,
-     * "first_sent" : (string) the date and hour of first sent as ISO 8601 date,
-     * "last_sent" : (string) the date and hour of last sent as ISO 8601 date,
-     * "tags" : (array) the tag names associated with the campaign,
-     * "teams" : (array) the names of the Teams associated with the campaign,
-     * "messages": {
-     * "message_variation_id": (string) { // <=This is the actual id
-     * "channel": (string) the channel type of the message, must be either email, ios_push, webhook, content_card, in-app_message, or sms,
-     * "name": (string) the name of the message in the dashboard (eg., "Variation 1")
-     * ... channel-specific fields for this message, see the following messages section ...
-     * }
-     * },
-     * "conversion_behaviors": (array) the conversion event behaviors assigned to the campaign, see the following conversions behavior section.
+     *     "message": (required, string) the status of the export, returns 'success' when completed without errors,
+     *     "created_at" : (string) the date created as ISO 8601 date,
+     *     "updated_at" : (string) the date last updated as ISO 8601 date,
+     *     "archived": (boolean) whether this campaign is archived,
+     *     "draft": (boolean) whether this campaign is a draft,
+     *     "name" : (string) the campaign name,
+     *     "description" : (string) the campaign description,
+     *     "schedule_type" : (string) the type of scheduling action,
+     *     "channels" : (array) the list of channels to send via,
+     *     "first_sent" : (string) the date and hour of first sent as ISO 8601 date,
+     *     "last_sent" : (string) the date and hour of last sent as ISO 8601 date,
+     *     "tags" : (array) the tag names associated with the campaign,
+     *     "teams" : (array) the names of the Teams associated with the campaign,
+     *     "messages": {
+     *         "message_variation_id": (string) { // <=This is the actual id
+     *             "channel": (string) the channel type of the message, must be either email, ios_push, webhook, content_card, in-app_message, or sms,
+     *             "name": (string) the name of the message in the dashboard (eg., "Variation 1")
+     *             ... channel-specific fields for this message, see the following messages section ...
+     *         }
+     *     },
+     *     "conversion_behaviors": (array) the conversion event behaviors assigned to the campaign, see the following conversions behavior section.
      * }
      *
-     * ```
+     *  ```
      *
      * ### Messages by channel
      *
@@ -69,93 +69,93 @@ class GetCampaignsDetail extends \Braze\Runtime\Client\BaseEndpoint implements \
      *
      * ``` json
      * {
-     * "channel": (string) description of the channel, such as "ios_push" or "android_push"
-     * "alert": (string) alert body text,
-     * "extras": (hash) any key value pairs provided
+     *     "channel": (string) description of the channel, such as "ios_push" or "android_push"
+     *     "alert": (string) alert body text,
+     *     "extras": (hash) any key value pairs provided
      * }
      *
-     * ```
+     *  ```
      *
      * #### Email
      *
      * ``` json
      * {
-     * "channel": "email",
-     * "subject": (string) subject,
-     * "body": (string) HTML body,
-     * "from": (string) from address and display name,
-     * "reply_to": (string) reply-to for message, if different than "from" address,
-     * "title": (string) name of the email,
-     * "extras": (hash) any key value pairs provided
+     *     "channel": "email",
+     *     "subject": (string) subject,
+     *     "body": (string) HTML body,
+     *     "from": (string) from address and display name,
+     *     "reply_to": (string) reply-to for message, if different than "from" address,
+     *     "title": (string) name of the email,
+     *     "extras": (hash) any key value pairs provided
      * }
      *
-     * ```
+     *  ```
      *
      * #### In-app message
      *
      * ``` json
      * {
-     * "type": (string) description of in-app message type, such as "survey",
-     * "data": {
-     * "pages": [
-     * {
-     * "header":
-     * {
-     * "text":(string) display text for the header of the survey,
-     * }
-     * "choices": [
-     * {
-     * "choice_id": (string) choice identifier,
-     * "text": (string) display text,
-     * "custom_attribute_key": (string) custom attribute key,
-     * "custom_attribute_value": (sting) custom attribute value,
-     * "deleted": (boolean) deleted from live campaign,
-     * },
-     * ...
-     * ]
-     * }
-     * ]
-     * }
+     *     "type": (string) description of in-app message type, such as "survey",
+     *     "data": {
+     *         "pages": [
+     *             {
+     *                 "header":
+     *                     {
+     *                          "text":(string) display text for the header of the survey,
+     *                     }
+     *                 "choices": [
+     *                     {
+     *                        "choice_id": (string) choice identifier,
+     *                        "text": (string) display text,
+     *                        "custom_attribute_key": (string) custom attribute key,
+     *                        "custom_attribute_value": (sting) custom attribute value,
+     *                        "deleted": (boolean) deleted from live campaign,
+     *                     },
+     *                     ...
+     *                 ]
+     *             }
+     *         ]
+     *     }
      * }
      *
-     * ```
+     *  ```
      *
      * #### Content Card
      *
      * ``` json
      * {
-     * "channel": "content_cards",
-     * "name": (string) name of variant,
-     * "extras": (hash) any key value pairs provided; only present if at least one key-value pair has been set
+     *     "channel": "content_cards",
+     *     "name": (string) name of variant,
+     *     "extras": (hash) any key value pairs provided; only present if at least one key-value pair has been set
      * }
      *
-     * ```
+     *  ```
      *
      * #### Webhook
      *
      * ``` json
      * {
-     * "channel": "webhook",
-     * "url": (string) url for webhook,
-     * "body": (string) payload body,
-     * "type": (string) body content type,
-     * "headers": (hash) specified request headers,
-     * "method": (string) HTTP method (e.g., "POST" or "GET"),
+     *     "channel": "webhook",
+     *     "url": (string) url for webhook,
+     *     "body": (string) payload body,
+     *     "type": (string) body content type,
+     *     "headers": (hash) specified request headers,
+     *     "method": (string) HTTP method (e.g., "POST" or "GET"),
      * }
      *
-     * ```
+     *  ```
      *
      * #### SMS
      *
      * ``` json
      * {
-     * "channel": "sms",
-     * "body": (string) payload body,
-     * "from": (string) list of numbers associated with the subscription group,
-     * "subscription_group_id": (string) API id of the subscription group targeted in the SMS message
+     *   "channel": "sms",
+     *   "body": (string) payload body,
+     *   "from": (string) list of numbers associated with the subscription group,
+     *   "subscription_group_id": (string) API id of the subscription group targeted in the SMS message
      * }
      *
-     * ```
+     *  ```
      *
      * #### WhatsApp
      *
@@ -163,43 +163,43 @@ class GetCampaignsDetail extends \Braze\Runtime\Client\BaseEndpoint implements \
      *
      * ``` json
      * {
-     * "channel": "whats_app",
-     * "subscription_group_id": (string) the API ID of the subscription group selected in the WhatsApp message
-     * "from": (array) the list of strings of the numbers associated with the subscription group,
-     * "template_name": (string) the name of the WhatsApp template being sent,
-     * "template_language_code": (string) the language code of the WhatsApp template being sent,
-     * "header_variables": (array) the list of strings, if present, of Liquid variables being inserted into header of WhatsApp template being sent,
-     * "body_variables": (array) the list of strings, if present, of Liquid variables being inserted into body of WhatsApp template being sent,
-     * "button_variables": (array) the list of strings, if present, of Liquid variables being inserted into buttons of WhatsApp template being sent
+     *   "channel": "whats_app",
+     *   "subscription_group_id": (string) the API ID of the subscription group selected in the WhatsApp message
+     *   "from": (array) the list of strings of the numbers associated with the subscription group,
+     *   "template_name": (string) the name of the WhatsApp template being sent,
+     *   "template_language_code": (string) the language code of the WhatsApp template being sent,
+     *   "header_variables": (array) the list of strings, if present, of Liquid variables being inserted into header of WhatsApp template being sent,
+     *   "body_variables": (array) the list of strings, if present, of Liquid variables being inserted into body of WhatsApp template being sent,
+     *   "button_variables": (array) the list of strings, if present, of Liquid variables being inserted into buttons of WhatsApp template being sent
      * }
      *
-     * ```
+     *  ```
      *
      * ##### Response messages
      *
      * ``` json
      * {
-     * "channel": "whats_app",
-     * "subscription_group_id": (string) the API ID of the subscription group selected in the WhatsApp message,
-     * "from": (array) list of strings of the numbers associated with the subscription group,
-     * "layout": (string) the name of the WhatsApp template being sent (text or media or quick-reply),
-     * "header_text": (string, optional) the text, if present, of the header of the message being sent,
-     * "body_text": (string, optional) the text, if present, of the body of the message being sent,
-     * "footer_text": (string, optional) the text, if present, of the footer of the message being sent,
-     * "buttons": (array) list of button objects in the message being sent ({"text": (string) the text of the button})
+     *   "channel": "whats_app",
+     *   "subscription_group_id": (string) the API ID of the subscription group selected in the WhatsApp message,
+     *   "from": (array) list of strings of the numbers associated with the subscription group,
+     *   "layout": (string) the name of the WhatsApp template being sent (text or media or quick-reply),
+     *   "header_text": (string, optional) the text, if present, of the header of the message being sent,
+     *   "body_text": (string, optional) the text, if present, of the body of the message being sent,
+     *   "footer_text": (string, optional) the text, if present, of the footer of the message being sent,
+     *   "buttons": (array) list of button objects in the message being sent ({"text": (string) the text of the button})
      * }
      *
-     * ```
+     *  ```
      *
      * #### Control messages
      *
      * ``` json
      * {
-     * "channel": (string) description of the channel that the control is for,
-     * "type": "control"
+     *     "channel": (string) description of the channel that the control is for,
+     *     "type": "control"
      * }
      *
-     * ```
+     *  ```
      *
      * ### Conversion behaviors
      *
@@ -209,75 +209,75 @@ class GetCampaignsDetail extends \Braze\Runtime\Client\BaseEndpoint implements \
      *
      * ``` json
      * {
-     * "type": "Clicks Email",
-     * "window": (integer) number of seconds during which the user can convert on this event, i.e. - 86400, which is 24 hours
+     *     "type": "Clicks Email",
+     *     "window": (integer) number of seconds during which the user can convert on this event, i.e. - 86400, which is 24 hours
      * }
      *
-     * ```
+     *  ```
      *
      * #### Opens email
      *
      * ``` json
      * {
-     * "type": "Opens Email",
-     * "window": (integer) number of seconds during which the user can convert on this event, i.e. - 86400, which is 24 hours
+     *     "type": "Opens Email",
+     *     "window": (integer) number of seconds during which the user can convert on this event, i.e. - 86400, which is 24 hours
      * }
      *
-     * ```
+     *  ```
      *
      * #### Makes purchase (any purchase)
      *
      * ``` json
      * {
-     * "type": "Makes Any Purchase",
-     * "window": (integer) number of seconds during which the user can convert on this event, i.e. - 86400, which is 24 hours
+     *     "type": "Makes Any Purchase",
+     *     "window": (integer) number of seconds during which the user can convert on this event, i.e. - 86400, which is 24 hours
      * }
      *
-     * ```
+     *  ```
      *
      * #### Makes purchase (specific product)
      *
      * ``` json
      * {
-     * "type": "Makes Specific Purchase",
-     * "window": (integer) number of seconds during which the user can convert on this event, i.e. - 86400, which is 24 hours,
-     * "product": (string) name of the product, i.e. - "Feline Body Armor"
+     *     "type": "Makes Specific Purchase",
+     *     "window": (integer) number of seconds during which the user can convert on this event, i.e. - 86400, which is 24 hours,
+     *     "product": (string) name of the product, i.e. - "Feline Body Armor"
      * }
      *
-     * ```
+     *  ```
      *
      * #### Performs custom event
      *
      * ``` json
      * {
-     * "type": "Performs Custom Event",
-     * "window": (integer) number of seconds during which the user can convert on this event, i.e. - 86400, which is 24 hours,
-     * "custom_event_name": (string) name of the event, i.e. - "Used Feline Body Armor"
+     *     "type": "Performs Custom Event",
+     *     "window": (integer) number of seconds during which the user can convert on this event, i.e. - 86400, which is 24 hours,
+     *     "custom_event_name": (string) name of the event, i.e. - "Used Feline Body Armor"
      * }
      *
-     * ```
+     *  ```
      *
      * #### Upgrades app
      *
      * ``` json
      * {
-     * "type": "Upgrades App",
-     * "window": (integer) number of seconds during which the user can convert on this event, i.e. - 86400, which is 24 hours,
-     * "app_ids": (array|null) array of app ids, i.e. - ["12345", "67890"], or `null` if "Track sessions for any app" is selected in the UI
+     *     "type": "Upgrades App",
+     *     "window": (integer) number of seconds during which the user can convert on this event, i.e. - 86400, which is 24 hours,
+     *     "app_ids": (array|null) array of app ids, i.e. - ["12345", "67890"], or `null` if "Track sessions for any app" is selected in the UI
      * }
      *
-     * ```
+     *  ```
      *
      * #### Uses app
      *
      * ``` json
      * {
-     * "type": "Starts Session",
-     * "window": (integer) number of seconds during which the user can convert on this event, i.e. - 86400, which is 24 hours,
-     * "app_ids": (array|null) array of app ids, i.e. - ["12345", "67890"], or `null` if "Track sessions for any app" is selected in the UI
+     *     "type": "Starts Session",
+     *     "window": (integer) number of seconds during which the user can convert on this event, i.e. - 86400, which is 24 hours,
+     *     "app_ids": (array|null) array of app ids, i.e. - ["12345", "67890"], or `null` if "Track sessions for any app" is selected in the UI
      * }
      *
-     * ```
+     *  ```
      *
      * > **Tip:** For help with CSV and API exports, visit [Export troubleshooting](https://www.braze.com/docs/user_guide/data_and_analytics/export_braze_data/export_troubleshooting/).
      *
@@ -353,29 +353,29 @@ class GetCampaignsDetail extends \Braze\Runtime\Client\BaseEndpoint implements \
      * @throws \Braze\Exception\GetCampaignsDetailTooManyRequestsException
      * @throws \Braze\Exception\GetCampaignsDetailInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();
-        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (200 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return json_decode($body);
         }
-        if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (400 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetCampaignsDetailBadRequestException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (401 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetCampaignsDetailUnauthorizedException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (403 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetCampaignsDetailForbiddenException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (404 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetCampaignsDetailNotFoundException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (429 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (429 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetCampaignsDetailTooManyRequestsException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (500 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetCampaignsDetailInternalServerErrorException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
     }

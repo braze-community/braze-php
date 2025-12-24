@@ -27,17 +27,17 @@ class MessagesLiveActivityUpdatePostBodyNormalizer implements DenormalizerInterf
     use CheckArray;
     use ValidatorTrait;
 
-    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
+    public function supportsDenormalization(mixed $data, string $type, string $format = null, array $context = []): bool
     {
         return $type === \Braze\Model\MessagesLiveActivityUpdatePostBody::class;
     }
 
-    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+    public function supportsNormalization(mixed $data, string $format = null, array $context = []): bool
     {
         return is_object($data) && get_class($data) === \Braze\Model\MessagesLiveActivityUpdatePostBody::class;
     }
 
-    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
+    public function denormalize(mixed $data, string $type, string $format = null, array $context = []): mixed
     {
         if (isset($data['$ref'])) {
             return new Reference($data['$ref'], $context['document-origin']);
@@ -89,7 +89,7 @@ class MessagesLiveActivityUpdatePostBodyNormalizer implements DenormalizerInterf
         return $object;
     }
 
-    public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+    public function normalize(mixed $data, string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
         if ($data->isInitialized('appId') && null !== $data->getAppId()) {
@@ -105,10 +105,10 @@ class MessagesLiveActivityUpdatePostBodyNormalizer implements DenormalizerInterf
             $dataArray['end_activity'] = $data->getEndActivity();
         }
         if ($data->isInitialized('dismissalDate') && null !== $data->getDismissalDate()) {
-            $dataArray['dismissal_date'] = $data->getDismissalDate()?->format('Y-m-d\TH:i:sP');
+            $dataArray['dismissal_date'] = $data->getDismissalDate()->format('Y-m-d\TH:i:sP');
         }
         if ($data->isInitialized('staleDate') && null !== $data->getStaleDate()) {
-            $dataArray['stale_date'] = $data->getStaleDate()?->format('Y-m-d\TH:i:sP');
+            $dataArray['stale_date'] = $data->getStaleDate()->format('Y-m-d\TH:i:sP');
         }
         if ($data->isInitialized('notification') && null !== $data->getNotification()) {
             $dataArray['notification'] = $this->normalizer->normalize($data->getNotification(), 'json', $context);
@@ -122,7 +122,7 @@ class MessagesLiveActivityUpdatePostBodyNormalizer implements DenormalizerInterf
         return $dataArray;
     }
 
-    public function getSupportedTypes(?string $format = null): array
+    public function getSupportedTypes(string $format = null): array
     {
         return [\Braze\Model\MessagesLiveActivityUpdatePostBody::class => false];
     }

@@ -17,7 +17,7 @@ class PostUsersTrack extends \Braze\Runtime\Client\BaseEndpoint implements \Braz
     /**
      * > Use this endpoint to record custom events, purchases, and update user profile attributes.
      *
-     **Note:** Braze processes the data passed via API at face value and customers should only pass deltas (changing data) to minimize unnecessary data point consumption. To read more, refer to [Data points](https://www.braze.com/docs/user_guide/onboarding_with_braze/data_points#data-points).
+     * **Note:** Braze processes the data passed via API at face value and customers should only pass deltas (changing data) to minimize unnecessary data point consumption. To read more, refer to [Data points](https://www.braze.com/docs/user_guide/onboarding_with_braze/data_points#data-points).
      *
      * ## Prerequisites
      *
@@ -55,70 +55,70 @@ class PostUsersTrack extends \Braze\Runtime\Client\BaseEndpoint implements \Braz
      * --header 'Content-Type: application/json' \
      * --header 'Authorization: Bearer YOUR_REST_API_KEY' \
      * --data-raw '{
-     * "attributes": [
-     * {
-     * "email": "test@braze.com",
-     * "string_attribute": "fruit",
-     * "boolean_attribute_1": true,
-     * "integer_attribute": 26,
-     * "array_attribute": [
-     * "banana",
-     * "apple"
-     * ]
-     * }
-     * ],
-     * "events": [
-     * {
-     * "email": "test@braze.com",
-     * "app_id": "your_app_identifier",
-     * "name": "rented_movie",
-     * "time": "2022-12-06T19:20:45+01:00",
-     * "properties": {
-     * "release": {
-     * "studio": "FilmStudio",
-     * "year": "2022"
-     * },
-     * "cast": [
-     * {
-     * "name": "Actor1"
-     * },
-     * {
-     * "name": "Actor2"
-     * }
-     * ]
-     * }
-     * },
-     * {
-     * "user_alias": {
-     * "alias_name": "device123",
-     * "alias_label": "my_device_identifier"
-     * },
-     * "app_id": "your_app_identifier",
-     * "name": "rented_movie",
-     * "time": "2013-07-16T19:20:50+01:00"
-     * }
-     * ],
-     * "purchases": [
-     * {
-     * "email": "test@braze.com",
-     * "app_id": "your_app_identifier",
-     * "product_id": "product_name",
-     * "currency": "USD",
-     * "price": 12.12,
-     * "quantity": 6,
-     * "time": "2017-05-12T18:47:12Z",
-     * "properties": {
-     * "color": "red",
-     * "monogram": "ABC",
-     * "checkout_duration": 180,
-     * "size": "Large",
-     * "brand": "Backpack Locker"
-     * }
-     * }
-     * ]
+     *     "attributes": [
+     *         {
+     *             "email": "test@braze.com",
+     *             "string_attribute": "fruit",
+     *             "boolean_attribute_1": true,
+     *             "integer_attribute": 26,
+     *             "array_attribute": [
+     *                 "banana",
+     *                 "apple"
+     *             ]
+     *         }
+     *     ],
+     *     "events": [
+     *         {
+     *             "email": "test@braze.com",
+     *             "app_id": "your_app_identifier",
+     *             "name": "rented_movie",
+     *             "time": "2022-12-06T19:20:45+01:00",
+     *             "properties": {
+     *                 "release": {
+     *                     "studio": "FilmStudio",
+     *                     "year": "2022"
+     *                 },
+     *                 "cast": [
+     *                     {
+     *                         "name": "Actor1"
+     *                     },
+     *                     {
+     *                         "name": "Actor2"
+     *                     }
+     *                 ]
+     *             }
+     *         },
+     *         {
+     *             "user_alias": {
+     *                 "alias_name": "device123",
+     *                 "alias_label": "my_device_identifier"
+     *             },
+     *             "app_id": "your_app_identifier",
+     *             "name": "rented_movie",
+     *             "time": "2013-07-16T19:20:50+01:00"
+     *         }
+     *     ],
+     *     "purchases": [
+     *         {
+     *             "email": "test@braze.com",
+     *             "app_id": "your_app_identifier",
+     *             "product_id": "product_name",
+     *             "currency": "USD",
+     *             "price": 12.12,
+     *             "quantity": 6,
+     *             "time": "2017-05-12T18:47:12Z",
+     *             "properties": {
+     *                 "color": "red",
+     *                 "monogram": "ABC",
+     *                 "checkout_duration": 180,
+     *                 "size": "Large",
+     *                 "brand": "Backpack Locker"
+     *             }
+     *         }
+     *     ]
      * }'
      *
-     * ```
+     *  ```
      *
      * ### Update a user profile by phone number
      *
@@ -133,21 +133,21 @@ class PostUsersTrack extends \Braze\Runtime\Client\BaseEndpoint implements \Braz
      * --header 'Content-Type: application/json' \
      * --header 'Authorization: Bearer YOUR_REST_API_KEY' \
      * --data-raw '{
-     * "attributes": [
-     * {
-     * "phone": "+15043277269",
-     * "string_attribute": "fruit",
-     * "boolean_attribute_1": true,
-     * "integer_attribute": 25,
-     * "array_attribute": [
-     * "banana",
-     * "apple"
-     * ]
-     * }
-     * ],
+     *     "attributes": [
+     *         {
+     *             "phone": "+15043277269",
+     *             "string_attribute": "fruit",
+     *             "boolean_attribute_1": true,
+     *             "integer_attribute": 25,
+     *             "array_attribute": [
+     *                 "banana",
+     *                 "apple"
+     *             ]
+     *         }
+     *     ],
      * }'
      *
-     * ```
+     *  ```
      *
      * ### Set subscription groups
      *
@@ -160,29 +160,29 @@ class PostUsersTrack extends \Braze\Runtime\Client\BaseEndpoint implements \Braz
      * --header 'Content-Type: application/json' \
      * --header 'Authorization: Bearer YOUR_REST_API_KEY' \
      * --data-raw '{
-     * "attributes": [
-     * {
-     * "external_id": "user_identifier",
-     * "email": "example@email.com",
-     * "email_subscribe": "subscribed",
-     * "subscription_groups": [{
-     * "subscription_group_id": "subscription_group_identifier_1",
-     * "subscription_state": "unsubscribed"
-     * },
-     * {
-     * "subscription_group_id": "subscription_group_identifier_2",
-     * "subscription_state": "subscribed"
-     * },
-     * {
-     * "subscription_group_id": "subscription_group_identifier_3",
-     * "subscription_state": "subscribed"
-     * }
-     * ]
-     * }
-     * ]
+     *   "attributes": [
+     *   {
+     *     "external_id": "user_identifier",
+     *     "email": "example@email.com",
+     *     "email_subscribe": "subscribed",
+     *     "subscription_groups": [{
+     *       "subscription_group_id": "subscription_group_identifier_1",
+     *       "subscription_state": "unsubscribed"
+     *       },
+     *       {
+     *         "subscription_group_id": "subscription_group_identifier_2",
+     *         "subscription_state": "subscribed"
+     *         },
+     *         {
+     *           "subscription_group_id": "subscription_group_identifier_3",
+     *           "subscription_state": "subscribed"
+     *         }
+     *       ]
+     *     }
+     *   ]
      * }'
      *
-     * ```
+     *  ```
      *
      * ### Example request to create an alias-only user
      *
@@ -194,19 +194,19 @@ class PostUsersTrack extends \Braze\Runtime\Client\BaseEndpoint implements \Braz
      * --header 'Authorization: Bearer YOUR_REST_API_KEY' \
      * --data-raw '{
      * {
-     * "attributes": [
-     * {
-     * "_update_existing_only": false,
-     * "user_alias": {
-     * "alias_name": "example_name",
-     * "alias_label": "example_label"
-     * },
-     * "email": "email@example.com"
-     * }
-     * ],
+     *     "attributes": [
+     *         {
+     *             "_update_existing_only": false,
+     *             "user_alias": {
+     *                 "alias_name": "example_name",
+     *                 "alias_label": "example_label"
+     *             },
+     *             "email": "email@example.com"
+     *         }
+     *     ],
      * }'
      *
-     * ```
+     *  ```
      *
      * ## Responses
      *
@@ -218,13 +218,13 @@ class PostUsersTrack extends \Braze\Runtime\Client\BaseEndpoint implements \Braz
      *
      * ``` json
      * {
-     * "message" : "success",
-     * "attributes_processed" : (optional, integer), if attributes are included in the request, this will return an integer of the number of external_ids with attributes that were queued to be processed,
-     * "events_processed" : (optional, integer), if events are included in the request, this will return an integer of the number of events that were queued to be processed,
-     * "purchases_processed" : (optional, integer), if purchases are included in the request, this will return an integer of the number of purchases that were queued to be processed,
+     *   "message" : "success",
+     *   "attributes_processed" : (optional, integer), if attributes are included in the request, this will return an integer of the number of external_ids with attributes that were queued to be processed,
+     *   "events_processed" : (optional, integer), if events are included in the request, this will return an integer of the number of events that were queued to be processed,
+     *   "purchases_processed" : (optional, integer), if purchases are included in the request, this will return an integer of the number of purchases that were queued to be processed,
      * }
      *
-     * ```
+     *  ```
      *
      * ### Successful message with non-fatal errors
      *
@@ -232,15 +232,15 @@ class PostUsersTrack extends \Braze\Runtime\Client\BaseEndpoint implements \Braz
      *
      * ``` json
      * {
-     * "message" : "success",
-     * "errors" : [
-     * {
-     * <minor error message>
-     * }
-     * ]
+     *   "message" : "success",
+     *   "errors" : [
+     *     {
+     *       <minor error message>
+     *     }
+     *   ]
      * }
      *
-     * ```
+     *  ```
      *
      * For success messages, any data not affected by an error in the `errors` array will still be processed.
      *
@@ -250,15 +250,15 @@ class PostUsersTrack extends \Braze\Runtime\Client\BaseEndpoint implements \Braz
      *
      * ``` json
      * {
-     * "message" : <fatal error message>,
-     * "errors" : [
-     * {
-     * <fatal error message>
-     * }
-     * ]
+     *   "message" : <fatal error message>,
+     *   "errors" : [
+     *     {
+     *       <fatal error message>
+     *     }
+     *   ]
      * }
      *
-     * ```
+     *  ```
      *
      * ### Fatal error response codes
      *
@@ -314,7 +314,7 @@ class PostUsersTrack extends \Braze\Runtime\Client\BaseEndpoint implements \Braz
      * @var string $Authorization
      *             }
      */
-    public function __construct(?\Braze\Model\UsersTrackPostBody $requestBody = null, array $headerParameters = [])
+    public function __construct(\Braze\Model\UsersTrackPostBody $requestBody = null, array $headerParameters = [])
     {
         $this->body = $requestBody;
         $this->headerParameters = $headerParameters;
@@ -366,32 +366,32 @@ class PostUsersTrack extends \Braze\Runtime\Client\BaseEndpoint implements \Braz
      * @throws \Braze\Exception\PostUsersTrackTooManyRequestsException
      * @throws \Braze\Exception\PostUsersTrackInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();
-        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (200 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return json_decode($body);
         }
-        if (is_null($contentType) === false && (201 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (201 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return json_decode($body);
         }
-        if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (400 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostUsersTrackBadRequestException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (401 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostUsersTrackUnauthorizedException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (403 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostUsersTrackForbiddenException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (404 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostUsersTrackNotFoundException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (429 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (429 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostUsersTrackTooManyRequestsException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (500 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostUsersTrackInternalServerErrorException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
     }

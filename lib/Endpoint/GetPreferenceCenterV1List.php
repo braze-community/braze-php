@@ -35,41 +35,41 @@ class GetPreferenceCenterV1List extends \Braze\Runtime\Client\BaseEndpoint imple
      * curl --location -g --request GET https://rest.iad-01.braze.com/preference_center/v1/list \
      * --header 'Authorization: Bearer YOUR-REST-API-KEY'
      *
-     * ```
+     *  ```
      *
      * ## Response
      *
      * ``` json
      * {
-     * "preference_centers": [
-     * {
-     * "name": "My Preference Center 1",
-     * "preference_center_api_id": "preference_center_api_id",
-     * "created_at": "2022-08-17T15:46:10Z",
-     * "updated_at": "2022-08-17T15:46:10Z"
-     * },
-     * {
-     * "name": "My Preference Center 2",
-     * "preference_center_api_id": "preference_center_api_id",
-     * "created_at": "2022-08-19T11:13:06Z",
-     * "updated_at": "2022-08-19T11:13:06Z"
-     * },
-     * {
-     * "name": "My Preference Center 3",
-     * "preference_center_api_id": "preference_center_api_id",
-     * "created_at": "2022-08-19T11:30:50Z",
-     * "updated_at": "2022-08-19T11:30:50Z"
-     * },
-     * {
-     * "name": "My Preference Center 4",
-     * "preference_center_api_id": "preference_center_api_id",
-     * "created_at": "2022-09-13T20:41:34Z",
-     * "updated_at": "2022-09-13T20:41:34Z"
-     * }
-     * ]
+     *   "preference_centers": [
+     *     {
+     *       "name": "My Preference Center 1",
+     *       "preference_center_api_id": "preference_center_api_id",
+     *       "created_at": "2022-08-17T15:46:10Z",
+     *       "updated_at": "2022-08-17T15:46:10Z"
+     *     },
+     *     {
+     *       "name": "My Preference Center 2",
+     *       "preference_center_api_id": "preference_center_api_id",
+     *       "created_at": "2022-08-19T11:13:06Z",
+     *       "updated_at": "2022-08-19T11:13:06Z"
+     *     },
+     *     {
+     *       "name": "My Preference Center 3",
+     *       "preference_center_api_id": "preference_center_api_id",
+     *       "created_at": "2022-08-19T11:30:50Z",
+     *       "updated_at": "2022-08-19T11:30:50Z"
+     *     },
+     *     {
+     *       "name": "My Preference Center 4",
+     *       "preference_center_api_id": "preference_center_api_id",
+     *       "created_at": "2022-09-13T20:41:34Z",
+     *       "updated_at": "2022-09-13T20:41:34Z"
+     *     }
+     *   ]
      * }
      *
-     * ```
+     *  ```
      *
      * @param array $headerParameters {
      *
@@ -122,29 +122,29 @@ class GetPreferenceCenterV1List extends \Braze\Runtime\Client\BaseEndpoint imple
      * @throws \Braze\Exception\GetPreferenceCenterV1ListTooManyRequestsException
      * @throws \Braze\Exception\GetPreferenceCenterV1ListInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();
-        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (200 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return json_decode($body);
         }
-        if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (400 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetPreferenceCenterV1ListBadRequestException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (401 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetPreferenceCenterV1ListUnauthorizedException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (403 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetPreferenceCenterV1ListForbiddenException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (404 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetPreferenceCenterV1ListNotFoundException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (429 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (429 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetPreferenceCenterV1ListTooManyRequestsException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (500 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetPreferenceCenterV1ListInternalServerErrorException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
     }

@@ -16,7 +16,7 @@ it('sends a POST to "/v2/subscription/status/set"', function (): void {
         'subscription_state' => 'subscribed',
         'external_ids' => ['id1'],
         'id' => 'restaurant1',
-        'emails' => ['john@example.com'],
+        'emails' => ['braze@example.com'],
         'phones' => ['1234567890'],
     ]);
     expect($body->getSubscriptionGroups())->toBeTruthy();

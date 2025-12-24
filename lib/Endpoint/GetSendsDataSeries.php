@@ -35,44 +35,44 @@ class GetSendsDataSeries extends \Braze\Runtime\Client\BaseEndpoint implements \
      * Content-Type: application/json
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
-     * "variation_name": (string) variation name,
-     * "sent": (int) the number of sends,
-     * "delivered": (int) the number of messages successfully delivered,
-     * "undelivered": (int) the number of undelivered,
-     * "delivery_failed": (int) the number of rejected,
-     * "direct_opens": (int) the number of direct opens,
-     * "total_opens": (int) the number of total opens,
-     * "bounces": (int) the number of bounces,
-     * "body_clicks": (int) the number of body clicks,
-     * "revenue": (float) the number of dollars of revenue (USD),
-     * "unique_recipients": (int) the number of unique recipients,
-     * "conversions": (int) the number of conversions,
-     * "conversions_by_send_time": (int) the number of conversions,
-     * "conversions1": (int, optional) the number of conversions for the second conversion event,
-     * "conversions1_by_send_time": (int, optional) the number of conversions for the second conversion event by send time,
-     * "conversions2": (int, optional) the number of conversions for the third conversion event,
-     * "conversions2_by_send_time": (int, optional) the number of conversions for the third conversion event by send time,
-     * "conversions3": (int, optional) the number of conversions for the fourth conversion event,
-     * "conversions3_by_send_time": (int, optional) the number of conversions for the fourth conversion event by send time
-     * }
-     * ]
-     * },
-     * "conversions_by_send_time": 0,
-     * "conversions1_by_send_time": 0,
-     * "conversions2_by_send_time": 0,
-     * "conversions3_by_send_time": 0,
-     * "conversions": 0,
-     * "conversions1": 0,
-     * "conversions2": 0,
-     * "conversions3": 0,
-     * "unique_recipients": 1,
-     * "revenue": 0
-     * }
-     * ],
-     * "message": "success"
+     *             "variation_name": (string) variation name,
+     *             "sent": (int) the number of sends,
+     *             "delivered": (int) the number of messages successfully delivered,
+     *             "undelivered": (int) the number of undelivered,
+     *             "delivery_failed": (int) the number of rejected,
+     *             "direct_opens": (int) the number of direct opens,
+     *             "total_opens": (int) the number of total opens,
+     *             "bounces": (int) the number of bounces,
+     *             "body_clicks": (int) the number of body clicks,
+     *             "revenue": (float) the number of dollars of revenue (USD),
+     *             "unique_recipients": (int) the number of unique recipients,
+     *             "conversions": (int) the number of conversions,
+     *             "conversions_by_send_time": (int) the number of conversions,
+     *             "conversions1": (int, optional) the number of conversions for the second conversion event,
+     *             "conversions1_by_send_time": (int, optional) the number of conversions for the second conversion event by send time,
+     *             "conversions2": (int, optional) the number of conversions for the third conversion event,
+     *             "conversions2_by_send_time": (int, optional) the number of conversions for the third conversion event by send time,
+     *             "conversions3": (int, optional) the number of conversions for the fourth conversion event,
+     *             "conversions3_by_send_time": (int, optional) the number of conversions for the fourth conversion event by send time
+     *           }
+     *         ]
+     *       },
+     *       "conversions_by_send_time": 0,
+     *       "conversions1_by_send_time": 0,
+     *       "conversions2_by_send_time": 0,
+     *       "conversions3_by_send_time": 0,
+     *       "conversions": 0,
+     *       "conversions1": 0,
+     *       "conversions2": 0,
+     *       "conversions3": 0,
+     *       "unique_recipients": 1,
+     *       "revenue": 0
+     *     }
+     *   ],
+     *   "message": "success"
      * }
      *
-     * ```
+     *  ```
      *
      * > **Tip:** For help with CSV and API exports, visit [Export troubleshooting](https://www.braze.com/docs/user_guide/data_and_analytics/export_braze_data/export_troubleshooting/).
      *
@@ -158,29 +158,29 @@ class GetSendsDataSeries extends \Braze\Runtime\Client\BaseEndpoint implements \
      * @throws \Braze\Exception\GetSendsDataSeriesTooManyRequestsException
      * @throws \Braze\Exception\GetSendsDataSeriesInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();
-        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (200 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return json_decode($body);
         }
-        if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (400 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetSendsDataSeriesBadRequestException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (401 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetSendsDataSeriesUnauthorizedException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (403 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetSendsDataSeriesForbiddenException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (404 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetSendsDataSeriesNotFoundException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (429 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (429 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetSendsDataSeriesTooManyRequestsException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (500 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetSendsDataSeriesInternalServerErrorException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
     }

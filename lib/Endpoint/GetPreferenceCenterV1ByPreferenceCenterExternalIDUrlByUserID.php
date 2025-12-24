@@ -49,16 +49,16 @@ class GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserID extends \Braz
      * curl --location --request GET 'https://rest.iad-01.braze.com/preference_center/v1/$preference_center_external_id/url/$user_external_id' \
      * --header 'Authorization: Bearer YOUR-API-KEY-HERE'
      *
-     * ```
+     *  ```
      *
      * ## Response
      *
      * ``` json
      * {
-     * "preference_center_url": "https://www.example.com/preferences"
+     *   "preference_center_url": "https://www.example.com/preferences"
      * }
      *
-     * ```
+     *  ```
      *
      * @param array $queryParameters {
      *
@@ -132,29 +132,29 @@ class GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserID extends \Braz
      * @throws \Braze\Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserIDTooManyRequestsException
      * @throws \Braze\Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserIDInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();
-        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (200 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return json_decode($body);
         }
-        if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (400 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserIDBadRequestException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (401 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserIDUnauthorizedException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (403 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserIDForbiddenException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (404 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserIDNotFoundException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (429 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (429 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserIDTooManyRequestsException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (500 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserIDInternalServerErrorException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
     }

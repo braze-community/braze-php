@@ -39,35 +39,35 @@ class PostScimV2User extends \Braze\Runtime\Client\BaseEndpoint implements \Braz
      *
      * ``` json
      * {
-     * "schemas": ["urn:ietf:params:scim:schemas:core:2.0:User"],
-     * "id": "dfa245b7-24195aec-887bb3ad-602b3340",
-     * "userName": "user@test.com",
-     * "name": {
-     * "givenName": "Test",
-     * "familyName": "User"
-     * },
-     * "department": "finance",
-     * "lastSignInAt": "Thursday, January 1, 1970 12:00:00 AM",
-     * "permissions": {
-     * "companyPermissions": ["manage_company_settings"],
-     * "appGroup": [
-     * {
-     * "appGroupId": "241adcd25789fabcded",
-     * "appGroupName": "Test App Group",
-     * "appGroupPermissions": ["basic_access","send_campaigns_canvases"],
-     * "team": [
-     * {
-     * "teamId": "2519dafcdba238ae7",
-     * "teamName": "Test Team",
-     * "teamPermissions": ["basic_access","export_user_data"]
-     * }
-     * ]
-     * }
-     * ]
-     * }
+     *     "schemas": ["urn:ietf:params:scim:schemas:core:2.0:User"],
+     *     "id": "dfa245b7-24195aec-887bb3ad-602b3340",
+     *     "userName": "user@test.com",
+     *     "name": {
+     *         "givenName": "Test",
+     *         "familyName": "User"
+     *     },
+     *     "department": "finance",
+     *     "lastSignInAt": "Thursday, January 1, 1970 12:00:00 AM",
+     *     "permissions": {
+     *         "companyPermissions": ["manage_company_settings"],
+     *         "appGroup": [
+     *             {
+     *                 "appGroupId": "241adcd25789fabcded",
+     *                 "appGroupName": "Test App Group",
+     *                 "appGroupPermissions": ["basic_access","send_campaigns_canvases"],
+     *                 "team": [
+     *                     {
+     *                          "teamId": "2519dafcdba238ae7",
+     *                          "teamName": "Test Team",
+     *                          "teamPermissions": ["basic_access","export_user_data"]
+     *                     }
+     *                 ]
+     *             }
+     *         ]
+     *     }
      * }
      *
-     * ```
+     *  ```
      *
      * ### Error states
      *
@@ -78,12 +78,12 @@ class PostScimV2User extends \Braze\Runtime\Client\BaseEndpoint implements \Braz
      * Date: Tue, 10 Sep 2019 02:22:30 GMT
      * Content-Type: text/json;charset=UTF-8
      * {
-     * "schemas": ["urn:ietf:params:scim:api:messages:2.0:Error"],
-     * "detail": "User already exists in the database.",
-     * "status": 409
+     *   "schemas": ["urn:ietf:params:scim:api:messages:2.0:Error"],
+     *   "detail": "User already exists in the database.",
+     *   "status": 409
      * }
      *
-     * ```
+     *  ```
      *
      * @param array $headerParameters {
      *
@@ -92,7 +92,7 @@ class PostScimV2User extends \Braze\Runtime\Client\BaseEndpoint implements \Braz
      * @var string $Authorization
      *             }
      */
-    public function __construct(?\Braze\Model\ScimV2UsersPostBody $requestBody = null, array $headerParameters = [])
+    public function __construct(\Braze\Model\ScimV2UsersPostBody $requestBody = null, array $headerParameters = [])
     {
         $this->body = $requestBody;
         $this->headerParameters = $headerParameters;
@@ -145,32 +145,32 @@ class PostScimV2User extends \Braze\Runtime\Client\BaseEndpoint implements \Braz
      * @throws \Braze\Exception\PostScimV2UserTooManyRequestsException
      * @throws \Braze\Exception\PostScimV2UserInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();
-        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (200 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return json_decode($body);
         }
-        if (is_null($contentType) === false && (201 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (201 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return json_decode($body);
         }
-        if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (400 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostScimV2UserBadRequestException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (401 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostScimV2UserUnauthorizedException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (403 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostScimV2UserForbiddenException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (404 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostScimV2UserNotFoundException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (429 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (429 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostScimV2UserTooManyRequestsException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (500 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostScimV2UserInternalServerErrorException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
     }

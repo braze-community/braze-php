@@ -45,7 +45,7 @@ class GetCatalogsByCatalogNameItemByItemId extends \Braze\Runtime\Client\BaseEnd
      * --header 'Content-Type: application/json' \
      * --header 'Authorization: Bearer YOUR-REST-API-KEY'
      *
-     * ```
+     *  ```
      *
      * ## Response
      *
@@ -57,21 +57,21 @@ class GetCatalogsByCatalogNameItemByItemId extends \Braze\Runtime\Client\BaseEnd
      *
      * ``` json
      * {
-     * "items": [
-     * {
-     * "id": "restaurant3",
-     * "Name": "Restaurant1",
-     * "City": "New York",
-     * "Cuisine": "American",
-     * "Rating": 5,
-     * "Loyalty_Program": true,
-     * "Open_Time": "2022-11-01T09:03:19.967Z"
-     * }
-     * ],
-     * "message": "success"
+     *   "items": [
+     *     {
+     *       "id": "restaurant3",
+     *       "Name": "Restaurant1",
+     *       "City": "New York",
+     *       "Cuisine": "American",
+     *       "Rating": 5,
+     *       "Loyalty_Program": true,
+     *       "Open_Time": "2022-11-01T09:03:19.967Z"
+     *     }
+     *   ],
+     *   "message": "success"
      * }
      *
-     * ```
+     *  ```
      *
      * ### Example error response
      *
@@ -79,22 +79,22 @@ class GetCatalogsByCatalogNameItemByItemId extends \Braze\Runtime\Client\BaseEnd
      *
      * ``` json
      * {
-     * "errors": [
-     * {
-     * "id": "item-not-found",
-     * "message": "Could not find item",
-     * "parameters": [
-     * "item_id"
-     * ],
-     * "parameter_values": [
-     * "restaurant34"
-     * ]
-     * }
-     * ],
-     * "message": "Invalid Request"
+     *   "errors": [
+     *     {
+     *       "id": "item-not-found",
+     *       "message": "Could not find item",
+     *       "parameters": [
+     *         "item_id"
+     *       ],
+     *       "parameter_values": [
+     *         "restaurant34"
+     *       ]
+     *     }
+     *   ],
+     *   "message": "Invalid Request"
      * }
      *
-     * ```
+     *  ```
      *
      * ## Troubleshooting
      *
@@ -160,29 +160,29 @@ class GetCatalogsByCatalogNameItemByItemId extends \Braze\Runtime\Client\BaseEnd
      * @throws \Braze\Exception\GetCatalogsByCatalogNameItemByItemIdTooManyRequestsException
      * @throws \Braze\Exception\GetCatalogsByCatalogNameItemByItemIdInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();
-        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (200 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return json_decode($body);
         }
-        if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (400 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetCatalogsByCatalogNameItemByItemIdBadRequestException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (401 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetCatalogsByCatalogNameItemByItemIdUnauthorizedException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (403 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetCatalogsByCatalogNameItemByItemIdForbiddenException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (404 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetCatalogsByCatalogNameItemByItemIdNotFoundException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (429 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (429 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetCatalogsByCatalogNameItemByItemIdTooManyRequestsException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (500 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetCatalogsByCatalogNameItemByItemIdInternalServerErrorException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
     }

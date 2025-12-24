@@ -36,7 +36,7 @@ class GetCatalog extends \Braze\Runtime\Client\BaseEndpoint implements \Braze\Ru
      * --header 'Content-Type: application/json' \
      * --header 'Authorization: Bearer YOUR-REST-API-KEY'
      *
-     * ```
+     *  ```
      *
      * ## Response
      *
@@ -46,76 +46,76 @@ class GetCatalog extends \Braze\Runtime\Client\BaseEndpoint implements \Braze\Ru
      *
      * ``` json
      * {
-     * "catalogs": [
-     * {
-     * "description": "My Restaurants",
-     * "fields": [
-     * {
-     * "name": "id",
-     * "type": "string"
-     * },
-     * {
-     * "name": "Name",
-     * "type": "string"
-     * },
-     * {
-     * "name": "City",
-     * "type": "string"
-     * },
-     * {
-     * "name": "Cuisine",
-     * "type": "string"
-     * },
-     * {
-     * "name": "Rating",
-     * "type": "number"
-     * },
-     * {
-     * "name": "Loyalty_Program",
-     * "type": "boolean"
-     * },
-     * {
-     * "name": "Created_At",
-     * "type": "time"
-     * }
-     * ],
-     * "name": "restaurants",
-     * "num_items": 10,
-     * "updated_at": "2022-11-02T20:04:06.879+00:00"
-     * },
-     * {
-     * "description": "My Catalog",
-     * "fields": [
-     * {
-     * "name": "id",
-     * "type": "string"
-     * },
-     * {
-     * "name": "string_field",
-     * "type": "string"
-     * },
-     * {
-     * "name": "number_field",
-     * "type": "number"
-     * },
-     * {
-     * "name": "boolean_field",
-     * "type": "boolean"
-     * },
-     * {
-     * "name": "time_field",
-     * "type": "time"
-     * },
-     * ],
-     * "name": "my_catalog",
-     * "num_items": 3,
-     * "updated_at": "2022-11-02T09:03:19.967+00:00"
-     * },
-     * ],
-     * "message": "success"
+     *   "catalogs": [
+     *     {
+     *       "description": "My Restaurants",
+     *       "fields": [
+     *         {
+     *           "name": "id",
+     *           "type": "string"
+     *         },
+     *         {
+     *           "name": "Name",
+     *           "type": "string"
+     *         },
+     *         {
+     *           "name": "City",
+     *           "type": "string"
+     *         },
+     *         {
+     *           "name": "Cuisine",
+     *           "type": "string"
+     *         },
+     *         {
+     *           "name": "Rating",
+     *           "type": "number"
+     *         },
+     *         {
+     *           "name": "Loyalty_Program",
+     *           "type": "boolean"
+     *         },
+     *         {
+     *           "name": "Created_At",
+     *           "type": "time"
+     *         }
+     *       ],
+     *       "name": "restaurants",
+     *       "num_items": 10,
+     *       "updated_at": "2022-11-02T20:04:06.879+00:00"
+     *     },
+     *     {
+     *       "description": "My Catalog",
+     *       "fields": [
+     *         {
+     *           "name": "id",
+     *           "type": "string"
+     *         },
+     *         {
+     *           "name": "string_field",
+     *           "type": "string"
+     *         },
+     *         {
+     *           "name": "number_field",
+     *           "type": "number"
+     *         },
+     *         {
+     *           "name": "boolean_field",
+     *           "type": "boolean"
+     *         },
+     *         {
+     *           "name": "time_field",
+     *           "type": "time"
+     *         },
+     *       ],
+     *       "name": "my_catalog",
+     *       "num_items": 3,
+     *       "updated_at": "2022-11-02T09:03:19.967+00:00"
+     *     },
+     *   ],
+     *   "message": "success"
      * }
      *
-     * ```
+     *  ```
      *
      * @param array $headerParameters {
      *
@@ -170,29 +170,29 @@ class GetCatalog extends \Braze\Runtime\Client\BaseEndpoint implements \Braze\Ru
      * @throws \Braze\Exception\GetCatalogTooManyRequestsException
      * @throws \Braze\Exception\GetCatalogInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();
-        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (200 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return json_decode($body);
         }
-        if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (400 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetCatalogBadRequestException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (401 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetCatalogUnauthorizedException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (403 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetCatalogForbiddenException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (404 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetCatalogNotFoundException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (429 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (429 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetCatalogTooManyRequestsException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (500 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\GetCatalogInternalServerErrorException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
     }

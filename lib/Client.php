@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace Braze;
 
-class Client extends Runtime\Client\Client
+class Client extends \Braze\Runtime\Client\Client
 {
     /**
      * > Use this endpoint to delete a catalog.
@@ -39,10 +39,10 @@ class Client extends Runtime\Client\Client
      *
      * ``` json
      * {
-     * "message": "success"
+     *   "message": "success"
      * }
      *
-     * ```
+     *  ```
      *
      * ### Example error response
      *
@@ -50,22 +50,22 @@ class Client extends Runtime\Client\Client
      *
      * ``` json
      * {
-     * "errors": [
-     * {
-     * "id": "catalog-not-found",
-     * "message": "Could not find catalog",
-     * "parameters": [
-     * "catalog_name"
-     * ],
-     * "parameter_values": [
-     * "restaurants"
-     * ]
-     * }
-     * ],
-     * "message": "Invalid Request"
+     *   "errors": [
+     *     {
+     *       "id": "catalog-not-found",
+     *       "message": "Could not find catalog",
+     *       "parameters": [
+     *         "catalog_name"
+     *       ],
+     *       "parameter_values": [
+     *         "restaurants"
+     *       ]
+     *     }
+     *   ],
+     *   "message": "Invalid Request"
      * }
      *
-     * ```
+     *  ```
      *
      * ## Troubleshooting
      *
@@ -83,18 +83,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\DeleteCatalogByCatalogNameBadRequestException
-     * @throws Exception\DeleteCatalogByCatalogNameUnauthorizedException
-     * @throws Exception\DeleteCatalogByCatalogNameForbiddenException
-     * @throws Exception\DeleteCatalogByCatalogNameNotFoundException
-     * @throws Exception\DeleteCatalogByCatalogNameTooManyRequestsException
-     * @throws Exception\DeleteCatalogByCatalogNameInternalServerErrorException
+     * @throws \Braze\Exception\DeleteCatalogByCatalogNameBadRequestException
+     * @throws \Braze\Exception\DeleteCatalogByCatalogNameUnauthorizedException
+     * @throws \Braze\Exception\DeleteCatalogByCatalogNameForbiddenException
+     * @throws \Braze\Exception\DeleteCatalogByCatalogNameNotFoundException
+     * @throws \Braze\Exception\DeleteCatalogByCatalogNameTooManyRequestsException
+     * @throws \Braze\Exception\DeleteCatalogByCatalogNameInternalServerErrorException
      */
     public function deleteCatalogByCatalogName(string $catalogName, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\DeleteCatalogByCatalogName($catalogName, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\DeleteCatalogByCatalogName($catalogName, $headerParameters), $fetch);
     }
 
     /**
@@ -119,7 +119,7 @@ class Client extends Runtime\Client\Client
      * --header 'Content-Type: application/json' \
      * --header 'Authorization: Bearer YOUR-REST-API-KEY'
      *
-     * ```
+     *  ```
      *
      * ## Response
      *
@@ -129,76 +129,76 @@ class Client extends Runtime\Client\Client
      *
      * ``` json
      * {
-     * "catalogs": [
-     * {
-     * "description": "My Restaurants",
-     * "fields": [
-     * {
-     * "name": "id",
-     * "type": "string"
-     * },
-     * {
-     * "name": "Name",
-     * "type": "string"
-     * },
-     * {
-     * "name": "City",
-     * "type": "string"
-     * },
-     * {
-     * "name": "Cuisine",
-     * "type": "string"
-     * },
-     * {
-     * "name": "Rating",
-     * "type": "number"
-     * },
-     * {
-     * "name": "Loyalty_Program",
-     * "type": "boolean"
-     * },
-     * {
-     * "name": "Created_At",
-     * "type": "time"
-     * }
-     * ],
-     * "name": "restaurants",
-     * "num_items": 10,
-     * "updated_at": "2022-11-02T20:04:06.879+00:00"
-     * },
-     * {
-     * "description": "My Catalog",
-     * "fields": [
-     * {
-     * "name": "id",
-     * "type": "string"
-     * },
-     * {
-     * "name": "string_field",
-     * "type": "string"
-     * },
-     * {
-     * "name": "number_field",
-     * "type": "number"
-     * },
-     * {
-     * "name": "boolean_field",
-     * "type": "boolean"
-     * },
-     * {
-     * "name": "time_field",
-     * "type": "time"
-     * },
-     * ],
-     * "name": "my_catalog",
-     * "num_items": 3,
-     * "updated_at": "2022-11-02T09:03:19.967+00:00"
-     * },
-     * ],
-     * "message": "success"
+     *   "catalogs": [
+     *     {
+     *       "description": "My Restaurants",
+     *       "fields": [
+     *         {
+     *           "name": "id",
+     *           "type": "string"
+     *         },
+     *         {
+     *           "name": "Name",
+     *           "type": "string"
+     *         },
+     *         {
+     *           "name": "City",
+     *           "type": "string"
+     *         },
+     *         {
+     *           "name": "Cuisine",
+     *           "type": "string"
+     *         },
+     *         {
+     *           "name": "Rating",
+     *           "type": "number"
+     *         },
+     *         {
+     *           "name": "Loyalty_Program",
+     *           "type": "boolean"
+     *         },
+     *         {
+     *           "name": "Created_At",
+     *           "type": "time"
+     *         }
+     *       ],
+     *       "name": "restaurants",
+     *       "num_items": 10,
+     *       "updated_at": "2022-11-02T20:04:06.879+00:00"
+     *     },
+     *     {
+     *       "description": "My Catalog",
+     *       "fields": [
+     *         {
+     *           "name": "id",
+     *           "type": "string"
+     *         },
+     *         {
+     *           "name": "string_field",
+     *           "type": "string"
+     *         },
+     *         {
+     *           "name": "number_field",
+     *           "type": "number"
+     *         },
+     *         {
+     *           "name": "boolean_field",
+     *           "type": "boolean"
+     *         },
+     *         {
+     *           "name": "time_field",
+     *           "type": "time"
+     *         },
+     *       ],
+     *       "name": "my_catalog",
+     *       "num_items": 3,
+     *       "updated_at": "2022-11-02T09:03:19.967+00:00"
+     *     },
+     *   ],
+     *   "message": "success"
      * }
      *
-     * ```
+     *  ```
      *
      * @param array $headerParameters {
      *
@@ -208,18 +208,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\GetCatalogBadRequestException
-     * @throws Exception\GetCatalogUnauthorizedException
-     * @throws Exception\GetCatalogForbiddenException
-     * @throws Exception\GetCatalogNotFoundException
-     * @throws Exception\GetCatalogTooManyRequestsException
-     * @throws Exception\GetCatalogInternalServerErrorException
+     * @throws \Braze\Exception\GetCatalogBadRequestException
+     * @throws \Braze\Exception\GetCatalogUnauthorizedException
+     * @throws \Braze\Exception\GetCatalogForbiddenException
+     * @throws \Braze\Exception\GetCatalogNotFoundException
+     * @throws \Braze\Exception\GetCatalogTooManyRequestsException
+     * @throws \Braze\Exception\GetCatalogInternalServerErrorException
      */
     public function getCatalog(array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\GetCatalog($headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\GetCatalog($headerParameters), $fetch);
     }
 
     /**
@@ -254,45 +254,45 @@ class Client extends Runtime\Client\Client
      * --header 'Content-Type: application/json' \
      * --header 'Authorization: Bearer YOUR-REST-API-KEY' \
      * --data-raw '{
-     * "catalogs": [
-     * {
-     * "name": "restaurants",
-     * "description": "My Restaurants",
-     * "fields": [
-     * {
-     * "name": "id",
-     * "type": "string"
-     * },
-     * {
-     * "name": "Name",
-     * "type": "string"
-     * },
-     * {
-     * "name": "City",
-     * "type": "string"
-     * },
-     * {
-     * "name": "Cuisine",
-     * "type": "string"
-     * },
-     * {
-     * "name": "Rating",
-     * "type": "number"
-     * },
-     * {
-     * "name": "Loyalty_Program",
-     * "type": "boolean"
-     * },
-     * {
-     * "name": "Created_At",
-     * "type": "time"
-     * }
-     * ]
-     * }
-     * ]
+     *   "catalogs": [
+     *     {
+     *       "name": "restaurants",
+     *       "description": "My Restaurants",
+     *       "fields": [
+     *         {
+     *           "name": "id",
+     *           "type": "string"
+     *         },
+     *         {
+     *           "name": "Name",
+     *           "type": "string"
+     *         },
+     *         {
+     *           "name": "City",
+     *           "type": "string"
+     *         },
+     *         {
+     *           "name": "Cuisine",
+     *           "type": "string"
+     *         },
+     *         {
+     *           "name": "Rating",
+     *           "type": "number"
+     *         },
+     *         {
+     *           "name": "Loyalty_Program",
+     *           "type": "boolean"
+     *         },
+     *         {
+     *           "name": "Created_At",
+     *           "type": "time"
+     *         }
+     *       ]
+     *     }
+     *   ]
      * }'
      *
-     * ```
+     *  ```
      *
      * ## Response
      *
@@ -304,48 +304,48 @@ class Client extends Runtime\Client\Client
      *
      * ``` json
      * {
-     * "catalogs": [
-     * {
-     * "description": "My Restaurants",
-     * "fields": [
-     * {
-     * "name": "id",
-     * "type": "string"
-     * },
-     * {
-     * "name": "Name",
-     * "type": "string"
-     * },
-     * {
-     * "name": "City",
-     * "type": "string"
-     * },
-     * {
-     * "name": "Cuisine",
-     * "type": "string"
-     * },
-     * {
-     * "name": "Rating",
-     * "type": "number"
-     * },
-     * {
-     * "name": "Loyalty_Program",
-     * "type": "boolean"
-     * },
-     * {
-     * "name": "Created_At",
-     * "type": "time"
-     * }
-     * ],
-     * "name": "restaurants",
-     * "num_items": 0,
-     * "updated_at": "2022-11-02T20:04:06.879+00:00"
-     * }
-     * ],
-     * "message": "success"
+     *   "catalogs": [
+     *     {
+     *       "description": "My Restaurants",
+     *       "fields": [
+     *         {
+     *           "name": "id",
+     *           "type": "string"
+     *         },
+     *         {
+     *           "name": "Name",
+     *           "type": "string"
+     *         },
+     *         {
+     *           "name": "City",
+     *           "type": "string"
+     *         },
+     *         {
+     *           "name": "Cuisine",
+     *           "type": "string"
+     *         },
+     *         {
+     *           "name": "Rating",
+     *           "type": "number"
+     *         },
+     *         {
+     *           "name": "Loyalty_Program",
+     *           "type": "boolean"
+     *         },
+     *         {
+     *           "name": "Created_At",
+     *           "type": "time"
+     *         }
+     *       ],
+     *       "name": "restaurants",
+     *       "num_items": 0,
+     *       "updated_at": "2022-11-02T20:04:06.879+00:00"
+     *     }
+     *   ],
+     *   "message": "success"
      * }
      *
-     * ```
+     *  ```
      *
      * ### Example error response
      *
@@ -353,22 +353,22 @@ class Client extends Runtime\Client\Client
      *
      * ``` json
      * {
-     * "errors": [
-     * {
-     * "id": "catalog-name-already-exists",
-     * "message": "A catalog with that name already exists",
-     * "parameters": [
-     * "name"
-     * ],
-     * "parameter_values": [
-     * "restaurants"
-     * ]
-     * }
-     * ],
-     * "message": "Invalid Request"
+     *   "errors": [
+     *     {
+     *       "id": "catalog-name-already-exists",
+     *       "message": "A catalog with that name already exists",
+     *       "parameters": [
+     *         "name"
+     *       ],
+     *       "parameter_values": [
+     *         "restaurants"
+     *       ]
+     *     }
+     *   ],
+     *   "message": "Invalid Request"
      * }
      *
-     * ```
+     *  ```
      *
      * ## Troubleshooting
      *
@@ -391,7 +391,8 @@ class Client extends Runtime\Client\Client
      * | `too-many-catalog-atoms` | You can only create one catalog per request. |
      * | `too-many-fields` | Number of fields limit is 30. |
      *
-     * @param array $headerParameters {
+     * @param \Braze\Model\CatalogsPostBody|null $requestBody
+     * @param array                              $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -399,18 +400,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PostCatalogBadRequestException
-     * @throws Exception\PostCatalogUnauthorizedException
-     * @throws Exception\PostCatalogForbiddenException
-     * @throws Exception\PostCatalogNotFoundException
-     * @throws Exception\PostCatalogTooManyRequestsException
-     * @throws Exception\PostCatalogInternalServerErrorException
+     * @throws \Braze\Exception\PostCatalogBadRequestException
+     * @throws \Braze\Exception\PostCatalogUnauthorizedException
+     * @throws \Braze\Exception\PostCatalogForbiddenException
+     * @throws \Braze\Exception\PostCatalogNotFoundException
+     * @throws \Braze\Exception\PostCatalogTooManyRequestsException
+     * @throws \Braze\Exception\PostCatalogInternalServerErrorException
      */
-    public function postCatalog(?Model\CatalogsPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postCatalog(Model\CatalogsPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PostCatalog($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PostCatalog($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -445,14 +446,14 @@ class Client extends Runtime\Client\Client
      * --header 'Content-Type: application/json' \
      * --header 'Authorization: Bearer YOUR-REST-API-KEY' \
      * --data-raw '{
-     * "items": [
-     * {"id": "restaurant1"},
-     * {"id": "restaurant2"},
-     * {"id": "restaurant3"}
-     * ]
+     *   "items": [
+     *     {"id": "restaurant1"},
+     *     {"id": "restaurant2"},
+     *     {"id": "restaurant3"}
+     *   ]
      * }'
      *
-     * ```
+     *  ```
      *
      * ## Response
      *
@@ -464,10 +465,10 @@ class Client extends Runtime\Client\Client
      *
      * ``` json
      * {
-     * "message": "success"
+     *   "message": "success"
      * }
      *
-     * ```
+     *  ```
      *
      * ### Example error response
      *
@@ -475,18 +476,18 @@ class Client extends Runtime\Client\Client
      *
      * ``` json
      * {
-     * "errors": [
-     * {
-     * "id": "items-missing-ids",
-     * "message": "There are 1 item(s) that do not have ids",
-     * "parameters": [],
-     * "parameter_values": []
-     * }
-     * ],
-     * "message": "Invalid Request",
+     *   "errors": [
+     *     {
+     *       "id": "items-missing-ids",
+     *       "message": "There are 1 item(s) that do not have ids",
+     *       "parameters": [],
+     *       "parameter_values": []
+     *     }
+     *   ],
+     *   "message": "Invalid Request",
      * }
      *
-     * ```
+     *  ```
      *
      * ## Troubleshooting
      *
@@ -502,7 +503,8 @@ class Client extends Runtime\Client\Client
      * | `invalid-ids` | Item IDs can only include letters, numbers, hyphens, and underscores. |
      * | `request-includes-too-many-items` | Your request has too many items. The item limit per request is 50. |
      *
-     * @param array $headerParameters {
+     * @param \Braze\Model\CatalogsCatalogNameItemsDeleteBody|null $requestBody
+     * @param array                                                $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -510,18 +512,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\DeleteCatalogsByCatalogNameItemBadRequestException
-     * @throws Exception\DeleteCatalogsByCatalogNameItemUnauthorizedException
-     * @throws Exception\DeleteCatalogsByCatalogNameItemForbiddenException
-     * @throws Exception\DeleteCatalogsByCatalogNameItemNotFoundException
-     * @throws Exception\DeleteCatalogsByCatalogNameItemTooManyRequestsException
-     * @throws Exception\DeleteCatalogsByCatalogNameItemInternalServerErrorException
+     * @throws \Braze\Exception\DeleteCatalogsByCatalogNameItemBadRequestException
+     * @throws \Braze\Exception\DeleteCatalogsByCatalogNameItemUnauthorizedException
+     * @throws \Braze\Exception\DeleteCatalogsByCatalogNameItemForbiddenException
+     * @throws \Braze\Exception\DeleteCatalogsByCatalogNameItemNotFoundException
+     * @throws \Braze\Exception\DeleteCatalogsByCatalogNameItemTooManyRequestsException
+     * @throws \Braze\Exception\DeleteCatalogsByCatalogNameItemInternalServerErrorException
      */
-    public function deleteCatalogsByCatalogNameItem(string $catalogName, ?Model\CatalogsCatalogNameItemsDeleteBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function deleteCatalogsByCatalogNameItem(string $catalogName, Model\CatalogsCatalogNameItemsDeleteBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\DeleteCatalogsByCatalogNameItem($catalogName, $requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\DeleteCatalogsByCatalogNameItem($catalogName, $requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -562,7 +564,7 @@ class Client extends Runtime\Client\Client
      * --header 'Content-Type: application/json' \
      * --header 'Authorization: Bearer YOUR-REST-API-KEY'
      *
-     * ```
+     *  ```
      *
      * ### With cursor
      *
@@ -571,7 +573,7 @@ class Client extends Runtime\Client\Client
      * --header 'Content-Type: application/json' \
      * --header 'Authorization: Bearer YOUR-REST-API-KEY'
      *
-     * ```
+     *  ```
      *
      * ## Response
      *
@@ -582,50 +584,50 @@ class Client extends Runtime\Client\Client
      * The status code `200` could return the following response header and body.
      *
      * >
-     **Note:** The `Link` header won't exist if the catalog has less than or equal to 50 items. For calls without a cursor, `prev` will not show. When looking at the last page of items, `next` will not show.
+     * **Note:** The `Link` header won't exist if the catalog has less than or equal to 50 items. For calls without a cursor, `prev` will not show. When looking at the last page of items, `next` will not show.
      *
      *
      *
      * ```
      * Link: </catalogs/all_restaurants/items?cursor=c2tpcDow>; rel="prev",</catalogs/all_restaurants/items?cursor=c2tpcDoxMDA=>; rel="next"
      *
-     * ```
+     *  ```
      *
      * ``` json
      * {
-     * "items": [
-     * {
-     * "id": "restaurant1",
-     * "Name": "Restaurant1",
-     * "City": "New York",
-     * "Cuisine": "American",
-     * "Rating": 5,
-     * "Loyalty_Program": true,
-     * "Open_Time": "2022-11-02T09:03:19.967Z"
-     * },
-     * {
-     * "id": "restaurant2",
-     * "Name": "Restaurant2",
-     * "City": "New York",
-     * "Cuisine": "American",
-     * "Rating": 10,
-     * "Loyalty_Program": true,
-     * "Open_Time": "2022-11-02T09:03:19.967Z"
-     * },
-     * {
-     * "id": "restaurant3",
-     * "Name": "Restaurant3",
-     * "City": "New York",
-     * "Cuisine": "American",
-     * "Rating": 5,
-     * "Loyalty_Program": false,
-     * "Open_Time": "2022-11-02T09:03:19.967Z"
-     * }
-     * ],
-     * "message": "success"
+     *   "items": [
+     *     {
+     *       "id": "restaurant1",
+     *       "Name": "Restaurant1",
+     *       "City": "New York",
+     *       "Cuisine": "American",
+     *       "Rating": 5,
+     *       "Loyalty_Program": true,
+     *       "Open_Time": "2022-11-02T09:03:19.967Z"
+     *     },
+     *     {
+     *       "id": "restaurant2",
+     *       "Name": "Restaurant2",
+     *       "City": "New York",
+     *       "Cuisine": "American",
+     *       "Rating": 10,
+     *       "Loyalty_Program": true,
+     *       "Open_Time": "2022-11-02T09:03:19.967Z"
+     *     },
+     *     {
+     *       "id": "restaurant3",
+     *       "Name": "Restaurant3",
+     *       "City": "New York",
+     *       "Cuisine": "American",
+     *       "Rating": 5,
+     *       "Loyalty_Program": false,
+     *       "Open_Time": "2022-11-02T09:03:19.967Z"
+     *     }
+     *   ],
+     *   "message": "success"
      * }
      *
-     * ```
+     *  ```
      *
      * ### Example error response
      *
@@ -633,22 +635,22 @@ class Client extends Runtime\Client\Client
      *
      * ``` json
      * {
-     * "errors": [
-     * {
-     * "id": "invalid-cursor",
-     * "message": "'cursor' is not valid",
-     * "parameters": [
-     * "cursor"
-     * ],
-     * "parameter_values": [
-     * "bad-cursor"
-     * ]
-     * }
-     * ],
-     * "message": "Invalid Request"
+     *   "errors": [
+     *     {
+     *       "id": "invalid-cursor",
+     *       "message": "'cursor' is not valid",
+     *       "parameters": [
+     *         "cursor"
+     *       ],
+     *       "parameter_values": [
+     *         "bad-cursor"
+     *       ]
+     *     }
+     *   ],
+     *   "message": "Invalid Request"
      * }
      *
-     * ```
+     *  ```
      *
      * ## Troubleshooting
      *
@@ -667,18 +669,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\GetCatalogsByCatalogNameItemBadRequestException
-     * @throws Exception\GetCatalogsByCatalogNameItemUnauthorizedException
-     * @throws Exception\GetCatalogsByCatalogNameItemForbiddenException
-     * @throws Exception\GetCatalogsByCatalogNameItemNotFoundException
-     * @throws Exception\GetCatalogsByCatalogNameItemTooManyRequestsException
-     * @throws Exception\GetCatalogsByCatalogNameItemInternalServerErrorException
+     * @throws \Braze\Exception\GetCatalogsByCatalogNameItemBadRequestException
+     * @throws \Braze\Exception\GetCatalogsByCatalogNameItemUnauthorizedException
+     * @throws \Braze\Exception\GetCatalogsByCatalogNameItemForbiddenException
+     * @throws \Braze\Exception\GetCatalogsByCatalogNameItemNotFoundException
+     * @throws \Braze\Exception\GetCatalogsByCatalogNameItemTooManyRequestsException
+     * @throws \Braze\Exception\GetCatalogsByCatalogNameItemInternalServerErrorException
      */
     public function getCatalogsByCatalogNameItem(string $catalogName, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\GetCatalogsByCatalogNameItem($catalogName, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\GetCatalogsByCatalogNameItem($catalogName, $headerParameters), $fetch);
     }
 
     /**
@@ -713,39 +715,39 @@ class Client extends Runtime\Client\Client
      * --header 'Content-Type: application/json' \
      * --header 'Authorization: Bearer YOUR-REST-API-KEY' \
      * --data-raw '{
-     * "items": [
-     * {
-     * "id": "restaurant1",
-     * "Name": "Restaurant",
-     * "Loyalty_Program": false,
-     * "Location": {
-     * "Latitude": 33.6112,
-     * "Longitude": -117.8711
-     * },
-     * "Top_Dishes": {
-     * "$add": [
-     * "Biscuits",
-     * "Coleslaw"
-     * ],
-     * "$remove": [
-     * "French Fries"
-     * ]
-     * },
-     * "Open_Time": "2021-09-03T09:03:19.967+00:00"
-     * },
-     * {
-     * "id": "restaurant3",
-     * "City": "San Francisco",
-     * "Rating": 2,
-     * "Top_Dishes": [
-     * "Buffalo Wings",
-     * "Philly Cheesesteak"
-     * ]
-     * }
-     * ]
+     *   "items": [
+     *     {
+     *       "id": "restaurant1",
+     *       "Name": "Restaurant",
+     *       "Loyalty_Program": false,
+     *       "Location": {
+     *         "Latitude": 33.6112,
+     *         "Longitude": -117.8711
+     *       },
+     *       "Top_Dishes": {
+     *         "$add": [
+     *           "Biscuits",
+     *           "Coleslaw"
+     *         ],
+     *         "$remove": [
+     *           "French Fries"
+     *         ]
+     *       },
+     *       "Open_Time": "2021-09-03T09:03:19.967+00:00"
+     *     },
+     *     {
+     *       "id": "restaurant3",
+     *       "City": "San Francisco",
+     *       "Rating": 2,
+     *       "Top_Dishes": [
+     *         "Buffalo Wings",
+     *         "Philly Cheesesteak"
+     *       ]
+     *     }
+     *   ]
      * }'
      *
-     * ```
+     *  ```
      *
      * > **Note:** The $`add` and `$remove` operators are only applicable to array type fields, and are only supported by PATCH endpoints.
      *
@@ -760,10 +762,10 @@ class Client extends Runtime\Client\Client
      *
      * ``` json
      * {
-     * "message": "success"
+     *   "message": "success"
      * }
      *
-     * ```
+     *  ```
      *
      * ### Example error response
      *
@@ -771,22 +773,22 @@ class Client extends Runtime\Client\Client
      *
      * ``` json
      * {
-     * "errors": [
-     * {
-     * "id": "invalid-fields",
-     * "message": "Some of the fields given do not exist in the catalog",
-     * "parameters": [
-     * "id"
-     * ],
-     * "parameter_values": [
-     * "restaurant1"
-     * ]
-     * }
-     * ],
-     * "message": "Invalid Request"
+     *   "errors": [
+     *     {
+     *       "id": "invalid-fields",
+     *       "message": "Some of the fields given do not exist in the catalog",
+     *       "parameters": [
+     *         "id"
+     *       ],
+     *       "parameter_values": [
+     *         "restaurant1"
+     *       ]
+     *     }
+     *   ],
+     *   "message": "Invalid Request"
      * }
      *
-     * ```
+     *  ```
      *
      * ## Troubleshooting
      *
@@ -808,7 +810,8 @@ class Client extends Runtime\Client\Client
      * | `too-deep-nesting-in-value-object` | Item objects can't have more than 50 levels of nesting. |
      * | `unable-to-coerce-value` | Item types can't be converted. |
      *
-     * @param array $headerParameters {
+     * @param \Braze\Model\CatalogsCatalogNameItemsPatchBody|null $requestBody
+     * @param array                                               $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -816,18 +819,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PatchCatalogsByCatalogNameItemBadRequestException
-     * @throws Exception\PatchCatalogsByCatalogNameItemUnauthorizedException
-     * @throws Exception\PatchCatalogsByCatalogNameItemForbiddenException
-     * @throws Exception\PatchCatalogsByCatalogNameItemNotFoundException
-     * @throws Exception\PatchCatalogsByCatalogNameItemTooManyRequestsException
-     * @throws Exception\PatchCatalogsByCatalogNameItemInternalServerErrorException
+     * @throws \Braze\Exception\PatchCatalogsByCatalogNameItemBadRequestException
+     * @throws \Braze\Exception\PatchCatalogsByCatalogNameItemUnauthorizedException
+     * @throws \Braze\Exception\PatchCatalogsByCatalogNameItemForbiddenException
+     * @throws \Braze\Exception\PatchCatalogsByCatalogNameItemNotFoundException
+     * @throws \Braze\Exception\PatchCatalogsByCatalogNameItemTooManyRequestsException
+     * @throws \Braze\Exception\PatchCatalogsByCatalogNameItemInternalServerErrorException
      */
-    public function patchCatalogsByCatalogNameItem(string $catalogName, ?Model\CatalogsCatalogNameItemsPatchBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function patchCatalogsByCatalogNameItem(string $catalogName, Model\CatalogsCatalogNameItemsPatchBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PatchCatalogsByCatalogNameItem($catalogName, $requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PatchCatalogsByCatalogNameItem($catalogName, $requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -862,62 +865,62 @@ class Client extends Runtime\Client\Client
      * --header 'Content-Type: application/json' \
      * --header 'Authorization: Bearer YOUR-REST-API-KEY' \
      * --data-raw '{
-     * "items": [
-     * {
-     * "id": "restaurant1",
-     * "Name": "Restaurant1",
-     * "City": "New York",
-     * "Cuisine": "American",
-     * "Rating": 5,
-     * "Loyalty_Program": true,
-     * "Location": {
-     * "Latitude": 33.6112,
-     * "Longitude": -117.8711
-     * },
-     * "Top_Dishes": [
-     * "Hamburger",
-     * "Deluxe Cheeseburger"
-     * ],
-     * "Created_At": "2022-11-01T09:03:19.967+00:00"
-     * },
-     * {
-     * "id": "restaurant2",
-     * "Name": "Restaurant2",
-     * "City": "New York",
-     * "Cuisine": "American",
-     * "Rating": 10,
-     * "Loyalty_Program": true,
-     * "Location": {
-     * "Latitude": 40.7413,
-     * "Longitude": -73.9764
-     * },
-     * "Top_Dishes": [
-     * "Hot Dog",
-     * "French Fries"
-     * ],
-     * "Created_At": "2022-11-02T09:03:19.967+00:00"
-     * },
-     * {
-     * "id": "restaurant3",
-     * "Name": "Restaurant3",
-     * "City": "New York",
-     * "Cuisine": "American",
-     * "Rating": 3,
-     * "Loyalty_Program": false,
-     * "Location": {
-     * "Latitude": 40.7489,
-     * "Longitude": -73.9972
-     * },
-     * "Top_Dishes": [
-     * "Buffalo Wings",
-     * "Philly Cheesesteak"
-     * ],
-     * "Created_At": "2022-11-03T09:03:19.967+00:00"
-     * }
-     * ]
+     *   "items": [
+     *     {
+     *       "id": "restaurant1",
+     *       "Name": "Restaurant1",
+     *       "City": "New York",
+     *       "Cuisine": "American",
+     *       "Rating": 5,
+     *       "Loyalty_Program": true,
+     *       "Location": {
+     *         "Latitude": 33.6112,
+     *         "Longitude": -117.8711
+     *       },
+     *       "Top_Dishes": [
+     *         "Hamburger",
+     *         "Deluxe Cheeseburger"
+     *       ],
+     *       "Created_At": "2022-11-01T09:03:19.967+00:00"
+     *     },
+     *     {
+     *       "id": "restaurant2",
+     *       "Name": "Restaurant2",
+     *       "City": "New York",
+     *       "Cuisine": "American",
+     *       "Rating": 10,
+     *       "Loyalty_Program": true,
+     *       "Location": {
+     *         "Latitude": 40.7413,
+     *         "Longitude": -73.9764
+     *       },
+     *       "Top_Dishes": [
+     *         "Hot Dog",
+     *         "French Fries"
+     *       ],
+     *       "Created_At": "2022-11-02T09:03:19.967+00:00"
+     *     },
+     *     {
+     *       "id": "restaurant3",
+     *       "Name": "Restaurant3",
+     *       "City": "New York",
+     *       "Cuisine": "American",
+     *       "Rating": 3,
+     *       "Loyalty_Program": false,
+     *       "Location": {
+     *         "Latitude": 40.7489,
+     *         "Longitude": -73.9972
+     *       },
+     *       "Top_Dishes": [
+     *         "Buffalo Wings",
+     *         "Philly Cheesesteak"
+     *       ],
+     *       "Created_At": "2022-11-03T09:03:19.967+00:00"
+     *     }
+     *   ]
      * }'
      *
-     * ```
+     *  ```
      *
      * ## Response
      *
@@ -929,10 +932,10 @@ class Client extends Runtime\Client\Client
      *
      * ``` json
      * {
-     * "message": "success"
+     *   "message": "success"
      * }
      *
-     * ```
+     *  ```
      *
      * ### Example error response
      *
@@ -940,22 +943,22 @@ class Client extends Runtime\Client\Client
      *
      * ``` json
      * {
-     * "errors": [
-     * {
-     * "id": "fields-do-not-match",
-     * "message": "Fields do not match with fields on the catalog",
-     * "parameters": [
-     * "id"
-     * ],
-     * "parameter_values": [
-     * "restaurant2"
-     * ]
-     * }
-     * ],
-     * "message": "Invalid Request"
+     *   "errors": [
+     *     {
+     *       "id": "fields-do-not-match",
+     *       "message": "Fields do not match with fields on the catalog",
+     *       "parameters": [
+     *         "id"
+     *       ],
+     *       "parameter_values": [
+     *         "restaurant2"
+     *       ]
+     *     }
+     *   ],
+     *   "message": "Invalid Request"
      * }
      *
-     * ```
+     *  ```
      *
      * ## Troubleshooting
      *
@@ -977,7 +980,8 @@ class Client extends Runtime\Client\Client
      * | `too-deep-nesting-in-value-object` | Item objects can't have more than 50 levels of nesting. |
      * | `unable-to-coerce-value` | Item types can't be converted. |
      *
-     * @param array $headerParameters {
+     * @param \Braze\Model\CatalogsCatalogNameItemsPostBody|null $requestBody
+     * @param array                                              $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -985,18 +989,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PostCatalogsByCatalogNameItemBadRequestException
-     * @throws Exception\PostCatalogsByCatalogNameItemUnauthorizedException
-     * @throws Exception\PostCatalogsByCatalogNameItemForbiddenException
-     * @throws Exception\PostCatalogsByCatalogNameItemNotFoundException
-     * @throws Exception\PostCatalogsByCatalogNameItemTooManyRequestsException
-     * @throws Exception\PostCatalogsByCatalogNameItemInternalServerErrorException
+     * @throws \Braze\Exception\PostCatalogsByCatalogNameItemBadRequestException
+     * @throws \Braze\Exception\PostCatalogsByCatalogNameItemUnauthorizedException
+     * @throws \Braze\Exception\PostCatalogsByCatalogNameItemForbiddenException
+     * @throws \Braze\Exception\PostCatalogsByCatalogNameItemNotFoundException
+     * @throws \Braze\Exception\PostCatalogsByCatalogNameItemTooManyRequestsException
+     * @throws \Braze\Exception\PostCatalogsByCatalogNameItemInternalServerErrorException
      */
-    public function postCatalogsByCatalogNameItem(string $catalogName, ?Model\CatalogsCatalogNameItemsPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postCatalogsByCatalogNameItem(string $catalogName, Model\CatalogsCatalogNameItemsPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PostCatalogsByCatalogNameItem($catalogName, $requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PostCatalogsByCatalogNameItem($catalogName, $requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -1031,34 +1035,34 @@ class Client extends Runtime\Client\Client
      * --header 'Content-Type: application/json' \
      * --header 'Authorization: Bearer YOUR-REST-API-KEY' \
      * --data-raw '{
-     * "items": [
-     * {
-     * "id": "restaurant1",
-     * "Name": "Restaurant",
-     * "Loyalty_Program": false,
-     * "Location": {
-     * "Latitude": 33.6112,
-     * "Longitude": -117.8711
-     * },
-     * "Top_Dishes": [
-     * "Hamburger",
-     * "Deluxe Cheeseburger"
-     * ],
-     * "Open_Time": "2021-09-03T09:03:19.967+00:00"
-     * },
-     * {
-     * "id": "restaurant3",
-     * "City": "San Francisco",
-     * "Rating": 2,
-     * "Top_Dishes": [
-     * "Hot Dog",
-     * "French Fries"
-     * ]
-     * }
-     * ]
+     *   "items": [
+     *     {
+     *       "id": "restaurant1",
+     *       "Name": "Restaurant",
+     *       "Loyalty_Program": false,
+     *       "Location": {
+     *         "Latitude": 33.6112,
+     *         "Longitude": -117.8711
+     *       },
+     *       "Top_Dishes": [
+     *         "Hamburger",
+     *         "Deluxe Cheeseburger"
+     *       ],
+     *       "Open_Time": "2021-09-03T09:03:19.967+00:00"
+     *     },
+     *     {
+     *       "id": "restaurant3",
+     *       "City": "San Francisco",
+     *       "Rating": 2,
+     *       "Top_Dishes": [
+     *         "Hot Dog",
+     *         "French Fries"
+     *       ]
+     *     }
+     *   ]
      * }'
      *
-     * ```
+     *  ```
      *
      * ## Response
      *
@@ -1070,10 +1074,10 @@ class Client extends Runtime\Client\Client
      *
      * ``` json
      * {
-     * "message": "success"
+     *   "message": "success"
      * }
      *
-     * ```
+     *  ```
      *
      * ### Example error response
      *
@@ -1081,22 +1085,22 @@ class Client extends Runtime\Client\Client
      *
      * ``` json
      * {
-     * "errors": [
-     * {
-     * "id": "invalid-fields",
-     * "message": "Some of the fields given do not exist in the catalog",
-     * "parameters": [
-     * "id"
-     * ],
-     * "parameter_values": [
-     * "restaurant1"
-     * ]
-     * }
-     * ],
-     * "message": "Invalid Request"
+     *   "errors": [
+     *     {
+     *       "id": "invalid-fields",
+     *       "message": "Some of the fields given do not exist in the catalog",
+     *       "parameters": [
+     *         "id"
+     *       ],
+     *       "parameter_values": [
+     *         "restaurant1"
+     *       ]
+     *     }
+     *   ],
+     *   "message": "Invalid Request"
      * }
      *
-     * ```
+     *  ```
      *
      * ## Troubleshooting
      *
@@ -1118,7 +1122,8 @@ class Client extends Runtime\Client\Client
      * | `request_includes_too_many_items` | Your request has too many items. The item limit per request is 50. |
      * | `unable_to_coerce_value` | Item types can't be converted. |
      *
-     * @param array $headerParameters {
+     * @param \Braze\Model\CatalogsCatalogNameItemsPutBody|null $requestBody
+     * @param array                                             $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -1126,18 +1131,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PutCatalogsByCatalogNameItemBadRequestException
-     * @throws Exception\PutCatalogsByCatalogNameItemUnauthorizedException
-     * @throws Exception\PutCatalogsByCatalogNameItemForbiddenException
-     * @throws Exception\PutCatalogsByCatalogNameItemNotFoundException
-     * @throws Exception\PutCatalogsByCatalogNameItemTooManyRequestsException
-     * @throws Exception\PutCatalogsByCatalogNameItemInternalServerErrorException
+     * @throws \Braze\Exception\PutCatalogsByCatalogNameItemBadRequestException
+     * @throws \Braze\Exception\PutCatalogsByCatalogNameItemUnauthorizedException
+     * @throws \Braze\Exception\PutCatalogsByCatalogNameItemForbiddenException
+     * @throws \Braze\Exception\PutCatalogsByCatalogNameItemNotFoundException
+     * @throws \Braze\Exception\PutCatalogsByCatalogNameItemTooManyRequestsException
+     * @throws \Braze\Exception\PutCatalogsByCatalogNameItemInternalServerErrorException
      */
-    public function putCatalogsByCatalogNameItem(string $catalogName, ?Model\CatalogsCatalogNameItemsPutBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function putCatalogsByCatalogNameItem(string $catalogName, Model\CatalogsCatalogNameItemsPutBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PutCatalogsByCatalogNameItem($catalogName, $requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PutCatalogsByCatalogNameItem($catalogName, $requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -1169,7 +1174,7 @@ class Client extends Runtime\Client\Client
      * --header 'Content-Type: application/json' \
      * --header 'Authorization: Bearer YOUR-REST-API-KEY'
      *
-     * ```
+     *  ```
      *
      * ## Response
      *
@@ -1181,10 +1186,10 @@ class Client extends Runtime\Client\Client
      *
      * ``` json
      * {
-     * "message": "success"
+     *   "message": "success"
      * }
      *
-     * ```
+     *  ```
      *
      * ### Example error response
      *
@@ -1192,22 +1197,22 @@ class Client extends Runtime\Client\Client
      *
      * ``` json
      * {
-     * "errors": [
-     * {
-     * "id": "item-not-found",
-     * "message": "Could not find item",
-     * "parameters": [
-     * "item_id"
-     * ],
-     * "parameter_values": [
-     * "restaurant34"
-     * ]
-     * }
-     * ],
-     * "message": "Invalid Request"
+     *   "errors": [
+     *     {
+     *       "id": "item-not-found",
+     *       "message": "Could not find item",
+     *       "parameters": [
+     *         "item_id"
+     *       ],
+     *       "parameter_values": [
+     *         "restaurant34"
+     *       ]
+     *     }
+     *   ],
+     *   "message": "Invalid Request"
      * }
      *
-     * ```
+     *  ```
      *
      * ## Troubleshooting
      *
@@ -1227,18 +1232,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\DeleteCatalogsByCatalogNameItemByItemIdBadRequestException
-     * @throws Exception\DeleteCatalogsByCatalogNameItemByItemIdUnauthorizedException
-     * @throws Exception\DeleteCatalogsByCatalogNameItemByItemIdForbiddenException
-     * @throws Exception\DeleteCatalogsByCatalogNameItemByItemIdNotFoundException
-     * @throws Exception\DeleteCatalogsByCatalogNameItemByItemIdTooManyRequestsException
-     * @throws Exception\DeleteCatalogsByCatalogNameItemByItemIdInternalServerErrorException
+     * @throws \Braze\Exception\DeleteCatalogsByCatalogNameItemByItemIdBadRequestException
+     * @throws \Braze\Exception\DeleteCatalogsByCatalogNameItemByItemIdUnauthorizedException
+     * @throws \Braze\Exception\DeleteCatalogsByCatalogNameItemByItemIdForbiddenException
+     * @throws \Braze\Exception\DeleteCatalogsByCatalogNameItemByItemIdNotFoundException
+     * @throws \Braze\Exception\DeleteCatalogsByCatalogNameItemByItemIdTooManyRequestsException
+     * @throws \Braze\Exception\DeleteCatalogsByCatalogNameItemByItemIdInternalServerErrorException
      */
     public function deleteCatalogsByCatalogNameItemByItemId(string $catalogName, string $itemId, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\DeleteCatalogsByCatalogNameItemByItemId($catalogName, $itemId, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\DeleteCatalogsByCatalogNameItemByItemId($catalogName, $itemId, $headerParameters), $fetch);
     }
 
     /**
@@ -1270,7 +1275,7 @@ class Client extends Runtime\Client\Client
      * --header 'Content-Type: application/json' \
      * --header 'Authorization: Bearer YOUR-REST-API-KEY'
      *
-     * ```
+     *  ```
      *
      * ## Response
      *
@@ -1282,21 +1287,21 @@ class Client extends Runtime\Client\Client
      *
      * ``` json
      * {
-     * "items": [
-     * {
-     * "id": "restaurant3",
-     * "Name": "Restaurant1",
-     * "City": "New York",
-     * "Cuisine": "American",
-     * "Rating": 5,
-     * "Loyalty_Program": true,
-     * "Open_Time": "2022-11-01T09:03:19.967Z"
-     * }
-     * ],
-     * "message": "success"
+     *   "items": [
+     *     {
+     *       "id": "restaurant3",
+     *       "Name": "Restaurant1",
+     *       "City": "New York",
+     *       "Cuisine": "American",
+     *       "Rating": 5,
+     *       "Loyalty_Program": true,
+     *       "Open_Time": "2022-11-01T09:03:19.967Z"
+     *     }
+     *   ],
+     *   "message": "success"
      * }
      *
-     * ```
+     *  ```
      *
      * ### Example error response
      *
@@ -1304,22 +1309,22 @@ class Client extends Runtime\Client\Client
      *
      * ``` json
      * {
-     * "errors": [
-     * {
-     * "id": "item-not-found",
-     * "message": "Could not find item",
-     * "parameters": [
-     * "item_id"
-     * ],
-     * "parameter_values": [
-     * "restaurant34"
-     * ]
-     * }
-     * ],
-     * "message": "Invalid Request"
+     *   "errors": [
+     *     {
+     *       "id": "item-not-found",
+     *       "message": "Could not find item",
+     *       "parameters": [
+     *         "item_id"
+     *       ],
+     *       "parameter_values": [
+     *         "restaurant34"
+     *       ]
+     *     }
+     *   ],
+     *   "message": "Invalid Request"
      * }
      *
-     * ```
+     *  ```
      *
      * ## Troubleshooting
      *
@@ -1338,18 +1343,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\GetCatalogsByCatalogNameItemByItemIdBadRequestException
-     * @throws Exception\GetCatalogsByCatalogNameItemByItemIdUnauthorizedException
-     * @throws Exception\GetCatalogsByCatalogNameItemByItemIdForbiddenException
-     * @throws Exception\GetCatalogsByCatalogNameItemByItemIdNotFoundException
-     * @throws Exception\GetCatalogsByCatalogNameItemByItemIdTooManyRequestsException
-     * @throws Exception\GetCatalogsByCatalogNameItemByItemIdInternalServerErrorException
+     * @throws \Braze\Exception\GetCatalogsByCatalogNameItemByItemIdBadRequestException
+     * @throws \Braze\Exception\GetCatalogsByCatalogNameItemByItemIdUnauthorizedException
+     * @throws \Braze\Exception\GetCatalogsByCatalogNameItemByItemIdForbiddenException
+     * @throws \Braze\Exception\GetCatalogsByCatalogNameItemByItemIdNotFoundException
+     * @throws \Braze\Exception\GetCatalogsByCatalogNameItemByItemIdTooManyRequestsException
+     * @throws \Braze\Exception\GetCatalogsByCatalogNameItemByItemIdInternalServerErrorException
      */
     public function getCatalogsByCatalogNameItemByItemId(string $catalogName, string $itemId, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\GetCatalogsByCatalogNameItemByItemId($catalogName, $itemId, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\GetCatalogsByCatalogNameItemByItemId($catalogName, $itemId, $headerParameters), $fetch);
     }
 
     /**
@@ -1383,29 +1388,29 @@ class Client extends Runtime\Client\Client
      * --header 'Content-Type: application/json' \
      * --header 'Authorization: Bearer YOUR-REST-API-KEY' \
      * --data-raw '{
-     * "items": [
-     * {
-     * "Name": "Restaurant",
-     * "Loyalty_Program": false,
-     * "Location": {
-     * "Latitude": 33.6112,
-     * "Longitude": -117.8711
-     * },
-     * "Top_Dishes": {
-     * "$add": [
-     * "Biscuits",
-     * "Coleslaw"
-     * ],
-     * "$remove": [
-     * "French Fries"
-     * ]
-     * },
-     * "Open_Time": "2021-09-03T09:03:19.967+00:00"
-     * }
-     * ]
+     *   "items": [
+     *     {
+     *       "Name": "Restaurant",
+     *       "Loyalty_Program": false,
+     *       "Location": {
+     *         "Latitude": 33.6112,
+     *         "Longitude": -117.8711
+     *       },
+     *       "Top_Dishes": {
+     *         "$add": [
+     *           "Biscuits",
+     *           "Coleslaw"
+     *         ],
+     *         "$remove": [
+     *           "French Fries"
+     *         ]
+     *       },
+     *       "Open_Time": "2021-09-03T09:03:19.967+00:00"
+     *     }
+     *   ]
      * }'
      *
-     * ```
+     *  ```
      *
      * > **Note:** The $`add` and `$remove` operators are only applicable to array type fields, and are only supported by PATCH endpoints.
      *
@@ -1420,10 +1425,10 @@ class Client extends Runtime\Client\Client
      *
      * ``` json
      * {
-     * "message": "success"
+     *   "message": "success"
      * }
      *
-     * ```
+     *  ```
      *
      * ### Example error response
      *
@@ -1431,22 +1436,22 @@ class Client extends Runtime\Client\Client
      *
      * ``` json
      * {
-     * "errors": [
-     * {
-     * "id": "invalid-fields",
-     * "message": "Some of the fields given do not exist in the catalog",
-     * "parameters": [
-     * "id"
-     * ],
-     * "parameter_values": [
-     * "restaurant1"
-     * ]
-     * }
-     * ],
-     * "message": "Invalid Request"
+     *   "errors": [
+     *     {
+     *       "id": "invalid-fields",
+     *       "message": "Some of the fields given do not exist in the catalog",
+     *       "parameters": [
+     *         "id"
+     *       ],
+     *       "parameter_values": [
+     *         "restaurant1"
+     *       ]
+     *     }
+     *   ],
+     *   "message": "Invalid Request"
      * }
      *
-     * ```
+     *  ```
      *
      * ## Troubleshooting
      *
@@ -1469,7 +1474,8 @@ class Client extends Runtime\Client\Client
      * | `too-deep-nesting-in-value-object` | Item objects can't have more than 50 levels of nesting. |
      * | `unable-to-coerce-value` | Item types can't be converted. |
      *
-     * @param array $headerParameters {
+     * @param \Braze\Model\CatalogsCatalogNameItemsItemIdPatchBody|null $requestBody
+     * @param array                                                     $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -1477,18 +1483,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PatchCatalogsByCatalogNameItemByItemIdBadRequestException
-     * @throws Exception\PatchCatalogsByCatalogNameItemByItemIdUnauthorizedException
-     * @throws Exception\PatchCatalogsByCatalogNameItemByItemIdForbiddenException
-     * @throws Exception\PatchCatalogsByCatalogNameItemByItemIdNotFoundException
-     * @throws Exception\PatchCatalogsByCatalogNameItemByItemIdTooManyRequestsException
-     * @throws Exception\PatchCatalogsByCatalogNameItemByItemIdInternalServerErrorException
+     * @throws \Braze\Exception\PatchCatalogsByCatalogNameItemByItemIdBadRequestException
+     * @throws \Braze\Exception\PatchCatalogsByCatalogNameItemByItemIdUnauthorizedException
+     * @throws \Braze\Exception\PatchCatalogsByCatalogNameItemByItemIdForbiddenException
+     * @throws \Braze\Exception\PatchCatalogsByCatalogNameItemByItemIdNotFoundException
+     * @throws \Braze\Exception\PatchCatalogsByCatalogNameItemByItemIdTooManyRequestsException
+     * @throws \Braze\Exception\PatchCatalogsByCatalogNameItemByItemIdInternalServerErrorException
      */
-    public function patchCatalogsByCatalogNameItemByItemId(string $catalogName, string $itemId, ?Model\CatalogsCatalogNameItemsItemIdPatchBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function patchCatalogsByCatalogNameItemByItemId(string $catalogName, string $itemId, Model\CatalogsCatalogNameItemsItemIdPatchBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PatchCatalogsByCatalogNameItemByItemId($catalogName, $itemId, $requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PatchCatalogsByCatalogNameItemByItemId($catalogName, $itemId, $requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -1523,27 +1529,27 @@ class Client extends Runtime\Client\Client
      * --header 'Content-Type: application/json' \
      * --header 'Authorization: Bearer YOUR-REST-API-KEY' \
      * --data-raw '{
-     * "items": [
-     * {
-     * "Name": "Restaurant1",
-     * "City": "New York",
-     * "Cuisine": "American",
-     * "Rating": 5,
-     * "Loyalty_Program": true,
-     * "Location": {
-     * "Latitude": 33.6112,
-     * "Longitude": -117.8711
-     * },
-     * "Top_Dishes": [
-     * "Hamburger",
-     * "Deluxe Cheeseburger"
-     * ],
-     * "Created_At": "2022-11-01T09:03:19.967+00:00"
-     * }
-     * ]
+     *   "items": [
+     *     {
+     *       "Name": "Restaurant1",
+     *       "City": "New York",
+     *       "Cuisine": "American",
+     *       "Rating": 5,
+     *       "Loyalty_Program": true,
+     *       "Location": {
+     *         "Latitude": 33.6112,
+     *         "Longitude": -117.8711
+     *       },
+     *       "Top_Dishes": [
+     *         "Hamburger",
+     *         "Deluxe Cheeseburger"
+     *       ],
+     *       "Created_At": "2022-11-01T09:03:19.967+00:00"
+     *     }
+     *   ]
      * }'
      *
-     * ```
+     *  ```
      *
      * ## Response
      *
@@ -1555,10 +1561,10 @@ class Client extends Runtime\Client\Client
      *
      * ``` json
      * {
-     * "message": "success"
+     *   "message": "success"
      * }
      *
-     * ```
+     *  ```
      *
      * ### Example error response
      *
@@ -1566,22 +1572,22 @@ class Client extends Runtime\Client\Client
      *
      * ``` json
      * {
-     * "errors": [
-     * {
-     * "id": "invalid-fields",
-     * "message": "Some of the fields given do not exist in the catalog",
-     * "parameters": [
-     * "id"
-     * ],
-     * "parameter_values": [
-     * "restaurant1"
-     * ]
-     * }
-     * ],
-     * "message": "Invalid Request"
+     *   "errors": [
+     *     {
+     *       "id": "invalid-fields",
+     *       "message": "Some of the fields given do not exist in the catalog",
+     *       "parameters": [
+     *         "id"
+     *       ],
+     *       "parameter_values": [
+     *         "restaurant1"
+     *       ]
+     *     }
+     *   ],
+     *   "message": "Invalid Request"
      * }
      *
-     * ```
+     *  ```
      *
      * ## Troubleshooting
      *
@@ -1606,7 +1612,8 @@ class Client extends Runtime\Client\Client
      * | `too-deep-nesting-in-value-object` | Item objects can't have more than 50 levels of nesting. |
      * | `unable-to-coerce-value` | Item types can't be converted. |
      *
-     * @param array $headerParameters {
+     * @param \Braze\Model\CatalogsCatalogNameItemsItemIdPostBody|null $requestBody
+     * @param array                                                    $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -1614,18 +1621,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PostCatalogsByCatalogNameItemByItemIdBadRequestException
-     * @throws Exception\PostCatalogsByCatalogNameItemByItemIdUnauthorizedException
-     * @throws Exception\PostCatalogsByCatalogNameItemByItemIdForbiddenException
-     * @throws Exception\PostCatalogsByCatalogNameItemByItemIdNotFoundException
-     * @throws Exception\PostCatalogsByCatalogNameItemByItemIdTooManyRequestsException
-     * @throws Exception\PostCatalogsByCatalogNameItemByItemIdInternalServerErrorException
+     * @throws \Braze\Exception\PostCatalogsByCatalogNameItemByItemIdBadRequestException
+     * @throws \Braze\Exception\PostCatalogsByCatalogNameItemByItemIdUnauthorizedException
+     * @throws \Braze\Exception\PostCatalogsByCatalogNameItemByItemIdForbiddenException
+     * @throws \Braze\Exception\PostCatalogsByCatalogNameItemByItemIdNotFoundException
+     * @throws \Braze\Exception\PostCatalogsByCatalogNameItemByItemIdTooManyRequestsException
+     * @throws \Braze\Exception\PostCatalogsByCatalogNameItemByItemIdInternalServerErrorException
      */
-    public function postCatalogsByCatalogNameItemByItemId(string $catalogName, string $itemId, ?Model\CatalogsCatalogNameItemsItemIdPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postCatalogsByCatalogNameItemByItemId(string $catalogName, string $itemId, Model\CatalogsCatalogNameItemsItemIdPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PostCatalogsByCatalogNameItemByItemId($catalogName, $itemId, $requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PostCatalogsByCatalogNameItemByItemId($catalogName, $itemId, $requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -1661,24 +1668,24 @@ class Client extends Runtime\Client\Client
      * --header 'Content-Type: application/json' \
      * --header 'Authorization: Bearer YOUR-REST-API-KEY' \
      * --data-raw '{
-     * "items": [
-     * {
-     * "Name": "Restaurant",
-     * "Loyalty_Program": false,
-     * "Location": {
-     * "Latitude": 33.6112,
-     * "Longitude": -117.8711
-     * },
-     * "Top_Dishes": [
-     * "Hamburger",
-     * "Deluxe Cheeseburger"
-     * ],
-     * "Open_Time": "2021-09-03T09:03:19.967+00:00"
-     * }
-     * ]
+     *   "items": [
+     *     {
+     *       "Name": "Restaurant",
+     *       "Loyalty_Program": false,
+     *       "Location": {
+     *         "Latitude": 33.6112,
+     *         "Longitude": -117.8711
+     *       },
+     *       "Top_Dishes": [
+     *         "Hamburger",
+     *         "Deluxe Cheeseburger"
+     *       ],
+     *       "Open_Time": "2021-09-03T09:03:19.967+00:00"
+     *     }
+     *   ]
      * }'
      *
-     * ```
+     *  ```
      *
      * ## Response
      *
@@ -1690,10 +1697,10 @@ class Client extends Runtime\Client\Client
      *
      * ``` json
      * {
-     * "message": "success"
+     *   "message": "success"
      * }
      *
-     * ```
+     *  ```
      *
      * ### Example error response
      *
@@ -1701,22 +1708,22 @@ class Client extends Runtime\Client\Client
      *
      * ``` json
      * {
-     * "errors": [
-     * {
-     * "id": "invalid-fields",
-     * "message": "Some of the fields given do not exist in the catalog",
-     * "parameters": [
-     * "id"
-     * ],
-     * "parameter_values": [
-     * "restaurant1"
-     * ]
-     * }
-     * ],
-     * "message": "Invalid Request"
+     *   "errors": [
+     *     {
+     *       "id": "invalid-fields",
+     *       "message": "Some of the fields given do not exist in the catalog",
+     *       "parameters": [
+     *         "id"
+     *       ],
+     *       "parameter_values": [
+     *         "restaurant1"
+     *       ]
+     *     }
+     *   ],
+     *   "message": "Invalid Request"
      * }
      *
-     * ```
+     *  ```
      *
      * ## Troubleshooting
      *
@@ -1741,7 +1748,8 @@ class Client extends Runtime\Client\Client
      * | `too_deep_nesting_in_value_object` | Item objects can't have more than 50 levels of nesting. |
      * | `unable_to_coerce_value` | Item types can't be converted. |
      *
-     * @param array $headerParameters {
+     * @param \Braze\Model\CatalogsCatalogNameItemsItemIdPutBody|null $requestBody
+     * @param array                                                   $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -1749,18 +1757,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PutCatalogsByCatalogNameItemByItemIdBadRequestException
-     * @throws Exception\PutCatalogsByCatalogNameItemByItemIdUnauthorizedException
-     * @throws Exception\PutCatalogsByCatalogNameItemByItemIdForbiddenException
-     * @throws Exception\PutCatalogsByCatalogNameItemByItemIdNotFoundException
-     * @throws Exception\PutCatalogsByCatalogNameItemByItemIdTooManyRequestsException
-     * @throws Exception\PutCatalogsByCatalogNameItemByItemIdInternalServerErrorException
+     * @throws \Braze\Exception\PutCatalogsByCatalogNameItemByItemIdBadRequestException
+     * @throws \Braze\Exception\PutCatalogsByCatalogNameItemByItemIdUnauthorizedException
+     * @throws \Braze\Exception\PutCatalogsByCatalogNameItemByItemIdForbiddenException
+     * @throws \Braze\Exception\PutCatalogsByCatalogNameItemByItemIdNotFoundException
+     * @throws \Braze\Exception\PutCatalogsByCatalogNameItemByItemIdTooManyRequestsException
+     * @throws \Braze\Exception\PutCatalogsByCatalogNameItemByItemIdInternalServerErrorException
      */
-    public function putCatalogsByCatalogNameItemByItemId(string $catalogName, string $itemId, ?Model\CatalogsCatalogNameItemsItemIdPutBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function putCatalogsByCatalogNameItemByItemId(string $catalogName, string $itemId, Model\CatalogsCatalogNameItemsItemIdPutBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PutCatalogsByCatalogNameItemByItemId($catalogName, $itemId, $requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PutCatalogsByCatalogNameItemByItemId($catalogName, $itemId, $requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -1785,7 +1793,7 @@ class Client extends Runtime\Client\Client
      * curl --location --request GET 'https://rest.iad-01.braze.com/email/hard_bounces?start_date=2019-01-01&end_date=2019-02-01&limit=100&offset=1&email=example@braze.com' \
      * --header 'Authorization: Bearer YOUR-API-KEY-HERE'
      *
-     * ```
+     *  ```
      *
      * ## Response
      *
@@ -1795,24 +1803,24 @@ class Client extends Runtime\Client\Client
      * Content-Type: application/json
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
-     * "emails": [
-     * {
-     * "email": "example1@braze.com",
-     * "hard_bounced_at": "2016-08-25 15:24:32 +0000"
-     * },
-     * {
-     * "email": "example2@braze.com",
-     * "hard_bounced_at": "2016-08-24 17:41:58 +0000"
-     * },
-     * {
-     * "email": "example3@braze.com",
-     * "hard_bounced_at": "2016-08-24 12:01:13 +0000"
-     * }
-     * ],
-     * "message": "success"
+     *   "emails": [
+     *     {
+     *       "email": "example1@braze.com",
+     *       "hard_bounced_at": "2016-08-25 15:24:32 +0000"
+     *     },
+     *     {
+     *       "email": "example2@braze.com",
+     *       "hard_bounced_at": "2016-08-24 17:41:58 +0000"
+     *     },
+     *     {
+     *       "email": "example3@braze.com",
+     *       "hard_bounced_at": "2016-08-24 12:01:13 +0000"
+     *     }
+     *   ],
+     *   "message": "success"
      * }
      *
-     * ```
+     *  ```
      *
      * @param array $queryParameters {
      *
@@ -1846,18 +1854,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\GetEmailHardBounceBadRequestException
-     * @throws Exception\GetEmailHardBounceUnauthorizedException
-     * @throws Exception\GetEmailHardBounceForbiddenException
-     * @throws Exception\GetEmailHardBounceNotFoundException
-     * @throws Exception\GetEmailHardBounceTooManyRequestsException
-     * @throws Exception\GetEmailHardBounceInternalServerErrorException
+     * @throws \Braze\Exception\GetEmailHardBounceBadRequestException
+     * @throws \Braze\Exception\GetEmailHardBounceUnauthorizedException
+     * @throws \Braze\Exception\GetEmailHardBounceForbiddenException
+     * @throws \Braze\Exception\GetEmailHardBounceNotFoundException
+     * @throws \Braze\Exception\GetEmailHardBounceTooManyRequestsException
+     * @throws \Braze\Exception\GetEmailHardBounceInternalServerErrorException
      */
     public function getEmailHardBounce(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\GetEmailHardBounce($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\GetEmailHardBounce($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -1884,7 +1892,7 @@ class Client extends Runtime\Client\Client
      * curl --location --request GET 'https://rest.iad-01.braze.com/email/unsubscribes?start_date=2020-01-01&end_date=2020-02-01&limit=1&offset=1&sort_direction=desc&email=example@braze.com' \
      * --header 'Authorization: Bearer YOUR-API-KEY-HERE'
      *
-     * ```
+     *  ```
      *
      * ## Response
      *
@@ -1894,24 +1902,24 @@ class Client extends Runtime\Client\Client
      * Content-Type: application/json
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
-     * "emails": [
-     * {
-     * "email": "example1@braze.com",
-     * "unsubscribed_at": "2016-08-25 15:24:32 +0000"
-     * },
-     * {
-     * "email": "example2@braze.com",
-     * "unsubscribed_at": "2016-08-24 17:41:58 +0000"
-     * },
-     * {
-     * "email": "example3@braze.com",
-     * "unsubscribed_at": "2016-08-24 12:01:13 +0000"
-     * }
-     * ],
-     * "message": "success"
+     *   "emails": [
+     *     {
+     *       "email": "example1@braze.com",
+     *       "unsubscribed_at": "2016-08-25 15:24:32 +0000"
+     *     },
+     *     {
+     *       "email": "example2@braze.com",
+     *       "unsubscribed_at": "2016-08-24 17:41:58 +0000"
+     *     },
+     *     {
+     *       "email": "example3@braze.com",
+     *       "unsubscribed_at": "2016-08-24 12:01:13 +0000"
+     *     }
+     *   ],
+     *   "message": "success"
      * }
      *
-     * ```
+     *  ```
      *
      * @param array $queryParameters {
      *
@@ -1942,18 +1950,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\GetEmailUnsubscribeBadRequestException
-     * @throws Exception\GetEmailUnsubscribeUnauthorizedException
-     * @throws Exception\GetEmailUnsubscribeForbiddenException
-     * @throws Exception\GetEmailUnsubscribeNotFoundException
-     * @throws Exception\GetEmailUnsubscribeTooManyRequestsException
-     * @throws Exception\GetEmailUnsubscribeInternalServerErrorException
+     * @throws \Braze\Exception\GetEmailUnsubscribeBadRequestException
+     * @throws \Braze\Exception\GetEmailUnsubscribeUnauthorizedException
+     * @throws \Braze\Exception\GetEmailUnsubscribeForbiddenException
+     * @throws \Braze\Exception\GetEmailUnsubscribeNotFoundException
+     * @throws \Braze\Exception\GetEmailUnsubscribeTooManyRequestsException
+     * @throws \Braze\Exception\GetEmailUnsubscribeInternalServerErrorException
      */
     public function getEmailUnsubscribe(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\GetEmailUnsubscribe($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\GetEmailUnsubscribe($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -1976,7 +1984,8 @@ class Client extends Runtime\Client\Client
      * | `email` | Required | String or array | String email address to modify, or an array of up to 50 email addresses to modify. |
      * | `subscription_state` | Required | String | Either “subscribed”, “unsubscribed”, or “opted_in”. |
      *
-     * @param array $headerParameters {
+     * @param \Braze\Model\EmailStatusPostBody|null $requestBody
+     * @param array                                 $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -1984,18 +1993,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PostEmailStatusBadRequestException
-     * @throws Exception\PostEmailStatusUnauthorizedException
-     * @throws Exception\PostEmailStatusForbiddenException
-     * @throws Exception\PostEmailStatusNotFoundException
-     * @throws Exception\PostEmailStatusTooManyRequestsException
-     * @throws Exception\PostEmailStatusInternalServerErrorException
+     * @throws \Braze\Exception\PostEmailStatusBadRequestException
+     * @throws \Braze\Exception\PostEmailStatusUnauthorizedException
+     * @throws \Braze\Exception\PostEmailStatusForbiddenException
+     * @throws \Braze\Exception\PostEmailStatusNotFoundException
+     * @throws \Braze\Exception\PostEmailStatusTooManyRequestsException
+     * @throws \Braze\Exception\PostEmailStatusInternalServerErrorException
      */
-    public function postEmailStatus(?Model\EmailStatusPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postEmailStatus(Model\EmailStatusPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PostEmailStatus($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PostEmailStatus($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -2015,7 +2024,8 @@ class Client extends Runtime\Client\Client
      * | --- | --- | --- | --- |
      * | `email` | Required | String or array | String email address to modify, or an array of up to 50 email addresses to modify. |
      *
-     * @param array $headerParameters {
+     * @param \Braze\Model\EmailBounceRemovePostBody|null $requestBody
+     * @param array                                       $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -2023,18 +2033,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PostEmailBounceRemoveBadRequestException
-     * @throws Exception\PostEmailBounceRemoveUnauthorizedException
-     * @throws Exception\PostEmailBounceRemoveForbiddenException
-     * @throws Exception\PostEmailBounceRemoveNotFoundException
-     * @throws Exception\PostEmailBounceRemoveTooManyRequestsException
-     * @throws Exception\PostEmailBounceRemoveInternalServerErrorException
+     * @throws \Braze\Exception\PostEmailBounceRemoveBadRequestException
+     * @throws \Braze\Exception\PostEmailBounceRemoveUnauthorizedException
+     * @throws \Braze\Exception\PostEmailBounceRemoveForbiddenException
+     * @throws \Braze\Exception\PostEmailBounceRemoveNotFoundException
+     * @throws \Braze\Exception\PostEmailBounceRemoveTooManyRequestsException
+     * @throws \Braze\Exception\PostEmailBounceRemoveInternalServerErrorException
      */
-    public function postEmailBounceRemove(?Model\EmailBounceRemovePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postEmailBounceRemove(Model\EmailBounceRemovePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PostEmailBounceRemove($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PostEmailBounceRemove($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -2054,7 +2064,8 @@ class Client extends Runtime\Client\Client
      * | --- | --- | --- | --- |
      * | `email` | Required | String or array | String email address to modify, or an array of up to 50 email addresses to modify. |
      *
-     * @param array $headerParameters {
+     * @param \Braze\Model\EmailSpamRemovePostBody|null $requestBody
+     * @param array                                     $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -2062,18 +2073,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PostEmailSpamRemoveBadRequestException
-     * @throws Exception\PostEmailSpamRemoveUnauthorizedException
-     * @throws Exception\PostEmailSpamRemoveForbiddenException
-     * @throws Exception\PostEmailSpamRemoveNotFoundException
-     * @throws Exception\PostEmailSpamRemoveTooManyRequestsException
-     * @throws Exception\PostEmailSpamRemoveInternalServerErrorException
+     * @throws \Braze\Exception\PostEmailSpamRemoveBadRequestException
+     * @throws \Braze\Exception\PostEmailSpamRemoveUnauthorizedException
+     * @throws \Braze\Exception\PostEmailSpamRemoveForbiddenException
+     * @throws \Braze\Exception\PostEmailSpamRemoveNotFoundException
+     * @throws \Braze\Exception\PostEmailSpamRemoveTooManyRequestsException
+     * @throws \Braze\Exception\PostEmailSpamRemoveInternalServerErrorException
      */
-    public function postEmailSpamRemove(?Model\EmailSpamRemovePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postEmailSpamRemove(Model\EmailSpamRemovePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PostEmailSpamRemove($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PostEmailSpamRemove($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -2093,7 +2104,8 @@ class Client extends Runtime\Client\Client
      * | --- | --- | --- | --- |
      * | `email` | Required | String or array | String email address to blacklist, or an array of up to 50 email addresses to blocklist. |
      *
-     * @param array $headerParameters {
+     * @param \Braze\Model\EmailBlocklistPostBody|null $requestBody
+     * @param array                                    $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -2101,18 +2113,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PostEmailBlocklistBadRequestException
-     * @throws Exception\PostEmailBlocklistUnauthorizedException
-     * @throws Exception\PostEmailBlocklistForbiddenException
-     * @throws Exception\PostEmailBlocklistNotFoundException
-     * @throws Exception\PostEmailBlocklistTooManyRequestsException
-     * @throws Exception\PostEmailBlocklistInternalServerErrorException
+     * @throws \Braze\Exception\PostEmailBlocklistBadRequestException
+     * @throws \Braze\Exception\PostEmailBlocklistUnauthorizedException
+     * @throws \Braze\Exception\PostEmailBlocklistForbiddenException
+     * @throws \Braze\Exception\PostEmailBlocklistNotFoundException
+     * @throws \Braze\Exception\PostEmailBlocklistTooManyRequestsException
+     * @throws \Braze\Exception\PostEmailBlocklistInternalServerErrorException
      */
-    public function postEmailBlocklist(?Model\EmailBlocklistPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postEmailBlocklist(Model\EmailBlocklistPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PostEmailBlocklist($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PostEmailBlocklist($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -2132,7 +2144,8 @@ class Client extends Runtime\Client\Client
      * | --- | --- | --- | --- |
      * | `email` | Required | String or array | String email address to blacklist, or an array of up to 50 email addresses to blocklist. |
      *
-     * @param array $headerParameters {
+     * @param \Braze\Model\EmailBlacklistPostBody|null $requestBody
+     * @param array                                    $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -2140,18 +2153,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PostEmailBlacklistBadRequestException
-     * @throws Exception\PostEmailBlacklistUnauthorizedException
-     * @throws Exception\PostEmailBlacklistForbiddenException
-     * @throws Exception\PostEmailBlacklistNotFoundException
-     * @throws Exception\PostEmailBlacklistTooManyRequestsException
-     * @throws Exception\PostEmailBlacklistInternalServerErrorException
+     * @throws \Braze\Exception\PostEmailBlacklistBadRequestException
+     * @throws \Braze\Exception\PostEmailBlacklistUnauthorizedException
+     * @throws \Braze\Exception\PostEmailBlacklistForbiddenException
+     * @throws \Braze\Exception\PostEmailBlacklistNotFoundException
+     * @throws \Braze\Exception\PostEmailBlacklistTooManyRequestsException
+     * @throws \Braze\Exception\PostEmailBlacklistInternalServerErrorException
      */
-    public function postEmailBlacklist(?Model\EmailBlacklistPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postEmailBlacklist(Model\EmailBlacklistPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PostEmailBlacklist($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PostEmailBlacklist($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -2178,87 +2191,87 @@ class Client extends Runtime\Client\Client
      * Content-Type: application/json
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
-     * "message": (required, string) the status of the export, returns 'success' when completed without errors,
-     * "data" : [
-     * {
-     * "time" : (string) date as ISO 8601 date,
-     * "messages" : {
-     * "ios_push" : [
-     * {
-     * "variation_name": "iOS_Push",
-     * "sent" : (int),
-     * "direct_opens" : (int),
-     * "total_opens" : (int),
-     * "bounces" : (int),
-     * "body_clicks" : (int)
-     * "revenue": 0,
-     * "unique_recipients": 1,
-     * "conversions": 0,
-     * "conversions_by_send_time": 0,
-     * "conversions1": 0,
-     * "conversions1_by_send_time": 0,
-     * "conversions2": 0,
-     * "conversions2_by_send_time": 0,
-     * "conversions3": 0,
-     * "conversions3_by_send_time": 0,
-     * "carousel_slide_[NUM]_[TITLE]_click": (optional, int),
-     * "notif_button_[NUM]_[TITLE]_click": (optional, int)
-     * }
-     * ],
-     * "android_push" : [
-     * {
-     * "sent" : (int),
-     * "direct_opens" : (int),
-     * "total_opens" : (int),
-     * "bounces" : (int),
-     * "body_clicks" : (int)
-     * }
-     * ],
-     * "webhook": [
-     * {
-     * "sent": (int),
-     * "errors": (int)
-     * }
-     * ],
-     * "email" : [
-     * {
-     * "sent": (int),
-     * "opens": (int),
-     * "unique_opens": (int),
-     * "clicks": (int),
-     * "unique_clicks": (int),
-     * "unsubscribes": (int),
-     * "bounces": (int),
-     * "delivered": (int),
-     * "reported_spam": (int)
-     * }
-     * ],
-     * "sms" : [
-     * {
-     * "sent": (int),
-     * "delivered": (int),
-     * "undelivered": (int),
-     * "delivery_failed": (int)
-     * }
-     * ]
-     * },
-     * "conversions_by_send_time": (optional, int),
-     * "conversions1_by_send_time": (optional, int),
-     * "conversions2_by_send_time": (optional, int),
-     * "conversions3_by_send_time": (optional, int),
-     * "conversions": (int),
-     * "conversions1": (optional, int),
-     * "conversions2": (optional, int),
-     * "conversions3": (optional, int),
-     * "unique_recipients": (int),
-     * "revenue": (optional, float)
-     * },
-     * ...
-     * ],
-     * ...
+     *     "message": (required, string) the status of the export, returns 'success' when completed without errors,
+     *     "data" : [
+     *         {
+     *             "time" : (string) date as ISO 8601 date,
+     *             "messages" : {
+     *                 "ios_push" : [
+     *                     {
+     *                       "variation_name": "iOS_Push",
+     *                       "sent" : (int),
+     *                       "direct_opens" : (int),
+     *                       "total_opens" : (int),
+     *                       "bounces" : (int),
+     *                       "body_clicks" : (int)
+     *                       "revenue": 0,
+     *                       "unique_recipients": 1,
+     *                       "conversions": 0,
+     *                       "conversions_by_send_time": 0,
+     *                       "conversions1": 0,
+     *                       "conversions1_by_send_time": 0,
+     *                       "conversions2": 0,
+     *                       "conversions2_by_send_time": 0,
+     *                       "conversions3": 0,
+     *                       "conversions3_by_send_time": 0,
+     *                       "carousel_slide_[NUM]_[TITLE]_click": (optional, int),
+     *                       "notif_button_[NUM]_[TITLE]_click": (optional, int)
+     *                     }
+     *                 ],
+     *                 "android_push" : [
+     *                     {
+     *                       "sent" : (int),
+     *                       "direct_opens" : (int),
+     *                       "total_opens" : (int),
+     *                       "bounces" : (int),
+     *                       "body_clicks" : (int)
+     *                     }
+     *                 ],
+     *                 "webhook": [
+     *                     {
+     *                       "sent": (int),
+     *                       "errors": (int)
+     *                     }
+     *                 ],
+     *                 "email" : [
+     *                     {
+     *                       "sent": (int),
+     *                       "opens": (int),
+     *                       "unique_opens": (int),
+     *                       "clicks": (int),
+     *                       "unique_clicks": (int),
+     *                       "unsubscribes": (int),
+     *                       "bounces": (int),
+     *                       "delivered": (int),
+     *                       "reported_spam": (int)
+     *                     }
+     *                 ],
+     *                 "sms" : [
+     *                   {
+     *                     "sent": (int),
+     *                     "delivered": (int),
+     *                     "undelivered": (int),
+     *                     "delivery_failed": (int)
+     *                   }
+     *                 ]
+     *               },
+     *            "conversions_by_send_time": (optional, int),
+     *            "conversions1_by_send_time": (optional, int),
+     *            "conversions2_by_send_time": (optional, int),
+     *            "conversions3_by_send_time": (optional, int),
+     *            "conversions": (int),
+     *            "conversions1": (optional, int),
+     *            "conversions2": (optional, int),
+     *            "conversions3": (optional, int),
+     *            "unique_recipients": (int),
+     *            "revenue": (optional, float)
+     *         },
+     *         ...
+     *     ],
+     *     ...
      * }
      *
-     * ```
+     *  ```
      *
      * ### Multivariate response
      *
@@ -2266,75 +2279,75 @@ class Client extends Runtime\Client\Client
      * Content-Type: application/json
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
-     * "data" : [
-     * {
-     * "time" : (string) date as ISO 8601 date,
-     * "conversions" : (int),
-     * "revenue": (float),
-     * "conversions_by_send_time": (int),
-     * "messages" : {
-     * "trigger_in_app_message": [{
-     * "variation_name": (optional, string),
-     * "impressions": (int),
-     * "clicks": (int),
-     * "first_button_clicks": (int),
-     * "second_button_clicks": (int),
-     * "revenue": (optional, float),,
-     * "unique_recipients": (int),
-     * "conversions": (optional, int),
-     * "conversions_by_send_time": (optional, int),
-     * "conversions1": (optional, int),
-     * "conversions1_by_send_time": (optional, int),
-     * "conversions2": (optional, int),
-     * "conversions2_by_send_time": (optional, int),
-     * "conversions3": (optional, int),
-     * "conversions3_by_send_time": (optional, int)
-     * }, {
-     * "variation_name": (optional, string),
-     * "impressions": (int),
-     * "clicks": (int),
-     * "first_button_clicks": (int),
-     * "second_button_clicks": (int),
-     * "revenue": (optional, float),,
-     * "unique_recipients": (int),
-     * "conversions": (optional, int),
-     * "conversions_by_send_time": (optional, int),
-     * "conversions1": (optional, int),
-     * "conversions1_by_send_time": (optional, int),
-     * "conversions2": (optional, int),
-     * "conversions2_by_send_time": (optional, int),
-     * "conversions3": (optional, int).
-     * "conversions3_by_send_time": (optional, int)
-     * }, {
-     * "variation_name": (optional, string),
-     * "revenue": (optional, float),,
-     * "unique_recipients": (int),
-     * "conversions": (optional, int),
-     * "conversions_by_send_time": (optional, int),
-     * "conversions1": (optional, int),
-     * "conversions1_by_send_time": (optional, int),
-     * "conversions2": (optional, int),
-     * "conversions2_by_send_time": (optional, int),
-     * "conversions3": (optional, int),
-     * "conversions3_by_send_time": (optional, int),
-     * "enrolled": (optional, int)
-     * }]
-     * },
-     * "conversions_by_send_time": (optional, int),
-     * "conversions1_by_send_time": (optional, int),
-     * "conversions2_by_send_time": (optional, int),
-     * "conversions3_by_send_time": (optional, int),
-     * "conversions": (optional, int,
-     * "conversions1": (optional, int),
-     * "conversions2": (optional, int),
-     * "conversions3": (optional, int),
-     * "unique_recipients": (int),
-     * "revenue": (optional, float)
-     * }],
-     * ...
+     *     "data" : [
+     *         {
+     *             "time" : (string) date as ISO 8601 date,
+     *             "conversions" : (int),
+     *             "revenue": (float),
+     *             "conversions_by_send_time": (int),
+     *             "messages" : {
+     *                "trigger_in_app_message": [{
+     *                       "variation_name": (optional, string),
+     *                       "impressions": (int),
+     *                       "clicks": (int),
+     *                       "first_button_clicks": (int),
+     *                       "second_button_clicks": (int),
+     *                       "revenue": (optional, float),,
+     *                       "unique_recipients": (int),
+     *                       "conversions": (optional, int),
+     *                       "conversions_by_send_time": (optional, int),
+     *                       "conversions1": (optional, int),
+     *                       "conversions1_by_send_time": (optional, int),
+     *                       "conversions2": (optional, int),
+     *                       "conversions2_by_send_time": (optional, int),
+     *                       "conversions3": (optional, int),
+     *                       "conversions3_by_send_time": (optional, int)
+     *                   }, {
+     *                       "variation_name": (optional, string),
+     *                       "impressions": (int),
+     *                       "clicks": (int),
+     *                       "first_button_clicks": (int),
+     *                       "second_button_clicks": (int),
+     *                       "revenue": (optional, float),,
+     *                       "unique_recipients": (int),
+     *                       "conversions": (optional, int),
+     *                       "conversions_by_send_time": (optional, int),
+     *                       "conversions1": (optional, int),
+     *                       "conversions1_by_send_time": (optional, int),
+     *                       "conversions2": (optional, int),
+     *                       "conversions2_by_send_time": (optional, int),
+     *                       "conversions3": (optional, int).
+     *                       "conversions3_by_send_time": (optional, int)
+     *                   }, {
+     *                       "variation_name": (optional, string),
+     *                       "revenue": (optional, float),,
+     *                       "unique_recipients": (int),
+     *                       "conversions": (optional, int),
+     *                       "conversions_by_send_time": (optional, int),
+     *                       "conversions1": (optional, int),
+     *                       "conversions1_by_send_time": (optional, int),
+     *                       "conversions2": (optional, int),
+     *                       "conversions2_by_send_time": (optional, int),
+     *                       "conversions3": (optional, int),
+     *                       "conversions3_by_send_time": (optional, int),
+     *                       "enrolled": (optional, int)
+     *                   }]
+     *               },
+     *               "conversions_by_send_time": (optional, int),
+     *               "conversions1_by_send_time": (optional, int),
+     *               "conversions2_by_send_time": (optional, int),
+     *               "conversions3_by_send_time": (optional, int),
+     *               "conversions": (optional, int,
+     *               "conversions1": (optional, int),
+     *               "conversions2": (optional, int),
+     *               "conversions3": (optional, int),
+     *               "unique_recipients": (int),
+     *               "revenue": (optional, float)
+     *          }],
+     *          ...
      * }
      *
-     * ```
+     *  ```
      *
      * Possible message types are `email`, `in_app_message`, `webhook`, `android_push`, ios_push, `kindle_push`, `web_push`. All push message types will have the same statistics shown for `android_push`.
      *
@@ -2362,18 +2375,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\GetCampaignsDataSeriesBadRequestException
-     * @throws Exception\GetCampaignsDataSeriesUnauthorizedException
-     * @throws Exception\GetCampaignsDataSeriesForbiddenException
-     * @throws Exception\GetCampaignsDataSeriesNotFoundException
-     * @throws Exception\GetCampaignsDataSeriesTooManyRequestsException
-     * @throws Exception\GetCampaignsDataSeriesInternalServerErrorException
+     * @throws \Braze\Exception\GetCampaignsDataSeriesBadRequestException
+     * @throws \Braze\Exception\GetCampaignsDataSeriesUnauthorizedException
+     * @throws \Braze\Exception\GetCampaignsDataSeriesForbiddenException
+     * @throws \Braze\Exception\GetCampaignsDataSeriesNotFoundException
+     * @throws \Braze\Exception\GetCampaignsDataSeriesTooManyRequestsException
+     * @throws \Braze\Exception\GetCampaignsDataSeriesInternalServerErrorException
      */
     public function getCampaignsDataSeries(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\GetCampaignsDataSeries($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\GetCampaignsDataSeries($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -2398,30 +2411,30 @@ class Client extends Runtime\Client\Client
      * Content-Type: application/json
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
-     * "message": (required, string) the status of the export, returns 'success' when completed without errors,
-     * "created_at" : (string) the date created as ISO 8601 date,
-     * "updated_at" : (string) the date last updated as ISO 8601 date,
-     * "archived": (boolean) whether this campaign is archived,
-     * "draft": (boolean) whether this campaign is a draft,
-     * "name" : (string) the campaign name,
-     * "description" : (string) the campaign description,
-     * "schedule_type" : (string) the type of scheduling action,
-     * "channels" : (array) the list of channels to send via,
-     * "first_sent" : (string) the date and hour of first sent as ISO 8601 date,
-     * "last_sent" : (string) the date and hour of last sent as ISO 8601 date,
-     * "tags" : (array) the tag names associated with the campaign,
-     * "teams" : (array) the names of the Teams associated with the campaign,
-     * "messages": {
-     * "message_variation_id": (string) { // <=This is the actual id
-     * "channel": (string) the channel type of the message, must be either email, ios_push, webhook, content_card, in-app_message, or sms,
-     * "name": (string) the name of the message in the dashboard (eg., "Variation 1")
-     * ... channel-specific fields for this message, see the following messages section ...
-     * }
-     * },
-     * "conversion_behaviors": (array) the conversion event behaviors assigned to the campaign, see the following conversions behavior section.
+     *     "message": (required, string) the status of the export, returns 'success' when completed without errors,
+     *     "created_at" : (string) the date created as ISO 8601 date,
+     *     "updated_at" : (string) the date last updated as ISO 8601 date,
+     *     "archived": (boolean) whether this campaign is archived,
+     *     "draft": (boolean) whether this campaign is a draft,
+     *     "name" : (string) the campaign name,
+     *     "description" : (string) the campaign description,
+     *     "schedule_type" : (string) the type of scheduling action,
+     *     "channels" : (array) the list of channels to send via,
+     *     "first_sent" : (string) the date and hour of first sent as ISO 8601 date,
+     *     "last_sent" : (string) the date and hour of last sent as ISO 8601 date,
+     *     "tags" : (array) the tag names associated with the campaign,
+     *     "teams" : (array) the names of the Teams associated with the campaign,
+     *     "messages": {
+     *         "message_variation_id": (string) { // <=This is the actual id
+     *             "channel": (string) the channel type of the message, must be either email, ios_push, webhook, content_card, in-app_message, or sms,
+     *             "name": (string) the name of the message in the dashboard (eg., "Variation 1")
+     *             ... channel-specific fields for this message, see the following messages section ...
+     *         }
+     *     },
+     *     "conversion_behaviors": (array) the conversion event behaviors assigned to the campaign, see the following conversions behavior section.
      * }
      *
-     * ```
+     *  ```
      *
      * ### Messages by channel
      *
@@ -2431,93 +2444,93 @@ class Client extends Runtime\Client\Client
      *
      * ``` json
      * {
-     * "channel": (string) description of the channel, such as "ios_push" or "android_push"
-     * "alert": (string) alert body text,
-     * "extras": (hash) any key value pairs provided
+     *     "channel": (string) description of the channel, such as "ios_push" or "android_push"
+     *     "alert": (string) alert body text,
+     *     "extras": (hash) any key value pairs provided
      * }
      *
-     * ```
+     *  ```
      *
      * #### Email
      *
      * ``` json
      * {
-     * "channel": "email",
-     * "subject": (string) subject,
-     * "body": (string) HTML body,
-     * "from": (string) from address and display name,
-     * "reply_to": (string) reply-to for message, if different than "from" address,
-     * "title": (string) name of the email,
-     * "extras": (hash) any key value pairs provided
+     *     "channel": "email",
+     *     "subject": (string) subject,
+     *     "body": (string) HTML body,
+     *     "from": (string) from address and display name,
+     *     "reply_to": (string) reply-to for message, if different than "from" address,
+     *     "title": (string) name of the email,
+     *     "extras": (hash) any key value pairs provided
      * }
      *
-     * ```
+     *  ```
      *
      * #### In-app message
      *
      * ``` json
      * {
-     * "type": (string) description of in-app message type, such as "survey",
-     * "data": {
-     * "pages": [
-     * {
-     * "header":
-     * {
-     * "text":(string) display text for the header of the survey,
-     * }
-     * "choices": [
-     * {
-     * "choice_id": (string) choice identifier,
-     * "text": (string) display text,
-     * "custom_attribute_key": (string) custom attribute key,
-     * "custom_attribute_value": (sting) custom attribute value,
-     * "deleted": (boolean) deleted from live campaign,
-     * },
-     * ...
-     * ]
-     * }
-     * ]
-     * }
+     *     "type": (string) description of in-app message type, such as "survey",
+     *     "data": {
+     *         "pages": [
+     *             {
+     *                 "header":
+     *                     {
+     *                          "text":(string) display text for the header of the survey,
+     *                     }
+     *                 "choices": [
+     *                     {
+     *                        "choice_id": (string) choice identifier,
+     *                        "text": (string) display text,
+     *                        "custom_attribute_key": (string) custom attribute key,
+     *                        "custom_attribute_value": (sting) custom attribute value,
+     *                        "deleted": (boolean) deleted from live campaign,
+     *                     },
+     *                     ...
+     *                 ]
+     *             }
+     *         ]
+     *     }
      * }
      *
-     * ```
+     *  ```
      *
      * #### Content Card
      *
      * ``` json
      * {
-     * "channel": "content_cards",
-     * "name": (string) name of variant,
-     * "extras": (hash) any key value pairs provided; only present if at least one key-value pair has been set
+     *     "channel": "content_cards",
+     *     "name": (string) name of variant,
+     *     "extras": (hash) any key value pairs provided; only present if at least one key-value pair has been set
      * }
      *
-     * ```
+     *  ```
      *
      * #### Webhook
      *
      * ``` json
      * {
-     * "channel": "webhook",
-     * "url": (string) url for webhook,
-     * "body": (string) payload body,
-     * "type": (string) body content type,
-     * "headers": (hash) specified request headers,
-     * "method": (string) HTTP method (e.g., "POST" or "GET"),
+     *     "channel": "webhook",
+     *     "url": (string) url for webhook,
+     *     "body": (string) payload body,
+     *     "type": (string) body content type,
+     *     "headers": (hash) specified request headers,
+     *     "method": (string) HTTP method (e.g., "POST" or "GET"),
      * }
      *
-     * ```
+     *  ```
      *
      * #### SMS
      *
      * ``` json
      * {
-     * "channel": "sms",
-     * "body": (string) payload body,
-     * "from": (string) list of numbers associated with the subscription group,
-     * "subscription_group_id": (string) API id of the subscription group targeted in the SMS message
+     *   "channel": "sms",
+     *   "body": (string) payload body,
+     *   "from": (string) list of numbers associated with the subscription group,
+     *   "subscription_group_id": (string) API id of the subscription group targeted in the SMS message
      * }
      *
-     * ```
+     *  ```
      *
      * #### WhatsApp
      *
@@ -2525,43 +2538,43 @@ class Client extends Runtime\Client\Client
      *
      * ``` json
      * {
-     * "channel": "whats_app",
-     * "subscription_group_id": (string) the API ID of the subscription group selected in the WhatsApp message
-     * "from": (array) the list of strings of the numbers associated with the subscription group,
-     * "template_name": (string) the name of the WhatsApp template being sent,
-     * "template_language_code": (string) the language code of the WhatsApp template being sent,
-     * "header_variables": (array) the list of strings, if present, of Liquid variables being inserted into header of WhatsApp template being sent,
-     * "body_variables": (array) the list of strings, if present, of Liquid variables being inserted into body of WhatsApp template being sent,
-     * "button_variables": (array) the list of strings, if present, of Liquid variables being inserted into buttons of WhatsApp template being sent
+     *   "channel": "whats_app",
+     *   "subscription_group_id": (string) the API ID of the subscription group selected in the WhatsApp message
+     *   "from": (array) the list of strings of the numbers associated with the subscription group,
+     *   "template_name": (string) the name of the WhatsApp template being sent,
+     *   "template_language_code": (string) the language code of the WhatsApp template being sent,
+     *   "header_variables": (array) the list of strings, if present, of Liquid variables being inserted into header of WhatsApp template being sent,
+     *   "body_variables": (array) the list of strings, if present, of Liquid variables being inserted into body of WhatsApp template being sent,
+     *   "button_variables": (array) the list of strings, if present, of Liquid variables being inserted into buttons of WhatsApp template being sent
      * }
      *
-     * ```
+     *  ```
      *
      * ##### Response messages
      *
      * ``` json
      * {
-     * "channel": "whats_app",
-     * "subscription_group_id": (string) the API ID of the subscription group selected in the WhatsApp message,
-     * "from": (array) list of strings of the numbers associated with the subscription group,
-     * "layout": (string) the name of the WhatsApp template being sent (text or media or quick-reply),
-     * "header_text": (string, optional) the text, if present, of the header of the message being sent,
-     * "body_text": (string, optional) the text, if present, of the body of the message being sent,
-     * "footer_text": (string, optional) the text, if present, of the footer of the message being sent,
-     * "buttons": (array) list of button objects in the message being sent ({"text": (string) the text of the button})
+     *   "channel": "whats_app",
+     *   "subscription_group_id": (string) the API ID of the subscription group selected in the WhatsApp message,
+     *   "from": (array) list of strings of the numbers associated with the subscription group,
+     *   "layout": (string) the name of the WhatsApp template being sent (text or media or quick-reply),
+     *   "header_text": (string, optional) the text, if present, of the header of the message being sent,
+     *   "body_text": (string, optional) the text, if present, of the body of the message being sent,
+     *   "footer_text": (string, optional) the text, if present, of the footer of the message being sent,
+     *   "buttons": (array) list of button objects in the message being sent ({"text": (string) the text of the button})
      * }
      *
-     * ```
+     *  ```
      *
      * #### Control messages
      *
      * ``` json
      * {
-     * "channel": (string) description of the channel that the control is for,
-     * "type": "control"
+     *     "channel": (string) description of the channel that the control is for,
+     *     "type": "control"
      * }
      *
-     * ```
+     *  ```
      *
      * ### Conversion behaviors
      *
@@ -2571,75 +2584,75 @@ class Client extends Runtime\Client\Client
      *
      * ``` json
      * {
-     * "type": "Clicks Email",
-     * "window": (integer) number of seconds during which the user can convert on this event, i.e. - 86400, which is 24 hours
+     *     "type": "Clicks Email",
+     *     "window": (integer) number of seconds during which the user can convert on this event, i.e. - 86400, which is 24 hours
      * }
      *
-     * ```
+     *  ```
      *
      * #### Opens email
      *
      * ``` json
      * {
-     * "type": "Opens Email",
-     * "window": (integer) number of seconds during which the user can convert on this event, i.e. - 86400, which is 24 hours
+     *     "type": "Opens Email",
+     *     "window": (integer) number of seconds during which the user can convert on this event, i.e. - 86400, which is 24 hours
      * }
      *
-     * ```
+     *  ```
      *
      * #### Makes purchase (any purchase)
      *
      * ``` json
      * {
-     * "type": "Makes Any Purchase",
-     * "window": (integer) number of seconds during which the user can convert on this event, i.e. - 86400, which is 24 hours
+     *     "type": "Makes Any Purchase",
+     *     "window": (integer) number of seconds during which the user can convert on this event, i.e. - 86400, which is 24 hours
      * }
      *
-     * ```
+     *  ```
      *
      * #### Makes purchase (specific product)
      *
      * ``` json
      * {
-     * "type": "Makes Specific Purchase",
-     * "window": (integer) number of seconds during which the user can convert on this event, i.e. - 86400, which is 24 hours,
-     * "product": (string) name of the product, i.e. - "Feline Body Armor"
+     *     "type": "Makes Specific Purchase",
+     *     "window": (integer) number of seconds during which the user can convert on this event, i.e. - 86400, which is 24 hours,
+     *     "product": (string) name of the product, i.e. - "Feline Body Armor"
      * }
      *
-     * ```
+     *  ```
      *
      * #### Performs custom event
      *
      * ``` json
      * {
-     * "type": "Performs Custom Event",
-     * "window": (integer) number of seconds during which the user can convert on this event, i.e. - 86400, which is 24 hours,
-     * "custom_event_name": (string) name of the event, i.e. - "Used Feline Body Armor"
+     *     "type": "Performs Custom Event",
+     *     "window": (integer) number of seconds during which the user can convert on this event, i.e. - 86400, which is 24 hours,
+     *     "custom_event_name": (string) name of the event, i.e. - "Used Feline Body Armor"
      * }
      *
-     * ```
+     *  ```
      *
      * #### Upgrades app
      *
      * ``` json
      * {
-     * "type": "Upgrades App",
-     * "window": (integer) number of seconds during which the user can convert on this event, i.e. - 86400, which is 24 hours,
-     * "app_ids": (array|null) array of app ids, i.e. - ["12345", "67890"], or `null` if "Track sessions for any app" is selected in the UI
+     *     "type": "Upgrades App",
+     *     "window": (integer) number of seconds during which the user can convert on this event, i.e. - 86400, which is 24 hours,
+     *     "app_ids": (array|null) array of app ids, i.e. - ["12345", "67890"], or `null` if "Track sessions for any app" is selected in the UI
      * }
      *
-     * ```
+     *  ```
      *
      * #### Uses app
      *
      * ``` json
      * {
-     * "type": "Starts Session",
-     * "window": (integer) number of seconds during which the user can convert on this event, i.e. - 86400, which is 24 hours,
-     * "app_ids": (array|null) array of app ids, i.e. - ["12345", "67890"], or `null` if "Track sessions for any app" is selected in the UI
+     *     "type": "Starts Session",
+     *     "window": (integer) number of seconds during which the user can convert on this event, i.e. - 86400, which is 24 hours,
+     *     "app_ids": (array|null) array of app ids, i.e. - ["12345", "67890"], or `null` if "Track sessions for any app" is selected in the UI
      * }
      *
-     * ```
+     *  ```
      *
      * > **Tip:** For help with CSV and API exports, visit [Export troubleshooting](https://www.braze.com/docs/user_guide/data_and_analytics/export_braze_data/export_troubleshooting/).
      *
@@ -2659,18 +2672,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\GetCampaignsDetailBadRequestException
-     * @throws Exception\GetCampaignsDetailUnauthorizedException
-     * @throws Exception\GetCampaignsDetailForbiddenException
-     * @throws Exception\GetCampaignsDetailNotFoundException
-     * @throws Exception\GetCampaignsDetailTooManyRequestsException
-     * @throws Exception\GetCampaignsDetailInternalServerErrorException
+     * @throws \Braze\Exception\GetCampaignsDetailBadRequestException
+     * @throws \Braze\Exception\GetCampaignsDetailUnauthorizedException
+     * @throws \Braze\Exception\GetCampaignsDetailForbiddenException
+     * @throws \Braze\Exception\GetCampaignsDetailNotFoundException
+     * @throws \Braze\Exception\GetCampaignsDetailTooManyRequestsException
+     * @throws \Braze\Exception\GetCampaignsDetailInternalServerErrorException
      */
     public function getCampaignsDetail(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\GetCampaignsDetail($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\GetCampaignsDetail($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -2692,20 +2705,20 @@ class Client extends Runtime\Client\Client
      * Content-Type: application/json
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
-     * "message": (required, string) the status of the export, returns 'success' when completed without errors,
-     * "campaigns" : [
-     * {
-     * "id" : (string) Campaign API Identifier,
-     * "last_edited": (ISO 8601 string) the last edited time for the message
-     * "name" : (string) campaign name,
-     * "is_api_campaign" : (boolean) whether the campaign is an API Campaign,
-     * "tags" : (array) tag names associated with the campaign
-     * },
-     * ...
-     * ]
+     *     "message": (required, string) the status of the export, returns 'success' when completed without errors,
+     *     "campaigns" : [
+     *         {
+     *             "id" : (string) Campaign API Identifier,
+     *             "last_edited": (ISO 8601 string) the last edited time for the message
+     *             "name" : (string) campaign name,
+     *             "is_api_campaign" : (boolean) whether the campaign is an API Campaign,
+     *             "tags" : (array) tag names associated with the campaign
+     *         },
+     *         ...
+     *     ]
      * }
      *
-     * ```
+     *  ```
      *
      * > **Tip:** For help with CSV and API exports, visit [Export troubleshooting](https://www.braze.com/docs/user_guide/data_and_analytics/export_braze_data/export_troubleshooting/).
      *
@@ -2735,18 +2748,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\GetCampaignsListBadRequestException
-     * @throws Exception\GetCampaignsListUnauthorizedException
-     * @throws Exception\GetCampaignsListForbiddenException
-     * @throws Exception\GetCampaignsListNotFoundException
-     * @throws Exception\GetCampaignsListTooManyRequestsException
-     * @throws Exception\GetCampaignsListInternalServerErrorException
+     * @throws \Braze\Exception\GetCampaignsListBadRequestException
+     * @throws \Braze\Exception\GetCampaignsListUnauthorizedException
+     * @throws \Braze\Exception\GetCampaignsListForbiddenException
+     * @throws \Braze\Exception\GetCampaignsListNotFoundException
+     * @throws \Braze\Exception\GetCampaignsListTooManyRequestsException
+     * @throws \Braze\Exception\GetCampaignsListInternalServerErrorException
      */
     public function getCampaignsList(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\GetCampaignsList($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\GetCampaignsList($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -2770,44 +2783,44 @@ class Client extends Runtime\Client\Client
      * Content-Type: application/json
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
-     * "variation_name": (string) variation name,
-     * "sent": (int) the number of sends,
-     * "delivered": (int) the number of messages successfully delivered,
-     * "undelivered": (int) the number of undelivered,
-     * "delivery_failed": (int) the number of rejected,
-     * "direct_opens": (int) the number of direct opens,
-     * "total_opens": (int) the number of total opens,
-     * "bounces": (int) the number of bounces,
-     * "body_clicks": (int) the number of body clicks,
-     * "revenue": (float) the number of dollars of revenue (USD),
-     * "unique_recipients": (int) the number of unique recipients,
-     * "conversions": (int) the number of conversions,
-     * "conversions_by_send_time": (int) the number of conversions,
-     * "conversions1": (int, optional) the number of conversions for the second conversion event,
-     * "conversions1_by_send_time": (int, optional) the number of conversions for the second conversion event by send time,
-     * "conversions2": (int, optional) the number of conversions for the third conversion event,
-     * "conversions2_by_send_time": (int, optional) the number of conversions for the third conversion event by send time,
-     * "conversions3": (int, optional) the number of conversions for the fourth conversion event,
-     * "conversions3_by_send_time": (int, optional) the number of conversions for the fourth conversion event by send time
-     * }
-     * ]
-     * },
-     * "conversions_by_send_time": 0,
-     * "conversions1_by_send_time": 0,
-     * "conversions2_by_send_time": 0,
-     * "conversions3_by_send_time": 0,
-     * "conversions": 0,
-     * "conversions1": 0,
-     * "conversions2": 0,
-     * "conversions3": 0,
-     * "unique_recipients": 1,
-     * "revenue": 0
-     * }
-     * ],
-     * "message": "success"
+     *             "variation_name": (string) variation name,
+     *             "sent": (int) the number of sends,
+     *             "delivered": (int) the number of messages successfully delivered,
+     *             "undelivered": (int) the number of undelivered,
+     *             "delivery_failed": (int) the number of rejected,
+     *             "direct_opens": (int) the number of direct opens,
+     *             "total_opens": (int) the number of total opens,
+     *             "bounces": (int) the number of bounces,
+     *             "body_clicks": (int) the number of body clicks,
+     *             "revenue": (float) the number of dollars of revenue (USD),
+     *             "unique_recipients": (int) the number of unique recipients,
+     *             "conversions": (int) the number of conversions,
+     *             "conversions_by_send_time": (int) the number of conversions,
+     *             "conversions1": (int, optional) the number of conversions for the second conversion event,
+     *             "conversions1_by_send_time": (int, optional) the number of conversions for the second conversion event by send time,
+     *             "conversions2": (int, optional) the number of conversions for the third conversion event,
+     *             "conversions2_by_send_time": (int, optional) the number of conversions for the third conversion event by send time,
+     *             "conversions3": (int, optional) the number of conversions for the fourth conversion event,
+     *             "conversions3_by_send_time": (int, optional) the number of conversions for the fourth conversion event by send time
+     *           }
+     *         ]
+     *       },
+     *       "conversions_by_send_time": 0,
+     *       "conversions1_by_send_time": 0,
+     *       "conversions2_by_send_time": 0,
+     *       "conversions3_by_send_time": 0,
+     *       "conversions": 0,
+     *       "conversions1": 0,
+     *       "conversions2": 0,
+     *       "conversions3": 0,
+     *       "unique_recipients": 1,
+     *       "revenue": 0
+     *     }
+     *   ],
+     *   "message": "success"
      * }
      *
-     * ```
+     *  ```
      *
      * > **Tip:** For help with CSV and API exports, visit [Export troubleshooting](https://www.braze.com/docs/user_guide/data_and_analytics/export_braze_data/export_troubleshooting/).
      *
@@ -2834,18 +2847,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\GetSendsDataSeriesBadRequestException
-     * @throws Exception\GetSendsDataSeriesUnauthorizedException
-     * @throws Exception\GetSendsDataSeriesForbiddenException
-     * @throws Exception\GetSendsDataSeriesNotFoundException
-     * @throws Exception\GetSendsDataSeriesTooManyRequestsException
-     * @throws Exception\GetSendsDataSeriesInternalServerErrorException
+     * @throws \Braze\Exception\GetSendsDataSeriesBadRequestException
+     * @throws \Braze\Exception\GetSendsDataSeriesUnauthorizedException
+     * @throws \Braze\Exception\GetSendsDataSeriesForbiddenException
+     * @throws \Braze\Exception\GetSendsDataSeriesNotFoundException
+     * @throws \Braze\Exception\GetSendsDataSeriesTooManyRequestsException
+     * @throws \Braze\Exception\GetSendsDataSeriesInternalServerErrorException
      */
     public function getSendsDataSeries(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\GetSendsDataSeries($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\GetSendsDataSeries($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -2865,56 +2878,56 @@ class Client extends Runtime\Client\Client
      * Content-Type: application/json
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
-     * "data": {
-     * "name": (string) Canvas name,
-     * "stats": [
-     * {
-     * "time": (string) date as ISO 8601 date,
-     * "total_stats": {
-     * "revenue": (float),
-     * "conversions": (int),
-     * "conversions_by_entry_time": (int),
-     * "entries": (int)
-     * },
-     * "variant_stats": (optional) {
-     * "00000000-0000-0000-0000-0000000000000": (API identifier for variant) {
-     * "name": (string) name of variant,
-     * "revenue": (int),
-     * "conversions": (int),
-     * "conversions_by_entry_time": (int),
-     * "entries": (int)
-     * },
-     * ... (more variants)
-     * },
-     * "step_stats": (optional) {
-     * "00000000-0000-0000-0000-0000000000000": (API identifier for step) {
-     * "name": (string) name of step,
-     * "revenue": (float),
-     * "conversions": (int),
-     * "conversions_by_entry_time": (int),
-     * "messages": {
-     * "email": [
-     * {
-     * "sent": (int),
-     * "opens": (int),
-     * "unique_opens": (int),
-     * "clicks": (int),
-     * ... (more stats)
-     * }
-     * ],
-     * ... (more channels)
-     * }
-     * },
-     * ... (more steps)
-     * }
-     * },
-     * ... (more stats by time)
-     * ]
-     * },
-     * "message": (required, string) the status of the export, returns 'success' when completed without errors
+     *   "data": {
+     *     "name": (string) Canvas name,
+     *     "stats": [
+     *       {
+     *         "time": (string) date as ISO 8601 date,
+     *         "total_stats": {
+     *           "revenue": (float),
+     *           "conversions": (int),
+     *           "conversions_by_entry_time": (int),
+     *           "entries": (int)
+     *         },
+     *         "variant_stats": (optional) {
+     *           "00000000-0000-0000-0000-0000000000000": (API identifier for variant) {
+     *             "name": (string) name of variant,
+     *             "revenue": (int),
+     *             "conversions": (int),
+     *             "conversions_by_entry_time": (int),
+     *             "entries": (int)
+     *           },
+     *           ... (more variants)
+     *         },
+     *         "step_stats": (optional) {
+     *           "00000000-0000-0000-0000-0000000000000": (API identifier for step) {
+     *             "name": (string) name of step,
+     *             "revenue": (float),
+     *             "conversions": (int),
+     *             "conversions_by_entry_time": (int),
+     *             "messages": {
+     *               "email": [
+     *                 {
+     *                   "sent": (int),
+     *                   "opens": (int),
+     *                   "unique_opens": (int),
+     *                   "clicks": (int),
+     *                   ... (more stats)
+     *                 }
+     *               ],
+     *               ... (more channels)
+     *             }
+     *           },
+     *           ... (more steps)
+     *         }
+     *       },
+     *       ... (more stats by time)
+     *     ]
+     *   },
+     *   "message": (required, string) the status of the export, returns 'success' when completed without errors
      * }
      *
-     * ```
+     *  ```
      *
      * > **Tip:** For help with CSV and API exports, visit [Export troubleshooting](https://www.braze.com/docs/user_guide/data_and_analytics/export_braze_data/export_troubleshooting/).
      *
@@ -2954,18 +2967,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\GetCanvasDataSeriesBadRequestException
-     * @throws Exception\GetCanvasDataSeriesUnauthorizedException
-     * @throws Exception\GetCanvasDataSeriesForbiddenException
-     * @throws Exception\GetCanvasDataSeriesNotFoundException
-     * @throws Exception\GetCanvasDataSeriesTooManyRequestsException
-     * @throws Exception\GetCanvasDataSeriesInternalServerErrorException
+     * @throws \Braze\Exception\GetCanvasDataSeriesBadRequestException
+     * @throws \Braze\Exception\GetCanvasDataSeriesUnauthorizedException
+     * @throws \Braze\Exception\GetCanvasDataSeriesForbiddenException
+     * @throws \Braze\Exception\GetCanvasDataSeriesNotFoundException
+     * @throws \Braze\Exception\GetCanvasDataSeriesTooManyRequestsException
+     * @throws \Braze\Exception\GetCanvasDataSeriesInternalServerErrorException
      */
     public function getCanvasDataSeries(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\GetCanvasDataSeries($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\GetCanvasDataSeries($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -2985,49 +2998,49 @@ class Client extends Runtime\Client\Client
      * Content-Type: application/json
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
-     * "data": {
-     * "name": (string) Canvas name,
-     * "total_stats": {
-     * "revenue": (float),
-     * "conversions": (int),
-     * "conversions_by_entry_time": (int),
-     * "entries": (int)
-     * },
-     * "variant_stats": (optional) {
-     * "00000000-0000-0000-0000-0000000000000": (API identifier for variant) {
-     * "name": (string) name of variant,
-     * "revenue": (float),
-     * "conversions": (int),
-     * "entries": (int)
-     * },
-     * ... (more variants)
-     * },
-     * "step_stats": (optional) {
-     * "00000000-0000-0000-0000-0000000000000": (API identifier for step) {
-     * "name": (string) name of step,
-     * "revenue": (float),
-     * "conversions": (int),
-     * "conversions_by_entry_time": (int),
-     * "messages": {
-     * "android_push": (name of channel) [
-     * {
-     * "sent": (int),
-     * "opens": (int),
-     * "influenced_opens": (int),
-     * "bounces": (int)
-     * ... (more stats for channel)
-     * }
-     * ],
-     * ... (more channels)
-     * }
-     * },
-     * ... (more steps)
-     * }
-     * },
-     * "message": (required, string) the status of the export, returns 'success' when completed without errors
+     *   "data": {
+     *     "name": (string) Canvas name,
+     *     "total_stats": {
+     *       "revenue": (float),
+     *       "conversions": (int),
+     *       "conversions_by_entry_time": (int),
+     *       "entries": (int)
+     *     },
+     *     "variant_stats": (optional) {
+     *       "00000000-0000-0000-0000-0000000000000": (API identifier for variant) {
+     *         "name": (string) name of variant,
+     *         "revenue": (float),
+     *         "conversions": (int),
+     *         "entries": (int)
+     *       },
+     *       ... (more variants)
+     *     },
+     *     "step_stats": (optional) {
+     *       "00000000-0000-0000-0000-0000000000000": (API identifier for step) {
+     *         "name": (string) name of step,
+     *         "revenue": (float),
+     *         "conversions": (int),
+     *         "conversions_by_entry_time": (int),
+     *         "messages": {
+     *           "android_push": (name of channel) [
+     *             {
+     *               "sent": (int),
+     *               "opens": (int),
+     *               "influenced_opens": (int),
+     *               "bounces": (int)
+     *               ... (more stats for channel)
+     *             }
+     *           ],
+     *           ... (more channels)
+     *         }
+     *       },
+     *       ... (more steps)
+     *     }
+     *   },
+     *   "message": (required, string) the status of the export, returns 'success' when completed without errors
      * }
      *
-     * ```
+     *  ```
      *
      * > **Tip:** For help with CSV and API exports, visit [Export troubleshooting](https://desktop.postman.com/?desktopVersion=9.19.0&userId=16580579&teamId=409325).
      *
@@ -3066,18 +3079,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\GetCanvasDataSummaryBadRequestException
-     * @throws Exception\GetCanvasDataSummaryUnauthorizedException
-     * @throws Exception\GetCanvasDataSummaryForbiddenException
-     * @throws Exception\GetCanvasDataSummaryNotFoundException
-     * @throws Exception\GetCanvasDataSummaryTooManyRequestsException
-     * @throws Exception\GetCanvasDataSummaryInternalServerErrorException
+     * @throws \Braze\Exception\GetCanvasDataSummaryBadRequestException
+     * @throws \Braze\Exception\GetCanvasDataSummaryUnauthorizedException
+     * @throws \Braze\Exception\GetCanvasDataSummaryForbiddenException
+     * @throws \Braze\Exception\GetCanvasDataSummaryNotFoundException
+     * @throws \Braze\Exception\GetCanvasDataSummaryTooManyRequestsException
+     * @throws \Braze\Exception\GetCanvasDataSummaryInternalServerErrorException
      */
     public function getCanvasDataSummary(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\GetCanvasDataSummary($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\GetCanvasDataSummary($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -3100,55 +3113,55 @@ class Client extends Runtime\Client\Client
      * Content-Type: application/json
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
-     * "created_at": (string) the date created as ISO 8601 date,
-     * "updated_at": (string) the date updated as ISO 8601 date,
-     * "name": (string) the Canvas name,
-     * "description": (string) the Canvas description,
-     * "archived": (boolean) whether this Canvas is archived,
-     * "draft": (boolean) whether this Canvas is a draft,
-     * "schedule_type": (string) the type of scheduling action,
-     * "first_entry": (string) the date of first entry as ISO 8601 date,
-     * "last_entry": (string) the date of last entry as ISO 8601 date,
-     * "channels": (array of strings) step channels used with Canvas,
-     * "variants": [
-     * {
-     * "name": (string) the name of variant,
-     * "id": (string) the API identifier of the variant,
-     * "first_step_ids": (array of strings) the API identifiers for first steps in variant,
-     * "first_step_id": (string) the API identifier of first step in variant (deprecated in November 2017, only included if the variant has only one first step)
-     * },
-     * ... (more variations)
-     * ],
-     * "tags": (array of strings) the tag names associated with the Canvas,
-     * "teams" : (array) the names of the Teams associated with the Canvas,
-     * "steps": [
-     * {
-     * "name": (string) the name of step,
-     * "type" (string) the type of Canvas component,
-     * "id": (string) the API identifier of the step,
-     * "next_step_ids": (array of strings) IDs for next steps that are full steps or Message steps,
-     * "next_paths": { (array of objects)
-     * // for Decision Splits, this property should evaluate to "Yes" or "No"
-     * // for Audience Path and Action Paths, this property should evaluate to the group name
-     * // for Experiment Paths, this property should evaluate to the path name
-     * // for other steps, this property should evaluate to "null"
-     * "name": (string) name the name of step,
-     * "next_step_id": (string) IDs for next steps that are full steps or Message steps,
-     * }
-     * "channels": (array of strings) the channels used in step,
-     * "messages": {
-     * "message_variation_id": (string) {  // <=This is the actual id
-     * "channel": (string) the channel type of the message (for example, "email"),
-     * // channel-specific fields for this message, see Campaign Details endpoint API Response for example message responses
-     * }
-     * }
-     * },
-     * ... (more steps)
-     * ],
-     * "message": (required, string) the status of the export, returns 'success' when completed without errors
+     *   "created_at": (string) the date created as ISO 8601 date,
+     *   "updated_at": (string) the date updated as ISO 8601 date,
+     *   "name": (string) the Canvas name,
+     *   "description": (string) the Canvas description,
+     *   "archived": (boolean) whether this Canvas is archived,
+     *   "draft": (boolean) whether this Canvas is a draft,
+     *   "schedule_type": (string) the type of scheduling action,
+     *   "first_entry": (string) the date of first entry as ISO 8601 date,
+     *   "last_entry": (string) the date of last entry as ISO 8601 date,
+     *   "channels": (array of strings) step channels used with Canvas,
+     *   "variants": [
+     *     {
+     *       "name": (string) the name of variant,
+     *       "id": (string) the API identifier of the variant,
+     *       "first_step_ids": (array of strings) the API identifiers for first steps in variant,
+     *       "first_step_id": (string) the API identifier of first step in variant (deprecated in November 2017, only included if the variant has only one first step)
+     *     },
+     *     ... (more variations)
+     *   ],
+     *   "tags": (array of strings) the tag names associated with the Canvas,
+     *   "teams" : (array) the names of the Teams associated with the Canvas,
+     *   "steps": [
+     *     {
+     *       "name": (string) the name of step,
+     *       "type" (string) the type of Canvas component,
+     *       "id": (string) the API identifier of the step,
+     *       "next_step_ids": (array of strings) IDs for next steps that are full steps or Message steps,
+     *       "next_paths": { (array of objects)
+     *       // for Decision Splits, this property should evaluate to "Yes" or "No"
+     *       // for Audience Path and Action Paths, this property should evaluate to the group name
+     *       // for Experiment Paths, this property should evaluate to the path name
+     *       // for other steps, this property should evaluate to "null"
+     *         "name": (string) name the name of step,
+     *         "next_step_id": (string) IDs for next steps that are full steps or Message steps,
+     *         }
+     *       "channels": (array of strings) the channels used in step,
+     *       "messages": {
+     *           "message_variation_id": (string) {  // <=This is the actual id
+     *               "channel": (string) the channel type of the message (for example, "email"),
+     *               // channel-specific fields for this message, see Campaign Details endpoint API Response for example message responses
+     *           }
+     *       }
+     *     },
+     *     ... (more steps)
+     *   ],
+     *   "message": (required, string) the status of the export, returns 'success' when completed without errors
      * }
      *
-     * ```
+     *  ```
      *
      * > **Tip:** For help with CSV and API exports, visit [Export troubleshooting](https://desktop.postman.com/?desktopVersion=9.19.0&userId=16580579&teamId=409325).
      *
@@ -3166,18 +3179,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\GetCanvasDetailBadRequestException
-     * @throws Exception\GetCanvasDetailUnauthorizedException
-     * @throws Exception\GetCanvasDetailForbiddenException
-     * @throws Exception\GetCanvasDetailNotFoundException
-     * @throws Exception\GetCanvasDetailTooManyRequestsException
-     * @throws Exception\GetCanvasDetailInternalServerErrorException
+     * @throws \Braze\Exception\GetCanvasDetailBadRequestException
+     * @throws \Braze\Exception\GetCanvasDetailUnauthorizedException
+     * @throws \Braze\Exception\GetCanvasDetailForbiddenException
+     * @throws \Braze\Exception\GetCanvasDetailNotFoundException
+     * @throws \Braze\Exception\GetCanvasDetailTooManyRequestsException
+     * @throws \Braze\Exception\GetCanvasDetailInternalServerErrorException
      */
     public function getCanvasDetail(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\GetCanvasDetail($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\GetCanvasDetail($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -3201,19 +3214,19 @@ class Client extends Runtime\Client\Client
      * Content-Type: application/json
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
-     * "canvases" : [
-     * {
-     * "id" : (string) Canvas API Identifier,
-     * "last_edited": (ISO 8601 string) the last edited time for the message,
-     * "name" : (string) Canvas name,
-     * "tags" : (array) tag names associated with the Canvas,
-     * },
-     * ... (more Canvases)
-     * ],
-     * "message": (required, string) the status of the export, returns 'success' when completed without errors
+     *   "canvases" : [
+     *       {
+     *           "id" : (string) Canvas API Identifier,
+     *           "last_edited": (ISO 8601 string) the last edited time for the message,
+     *           "name" : (string) Canvas name,
+     *           "tags" : (array) tag names associated with the Canvas,
+     *       },
+     *     ... (more Canvases)
+     *   ],
+     *   "message": (required, string) the status of the export, returns 'success' when completed without errors
      * }
      *
-     * ```
+     *  ```
      *
      * > **Tip:** For help with CSV and API exports, visit [Export troubleshooting](https://desktop.postman.com/?desktopVersion=9.19.0&userId=16580579&teamId=409325).
      *
@@ -3243,18 +3256,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\GetCanvasListBadRequestException
-     * @throws Exception\GetCanvasListUnauthorizedException
-     * @throws Exception\GetCanvasListForbiddenException
-     * @throws Exception\GetCanvasListNotFoundException
-     * @throws Exception\GetCanvasListTooManyRequestsException
-     * @throws Exception\GetCanvasListInternalServerErrorException
+     * @throws \Braze\Exception\GetCanvasListBadRequestException
+     * @throws \Braze\Exception\GetCanvasListUnauthorizedException
+     * @throws \Braze\Exception\GetCanvasListForbiddenException
+     * @throws \Braze\Exception\GetCanvasListNotFoundException
+     * @throws \Braze\Exception\GetCanvasListTooManyRequestsException
+     * @throws \Braze\Exception\GetCanvasListInternalServerErrorException
      */
     public function getCanvasList(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\GetCanvasList($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\GetCanvasList($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -3274,16 +3287,16 @@ class Client extends Runtime\Client\Client
      * Content-Type: application/json
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
-     * "message": (required, string) the status of the export, returns 'success' when completed without errors,
-     * "events" : [
-     * "Event A", (string) the event name,
-     * "Event B", (string) the event name,
-     * "Event C", (string) the event name,
-     * ...
-     * ]
+     *     "message": (required, string) the status of the export, returns 'success' when completed without errors,
+     *     "events" : [
+     *         "Event A", (string) the event name,
+     *         "Event B", (string) the event name,
+     *         "Event C", (string) the event name,
+     *         ...
+     *     ]
      * }
      *
-     * ```
+     *  ```
      *
      * ### Fatal error response codes
      *
@@ -3305,18 +3318,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\GetEventsListBadRequestException
-     * @throws Exception\GetEventsListUnauthorizedException
-     * @throws Exception\GetEventsListForbiddenException
-     * @throws Exception\GetEventsListNotFoundException
-     * @throws Exception\GetEventsListTooManyRequestsException
-     * @throws Exception\GetEventsListInternalServerErrorException
+     * @throws \Braze\Exception\GetEventsListBadRequestException
+     * @throws \Braze\Exception\GetEventsListUnauthorizedException
+     * @throws \Braze\Exception\GetEventsListForbiddenException
+     * @throws \Braze\Exception\GetEventsListNotFoundException
+     * @throws \Braze\Exception\GetEventsListTooManyRequestsException
+     * @throws \Braze\Exception\GetEventsListInternalServerErrorException
      */
     public function getEventsList(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\GetEventsList($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\GetEventsList($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -3336,17 +3349,17 @@ class Client extends Runtime\Client\Client
      * Content-Type: application/json
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
-     * "message": (required, string) the status of the export, returns 'success' when completed without errors,
-     * "data" : [
-     * {
-     * "time" : (string) point in time - as ISO 8601 extended when unit is "hour" and as ISO 8601 date when unit is "day",
-     * "count" : (int)
-     * },
-     * ...
-     * ]
+     *     "message": (required, string) the status of the export, returns 'success' when completed without errors,
+     *     "data" : [
+     *         {
+     *             "time" : (string) point in time - as ISO 8601 extended when unit is "hour" and as ISO 8601 date when unit is "day",
+     *             "count" : (int)
+     *         },
+     *         ...
+     *     ]
      * }
      *
-     * ```
+     *  ```
      *
      * ### Fatal error response codes
      *
@@ -3385,18 +3398,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\GetEventsDataSeriesBadRequestException
-     * @throws Exception\GetEventsDataSeriesUnauthorizedException
-     * @throws Exception\GetEventsDataSeriesForbiddenException
-     * @throws Exception\GetEventsDataSeriesNotFoundException
-     * @throws Exception\GetEventsDataSeriesTooManyRequestsException
-     * @throws Exception\GetEventsDataSeriesInternalServerErrorException
+     * @throws \Braze\Exception\GetEventsDataSeriesBadRequestException
+     * @throws \Braze\Exception\GetEventsDataSeriesUnauthorizedException
+     * @throws \Braze\Exception\GetEventsDataSeriesForbiddenException
+     * @throws \Braze\Exception\GetEventsDataSeriesNotFoundException
+     * @throws \Braze\Exception\GetEventsDataSeriesTooManyRequestsException
+     * @throws \Braze\Exception\GetEventsDataSeriesInternalServerErrorException
      */
     public function getEventsDataSeries(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\GetEventsDataSeries($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\GetEventsDataSeries($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -3416,14 +3429,14 @@ class Client extends Runtime\Client\Client
      * Content-Type: application/json
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
-     * "message": (required, string) the status of the export, returns 'success' when completed without errors,
-     * "data" : [
-     * {
-     * "time" : (string) the date as ISO 8601 date,
-     * "new_users" : (int) the number of daily new users
-     * },
-     * ...
-     * ]
+     *     "message": (required, string) the status of the export, returns 'success' when completed without errors,
+     *     "data" : [
+     *         {
+     *             "time" : (string) the date as ISO 8601 date,
+     *             "new_users" : (int) the number of daily new users
+     *         },
+     *         ...
+     *     ]
      * }
      *
      * ```
@@ -3450,18 +3463,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\GetKpiNewUsersDataSeriesBadRequestException
-     * @throws Exception\GetKpiNewUsersDataSeriesUnauthorizedException
-     * @throws Exception\GetKpiNewUsersDataSeriesForbiddenException
-     * @throws Exception\GetKpiNewUsersDataSeriesNotFoundException
-     * @throws Exception\GetKpiNewUsersDataSeriesTooManyRequestsException
-     * @throws Exception\GetKpiNewUsersDataSeriesInternalServerErrorException
+     * @throws \Braze\Exception\GetKpiNewUsersDataSeriesBadRequestException
+     * @throws \Braze\Exception\GetKpiNewUsersDataSeriesUnauthorizedException
+     * @throws \Braze\Exception\GetKpiNewUsersDataSeriesForbiddenException
+     * @throws \Braze\Exception\GetKpiNewUsersDataSeriesNotFoundException
+     * @throws \Braze\Exception\GetKpiNewUsersDataSeriesTooManyRequestsException
+     * @throws \Braze\Exception\GetKpiNewUsersDataSeriesInternalServerErrorException
      */
     public function getKpiNewUsersDataSeries(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\GetKpiNewUsersDataSeries($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\GetKpiNewUsersDataSeries($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -3481,14 +3494,14 @@ class Client extends Runtime\Client\Client
      * Content-Type: application/json
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
-     * "message": (required, string) the status of the export, returns 'success' when completed without errors,
-     * "data" : [
-     * {
-     * "time" : (string) the date as ISO 8601 date,
-     * "dau" : (int) the number of daily active users
-     * },
-     * ...
-     * ]
+     *     "message": (required, string) the status of the export, returns 'success' when completed without errors,
+     *     "data" : [
+     *         {
+     *             "time" : (string) the date as ISO 8601 date,
+     *             "dau" : (int) the number of daily active users
+     *         },
+     *         ...
+     *     ]
      * }
      *
      * ```
@@ -3514,18 +3527,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\GetKpiDauDataSeriesBadRequestException
-     * @throws Exception\GetKpiDauDataSeriesUnauthorizedException
-     * @throws Exception\GetKpiDauDataSeriesForbiddenException
-     * @throws Exception\GetKpiDauDataSeriesNotFoundException
-     * @throws Exception\GetKpiDauDataSeriesTooManyRequestsException
-     * @throws Exception\GetKpiDauDataSeriesInternalServerErrorException
+     * @throws \Braze\Exception\GetKpiDauDataSeriesBadRequestException
+     * @throws \Braze\Exception\GetKpiDauDataSeriesUnauthorizedException
+     * @throws \Braze\Exception\GetKpiDauDataSeriesForbiddenException
+     * @throws \Braze\Exception\GetKpiDauDataSeriesNotFoundException
+     * @throws \Braze\Exception\GetKpiDauDataSeriesTooManyRequestsException
+     * @throws \Braze\Exception\GetKpiDauDataSeriesInternalServerErrorException
      */
     public function getKpiDauDataSeries(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\GetKpiDauDataSeries($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\GetKpiDauDataSeries($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -3545,14 +3558,14 @@ class Client extends Runtime\Client\Client
      * Content-Type: application/json
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
-     * "message": (required, string) the status of the export, returns 'success' when completed without errors,
-     * "data" : [
-     * {
-     * "time" : (string) the date as ISO 8601 date,
-     * "mau" : (int) the number of monthly active users
-     * },
-     * ...
-     * ]
+     *     "message": (required, string) the status of the export, returns 'success' when completed without errors,
+     *     "data" : [
+     *         {
+     *             "time" : (string) the date as ISO 8601 date,
+     *             "mau" : (int) the number of monthly active users
+     *         },
+     *         ...
+     *     ]
      * }
      *
      * ```
@@ -3579,18 +3592,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\GetKpiMauDataSeriesBadRequestException
-     * @throws Exception\GetKpiMauDataSeriesUnauthorizedException
-     * @throws Exception\GetKpiMauDataSeriesForbiddenException
-     * @throws Exception\GetKpiMauDataSeriesNotFoundException
-     * @throws Exception\GetKpiMauDataSeriesTooManyRequestsException
-     * @throws Exception\GetKpiMauDataSeriesInternalServerErrorException
+     * @throws \Braze\Exception\GetKpiMauDataSeriesBadRequestException
+     * @throws \Braze\Exception\GetKpiMauDataSeriesUnauthorizedException
+     * @throws \Braze\Exception\GetKpiMauDataSeriesForbiddenException
+     * @throws \Braze\Exception\GetKpiMauDataSeriesNotFoundException
+     * @throws \Braze\Exception\GetKpiMauDataSeriesTooManyRequestsException
+     * @throws \Braze\Exception\GetKpiMauDataSeriesInternalServerErrorException
      */
     public function getKpiMauDataSeries(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\GetKpiMauDataSeries($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\GetKpiMauDataSeries($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -3610,14 +3623,14 @@ class Client extends Runtime\Client\Client
      * Content-Type: application/json
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
-     * "message": (required, string) the status of the export, returns 'success' when completed without errors,
-     * "data" : [
-     * {
-     * "time" : (string) the date as ISO 8601 date,
-     * "uninstalls" : (int) the number of uninstalls
-     * },
-     * ...
-     * ]
+     *     "message": (required, string) the status of the export, returns 'success' when completed without errors,
+     *     "data" : [
+     *         {
+     *             "time" : (string) the date as ISO 8601 date,
+     *             "uninstalls" : (int) the number of uninstalls
+     *         },
+     *         ...
+     *     ]
      * }
      *
      * ```
@@ -3644,18 +3657,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\GetKpiUninstallsDataSeriesBadRequestException
-     * @throws Exception\GetKpiUninstallsDataSeriesUnauthorizedException
-     * @throws Exception\GetKpiUninstallsDataSeriesForbiddenException
-     * @throws Exception\GetKpiUninstallsDataSeriesNotFoundException
-     * @throws Exception\GetKpiUninstallsDataSeriesTooManyRequestsException
-     * @throws Exception\GetKpiUninstallsDataSeriesInternalServerErrorException
+     * @throws \Braze\Exception\GetKpiUninstallsDataSeriesBadRequestException
+     * @throws \Braze\Exception\GetKpiUninstallsDataSeriesUnauthorizedException
+     * @throws \Braze\Exception\GetKpiUninstallsDataSeriesForbiddenException
+     * @throws \Braze\Exception\GetKpiUninstallsDataSeriesNotFoundException
+     * @throws \Braze\Exception\GetKpiUninstallsDataSeriesTooManyRequestsException
+     * @throws \Braze\Exception\GetKpiUninstallsDataSeriesInternalServerErrorException
      */
     public function getKpiUninstallsDataSeries(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\GetKpiUninstallsDataSeries($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\GetKpiUninstallsDataSeries($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -3675,17 +3688,17 @@ class Client extends Runtime\Client\Client
      * Content-Type: application/json
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
-     * "message": (required, string) the status of the export, returns 'success' when completed without errors,
-     * "data" : [
-     * {
-     * "time" : (string) the point in time - as ISO 8601 extended when unit is "hour" and as ISO 8601 date when unit is "day",
-     * "clicks" : (int) the number of clicks,
-     * "impressions" : (int) the number of impressions,
-     * "unique_clicks" : (int) the number of unique clicks,
-     * "unique_impressions" : (int) the number of unique impressions
-     * },
-     * ...
-     * ]
+     *     "message": (required, string) the status of the export, returns 'success' when completed without errors,
+     *     "data" : [
+     *         {
+     *             "time" : (string) the point in time - as ISO 8601 extended when unit is "hour" and as ISO 8601 date when unit is "day",
+     *             "clicks" : (int) the number of clicks,
+     *             "impressions" : (int) the number of impressions,
+     *             "unique_clicks" : (int) the number of unique clicks,
+     *             "unique_impressions" : (int) the number of unique impressions
+     *         },
+     *         ...
+     *     ]
      * }
      *
      * ```
@@ -3708,7 +3721,6 @@ class Client extends Runtime\Client\Client
      * @var string $ending_at (Optional) Datetime ([ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) string)
      *
      * Date on which the data series should end. Defaults to time of the request.
-     *
      * }
      *
      * @param array $headerParameters {
@@ -3718,18 +3730,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\GetFeedDataSeriesBadRequestException
-     * @throws Exception\GetFeedDataSeriesUnauthorizedException
-     * @throws Exception\GetFeedDataSeriesForbiddenException
-     * @throws Exception\GetFeedDataSeriesNotFoundException
-     * @throws Exception\GetFeedDataSeriesTooManyRequestsException
-     * @throws Exception\GetFeedDataSeriesInternalServerErrorException
+     * @throws \Braze\Exception\GetFeedDataSeriesBadRequestException
+     * @throws \Braze\Exception\GetFeedDataSeriesUnauthorizedException
+     * @throws \Braze\Exception\GetFeedDataSeriesForbiddenException
+     * @throws \Braze\Exception\GetFeedDataSeriesNotFoundException
+     * @throws \Braze\Exception\GetFeedDataSeriesTooManyRequestsException
+     * @throws \Braze\Exception\GetFeedDataSeriesInternalServerErrorException
      */
     public function getFeedDataSeries(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\GetFeedDataSeries($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\GetFeedDataSeries($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -3749,19 +3761,19 @@ class Client extends Runtime\Client\Client
      * Content-Type: application/json
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
-     * "message": (required, string) The status of the export, returns 'success' when completed without errors,
-     * "created_at" : (string) Date created as ISO 8601 date,
-     * "updated_at" : (string) Date last updated as ISO 8601 date,
-     * "name" : (string) Card name,
-     * "publish_at" : (string) Date card was published as ISO 8601 date,
-     * "end_at" : (string) Date card will stop displaying for users as ISO 8601 date,
-     * "tags" : (array) Tag names associated with the card,
-     * "title" : (string) Title of the card,
-     * "image_url" : (string) Image URL used by this card,
-     * "extras" : (dictionary) Dictionary containing key-value pair data attached to this card,
-     * "description" : (string) Description text used by this card,
-     * "archived": (boolean) whether this Card is archived,
-     * "draft": (boolean) whether this Card is a draft,
+     *     "message": (required, string) The status of the export, returns 'success' when completed without errors,
+     *     "created_at" : (string) Date created as ISO 8601 date,
+     *     "updated_at" : (string) Date last updated as ISO 8601 date,
+     *     "name" : (string) Card name,
+     *     "publish_at" : (string) Date card was published as ISO 8601 date,
+     *     "end_at" : (string) Date card will stop displaying for users as ISO 8601 date,
+     *     "tags" : (array) Tag names associated with the card,
+     *     "title" : (string) Title of the card,
+     *     "image_url" : (string) Image URL used by this card,
+     *     "extras" : (dictionary) Dictionary containing key-value pair data attached to this card,
+     *     "description" : (string) Description text used by this card,
+     *     "archived": (boolean) whether this Card is archived,
+     *     "draft": (boolean) whether this Card is a draft,
      * }
      *
      * ```
@@ -3784,18 +3796,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\GetFeedDetailBadRequestException
-     * @throws Exception\GetFeedDetailUnauthorizedException
-     * @throws Exception\GetFeedDetailForbiddenException
-     * @throws Exception\GetFeedDetailNotFoundException
-     * @throws Exception\GetFeedDetailTooManyRequestsException
-     * @throws Exception\GetFeedDetailInternalServerErrorException
+     * @throws \Braze\Exception\GetFeedDetailBadRequestException
+     * @throws \Braze\Exception\GetFeedDetailUnauthorizedException
+     * @throws \Braze\Exception\GetFeedDetailForbiddenException
+     * @throws \Braze\Exception\GetFeedDetailNotFoundException
+     * @throws \Braze\Exception\GetFeedDetailTooManyRequestsException
+     * @throws \Braze\Exception\GetFeedDetailInternalServerErrorException
      */
     public function getFeedDetail(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\GetFeedDetail($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\GetFeedDetail($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -3815,19 +3827,19 @@ class Client extends Runtime\Client\Client
      * Content-Type: application/json
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
-     * "message": (required, string) the status of the export, returns 'success' when completed without errors,
-     * "cards" : [
-     * {
-     * "id" : (string) the card API identifier,
-     * "type" : (string) type of the card - NewsItem (classic cards), CaptionedImage, Banner
-     * "title" : (string) the title of the card,
-     * "tags" : (array) the tag names associated with the card
-     * },
-     * ...
-     * ]
+     *     "message": (required, string) the status of the export, returns 'success' when completed without errors,
+     *     "cards" : [
+     *         {
+     *             "id" : (string) the card API identifier,
+     *             "type" : (string) type of the card - NewsItem (classic cards), CaptionedImage, Banner
+     *             "title" : (string) the title of the card,
+     *             "tags" : (array) the tag names associated with the card
+     *         },
+     *         ...
+     *     ]
      * }
      *
-     * ```
+     *  ```
      *
      * > **Tip:** For help with CSV and API exports, visit [Export troubleshooting](https://www.braze.com/docs/user_guide/data_and_analytics/export_braze_data/export_troubleshooting/).
      *
@@ -3854,18 +3866,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\GetFeedListBadRequestException
-     * @throws Exception\GetFeedListUnauthorizedException
-     * @throws Exception\GetFeedListForbiddenException
-     * @throws Exception\GetFeedListNotFoundException
-     * @throws Exception\GetFeedListTooManyRequestsException
-     * @throws Exception\GetFeedListInternalServerErrorException
+     * @throws \Braze\Exception\GetFeedListBadRequestException
+     * @throws \Braze\Exception\GetFeedListUnauthorizedException
+     * @throws \Braze\Exception\GetFeedListForbiddenException
+     * @throws \Braze\Exception\GetFeedListNotFoundException
+     * @throws \Braze\Exception\GetFeedListTooManyRequestsException
+     * @throws \Braze\Exception\GetFeedListInternalServerErrorException
      */
     public function getFeedList(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\GetFeedList($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\GetFeedList($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -3883,10 +3895,10 @@ class Client extends Runtime\Client\Client
      * Content-Type: application/json
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
-     * "products": [
-     * "product_name" (string), the name of the product
-     * ],
-     * "message": "success"
+     *   "products": [
+     *     "product_name" (string), the name of the product
+     *   ],
+     *   "message": "success"
      * }
      *
      * ```
@@ -3907,18 +3919,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\GetPurchasesProductListBadRequestException
-     * @throws Exception\GetPurchasesProductListUnauthorizedException
-     * @throws Exception\GetPurchasesProductListForbiddenException
-     * @throws Exception\GetPurchasesProductListNotFoundException
-     * @throws Exception\GetPurchasesProductListTooManyRequestsException
-     * @throws Exception\GetPurchasesProductListInternalServerErrorException
+     * @throws \Braze\Exception\GetPurchasesProductListBadRequestException
+     * @throws \Braze\Exception\GetPurchasesProductListUnauthorizedException
+     * @throws \Braze\Exception\GetPurchasesProductListForbiddenException
+     * @throws \Braze\Exception\GetPurchasesProductListNotFoundException
+     * @throws \Braze\Exception\GetPurchasesProductListTooManyRequestsException
+     * @throws \Braze\Exception\GetPurchasesProductListInternalServerErrorException
      */
     public function getPurchasesProductList(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\GetPurchasesProductList($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\GetPurchasesProductList($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -3944,14 +3956,14 @@ class Client extends Runtime\Client\Client
      * Content-Type: application/json
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
-     * "message": (required, string) the status of the export, returns 'success' when completed without errors,
-     * "data" : [
-     * {
-     * "time" : (string) the date as ISO 8601 date,
-     * "purchase_quantity" : (int) the number of items purchased in the time period
-     * },
-     * ...
-     * ]
+     *   "message": (required, string) the status of the export, returns 'success' when completed without errors,
+     *   "data" : [
+     *     {
+     *       "time" : (string) the date as ISO 8601 date,
+     *       "purchase_quantity" : (int) the number of items purchased in the time period
+     *       },
+     *     ...
+     *   ]
      * }
      *
      * ```
@@ -3979,18 +3991,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\GetPurchasesQuantitySeriesBadRequestException
-     * @throws Exception\GetPurchasesQuantitySeriesUnauthorizedException
-     * @throws Exception\GetPurchasesQuantitySeriesForbiddenException
-     * @throws Exception\GetPurchasesQuantitySeriesNotFoundException
-     * @throws Exception\GetPurchasesQuantitySeriesTooManyRequestsException
-     * @throws Exception\GetPurchasesQuantitySeriesInternalServerErrorException
+     * @throws \Braze\Exception\GetPurchasesQuantitySeriesBadRequestException
+     * @throws \Braze\Exception\GetPurchasesQuantitySeriesUnauthorizedException
+     * @throws \Braze\Exception\GetPurchasesQuantitySeriesForbiddenException
+     * @throws \Braze\Exception\GetPurchasesQuantitySeriesNotFoundException
+     * @throws \Braze\Exception\GetPurchasesQuantitySeriesTooManyRequestsException
+     * @throws \Braze\Exception\GetPurchasesQuantitySeriesInternalServerErrorException
      */
     public function getPurchasesQuantitySeries(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\GetPurchasesQuantitySeries($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\GetPurchasesQuantitySeries($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -4016,14 +4028,14 @@ class Client extends Runtime\Client\Client
      * Content-Type: application/json
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
-     * "message": (required, string) the status of the export, returns 'success' when completed without errors,
-     * "data" : [
-     * {
-     * "time" : (string) the date as ISO 8601 date,
-     * "revenue" : (int) amount of revenue for the time period
-     * },
-     * ...
-     * ]
+     *   "message": (required, string) the status of the export, returns 'success' when completed without errors,
+     *   "data" : [
+     *     {
+     *       "time" : (string) the date as ISO 8601 date,
+     *       "revenue" : (int) amount of revenue for the time period
+     *       },
+     *     ...
+     *   ]
      * }
      *
      * ```
@@ -4051,18 +4063,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\GetPurchasesRevenueSeriesBadRequestException
-     * @throws Exception\GetPurchasesRevenueSeriesUnauthorizedException
-     * @throws Exception\GetPurchasesRevenueSeriesForbiddenException
-     * @throws Exception\GetPurchasesRevenueSeriesNotFoundException
-     * @throws Exception\GetPurchasesRevenueSeriesTooManyRequestsException
-     * @throws Exception\GetPurchasesRevenueSeriesInternalServerErrorException
+     * @throws \Braze\Exception\GetPurchasesRevenueSeriesBadRequestException
+     * @throws \Braze\Exception\GetPurchasesRevenueSeriesUnauthorizedException
+     * @throws \Braze\Exception\GetPurchasesRevenueSeriesForbiddenException
+     * @throws \Braze\Exception\GetPurchasesRevenueSeriesNotFoundException
+     * @throws \Braze\Exception\GetPurchasesRevenueSeriesTooManyRequestsException
+     * @throws \Braze\Exception\GetPurchasesRevenueSeriesInternalServerErrorException
      */
     public function getPurchasesRevenueSeries(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\GetPurchasesRevenueSeries($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\GetPurchasesRevenueSeries($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -4084,19 +4096,19 @@ class Client extends Runtime\Client\Client
      * Content-Type: application/json
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
-     * "message": (required, string) the status of the export, returns 'success' when completed without errors,
-     * "segments" : [
-     * {
-     * "id" : (string) Segment API Identifier,
-     * "name" : (string) segment name,
-     * "analytics_tracking_enabled" : (boolean) whether the segment has analytics tracking enabled,
-     * "tags" : (array) tag names associated with the segment
-     * },
-     * ...
-     * ]
+     *     "message": (required, string) the status of the export, returns 'success' when completed without errors,
+     *     "segments" : [
+     *         {
+     *             "id" : (string) Segment API Identifier,
+     *             "name" : (string) segment name,
+     *             "analytics_tracking_enabled" : (boolean) whether the segment has analytics tracking enabled,
+     *             "tags" : (array) tag names associated with the segment
+     *         },
+     *         ...
+     *     ]
      * }
      *
-     * ```
+     *  ```
      *
      * > **Tip:** For help with CSV and API exports, visit [Export troubleshooting](https://www.braze.com/docs/user_guide/data_and_analytics/export_braze_data/export_troubleshooting/).
      *
@@ -4120,18 +4132,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\GetSegmentsListBadRequestException
-     * @throws Exception\GetSegmentsListUnauthorizedException
-     * @throws Exception\GetSegmentsListForbiddenException
-     * @throws Exception\GetSegmentsListNotFoundException
-     * @throws Exception\GetSegmentsListTooManyRequestsException
-     * @throws Exception\GetSegmentsListInternalServerErrorException
+     * @throws \Braze\Exception\GetSegmentsListBadRequestException
+     * @throws \Braze\Exception\GetSegmentsListUnauthorizedException
+     * @throws \Braze\Exception\GetSegmentsListForbiddenException
+     * @throws \Braze\Exception\GetSegmentsListNotFoundException
+     * @throws \Braze\Exception\GetSegmentsListTooManyRequestsException
+     * @throws \Braze\Exception\GetSegmentsListInternalServerErrorException
      */
     public function getSegmentsList(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\GetSegmentsList($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\GetSegmentsList($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -4151,17 +4163,17 @@ class Client extends Runtime\Client\Client
      * Content-Type: application/json
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
-     * "message": (required, string) the status of the export, returns 'success' when completed without errors,
-     * "data" : [
-     * {
-     * "time" : (string) date as ISO 8601 date,
-     * "size" : (int) size of the segment on that date
-     * },
-     * ...
-     * ]
+     *     "message": (required, string) the status of the export, returns 'success' when completed without errors,
+     *     "data" : [
+     *         {
+     *             "time" : (string) date as ISO 8601 date,
+     *             "size" : (int) size of the segment on that date
+     *         },
+     *         ...
+     *     ]
      * }
      *
-     * ```
+     *  ```
      *
      * > **Tip:** For help with CSV and API exports, visit [Export troubleshooting](https://www.braze.com/docs/user_guide/data_and_analytics/export_braze_data/export_troubleshooting/).
      *
@@ -4187,18 +4199,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\GetSegmentsDataSeriesBadRequestException
-     * @throws Exception\GetSegmentsDataSeriesUnauthorizedException
-     * @throws Exception\GetSegmentsDataSeriesForbiddenException
-     * @throws Exception\GetSegmentsDataSeriesNotFoundException
-     * @throws Exception\GetSegmentsDataSeriesTooManyRequestsException
-     * @throws Exception\GetSegmentsDataSeriesInternalServerErrorException
+     * @throws \Braze\Exception\GetSegmentsDataSeriesBadRequestException
+     * @throws \Braze\Exception\GetSegmentsDataSeriesUnauthorizedException
+     * @throws \Braze\Exception\GetSegmentsDataSeriesForbiddenException
+     * @throws \Braze\Exception\GetSegmentsDataSeriesNotFoundException
+     * @throws \Braze\Exception\GetSegmentsDataSeriesTooManyRequestsException
+     * @throws \Braze\Exception\GetSegmentsDataSeriesInternalServerErrorException
      */
     public function getSegmentsDataSeries(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\GetSegmentsDataSeries($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\GetSegmentsDataSeries($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -4218,17 +4230,17 @@ class Client extends Runtime\Client\Client
      * Content-Type: application/json
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
-     * "message": (required, string) the status of the export, returns 'success' when completed without errors,
-     * "created_at" : (string) the date created as ISO 8601 date,
-     * "updated_at" : (string) the date last updated as ISO 8601 date,
-     * "name" : (string) the segment name,
-     * "description" : (string) a human-readable description of filters,
-     * "text_description" : (string) the segment description,
-     * "tags" : (array) the tag names associated with the segment formatted as strings,
-     * "teams" : (array) the names of the Teams associated with the campaign
+     *       "message": (required, string) the status of the export, returns 'success' when completed without errors,
+     *       "created_at" : (string) the date created as ISO 8601 date,
+     *       "updated_at" : (string) the date last updated as ISO 8601 date,
+     *       "name" : (string) the segment name,
+     *       "description" : (string) a human-readable description of filters,
+     *       "text_description" : (string) the segment description,
+     *       "tags" : (array) the tag names associated with the segment formatted as strings,
+     *       "teams" : (array) the names of the Teams associated with the campaign
      * }
      *
-     * ```
+     *  ```
      *
      * > **Tip:** For help with CSV and API exports, visit [Export troubleshooting](https://www.braze.com/docs/user_guide/data_and_analytics/export_braze_data/export_troubleshooting/).
      *
@@ -4248,18 +4260,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\GetSegmentsDetailBadRequestException
-     * @throws Exception\GetSegmentsDetailUnauthorizedException
-     * @throws Exception\GetSegmentsDetailForbiddenException
-     * @throws Exception\GetSegmentsDetailNotFoundException
-     * @throws Exception\GetSegmentsDetailTooManyRequestsException
-     * @throws Exception\GetSegmentsDetailInternalServerErrorException
+     * @throws \Braze\Exception\GetSegmentsDetailBadRequestException
+     * @throws \Braze\Exception\GetSegmentsDetailUnauthorizedException
+     * @throws \Braze\Exception\GetSegmentsDetailForbiddenException
+     * @throws \Braze\Exception\GetSegmentsDetailNotFoundException
+     * @throws \Braze\Exception\GetSegmentsDetailTooManyRequestsException
+     * @throws \Braze\Exception\GetSegmentsDetailInternalServerErrorException
      */
     public function getSegmentsDetail(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\GetSegmentsDetail($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\GetSegmentsDetail($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -4279,14 +4291,14 @@ class Client extends Runtime\Client\Client
      * Content-Type: application/json
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
-     * "message": (required, string) the status of the export, returns 'success' when completed without errors,
-     * "data" : [
-     * {
-     * "time" : (string) point in time - as ISO 8601 extended when unit is "hour" and as ISO 8601 date when unit is "day",
-     * "sessions" : (int)
-     * },
-     * ...
-     * ]
+     *     "message": (required, string) the status of the export, returns 'success' when completed without errors,
+     *     "data" : [
+     *         {
+     *             "time" : (string) point in time - as ISO 8601 extended when unit is "hour" and as ISO 8601 date when unit is "day",
+     *             "sessions" : (int)
+     *         },
+     *         ...
+     *     ]
      * }
      *
      * ```
@@ -4319,18 +4331,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\GetSessionsDataSeriesBadRequestException
-     * @throws Exception\GetSessionsDataSeriesUnauthorizedException
-     * @throws Exception\GetSessionsDataSeriesForbiddenException
-     * @throws Exception\GetSessionsDataSeriesNotFoundException
-     * @throws Exception\GetSessionsDataSeriesTooManyRequestsException
-     * @throws Exception\GetSessionsDataSeriesInternalServerErrorException
+     * @throws \Braze\Exception\GetSessionsDataSeriesBadRequestException
+     * @throws \Braze\Exception\GetSessionsDataSeriesUnauthorizedException
+     * @throws \Braze\Exception\GetSessionsDataSeriesForbiddenException
+     * @throws \Braze\Exception\GetSessionsDataSeriesNotFoundException
+     * @throws \Braze\Exception\GetSessionsDataSeriesTooManyRequestsException
+     * @throws \Braze\Exception\GetSessionsDataSeriesInternalServerErrorException
      */
     public function getSessionsDataSeries(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\GetSessionsDataSeries($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\GetSessionsDataSeries($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -4402,12 +4414,12 @@ class Client extends Runtime\Client\Client
      * Content-Type: application/json
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
-     * "message": (required, string) the status of the export, returns 'success' when completed without errors,
-     * "users" : (array of object) the data for each of the exported users, may be empty if no users are found,
-     * "invalid_user_ids" : (optional, array of string) each of the identifiers provided in the request that did not correspond to a known user
+     *     "message": (required, string) the status of the export, returns 'success' when completed without errors,
+     *     "users" : (array of object) the data for each of the exported users, may be empty if no users are found,
+     *     "invalid_user_ids" : (optional, array of string) each of the identifiers provided in the request that did not correspond to a known user
      * }
      *
-     * ```
+     *  ```
      *
      * For an example of the data that is accessible via this endpoint see the following example.
      *
@@ -4417,284 +4429,285 @@ class Client extends Runtime\Client\Client
      *
      * ``` json
      * {
-     * "created_at": (string),
-     * "external_id" : (string),
-     * "user_aliases" : [
-     * {
-     * "alias_name" : (string),
-     * "alias_label" : (string)
-     * }
-     * ],
-     * "braze_id": (string),
-     * "first_name" : (string),
-     * "last_name" : (string),
-     * "email" : (string),
-     * "dob" : (string) date for the user's date of birth,
-     * "home_city" : (string),
-     * "country" : (string) ISO-3166-1 alpha-2 standard,
-     * "phone" : (string),
-     * "language" : (string) ISO-639-1 standard,
-     * "time_zone" : (string),
-     * "last_coordinates" : (array of float) [lon, lat],
-     * "gender" : (string) "M" | "F",
-     * "total_revenue" : (float),
-     * "attributed_campaign" : (string),
-     * "attributed_source" : (string),
-     * "attributed_adgroup" : (string),
-     * "attributed_ad" : (string),
-     * "push_subscribe" : (string) "opted_in" | "subscribed" | "unsubscribed",
-     * "email_subscribe" : (string) "opted_in" | "subscribed" | "unsubscribed",
-     * "custom_attributes" : (object) custom attribute key-value pairs,
-     * "custom_events" : [
-     * {
-     * "name" : (string),
-     * "first" : (string) date,
-     * "last" : (string) date,
-     * "count" : (int)
-     * },
-     * ...
-     * ],
-     * "purchases" : [
-     * {
-     * "name" : (string),
-     * "first" : (string) date,
-     * "last" : (string) date,
-     * "count" : (int)
-     * },
-     * ...
-     * ],
-     * "devices" : [
-     * {
-     * "model" : (string),
-     * "os" : (string),
-     * "carrier" : (string),
-     * "idfv" : (string) only included for iOS devices when IDFV collection is enabled,
-     * "idfa" : (string) only included for iOS devices when IDFA collection is enabled,
-     * "google_ad_id" : (string) only included for Android devices when Google Play Advertising Identifier collection is enabled,
-     * "roku_ad_id" : (string) only included for Roku devices,
-     * "ad_tracking_enabled" : (bool)
-     * },
-     * ...
-     * ],
-     * "push_tokens" : [
-     * {
-     * "app" : (string) app name,
-     * "platform" : (string),
-     * "token" : (string)
-     * },
-     * ...
-     * ],
-     * "apps" : [
-     * {
-     * "name" : (string),
-     * "platform" : (string),
-     * "version" : (string),
-     * "sessions" : (integer),
-     * "first_used" : (string) date,
-     * "last_used" : (string) date
-     * },
-     * ...
-     * ],
-     * "campaigns_received" : [
-     * {
-     * "name" : (string),
-     * "last_received" : (string) date,
-     * "engaged" :
-     * {
-     * "opened_email" : (bool),
-     * "opened_push" : (bool),
-     * "clicked_email" : (bool),
-     * "clicked_triggered_in_app_message" : (bool)
-     * },
-     * "converted" : (bool),
-     * "api_campaign_id" : (string),
-     * "variation_name" : (optional, string) exists only if it is a multivariate campaign,
-     * "variation_api_id" : (optional, string) exists only if it is a multivariate campaign,
-     * "in_control" : (optional, bool) exists only if it is a multivariate campaign
-     * },
-     * ...
-     * ],
-     * "canvases_received": [
-     * {
-     * "name": (string),
-     * "api_canvas_id": (string),
-     * "last_received_message": (string) date,
-     * "last_entered": (string) date,
-     * "variation_name": (string),
-     * "in_control": (bool),
-     * "last_exited": (string) date,
-     * "steps_received": [
-     * {
-     * "name": (string),
-     * "api_canvas_step_id": (string),
-     * "last_received": (string) date
-     * },
-     * {
-     * "name": (string),
-     * "api_canvas_step_id": (string),
-     * "last_received": (string) date
-     * },
-     * {
-     * "name": (string),
-     * "api_canvas_step_id": (string),
-     * "last_received": (string) date
-     * }
-     * ]
-     * },
-     * ...
-     * ],
-     * "cards_clicked" : [
-     * {
-     * "name" : (string)
-     * },
-     * ...
-     * ]
+     *     "created_at": (string),
+     *     "external_id" : (string),
+     *     "user_aliases" : [
+     *       {
+     *         "alias_name" : (string),
+     *         "alias_label" : (string)
+     *       }
+     *     ],
+     *     "braze_id": (string),
+     *     "first_name" : (string),
+     *     "last_name" : (string),
+     *     "email" : (string),
+     *     "dob" : (string) date for the user's date of birth,
+     *     "home_city" : (string),
+     *     "country" : (string) ISO-3166-1 alpha-2 standard,
+     *     "phone" : (string),
+     *     "language" : (string) ISO-639-1 standard,
+     *     "time_zone" : (string),
+     *     "last_coordinates" : (array of float) [lon, lat],
+     *     "gender" : (string) "M" | "F",
+     *     "total_revenue" : (float),
+     *     "attributed_campaign" : (string),
+     *     "attributed_source" : (string),
+     *     "attributed_adgroup" : (string),
+     *     "attributed_ad" : (string),
+     *     "push_subscribe" : (string) "opted_in" | "subscribed" | "unsubscribed",
+     *     "email_subscribe" : (string) "opted_in" | "subscribed" | "unsubscribed",
+     *     "custom_attributes" : (object) custom attribute key-value pairs,
+     *     "custom_events" : [
+     *       {
+     *         "name" : (string),
+     *         "first" : (string) date,
+     *         "last" : (string) date,
+     *         "count" : (int)
+     *       },
+     *       ...
+     *     ],
+     *     "purchases" : [
+     *       {
+     *         "name" : (string),
+     *         "first" : (string) date,
+     *         "last" : (string) date,
+     *         "count" : (int)
+     *       },
+     *       ...
+     *     ],
+     *     "devices" : [
+     *       {
+     *         "model" : (string),
+     *         "os" : (string),
+     *         "carrier" : (string),
+     *         "idfv" : (string) only included for iOS devices when IDFV collection is enabled,
+     *         "idfa" : (string) only included for iOS devices when IDFA collection is enabled,
+     *         "google_ad_id" : (string) only included for Android devices when Google Play Advertising Identifier collection is enabled,
+     *         "roku_ad_id" : (string) only included for Roku devices,
+     *         "ad_tracking_enabled" : (bool)
+     *       },
+     *       ...
+     *     ],
+     *     "push_tokens" : [
+     *       {
+     *         "app" : (string) app name,
+     *         "platform" : (string),
+     *         "token" : (string)
+     *       },
+     *       ...
+     *     ],
+     *     "apps" : [
+     *       {
+     *         "name" : (string),
+     *         "platform" : (string),
+     *         "version" : (string),
+     *         "sessions" : (integer),
+     *         "first_used" : (string) date,
+     *         "last_used" : (string) date
+     *       },
+     *       ...
+     *     ],
+     *     "campaigns_received" : [
+     *       {
+     *         "name" : (string),
+     *         "last_received" : (string) date,
+     *         "engaged" :
+     *          {
+     *            "opened_email" : (bool),
+     *            "opened_push" : (bool),
+     *            "clicked_email" : (bool),
+     *            "clicked_triggered_in_app_message" : (bool)
+     *           },
+     *           "converted" : (bool),
+     *           "api_campaign_id" : (string),
+     *           "variation_name" : (optional, string) exists only if it is a multivariate campaign,
+     *           "variation_api_id" : (optional, string) exists only if it is a multivariate campaign,
+     *           "in_control" : (optional, bool) exists only if it is a multivariate campaign
+     *         },
+     *       ...
+     *     ],
+     *     "canvases_received": [
+     *       {
+     *         "name": (string),
+     *         "api_canvas_id": (string),
+     *         "last_received_message": (string) date,
+     *         "last_entered": (string) date,
+     *         "variation_name": (string),
+     *         "in_control": (bool),
+     *         "last_exited": (string) date,
+     *         "steps_received": [
+     *           {
+     *             "name": (string),
+     *             "api_canvas_step_id": (string),
+     *             "last_received": (string) date
+     *           },
+     *           {
+     *             "name": (string),
+     *             "api_canvas_step_id": (string),
+     *             "last_received": (string) date
+     *           },
+     *           {
+     *             "name": (string),
+     *             "api_canvas_step_id": (string),
+     *             "last_received": (string) date
+     *           }
+     *         ]
+     *       },
+     *       ...
+     *     ],
+     *     "cards_clicked" : [
+     *       {
+     *         "name" : (string)
+     *       },
+     *       ...
+     *     ]
      * }
      *
-     * ```
+     *  ```
      *
      * #### Sample output
      *
      * ``` json
      * {
-     * "created_at" : "2020-07-10 15:00:00.000 UTC",
-     * "external_id" : "A8i3mkd99",
-     * "user_aliases" : [
-     * {
-     * "alias_name" : "user_123",
-     * "alias_label" : "amplitude_id"
-     * }
-     * ],
-     * "braze_id": "5fbd99bac125ca40511f2cb1",
-     * "random_bucket" : 2365,
-     * "first_name" : "Jane",
-     * "last_name" : "Doe",
-     * "email" : "example@braze.com",
-     * "dob" : "1980-12-21",
-     * "home_city" : "Chicago",
-     * "country" : "US",
-     * "phone" : "+442071838750",
-     * "language" : "en",
-     * "time_zone" : "Eastern Time (US & Canada)",
-     * "last_coordinates" : [41.84157636433568, -87.83520818508256],
-     * "gender" : "F",
-     * "total_revenue" : 65,
-     * "attributed_campaign" : "braze_test_campaign_072219",
-     * "attributed_source" : "braze_test_source_072219",
-     * "attributed_adgroup" : "braze_test_adgroup_072219",
-     * "attributed_ad" : "braze_test_ad_072219",
-     * "push_subscribe" : "opted_in",
-     * "push_opted_in_at": "2020-01-26T22:45:53.953Z",
-     * "email_subscribe" : "subscribed",
-     * "custom_attributes":
-     * {
-     * "loyaltyId": "37c98b9d-9a7f-4b2f-a125-d873c5152856",
-     * "loyaltyPoints": "321",
-     * "loyaltyPointsNumber": 107
-     * },
-     * "custom_events": [
-     * {
-     * "name": "Loyalty Acknowledgement",
-     * "first": "2021-06-28T17:02:43.032Z",
-     * "last": "2021-06-28T17:02:43.032Z",
-     * "count": 1
-     * },
-     * ...
-     * ],
-     * "purchases": [
-     * {
-     * "name": "item_40834",
-     * "first": "2021-09-05T03:45:50.540Z",
-     * "last": "2022-06-03T17:30:41.201Z",
-     * "count": 10
-     * },
-     * ...
-     * ],
-     * "devices": [
-     * {
-     * "model": "Pixel XL",
-     * "os": "Android (Q)",
-     * "carrier": null,
-     * "device_id": "312ef2c1-83db-4789-967-554545a1bf7a",
-     * "ad_tracking_enabled": true
-     * },
-     * ...
-     * ],
-     * "push_tokens": [
-     * {
-     * "app": "MovieCanon",
-     * "platform": "Android",
-     * "token": "12345abcd",
-     * "device_id": "312ef2c1-83db-4789-967-554545a1bf7a",
-     * "notifications_enabled": true
-     * },
-     * ...
-     * ],
-     * "apps": [
-     * {
-     * "name": "MovieCannon",
-     * "platform": "Android",
-     * "version": "3.29.0",
-     * "sessions": 1129,
-     * "first_used": "2020-02-02T19:56:19.142Z",
-     * "last_used": "2021-11-11T00:25:19.201Z"
-     * },
-     * ...
-     * ],
-     * "campaigns_received": [
-     * {
-     * "name": "Email Unsubscribe",
-     * "api_campaign_id": "d72fdc84-ddda-44f1-a0d5-0e79f47ef942",
-     * "last_received": "2022-06-02T03:07:38.105Z",
-     * "engaged":
-     * {
-     * "opened_email": true
-     * },
-     * "converted": true,
-     * "multiple_converted":
-     * {
-     * "Primary Conversion Event - A": true
-     * },
-     * "in_control": false,
-     * "variation_name": "Variant 1",
-     * "variation_api_id": "1bddc73a-a134-4784-9134-5b5574a9e0b8"
-     * },
-     * ...
-     * ],
-     * "canvases_received": [
-     * {
-     * "name": "Non Global  Holdout Group 4/21/21",
-     * "api_canvas_id": "46972a9d-dc81-473f-aa03-e3473b4ed781",
-     * "last_received_message": "2021-07-07T20:46:24.136Z",
-     * "last_entered": "2021-07-07T20:45:24.000+00:00",
-     * "variation_name": "Variant 1",
-     * "in_control": false,
-     * "last_entered_control_at": null,
-     * "last_exited": "2021-07-07T20:46:24.136Z",
-     * "steps_received": [
-     * {
-     * "name": "Step",
-     * "api_canvas_step_id": "43d1a349-c3c8-4be1-9fbe-ce708e4d1c39",
-     * "last_received": "2021-07-07T20:46:24.136Z"
-     * },
-     * ...
-     * ]
-     * }
-     * ...
-     * ],
-     * "cards_clicked" : [
-     * {
-     * "name" : "Loyalty Promo"
-     * },
-     * ...
-     * ]
+     *     "created_at" : "2020-07-10 15:00:00.000 UTC",
+     *     "external_id" : "A8i3mkd99",
+     *     "user_aliases" : [
+     *       {
+     *         "alias_name" : "user_123",
+     *         "alias_label" : "amplitude_id"
+     *       }
+     *     ],
+     *     "braze_id": "5fbd99bac125ca40511f2cb1",
+     *     "random_bucket" : 2365,
+     *     "first_name" : "Jane",
+     *     "last_name" : "Doe",
+     *     "email" : "example@braze.com",
+     *     "dob" : "1980-12-21",
+     *     "home_city" : "Chicago",
+     *     "country" : "US",
+     *     "phone" : "+442071838750",
+     *     "language" : "en",
+     *     "time_zone" : "Eastern Time (US & Canada)",
+     *     "last_coordinates" : [41.84157636433568, -87.83520818508256],
+     *     "gender" : "F",
+     *     "total_revenue" : 65,
+     *     "attributed_campaign" : "braze_test_campaign_072219",
+     *     "attributed_source" : "braze_test_source_072219",
+     *     "attributed_adgroup" : "braze_test_adgroup_072219",
+     *     "attributed_ad" : "braze_test_ad_072219",
+     *     "push_subscribe" : "opted_in",
+     *     "push_opted_in_at": "2020-01-26T22:45:53.953Z",
+     *     "email_subscribe" : "subscribed",
+     *     "custom_attributes":
+     *     {
+     *       "loyaltyId": "37c98b9d-9a7f-4b2f-a125-d873c5152856",
+     *       "loyaltyPoints": "321",
+     *        "loyaltyPointsNumber": 107
+     *     },
+     *     "custom_events": [
+     *       {
+     *         "name": "Loyalty Acknowledgement",
+     *         "first": "2021-06-28T17:02:43.032Z",
+     *         "last": "2021-06-28T17:02:43.032Z",
+     *         "count": 1
+     *       },
+     *       ...
+     *     ],
+     *     "purchases": [
+     *       {
+     *         "name": "item_40834",
+     *         "first": "2021-09-05T03:45:50.540Z",
+     *         "last": "2022-06-03T17:30:41.201Z",
+     *         "count": 10
+     *       },
+     *       ...
+     *     ],
+     *     "devices": [
+     *       {
+     *         "model": "Pixel XL",
+     *         "os": "Android (Q)",
+     *         "carrier": null,
+     *         "device_id": "312ef2c1-83db-4789-967-554545a1bf7a",
+     *         "ad_tracking_enabled": true
+     *       },
+     *       ...
+     *     ],
+     *     "push_tokens": [
+     *       {
+     *         "app": "MovieCanon",
+     *         "platform": "Android",
+     *         "token": "12345abcd",
+     *         "device_id": "312ef2c1-83db-4789-967-554545a1bf7a",
+     *         "notifications_enabled": true
+     *       },
+     *       ...
+     *     ],
+     *     "apps": [
+     *       {
+     *         "name": "MovieCannon",
+     *         "platform": "Android",
+     *         "version": "3.29.0",
+     *         "sessions": 1129,
+     *         "first_used": "2020-02-02T19:56:19.142Z",
+     *         "last_used": "2021-11-11T00:25:19.201Z"
+     *       },
+     *       ...
+     *     ],
+     *     "campaigns_received": [
+     *       {
+     *         "name": "Email Unsubscribe",
+     *         "api_campaign_id": "d72fdc84-ddda-44f1-a0d5-0e79f47ef942",
+     *         "last_received": "2022-06-02T03:07:38.105Z",
+     *         "engaged":
+     *         {
+     *            "opened_email": true
+     *         },
+     *         "converted": true,
+     *         "multiple_converted":
+     *         {
+     *           "Primary Conversion Event - A": true
+     *         },
+     *         "in_control": false,
+     *         "variation_name": "Variant 1",
+     *         "variation_api_id": "1bddc73a-a134-4784-9134-5b5574a9e0b8"
+     *       },
+     *       ...
+     *     ],
+     *     "canvases_received": [
+     *       {
+     *         "name": "Non Global  Holdout Group 4/21/21",
+     *         "api_canvas_id": "46972a9d-dc81-473f-aa03-e3473b4ed781",
+     *         "last_received_message": "2021-07-07T20:46:24.136Z",
+     *         "last_entered": "2021-07-07T20:45:24.000+00:00",
+     *         "variation_name": "Variant 1",
+     *         "in_control": false,
+     *         "last_entered_control_at": null,
+     *         "last_exited": "2021-07-07T20:46:24.136Z",
+     *         "steps_received": [
+     *           {
+     *             "name": "Step",
+     *             "api_canvas_step_id": "43d1a349-c3c8-4be1-9fbe-ce708e4d1c39",
+     *             "last_received": "2021-07-07T20:46:24.136Z"
+     *           },
+     *           ...
+     *         ]
+     *       }
+     *       ...
+     *     ],
+     *     "cards_clicked" : [
+     *       {
+     *         "name" : "Loyalty Promo"
+     *       },
+     *       ...
+     *     ]
      * }
      *
-     * ```
+     *  ```
      *
      * > **Tip:** For help with CSV and API exports, visit [Export troubleshooting](https://www.braze.com/docs/user_guide/data_and_analytics/export_braze_data/export_troubleshooting/).
      *
-     * @param array $headerParameters {
+     * @param \Braze\Model\UsersExportIdsPostBody|null $requestBody
+     * @param array                                    $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -4702,18 +4715,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PostUsersExportIdBadRequestException
-     * @throws Exception\PostUsersExportIdUnauthorizedException
-     * @throws Exception\PostUsersExportIdForbiddenException
-     * @throws Exception\PostUsersExportIdNotFoundException
-     * @throws Exception\PostUsersExportIdTooManyRequestsException
-     * @throws Exception\PostUsersExportIdInternalServerErrorException
+     * @throws \Braze\Exception\PostUsersExportIdBadRequestException
+     * @throws \Braze\Exception\PostUsersExportIdUnauthorizedException
+     * @throws \Braze\Exception\PostUsersExportIdForbiddenException
+     * @throws \Braze\Exception\PostUsersExportIdNotFoundException
+     * @throws \Braze\Exception\PostUsersExportIdTooManyRequestsException
+     * @throws \Braze\Exception\PostUsersExportIdInternalServerErrorException
      */
-    public function postUsersExportId(?Model\UsersExportIdsPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postUsersExportId(Model\UsersExportIdsPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PostUsersExportId($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PostUsersExportId($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -4745,9 +4758,9 @@ class Client extends Runtime\Client\Client
      *
      * #### **Export pathing breakdown for ZIP**
      *
-     **ZIP format:** `bucket-name/segment-export/SEGMENT_ID/YYYY-MM-dd/RANDOM_UUID-TIMESTAMP_WHEN_EXPORT_STARTED/filename.zip`
+     * **ZIP format:** `bucket-name/segment-export/SEGMENT_ID/YYYY-MM-dd/RANDOM_UUID-TIMESTAMP_WHEN_EXPORT_STARTED/filename.zip`
      *
-     **Example ZIP:** `braze.docs.bucket/segment-export/abc56c0c-rd4a-pb0a-870pdf4db07q/2019-04-25/d9696570-dfb7-45ae-baa2-25e302r2da27-1556044807/114f0226319130e1a4770f2602b5639a.zip`
+     * **Example ZIP:** `braze.docs.bucket/segment-export/abc56c0c-rd4a-pb0a-870pdf4db07q/2019-04-25/d9696570-dfb7-45ae-baa2-25e302r2da27-1556044807/114f0226319130e1a4770f2602b5639a.zip`
      *
      * | Property | Details | Shown in Example as |
      * | --- | --- | --- |
@@ -4828,12 +4841,12 @@ class Client extends Runtime\Client\Client
      * Content-Type: application/json
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
-     * "message": (required, string) the status of the export, returns 'success' when completed without errors,
-     * "object_prefix": (required, string) the filename prefix that will be used for the JSON file produced by this export, e.g. 'bb8e2a91-c4aa-478b-b3f2-a4ee91731ad1-1464728599',
-     * "url" : (optional, string) the URL where the segment export data can be downloaded if you do not have your own S3 credentials
+     *     "message": (required, string) the status of the export, returns 'success' when completed without errors,
+     *     "object_prefix": (required, string) the filename prefix that will be used for the JSON file produced by this export, e.g. 'bb8e2a91-c4aa-478b-b3f2-a4ee91731ad1-1464728599',
+     *     "url" : (optional, string) the URL where the segment export data can be downloaded if you do not have your own S3 credentials
      * }
      *
-     * ```
+     *  ```
      *
      * Once made available, the URL will only be valid for a few hours. As such, we highly recommend that you add your own S3 credentials to Braze.
      *
@@ -4843,283 +4856,284 @@ class Client extends Runtime\Client\Client
      *
      * ``` json
      * {
-     * "external_id" : (string),
-     * "user_aliases" : [
-     * {
-     * "alias_name" : (string),
-     * "alias_label" : (string)
-     * }
-     * ],
-     * "braze_id": (string),
-     * "first_name" : (string),
-     * "last_name" : (string),
-     * "email" : (string),
-     * "dob" : (string) date for the user's date of birth,
-     * "home_city" : (string),
-     * "country" : (string),
-     * "phone" : (string),
-     * "language" : (string) ISO-639 two letter code,
-     * "time_zone" : (string),
-     * "last_coordinates" : (array of float) [lon, lat],
-     * "gender" : (string) "M" | "F",
-     * "total_revenue" : (float),
-     * "attributed_campaign" : (string),
-     * "attributed_source" : (string),
-     * "attributed_adgroup" : (string),
-     * "attributed_ad" : (string),
-     * "push_subscribe" : (string) "opted_in" | "subscribed" | "unsubscribed",
-     * "email_subscribe" : (string) "opted_in" | "subscribed" | "unsubscribed",
-     * "custom_attributes" : (object) custom attribute key value pairs,
-     * "custom_events" : [
-     * {
-     * "name" : (string),
-     * "first" : (string) date,
-     * "last" : (string) date,
-     * "count" : (int)
-     * },
-     * ...
-     * ],
-     * "purchases" : [
-     * {
-     * "name" : (string),
-     * "first" : (string) date,
-     * "last" : (string) date,
-     * "count" : (int)
-     * },
-     * ...
-     * ],
-     * "devices" : [
-     * {
-     * "model" : (string),
-     * "os" : (string),
-     * "carrier" : (string),
-     * "idfv" : (string) only included for iOS devices,
-     * "idfa" : (string) only included for iOS devices when IDFA collection is enabled,
-     * "google_ad_id" : (string) only included for Android devices when Google Play Advertising Identifier collection is enabled,
-     * "roku_ad_id" : (string) only included for Roku devices,
-     * "windows_ad_id" : (string) only included for Windows devices,
-     * "ad_tracking_enabled" : (bool)
-     * },
-     * ...
-     * ],
-     * "push_tokens" : [
-     * {
-     * "app" : (string) app name,
-     * "platform" : (string),
-     * "token" : (string)
-     * },
-     * ...
-     * ],
-     * "apps" : [
-     * {
-     * "name" : (string),
-     * "platform" : (string),
-     * "version" : (string),
-     * "sessions" : (string),
-     * "first_used" : (string) date,
-     * "last_used" : (string) date
-     * },
-     * ...
-     * ],
-     * "campaigns_received" : [
-     * {
-     * "name" : (string),
-     * "last_received" : (string) date,
-     * "engaged" : {
-     * "opened_email" : (bool),
-     * "opened_push" : (bool),
-     * "clicked_email" : (bool),
-     * "clicked_in_app_message" : (bool)
-     * },
-     * "converted" : (bool),
-     * "api_campaign_id" : (string),
-     * "variation_name" : (optional, string) exists only if it is a multivariate campaign,
-     * "variation_api_id" : (optional, string) exists only if it is a multivariate campaign,
-     * "in_control" : (optional, bool) exists only if it is a multivariate campaign
-     * },
-     * ...
-     * ],
-     * "canvases_received": [
-     * {
-     * "name": (string),
-     * "api_canvas_id": (string),
-     * "last_received_message": (string) date,
-     * "last_entered": (string) date,
-     * "variation_name": (string),
-     * "in_control": (bool),
-     * "last_exited": (string) date,
-     * "steps_received": [
-     * {
-     * "name": (string),
-     * "api_canvas_step_id": (string),
-     * "last_received": (string) date
-     * },
-     * {
-     * "name": (string),
-     * "api_canvas_step_id": (string),
-     * "last_received": (string) date
-     * },
-     * {
-     * "name": (string),
-     * "api_canvas_step_id": (string),
-     * "last_received": (string) date
-     * }
-     * ]
-     * },
-     * ...
-     * ],
-     * "cards_clicked" : [
-     * {
-     * "name" : (string)
-     * },
-     * ...
-     * ]
+     *     "external_id" : (string),
+     *     "user_aliases" : [
+     *       {
+     *         "alias_name" : (string),
+     *         "alias_label" : (string)
+     *       }
+     *     ],
+     *     "braze_id": (string),
+     *     "first_name" : (string),
+     *     "last_name" : (string),
+     *     "email" : (string),
+     *     "dob" : (string) date for the user's date of birth,
+     *     "home_city" : (string),
+     *     "country" : (string),
+     *     "phone" : (string),
+     *     "language" : (string) ISO-639 two letter code,
+     *     "time_zone" : (string),
+     *     "last_coordinates" : (array of float) [lon, lat],
+     *     "gender" : (string) "M" | "F",
+     *     "total_revenue" : (float),
+     *     "attributed_campaign" : (string),
+     *     "attributed_source" : (string),
+     *     "attributed_adgroup" : (string),
+     *     "attributed_ad" : (string),
+     *     "push_subscribe" : (string) "opted_in" | "subscribed" | "unsubscribed",
+     *     "email_subscribe" : (string) "opted_in" | "subscribed" | "unsubscribed",
+     *     "custom_attributes" : (object) custom attribute key value pairs,
+     *     "custom_events" : [
+     *         {
+     *             "name" : (string),
+     *             "first" : (string) date,
+     *             "last" : (string) date,
+     *             "count" : (int)
+     *         },
+     *         ...
+     *     ],
+     *     "purchases" : [
+     *         {
+     *             "name" : (string),
+     *             "first" : (string) date,
+     *             "last" : (string) date,
+     *             "count" : (int)
+     *         },
+     *         ...
+     *     ],
+     *     "devices" : [
+     *         {
+     *             "model" : (string),
+     *             "os" : (string),
+     *             "carrier" : (string),
+     *             "idfv" : (string) only included for iOS devices,
+     *             "idfa" : (string) only included for iOS devices when IDFA collection is enabled,
+     *             "google_ad_id" : (string) only included for Android devices when Google Play Advertising Identifier collection is enabled,
+     *             "roku_ad_id" : (string) only included for Roku devices,
+     *             "windows_ad_id" : (string) only included for Windows devices,
+     *             "ad_tracking_enabled" : (bool)
+     *         },
+     *         ...
+     *     ],
+     *     "push_tokens" : [
+     *         {
+     *             "app" : (string) app name,
+     *             "platform" : (string),
+     *             "token" : (string)
+     *         },
+     *         ...
+     *     ],
+     *     "apps" : [
+     *         {
+     *             "name" : (string),
+     *             "platform" : (string),
+     *             "version" : (string),
+     *             "sessions" : (string),
+     *             "first_used" : (string) date,
+     *             "last_used" : (string) date
+     *         },
+     *         ...
+     *     ],
+     *     "campaigns_received" : [
+     *         {
+     *             "name" : (string),
+     *             "last_received" : (string) date,
+     *             "engaged" : {
+     *                 "opened_email" : (bool),
+     *                 "opened_push" : (bool),
+     *                 "clicked_email" : (bool),
+     *                 "clicked_in_app_message" : (bool)
+     *             },
+     *             "converted" : (bool),
+     *             "api_campaign_id" : (string),
+     *             "variation_name" : (optional, string) exists only if it is a multivariate campaign,
+     *             "variation_api_id" : (optional, string) exists only if it is a multivariate campaign,
+     *             "in_control" : (optional, bool) exists only if it is a multivariate campaign
+     *         },
+     *         ...
+     *     ],
+     *     "canvases_received": [
+     *         {
+     *             "name": (string),
+     *             "api_canvas_id": (string),
+     *             "last_received_message": (string) date,
+     *             "last_entered": (string) date,
+     *             "variation_name": (string),
+     *             "in_control": (bool),
+     *             "last_exited": (string) date,
+     *             "steps_received": [
+     *                 {
+     *                     "name": (string),
+     *                     "api_canvas_step_id": (string),
+     *                     "last_received": (string) date
+     *                 },
+     *                 {
+     *                     "name": (string),
+     *                     "api_canvas_step_id": (string),
+     *                     "last_received": (string) date
+     *                 },
+     *                 {
+     *                     "name": (string),
+     *                     "api_canvas_step_id": (string),
+     *                     "last_received": (string) date
+     *                 }
+     *             ]
+     *         },
+     *         ...
+     *     ],
+     *     "cards_clicked" : [
+     *         {
+     *             "name" : (string)
+     *         },
+     *         ...
+     *     ]
      * }
      *
-     * ```
+     *  ```
      *
      * #### **Sample output**
      *
      * ``` json
      * {
-     * "created_at" : "2020-07-10 15:00:00.000 UTC",
-     * "external_id" : "A8i3mkd99",
-     * "user_aliases" : [
-     * {
-     * "alias_name" : "user_123",
-     * "alias_label" : "amplitude_id"
-     * }
-     * ],
-     * "braze_id": "5fbd99bac125ca40511f2cb1",
-     * "random_bucket" : 2365,
-     * "first_name" : "Jane",
-     * "last_name" : "Doe",
-     * "email" : "example@braze.com",
-     * "dob" : "1980-12-21",
-     * "home_city" : "Chicago",
-     * "country" : "US",
-     * "phone" : "+442071838750",
-     * "language" : "en",
-     * "time_zone" : "Eastern Time (US & Canada)",
-     * "last_coordinates" : [41.84157636433568, -87.83520818508256],
-     * "gender" : "F",
-     * "total_revenue" : 65,
-     * "attributed_campaign" : "braze_test_campaign_072219",
-     * "attributed_source" : "braze_test_source_072219",
-     * "attributed_adgroup" : "braze_test_adgroup_072219",
-     * "attributed_ad" : "braze_test_ad_072219",
-     * "push_subscribe" : "opted_in",
-     * "push_opted_in_at": "2020-01-26T22:45:53.953Z",
-     * "email_subscribe" : "subscribed",
-     * "custom_attributes":
-     * {
-     * "loyaltyId": "37c98b9d-9a7f-4b2f-a125-d873c5152856",
-     * "loyaltyPoints": "321",
-     * "loyaltyPointsNumber": 107
-     * },
-     * "custom_events": [
-     * {
-     * "name": "Loyalty Acknowledgement",
-     * "first": "2021-06-28T17:02:43.032Z",
-     * "last": "2021-06-28T17:02:43.032Z",
-     * "count": 1
-     * },
-     * ...
-     * ],
-     * "purchases": [
-     * {
-     * "name": "item_40834",
-     * "first": "2021-09-05T03:45:50.540Z",
-     * "last": "2022-06-03T17:30:41.201Z",
-     * "count": 10
-     * },
-     * ...
-     * ],
-     * "devices": [
-     * {
-     * "model": "Pixel XL",
-     * "os": "Android (Q)",
-     * "carrier": null,
-     * "device_id": "312ef2c1-83db-4789-967-554545a1bf7a",
-     * "ad_tracking_enabled": true
-     * },
-     * ...
-     * ],
-     * "push_tokens": [
-     * {
-     * "app": "MovieCanon",
-     * "platform": "Android",
-     * "token": "12345abcd",
-     * "device_id": "312ef2c1-83db-4789-967-554545a1bf7a",
-     * "notifications_enabled": true
-     * },
-     * ...
-     * ],
-     * "apps": [
-     * {
-     * "name": "MovieCannon",
-     * "platform": "Android",
-     * "version": "3.29.0",
-     * "sessions": 1129,
-     * "first_used": "2020-02-02T19:56:19.142Z",
-     * "last_used": "2021-11-11T00:25:19.201Z"
-     * },
-     * ...
-     * ],
-     * "campaigns_received": [
-     * {
-     * "name": "Email Unsubscribe",
-     * "api_campaign_id": "d72fdc84-ddda-44f1-a0d5-0e79f47ef942",
-     * "last_received": "2022-06-02T03:07:38.105Z",
-     * "engaged":
-     * {
-     * "opened_email": true
-     * },
-     * "converted": true,
-     * "multiple_converted":
-     * {
-     * "Primary Conversion Event - A": true
-     * },
-     * "in_control": false,
-     * "variation_name": "Variant 1",
-     * "variation_api_id": "1bddc73a-a134-4784-9134-5b5574a9e0b8"
-     * },
-     * ...
-     * ],
-     * "canvases_received": [
-     * {
-     * "name": "Non Global  Holdout Group 4/21/21",
-     * "api_canvas_id": "46972a9d-dc81-473f-aa03-e3473b4ed781",
-     * "last_received_message": "2021-07-07T20:46:24.136Z",
-     * "last_entered": "2021-07-07T20:45:24.000+00:00",
-     * "variation_name": "Variant 1",
-     * "in_control": false,
-     * "last_entered_control_at": null,
-     * "last_exited": "2021-07-07T20:46:24.136Z",
-     * "steps_received": [
-     * {
-     * "name": "Step",
-     * "api_canvas_step_id": "43d1a349-c3c8-4be1-9fbe-ce708e4d1c39",
-     * "last_received": "2021-07-07T20:46:24.136Z"
-     * },
-     * ...
-     * ]
-     * }
-     * ...
-     * ],
-     * "cards_clicked" : [
-     * {
-     * "name" : "Loyalty Promo"
-     * },
-     * ...
-     * ]
+     *     "created_at" : "2020-07-10 15:00:00.000 UTC",
+     *     "external_id" : "A8i3mkd99",
+     *     "user_aliases" : [
+     *       {
+     *         "alias_name" : "user_123",
+     *         "alias_label" : "amplitude_id"
+     *       }
+     *     ],
+     *     "braze_id": "5fbd99bac125ca40511f2cb1",
+     *     "random_bucket" : 2365,
+     *     "first_name" : "Jane",
+     *     "last_name" : "Doe",
+     *     "email" : "example@braze.com",
+     *     "dob" : "1980-12-21",
+     *     "home_city" : "Chicago",
+     *     "country" : "US",
+     *     "phone" : "+442071838750",
+     *     "language" : "en",
+     *     "time_zone" : "Eastern Time (US & Canada)",
+     *     "last_coordinates" : [41.84157636433568, -87.83520818508256],
+     *     "gender" : "F",
+     *     "total_revenue" : 65,
+     *     "attributed_campaign" : "braze_test_campaign_072219",
+     *     "attributed_source" : "braze_test_source_072219",
+     *     "attributed_adgroup" : "braze_test_adgroup_072219",
+     *     "attributed_ad" : "braze_test_ad_072219",
+     *     "push_subscribe" : "opted_in",
+     *     "push_opted_in_at": "2020-01-26T22:45:53.953Z",
+     *     "email_subscribe" : "subscribed",
+     *     "custom_attributes":
+     *     {
+     *       "loyaltyId": "37c98b9d-9a7f-4b2f-a125-d873c5152856",
+     *       "loyaltyPoints": "321",
+     *        "loyaltyPointsNumber": 107
+     *     },
+     *     "custom_events": [
+     *       {
+     *         "name": "Loyalty Acknowledgement",
+     *         "first": "2021-06-28T17:02:43.032Z",
+     *         "last": "2021-06-28T17:02:43.032Z",
+     *         "count": 1
+     *       },
+     *       ...
+     *     ],
+     *     "purchases": [
+     *       {
+     *         "name": "item_40834",
+     *         "first": "2021-09-05T03:45:50.540Z",
+     *         "last": "2022-06-03T17:30:41.201Z",
+     *         "count": 10
+     *       },
+     *       ...
+     *     ],
+     *     "devices": [
+     *       {
+     *         "model": "Pixel XL",
+     *         "os": "Android (Q)",
+     *         "carrier": null,
+     *         "device_id": "312ef2c1-83db-4789-967-554545a1bf7a",
+     *         "ad_tracking_enabled": true
+     *       },
+     *       ...
+     *     ],
+     *     "push_tokens": [
+     *       {
+     *         "app": "MovieCanon",
+     *         "platform": "Android",
+     *         "token": "12345abcd",
+     *         "device_id": "312ef2c1-83db-4789-967-554545a1bf7a",
+     *         "notifications_enabled": true
+     *       },
+     *       ...
+     *     ],
+     *     "apps": [
+     *       {
+     *         "name": "MovieCannon",
+     *         "platform": "Android",
+     *         "version": "3.29.0",
+     *         "sessions": 1129,
+     *         "first_used": "2020-02-02T19:56:19.142Z",
+     *         "last_used": "2021-11-11T00:25:19.201Z"
+     *       },
+     *       ...
+     *     ],
+     *     "campaigns_received": [
+     *       {
+     *         "name": "Email Unsubscribe",
+     *         "api_campaign_id": "d72fdc84-ddda-44f1-a0d5-0e79f47ef942",
+     *         "last_received": "2022-06-02T03:07:38.105Z",
+     *         "engaged":
+     *         {
+     *            "opened_email": true
+     *         },
+     *         "converted": true,
+     *         "multiple_converted":
+     *         {
+     *           "Primary Conversion Event - A": true
+     *         },
+     *         "in_control": false,
+     *         "variation_name": "Variant 1",
+     *         "variation_api_id": "1bddc73a-a134-4784-9134-5b5574a9e0b8"
+     *       },
+     *       ...
+     *     ],
+     *     "canvases_received": [
+     *       {
+     *         "name": "Non Global  Holdout Group 4/21/21",
+     *         "api_canvas_id": "46972a9d-dc81-473f-aa03-e3473b4ed781",
+     *         "last_received_message": "2021-07-07T20:46:24.136Z",
+     *         "last_entered": "2021-07-07T20:45:24.000+00:00",
+     *         "variation_name": "Variant 1",
+     *         "in_control": false,
+     *         "last_entered_control_at": null,
+     *         "last_exited": "2021-07-07T20:46:24.136Z",
+     *         "steps_received": [
+     *           {
+     *             "name": "Step",
+     *             "api_canvas_step_id": "43d1a349-c3c8-4be1-9fbe-ce708e4d1c39",
+     *             "last_received": "2021-07-07T20:46:24.136Z"
+     *           },
+     *           ...
+     *         ]
+     *       }
+     *       ...
+     *     ],
+     *     "cards_clicked" : [
+     *       {
+     *         "name" : "Loyalty Promo"
+     *       },
+     *       ...
+     *     ]
      * }
      *
-     * ```
+     *  ```
      *
      * > Tip: For help with CSV and API exports, visit Export troubleshooting.
      *
-     * @param array $headerParameters {
+     * @param \Braze\Model\UsersExportSegmentPostBody|null $requestBody
+     * @param array                                        $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -5127,18 +5141,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PostUsersExportSegmentBadRequestException
-     * @throws Exception\PostUsersExportSegmentUnauthorizedException
-     * @throws Exception\PostUsersExportSegmentForbiddenException
-     * @throws Exception\PostUsersExportSegmentNotFoundException
-     * @throws Exception\PostUsersExportSegmentTooManyRequestsException
-     * @throws Exception\PostUsersExportSegmentInternalServerErrorException
+     * @throws \Braze\Exception\PostUsersExportSegmentBadRequestException
+     * @throws \Braze\Exception\PostUsersExportSegmentUnauthorizedException
+     * @throws \Braze\Exception\PostUsersExportSegmentForbiddenException
+     * @throws \Braze\Exception\PostUsersExportSegmentNotFoundException
+     * @throws \Braze\Exception\PostUsersExportSegmentTooManyRequestsException
+     * @throws \Braze\Exception\PostUsersExportSegmentInternalServerErrorException
      */
-    public function postUsersExportSegment(?Model\UsersExportSegmentPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postUsersExportSegment(Model\UsersExportSegmentPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PostUsersExportSegment($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PostUsersExportSegment($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -5208,12 +5222,12 @@ class Client extends Runtime\Client\Client
      * Content-Type: application/json
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
-     * "message": (required, string) the status of the export, returns 'success' when completed without errors,
-     * "object_prefix": (required, string) the filename prefix that will be used for the JSON file produced by this export, e.g.,'bb8e2a91-c4aa-478b-b3f2-a4ee91731ad1-1464728599',
-     * "url" : (optional, string) the URL where the segment export data can be downloaded if you do not have your own S3 credentials
+     *     "message": (required, string) the status of the export, returns 'success' when completed without errors,
+     *     "object_prefix": (required, string) the filename prefix that will be used for the JSON file produced by this export, e.g.,'bb8e2a91-c4aa-478b-b3f2-a4ee91731ad1-1464728599',
+     *     "url" : (optional, string) the URL where the segment export data can be downloaded if you do not have your own S3 credentials
      * }
      *
-     * ```
+     *  ```
      *
      * Once made available, the URL will only be valid for a few hours. As such, we highly recommend that you add your own S3 credentials to Braze.
      *
@@ -5223,159 +5237,160 @@ class Client extends Runtime\Client\Client
      *
      * ``` json
      * {
-     * "created_at" : (string),
-     * "external_id" : (string),
-     * "user_aliases" : [
-     * {
-     * "alias_name" : (string),
-     * "alias_label" : (string)
-     * }
-     * ],
-     * "braze_id": (string),
-     * "first_name" : (string),
-     * "last_name" : (string),
-     * "email" : (string),
-     * "dob" : (string) date for the user's date of birth,
-     * "home_city" : (string),
-     * "country" : (string) ISO-3166-1 alpha-2 standard,
-     * "phone" : (string),
-     * "language" : (string) ISO-639-1 standard,
-     * "time_zone" : (string),
-     * "last_coordinates" : (array of float) [lon, lat],
-     * "gender" : (string) "M" | "F",
-     * "total_revenue" : (float),
-     * "attributed_campaign" : (string),
-     * "attributed_source" : (string),
-     * "attributed_adgroup" : (string),
-     * "attributed_ad" : (string),
-     * "custom_attributes" : (object) custom attribute key-value pairs,
-     * "custom_events" : [
-     * {
-     * "name" : (string),
-     * "first" : (string) date,
-     * "last" : (string) date,
-     * "count" : (int)
-     * },
-     * ...
-     * ],
-     * "purchases" : [
-     * {
-     * "name" : (string),
-     * "first" : (string) date,
-     * "last" : (string) date,
-     * "count" : (int)
-     * },
-     * ...
-     * ],
-     * "devices" : [
-     * {
-     * "model" : (string),
-     * "os" : (string),
-     * "carrier" : (string),
-     * "idfv" : (string) only included for iOS devices when IDFV collection is enabled,
-     * "idfa" : (string) only included for iOS devices when IDFA collection is enabled,
-     * "google_ad_id" : (string) only included for Android devices when Google Play Advertising Identifier collection is enabled,
-     * "roku_ad_id" : (string) only included for Roku devices,
-     * "ad_tracking_enabled" : (bool)
-     * },
-     * ...
-     * ],
-     * "apps" : [
-     * {
-     * "name" : (string),
-     * "platform" : (string),
-     * "version" : (string),
-     * "sessions" : (string),
-     * "first_used" : (string) date,
-     * "last_used" : (string) date
-     * },
-     * ...
-     * ],
+     *     "created_at" : (string),
+     *     "external_id" : (string),
+     *     "user_aliases" : [
+     *       {
+     *         "alias_name" : (string),
+     *         "alias_label" : (string)
+     *       }
+     *     ],
+     *     "braze_id": (string),
+     *     "first_name" : (string),
+     *     "last_name" : (string),
+     *     "email" : (string),
+     *     "dob" : (string) date for the user's date of birth,
+     *     "home_city" : (string),
+     *     "country" : (string) ISO-3166-1 alpha-2 standard,
+     *     "phone" : (string),
+     *     "language" : (string) ISO-639-1 standard,
+     *     "time_zone" : (string),
+     *     "last_coordinates" : (array of float) [lon, lat],
+     *     "gender" : (string) "M" | "F",
+     *     "total_revenue" : (float),
+     *     "attributed_campaign" : (string),
+     *     "attributed_source" : (string),
+     *     "attributed_adgroup" : (string),
+     *     "attributed_ad" : (string),
+     *     "custom_attributes" : (object) custom attribute key-value pairs,
+     *     "custom_events" : [
+     *       {
+     *         "name" : (string),
+     *         "first" : (string) date,
+     *         "last" : (string) date,
+     *         "count" : (int)
+     *       },
+     *       ...
+     *     ],
+     *     "purchases" : [
+     *       {
+     *         "name" : (string),
+     *         "first" : (string) date,
+     *         "last" : (string) date,
+     *          "count" : (int)
+     *       },
+     *       ...
+     *     ],
+     *     "devices" : [
+     *       {
+     *         "model" : (string),
+     *         "os" : (string),
+     *         "carrier" : (string),
+     *         "idfv" : (string) only included for iOS devices when IDFV collection is enabled,
+     *         "idfa" : (string) only included for iOS devices when IDFA collection is enabled,
+     *         "google_ad_id" : (string) only included for Android devices when Google Play Advertising Identifier collection is enabled,
+     *         "roku_ad_id" : (string) only included for Roku devices,
+     *         "ad_tracking_enabled" : (bool)
+     *       },
+     *       ...
+     *     ],
+     *     "apps" : [
+     *       {
+     *         "name" : (string),
+     *         "platform" : (string),
+     *         "version" : (string),
+     *         "sessions" : (string),
+     *         "first_used" : (string) date,
+     *         "last_used" : (string) date
+     *       },
+     *       ...
+     *     ],
      * }
      *
-     * ```
+     *  ```
      *
      * ### Sample output
      *
      * ``` json
      * {
      * {
-     * "created_at" : "2020-07-10 15:00:00.000 UTC",
-     * "external_id" : "A8i3mkd99",
-     * "user_aliases" : [
-     * {
-     * "alias_name" : "user_123",
-     * "alias_label" : "amplitude_id"
-     * }
-     * ],
-     * "braze_id": "5fbd99bac125ca40511f2cb1",
-     * "random_bucket" : 2365,
-     * "first_name" : "Jane",
-     * "last_name" : "Doe",
-     * "email" : "example@braze.com",
-     * "dob" : "1980-12-21",
-     * "home_city" : "Chicago",
-     * "country" : "US",
-     * "phone" : "+442071838750",
-     * "language" : "en",
-     * "time_zone" : "Eastern Time (US & Canada)",
-     * "last_coordinates" : [41.84157636433568, -87.83520818508256],
-     * "gender" : "F",
-     * "total_revenue" : 65,
-     * "attributed_campaign" : "braze_test_campaign_072219",
-     * "attributed_source" : "braze_test_source_072219",
-     * "attributed_adgroup" : "braze_test_adgroup_072219",
-     * "attributed_ad" : "braze_test_ad_072219",
-     * "custom_attributes":
-     * {
-     * "loyaltyId": "37c98b9d-9a7f-4b2f-a125-d873c5152856",
-     * "loyaltyPoints": "321",
-     * "loyaltyPointsNumber": 107
-     * },
-     * "custom_events": [
-     * {
-     * "name": "Loyalty Acknowledgement",
-     * "first": "2021-06-28T17:02:43.032Z",
-     * "last": "2021-06-28T17:02:43.032Z",
-     * "count": 1
-     * },
-     * ...
-     * ],
-     * "purchases": [
-     * {
-     * "name": "item_40834",
-     * "first": "2021-09-05T03:45:50.540Z",
-     * "last": "2022-06-03T17:30:41.201Z",
-     * "count": 10
-     * },
-     * ...
-     * ],
-     * "devices": [
-     * {
-     * "model": "Pixel XL",
-     * "os": "Android (Q)",
-     * "carrier": null,
-     * "device_id": "312ef2c1-83db-4789-967-554545a1bf7a",
-     * "ad_tracking_enabled": true
-     * },
-     * ...
-     * ],
-     * "apps": [
-     * {
-     * "name": "MovieCannon",
-     * "platform": "Android",
-     * "version": "3.29.0",
-     * "sessions": 1129,
-     * "first_used": "2020-02-02T19:56:19.142Z",
-     * "last_used": "2021-11-11T00:25:19.201Z"
-     * },
-     * ...
-     * ],
+     *     "created_at" : "2020-07-10 15:00:00.000 UTC",
+     *     "external_id" : "A8i3mkd99",
+     *     "user_aliases" : [
+     *       {
+     *         "alias_name" : "user_123",
+     *         "alias_label" : "amplitude_id"
+     *       }
+     *     ],
+     *     "braze_id": "5fbd99bac125ca40511f2cb1",
+     *     "random_bucket" : 2365,
+     *     "first_name" : "Jane",
+     *     "last_name" : "Doe",
+     *     "email" : "example@braze.com",
+     *     "dob" : "1980-12-21",
+     *     "home_city" : "Chicago",
+     *     "country" : "US",
+     *     "phone" : "+442071838750",
+     *     "language" : "en",
+     *     "time_zone" : "Eastern Time (US & Canada)",
+     *     "last_coordinates" : [41.84157636433568, -87.83520818508256],
+     *     "gender" : "F",
+     *     "total_revenue" : 65,
+     *     "attributed_campaign" : "braze_test_campaign_072219",
+     *     "attributed_source" : "braze_test_source_072219",
+     *     "attributed_adgroup" : "braze_test_adgroup_072219",
+     *     "attributed_ad" : "braze_test_ad_072219",
+     *     "custom_attributes":
+     *       {
+     *         "loyaltyId": "37c98b9d-9a7f-4b2f-a125-d873c5152856",
+     *         "loyaltyPoints": "321",
+     *         "loyaltyPointsNumber": 107
+     *       },
+     *     "custom_events": [
+     *       {
+     *           "name": "Loyalty Acknowledgement",
+     *           "first": "2021-06-28T17:02:43.032Z",
+     *           "last": "2021-06-28T17:02:43.032Z",
+     *           "count": 1
+     *       },
+     *       ...
+     *     ],
+     *     "purchases": [
+     *       {
+     *         "name": "item_40834",
+     *         "first": "2021-09-05T03:45:50.540Z",
+     *         "last": "2022-06-03T17:30:41.201Z",
+     *         "count": 10
+     *       },
+     *       ...
+     *     ],
+     *     "devices": [
+     *       {
+     *         "model": "Pixel XL",
+     *         "os": "Android (Q)",
+     *         "carrier": null,
+     *         "device_id": "312ef2c1-83db-4789-967-554545a1bf7a",
+     *         "ad_tracking_enabled": true
+     *       },
+     *       ...
+     *     ],
+     *     "apps": [
+     *       {
+     *         "name": "MovieCannon",
+     *         "platform": "Android",
+     *         "version": "3.29.0",
+     *         "sessions": 1129,
+     *         "first_used": "2020-02-02T19:56:19.142Z",
+     *         "last_used": "2021-11-11T00:25:19.201Z"
+     *       },
+     *       ...
+     *     ],
      * }
      *
-     * ```
+     *  ```
      *
-     * @param array $headerParameters {
+     * @param \Braze\Model\UsersExportGlobalControlGroupPostBody|null $requestBody
+     * @param array                                                   $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -5383,18 +5398,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PostUsersExportGlobalControlGroupBadRequestException
-     * @throws Exception\PostUsersExportGlobalControlGroupUnauthorizedException
-     * @throws Exception\PostUsersExportGlobalControlGroupForbiddenException
-     * @throws Exception\PostUsersExportGlobalControlGroupNotFoundException
-     * @throws Exception\PostUsersExportGlobalControlGroupTooManyRequestsException
-     * @throws Exception\PostUsersExportGlobalControlGroupInternalServerErrorException
+     * @throws \Braze\Exception\PostUsersExportGlobalControlGroupBadRequestException
+     * @throws \Braze\Exception\PostUsersExportGlobalControlGroupUnauthorizedException
+     * @throws \Braze\Exception\PostUsersExportGlobalControlGroupForbiddenException
+     * @throws \Braze\Exception\PostUsersExportGlobalControlGroupNotFoundException
+     * @throws \Braze\Exception\PostUsersExportGlobalControlGroupTooManyRequestsException
+     * @throws \Braze\Exception\PostUsersExportGlobalControlGroupInternalServerErrorException
      */
-    public function postUsersExportGlobalControlGroup(?Model\UsersExportGlobalControlGroupPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postUsersExportGlobalControlGroup(Model\UsersExportGlobalControlGroupPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PostUsersExportGlobalControlGroup($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PostUsersExportGlobalControlGroup($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -5437,10 +5452,10 @@ class Client extends Runtime\Client\Client
      *
      * ``` json
      * {
-     * "message": "success"
+     *   "message": "success"
      * }
      *
-     * ```
+     *  ```
      *
      * ### Example error response
      *
@@ -5450,12 +5465,13 @@ class Client extends Runtime\Client\Client
      *
      * ``` json
      * {
-     * "error": "\nProblem:\n  message body does not match declared format\nResolution:\n  when specifying application/json as content-type, you must pass valid application/json in the request's 'body' "
+     *     "error": "\nProblem:\n  message body does not match declared format\nResolution:\n  when specifying application/json as content-type, you must pass valid application/json in the request's 'body' "
      * }
      *
-     * ```
+     *  ```
      *
-     * @param array $headerParameters {
+     * @param \Braze\Model\MessagesLiveActivityUpdatePostBody|null $requestBody
+     * @param array                                                $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -5463,18 +5479,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PostMessagesLiveActivityUpdateBadRequestException
-     * @throws Exception\PostMessagesLiveActivityUpdateUnauthorizedException
-     * @throws Exception\PostMessagesLiveActivityUpdateForbiddenException
-     * @throws Exception\PostMessagesLiveActivityUpdateNotFoundException
-     * @throws Exception\PostMessagesLiveActivityUpdateTooManyRequestsException
-     * @throws Exception\PostMessagesLiveActivityUpdateInternalServerErrorException
+     * @throws \Braze\Exception\PostMessagesLiveActivityUpdateBadRequestException
+     * @throws \Braze\Exception\PostMessagesLiveActivityUpdateUnauthorizedException
+     * @throws \Braze\Exception\PostMessagesLiveActivityUpdateForbiddenException
+     * @throws \Braze\Exception\PostMessagesLiveActivityUpdateNotFoundException
+     * @throws \Braze\Exception\PostMessagesLiveActivityUpdateTooManyRequestsException
+     * @throws \Braze\Exception\PostMessagesLiveActivityUpdateInternalServerErrorException
      */
-    public function postMessagesLiveActivityUpdate(?Model\MessagesLiveActivityUpdatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postMessagesLiveActivityUpdate(Model\MessagesLiveActivityUpdatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PostMessagesLiveActivityUpdate($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PostMessagesLiveActivityUpdate($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -5496,19 +5512,19 @@ class Client extends Runtime\Client\Client
      * Content-Type: application/json
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
-     * "scheduled_broadcasts": [
-     * {
-     * "name" (string) the name of the scheduled broadcast,
-     * "id" (stings) the Canvas or campaign identifier,
-     * "type" (string) the broadcast type either Canvas or Campaign,
-     * "tags" (array) an array of tag names formatted as strings,
-     * "next_send_time" (string) The next send time formatted in ISO 8601, may also include time zone if not local/intelligent delivery,
-     * "schedule_type" (string) The schedule type, either local_time_zones, intelligent_delivery or the name of your company's time zone,
-     * },
-     * ]
+     *   "scheduled_broadcasts": [
+     *     {
+     *       "name" (string) the name of the scheduled broadcast,
+     *       "id" (stings) the Canvas or campaign identifier,
+     *       "type" (string) the broadcast type either Canvas or Campaign,
+     *       "tags" (array) an array of tag names formatted as strings,
+     *       "next_send_time" (string) The next send time formatted in ISO 8601, may also include time zone if not local/intelligent delivery,
+     *       "schedule_type" (string) The schedule type, either local_time_zones, intelligent_delivery or the name of your company's time zone,
+     *     },
+     *   ]
      * }
      *
-     * ```
+     *  ```
      *
      * @param array $queryParameters {
      *
@@ -5524,18 +5540,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\GetMessagesScheduledBroadcastBadRequestException
-     * @throws Exception\GetMessagesScheduledBroadcastUnauthorizedException
-     * @throws Exception\GetMessagesScheduledBroadcastForbiddenException
-     * @throws Exception\GetMessagesScheduledBroadcastNotFoundException
-     * @throws Exception\GetMessagesScheduledBroadcastTooManyRequestsException
-     * @throws Exception\GetMessagesScheduledBroadcastInternalServerErrorException
+     * @throws \Braze\Exception\GetMessagesScheduledBroadcastBadRequestException
+     * @throws \Braze\Exception\GetMessagesScheduledBroadcastUnauthorizedException
+     * @throws \Braze\Exception\GetMessagesScheduledBroadcastForbiddenException
+     * @throws \Braze\Exception\GetMessagesScheduledBroadcastNotFoundException
+     * @throws \Braze\Exception\GetMessagesScheduledBroadcastTooManyRequestsException
+     * @throws \Braze\Exception\GetMessagesScheduledBroadcastInternalServerErrorException
      */
     public function getMessagesScheduledBroadcast(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\GetMessagesScheduledBroadcast($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\GetMessagesScheduledBroadcast($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -5555,7 +5571,8 @@ class Client extends Runtime\Client\Client
      * | --- | --- | --- | --- |
      * | `schedule_id` | Required | String | The schedule_id to delete (obtained from the response to create schedule). |
      *
-     * @param array $headerParameters {
+     * @param \Braze\Model\MessagesScheduleDeletePostBody|null $requestBody
+     * @param array                                            $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -5563,18 +5580,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PostMessagesScheduleDeleteBadRequestException
-     * @throws Exception\PostMessagesScheduleDeleteUnauthorizedException
-     * @throws Exception\PostMessagesScheduleDeleteForbiddenException
-     * @throws Exception\PostMessagesScheduleDeleteNotFoundException
-     * @throws Exception\PostMessagesScheduleDeleteTooManyRequestsException
-     * @throws Exception\PostMessagesScheduleDeleteInternalServerErrorException
+     * @throws \Braze\Exception\PostMessagesScheduleDeleteBadRequestException
+     * @throws \Braze\Exception\PostMessagesScheduleDeleteUnauthorizedException
+     * @throws \Braze\Exception\PostMessagesScheduleDeleteForbiddenException
+     * @throws \Braze\Exception\PostMessagesScheduleDeleteNotFoundException
+     * @throws \Braze\Exception\PostMessagesScheduleDeleteTooManyRequestsException
+     * @throws \Braze\Exception\PostMessagesScheduleDeleteInternalServerErrorException
      */
-    public function postMessagesScheduleDelete(?Model\MessagesScheduleDeletePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postMessagesScheduleDelete(Model\MessagesScheduleDeletePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PostMessagesScheduleDelete($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PostMessagesScheduleDelete($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -5595,7 +5612,8 @@ class Client extends Runtime\Client\Client
      * | `canvas_id` | Required | String | See [Canvas identifier](https://braze.com/docs/api/identifier_types/). |
      * | `schedule_id` | Required | String | The `schedule_id` to delete (obtained from the response to create schedule). |
      *
-     * @param array $headerParameters {
+     * @param \Braze\Model\CanvasTriggerScheduleDeletePostBody|null $requestBody
+     * @param array                                                 $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -5603,18 +5621,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PostCanvasTriggerScheduleDeleteBadRequestException
-     * @throws Exception\PostCanvasTriggerScheduleDeleteUnauthorizedException
-     * @throws Exception\PostCanvasTriggerScheduleDeleteForbiddenException
-     * @throws Exception\PostCanvasTriggerScheduleDeleteNotFoundException
-     * @throws Exception\PostCanvasTriggerScheduleDeleteTooManyRequestsException
-     * @throws Exception\PostCanvasTriggerScheduleDeleteInternalServerErrorException
+     * @throws \Braze\Exception\PostCanvasTriggerScheduleDeleteBadRequestException
+     * @throws \Braze\Exception\PostCanvasTriggerScheduleDeleteUnauthorizedException
+     * @throws \Braze\Exception\PostCanvasTriggerScheduleDeleteForbiddenException
+     * @throws \Braze\Exception\PostCanvasTriggerScheduleDeleteNotFoundException
+     * @throws \Braze\Exception\PostCanvasTriggerScheduleDeleteTooManyRequestsException
+     * @throws \Braze\Exception\PostCanvasTriggerScheduleDeleteInternalServerErrorException
      */
-    public function postCanvasTriggerScheduleDelete(?Model\CanvasTriggerScheduleDeletePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postCanvasTriggerScheduleDelete(Model\CanvasTriggerScheduleDeletePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PostCanvasTriggerScheduleDelete($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PostCanvasTriggerScheduleDelete($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -5637,7 +5655,8 @@ class Client extends Runtime\Client\Client
      * | `campaign_id` | Required | String | See [campaign identifier](https://www.braze.com/docs/api/identifier_types/). |
      * | `schedule_id` | Required | String | The `schedule_id` to delete (obtained from the response to create schedule). |
      *
-     * @param array $headerParameters {
+     * @param \Braze\Model\CampaignsTriggerScheduleDeletePostBody|null $requestBody
+     * @param array                                                    $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -5645,18 +5664,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PostCampaignsTriggerScheduleDeleteBadRequestException
-     * @throws Exception\PostCampaignsTriggerScheduleDeleteUnauthorizedException
-     * @throws Exception\PostCampaignsTriggerScheduleDeleteForbiddenException
-     * @throws Exception\PostCampaignsTriggerScheduleDeleteNotFoundException
-     * @throws Exception\PostCampaignsTriggerScheduleDeleteTooManyRequestsException
-     * @throws Exception\PostCampaignsTriggerScheduleDeleteInternalServerErrorException
+     * @throws \Braze\Exception\PostCampaignsTriggerScheduleDeleteBadRequestException
+     * @throws \Braze\Exception\PostCampaignsTriggerScheduleDeleteUnauthorizedException
+     * @throws \Braze\Exception\PostCampaignsTriggerScheduleDeleteForbiddenException
+     * @throws \Braze\Exception\PostCampaignsTriggerScheduleDeleteNotFoundException
+     * @throws \Braze\Exception\PostCampaignsTriggerScheduleDeleteTooManyRequestsException
+     * @throws \Braze\Exception\PostCampaignsTriggerScheduleDeleteInternalServerErrorException
      */
-    public function postCampaignsTriggerScheduleDelete(?Model\CampaignsTriggerScheduleDeletePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postCampaignsTriggerScheduleDelete(Model\CampaignsTriggerScheduleDeletePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PostCampaignsTriggerScheduleDelete($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PostCampaignsTriggerScheduleDelete($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -5702,27 +5721,28 @@ class Client extends Runtime\Client\Client
      *
      * ``` json
      * {
-     * "dispatch_id": (string) the dispatch identifier,
-     * "schedule_id": (string) the schedule identifier,
-     * "message": "success"
+     *     "dispatch_id": (string) the dispatch identifier,
+     *     "schedule_id": (string) the schedule identifier,
+     *     "message": "success"
      * }
      *
-     * ```
+     *  ```
      *
-     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param \Braze\Model\MessagesScheduleCreatePostBody|null $requestBody
+     * @param string                                           $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PostMessagesScheduleCreateBadRequestException
-     * @throws Exception\PostMessagesScheduleCreateUnauthorizedException
-     * @throws Exception\PostMessagesScheduleCreateForbiddenException
-     * @throws Exception\PostMessagesScheduleCreateNotFoundException
-     * @throws Exception\PostMessagesScheduleCreateTooManyRequestsException
-     * @throws Exception\PostMessagesScheduleCreateInternalServerErrorException
+     * @throws \Braze\Exception\PostMessagesScheduleCreateBadRequestException
+     * @throws \Braze\Exception\PostMessagesScheduleCreateUnauthorizedException
+     * @throws \Braze\Exception\PostMessagesScheduleCreateForbiddenException
+     * @throws \Braze\Exception\PostMessagesScheduleCreateNotFoundException
+     * @throws \Braze\Exception\PostMessagesScheduleCreateTooManyRequestsException
+     * @throws \Braze\Exception\PostMessagesScheduleCreateInternalServerErrorException
      */
-    public function postMessagesScheduleCreate(?Model\MessagesScheduleCreatePostBody $requestBody = null, string $fetch = self::FETCH_OBJECT)
+    public function postMessagesScheduleCreate(Model\MessagesScheduleCreatePostBody $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PostMessagesScheduleCreate($requestBody), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PostMessagesScheduleCreate($requestBody), $fetch);
     }
 
     /**
@@ -5768,14 +5788,15 @@ class Client extends Runtime\Client\Client
      * Authorization: Bearer YOUR-API-KEY-HERE
      * {
      * {
-     * "dispatch_id": "dispatch_identifier",
-     * "schedule_id": "schedule_identifier",
-     * "message": "success"
+     *     "dispatch_id": "dispatch_identifier",
+     *     "schedule_id": "schedule_identifier",
+     *     "message": "success"
      * }
      *
-     * ```
+     *  ```
      *
-     * @param array $headerParameters {
+     * @param \Braze\Model\CampaignsTriggerScheduleCreatePostBody|null $requestBody
+     * @param array                                                    $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -5783,18 +5804,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PostCampaignsTriggerScheduleCreateBadRequestException
-     * @throws Exception\PostCampaignsTriggerScheduleCreateUnauthorizedException
-     * @throws Exception\PostCampaignsTriggerScheduleCreateForbiddenException
-     * @throws Exception\PostCampaignsTriggerScheduleCreateNotFoundException
-     * @throws Exception\PostCampaignsTriggerScheduleCreateTooManyRequestsException
-     * @throws Exception\PostCampaignsTriggerScheduleCreateInternalServerErrorException
+     * @throws \Braze\Exception\PostCampaignsTriggerScheduleCreateBadRequestException
+     * @throws \Braze\Exception\PostCampaignsTriggerScheduleCreateUnauthorizedException
+     * @throws \Braze\Exception\PostCampaignsTriggerScheduleCreateForbiddenException
+     * @throws \Braze\Exception\PostCampaignsTriggerScheduleCreateNotFoundException
+     * @throws \Braze\Exception\PostCampaignsTriggerScheduleCreateTooManyRequestsException
+     * @throws \Braze\Exception\PostCampaignsTriggerScheduleCreateInternalServerErrorException
      */
-    public function postCampaignsTriggerScheduleCreate(?Model\CampaignsTriggerScheduleCreatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postCampaignsTriggerScheduleCreate(Model\CampaignsTriggerScheduleCreatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PostCampaignsTriggerScheduleCreate($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PostCampaignsTriggerScheduleCreate($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -5831,7 +5852,8 @@ class Client extends Runtime\Client\Client
      * | `trigger_properties` | Optional | Object | Personalization key-value pairs for all users in this send. See [trigger properties](https://www.braze.com/docs/api/objects_filters/trigger_properties_object/). |
      * | `schedule` | Required | Schedule object | See [schedule object](https://www.braze.com/docs/api/objects_filters/schedule_object/). |
      *
-     * @param array $headerParameters {
+     * @param \Braze\Model\CanvasTriggerScheduleCreatePostBody|null $requestBody
+     * @param array                                                 $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -5839,18 +5861,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PostCanvasTriggerScheduleCreateBadRequestException
-     * @throws Exception\PostCanvasTriggerScheduleCreateUnauthorizedException
-     * @throws Exception\PostCanvasTriggerScheduleCreateForbiddenException
-     * @throws Exception\PostCanvasTriggerScheduleCreateNotFoundException
-     * @throws Exception\PostCanvasTriggerScheduleCreateTooManyRequestsException
-     * @throws Exception\PostCanvasTriggerScheduleCreateInternalServerErrorException
+     * @throws \Braze\Exception\PostCanvasTriggerScheduleCreateBadRequestException
+     * @throws \Braze\Exception\PostCanvasTriggerScheduleCreateUnauthorizedException
+     * @throws \Braze\Exception\PostCanvasTriggerScheduleCreateForbiddenException
+     * @throws \Braze\Exception\PostCanvasTriggerScheduleCreateNotFoundException
+     * @throws \Braze\Exception\PostCanvasTriggerScheduleCreateTooManyRequestsException
+     * @throws \Braze\Exception\PostCanvasTriggerScheduleCreateInternalServerErrorException
      */
-    public function postCanvasTriggerScheduleCreate(?Model\CanvasTriggerScheduleCreatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postCanvasTriggerScheduleCreate(Model\CanvasTriggerScheduleCreatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PostCanvasTriggerScheduleCreate($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PostCanvasTriggerScheduleCreate($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -5881,30 +5903,31 @@ class Client extends Runtime\Client\Client
      * --header 'Content-Type: application/json' \
      * --header 'Authorization: Bearer YOUR-REST-API-KEY' \
      * --data-raw '{
-     * "schedule_id": "schedule_identifier",
-     * "schedule": {
-     * "time": "2017-05-24T20:30:36Z"
-     * },
-     * "messages": {
-     * "apple_push": {
-     * "alert": "Updated Message!",
-     * "badge": 1
-     * },
-     * "android_push": {
-     * "title": "Updated title!",
-     * "alert": "Updated message!"
-     * },
-     * "sms": {
-     * "subscription_group_id": "subscription_group_identifier",
-     * "message_variation_id": "message_variation_identifier",
-     * "body": "This is my SMS body.",
-     * "app_id": "app_identifier"
-     * }
-     * }
+     *   "schedule_id": "schedule_identifier",
+     *   "schedule": {
+     *     "time": "2017-05-24T20:30:36Z"
+     *    },
+     *   "messages": {
+     *     "apple_push": {
+     *       "alert": "Updated Message!",
+     *       "badge": 1
+     *     },
+     *     "android_push": {
+     *       "title": "Updated title!",
+     *       "alert": "Updated message!"
+     *     },
+     *     "sms": {
+     *       "subscription_group_id": "subscription_group_identifier",
+     *       "message_variation_id": "message_variation_identifier",
+     *       "body": "This is my SMS body.",
+     *       "app_id": "app_identifier"
+     *     }
+     *   }
      * }'
-     * ```
+     *  ```
      *
-     * @param array $headerParameters {
+     * @param \Braze\Model\MessagesScheduleUpdatePostBody|null $requestBody
+     * @param array                                            $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -5912,18 +5935,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PostMessagesScheduleUpdateBadRequestException
-     * @throws Exception\PostMessagesScheduleUpdateUnauthorizedException
-     * @throws Exception\PostMessagesScheduleUpdateForbiddenException
-     * @throws Exception\PostMessagesScheduleUpdateNotFoundException
-     * @throws Exception\PostMessagesScheduleUpdateTooManyRequestsException
-     * @throws Exception\PostMessagesScheduleUpdateInternalServerErrorException
+     * @throws \Braze\Exception\PostMessagesScheduleUpdateBadRequestException
+     * @throws \Braze\Exception\PostMessagesScheduleUpdateUnauthorizedException
+     * @throws \Braze\Exception\PostMessagesScheduleUpdateForbiddenException
+     * @throws \Braze\Exception\PostMessagesScheduleUpdateNotFoundException
+     * @throws \Braze\Exception\PostMessagesScheduleUpdateTooManyRequestsException
+     * @throws \Braze\Exception\PostMessagesScheduleUpdateInternalServerErrorException
      */
-    public function postMessagesScheduleUpdate(?Model\MessagesScheduleUpdatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postMessagesScheduleUpdate(Model\MessagesScheduleUpdatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PostMessagesScheduleUpdate($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PostMessagesScheduleUpdate($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -5958,16 +5981,17 @@ class Client extends Runtime\Client\Client
      * --header 'Content-Type: application/json' \
      * --header 'Authorization: Bearer YOUR-REST-API-KEY' \
      * --data-raw '{
-     * "campaign_id": "campaign_identifier",
-     * "schedule_id": "schedule_identifier",
-     * "schedule": {
-     * "time": "2017-05-24T21:30:00Z",
-     * "in_local_time": true
-     * }
+     *   "campaign_id": "campaign_identifier",
+     *   "schedule_id": "schedule_identifier",
+     *   "schedule": {
+     *     "time": "2017-05-24T21:30:00Z",
+     *     "in_local_time": true
+     *   }
      * }'
-     * ```
+     *  ```
      *
-     * @param array $headerParameters {
+     * @param \Braze\Model\CampaignsTriggerScheduleUpdatePostBody|null $requestBody
+     * @param array                                                    $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -5975,18 +5999,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PostCampaignsTriggerScheduleUpdateBadRequestException
-     * @throws Exception\PostCampaignsTriggerScheduleUpdateUnauthorizedException
-     * @throws Exception\PostCampaignsTriggerScheduleUpdateForbiddenException
-     * @throws Exception\PostCampaignsTriggerScheduleUpdateNotFoundException
-     * @throws Exception\PostCampaignsTriggerScheduleUpdateTooManyRequestsException
-     * @throws Exception\PostCampaignsTriggerScheduleUpdateInternalServerErrorException
+     * @throws \Braze\Exception\PostCampaignsTriggerScheduleUpdateBadRequestException
+     * @throws \Braze\Exception\PostCampaignsTriggerScheduleUpdateUnauthorizedException
+     * @throws \Braze\Exception\PostCampaignsTriggerScheduleUpdateForbiddenException
+     * @throws \Braze\Exception\PostCampaignsTriggerScheduleUpdateNotFoundException
+     * @throws \Braze\Exception\PostCampaignsTriggerScheduleUpdateTooManyRequestsException
+     * @throws \Braze\Exception\PostCampaignsTriggerScheduleUpdateInternalServerErrorException
      */
-    public function postCampaignsTriggerScheduleUpdate(?Model\CampaignsTriggerScheduleUpdatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postCampaignsTriggerScheduleUpdate(Model\CampaignsTriggerScheduleUpdatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PostCampaignsTriggerScheduleUpdate($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PostCampaignsTriggerScheduleUpdate($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -6011,17 +6035,17 @@ class Client extends Runtime\Client\Client
      * ``` json
      * Content-Type: application/json
      * Authorization: Bearer YOUR-REST-API-KEY
-     * ```
+     *  ```
      *
      * ``` json
      * {
-     * "canvas_id": (required, string) see Canvas identifier,
-     * "schedule_id": (required, string) the `schedule_id` to update (obtained from the response to create schedule),
-     * "schedule": {
-     * // required, see create schedule documentation
+     *   "canvas_id": (required, string) see Canvas identifier,
+     *   "schedule_id": (required, string) the `schedule_id` to update (obtained from the response to create schedule),
+     *   "schedule": {
+     *     // required, see create schedule documentation
+     *   }
      * }
-     * }
-     * ```
+     *  ```
      *
      * ## Request parameters
      *
@@ -6031,7 +6055,8 @@ class Client extends Runtime\Client\Client
      * | `schedule_id` | Optional | String | The `schedule_id` to update (obtained from the response to create schedule). |
      * | `schedule` | Required | Object | See [schedule object](https://www.braze.com/docs/api/objects_filters/schedule_object/). |
      *
-     * @param array $headerParameters {
+     * @param \Braze\Model\CanvasTriggerScheduleUpdatePostBody|null $requestBody
+     * @param array                                                 $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -6039,18 +6064,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PostCanvasTriggerScheduleUpdateBadRequestException
-     * @throws Exception\PostCanvasTriggerScheduleUpdateUnauthorizedException
-     * @throws Exception\PostCanvasTriggerScheduleUpdateForbiddenException
-     * @throws Exception\PostCanvasTriggerScheduleUpdateNotFoundException
-     * @throws Exception\PostCanvasTriggerScheduleUpdateTooManyRequestsException
-     * @throws Exception\PostCanvasTriggerScheduleUpdateInternalServerErrorException
+     * @throws \Braze\Exception\PostCanvasTriggerScheduleUpdateBadRequestException
+     * @throws \Braze\Exception\PostCanvasTriggerScheduleUpdateUnauthorizedException
+     * @throws \Braze\Exception\PostCanvasTriggerScheduleUpdateForbiddenException
+     * @throws \Braze\Exception\PostCanvasTriggerScheduleUpdateNotFoundException
+     * @throws \Braze\Exception\PostCanvasTriggerScheduleUpdateTooManyRequestsException
+     * @throws \Braze\Exception\PostCanvasTriggerScheduleUpdateInternalServerErrorException
      */
-    public function postCanvasTriggerScheduleUpdate(?Model\CanvasTriggerScheduleUpdatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postCanvasTriggerScheduleUpdate(Model\CanvasTriggerScheduleUpdatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PostCanvasTriggerScheduleUpdate($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PostCanvasTriggerScheduleUpdate($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -6081,13 +6106,14 @@ class Client extends Runtime\Client\Client
      * Content-Type: application/json
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
-     * "message": "success",
-     * "send_id" : (string) the send identifier
+     *   "message": "success",
+     *   "send_id" : (string) the send identifier
      * }
      *
-     * ```
+     *  ```
      *
-     * @param array $headerParameters {
+     * @param \Braze\Model\SendsIdCreatePostBody|null $requestBody
+     * @param array                                   $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -6095,18 +6121,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PostSendsIdCreateBadRequestException
-     * @throws Exception\PostSendsIdCreateUnauthorizedException
-     * @throws Exception\PostSendsIdCreateForbiddenException
-     * @throws Exception\PostSendsIdCreateNotFoundException
-     * @throws Exception\PostSendsIdCreateTooManyRequestsException
-     * @throws Exception\PostSendsIdCreateInternalServerErrorException
+     * @throws \Braze\Exception\PostSendsIdCreateBadRequestException
+     * @throws \Braze\Exception\PostSendsIdCreateUnauthorizedException
+     * @throws \Braze\Exception\PostSendsIdCreateForbiddenException
+     * @throws \Braze\Exception\PostSendsIdCreateNotFoundException
+     * @throws \Braze\Exception\PostSendsIdCreateTooManyRequestsException
+     * @throws \Braze\Exception\PostSendsIdCreateInternalServerErrorException
      */
-    public function postSendsIdCreate(?Model\SendsIdCreatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postSendsIdCreate(Model\SendsIdCreatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PostSendsIdCreate($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PostSendsIdCreate($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -6152,7 +6178,8 @@ class Client extends Runtime\Client\Client
      *
      * Message sending endpoint responses will include the message’s `dispatch_id` for reference back to the dispatch of the message. The `dispatch_id` is the ID of the message dispatch, meaning the unique ID for each “transmission” sent from Braze. For more information, refer to [Dispatch ID behavior](https://www.braze.com/docs/help/help_articles/data/dispatch_id/).
      *
-     * @param array $headerParameters {
+     * @param \Braze\Model\MessagesSendPostBody|null $requestBody
+     * @param array                                  $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -6160,18 +6187,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PostMessagesSendBadRequestException
-     * @throws Exception\PostMessagesSendUnauthorizedException
-     * @throws Exception\PostMessagesSendForbiddenException
-     * @throws Exception\PostMessagesSendNotFoundException
-     * @throws Exception\PostMessagesSendTooManyRequestsException
-     * @throws Exception\PostMessagesSendInternalServerErrorException
+     * @throws \Braze\Exception\PostMessagesSendBadRequestException
+     * @throws \Braze\Exception\PostMessagesSendUnauthorizedException
+     * @throws \Braze\Exception\PostMessagesSendForbiddenException
+     * @throws \Braze\Exception\PostMessagesSendNotFoundException
+     * @throws \Braze\Exception\PostMessagesSendTooManyRequestsException
+     * @throws \Braze\Exception\PostMessagesSendInternalServerErrorException
      */
-    public function postMessagesSend(?Model\MessagesSendPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postMessagesSend(Model\MessagesSendPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PostMessagesSend($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PostMessagesSend($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -6214,12 +6241,12 @@ class Client extends Runtime\Client\Client
      *
      * ``` json
      * {
-     * "dispatch_id": Out-of-the-box generated Unique ID of the instance of this send
-     * "status": Current status of the message
-     * "metadata": Object containing additional information about the send instance
+     *     "dispatch_id": Out-of-the-box generated Unique ID of the instance of this send
+     *     "status": Current status of the message
+     *     "metadata": Object containing additional information about the send instance
      * }
      *
-     * ```
+     *  ```
      *
      * ## Troubleshooting
      *
@@ -6255,61 +6282,61 @@ class Client extends Runtime\Client\Client
      * ``` json
      * // Sent Event
      * {
-     * "dispatch_id": "acf471119f7449d579e8089032003ded",
-     * "status": "sent",
-     * "metadata": {
-     * "received_at": "2020-08-31T18:58:41.000+00:00",
-     * "enqueued_at": "2020-08-31T18:58:41.000+00:00",
-     * "executed_at": "2020-08-31T18:58:41.000+00:00",
-     * "sent_at": "2020-08-31T18:58:42.000+00:00",
-     * "campaign_api_id": "417220e4-5a2a-b634-7f7d-9ec891532368",
-     * "external_send_id" : "34a2ceb3cf6184132f3d816e9984269a"
-     * }
+     *     "dispatch_id": "acf471119f7449d579e8089032003ded",
+     *     "status": "sent",
+     *     "metadata": {
+     *       "received_at": "2020-08-31T18:58:41.000+00:00",
+     *       "enqueued_at": "2020-08-31T18:58:41.000+00:00",
+     *       "executed_at": "2020-08-31T18:58:41.000+00:00",
+     *       "sent_at": "2020-08-31T18:58:42.000+00:00",
+     *       "campaign_api_id": "417220e4-5a2a-b634-7f7d-9ec891532368",
+     *       "external_send_id" : "34a2ceb3cf6184132f3d816e9984269a"
+     *     }
      * }
      * // Processed Event
      * {
-     * "dispatch_id": "acf471119f7449d579e8089032003ded",
-     * "status": "processed",
-     * "metadata": {
-     * "processed_at": "2020-08-31T18:58:42.000+00:00",
-     * "campaign_api_id": "417220e4-5a2a-b634-7f7d-9ec891532368",
-     * "external_send_id" : "34a2ceb3cf6184132f3d816e9984269a"
-     * }
+     *     "dispatch_id": "acf471119f7449d579e8089032003ded",
+     *     "status": "processed",
+     *     "metadata": {
+     *       "processed_at": "2020-08-31T18:58:42.000+00:00",
+     *       "campaign_api_id": "417220e4-5a2a-b634-7f7d-9ec891532368",
+     *       "external_send_id" : "34a2ceb3cf6184132f3d816e9984269a"
+     *     }
      * }
      * // Aborted
      * {
-     * "dispatch_id": "acf471119f7449d579e8089032003ded",
-     * "status": "aborted",
-     * "metadata": {
-     * "reason": "User not emailable",
-     * "aborted_at": "2020-08-31T19:04:51.000+00:00",
-     * "campaign_api_id": "417220e4-5a2a-b634-7f7d-9ec891532368",
-     * "external_send_id" : "34a2ceb3cf6184132f3d816e9984269a"
-     * }
+     *     "dispatch_id": "acf471119f7449d579e8089032003ded",
+     *     "status": "aborted",
+     *     "metadata": {
+     *       "reason": "User not emailable",
+     *       "aborted_at": "2020-08-31T19:04:51.000+00:00",
+     *       "campaign_api_id": "417220e4-5a2a-b634-7f7d-9ec891532368",
+     *       "external_send_id" : "34a2ceb3cf6184132f3d816e9984269a"
+     *     }
      * }
      * // Delivered Event
      * {
-     * "dispatch_id": "acf471119f7449d579e8089032003ded",
-     * "status": "delivered",
-     * "metadata": {
-     * "delivered_at": "2020-08-31T18:27:32.000+00:00",
-     * "campaign_api_id": "417220e4-5a2a-b634-7f7d-9ec891532368",
-     * "external_send_id" : "34a2ceb3cf6184132f3d816e9984269a"
-     * }
+     *     "dispatch_id": "acf471119f7449d579e8089032003ded",
+     *     "status": "delivered",
+     *     "metadata": {
+     *       "delivered_at": "2020-08-31T18:27:32.000+00:00",
+     *       "campaign_api_id": "417220e4-5a2a-b634-7f7d-9ec891532368",
+     *       "external_send_id" : "34a2ceb3cf6184132f3d816e9984269a"
+     *     }
      * }
      * // Bounced Event
      * {
-     * "dispatch_id": "acf471119f7449d579e8089032003ded",
-     * "status": "bounced",
-     * "metadata": {
-     * "bounced_at": "2020-08-31T18:58:43.000+00:00",
-     * "reason": "550 5.1.1 The email account that you tried to reach does not exist",
-     * "campaign_api_id": "417220e4-5a2a-b634-7f7d-9ec891532368",
-     * "external_send_id" : "34a2ceb3cf6184132f3d816e9984269a"
-     * }
+     *     "dispatch_id": "acf471119f7449d579e8089032003ded",
+     *     "status": "bounced",
+     *     "metadata": {
+     *       "bounced_at": "2020-08-31T18:58:43.000+00:00",
+     *       "reason": "550 5.1.1 The email account that you tried to reach does not exist",
+     *       "campaign_api_id": "417220e4-5a2a-b634-7f7d-9ec891532368",
+     *       "external_send_id" : "34a2ceb3cf6184132f3d816e9984269a"
+     *     }
      * }
      *
-     * ```
+     *  ```
      *
      * #### Message status
      *
@@ -6326,63 +6353,64 @@ class Client extends Runtime\Client\Client
      * ``` json
      * // Sent Event
      * {
-     * "dispatch_id": "acf471119f7449d579e8089032003ded",
-     * "status": "sent",
-     * "metadata": {
-     * "received_at": "2020-08-31T18:58:41.000+00:00",
-     * "enqueued_at": "2020-08-31T18:58:41.000+00:00",
-     * "executed_at": "2020-08-31T18:58:41.000+00:00",
-     * "sent_at": "2020-08-31T18:58:42.000+00:00",
-     * "campaign_api_id": "417220e4-5a2a-b634-7f7d-9ec891532368",
-     * "external_send_id" : "34a2ceb3cf6184132f3d816e9984269a"
-     * }
+     *     "dispatch_id": "acf471119f7449d579e8089032003ded",
+     *     "status": "sent",
+     *     "metadata": {
+     *       "received_at": "2020-08-31T18:58:41.000+00:00",
+     *       "enqueued_at": "2020-08-31T18:58:41.000+00:00",
+     *       "executed_at": "2020-08-31T18:58:41.000+00:00",
+     *       "sent_at": "2020-08-31T18:58:42.000+00:00",
+     *       "campaign_api_id": "417220e4-5a2a-b634-7f7d-9ec891532368",
+     *       "external_send_id" : "34a2ceb3cf6184132f3d816e9984269a"
+     *     }
      * }
      * // Processed Event
      * {
-     * "dispatch_id": "acf471119f7449d579e8089032003ded",
-     * "status": "processed",
-     * "metadata": {
-     * "processed_at": "2020-08-31T18:58:42.000+00:00",
-     * "campaign_api_id": "417220e4-5a2a-b634-7f7d-9ec891532368",
-     * "external_send_id" : "34a2ceb3cf6184132f3d816e9984269a"
-     * }
+     *     "dispatch_id": "acf471119f7449d579e8089032003ded",
+     *     "status": "processed",
+     *     "metadata": {
+     *       "processed_at": "2020-08-31T18:58:42.000+00:00",
+     *       "campaign_api_id": "417220e4-5a2a-b634-7f7d-9ec891532368",
+     *       "external_send_id" : "34a2ceb3cf6184132f3d816e9984269a"
+     *     }
      * }
      * // Aborted
      * {
-     * "dispatch_id": "acf471119f7449d579e8089032003ded",
-     * "status": "aborted",
-     * "metadata": {
-     * "reason": "User not emailable",
-     * "aborted_at": "2020-08-31T19:04:51.000+00:00",
-     * "campaign_api_id": "417220e4-5a2a-b634-7f7d-9ec891532368",
-     * "external_send_id" : "34a2ceb3cf6184132f3d816e9984269a"
-     * }
+     *     "dispatch_id": "acf471119f7449d579e8089032003ded",
+     *     "status": "aborted",
+     *     "metadata": {
+     *       "reason": "User not emailable",
+     *       "aborted_at": "2020-08-31T19:04:51.000+00:00",
+     *       "campaign_api_id": "417220e4-5a2a-b634-7f7d-9ec891532368",
+     *       "external_send_id" : "34a2ceb3cf6184132f3d816e9984269a"
+     *     }
      * }
      * // Delivered Event
      * {
-     * "dispatch_id": "acf471119f7449d579e8089032003ded",
-     * "status": "delivered",
-     * "metadata": {
-     * "delivered_at": "2020-08-31T18:27:32.000+00:00",
-     * "campaign_api_id": "417220e4-5a2a-b634-7f7d-9ec891532368",
-     * "external_send_id" : "34a2ceb3cf6184132f3d816e9984269a"
-     * }
+     *     "dispatch_id": "acf471119f7449d579e8089032003ded",
+     *     "status": "delivered",
+     *     "metadata": {
+     *       "delivered_at": "2020-08-31T18:27:32.000+00:00",
+     *       "campaign_api_id": "417220e4-5a2a-b634-7f7d-9ec891532368",
+     *       "external_send_id" : "34a2ceb3cf6184132f3d816e9984269a"
+     *     }
      * }
      * // Bounced Event
      * {
-     * "dispatch_id": "acf471119f7449d579e8089032003ded",
-     * "status": "bounced",
-     * "metadata": {
-     * "bounced_at": "2020-08-31T18:58:43.000+00:00",
-     * "reason": "550 5.1.1 The email account that you tried to reach does not exist",
-     * "campaign_api_id": "417220e4-5a2a-b634-7f7d-9ec891532368",
-     * "external_send_id" : "34a2ceb3cf6184132f3d816e9984269a"
-     * }
+     *     "dispatch_id": "acf471119f7449d579e8089032003ded",
+     *     "status": "bounced",
+     *     "metadata": {
+     *       "bounced_at": "2020-08-31T18:58:43.000+00:00",
+     *       "reason": "550 5.1.1 The email account that you tried to reach does not exist",
+     *       "campaign_api_id": "417220e4-5a2a-b634-7f7d-9ec891532368",
+     *       "external_send_id" : "34a2ceb3cf6184132f3d816e9984269a"
+     *     }
      * }
      *
-     * ```
+     *  ```
      *
-     * @param array $headerParameters {
+     * @param \Braze\Model\TransactionalV1CampaignsCampaignIdSendPostBody|null $requestBody
+     * @param array                                                            $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -6390,18 +6418,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PostTransactionalV1CampaignsByCampaignIdSendBadRequestException
-     * @throws Exception\PostTransactionalV1CampaignsByCampaignIdSendUnauthorizedException
-     * @throws Exception\PostTransactionalV1CampaignsByCampaignIdSendForbiddenException
-     * @throws Exception\PostTransactionalV1CampaignsByCampaignIdSendNotFoundException
-     * @throws Exception\PostTransactionalV1CampaignsByCampaignIdSendTooManyRequestsException
-     * @throws Exception\PostTransactionalV1CampaignsByCampaignIdSendInternalServerErrorException
+     * @throws \Braze\Exception\PostTransactionalV1CampaignsByCampaignIdSendBadRequestException
+     * @throws \Braze\Exception\PostTransactionalV1CampaignsByCampaignIdSendUnauthorizedException
+     * @throws \Braze\Exception\PostTransactionalV1CampaignsByCampaignIdSendForbiddenException
+     * @throws \Braze\Exception\PostTransactionalV1CampaignsByCampaignIdSendNotFoundException
+     * @throws \Braze\Exception\PostTransactionalV1CampaignsByCampaignIdSendTooManyRequestsException
+     * @throws \Braze\Exception\PostTransactionalV1CampaignsByCampaignIdSendInternalServerErrorException
      */
-    public function postTransactionalV1CampaignsByCampaignIdSend(string $campaignId, ?Model\TransactionalV1CampaignsCampaignIdSendPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postTransactionalV1CampaignsByCampaignIdSend(string $campaignId, Model\TransactionalV1CampaignsCampaignIdSendPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PostTransactionalV1CampaignsByCampaignIdSend($campaignId, $requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PostTransactionalV1CampaignsByCampaignIdSend($campaignId, $requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -6450,13 +6478,14 @@ class Client extends Runtime\Client\Client
      *
      * ## Create send endpoint
      *
-     **Using the attributes object in campaigns**
+     * **Using the attributes object in campaigns**
      *
      * Braze has a Messaging Object called `Attributes` that will allow you to add, create, or update attributes and values for a user before you send them an API-triggered campaigns using the `campaign/trigger/send` endpoint as this API call will process the User Attributes object before it processes and sends the campaign. This helps minimize the risk of there being issues caused by [race conditions](https://www.braze.com/docs/help/best_practices/race_conditions/).
      *
      * > **Important:** Looking for the Canvas version of this endpoint? Check out [Sending Canvas messages via API-triggered delivery](https://www.braze.com/docs/api/endpoints/messaging/send_messages/post_send_triggered_canvases/#create-send-endpoint).
      *
-     * @param array $headerParameters {
+     * @param \Braze\Model\CampaignsTriggerSendPostBody|null $requestBody
+     * @param array                                          $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -6464,18 +6493,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PostCampaignsTriggerSendBadRequestException
-     * @throws Exception\PostCampaignsTriggerSendUnauthorizedException
-     * @throws Exception\PostCampaignsTriggerSendForbiddenException
-     * @throws Exception\PostCampaignsTriggerSendNotFoundException
-     * @throws Exception\PostCampaignsTriggerSendTooManyRequestsException
-     * @throws Exception\PostCampaignsTriggerSendInternalServerErrorException
+     * @throws \Braze\Exception\PostCampaignsTriggerSendBadRequestException
+     * @throws \Braze\Exception\PostCampaignsTriggerSendUnauthorizedException
+     * @throws \Braze\Exception\PostCampaignsTriggerSendForbiddenException
+     * @throws \Braze\Exception\PostCampaignsTriggerSendNotFoundException
+     * @throws \Braze\Exception\PostCampaignsTriggerSendTooManyRequestsException
+     * @throws \Braze\Exception\PostCampaignsTriggerSendInternalServerErrorException
      */
-    public function postCampaignsTriggerSend(?Model\CampaignsTriggerSendPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postCampaignsTriggerSend(Model\CampaignsTriggerSendPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PostCampaignsTriggerSend($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PostCampaignsTriggerSend($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -6519,13 +6548,14 @@ class Client extends Runtime\Client\Client
      *
      * ## Create send endpoint
      *
-     **Using the Attributes Object in Canvas**
+     * **Using the Attributes Object in Canvas**
      *
      * Braze has a Messaging Object called `Attributes` that allows you to add, create, or update attributes and values for a user before sending them an API-Triggered Canvas using the `canvas/trigger/send` endpoint as this API call will process the User Attributes object before it processes and sends the Canvas. This helps minimize the risk of there being issues caused by [race conditions](https://www.braze.com/docs/help/best_practices/race_conditions/).
      *
      * > **Important:** Looking for the camaigns version of this endpoint? Check out [Sending campaign messages via API-triggered delivery](https://www.braze.com/docs/api/endpoints/messaging/send_messages/post_send_triggered_campaigns/).
      *
-     * @param array $headerParameters {
+     * @param \Braze\Model\CanvasTriggerSendPostBody|null $requestBody
+     * @param array                                       $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -6533,18 +6563,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PostCanvasTriggerSendBadRequestException
-     * @throws Exception\PostCanvasTriggerSendUnauthorizedException
-     * @throws Exception\PostCanvasTriggerSendForbiddenException
-     * @throws Exception\PostCanvasTriggerSendNotFoundException
-     * @throws Exception\PostCanvasTriggerSendTooManyRequestsException
-     * @throws Exception\PostCanvasTriggerSendInternalServerErrorException
+     * @throws \Braze\Exception\PostCanvasTriggerSendBadRequestException
+     * @throws \Braze\Exception\PostCanvasTriggerSendUnauthorizedException
+     * @throws \Braze\Exception\PostCanvasTriggerSendForbiddenException
+     * @throws \Braze\Exception\PostCanvasTriggerSendNotFoundException
+     * @throws \Braze\Exception\PostCanvasTriggerSendTooManyRequestsException
+     * @throws \Braze\Exception\PostCanvasTriggerSendInternalServerErrorException
      */
-    public function postCanvasTriggerSend(?Model\CanvasTriggerSendPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postCanvasTriggerSend(Model\CanvasTriggerSendPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PostCanvasTriggerSend($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PostCanvasTriggerSend($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -6580,16 +6610,16 @@ class Client extends Runtime\Client\Client
      * curl --location --request GET 'https://rest.iad-01.braze.com/preference_center/v1/$preference_center_external_id/url/$user_external_id' \
      * --header 'Authorization: Bearer YOUR-API-KEY-HERE'
      *
-     * ```
+     *  ```
      *
      * ## Response
      *
      * ``` json
      * {
-     * "preference_center_url": "https://www.example.com/preferences"
+     *   "preference_center_url": "https://www.example.com/preferences"
      * }
      *
-     * ```
+     *  ```
      *
      * @param array $queryParameters {
      *
@@ -6604,18 +6634,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserIDBadRequestException
-     * @throws Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserIDUnauthorizedException
-     * @throws Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserIDForbiddenException
-     * @throws Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserIDNotFoundException
-     * @throws Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserIDTooManyRequestsException
-     * @throws Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserIDInternalServerErrorException
+     * @throws \Braze\Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserIDBadRequestException
+     * @throws \Braze\Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserIDUnauthorizedException
+     * @throws \Braze\Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserIDForbiddenException
+     * @throws \Braze\Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserIDNotFoundException
+     * @throws \Braze\Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserIDTooManyRequestsException
+     * @throws \Braze\Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserIDInternalServerErrorException
      */
     public function getPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserID(string $preferenceCenterExternalID, string $userID, array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserID($preferenceCenterExternalID, $userID, $queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserID($preferenceCenterExternalID, $userID, $queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -6639,41 +6669,41 @@ class Client extends Runtime\Client\Client
      * curl --location -g --request GET https://rest.iad-01.braze.com/preference_center/v1/list \
      * --header 'Authorization: Bearer YOUR-REST-API-KEY'
      *
-     * ```
+     *  ```
      *
      * ## Response
      *
      * ``` json
      * {
-     * "preference_centers": [
-     * {
-     * "name": "My Preference Center 1",
-     * "preference_center_api_id": "preference_center_api_id",
-     * "created_at": "2022-08-17T15:46:10Z",
-     * "updated_at": "2022-08-17T15:46:10Z"
-     * },
-     * {
-     * "name": "My Preference Center 2",
-     * "preference_center_api_id": "preference_center_api_id",
-     * "created_at": "2022-08-19T11:13:06Z",
-     * "updated_at": "2022-08-19T11:13:06Z"
-     * },
-     * {
-     * "name": "My Preference Center 3",
-     * "preference_center_api_id": "preference_center_api_id",
-     * "created_at": "2022-08-19T11:30:50Z",
-     * "updated_at": "2022-08-19T11:30:50Z"
-     * },
-     * {
-     * "name": "My Preference Center 4",
-     * "preference_center_api_id": "preference_center_api_id",
-     * "created_at": "2022-09-13T20:41:34Z",
-     * "updated_at": "2022-09-13T20:41:34Z"
-     * }
-     * ]
+     *   "preference_centers": [
+     *     {
+     *       "name": "My Preference Center 1",
+     *       "preference_center_api_id": "preference_center_api_id",
+     *       "created_at": "2022-08-17T15:46:10Z",
+     *       "updated_at": "2022-08-17T15:46:10Z"
+     *     },
+     *     {
+     *       "name": "My Preference Center 2",
+     *       "preference_center_api_id": "preference_center_api_id",
+     *       "created_at": "2022-08-19T11:13:06Z",
+     *       "updated_at": "2022-08-19T11:13:06Z"
+     *     },
+     *     {
+     *       "name": "My Preference Center 3",
+     *       "preference_center_api_id": "preference_center_api_id",
+     *       "created_at": "2022-08-19T11:30:50Z",
+     *       "updated_at": "2022-08-19T11:30:50Z"
+     *     },
+     *     {
+     *       "name": "My Preference Center 4",
+     *       "preference_center_api_id": "preference_center_api_id",
+     *       "created_at": "2022-09-13T20:41:34Z",
+     *       "updated_at": "2022-09-13T20:41:34Z"
+     *     }
+     *   ]
      * }
      *
-     * ```
+     *  ```
      *
      * @param array $headerParameters {
      *
@@ -6682,18 +6712,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\GetPreferenceCenterV1ListBadRequestException
-     * @throws Exception\GetPreferenceCenterV1ListUnauthorizedException
-     * @throws Exception\GetPreferenceCenterV1ListForbiddenException
-     * @throws Exception\GetPreferenceCenterV1ListNotFoundException
-     * @throws Exception\GetPreferenceCenterV1ListTooManyRequestsException
-     * @throws Exception\GetPreferenceCenterV1ListInternalServerErrorException
+     * @throws \Braze\Exception\GetPreferenceCenterV1ListBadRequestException
+     * @throws \Braze\Exception\GetPreferenceCenterV1ListUnauthorizedException
+     * @throws \Braze\Exception\GetPreferenceCenterV1ListForbiddenException
+     * @throws \Braze\Exception\GetPreferenceCenterV1ListNotFoundException
+     * @throws \Braze\Exception\GetPreferenceCenterV1ListTooManyRequestsException
+     * @throws \Braze\Exception\GetPreferenceCenterV1ListInternalServerErrorException
      */
     public function getPreferenceCenterV1List(array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\GetPreferenceCenterV1List($headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\GetPreferenceCenterV1List($headerParameters), $fetch);
     }
 
     /**
@@ -6723,27 +6753,27 @@ class Client extends Runtime\Client\Client
      * curl --location -g --request GET https://rest.iad-01.braze.com/preference_center/v1/preference_center_external_id \
      * --header 'Authorization: Bearer YOUR-REST-API-KEY'
      *
-     * ```
+     *  ```
      *
      * ## Response
      *
      * ``` json
      * {
-     * "name": "My Preference Center",
-     * "preference_center_api_id": "preference_center_api_id",
-     * "created_at": "example_time_created",
-     * "updated_at": "example_time_updated",
-     * "preference_center_title": "Example preference center title",
-     * "preference_center_page_html": "HTML for preference center here",
-     * "confirmation_page_html": "HTML for confirmation page here",
-     * "redirect_page_html": null,
-     * "preference_center_options": {
-     * "meta-viewport-content": "width=device-width, initial-scale=2"
-     * },
-     * "state": "active"
+     *   "name": "My Preference Center",
+     *   "preference_center_api_id": "preference_center_api_id",
+     *   "created_at": "example_time_created",
+     *   "updated_at": "example_time_updated",
+     *   "preference_center_title": "Example preference center title",
+     *   "preference_center_page_html": "HTML for preference center here",
+     *   "confirmation_page_html": "HTML for confirmation page here",
+     *   "redirect_page_html": null,
+     *   "preference_center_options": {
+     *     "meta-viewport-content": "width=device-width, initial-scale=2"
+     *   },
+     *   "state": "active"
      * }
      *
-     * ```
+     *  ```
      *
      * @param array $headerParameters {
      *
@@ -6752,18 +6782,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDBadRequestException
-     * @throws Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDUnauthorizedException
-     * @throws Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDForbiddenException
-     * @throws Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDNotFoundException
-     * @throws Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDTooManyRequestsException
-     * @throws Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDInternalServerErrorException
+     * @throws \Braze\Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDBadRequestException
+     * @throws \Braze\Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDUnauthorizedException
+     * @throws \Braze\Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDForbiddenException
+     * @throws \Braze\Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDNotFoundException
+     * @throws \Braze\Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDTooManyRequestsException
+     * @throws \Braze\Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDInternalServerErrorException
      */
     public function getPreferenceCenterV1ByPreferenceCenterExternalID(string $preferenceCenterExternalID, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\GetPreferenceCenterV1ByPreferenceCenterExternalID($preferenceCenterExternalID, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\GetPreferenceCenterV1ByPreferenceCenterExternalID($preferenceCenterExternalID, $headerParameters), $fetch);
     }
 
     /**
@@ -6800,29 +6830,30 @@ class Client extends Runtime\Client\Client
      * --header 'Content-Type: application/json' \
      * --header 'Authorization: Bearer YOUR-API-KEY-HERE' \
      * --data-raw '{
-     * "name": "Example",
-     * "preference_center_title": "Example Preference Center Title",
-     * "preference_center_page_html": "HTML for preference center here",
-     * "confirmation_page_html": "HTML here with a message to users here",
-     * "state": "active"
+     *   "name": "Example",
+     *   "preference_center_title": "Example Preference Center Title",
+     *   "preference_center_page_html": "HTML for preference center here",
+     *   "confirmation_page_html": "HTML here with a message to users here",
+     *   "state": "active"
      * }
      * '
      *
-     * ```
+     *  ```
      *
      * ## Example response
      *
      * ```
      * {
-     * "preference_center_api_id": "8efc52aa-935e-42b7-bd6b-98f43bb9b0f1",
-     * "created_at": "2022-09-22T18:28:07Z",
-     * "updated_at": "2022-09-22T18:32:07Z",
-     * "message": "success"
+     *   "preference_center_api_id": "8efc52aa-935e-42b7-bd6b-98f43bb9b0f1",
+     *   "created_at": "2022-09-22T18:28:07Z",
+     *   "updated_at": "2022-09-22T18:32:07Z",
+     *   "message": "success"
      * }
      *
-     * ```
+     *  ```
      *
-     * @param array $headerParameters {
+     * @param \Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBody|null $requestBody
+     * @param array                                                                 $headerParameters {
      *
      * @var string-Type
      * @var string
@@ -6830,18 +6861,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PutPreferenceCenterV1ByPreferenceCenterExternalIDBadRequestException
-     * @throws Exception\PutPreferenceCenterV1ByPreferenceCenterExternalIDUnauthorizedException
-     * @throws Exception\PutPreferenceCenterV1ByPreferenceCenterExternalIDForbiddenException
-     * @throws Exception\PutPreferenceCenterV1ByPreferenceCenterExternalIDNotFoundException
-     * @throws Exception\PutPreferenceCenterV1ByPreferenceCenterExternalIDTooManyRequestsException
-     * @throws Exception\PutPreferenceCenterV1ByPreferenceCenterExternalIDInternalServerErrorException
+     * @throws \Braze\Exception\PutPreferenceCenterV1ByPreferenceCenterExternalIDBadRequestException
+     * @throws \Braze\Exception\PutPreferenceCenterV1ByPreferenceCenterExternalIDUnauthorizedException
+     * @throws \Braze\Exception\PutPreferenceCenterV1ByPreferenceCenterExternalIDForbiddenException
+     * @throws \Braze\Exception\PutPreferenceCenterV1ByPreferenceCenterExternalIDNotFoundException
+     * @throws \Braze\Exception\PutPreferenceCenterV1ByPreferenceCenterExternalIDTooManyRequestsException
+     * @throws \Braze\Exception\PutPreferenceCenterV1ByPreferenceCenterExternalIDInternalServerErrorException
      */
-    public function putPreferenceCenterV1ByPreferenceCenterExternalID(string $preferenceCenterExternalID, ?Model\PreferenceCenterV1PreferenceCenterExternalIDPutBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function putPreferenceCenterV1ByPreferenceCenterExternalID(string $preferenceCenterExternalID, Model\PreferenceCenterV1PreferenceCenterExternalIDPutBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PutPreferenceCenterV1ByPreferenceCenterExternalID($preferenceCenterExternalID, $requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PutPreferenceCenterV1ByPreferenceCenterExternalID($preferenceCenterExternalID, $requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -6896,23 +6927,23 @@ class Client extends Runtime\Client\Client
      *
      * ```
      * {
-     * "preference_center_api_id": "preference_center_api_id_example",
-     * "liquid_tag": "{{preference_center.${MyPreferenceCenter2022-09-22}}}",
-     * "created_at": "2022-09-22T18:28:07+00:00",
-     * "message": "success"
+     *   "preference_center_api_id": "preference_center_api_id_example",
+     *   "liquid_tag": "{{preference_center.${MyPreferenceCenter2022-09-22}}}",
+     *   "created_at": "2022-09-22T18:28:07+00:00",
+     *   "message": "success"
      * }
      *
-     * ```
+     *  ```
      *
      * ### HTML with form inputs
      *
      * ```
      * %3C!doctype%20html%3E
      * <html lang="en">
-     * <head>
-     * <meta name="robots" content="noindex" />
-     * <title>Email Preferences</title>
-     * <script type="text/javascript">
+     *   <head>
+     *     <meta name="robots" content="noindex" />
+     *     <title>Email Preferences</title>
+     *     <script type="text/javascript">
      * %20%20%20%20%20%20window.onload%20%3D%20()%20%3D%3E%20%7B
      * %20%20%20%20%20%20%20%20const%20globalUnsubscribed%20%3D%20%26%23x27%3B%7B%7Bsubscribed_state.%24%7Bemail_global%7D%7D%7D%26%23x27%3B%20%3D%3D%20%22unsubscribed%22%3B
      * %20%20%20%20%20%20%20%20const%20globalSubscribedValue%20%3D%20%26%23x27%3B%7B%7Bsubscribed_state.%24%7Bemail_global%7D%7D%7D%26%23x27%3B%20%3D%3D%20%22opted_in%22%20%3F%20%22opted_in%22%20%3A%20%22subscribed%22%3B
@@ -6942,8 +6973,8 @@ class Client extends Runtime\Client\Client
      * %20%20%20%20%20%20%20%20%20%20setGlobal(e.target.checked)%3B
      * %20%20%20%20%20%20%20%20%7D)%3B
      * %20%20%20%20%20%20%7D%3B
-     * </script>
-     * <style>
+     *     </script>
+     *     <style>
      * %20%20%20%20%20%20body%20%7B
      * %20%20%20%20%20%20%20%20background%3A%20%23fff%3B
      * %20%20%20%20%20%20%20%20margin%3A%200%3B
@@ -6957,9 +6988,9 @@ class Client extends Runtime\Client\Client
      * %20%20%20%20%20%20%20%20%20%20width%3A%20100%25%3B
      * %20%20%20%20%20%20%20%20%7D
      * %20%20%20%20%20%20%7D
-     * </style>
-     * </head>
-     * <body class="vsc-initialized" style="margin: 0" bgcolor="#fff">
+     *     </style>
+     *   </head>
+     *   <body class="vsc-initialized" style="margin: 0" bgcolor="#fff">
      * %20%20%20%20%3Cdiv
      * %20%20%20%20%20%20class%3D%22main-container%22
      * %20%20%20%20%20%20style%3D%22
@@ -6977,64 +7008,64 @@ class Client extends Runtime\Client\Client
      * %20%20%20%20%20%20%20%20padding%3A%2015px%200%205px%3B
      * %20%20%20%20%20%20%22
      * %20%20%20%20%3E
-     * <div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="content" style="margin-left: 20px; margin-right: 20px">
-     * <div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27;>
+     *       <div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="content" style="margin-left: 20px; margin-right: 20px">
+     *         <div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27;>
      * %20%20%20%20%20%20%20%20%20%20%3Ch1
      * %20%20%20%20%20%20%20%20%20%20%20%20style%3D%22color%3A%20%233accdd%3B%20font-size%3A%2027px%3B%20font-weight%3A%20400%3B%20margin-bottom%3A%2040px%3B%20margin-top%3A%200%22
      * %20%20%20%20%20%20%20%20%20%20%20%20align%3D%22center%22
      * %20%20%20%20%20%20%20%20%20%20%3E
      * %20%20%20%20%20%20%20%20%20%20%20%20Manage%20Email%20Preferences
-     * </h1>
-     * <p class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="intro-text" style="font-size: 14px; margin-bottom: 20px" align="center">
+     *           </h1>
+     *           <p class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="intro-text" style="font-size: 14px; margin-bottom: 20px" align="center">
      * %20%20%20%20%20%20%20%20%20%20%20%20Select%20the%20emails%20that%20you%20want%20to%20receive.
-     * </p>
-     * </div>
-     * <form action="{{preference_center_submit_url}}" method="post" accept-charset="UTF-8">
-     * <div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27;>
-     * <h3 class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; style="font-size: 15px; margin-bottom: 15px; margin-left: 5px; margin-top: 40px">
-     * Email Address: <span class="displayed-email" style="font-weight: 400">{{${email_address}}}</span>
-     * </h3>
-     * </div>
-     * <div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="subscription-groups-holder" style="margin-bottom: 20px"><div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="row" style="border-top-width: 1px; border-top-color: #dddde2; border-top-style: solid; background-color: #fff; padding: 15px 10px 14px;border-bottom: 1px solid rgb(221, 221, 226);">
-     * <label style="color: #27368f; cursor: pointer; font-size: 15px; font-weight: 700;">
-     * <input type="checkbox" id="checkbox-3d2ae07a-f2ff-4318-bdff-e394f2d3a4ec" class="sub_group" style="margin-right: 4px;">
-     * <input type="hidden" name="{% form_field_name :subscription_group 3d2ae07a-f2ff-4318-bdff-e394f2d3a4ec %}" id="value-3d2ae07a-f2ff-4318-bdff-e394f2d3a4ec" />
+     *           </p>
+     *         </div>
+     *         <form action="{{preference_center_submit_url}}" method="post" accept-charset="UTF-8">
+     *           <div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27;>
+     *             <h3 class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; style="font-size: 15px; margin-bottom: 15px; margin-left: 5px; margin-top: 40px">
+     *               Email Address: <span class="displayed-email" style="font-weight: 400">{{${email_address}}}</span>
+     *             </h3>
+     *           </div>
+     *           <div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="subscription-groups-holder" style="margin-bottom: 20px"><div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="row" style="border-top-width: 1px; border-top-color: #dddde2; border-top-style: solid; background-color: #fff; padding: 15px 10px 14px;border-bottom: 1px solid rgb(221, 221, 226);">
+     *   <label style="color: #27368f; cursor: pointer; font-size: 15px; font-weight: 700;">
+     *     <input type="checkbox" id="checkbox-3d2ae07a-f2ff-4318-bdff-e394f2d3a4ec" class="sub_group" style="margin-right: 4px;">
+     *     <input type="hidden" name="{% form_field_name :subscription_group 3d2ae07a-f2ff-4318-bdff-e394f2d3a4ec %}" id="value-3d2ae07a-f2ff-4318-bdff-e394f2d3a4ec" />
      * %20%20%20%20Sub%20Group%201
-     * </label>
-     * <p class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="subscription-group" style="font-size: 13px; line-height: 1.4em; min-height: 20px; padding-right: 20px; margin: 0 0 3px 23px;">
-     * </p>
+     *   </label>
+     *   <p class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="subscription-group" style="font-size: 13px; line-height: 1.4em; min-height: 20px; padding-right: 20px; margin: 0 0 3px 23px;">
+     *   </p>
      * </div>
      * <div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="row" style="border-top-width: 1px; border-top-color: #dddde2; border-top-style: solid; background-color: #fff; padding: 15px 10px 14px;border-bottom: 1px solid rgb(221, 221, 226);">
-     * <label style="color: #27368f; cursor: pointer; font-size: 15px; font-weight: 700;">
-     * <input type="checkbox" id="checkbox-7d89bdc3-4aa1-4592-8b8a-4c8b7161c875" class="sub_group" style="margin-right: 4px;">
-     * <input type="hidden" name="{% form_field_name :subscription_group 7d89bdc3-4aa1-4592-8b8a-4c8b7161c875 %}" id="value-7d89bdc3-4aa1-4592-8b8a-4c8b7161c875" />
+     *   <label style="color: #27368f; cursor: pointer; font-size: 15px; font-weight: 700;">
+     *     <input type="checkbox" id="checkbox-7d89bdc3-4aa1-4592-8b8a-4c8b7161c875" class="sub_group" style="margin-right: 4px;">
+     *     <input type="hidden" name="{% form_field_name :subscription_group 7d89bdc3-4aa1-4592-8b8a-4c8b7161c875 %}" id="value-7d89bdc3-4aa1-4592-8b8a-4c8b7161c875" />
      * %20%20%20%20Sub%20Group%202
-     * </label>
-     * <p class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="subscription-group" style="font-size: 13px; line-height: 1.4em; min-height: 20px; padding-right: 20px; margin: 0 0 3px 23px;">
-     * </p>
+     *   </label>
+     *   <p class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="subscription-group" style="font-size: 13px; line-height: 1.4em; min-height: 20px; padding-right: 20px; margin: 0 0 3px 23px;">
+     *   </p>
      * </div>
      * <div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="row" style="border-top-width: 1px; border-top-color: #dddde2; border-top-style: solid; background-color: #fff; padding: 15px 10px 14px;border-bottom: 1px solid rgb(221, 221, 226);">
-     * <label style="color: #27368f; cursor: pointer; font-size: 15px; font-weight: 700;">
-     * <input type="checkbox" id="checkbox-5444d32e-2815-4258-964c-b9690d4ccb94" class="sub_group" style="margin-right: 4px;">
-     * <input type="hidden" name="{% form_field_name :subscription_group 5444d32e-2815-4258-964c-b9690d4ccb94 %}" id="value-5444d32e-2815-4258-964c-b9690d4ccb94" />
+     *   <label style="color: #27368f; cursor: pointer; font-size: 15px; font-weight: 700;">
+     *     <input type="checkbox" id="checkbox-5444d32e-2815-4258-964c-b9690d4ccb94" class="sub_group" style="margin-right: 4px;">
+     *     <input type="hidden" name="{% form_field_name :subscription_group 5444d32e-2815-4258-964c-b9690d4ccb94 %}" id="value-5444d32e-2815-4258-964c-b9690d4ccb94" />
      * %20%20%20%20Sub%20Group%203
-     * </label>
-     * <p class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="subscription-group" style="font-size: 13px; line-height: 1.4em; min-height: 20px; padding-right: 20px; margin: 0 0 3px 23px;">
-     * </p>
+     *   </label>
+     *   <p class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="subscription-group" style="font-size: 13px; line-height: 1.4em; min-height: 20px; padding-right: 20px; margin: 0 0 3px 23px;">
+     *   </p>
      * </div>
      * </div>
-     * <div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="unsub-all" style="cursor: pointer; font-size: 13px; margin-bottom: 20px" align="center">
-     * <label>
-     * <input type="checkbox" id="checkbox-global" />
+     *           <div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class="unsub-all" style="cursor: pointer; font-size: 13px; margin-bottom: 20px" align="center">
+     *             <label>
+     *               <input type="checkbox" id="checkbox-global" />
      * %20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cinput
      * %20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20type%3D%22hidden%22
      * %20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20id%3D%22value-global%22
      * %20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20name%3D%22%7B%25%20form_field_name%20%3Aemail_global_state%20%25%7D%22
      * %20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%3E
-     * <i class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27;> Unsubscribe from all of the above types of emails </i>
-     * </label>
-     * </div>
-     * <div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27;>
+     *               <i class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27;> Unsubscribe from all of the above types of emails </i>
+     *             </label>
+     *           </div>
+     *           <div class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27;>
      * %20%20%20%20%20%20%20%20%20%20%20%20%3Cinput
      * %20%20%20%20%20%20%20%20%20%20%20%20%20%20class%3D%22save%22
      * %20%20%20%20%20%20%20%20%20%20%20%20%20%20type%3D%22submit%22
@@ -7053,16 +7084,17 @@ class Client extends Runtime\Client\Client
      * %20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20border-style%3A%20none%3B
      * %20%20%20%20%20%20%20%20%20%20%20%20%20%20%22
      * %20%20%20%20%20%20%20%20%20%20%20%20%2F%3E
-     * </div>
-     * </form>
-     * </div>
-     * </div>
-     * </body>
+     *           </div>
+     *         </form>
+     *       </div>
+     *     </div>
+     *   </body>
      * </html>
      *
-     * ```
+     *  ```
      *
-     * @param array $headerParameters {
+     * @param \Braze\Model\PreferenceCenterV1PostBody|null $requestBody
+     * @param array                                        $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -7070,18 +7102,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PostPreferenceCenterV1BadRequestException
-     * @throws Exception\PostPreferenceCenterV1UnauthorizedException
-     * @throws Exception\PostPreferenceCenterV1ForbiddenException
-     * @throws Exception\PostPreferenceCenterV1NotFoundException
-     * @throws Exception\PostPreferenceCenterV1TooManyRequestsException
-     * @throws Exception\PostPreferenceCenterV1InternalServerErrorException
+     * @throws \Braze\Exception\PostPreferenceCenterV1BadRequestException
+     * @throws \Braze\Exception\PostPreferenceCenterV1UnauthorizedException
+     * @throws \Braze\Exception\PostPreferenceCenterV1ForbiddenException
+     * @throws \Braze\Exception\PostPreferenceCenterV1NotFoundException
+     * @throws \Braze\Exception\PostPreferenceCenterV1TooManyRequestsException
+     * @throws \Braze\Exception\PostPreferenceCenterV1InternalServerErrorException
      */
-    public function postPreferenceCenterV1(?Model\PreferenceCenterV1PostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postPreferenceCenterV1(Model\PreferenceCenterV1PostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PostPreferenceCenterV1($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PostPreferenceCenterV1($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -7115,7 +7147,7 @@ class Client extends Runtime\Client\Client
      * --header 'X-Request-Origin: YOUR-REQUEST-ORIGIN-HERE' \
      * --header 'Authorization: Bearer YOUR-SCIM-TOKEN-HERE' \
      *
-     * ```
+     *  ```
      *
      * ## Response
      *
@@ -7125,7 +7157,7 @@ class Client extends Runtime\Client\Client
      * HTTP/1.1 204 Not Found
      * Content-Type: text/html; charset=UTF-8
      *
-     * ```
+     *  ```
      *
      * If a developer with this ID doesn’t exist in Braze, the endpoint will respond with:
      *
@@ -7133,7 +7165,7 @@ class Client extends Runtime\Client\Client
      * HTTP/1.1 404 Not Found Content-Type: text/html; charset=UTF-8
      * { "schemas": ["urn:ietf:params:scim:api:messages:2.0:Error"], "detail": "User not found", "status": 404 }
      *
-     * ```
+     *  ```
      *
      * @param array $headerParameters {
      *
@@ -7144,18 +7176,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\DeleteScimV2UserByIdBadRequestException
-     * @throws Exception\DeleteScimV2UserByIdUnauthorizedException
-     * @throws Exception\DeleteScimV2UserByIdForbiddenException
-     * @throws Exception\DeleteScimV2UserByIdNotFoundException
-     * @throws Exception\DeleteScimV2UserByIdTooManyRequestsException
-     * @throws Exception\DeleteScimV2UserByIdInternalServerErrorException
+     * @throws \Braze\Exception\DeleteScimV2UserByIdBadRequestException
+     * @throws \Braze\Exception\DeleteScimV2UserByIdUnauthorizedException
+     * @throws \Braze\Exception\DeleteScimV2UserByIdForbiddenException
+     * @throws \Braze\Exception\DeleteScimV2UserByIdNotFoundException
+     * @throws \Braze\Exception\DeleteScimV2UserByIdTooManyRequestsException
+     * @throws \Braze\Exception\DeleteScimV2UserByIdInternalServerErrorException
      */
     public function deleteScimV2UserById(string $id, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\DeleteScimV2UserById($id, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\DeleteScimV2UserById($id, $headerParameters), $fetch);
     }
 
     /**
@@ -7187,61 +7219,61 @@ class Client extends Runtime\Client\Client
      * --header 'X-Request-Origin: YOUR-REQUEST-ORIGIN-HERE' \
      * --header 'Authorization: Bearer YOUR-API-KEY-HERE' \
      *
-     * ```
+     *  ```
      *
      * ## Response
      *
      * ``` json
      * {
-     * "schemas": ["urn:ietf:params:scim:schemas:core:2.0:User"],
-     * "id": "dfa245b7-24195aec-887bb3ad-602b3340",
-     * "userName": "user@test.com",
-     * "name": {
-     * "givenName": "Test",
-     * "familyName": "User"
-     * },
-     * "department": "finance",
-     * "lastSignInAt": "Thursday, January 1, 1970 12:00:00 AM",
-     * "createdAt": "Thursday, January 1, 1970 12:00:00 AM",
-     * "permissions": {
-     * "companyPermissions": ["manage_company_settings"],
-     * "roles": [
-     * {
-     * "roleName": "Another Test Role",
-     * "roleId": "23125dad23dfaae7,
-     * "appGroup": [
-     * {
-     * "appGroupId": "241adcd25adfabcded",
-     * "appGroupName": "Production Workspace",
-     * "appGroupPermissionSets": [
-     * {
-     * "appGroupPermissionSetName": "A Permission Set",
-     * "appGroupPermissionSetId": "dfa385109bc38",
-     * "permissions": ["basic_access","publish_cards"]
-     * }
-     * ]
-     * }
-     * ]
-     * }
-     * ],
-     * "appGroup": [
-     * {
-     * "appGroupId": "241adcd25789fabcded",
-     * "appGroupName": "Test Workspace",
-     * "appGroupPermissions": ["basic_access","send_campaigns_canvases"],
-     * "team": [
-     * {
-     * "teamId": "241adcd25789fabcded",
-     * "teamName": "Test Team",
-     * "teamPermissions": ["admin"]
-     * }
-     * ]
-     * }
-     * ]
-     * }
+     *     "schemas": ["urn:ietf:params:scim:schemas:core:2.0:User"],
+     *     "id": "dfa245b7-24195aec-887bb3ad-602b3340",
+     *     "userName": "user@test.com",
+     *     "name": {
+     *         "givenName": "Test",
+     *         "familyName": "User"
+     *     },
+     *     "department": "finance",
+     *     "lastSignInAt": "Thursday, January 1, 1970 12:00:00 AM",
+     *     "createdAt": "Thursday, January 1, 1970 12:00:00 AM",
+     *     "permissions": {
+     *         "companyPermissions": ["manage_company_settings"],
+     *         "roles": [
+     *             {
+     *                 "roleName": "Another Test Role",
+     *                 "roleId": "23125dad23dfaae7,
+     *                 "appGroup": [
+     *                     {
+     *                         "appGroupId": "241adcd25adfabcded",
+     *                         "appGroupName": "Production Workspace",
+     *                         "appGroupPermissionSets": [
+     *                             {
+     *                                 "appGroupPermissionSetName": "A Permission Set",
+     *                                 "appGroupPermissionSetId": "dfa385109bc38",
+     *                                 "permissions": ["basic_access","publish_cards"]
+     *                             }
+     *                         ]
+     *                     }
+     *                 ]
+     *             }
+     *         ],
+     *         "appGroup": [
+     *             {
+     *                 "appGroupId": "241adcd25789fabcded",
+     *                 "appGroupName": "Test Workspace",
+     *                 "appGroupPermissions": ["basic_access","send_campaigns_canvases"],
+     *                 "team": [
+     *                     {
+     *                          "teamId": "241adcd25789fabcded",
+     *                          "teamName": "Test Team",
+     *                          "teamPermissions": ["admin"]
+     *                     }
+     *                 ]
+     *             }
+     *         ]
+     *     }
      * }
      *
-     * ```
+     *  ```
      *
      * @param array $headerParameters {
      *
@@ -7252,18 +7284,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\GetScimV2UserByIdBadRequestException
-     * @throws Exception\GetScimV2UserByIdUnauthorizedException
-     * @throws Exception\GetScimV2UserByIdForbiddenException
-     * @throws Exception\GetScimV2UserByIdNotFoundException
-     * @throws Exception\GetScimV2UserByIdTooManyRequestsException
-     * @throws Exception\GetScimV2UserByIdInternalServerErrorException
+     * @throws \Braze\Exception\GetScimV2UserByIdBadRequestException
+     * @throws \Braze\Exception\GetScimV2UserByIdUnauthorizedException
+     * @throws \Braze\Exception\GetScimV2UserByIdForbiddenException
+     * @throws \Braze\Exception\GetScimV2UserByIdNotFoundException
+     * @throws \Braze\Exception\GetScimV2UserByIdTooManyRequestsException
+     * @throws \Braze\Exception\GetScimV2UserByIdInternalServerErrorException
      */
     public function getScimV2UserById(string $id, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\GetScimV2UserById($id, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\GetScimV2UserById($id, $headerParameters), $fetch);
     }
 
     /**
@@ -7300,35 +7332,35 @@ class Client extends Runtime\Client\Client
      *
      * ``` json
      * {
-     * "schemas": ["urn:ietf:params:scim:schemas:core:2.0:User"],
-     * "id": "dfa245b7-24195aec-887bb3ad-602b3340",
-     * "userName": "user@test.com",
-     * "name": {
-     * "givenName": "Test",
-     * "familyName": "User"
-     * },
-     * "department": "finance",
-     * "lastSignInAt": "Thursday, January 1, 1970 12:00:00 AM",
-     * "permissions": {
-     * "companyPermissions": ["manage_company_settings"],
-     * "appGroup": [
-     * {
-     * "appGroupId": "241adcd25789fabcded",
-     * "appGroupName": "Test App Group",
-     * "appGroupPermissions": ["basic_access","send_campaigns_canvases"],
-     * "team": [
-     * {
-     * "teamId": "2519dafcdba238ae7",
-     * "teamName": "Test Team",
-     * "teamPermissions": ["admin"]
-     * }
-     * ]
-     * }
-     * ]
-     * }
+     *     "schemas": ["urn:ietf:params:scim:schemas:core:2.0:User"],
+     *     "id": "dfa245b7-24195aec-887bb3ad-602b3340",
+     *     "userName": "user@test.com",
+     *     "name": {
+     *         "givenName": "Test",
+     *         "familyName": "User"
+     *     },
+     *     "department": "finance",
+     *     "lastSignInAt": "Thursday, January 1, 1970 12:00:00 AM",
+     *     "permissions": {
+     *         "companyPermissions": ["manage_company_settings"],
+     *         "appGroup": [
+     *             {
+     *                 "appGroupId": "241adcd25789fabcded",
+     *                 "appGroupName": "Test App Group",
+     *                 "appGroupPermissions": ["basic_access","send_campaigns_canvases"],
+     *                 "team": [
+     *                     {
+     *                          "teamId": "2519dafcdba238ae7",
+     *                          "teamName": "Test Team",
+     *                          "teamPermissions": ["admin"]
+     *                     }
+     *                 ]
+     *             }
+     *         ]
+     *     }
      * }
      *
-     * ```
+     *  ```
      *
      * ### Error states
      *
@@ -7338,14 +7370,15 @@ class Client extends Runtime\Client\Client
      * HTTP/1.1 404 Not Found
      * Content-Type: text/html; charset=UTF-8
      * {
-     * "schemas": ["urn:ietf:params:scim:api:messages:2.0:Error"],
-     * "detail": "User not found",
-     * "status": 404
+     *     "schemas": ["urn:ietf:params:scim:api:messages:2.0:Error"],
+     *     "detail": "User not found",
+     *     "status": 404
      * }
      *
-     * ```
+     *  ```
      *
-     * @param array $headerParameters {
+     * @param \Braze\Model\ScimV2UsersIdPutBody|null $requestBody
+     * @param array                                  $headerParameters {
      *
      * @var string $Content-Type
      * @var string $X-Request-Origin
@@ -7354,18 +7387,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PutScimV2UserByIdBadRequestException
-     * @throws Exception\PutScimV2UserByIdUnauthorizedException
-     * @throws Exception\PutScimV2UserByIdForbiddenException
-     * @throws Exception\PutScimV2UserByIdNotFoundException
-     * @throws Exception\PutScimV2UserByIdTooManyRequestsException
-     * @throws Exception\PutScimV2UserByIdInternalServerErrorException
+     * @throws \Braze\Exception\PutScimV2UserByIdBadRequestException
+     * @throws \Braze\Exception\PutScimV2UserByIdUnauthorizedException
+     * @throws \Braze\Exception\PutScimV2UserByIdForbiddenException
+     * @throws \Braze\Exception\PutScimV2UserByIdNotFoundException
+     * @throws \Braze\Exception\PutScimV2UserByIdTooManyRequestsException
+     * @throws \Braze\Exception\PutScimV2UserByIdInternalServerErrorException
      */
-    public function putScimV2UserById(string $id, ?Model\ScimV2UsersIdPutBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function putScimV2UserById(string $id, Model\ScimV2UsersIdPutBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PutScimV2UserById($id, $requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PutScimV2UserById($id, $requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -7398,40 +7431,40 @@ class Client extends Runtime\Client\Client
      * X-Request-Origin: YOUR-REQUEST-ORIGIN-HERE
      * Authorization: Bearer YOUR-SCIM-TOKEN-HERE
      * {
-     * "schemas": ["urn:ietf:params:scim:api:messages:2.0:ListResponse"],
-     * "totalResults": 1,
-     * "Resources": [
-     * {
-     * "userName": "user@test.com",
-     * "id": "dfa245b7-24195aec-887bb3ad-602b3340",
-     * "name": {
-     * "givenName": "Test",
-     * "familyName": "User"
-     * },
-     * "department": "finance",
-     * "lastSignInAt": "Thursday, January 1, 1970 12:00:00 AM",
-     * "permissions": {
-     * "companyPermissions": ["manage_company_settings"],
-     * "appGroup": [
-     * {
-     * "appGroupId": "241adcd25789fabcded",
-     * "appGroupName": "Test Workspace",
-     * "appGroupPermissions": ["basic_access","send_campaigns_canvases"],
-     * "team": [
-     * {
-     * "teamId": "241adcd25789fabcded",
-     * "teamName": "Test Team",
-     * "teamPermissions": ["admin"]
-     * }
-     * ]
-     * }
-     * ]
-     * }
-     * }
-     * ]
+     *     "schemas": ["urn:ietf:params:scim:api:messages:2.0:ListResponse"],
+     *     "totalResults": 1,
+     *     "Resources": [
+     *         {
+     *             "userName": "user@test.com",
+     *             "id": "dfa245b7-24195aec-887bb3ad-602b3340",
+     *             "name": {
+     *                 "givenName": "Test",
+     *                 "familyName": "User"
+     *             },
+     *             "department": "finance",
+     *             "lastSignInAt": "Thursday, January 1, 1970 12:00:00 AM",
+     *             "permissions": {
+     *                 "companyPermissions": ["manage_company_settings"],
+     *                 "appGroup": [
+     *                     {
+     *                         "appGroupId": "241adcd25789fabcded",
+     *                         "appGroupName": "Test Workspace",
+     *                         "appGroupPermissions": ["basic_access","send_campaigns_canvases"],
+     *                         "team": [
+     *                             {
+     *                                 "teamId": "241adcd25789fabcded",
+     *                                 "teamName": "Test Team",
+     *                                 "teamPermissions": ["admin"]
+     *                             }
+     *                         ]
+     *                     }
+     *                 ]
+     *             }
+     *         }
+     *     ]
      * }
      *
-     * ```
+     *  ```
      *
      * @param array $queryParameters {
      *
@@ -7447,18 +7480,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\GetScimV2UserBadRequestException
-     * @throws Exception\GetScimV2UserUnauthorizedException
-     * @throws Exception\GetScimV2UserForbiddenException
-     * @throws Exception\GetScimV2UserNotFoundException
-     * @throws Exception\GetScimV2UserTooManyRequestsException
-     * @throws Exception\GetScimV2UserInternalServerErrorException
+     * @throws \Braze\Exception\GetScimV2UserBadRequestException
+     * @throws \Braze\Exception\GetScimV2UserUnauthorizedException
+     * @throws \Braze\Exception\GetScimV2UserForbiddenException
+     * @throws \Braze\Exception\GetScimV2UserNotFoundException
+     * @throws \Braze\Exception\GetScimV2UserTooManyRequestsException
+     * @throws \Braze\Exception\GetScimV2UserInternalServerErrorException
      */
     public function getScimV2User(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\GetScimV2User($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\GetScimV2User($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -7486,35 +7519,35 @@ class Client extends Runtime\Client\Client
      *
      * ``` json
      * {
-     * "schemas": ["urn:ietf:params:scim:schemas:core:2.0:User"],
-     * "id": "dfa245b7-24195aec-887bb3ad-602b3340",
-     * "userName": "user@test.com",
-     * "name": {
-     * "givenName": "Test",
-     * "familyName": "User"
-     * },
-     * "department": "finance",
-     * "lastSignInAt": "Thursday, January 1, 1970 12:00:00 AM",
-     * "permissions": {
-     * "companyPermissions": ["manage_company_settings"],
-     * "appGroup": [
-     * {
-     * "appGroupId": "241adcd25789fabcded",
-     * "appGroupName": "Test App Group",
-     * "appGroupPermissions": ["basic_access","send_campaigns_canvases"],
-     * "team": [
-     * {
-     * "teamId": "2519dafcdba238ae7",
-     * "teamName": "Test Team",
-     * "teamPermissions": ["basic_access","export_user_data"]
-     * }
-     * ]
-     * }
-     * ]
-     * }
+     *     "schemas": ["urn:ietf:params:scim:schemas:core:2.0:User"],
+     *     "id": "dfa245b7-24195aec-887bb3ad-602b3340",
+     *     "userName": "user@test.com",
+     *     "name": {
+     *         "givenName": "Test",
+     *         "familyName": "User"
+     *     },
+     *     "department": "finance",
+     *     "lastSignInAt": "Thursday, January 1, 1970 12:00:00 AM",
+     *     "permissions": {
+     *         "companyPermissions": ["manage_company_settings"],
+     *         "appGroup": [
+     *             {
+     *                 "appGroupId": "241adcd25789fabcded",
+     *                 "appGroupName": "Test App Group",
+     *                 "appGroupPermissions": ["basic_access","send_campaigns_canvases"],
+     *                 "team": [
+     *                     {
+     *                          "teamId": "2519dafcdba238ae7",
+     *                          "teamName": "Test Team",
+     *                          "teamPermissions": ["basic_access","export_user_data"]
+     *                     }
+     *                 ]
+     *             }
+     *         ]
+     *     }
      * }
      *
-     * ```
+     *  ```
      *
      * ### Error states
      *
@@ -7525,14 +7558,15 @@ class Client extends Runtime\Client\Client
      * Date: Tue, 10 Sep 2019 02:22:30 GMT
      * Content-Type: text/json;charset=UTF-8
      * {
-     * "schemas": ["urn:ietf:params:scim:api:messages:2.0:Error"],
-     * "detail": "User already exists in the database.",
-     * "status": 409
+     *   "schemas": ["urn:ietf:params:scim:api:messages:2.0:Error"],
+     *   "detail": "User already exists in the database.",
+     *   "status": 409
      * }
      *
-     * ```
+     *  ```
      *
-     * @param array $headerParameters {
+     * @param \Braze\Model\ScimV2UsersPostBody|null $requestBody
+     * @param array                                 $headerParameters {
      *
      * @var string $Content-Type
      * @var string $X-Request-Origin
@@ -7541,18 +7575,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PostScimV2UserBadRequestException
-     * @throws Exception\PostScimV2UserUnauthorizedException
-     * @throws Exception\PostScimV2UserForbiddenException
-     * @throws Exception\PostScimV2UserNotFoundException
-     * @throws Exception\PostScimV2UserTooManyRequestsException
-     * @throws Exception\PostScimV2UserInternalServerErrorException
+     * @throws \Braze\Exception\PostScimV2UserBadRequestException
+     * @throws \Braze\Exception\PostScimV2UserUnauthorizedException
+     * @throws \Braze\Exception\PostScimV2UserForbiddenException
+     * @throws \Braze\Exception\PostScimV2UserNotFoundException
+     * @throws \Braze\Exception\PostScimV2UserTooManyRequestsException
+     * @throws \Braze\Exception\PostScimV2UserInternalServerErrorException
      */
-    public function postScimV2User(?Model\ScimV2UsersPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postScimV2User(Model\ScimV2UsersPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PostScimV2User($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PostScimV2User($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -7588,7 +7622,7 @@ class Client extends Runtime\Client\Client
      * curl --location --request GET 'https://rest.iad-01.braze.com/sms/invalid_phone_numbers?start_date=2019-01-01&end_date=2019-02-01&limit=100&offset=1&phone_numbers[]=12345678901' \
      * --header 'Authorization: Bearer YOUR-API-KEY-HERE'
      *
-     * ```
+     *  ```
      *
      * ## Response
      *
@@ -7598,27 +7632,27 @@ class Client extends Runtime\Client\Client
      * Content-Type: application/json
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
-     * "sms": [
-     * {
-     * "phone": (string) phone number in e.164 format,
-     * "invalid_detected_at": (string) the time the invalid number was detected in ISO 8601
-     * "reason" : "provider_error"
-     * },
-     * {
-     * "phone": (string) phone number in e.164 format,
-     * "invalid_detected_at": (string) the time the invalid number was detected in ISO 8601
-     * "reason" : "deactivated"
-     * },
-     * {
-     * "phone": (string) phone number in e.164 format,
-     * "invalid_detected_at": (string) the time the invalid number was detected in ISO 8601
-     * "reason" : "provider_error"
-     * }
-     * ],
-     * "message": "success"
+     *   "sms": [
+     *     {
+     *       "phone": (string) phone number in e.164 format,
+     *       "invalid_detected_at": (string) the time the invalid number was detected in ISO 8601
+     *       "reason" : "provider_error"
+     *     },
+     *     {
+     *       "phone": (string) phone number in e.164 format,
+     *       "invalid_detected_at": (string) the time the invalid number was detected in ISO 8601
+     *       "reason" : "deactivated"
+     *     },
+     *     {
+     *       "phone": (string) phone number in e.164 format,
+     *       "invalid_detected_at": (string) the time the invalid number was detected in ISO 8601
+     *       "reason" : "provider_error"
+     *     }
+     *   ],
+     *   "message": "success"
      * }
      *
-     * ```
+     *  ```
      *
      * @param array $queryParameters {
      *
@@ -7649,18 +7683,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\GetSmsInvalidPhoneNumberBadRequestException
-     * @throws Exception\GetSmsInvalidPhoneNumberUnauthorizedException
-     * @throws Exception\GetSmsInvalidPhoneNumberForbiddenException
-     * @throws Exception\GetSmsInvalidPhoneNumberNotFoundException
-     * @throws Exception\GetSmsInvalidPhoneNumberTooManyRequestsException
-     * @throws Exception\GetSmsInvalidPhoneNumberInternalServerErrorException
+     * @throws \Braze\Exception\GetSmsInvalidPhoneNumberBadRequestException
+     * @throws \Braze\Exception\GetSmsInvalidPhoneNumberUnauthorizedException
+     * @throws \Braze\Exception\GetSmsInvalidPhoneNumberForbiddenException
+     * @throws \Braze\Exception\GetSmsInvalidPhoneNumberNotFoundException
+     * @throws \Braze\Exception\GetSmsInvalidPhoneNumberTooManyRequestsException
+     * @throws \Braze\Exception\GetSmsInvalidPhoneNumberInternalServerErrorException
      */
     public function getSmsInvalidPhoneNumber(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\GetSmsInvalidPhoneNumber($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\GetSmsInvalidPhoneNumber($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -7689,12 +7723,13 @@ class Client extends Runtime\Client\Client
      * --header 'Content-Type: application/json' \
      * --header 'Authorization: Bearer YOUR-REST-API-KEY' \
      * --data-raw '{
-     * "phone_numbers" : ["12183095514","14255551212"]
+     *   "phone_numbers" : ["12183095514","14255551212"]
      * }'
      *
-     * ```
+     *  ```
      *
-     * @param array $headerParameters {
+     * @param \Braze\Model\SmsInvalidPhoneNumbersRemovePostBody|null $requestBody
+     * @param array                                                  $headerParameters {
      *
      * @var string $Authorization
      * @var string $Content-Type
@@ -7702,18 +7737,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PostSmsInvalidPhoneNumbersRemoveBadRequestException
-     * @throws Exception\PostSmsInvalidPhoneNumbersRemoveUnauthorizedException
-     * @throws Exception\PostSmsInvalidPhoneNumbersRemoveForbiddenException
-     * @throws Exception\PostSmsInvalidPhoneNumbersRemoveNotFoundException
-     * @throws Exception\PostSmsInvalidPhoneNumbersRemoveTooManyRequestsException
-     * @throws Exception\PostSmsInvalidPhoneNumbersRemoveInternalServerErrorException
+     * @throws \Braze\Exception\PostSmsInvalidPhoneNumbersRemoveBadRequestException
+     * @throws \Braze\Exception\PostSmsInvalidPhoneNumbersRemoveUnauthorizedException
+     * @throws \Braze\Exception\PostSmsInvalidPhoneNumbersRemoveForbiddenException
+     * @throws \Braze\Exception\PostSmsInvalidPhoneNumbersRemoveNotFoundException
+     * @throws \Braze\Exception\PostSmsInvalidPhoneNumbersRemoveTooManyRequestsException
+     * @throws \Braze\Exception\PostSmsInvalidPhoneNumbersRemoveInternalServerErrorException
      */
-    public function postSmsInvalidPhoneNumbersRemove(?Model\SmsInvalidPhoneNumbersRemovePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postSmsInvalidPhoneNumbersRemove(Model\SmsInvalidPhoneNumbersRemovePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PostSmsInvalidPhoneNumbersRemove($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PostSmsInvalidPhoneNumbersRemove($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -7752,7 +7787,7 @@ class Client extends Runtime\Client\Client
      * 1
      * https://rest.iad-03.braze.com/subscription/status/get?subscription_group_id={{subscription_group_id}}&external_id[]=1&external_id[]=2
      *
-     * ```
+     *  ```
      *
      * ### Email
      *
@@ -7760,7 +7795,7 @@ class Client extends Runtime\Client\Client
      * curl --location -g --request GET 'https://rest.iad-01.braze.com/subscription/status/get?subscription_group_id={{subscription_group_id}}&email=example@braze.com' \
      * --header 'Authorization: Bearer YOUR-REST-API-KEY'
      *
-     * ```
+     *  ```
      *
      * ## Response
      *
@@ -7770,14 +7805,14 @@ class Client extends Runtime\Client\Client
      * Content-Type: application/json
      * Authorization: Bearer YOUR-REST-API-KEY
      * {
-     * "status": {
-     * "1": "Unsubscribed",
-     * "2": "Subscribed"
-     * },
-     * "message": "success"
+     *   "status": {
+     *     "1": "Unsubscribed",
+     *     "2": "Subscribed"
+     *   },
+     *   "message": "success"
      * }
      *
-     * ```
+     *  ```
      *
      * @param array $queryParameters {
      *
@@ -7808,18 +7843,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\GetSubscriptionStatusGetBadRequestException
-     * @throws Exception\GetSubscriptionStatusGetUnauthorizedException
-     * @throws Exception\GetSubscriptionStatusGetForbiddenException
-     * @throws Exception\GetSubscriptionStatusGetNotFoundException
-     * @throws Exception\GetSubscriptionStatusGetTooManyRequestsException
-     * @throws Exception\GetSubscriptionStatusGetInternalServerErrorException
+     * @throws \Braze\Exception\GetSubscriptionStatusGetBadRequestException
+     * @throws \Braze\Exception\GetSubscriptionStatusGetUnauthorizedException
+     * @throws \Braze\Exception\GetSubscriptionStatusGetForbiddenException
+     * @throws \Braze\Exception\GetSubscriptionStatusGetNotFoundException
+     * @throws \Braze\Exception\GetSubscriptionStatusGetTooManyRequestsException
+     * @throws \Braze\Exception\GetSubscriptionStatusGetInternalServerErrorException
      */
     public function getSubscriptionStatusGet(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\GetSubscriptionStatusGet($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\GetSubscriptionStatusGet($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -7845,7 +7880,7 @@ class Client extends Runtime\Client\Client
      * curl --location -g --request GET 'https://rest.iad-01.braze.com/subscription/user/status?external_id={{external_id}}&email=example@braze.com&limit=100&offset=0' \
      * --header 'Authorization: Bearer YOUR-REST-API-KEY'
      *
-     * ```
+     *  ```
      *
      * @param array $queryParameters {
      *
@@ -7875,18 +7910,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\GetSubscriptionUserStatusBadRequestException
-     * @throws Exception\GetSubscriptionUserStatusUnauthorizedException
-     * @throws Exception\GetSubscriptionUserStatusForbiddenException
-     * @throws Exception\GetSubscriptionUserStatusNotFoundException
-     * @throws Exception\GetSubscriptionUserStatusTooManyRequestsException
-     * @throws Exception\GetSubscriptionUserStatusInternalServerErrorException
+     * @throws \Braze\Exception\GetSubscriptionUserStatusBadRequestException
+     * @throws \Braze\Exception\GetSubscriptionUserStatusUnauthorizedException
+     * @throws \Braze\Exception\GetSubscriptionUserStatusForbiddenException
+     * @throws \Braze\Exception\GetSubscriptionUserStatusNotFoundException
+     * @throws \Braze\Exception\GetSubscriptionUserStatusTooManyRequestsException
+     * @throws \Braze\Exception\GetSubscriptionUserStatusInternalServerErrorException
      */
     public function getSubscriptionUserStatus(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\GetSubscriptionUserStatus($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\GetSubscriptionUserStatus($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -7923,24 +7958,24 @@ class Client extends Runtime\Client\Client
      * --header 'Content-Type: application/json' \
      * --header 'Authorization: Bearer YOUR-REST-API-KEY' \
      * --data-raw '{
-     * "subscription_group_id": "504e09e6-ffa4-4b31-96c3-c05d50d903cf",
-     * "subscription_state": "unsubscribed",
-     * "external_id": [
-     * "user1",
-     * "user2"
-     * ],
-     * "emails": [
-     * "test1@braze.com",
-     * "test2@braze.com"
-     * ],
-     * "phones": [
-     * "+445555555555",
-     * "+445555555556"
-     * ]
+     *   "subscription_group_id": "504e09e6-ffa4-4b31-96c3-c05d50d903cf",
+     *   "subscription_state": "unsubscribed",
+     *   "external_id": [
+     *     "user1",
+     *     "user2"
+     *   ],
+     *   "emails": [
+     *     "test1@braze.com",
+     *     "test2@braze.com"
+     *   ],
+     *   "phones": [
+     *     "+445555555555",
+     *     "+445555555556"
+     *   ]
      * }
      * '
      *
-     * ```
+     *  ```
      *
      * ## Example success response
      *
@@ -7948,14 +7983,15 @@ class Client extends Runtime\Client\Client
      *
      * ``` json
      * {
-     * "message": "success"
+     *     "message": "success"
      * }
      *
-     * ```
+     *  ```
      *
      * > The endpoint only accepts the `email` or `phone` value, not both. If given both, you will receive this response: `{"message":"Either an email address or a phone number should be provided, but not both."}`
      *
-     * @param array $headerParameters {
+     * @param \Braze\Model\SubscriptionStatusSetPostBody|null $requestBody
+     * @param array                                           $headerParameters {
      *
      * @var string-Type
      * @var string
@@ -7963,18 +7999,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PostSubscriptionStatusSetBadRequestException
-     * @throws Exception\PostSubscriptionStatusSetUnauthorizedException
-     * @throws Exception\PostSubscriptionStatusSetForbiddenException
-     * @throws Exception\PostSubscriptionStatusSetNotFoundException
-     * @throws Exception\PostSubscriptionStatusSetTooManyRequestsException
-     * @throws Exception\PostSubscriptionStatusSetInternalServerErrorException
+     * @throws \Braze\Exception\PostSubscriptionStatusSetBadRequestException
+     * @throws \Braze\Exception\PostSubscriptionStatusSetUnauthorizedException
+     * @throws \Braze\Exception\PostSubscriptionStatusSetForbiddenException
+     * @throws \Braze\Exception\PostSubscriptionStatusSetNotFoundException
+     * @throws \Braze\Exception\PostSubscriptionStatusSetTooManyRequestsException
+     * @throws \Braze\Exception\PostSubscriptionStatusSetInternalServerErrorException
      */
-    public function postSubscriptionStatusSet(?Model\SubscriptionStatusSetPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postSubscriptionStatusSet(Model\SubscriptionStatusSetPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PostSubscriptionStatusSet($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PostSubscriptionStatusSet($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -8006,28 +8042,28 @@ class Client extends Runtime\Client\Client
      * --header 'Content-Type: application/json' \
      * --header 'Authorization: Bearer YOUR-REST-API-KEY' \
      * --data-raw '{
-     * "subscription_groups": [
-     * {
-     * "subscription_group_id": "504e09e6-ffa4-4b31-96c3-c05d50d903cf",
-     * "subscription_state": "unsubscribed",
-     * "external_ids": [
-     * "user1",
-     * "user2"
-     * ],
-     * "emails": [
-     * "test1@braze.com",
-     * "test2@braze.com"
-     * ],
-     * "phones": [
-     * "+445555555555",
-     * "+445555555556"
-     * ]
-     * }
-     * ]
+     *   "subscription_groups": [
+     *     {
+     *       "subscription_group_id": "504e09e6-ffa4-4b31-96c3-c05d50d903cf",
+     *       "subscription_state": "unsubscribed",
+     *       "external_ids": [
+     *         "user1",
+     *         "user2"
+     *       ],
+     *       "emails": [
+     *         "test1@braze.com",
+     *         "test2@braze.com"
+     *       ],
+     *       "phones": [
+     *         "+445555555555",
+     *         "+445555555556"
+     *       ]
+     *     }
+     *   ]
      * }
      * '
      *
-     * ```
+     *  ```
      *
      * ### Example successful response
      *
@@ -8035,12 +8071,13 @@ class Client extends Runtime\Client\Client
      *
      * ``` json
      * {
-     * "message": "success"
+     *     "message": "success"
      * }
      *
-     * ```
+     *  ```
      *
-     * @param array $headerParameters {
+     * @param \Braze\Model\V2SubscriptionStatusSetPostBody|null $requestBody
+     * @param array                                             $headerParameters {
      *
      * @var string-Type
      * @var string
@@ -8048,18 +8085,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PostV2SubscriptionStatusSetBadRequestException
-     * @throws Exception\PostV2SubscriptionStatusSetUnauthorizedException
-     * @throws Exception\PostV2SubscriptionStatusSetForbiddenException
-     * @throws Exception\PostV2SubscriptionStatusSetNotFoundException
-     * @throws Exception\PostV2SubscriptionStatusSetTooManyRequestsException
-     * @throws Exception\PostV2SubscriptionStatusSetInternalServerErrorException
+     * @throws \Braze\Exception\PostV2SubscriptionStatusSetBadRequestException
+     * @throws \Braze\Exception\PostV2SubscriptionStatusSetUnauthorizedException
+     * @throws \Braze\Exception\PostV2SubscriptionStatusSetForbiddenException
+     * @throws \Braze\Exception\PostV2SubscriptionStatusSetNotFoundException
+     * @throws \Braze\Exception\PostV2SubscriptionStatusSetTooManyRequestsException
+     * @throws \Braze\Exception\PostV2SubscriptionStatusSetInternalServerErrorException
      */
-    public function postV2SubscriptionStatusSet(?Model\V2SubscriptionStatusSetPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postV2SubscriptionStatusSet(Model\V2SubscriptionStatusSetPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PostV2SubscriptionStatusSet($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PostV2SubscriptionStatusSet($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -8088,7 +8125,7 @@ class Client extends Runtime\Client\Client
      * curl --location --request GET 'https://rest.iad-01.braze.com/content_blocks/list?modified_after=2020-01-01T01:01:01.000000&modified_before=2020-02-01T01:01:01.000000&limit=100&offset=1' \
      * --header 'Authorization: Bearer YOUR-API-KEY-HERE'
      *
-     * ```
+     *  ```
      *
      * ## Response
      *
@@ -8096,22 +8133,22 @@ class Client extends Runtime\Client\Client
      * Content-Type: application/json
      * Authorization: Bearer YOUR_REST_API_KEY
      * {
-     * "count": "integer",
-     * "content_blocks": [
-     * {
-     * "content_block_id": (string) the Content Block identifier,
-     * "name": (string) the name of the Content Block,
-     * "content_type": (string) the content type, html or text,
-     * "liquid_tag": (string) the Liquid tags,
-     * "inclusion_count" : (integer) the inclusion count,
-     * "created_at": (string) The time the Content Block was created in ISO 8601,
-     * "last_edited": (string) The time the Content Block was last edited in ISO 8601,
-     * "tags": (array) An array of tags formatted as strings,
-     * }
-     * ]
+     *   "count": "integer",
+     *   "content_blocks": [
+     *     {
+     *       "content_block_id": (string) the Content Block identifier,
+     *       "name": (string) the name of the Content Block,
+     *       "content_type": (string) the content type, html or text,
+     *       "liquid_tag": (string) the Liquid tags,
+     *       "inclusion_count" : (integer) the inclusion count,
+     *       "created_at": (string) The time the Content Block was created in ISO 8601,
+     *       "last_edited": (string) The time the Content Block was last edited in ISO 8601,
+     *       "tags": (array) An array of tags formatted as strings,
+     *     }
+     *   ]
      * }
      *
-     * ```
+     *  ```
      *
      * ## Troubleshooting
      *
@@ -8151,18 +8188,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\GetContentBlocksListBadRequestException
-     * @throws Exception\GetContentBlocksListUnauthorizedException
-     * @throws Exception\GetContentBlocksListForbiddenException
-     * @throws Exception\GetContentBlocksListNotFoundException
-     * @throws Exception\GetContentBlocksListTooManyRequestsException
-     * @throws Exception\GetContentBlocksListInternalServerErrorException
+     * @throws \Braze\Exception\GetContentBlocksListBadRequestException
+     * @throws \Braze\Exception\GetContentBlocksListUnauthorizedException
+     * @throws \Braze\Exception\GetContentBlocksListForbiddenException
+     * @throws \Braze\Exception\GetContentBlocksListNotFoundException
+     * @throws \Braze\Exception\GetContentBlocksListTooManyRequestsException
+     * @throws \Braze\Exception\GetContentBlocksListInternalServerErrorException
      */
     public function getContentBlocksList(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\GetContentBlocksList($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\GetContentBlocksList($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -8189,7 +8226,7 @@ class Client extends Runtime\Client\Client
      * curl --location -g --request GET 'https://rest.iad-01.braze.com/content_blocks/info?content_block_id={{content_block_id}}&include_inclusion_data=false' \
      * --header 'Authorization: Bearer YOUR-REST-API-KEY'
      *
-     * ```
+     *  ```
      *
      * ## Response
      *
@@ -8197,20 +8234,20 @@ class Client extends Runtime\Client\Client
      * Content-Type: application/json
      * Authorization: Bearer YOUR_REST_API_KEY
      * {
-     * "content_block_id": (string) the Content Block identifier,
-     * "name": (string) the name of the Content Block,
-     * "content": (string) the content in the Content Block,
-     * "description": (string) the Content Block description,
-     * "content_type": (string) the content type, html or text,
-     * "tags": (array) An array of tags formatted as strings,
-     * "created_at": (string) The time the Content Block was created in ISO 8601,
-     * "last_edited": (string) The time the Content Block was last edited in ISO 8601,
-     * "inclusion_count" : (integer) the inclusion count,
-     * "inclusion_data": (array) the inclusion data,
-     * "message": "success",
+     *   "content_block_id": (string) the Content Block identifier,
+     *   "name": (string) the name of the Content Block,
+     *   "content": (string) the content in the Content Block,
+     *   "description": (string) the Content Block description,
+     *   "content_type": (string) the content type, html or text,
+     *   "tags": (array) An array of tags formatted as strings,
+     *   "created_at": (string) The time the Content Block was created in ISO 8601,
+     *   "last_edited": (string) The time the Content Block was last edited in ISO 8601,
+     *   "inclusion_count" : (integer) the inclusion count,
+     *   "inclusion_data": (array) the inclusion data,
+     *   "message": "success",
      * }
      *
-     * ```
+     *  ```
      *
      * ## Troubleshooting
      *
@@ -8233,7 +8270,6 @@ class Client extends Runtime\Client\Client
      * @var bool $include_inclusion_data (Optional) Boolean
      *
      * When set to `true`, the API returns back the Message Variation API identifier of campaigns and Canvases where this Content Block is included, to be used in subsequent calls. The results exclude archived or deleted campaigns or Canvases.
-     *
      * }
      *
      * @param array $headerParameters {
@@ -8243,18 +8279,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\GetContentBlocksInfoBadRequestException
-     * @throws Exception\GetContentBlocksInfoUnauthorizedException
-     * @throws Exception\GetContentBlocksInfoForbiddenException
-     * @throws Exception\GetContentBlocksInfoNotFoundException
-     * @throws Exception\GetContentBlocksInfoTooManyRequestsException
-     * @throws Exception\GetContentBlocksInfoInternalServerErrorException
+     * @throws \Braze\Exception\GetContentBlocksInfoBadRequestException
+     * @throws \Braze\Exception\GetContentBlocksInfoUnauthorizedException
+     * @throws \Braze\Exception\GetContentBlocksInfoForbiddenException
+     * @throws \Braze\Exception\GetContentBlocksInfoNotFoundException
+     * @throws \Braze\Exception\GetContentBlocksInfoTooManyRequestsException
+     * @throws \Braze\Exception\GetContentBlocksInfoInternalServerErrorException
      */
     public function getContentBlocksInfo(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\GetContentBlocksInfo($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\GetContentBlocksInfo($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -8285,14 +8321,14 @@ class Client extends Runtime\Client\Client
      * --header 'Content-Type: application/json' \
      * --header 'Authorization: Bearer YOUR_REST_API_KEY' \
      * --data-raw '{
-     * "name": "content_block",
-     * "description": "This is my Content Block",
-     * "content": "HTML content within block",
-     * "state": "draft",
-     * "tags": ["marketing"]
+     *   "name": "content_block",
+     *   "description": "This is my Content Block",
+     *   "content": "HTML content within block",
+     *   "state": "draft",
+     *   "tags": ["marketing"]
      * }'
      *
-     * ```
+     *  ```
      *
      * ## Response
      *
@@ -8300,13 +8336,13 @@ class Client extends Runtime\Client\Client
      * Content-Type: application/json
      * Authorization: Bearer YOUR_REST_API_KEY
      * {
-     * "content_block_id": (string) Your newly generated block id,
-     * "liquid_tag": (string) The generated block tag from the Content Block name,
-     * "created_at": (string) The time the Content Block was created in ISO 8601,
-     * "message": "success"
+     *   "content_block_id": (string) Your newly generated block id,
+     *   "liquid_tag": (string) The generated block tag from the Content Block name,
+     *   "created_at": (string) The time the Content Block was created in ISO 8601,
+     *   "message": "success"
      * }
      *
-     * ```
+     *  ```
      *
      * ## Troubleshooting
      *
@@ -8331,7 +8367,8 @@ class Client extends Runtime\Client\Client
      * | `All tags must be strings` | Make sure your tags are encapsulated in quotes (`""`). |
      * | `Some tags could not be found` | To add a tag when creating a Content Block, the tag must already exist in Braze. |
      *
-     * @param array $headerParameters {
+     * @param \Braze\Model\ContentBlocksCreatePostBody|null $requestBody
+     * @param array                                         $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -8339,18 +8376,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PostContentBlocksCreateBadRequestException
-     * @throws Exception\PostContentBlocksCreateUnauthorizedException
-     * @throws Exception\PostContentBlocksCreateForbiddenException
-     * @throws Exception\PostContentBlocksCreateNotFoundException
-     * @throws Exception\PostContentBlocksCreateTooManyRequestsException
-     * @throws Exception\PostContentBlocksCreateInternalServerErrorException
+     * @throws \Braze\Exception\PostContentBlocksCreateBadRequestException
+     * @throws \Braze\Exception\PostContentBlocksCreateUnauthorizedException
+     * @throws \Braze\Exception\PostContentBlocksCreateForbiddenException
+     * @throws \Braze\Exception\PostContentBlocksCreateNotFoundException
+     * @throws \Braze\Exception\PostContentBlocksCreateTooManyRequestsException
+     * @throws \Braze\Exception\PostContentBlocksCreateInternalServerErrorException
      */
-    public function postContentBlocksCreate(?Model\ContentBlocksCreatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postContentBlocksCreate(Model\ContentBlocksCreatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PostContentBlocksCreate($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PostContentBlocksCreate($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -8382,15 +8419,15 @@ class Client extends Runtime\Client\Client
      * --header 'Content-Type: application/json' \
      * --header 'Authorization: Bearer YOUR_REST_API_KEY' \
      * --data-raw '{
-     * "content_block_id" :"content_block_id",
-     * "name": "content_block",
-     * "description": "This is my Content Block",
-     * "content": "HTML or text content within block",
-     * "state": "draft",
-     * "tags": ["marketing"]
+     *   "content_block_id" :"content_block_id",
+     *   "name": "content_block",
+     *   "description": "This is my Content Block",
+     *   "content": "HTML or text content within block",
+     *   "state": "draft",
+     *   "tags": ["marketing"]
      * }'
      *
-     * ```
+     *  ```
      *
      * ## Response
      *
@@ -8398,13 +8435,13 @@ class Client extends Runtime\Client\Client
      * Content-Type: application/json
      * Authorization: Bearer YOUR_REST_API_KEY
      * {
-     * "content_block_id": (string) Your newly generated block id,
-     * "liquid_tag": (string) The generated block tag from the Content Block name,
-     * "created_at": (string) The time the Content Block was created in ISO 8601,
-     * "message": "success"
+     *   "content_block_id": (string) Your newly generated block id,
+     *   "liquid_tag": (string) The generated block tag from the Content Block name,
+     *   "created_at": (string) The time the Content Block was created in ISO 8601,
+     *   "message": "success"
      * }
      *
-     * ```
+     *  ```
      *
      * ## Troubleshooting
      *
@@ -8431,7 +8468,8 @@ class Client extends Runtime\Client\Client
      * | `All tags must be strings` | Make sure your tags are encapsulated in quotes (`""`). |
      * | `Some tags could not be found` | To add a tag when creating a Content Block, the tag must already exist in Braze. |
      *
-     * @param array $headerParameters {
+     * @param \Braze\Model\ContentBlocksUpdatePostBody|null $requestBody
+     * @param array                                         $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -8439,18 +8477,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PostContentBlocksUpdateBadRequestException
-     * @throws Exception\PostContentBlocksUpdateUnauthorizedException
-     * @throws Exception\PostContentBlocksUpdateForbiddenException
-     * @throws Exception\PostContentBlocksUpdateNotFoundException
-     * @throws Exception\PostContentBlocksUpdateTooManyRequestsException
-     * @throws Exception\PostContentBlocksUpdateInternalServerErrorException
+     * @throws \Braze\Exception\PostContentBlocksUpdateBadRequestException
+     * @throws \Braze\Exception\PostContentBlocksUpdateUnauthorizedException
+     * @throws \Braze\Exception\PostContentBlocksUpdateForbiddenException
+     * @throws \Braze\Exception\PostContentBlocksUpdateNotFoundException
+     * @throws \Braze\Exception\PostContentBlocksUpdateTooManyRequestsException
+     * @throws \Braze\Exception\PostContentBlocksUpdateInternalServerErrorException
      */
-    public function postContentBlocksUpdate(?Model\ContentBlocksUpdatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postContentBlocksUpdate(Model\ContentBlocksUpdatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PostContentBlocksUpdate($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PostContentBlocksUpdate($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -8479,26 +8517,26 @@ class Client extends Runtime\Client\Client
      * curl --location --request GET 'https://rest.iad-01.braze.com/templates/email/list?modified_after=2020-01-01T01:01:01.000000&modified_before=2020-02-01T01:01:01.000000&limit=1&offset=0' \
      * --header 'Authorization: Bearer YOUR_REST_API_KEY'
      *
-     * ```
+     *  ```
      *
      * ## Response
      *
-     **Important:** Templates built using the drag-and-drop editor for email are not provided in this response.
+     * **Important:** Templates built using the drag-and-drop editor for email are not provided in this response.
      *
      * ``` json
      * Content-Type: application/json
      * Authorization: Bearer YOUR_REST_API_KEY
      * {
-     * "count": the number of templates returned
-     * "templates": [template with the following properties]:
-     * "email_template_id": (string) your email template's API Identifier,
-     * "template_name": (string) the name of your email template,
-     * "created_at": (string) the time the email was created at in ISO 8601,
-     * "updated_at": (string) the time the email was updated in ISO 8601,
-     * "tags": (array of strings) tags appended to the template
+     *   "count": the number of templates returned
+     *   "templates": [template with the following properties]:
+     *     "email_template_id": (string) your email template's API Identifier,
+     *     "template_name": (string) the name of your email template,
+     *     "created_at": (string) the time the email was created at in ISO 8601,
+     *     "updated_at": (string) the time the email was updated in ISO 8601,
+     *     "tags": (array of strings) tags appended to the template
      * }
      *
-     * ```
+     *  ```
      *
      * @param array $queryParameters {
      *
@@ -8523,24 +8561,24 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\GetTemplatesEmailListBadRequestException
-     * @throws Exception\GetTemplatesEmailListUnauthorizedException
-     * @throws Exception\GetTemplatesEmailListForbiddenException
-     * @throws Exception\GetTemplatesEmailListNotFoundException
-     * @throws Exception\GetTemplatesEmailListTooManyRequestsException
-     * @throws Exception\GetTemplatesEmailListInternalServerErrorException
+     * @throws \Braze\Exception\GetTemplatesEmailListBadRequestException
+     * @throws \Braze\Exception\GetTemplatesEmailListUnauthorizedException
+     * @throws \Braze\Exception\GetTemplatesEmailListForbiddenException
+     * @throws \Braze\Exception\GetTemplatesEmailListNotFoundException
+     * @throws \Braze\Exception\GetTemplatesEmailListTooManyRequestsException
+     * @throws \Braze\Exception\GetTemplatesEmailListInternalServerErrorException
      */
     public function getTemplatesEmailList(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\GetTemplatesEmailList($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\GetTemplatesEmailList($queryParameters, $headerParameters), $fetch);
     }
 
     /**
      * > Use this endpoint to get information on your email templates.
      *
-     **Important:** Templates built using the drag-and-drop editor are not accepted.
+     * **Important:** Templates built using the drag-and-drop editor are not accepted.
      *
      * ## Prerequisites
      *
@@ -8562,7 +8600,7 @@ class Client extends Runtime\Client\Client
      * curl --location -g --request GET 'https://rest.iad-01.braze.com/templates/email/info?email_template_id={{email_template_id}}' \
      * --header 'Authorization: Bearer YOUR_REST_API_KEY'
      *
-     * ```
+     *  ```
      *
      * ## Response
      *
@@ -8570,20 +8608,20 @@ class Client extends Runtime\Client\Client
      * Content-Type: application/json
      * Authorization: Bearer YOUR_REST_API_KEY
      * {
-     * "email_template_id": (string) Your email template's API Identifier,
-     * "template_name": (string) The name of your email template,
-     * "description": (string) The email template description,
-     * "subject": (string) The email template subject line,
-     * "preheader": (optional, string) The email preheader used to generate previews in some clients),
-     * "body": (optional, string) The email template body that may include HTML,
-     * "plaintext_body": (optional, string) A plaintext version of the email template body,
-     * "should_inline_css": (optional, boolean) Whether there is inline CSS in the body of the template - defaults to the css inlining value for the workspace,
-     * "tags": (string) Tag names,
-     * "created_at": (string) The time the email was created at in ISO 8601,
-     * "updated_at": (string) The time the email was updated in ISO 8601
+     *   "email_template_id": (string) Your email template's API Identifier,
+     *   "template_name": (string) The name of your email template,
+     *   "description": (string) The email template description,
+     *   "subject": (string) The email template subject line,
+     *   "preheader": (optional, string) The email preheader used to generate previews in some clients),
+     *   "body": (optional, string) The email template body that may include HTML,
+     *   "plaintext_body": (optional, string) A plaintext version of the email template body,
+     *   "should_inline_css": (optional, boolean) Whether there is inline CSS in the body of the template - defaults to the css inlining value for the workspace,
+     *   "tags": (string) Tag names,
+     *   "created_at": (string) The time the email was created at in ISO 8601,
+     *   "updated_at": (string) The time the email was updated in ISO 8601
      * }
      *
-     * ```
+     *  ```
      *
      * Images in this response will show in the `body` variable as HTML.
      *
@@ -8601,18 +8639,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\GetTemplatesEmailInfoBadRequestException
-     * @throws Exception\GetTemplatesEmailInfoUnauthorizedException
-     * @throws Exception\GetTemplatesEmailInfoForbiddenException
-     * @throws Exception\GetTemplatesEmailInfoNotFoundException
-     * @throws Exception\GetTemplatesEmailInfoTooManyRequestsException
-     * @throws Exception\GetTemplatesEmailInfoInternalServerErrorException
+     * @throws \Braze\Exception\GetTemplatesEmailInfoBadRequestException
+     * @throws \Braze\Exception\GetTemplatesEmailInfoUnauthorizedException
+     * @throws \Braze\Exception\GetTemplatesEmailInfoForbiddenException
+     * @throws \Braze\Exception\GetTemplatesEmailInfoNotFoundException
+     * @throws \Braze\Exception\GetTemplatesEmailInfoTooManyRequestsException
+     * @throws \Braze\Exception\GetTemplatesEmailInfoInternalServerErrorException
      */
     public function getTemplatesEmailInfo(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\GetTemplatesEmailInfo($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\GetTemplatesEmailInfo($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -8649,15 +8687,15 @@ class Client extends Runtime\Client\Client
      * --header 'Content-Type: application/json' \
      * --header 'Authorization: Bearer YOUR_REST_API_KEY' \
      * --data-raw '{
-     * "template_name": "email_template_name",
-     * "subject": "Welcome to my email template!",
-     * "body": "This is the text within my email body and https://www.braze.com/ here is a link to Braze.com.",
-     * "plaintext_body": "This is the text within my email body and here is a link to https://www.braze.com/.",
-     * "preheader": "My preheader is pretty cool.",
-     * "tags": ["Tag1", "Tag2"]
+     *   "template_name": "email_template_name",
+     *   "subject": "Welcome to my email template!",
+     *   "body": "This is the text within my email body and https://www.braze.com/ here is a link to Braze.com.",
+     *   "plaintext_body": "This is the text within my email body and here is a link to https://www.braze.com/.",
+     *   "preheader": "My preheader is pretty cool.",
+     *   "tags": ["Tag1", "Tag2"]
      * }'
      *
-     * ```
+     *  ```
      *
      * ## Possible errors
      *
@@ -8672,7 +8710,8 @@ class Client extends Runtime\Client\Client
      * | Email must have valid Content Block names | The email might contain Content Blocks that don’t exist in this environment. |
      * | Invalid value for `should_inline_css`. One of `true` or `false` was expected | This parameter only accepts boolean values (true or false). Make sure the value for `should_inline_css` is not encapsulated in quotes (`""`), which causes the value to be sent as a string instead. |
      *
-     * @param array $queryParameters {
+     * @param \Braze\Model\TemplatesEmailCreatePostBody|null $requestBody
+     * @param array                                          $queryParameters {
      *
      * @var string $template_name (Required) String
      * @var string $subject (Required) String
@@ -8691,18 +8730,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PostTemplatesEmailCreateBadRequestException
-     * @throws Exception\PostTemplatesEmailCreateUnauthorizedException
-     * @throws Exception\PostTemplatesEmailCreateForbiddenException
-     * @throws Exception\PostTemplatesEmailCreateNotFoundException
-     * @throws Exception\PostTemplatesEmailCreateTooManyRequestsException
-     * @throws Exception\PostTemplatesEmailCreateInternalServerErrorException
+     * @throws \Braze\Exception\PostTemplatesEmailCreateBadRequestException
+     * @throws \Braze\Exception\PostTemplatesEmailCreateUnauthorizedException
+     * @throws \Braze\Exception\PostTemplatesEmailCreateForbiddenException
+     * @throws \Braze\Exception\PostTemplatesEmailCreateNotFoundException
+     * @throws \Braze\Exception\PostTemplatesEmailCreateTooManyRequestsException
+     * @throws \Braze\Exception\PostTemplatesEmailCreateInternalServerErrorException
      */
-    public function postTemplatesEmailCreate(?Model\TemplatesEmailCreatePostBody $requestBody = null, array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postTemplatesEmailCreate(Model\TemplatesEmailCreatePostBody $requestBody = null, array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PostTemplatesEmailCreate($requestBody, $queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PostTemplatesEmailCreate($requestBody, $queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -8752,16 +8791,16 @@ class Client extends Runtime\Client\Client
      * --header 'Content-Type: application/json' \
      * --header 'Authorization: Bearer YOUR_REST_API_KEY' \
      * --data-raw '{
-     * "email_template_id": "email_template_id",
-     * "template_name": "Weekly Newsletter",
-     * "subject": "This Week'\''s Styles",
-     * "body": "Check out this week'\''s digital lookbook to inspire your outfits. Take a look at https://www.braze.com/",
-     * "plaintext_body": "This is the updated text within my email body and here is a link to https://www.braze.com/.",
-     * "preheader": "We want you to have the best looks this summer",
-     * "tags": ["Tag1", "Tag2"]
+     *   "email_template_id": "email_template_id",
+     *   "template_name": "Weekly Newsletter",
+     *   "subject": "This Week'\''s Styles",
+     *   "body": "Check out this week'\''s digital lookbook to inspire your outfits. Take a look at https://www.braze.com/",
+     *   "plaintext_body": "This is the updated text within my email body and here is a link to https://www.braze.com/.",
+     *   "preheader": "We want you to have the best looks this summer",
+     *   "tags": ["Tag1", "Tag2"]
      * }'
      *
-     * ```
+     *  ```
      *
      * ## Troubleshooting
      *
@@ -8775,7 +8814,8 @@ class Client extends Runtime\Client\Client
      * | Some tags could not be found | To add a tag when creating an email template, the tag must already exist in Braze. |
      * | Invalid value for `should_inline_css`. One of `true` or `false` was expected | This parameter only accepts boolean values (true or false). Make sure the value for `should_inline_css` is not encapsulated in quotes (`""`), which causes the value to be sent as a string instead. |
      *
-     * @param array $queryParameters {
+     * @param \Braze\Model\TemplatesEmailUpdatePostBody|null $requestBody
+     * @param array                                          $queryParameters {
      *
      * @var string $email_template_id (Required) String
      * @var string $template_name (Optional) String
@@ -8795,18 +8835,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PostTemplatesEmailUpdateBadRequestException
-     * @throws Exception\PostTemplatesEmailUpdateUnauthorizedException
-     * @throws Exception\PostTemplatesEmailUpdateForbiddenException
-     * @throws Exception\PostTemplatesEmailUpdateNotFoundException
-     * @throws Exception\PostTemplatesEmailUpdateTooManyRequestsException
-     * @throws Exception\PostTemplatesEmailUpdateInternalServerErrorException
+     * @throws \Braze\Exception\PostTemplatesEmailUpdateBadRequestException
+     * @throws \Braze\Exception\PostTemplatesEmailUpdateUnauthorizedException
+     * @throws \Braze\Exception\PostTemplatesEmailUpdateForbiddenException
+     * @throws \Braze\Exception\PostTemplatesEmailUpdateNotFoundException
+     * @throws \Braze\Exception\PostTemplatesEmailUpdateTooManyRequestsException
+     * @throws \Braze\Exception\PostTemplatesEmailUpdateInternalServerErrorException
      */
-    public function postTemplatesEmailUpdate(?Model\TemplatesEmailUpdatePostBody $requestBody = null, array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postTemplatesEmailUpdate(Model\TemplatesEmailUpdatePostBody $requestBody = null, array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PostTemplatesEmailUpdate($requestBody, $queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PostTemplatesEmailUpdate($requestBody, $queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -8850,12 +8890,12 @@ class Client extends Runtime\Client\Client
      *
      * ``` json
      * {
-     * "message" : (string) status message,
-     * "external_ids" : (array of strings) successful rename operations,
-     * "rename_errors": (array of arrays) <minor error message>
+     *   "message" : (string) status message,
+     *   "external_ids" : (array of strings) successful rename operations,
+     *   "rename_errors": (array of arrays) <minor error message>
      * }
      *
-     * ```
+     *  ```
      *
      * The `message` field will return `success` for any valid request. More specific errors are captured in the `rename_errors` array. The `message` field returns an error in the case of:
      *
@@ -8890,7 +8930,8 @@ class Client extends Runtime\Client\Client
      *
      * We have no hard limit on how long you can keep deprecated external IDs around, but we highly recommend removing them once there is no longer a need to reference users by the deprecated ID.
      *
-     * @param array $headerParameters {
+     * @param \Braze\Model\UsersExternalIdsRenamePostBody|null $requestBody
+     * @param array                                            $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -8898,18 +8939,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PostUsersExternalIdsRenameBadRequestException
-     * @throws Exception\PostUsersExternalIdsRenameUnauthorizedException
-     * @throws Exception\PostUsersExternalIdsRenameForbiddenException
-     * @throws Exception\PostUsersExternalIdsRenameNotFoundException
-     * @throws Exception\PostUsersExternalIdsRenameTooManyRequestsException
-     * @throws Exception\PostUsersExternalIdsRenameInternalServerErrorException
+     * @throws \Braze\Exception\PostUsersExternalIdsRenameBadRequestException
+     * @throws \Braze\Exception\PostUsersExternalIdsRenameUnauthorizedException
+     * @throws \Braze\Exception\PostUsersExternalIdsRenameForbiddenException
+     * @throws \Braze\Exception\PostUsersExternalIdsRenameNotFoundException
+     * @throws \Braze\Exception\PostUsersExternalIdsRenameTooManyRequestsException
+     * @throws \Braze\Exception\PostUsersExternalIdsRenameInternalServerErrorException
      */
-    public function postUsersExternalIdsRename(?Model\UsersExternalIdsRenamePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postUsersExternalIdsRename(Model\UsersExternalIdsRenamePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PostUsersExternalIdsRename($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PostUsersExternalIdsRename($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -8939,12 +8980,12 @@ class Client extends Runtime\Client\Client
      *
      * ``` json
      * {
-     * "message" : (string) status message,
-     * "removed_ids" : (array of strings) successful remove operations,
-     * "removal_errors": (array of arrays) <minor error message>
+     *   "message" : (string) status message,
+     *   "removed_ids" : (array of strings) successful remove operations,
+     *   "removal_errors": (array of arrays) <minor error message>
      * }
      *
-     * ```
+     *  ```
      *
      * The `message` field will return `success` for any valid request. More specific errors are captured in the `removal_errors` array. The `message` field returns an error in the case of:
      *
@@ -8956,7 +8997,8 @@ class Client extends Runtime\Client\Client
      *
      * - Rate limit hit (more than 1,000 requests per minute)
      *
-     * @param array $headerParameters {
+     * @param \Braze\Model\UsersExternalIdsRemovePostBody|null $requestBody
+     * @param array                                            $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -8964,18 +9006,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PostUsersExternalIdsRemoveBadRequestException
-     * @throws Exception\PostUsersExternalIdsRemoveUnauthorizedException
-     * @throws Exception\PostUsersExternalIdsRemoveForbiddenException
-     * @throws Exception\PostUsersExternalIdsRemoveNotFoundException
-     * @throws Exception\PostUsersExternalIdsRemoveTooManyRequestsException
-     * @throws Exception\PostUsersExternalIdsRemoveInternalServerErrorException
+     * @throws \Braze\Exception\PostUsersExternalIdsRemoveBadRequestException
+     * @throws \Braze\Exception\PostUsersExternalIdsRemoveUnauthorizedException
+     * @throws \Braze\Exception\PostUsersExternalIdsRemoveForbiddenException
+     * @throws \Braze\Exception\PostUsersExternalIdsRemoveNotFoundException
+     * @throws \Braze\Exception\PostUsersExternalIdsRemoveTooManyRequestsException
+     * @throws \Braze\Exception\PostUsersExternalIdsRemoveInternalServerErrorException
      */
-    public function postUsersExternalIdsRemove(?Model\UsersExternalIdsRemovePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postUsersExternalIdsRemove(Model\UsersExternalIdsRemovePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PostUsersExternalIdsRemove($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PostUsersExternalIdsRemove($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -8983,9 +9025,9 @@ class Client extends Runtime\Client\Client
      *
      * Up to 50 user aliases may be specified per request.
      *
-     **Adding a user alias for an existing user** requires an `external_id` to be included in the new user alias object. If the `external_id` is present in the object but there is no user with that `external_id`, the alias will not be added to any users. If an `external_id` is not present, a user will still be created but will need to be identified later. You can do this using the “Identifying Users” and the `users/identify` endpoint.
+     * **Adding a user alias for an existing user** requires an `external_id` to be included in the new user alias object. If the `external_id` is present in the object but there is no user with that `external_id`, the alias will not be added to any users. If an `external_id` is not present, a user will still be created but will need to be identified later. You can do this using the “Identifying Users” and the `users/identify` endpoint.
      *
-     **Creating a new alias-only user** requires the `external_id` to be omitted from the new user alias object. After the user is created, use the `/users/track` endpoint to associate the alias-only user with attributes, events, and purchases, and the `/users/identify` endpoint to identify the user with an `external_id`.
+     * **Creating a new alias-only user** requires the `external_id` to be omitted from the new user alias object. After the user is created, use the `/users/track` endpoint to associate the alias-only user with attributes, events, and purchases, and the `/users/identify` endpoint to identify the user with an `external_id`.
      *
      * ## Prerequisites
      *
@@ -9008,12 +9050,13 @@ class Client extends Runtime\Client\Client
      * Content-Type: application/json
      * Authorization: Bearer YOUR_REST_API_KEY
      * {
-     * "aliases_processed": 1,
-     * "message": "success"
+     *     "aliases_processed": 1,
+     *     "message": "success"
      * }
-     * ```
+     *  ```
      *
-     * @param array $headerParameters {
+     * @param \Braze\Model\UsersAliasNewPostBody|null $requestBody
+     * @param array                                   $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -9021,18 +9064,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PostUsersAliasNewBadRequestException
-     * @throws Exception\PostUsersAliasNewUnauthorizedException
-     * @throws Exception\PostUsersAliasNewForbiddenException
-     * @throws Exception\PostUsersAliasNewNotFoundException
-     * @throws Exception\PostUsersAliasNewTooManyRequestsException
-     * @throws Exception\PostUsersAliasNewInternalServerErrorException
+     * @throws \Braze\Exception\PostUsersAliasNewBadRequestException
+     * @throws \Braze\Exception\PostUsersAliasNewUnauthorizedException
+     * @throws \Braze\Exception\PostUsersAliasNewForbiddenException
+     * @throws \Braze\Exception\PostUsersAliasNewNotFoundException
+     * @throws \Braze\Exception\PostUsersAliasNewTooManyRequestsException
+     * @throws \Braze\Exception\PostUsersAliasNewInternalServerErrorException
      */
-    public function postUsersAliasNew(?Model\UsersAliasNewPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postUsersAliasNew(Model\UsersAliasNewPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PostUsersAliasNew($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PostUsersAliasNew($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -9042,7 +9085,7 @@ class Client extends Runtime\Client\Client
      *
      * Updating a user alias requires `alias_label`, `old_alias_name`, and `new_alias_name` to be included in the update user alias object. If there is no user alias associated with the `alias_label` and `old_alias_name`, no alias will be updated. If the given `alias_label` and `old_alias_name` is found, then the `old_alias_name` will be updated to the `new_alias_name`.
      *
-     **Note:** This endpoint does not guarantee the sequence of `alias_updates` objects being updated.
+     * **Note:** This endpoint does not guarantee the sequence of `alias_updates` objects being updated.
      *
      * ## Prerequisites
      *
@@ -9062,14 +9105,15 @@ class Client extends Runtime\Client\Client
      *
      * ``` json
      * {
-     * "alias_label" : (required, string),
-     * "old_alias_name" : (required, string),
-     * "new_alias_name" : (required, string)
+     *   "alias_label" : (required, string),
+     *   "old_alias_name" : (required, string),
+     *   "new_alias_name" : (required, string)
      * }
      *
-     * ```
+     *  ```
      *
-     * @param array $headerParameters {
+     * @param \Braze\Model\UsersAliasUpdatePostBody|null $requestBody
+     * @param array                                      $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -9077,18 +9121,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PostUsersAliasUpdateBadRequestException
-     * @throws Exception\PostUsersAliasUpdateUnauthorizedException
-     * @throws Exception\PostUsersAliasUpdateForbiddenException
-     * @throws Exception\PostUsersAliasUpdateNotFoundException
-     * @throws Exception\PostUsersAliasUpdateTooManyRequestsException
-     * @throws Exception\PostUsersAliasUpdateInternalServerErrorException
+     * @throws \Braze\Exception\PostUsersAliasUpdateBadRequestException
+     * @throws \Braze\Exception\PostUsersAliasUpdateUnauthorizedException
+     * @throws \Braze\Exception\PostUsersAliasUpdateForbiddenException
+     * @throws \Braze\Exception\PostUsersAliasUpdateNotFoundException
+     * @throws \Braze\Exception\PostUsersAliasUpdateTooManyRequestsException
+     * @throws \Braze\Exception\PostUsersAliasUpdateInternalServerErrorException
      */
-    public function postUsersAliasUpdate(?Model\UsersAliasUpdatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postUsersAliasUpdate(Model\UsersAliasUpdatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PostUsersAliasUpdate($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PostUsersAliasUpdate($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -9164,11 +9208,11 @@ class Client extends Runtime\Client\Client
      *
      * - Segmentable custom events summary
      *
-     * - Event count (the sum from both profiles)
+     *     - Event count (the sum from both profiles)
      *
-     * - Event first occurred (Braze will pick the earlier date of the two dates)
+     *     - Event first occurred (Braze will pick the earlier date of the two dates)
      *
-     * - Event last occurred (Braze will pick the later date of the two dates)
+     *     - Event last occurred (Braze will pick the later date of the two dates)
      *
      * - In-app purchase total in cents (the sum from both profiles)
      *
@@ -9190,11 +9234,11 @@ class Client extends Runtime\Client\Client
      *
      * - Custom event and purchase event count and first date and last date timestamps
      *
-     * - These merged fields will update “for X events in Y days” filters. For purchase events, these filters include “number of purchases in Y days” and “money spent in last Y days”.
+     *     - These merged fields will update “for X events in Y days” filters. For purchase events, these filters include “number of purchases in Y days” and “money spent in last Y days”.
      *
      * - Session data if the app exists on both user profiles
      *
-     * - For example, if our target user doesn’t have an app summary for “ABCApp” but our original user does, the target user will have the “ABCApp” app summary on their profile after the merge.
+     *     - For example, if our target user doesn’t have an app summary for “ABCApp” but our original user does, the target user will have the “ABCApp” app summary on their profile after the merge.
      *
      *
      * ### Identifying users by email
@@ -9217,26 +9261,26 @@ class Client extends Runtime\Client\Client
      * --header 'Content-Type: application/json' \
      * --header 'Authorization: Bearer YOUR_REST_API_KEY' \
      * --data-raw '{
-     * "aliases_to_identify": [
-     * {
-     * "external_id": "external_identifier",
-     * "user_alias": {
-     * "alias_name": "example_alias",
-     * "alias_label": "example_label"
-     * }
-     * }
-     * ],
-     * "emails_to_identify": [
-     * {
-     * "external_id": "external_identifier_2",
-     * "email": "john.smith@braze.com",
-     * "prioritization": ["unidentified", "most_recently_updated"]
-     * }
-     * ]
-     * "merge_behavior": "merge"
+     *   "aliases_to_identify": [
+     *     {
+     *       "external_id": "external_identifier",
+     *       "user_alias": {
+     *           "alias_name": "example_alias",
+     *           "alias_label": "example_label"
+     *       }
+     *     }
+     *   ],
+     *   "emails_to_identify": [
+     *     {
+     *       "external_id": "external_identifier_2",
+     *       "email": "john.smith@braze.com",
+     *       "prioritization": ["unidentified", "most_recently_updated"]
+     *     }
+     *   ]
+     *   "merge_behavior": "merge"
      * }'
      *
-     * ```
+     *  ```
      *
      * ## Response
      *
@@ -9244,13 +9288,14 @@ class Client extends Runtime\Client\Client
      * Content-Type: application/json
      * Authorization: Bearer YOUR_REST_API_KEY
      * {
-     * "aliases_processed": 1,
-     * "message": "success"
+     *     "aliases_processed": 1,
+     *     "message": "success"
      * }
      *
-     * ```
+     *  ```
      *
-     * @param array $headerParameters {
+     * @param \Braze\Model\UsersIdentifyPostBody|null $requestBody
+     * @param array                                   $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -9258,24 +9303,24 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PostUsersIdentifyBadRequestException
-     * @throws Exception\PostUsersIdentifyUnauthorizedException
-     * @throws Exception\PostUsersIdentifyForbiddenException
-     * @throws Exception\PostUsersIdentifyNotFoundException
-     * @throws Exception\PostUsersIdentifyTooManyRequestsException
-     * @throws Exception\PostUsersIdentifyInternalServerErrorException
+     * @throws \Braze\Exception\PostUsersIdentifyBadRequestException
+     * @throws \Braze\Exception\PostUsersIdentifyUnauthorizedException
+     * @throws \Braze\Exception\PostUsersIdentifyForbiddenException
+     * @throws \Braze\Exception\PostUsersIdentifyNotFoundException
+     * @throws \Braze\Exception\PostUsersIdentifyTooManyRequestsException
+     * @throws \Braze\Exception\PostUsersIdentifyInternalServerErrorException
      */
-    public function postUsersIdentify(?Model\UsersIdentifyPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postUsersIdentify(Model\UsersIdentifyPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PostUsersIdentify($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PostUsersIdentify($requestBody, $headerParameters), $fetch);
     }
 
     /**
      * > Use this endpoint to record custom events, purchases, and update user profile attributes.
      *
-     **Note:** Braze processes the data passed via API at face value and customers should only pass deltas (changing data) to minimize unnecessary data point consumption. To read more, refer to [Data points](https://www.braze.com/docs/user_guide/onboarding_with_braze/data_points#data-points).
+     * **Note:** Braze processes the data passed via API at face value and customers should only pass deltas (changing data) to minimize unnecessary data point consumption. To read more, refer to [Data points](https://www.braze.com/docs/user_guide/onboarding_with_braze/data_points#data-points).
      *
      * ## Prerequisites
      *
@@ -9313,70 +9358,70 @@ class Client extends Runtime\Client\Client
      * --header 'Content-Type: application/json' \
      * --header 'Authorization: Bearer YOUR_REST_API_KEY' \
      * --data-raw '{
-     * "attributes": [
-     * {
-     * "email": "test@braze.com",
-     * "string_attribute": "fruit",
-     * "boolean_attribute_1": true,
-     * "integer_attribute": 26,
-     * "array_attribute": [
-     * "banana",
-     * "apple"
-     * ]
-     * }
-     * ],
-     * "events": [
-     * {
-     * "email": "test@braze.com",
-     * "app_id": "your_app_identifier",
-     * "name": "rented_movie",
-     * "time": "2022-12-06T19:20:45+01:00",
-     * "properties": {
-     * "release": {
-     * "studio": "FilmStudio",
-     * "year": "2022"
-     * },
-     * "cast": [
-     * {
-     * "name": "Actor1"
-     * },
-     * {
-     * "name": "Actor2"
-     * }
-     * ]
-     * }
-     * },
-     * {
-     * "user_alias": {
-     * "alias_name": "device123",
-     * "alias_label": "my_device_identifier"
-     * },
-     * "app_id": "your_app_identifier",
-     * "name": "rented_movie",
-     * "time": "2013-07-16T19:20:50+01:00"
-     * }
-     * ],
-     * "purchases": [
-     * {
-     * "email": "test@braze.com",
-     * "app_id": "your_app_identifier",
-     * "product_id": "product_name",
-     * "currency": "USD",
-     * "price": 12.12,
-     * "quantity": 6,
-     * "time": "2017-05-12T18:47:12Z",
-     * "properties": {
-     * "color": "red",
-     * "monogram": "ABC",
-     * "checkout_duration": 180,
-     * "size": "Large",
-     * "brand": "Backpack Locker"
-     * }
-     * }
-     * ]
+     *     "attributes": [
+     *         {
+     *             "email": "test@braze.com",
+     *             "string_attribute": "fruit",
+     *             "boolean_attribute_1": true,
+     *             "integer_attribute": 26,
+     *             "array_attribute": [
+     *                 "banana",
+     *                 "apple"
+     *             ]
+     *         }
+     *     ],
+     *     "events": [
+     *         {
+     *             "email": "test@braze.com",
+     *             "app_id": "your_app_identifier",
+     *             "name": "rented_movie",
+     *             "time": "2022-12-06T19:20:45+01:00",
+     *             "properties": {
+     *                 "release": {
+     *                     "studio": "FilmStudio",
+     *                     "year": "2022"
+     *                 },
+     *                 "cast": [
+     *                     {
+     *                         "name": "Actor1"
+     *                     },
+     *                     {
+     *                         "name": "Actor2"
+     *                     }
+     *                 ]
+     *             }
+     *         },
+     *         {
+     *             "user_alias": {
+     *                 "alias_name": "device123",
+     *                 "alias_label": "my_device_identifier"
+     *             },
+     *             "app_id": "your_app_identifier",
+     *             "name": "rented_movie",
+     *             "time": "2013-07-16T19:20:50+01:00"
+     *         }
+     *     ],
+     *     "purchases": [
+     *         {
+     *             "email": "test@braze.com",
+     *             "app_id": "your_app_identifier",
+     *             "product_id": "product_name",
+     *             "currency": "USD",
+     *             "price": 12.12,
+     *             "quantity": 6,
+     *             "time": "2017-05-12T18:47:12Z",
+     *             "properties": {
+     *                 "color": "red",
+     *                 "monogram": "ABC",
+     *                 "checkout_duration": 180,
+     *                 "size": "Large",
+     *                 "brand": "Backpack Locker"
+     *             }
+     *         }
+     *     ]
      * }'
      *
-     * ```
+     *  ```
      *
      * ### Update a user profile by phone number
      *
@@ -9391,21 +9436,21 @@ class Client extends Runtime\Client\Client
      * --header 'Content-Type: application/json' \
      * --header 'Authorization: Bearer YOUR_REST_API_KEY' \
      * --data-raw '{
-     * "attributes": [
-     * {
-     * "phone": "+15043277269",
-     * "string_attribute": "fruit",
-     * "boolean_attribute_1": true,
-     * "integer_attribute": 25,
-     * "array_attribute": [
-     * "banana",
-     * "apple"
-     * ]
-     * }
-     * ],
+     *     "attributes": [
+     *         {
+     *             "phone": "+15043277269",
+     *             "string_attribute": "fruit",
+     *             "boolean_attribute_1": true,
+     *             "integer_attribute": 25,
+     *             "array_attribute": [
+     *                 "banana",
+     *                 "apple"
+     *             ]
+     *         }
+     *     ],
      * }'
      *
-     * ```
+     *  ```
      *
      * ### Set subscription groups
      *
@@ -9418,29 +9463,29 @@ class Client extends Runtime\Client\Client
      * --header 'Content-Type: application/json' \
      * --header 'Authorization: Bearer YOUR_REST_API_KEY' \
      * --data-raw '{
-     * "attributes": [
-     * {
-     * "external_id": "user_identifier",
-     * "email": "example@email.com",
-     * "email_subscribe": "subscribed",
-     * "subscription_groups": [{
-     * "subscription_group_id": "subscription_group_identifier_1",
-     * "subscription_state": "unsubscribed"
-     * },
-     * {
-     * "subscription_group_id": "subscription_group_identifier_2",
-     * "subscription_state": "subscribed"
-     * },
-     * {
-     * "subscription_group_id": "subscription_group_identifier_3",
-     * "subscription_state": "subscribed"
-     * }
-     * ]
-     * }
-     * ]
+     *   "attributes": [
+     *   {
+     *     "external_id": "user_identifier",
+     *     "email": "example@email.com",
+     *     "email_subscribe": "subscribed",
+     *     "subscription_groups": [{
+     *       "subscription_group_id": "subscription_group_identifier_1",
+     *       "subscription_state": "unsubscribed"
+     *       },
+     *       {
+     *         "subscription_group_id": "subscription_group_identifier_2",
+     *         "subscription_state": "subscribed"
+     *         },
+     *         {
+     *           "subscription_group_id": "subscription_group_identifier_3",
+     *           "subscription_state": "subscribed"
+     *         }
+     *       ]
+     *     }
+     *   ]
      * }'
      *
-     * ```
+     *  ```
      *
      * ### Example request to create an alias-only user
      *
@@ -9452,19 +9497,19 @@ class Client extends Runtime\Client\Client
      * --header 'Authorization: Bearer YOUR_REST_API_KEY' \
      * --data-raw '{
      * {
-     * "attributes": [
-     * {
-     * "_update_existing_only": false,
-     * "user_alias": {
-     * "alias_name": "example_name",
-     * "alias_label": "example_label"
-     * },
-     * "email": "email@example.com"
-     * }
-     * ],
+     *     "attributes": [
+     *         {
+     *             "_update_existing_only": false,
+     *             "user_alias": {
+     *                 "alias_name": "example_name",
+     *                 "alias_label": "example_label"
+     *             },
+     *             "email": "email@example.com"
+     *         }
+     *     ],
      * }'
      *
-     * ```
+     *  ```
      *
      * ## Responses
      *
@@ -9476,13 +9521,13 @@ class Client extends Runtime\Client\Client
      *
      * ``` json
      * {
-     * "message" : "success",
-     * "attributes_processed" : (optional, integer), if attributes are included in the request, this will return an integer of the number of external_ids with attributes that were queued to be processed,
-     * "events_processed" : (optional, integer), if events are included in the request, this will return an integer of the number of events that were queued to be processed,
-     * "purchases_processed" : (optional, integer), if purchases are included in the request, this will return an integer of the number of purchases that were queued to be processed,
+     *   "message" : "success",
+     *   "attributes_processed" : (optional, integer), if attributes are included in the request, this will return an integer of the number of external_ids with attributes that were queued to be processed,
+     *   "events_processed" : (optional, integer), if events are included in the request, this will return an integer of the number of events that were queued to be processed,
+     *   "purchases_processed" : (optional, integer), if purchases are included in the request, this will return an integer of the number of purchases that were queued to be processed,
      * }
      *
-     * ```
+     *  ```
      *
      * ### Successful message with non-fatal errors
      *
@@ -9490,15 +9535,15 @@ class Client extends Runtime\Client\Client
      *
      * ``` json
      * {
-     * "message" : "success",
-     * "errors" : [
-     * {
-     * <minor error message>
-     * }
-     * ]
+     *   "message" : "success",
+     *   "errors" : [
+     *     {
+     *       <minor error message>
+     *     }
+     *   ]
      * }
      *
-     * ```
+     *  ```
      *
      * For success messages, any data not affected by an error in the `errors` array will still be processed.
      *
@@ -9508,15 +9553,15 @@ class Client extends Runtime\Client\Client
      *
      * ``` json
      * {
-     * "message" : <fatal error message>,
-     * "errors" : [
-     * {
-     * <fatal error message>
-     * }
-     * ]
+     *   "message" : <fatal error message>,
+     *   "errors" : [
+     *     {
+     *       <fatal error message>
+     *     }
+     *   ]
      * }
      *
-     * ```
+     *  ```
      *
      * ### Fatal error response codes
      *
@@ -9566,7 +9611,8 @@ class Client extends Runtime\Client\Client
      *
      * Current limits based on expected ingestion can be found in the dashboard under **Settings** > **APIs and Identifiers** > **API limits**. We may modify rate limits to protect system stability or allow for increased data throughput on your account. Please contact Braze Support or your customer success manager for questions or concerns regarding hourly or per-second request limit and the needs of your business.
      *
-     * @param array $headerParameters {
+     * @param \Braze\Model\UsersTrackPostBody|null $requestBody
+     * @param array                                $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -9574,18 +9620,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PostUsersTrackBadRequestException
-     * @throws Exception\PostUsersTrackUnauthorizedException
-     * @throws Exception\PostUsersTrackForbiddenException
-     * @throws Exception\PostUsersTrackNotFoundException
-     * @throws Exception\PostUsersTrackTooManyRequestsException
-     * @throws Exception\PostUsersTrackInternalServerErrorException
+     * @throws \Braze\Exception\PostUsersTrackBadRequestException
+     * @throws \Braze\Exception\PostUsersTrackUnauthorizedException
+     * @throws \Braze\Exception\PostUsersTrackForbiddenException
+     * @throws \Braze\Exception\PostUsersTrackNotFoundException
+     * @throws \Braze\Exception\PostUsersTrackTooManyRequestsException
+     * @throws \Braze\Exception\PostUsersTrackInternalServerErrorException
      */
-    public function postUsersTrack(?Model\UsersTrackPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postUsersTrack(Model\UsersTrackPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PostUsersTrack($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PostUsersTrack($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -9632,12 +9678,13 @@ class Client extends Runtime\Client\Client
      * Content-Type: application/json
      * Authorization: Bearer YOUR_REST_API_KEY
      * {
-     * "deleted" : (required, integer) number of user IDs queued for deletion
+     *   "deleted" : (required, integer) number of user IDs queued for deletion
      * }
      *
-     * ```
+     *  ```
      *
-     * @param array $headerParameters {
+     * @param \Braze\Model\UsersDeletePostBody|null $requestBody
+     * @param array                                 $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -9645,18 +9692,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PostUsersDeleteBadRequestException
-     * @throws Exception\PostUsersDeleteUnauthorizedException
-     * @throws Exception\PostUsersDeleteForbiddenException
-     * @throws Exception\PostUsersDeleteNotFoundException
-     * @throws Exception\PostUsersDeleteTooManyRequestsException
-     * @throws Exception\PostUsersDeleteInternalServerErrorException
+     * @throws \Braze\Exception\PostUsersDeleteBadRequestException
+     * @throws \Braze\Exception\PostUsersDeleteUnauthorizedException
+     * @throws \Braze\Exception\PostUsersDeleteForbiddenException
+     * @throws \Braze\Exception\PostUsersDeleteNotFoundException
+     * @throws \Braze\Exception\PostUsersDeleteTooManyRequestsException
+     * @throws \Braze\Exception\PostUsersDeleteInternalServerErrorException
      */
-    public function postUsersDelete(?Model\UsersDeletePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postUsersDelete(Model\UsersDeletePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PostUsersDelete($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PostUsersDelete($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -9721,11 +9768,11 @@ class Client extends Runtime\Client\Client
      *
      * - Segmentable custom events summary
      *
-     * - Event count (the sum from both profiles)
+     *     - Event count (the sum from both profiles)
      *
-     * - Event first occurred (Braze will pick the earlier date of the two dates)
+     *     - Event first occurred (Braze will pick the earlier date of the two dates)
      *
-     * - Event last occurred (Braze will pick the later date of the two dates)
+     *     - Event last occurred (Braze will pick the later date of the two dates)
      *
      * - In-app purchase total in cents (the sum from both profiles)
      *
@@ -9778,10 +9825,10 @@ class Client extends Runtime\Client\Client
      *
      * ``` json
      * {
-     * "message": "success"
+     *   "message": "success"
      * }
      *
-     * ```
+     *  ```
      *
      * ### Example error response
      *
@@ -9789,10 +9836,10 @@ class Client extends Runtime\Client\Client
      *
      * ``` json
      * {
-     * "message": "'merge_updates' must be an array of objects"
+     *   "message": "'merge_updates' must be an array of objects"
      * }
      *
-     * ```
+     *  ```
      *
      * ## Troubleshooting
      *
@@ -9805,7 +9852,8 @@ class Client extends Runtime\Client\Client
      * | `identifiers must be objects with an 'external_id' property that is a string, or 'user_alias' property that is an object` | Check the identifiers in your request. |
      * | `'merge_updates' must only have 'identifier_to_merge' and 'identifier_to_keep'` | Check that `merge_updates` only contains the two objects `identifier_to_merge` and `identifier_to_keep`. |
      *
-     * @param array $headerParameters {
+     * @param \Braze\Model\UsersMergePostBody|null $requestBody
+     * @param array                                $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -9813,18 +9861,18 @@ class Client extends Runtime\Client\Client
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws Exception\PostUsersMergeBadRequestException
-     * @throws Exception\PostUsersMergeUnauthorizedException
-     * @throws Exception\PostUsersMergeForbiddenException
-     * @throws Exception\PostUsersMergeNotFoundException
-     * @throws Exception\PostUsersMergeTooManyRequestsException
-     * @throws Exception\PostUsersMergeInternalServerErrorException
+     * @throws \Braze\Exception\PostUsersMergeBadRequestException
+     * @throws \Braze\Exception\PostUsersMergeUnauthorizedException
+     * @throws \Braze\Exception\PostUsersMergeForbiddenException
+     * @throws \Braze\Exception\PostUsersMergeNotFoundException
+     * @throws \Braze\Exception\PostUsersMergeTooManyRequestsException
+     * @throws \Braze\Exception\PostUsersMergeInternalServerErrorException
      */
-    public function postUsersMerge(?Model\UsersMergePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postUsersMerge(Model\UsersMergePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new Endpoint\PostUsersMerge($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new \Braze\Endpoint\PostUsersMerge($requestBody, $headerParameters), $fetch);
     }
 
     public static function create($httpClient = null, array $additionalPlugins = [], array $additionalNormalizers = [])
@@ -9841,7 +9889,7 @@ class Client extends Runtime\Client\Client
         }
         $requestFactory = \Http\Discovery\Psr17FactoryDiscovery::findRequestFactory();
         $streamFactory = \Http\Discovery\Psr17FactoryDiscovery::findStreamFactory();
-        $normalizers = [new \Symfony\Component\Serializer\Normalizer\ArrayDenormalizer(), new Normalizer\JaneObjectNormalizer()];
+        $normalizers = [new \Symfony\Component\Serializer\Normalizer\ArrayDenormalizer(), new \Braze\Normalizer\JaneObjectNormalizer()];
         if (count($additionalNormalizers) > 0) {
             $normalizers = array_merge($normalizers, $additionalNormalizers);
         }

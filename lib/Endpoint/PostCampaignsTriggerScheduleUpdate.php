@@ -46,14 +46,14 @@ class PostCampaignsTriggerScheduleUpdate extends \Braze\Runtime\Client\BaseEndpo
      * --header 'Content-Type: application/json' \
      * --header 'Authorization: Bearer YOUR-REST-API-KEY' \
      * --data-raw '{
-     * "campaign_id": "campaign_identifier",
-     * "schedule_id": "schedule_identifier",
-     * "schedule": {
-     * "time": "2017-05-24T21:30:00Z",
-     * "in_local_time": true
-     * }
+     *   "campaign_id": "campaign_identifier",
+     *   "schedule_id": "schedule_identifier",
+     *   "schedule": {
+     *     "time": "2017-05-24T21:30:00Z",
+     *     "in_local_time": true
+     *   }
      * }'
-     * ```
+     *  ```
      *
      * @param array $headerParameters {
      *
@@ -61,7 +61,7 @@ class PostCampaignsTriggerScheduleUpdate extends \Braze\Runtime\Client\BaseEndpo
      * @var string $Authorization
      *             }
      */
-    public function __construct(?\Braze\Model\CampaignsTriggerScheduleUpdatePostBody $requestBody = null, array $headerParameters = [])
+    public function __construct(\Braze\Model\CampaignsTriggerScheduleUpdatePostBody $requestBody = null, array $headerParameters = [])
     {
         $this->body = $requestBody;
         $this->headerParameters = $headerParameters;
@@ -113,32 +113,32 @@ class PostCampaignsTriggerScheduleUpdate extends \Braze\Runtime\Client\BaseEndpo
      * @throws \Braze\Exception\PostCampaignsTriggerScheduleUpdateTooManyRequestsException
      * @throws \Braze\Exception\PostCampaignsTriggerScheduleUpdateInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();
-        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (200 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return json_decode($body);
         }
-        if (is_null($contentType) === false && (201 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (201 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return json_decode($body);
         }
-        if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (400 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostCampaignsTriggerScheduleUpdateBadRequestException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (401 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostCampaignsTriggerScheduleUpdateUnauthorizedException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (403 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostCampaignsTriggerScheduleUpdateForbiddenException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (404 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostCampaignsTriggerScheduleUpdateNotFoundException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (429 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (429 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostCampaignsTriggerScheduleUpdateTooManyRequestsException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (500 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostCampaignsTriggerScheduleUpdateInternalServerErrorException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
     }

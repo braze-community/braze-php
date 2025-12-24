@@ -43,28 +43,28 @@ class PostV2SubscriptionStatusSet extends \Braze\Runtime\Client\BaseEndpoint imp
      * --header 'Content-Type: application/json' \
      * --header 'Authorization: Bearer YOUR-REST-API-KEY' \
      * --data-raw '{
-     * "subscription_groups": [
-     * {
-     * "subscription_group_id": "504e09e6-ffa4-4b31-96c3-c05d50d903cf",
-     * "subscription_state": "unsubscribed",
-     * "external_ids": [
-     * "user1",
-     * "user2"
-     * ],
-     * "emails": [
-     * "test1@braze.com",
-     * "test2@braze.com"
-     * ],
-     * "phones": [
-     * "+445555555555",
-     * "+445555555556"
-     * ]
-     * }
-     * ]
+     *   "subscription_groups": [
+     *     {
+     *       "subscription_group_id": "504e09e6-ffa4-4b31-96c3-c05d50d903cf",
+     *       "subscription_state": "unsubscribed",
+     *       "external_ids": [
+     *         "user1",
+     *         "user2"
+     *       ],
+     *       "emails": [
+     *         "test1@braze.com",
+     *         "test2@braze.com"
+     *       ],
+     *       "phones": [
+     *         "+445555555555",
+     *         "+445555555556"
+     *       ]
+     *     }
+     *   ]
      * }
      * '
      *
-     * ```
+     *  ```
      *
      * ### Example successful response
      *
@@ -72,10 +72,10 @@ class PostV2SubscriptionStatusSet extends \Braze\Runtime\Client\BaseEndpoint imp
      *
      * ``` json
      * {
-     * "message": "success"
+     *     "message": "success"
      * }
      *
-     * ```
+     *  ```
      *
      * @param array $headerParameters {
      *
@@ -83,7 +83,7 @@ class PostV2SubscriptionStatusSet extends \Braze\Runtime\Client\BaseEndpoint imp
      * @var string
      *                  }
      */
-    public function __construct(?\Braze\Model\V2SubscriptionStatusSetPostBody $requestBody = null, array $headerParameters = [])
+    public function __construct(\Braze\Model\V2SubscriptionStatusSetPostBody $requestBody = null, array $headerParameters = [])
     {
         $this->body = $requestBody;
         $this->headerParameters = $headerParameters;
@@ -135,32 +135,32 @@ class PostV2SubscriptionStatusSet extends \Braze\Runtime\Client\BaseEndpoint imp
      * @throws \Braze\Exception\PostV2SubscriptionStatusSetTooManyRequestsException
      * @throws \Braze\Exception\PostV2SubscriptionStatusSetInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();
-        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (200 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return json_decode($body);
         }
-        if (is_null($contentType) === false && (201 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (201 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return json_decode($body);
         }
-        if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (400 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostV2SubscriptionStatusSetBadRequestException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (401 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostV2SubscriptionStatusSetUnauthorizedException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (403 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostV2SubscriptionStatusSetForbiddenException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (404 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostV2SubscriptionStatusSetNotFoundException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (429 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (429 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostV2SubscriptionStatusSetTooManyRequestsException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (500 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostV2SubscriptionStatusSetInternalServerErrorException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
     }

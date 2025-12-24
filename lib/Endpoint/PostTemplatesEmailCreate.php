@@ -48,15 +48,15 @@ class PostTemplatesEmailCreate extends \Braze\Runtime\Client\BaseEndpoint implem
      * --header 'Content-Type: application/json' \
      * --header 'Authorization: Bearer YOUR_REST_API_KEY' \
      * --data-raw '{
-     * "template_name": "email_template_name",
-     * "subject": "Welcome to my email template!",
-     * "body": "This is the text within my email body and https://www.braze.com/ here is a link to Braze.com.",
-     * "plaintext_body": "This is the text within my email body and here is a link to https://www.braze.com/.",
-     * "preheader": "My preheader is pretty cool.",
-     * "tags": ["Tag1", "Tag2"]
+     *   "template_name": "email_template_name",
+     *   "subject": "Welcome to my email template!",
+     *   "body": "This is the text within my email body and https://www.braze.com/ here is a link to Braze.com.",
+     *   "plaintext_body": "This is the text within my email body and here is a link to https://www.braze.com/.",
+     *   "preheader": "My preheader is pretty cool.",
+     *   "tags": ["Tag1", "Tag2"]
      * }'
      *
-     * ```
+     *  ```
      *
      * ## Possible errors
      *
@@ -88,7 +88,7 @@ class PostTemplatesEmailCreate extends \Braze\Runtime\Client\BaseEndpoint implem
      * @var string $Authorization
      *             }
      */
-    public function __construct(?\Braze\Model\TemplatesEmailCreatePostBody $requestBody = null, array $queryParameters = [], array $headerParameters = [])
+    public function __construct(\Braze\Model\TemplatesEmailCreatePostBody $requestBody = null, array $queryParameters = [], array $headerParameters = [])
     {
         $this->body = $requestBody;
         $this->queryParameters = $queryParameters;
@@ -158,32 +158,32 @@ class PostTemplatesEmailCreate extends \Braze\Runtime\Client\BaseEndpoint implem
      * @throws \Braze\Exception\PostTemplatesEmailCreateTooManyRequestsException
      * @throws \Braze\Exception\PostTemplatesEmailCreateInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();
-        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (200 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return json_decode($body);
         }
-        if (is_null($contentType) === false && (201 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (201 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return json_decode($body);
         }
-        if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (400 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostTemplatesEmailCreateBadRequestException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (401 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostTemplatesEmailCreateUnauthorizedException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (403 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostTemplatesEmailCreateForbiddenException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (404 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostTemplatesEmailCreateNotFoundException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (429 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (429 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostTemplatesEmailCreateTooManyRequestsException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (500 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostTemplatesEmailCreateInternalServerErrorException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
     }

@@ -1,0 +1,11 @@
+--- lib/Runtime/Client/BaseEndpointOld.php	2025-12-23 19:11:25
++++ lib/Runtime/Client/BaseEndpoint.php	2025-12-23 19:11:39
+@@ -49,7 +49,7 @@
+             if (in_array($key, $allowReserved, true)) {
+                 $queryParameters[] = rawurlencode($key) . '=' . $value;
+             } else {
+-                $queryParameters[] = rawurlencode($key) . '=' . rawurlencode($value);
++                $queryParameters[] = rawurlencode($key) . '=' . rawurlencode((string) $value);
+             }
+         }
+ 

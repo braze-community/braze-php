@@ -55,12 +55,12 @@ class PostTransactionalV1CampaignsByCampaignIdSend extends \Braze\Runtime\Client
      *
      * ``` json
      * {
-     * "dispatch_id": Out-of-the-box generated Unique ID of the instance of this send
-     * "status": Current status of the message
-     * "metadata": Object containing additional information about the send instance
+     *     "dispatch_id": Out-of-the-box generated Unique ID of the instance of this send
+     *     "status": Current status of the message
+     *     "metadata": Object containing additional information about the send instance
      * }
      *
-     * ```
+     *  ```
      *
      * ## Troubleshooting
      *
@@ -96,61 +96,61 @@ class PostTransactionalV1CampaignsByCampaignIdSend extends \Braze\Runtime\Client
      * ``` json
      * // Sent Event
      * {
-     * "dispatch_id": "acf471119f7449d579e8089032003ded",
-     * "status": "sent",
-     * "metadata": {
-     * "received_at": "2020-08-31T18:58:41.000+00:00",
-     * "enqueued_at": "2020-08-31T18:58:41.000+00:00",
-     * "executed_at": "2020-08-31T18:58:41.000+00:00",
-     * "sent_at": "2020-08-31T18:58:42.000+00:00",
-     * "campaign_api_id": "417220e4-5a2a-b634-7f7d-9ec891532368",
-     * "external_send_id" : "34a2ceb3cf6184132f3d816e9984269a"
-     * }
+     *     "dispatch_id": "acf471119f7449d579e8089032003ded",
+     *     "status": "sent",
+     *     "metadata": {
+     *       "received_at": "2020-08-31T18:58:41.000+00:00",
+     *       "enqueued_at": "2020-08-31T18:58:41.000+00:00",
+     *       "executed_at": "2020-08-31T18:58:41.000+00:00",
+     *       "sent_at": "2020-08-31T18:58:42.000+00:00",
+     *       "campaign_api_id": "417220e4-5a2a-b634-7f7d-9ec891532368",
+     *       "external_send_id" : "34a2ceb3cf6184132f3d816e9984269a"
+     *     }
      * }
      * // Processed Event
      * {
-     * "dispatch_id": "acf471119f7449d579e8089032003ded",
-     * "status": "processed",
-     * "metadata": {
-     * "processed_at": "2020-08-31T18:58:42.000+00:00",
-     * "campaign_api_id": "417220e4-5a2a-b634-7f7d-9ec891532368",
-     * "external_send_id" : "34a2ceb3cf6184132f3d816e9984269a"
-     * }
+     *     "dispatch_id": "acf471119f7449d579e8089032003ded",
+     *     "status": "processed",
+     *     "metadata": {
+     *       "processed_at": "2020-08-31T18:58:42.000+00:00",
+     *       "campaign_api_id": "417220e4-5a2a-b634-7f7d-9ec891532368",
+     *       "external_send_id" : "34a2ceb3cf6184132f3d816e9984269a"
+     *     }
      * }
      * // Aborted
      * {
-     * "dispatch_id": "acf471119f7449d579e8089032003ded",
-     * "status": "aborted",
-     * "metadata": {
-     * "reason": "User not emailable",
-     * "aborted_at": "2020-08-31T19:04:51.000+00:00",
-     * "campaign_api_id": "417220e4-5a2a-b634-7f7d-9ec891532368",
-     * "external_send_id" : "34a2ceb3cf6184132f3d816e9984269a"
-     * }
+     *     "dispatch_id": "acf471119f7449d579e8089032003ded",
+     *     "status": "aborted",
+     *     "metadata": {
+     *       "reason": "User not emailable",
+     *       "aborted_at": "2020-08-31T19:04:51.000+00:00",
+     *       "campaign_api_id": "417220e4-5a2a-b634-7f7d-9ec891532368",
+     *       "external_send_id" : "34a2ceb3cf6184132f3d816e9984269a"
+     *     }
      * }
      * // Delivered Event
      * {
-     * "dispatch_id": "acf471119f7449d579e8089032003ded",
-     * "status": "delivered",
-     * "metadata": {
-     * "delivered_at": "2020-08-31T18:27:32.000+00:00",
-     * "campaign_api_id": "417220e4-5a2a-b634-7f7d-9ec891532368",
-     * "external_send_id" : "34a2ceb3cf6184132f3d816e9984269a"
-     * }
+     *     "dispatch_id": "acf471119f7449d579e8089032003ded",
+     *     "status": "delivered",
+     *     "metadata": {
+     *       "delivered_at": "2020-08-31T18:27:32.000+00:00",
+     *       "campaign_api_id": "417220e4-5a2a-b634-7f7d-9ec891532368",
+     *       "external_send_id" : "34a2ceb3cf6184132f3d816e9984269a"
+     *     }
      * }
      * // Bounced Event
      * {
-     * "dispatch_id": "acf471119f7449d579e8089032003ded",
-     * "status": "bounced",
-     * "metadata": {
-     * "bounced_at": "2020-08-31T18:58:43.000+00:00",
-     * "reason": "550 5.1.1 The email account that you tried to reach does not exist",
-     * "campaign_api_id": "417220e4-5a2a-b634-7f7d-9ec891532368",
-     * "external_send_id" : "34a2ceb3cf6184132f3d816e9984269a"
-     * }
+     *     "dispatch_id": "acf471119f7449d579e8089032003ded",
+     *     "status": "bounced",
+     *     "metadata": {
+     *       "bounced_at": "2020-08-31T18:58:43.000+00:00",
+     *       "reason": "550 5.1.1 The email account that you tried to reach does not exist",
+     *       "campaign_api_id": "417220e4-5a2a-b634-7f7d-9ec891532368",
+     *       "external_send_id" : "34a2ceb3cf6184132f3d816e9984269a"
+     *     }
      * }
      *
-     * ```
+     *  ```
      *
      * #### Message status
      *
@@ -167,61 +167,61 @@ class PostTransactionalV1CampaignsByCampaignIdSend extends \Braze\Runtime\Client
      * ``` json
      * // Sent Event
      * {
-     * "dispatch_id": "acf471119f7449d579e8089032003ded",
-     * "status": "sent",
-     * "metadata": {
-     * "received_at": "2020-08-31T18:58:41.000+00:00",
-     * "enqueued_at": "2020-08-31T18:58:41.000+00:00",
-     * "executed_at": "2020-08-31T18:58:41.000+00:00",
-     * "sent_at": "2020-08-31T18:58:42.000+00:00",
-     * "campaign_api_id": "417220e4-5a2a-b634-7f7d-9ec891532368",
-     * "external_send_id" : "34a2ceb3cf6184132f3d816e9984269a"
-     * }
+     *     "dispatch_id": "acf471119f7449d579e8089032003ded",
+     *     "status": "sent",
+     *     "metadata": {
+     *       "received_at": "2020-08-31T18:58:41.000+00:00",
+     *       "enqueued_at": "2020-08-31T18:58:41.000+00:00",
+     *       "executed_at": "2020-08-31T18:58:41.000+00:00",
+     *       "sent_at": "2020-08-31T18:58:42.000+00:00",
+     *       "campaign_api_id": "417220e4-5a2a-b634-7f7d-9ec891532368",
+     *       "external_send_id" : "34a2ceb3cf6184132f3d816e9984269a"
+     *     }
      * }
      * // Processed Event
      * {
-     * "dispatch_id": "acf471119f7449d579e8089032003ded",
-     * "status": "processed",
-     * "metadata": {
-     * "processed_at": "2020-08-31T18:58:42.000+00:00",
-     * "campaign_api_id": "417220e4-5a2a-b634-7f7d-9ec891532368",
-     * "external_send_id" : "34a2ceb3cf6184132f3d816e9984269a"
-     * }
+     *     "dispatch_id": "acf471119f7449d579e8089032003ded",
+     *     "status": "processed",
+     *     "metadata": {
+     *       "processed_at": "2020-08-31T18:58:42.000+00:00",
+     *       "campaign_api_id": "417220e4-5a2a-b634-7f7d-9ec891532368",
+     *       "external_send_id" : "34a2ceb3cf6184132f3d816e9984269a"
+     *     }
      * }
      * // Aborted
      * {
-     * "dispatch_id": "acf471119f7449d579e8089032003ded",
-     * "status": "aborted",
-     * "metadata": {
-     * "reason": "User not emailable",
-     * "aborted_at": "2020-08-31T19:04:51.000+00:00",
-     * "campaign_api_id": "417220e4-5a2a-b634-7f7d-9ec891532368",
-     * "external_send_id" : "34a2ceb3cf6184132f3d816e9984269a"
-     * }
+     *     "dispatch_id": "acf471119f7449d579e8089032003ded",
+     *     "status": "aborted",
+     *     "metadata": {
+     *       "reason": "User not emailable",
+     *       "aborted_at": "2020-08-31T19:04:51.000+00:00",
+     *       "campaign_api_id": "417220e4-5a2a-b634-7f7d-9ec891532368",
+     *       "external_send_id" : "34a2ceb3cf6184132f3d816e9984269a"
+     *     }
      * }
      * // Delivered Event
      * {
-     * "dispatch_id": "acf471119f7449d579e8089032003ded",
-     * "status": "delivered",
-     * "metadata": {
-     * "delivered_at": "2020-08-31T18:27:32.000+00:00",
-     * "campaign_api_id": "417220e4-5a2a-b634-7f7d-9ec891532368",
-     * "external_send_id" : "34a2ceb3cf6184132f3d816e9984269a"
-     * }
+     *     "dispatch_id": "acf471119f7449d579e8089032003ded",
+     *     "status": "delivered",
+     *     "metadata": {
+     *       "delivered_at": "2020-08-31T18:27:32.000+00:00",
+     *       "campaign_api_id": "417220e4-5a2a-b634-7f7d-9ec891532368",
+     *       "external_send_id" : "34a2ceb3cf6184132f3d816e9984269a"
+     *     }
      * }
      * // Bounced Event
      * {
-     * "dispatch_id": "acf471119f7449d579e8089032003ded",
-     * "status": "bounced",
-     * "metadata": {
-     * "bounced_at": "2020-08-31T18:58:43.000+00:00",
-     * "reason": "550 5.1.1 The email account that you tried to reach does not exist",
-     * "campaign_api_id": "417220e4-5a2a-b634-7f7d-9ec891532368",
-     * "external_send_id" : "34a2ceb3cf6184132f3d816e9984269a"
-     * }
+     *     "dispatch_id": "acf471119f7449d579e8089032003ded",
+     *     "status": "bounced",
+     *     "metadata": {
+     *       "bounced_at": "2020-08-31T18:58:43.000+00:00",
+     *       "reason": "550 5.1.1 The email account that you tried to reach does not exist",
+     *       "campaign_api_id": "417220e4-5a2a-b634-7f7d-9ec891532368",
+     *       "external_send_id" : "34a2ceb3cf6184132f3d816e9984269a"
+     *     }
      * }
      *
-     * ```
+     *  ```
      *
      * @param array $headerParameters {
      *
@@ -229,7 +229,7 @@ class PostTransactionalV1CampaignsByCampaignIdSend extends \Braze\Runtime\Client
      * @var string $Authorization
      *             }
      */
-    public function __construct(string $campaignId, ?\Braze\Model\TransactionalV1CampaignsCampaignIdSendPostBody $requestBody = null, array $headerParameters = [])
+    public function __construct(string $campaignId, \Braze\Model\TransactionalV1CampaignsCampaignIdSendPostBody $requestBody = null, array $headerParameters = [])
     {
         $this->campaign_id = $campaignId;
         $this->body = $requestBody;
@@ -282,32 +282,32 @@ class PostTransactionalV1CampaignsByCampaignIdSend extends \Braze\Runtime\Client
      * @throws \Braze\Exception\PostTransactionalV1CampaignsByCampaignIdSendTooManyRequestsException
      * @throws \Braze\Exception\PostTransactionalV1CampaignsByCampaignIdSendInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();
-        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (200 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return json_decode($body);
         }
-        if (is_null($contentType) === false && (201 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (201 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return json_decode($body);
         }
-        if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (400 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostTransactionalV1CampaignsByCampaignIdSendBadRequestException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (401 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostTransactionalV1CampaignsByCampaignIdSendUnauthorizedException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (403 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostTransactionalV1CampaignsByCampaignIdSendForbiddenException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (404 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostTransactionalV1CampaignsByCampaignIdSendNotFoundException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (429 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (429 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostTransactionalV1CampaignsByCampaignIdSendTooManyRequestsException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (500 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Braze\Exception\PostTransactionalV1CampaignsByCampaignIdSendInternalServerErrorException($serializer->deserialize($body, 'Braze\Model\Error', 'json'), $response);
         }
     }
