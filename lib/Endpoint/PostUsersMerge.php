@@ -166,7 +166,7 @@ class PostUsersMerge extends \Braze\Runtime\Client\BaseEndpoint implements \Braz
      * @var string $Authorization
      *             }
      */
-    public function __construct(\Braze\Model\UsersMergePostBody $requestBody = null, array $headerParameters = [])
+    public function __construct(?\Braze\Model\UsersMergePostBody $requestBody = null, array $headerParameters = [])
     {
         $this->body = $requestBody;
         $this->headerParameters = $headerParameters;
@@ -218,7 +218,7 @@ class PostUsersMerge extends \Braze\Runtime\Client\BaseEndpoint implements \Braz
      * @throws \Braze\Exception\PostUsersMergeTooManyRequestsException
      * @throws \Braze\Exception\PostUsersMergeInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();

@@ -126,7 +126,7 @@ class GetSegmentsList extends \Braze\Runtime\Client\BaseEndpoint implements \Bra
      * @throws \Braze\Exception\GetSegmentsListTooManyRequestsException
      * @throws \Braze\Exception\GetSegmentsListInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();

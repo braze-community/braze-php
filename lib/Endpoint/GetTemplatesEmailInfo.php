@@ -134,7 +134,7 @@ class GetTemplatesEmailInfo extends \Braze\Runtime\Client\BaseEndpoint implement
      * @throws \Braze\Exception\GetTemplatesEmailInfoTooManyRequestsException
      * @throws \Braze\Exception\GetTemplatesEmailInfoInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();

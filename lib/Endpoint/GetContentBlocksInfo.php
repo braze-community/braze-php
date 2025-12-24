@@ -148,7 +148,7 @@ class GetContentBlocksInfo extends \Braze\Runtime\Client\BaseEndpoint implements
      * @throws \Braze\Exception\GetContentBlocksInfoTooManyRequestsException
      * @throws \Braze\Exception\GetContentBlocksInfoInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();

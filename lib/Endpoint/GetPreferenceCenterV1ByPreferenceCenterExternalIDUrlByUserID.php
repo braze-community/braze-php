@@ -132,7 +132,7 @@ class GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserID extends \Braz
      * @throws \Braze\Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserIDTooManyRequestsException
      * @throws \Braze\Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserIDInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();

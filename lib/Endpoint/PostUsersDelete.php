@@ -69,7 +69,7 @@ class PostUsersDelete extends \Braze\Runtime\Client\BaseEndpoint implements \Bra
      * @var string $Authorization
      *             }
      */
-    public function __construct(\Braze\Model\UsersDeletePostBody $requestBody = null, array $headerParameters = [])
+    public function __construct(?\Braze\Model\UsersDeletePostBody $requestBody = null, array $headerParameters = [])
     {
         $this->body = $requestBody;
         $this->headerParameters = $headerParameters;
@@ -121,7 +121,7 @@ class PostUsersDelete extends \Braze\Runtime\Client\BaseEndpoint implements \Bra
      * @throws \Braze\Exception\PostUsersDeleteTooManyRequestsException
      * @throws \Braze\Exception\PostUsersDeleteInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();

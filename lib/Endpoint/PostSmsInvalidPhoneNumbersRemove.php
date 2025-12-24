@@ -51,7 +51,7 @@ class PostSmsInvalidPhoneNumbersRemove extends \Braze\Runtime\Client\BaseEndpoin
      * @var string $Content-Type
      *             }
      */
-    public function __construct(\Braze\Model\SmsInvalidPhoneNumbersRemovePostBody $requestBody = null, array $headerParameters = [])
+    public function __construct(?\Braze\Model\SmsInvalidPhoneNumbersRemovePostBody $requestBody = null, array $headerParameters = [])
     {
         $this->body = $requestBody;
         $this->headerParameters = $headerParameters;
@@ -103,7 +103,7 @@ class PostSmsInvalidPhoneNumbersRemove extends \Braze\Runtime\Client\BaseEndpoin
      * @throws \Braze\Exception\PostSmsInvalidPhoneNumbersRemoveTooManyRequestsException
      * @throws \Braze\Exception\PostSmsInvalidPhoneNumbersRemoveInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();
