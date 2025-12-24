@@ -1,5 +1,27 @@
 # Changelog
 
+## [3.0.0](https://github.com/braze-community/braze-php/compare/v2.4.7...v3.0.0) (2025-12-24)
+
+
+### ⚠ BREAKING CHANGES
+
+* **composer:** change supported php version from >=8.0 to >=8.1
+
+### Features
+
+* **lib:** generate PHP code from OpenAPI spec ([cd0d7f8](https://github.com/braze-community/braze-php/commit/cd0d7f8e2c28a177307f16fa2d7239fad42d8a40))
+* **lib:** generate PHP code from OpenAPI spec ([c598713](https://github.com/braze-community/braze-php/commit/c598713a35bc38fae2c557c3c84373b6408ee270))
+
+
+### Bug Fixes
+
+* **lib:** cast value to string inside rawurlencode ([1c51fd8](https://github.com/braze-community/braze-php/commit/1c51fd827a1ec9b18af85d7e35731587c985c988))
+
+
+### Build System
+
+* **composer:** drop support for php 8.0 ([b47250e](https://github.com/braze-community/braze-php/commit/b47250e70f0dab42c470cfe4b0c0ff78ab5436d7))
+
 ## [2.4.7](https://github.com/braze-community/braze-php/compare/v2.4.6...v2.4.7) (2025-06-07)
 
 
