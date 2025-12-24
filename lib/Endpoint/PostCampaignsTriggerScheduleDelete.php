@@ -40,7 +40,7 @@ class PostCampaignsTriggerScheduleDelete extends \Braze\Runtime\Client\BaseEndpo
      * @var string $Authorization
      *             }
      */
-    public function __construct(\Braze\Model\CampaignsTriggerScheduleDeletePostBody $requestBody = null, array $headerParameters = [])
+    public function __construct(?\Braze\Model\CampaignsTriggerScheduleDeletePostBody $requestBody = null, array $headerParameters = [])
     {
         $this->body = $requestBody;
         $this->headerParameters = $headerParameters;
@@ -92,7 +92,7 @@ class PostCampaignsTriggerScheduleDelete extends \Braze\Runtime\Client\BaseEndpo
      * @throws \Braze\Exception\PostCampaignsTriggerScheduleDeleteTooManyRequestsException
      * @throws \Braze\Exception\PostCampaignsTriggerScheduleDeleteInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();

@@ -67,7 +67,7 @@ class PostCanvasTriggerSend extends \Braze\Runtime\Client\BaseEndpoint implement
      * @var string $Authorization
      *             }
      */
-    public function __construct(\Braze\Model\CanvasTriggerSendPostBody $requestBody = null, array $headerParameters = [])
+    public function __construct(?\Braze\Model\CanvasTriggerSendPostBody $requestBody = null, array $headerParameters = [])
     {
         $this->body = $requestBody;
         $this->headerParameters = $headerParameters;
@@ -119,7 +119,7 @@ class PostCanvasTriggerSend extends \Braze\Runtime\Client\BaseEndpoint implement
      * @throws \Braze\Exception\PostCanvasTriggerSendTooManyRequestsException
      * @throws \Braze\Exception\PostCanvasTriggerSendInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();

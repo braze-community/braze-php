@@ -238,7 +238,7 @@ class PostPreferenceCenterV1 extends \Braze\Runtime\Client\BaseEndpoint implemen
      * @var string $Authorization
      *             }
      */
-    public function __construct(\Braze\Model\PreferenceCenterV1PostBody $requestBody = null, array $headerParameters = [])
+    public function __construct(?\Braze\Model\PreferenceCenterV1PostBody $requestBody = null, array $headerParameters = [])
     {
         $this->body = $requestBody;
         $this->headerParameters = $headerParameters;
@@ -290,7 +290,7 @@ class PostPreferenceCenterV1 extends \Braze\Runtime\Client\BaseEndpoint implemen
      * @throws \Braze\Exception\PostPreferenceCenterV1TooManyRequestsException
      * @throws \Braze\Exception\PostPreferenceCenterV1InternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();

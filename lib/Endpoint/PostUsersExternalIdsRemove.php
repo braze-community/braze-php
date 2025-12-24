@@ -64,7 +64,7 @@ class PostUsersExternalIdsRemove extends \Braze\Runtime\Client\BaseEndpoint impl
      * @var string $Authorization
      *             }
      */
-    public function __construct(\Braze\Model\UsersExternalIdsRemovePostBody $requestBody = null, array $headerParameters = [])
+    public function __construct(?\Braze\Model\UsersExternalIdsRemovePostBody $requestBody = null, array $headerParameters = [])
     {
         $this->body = $requestBody;
         $this->headerParameters = $headerParameters;
@@ -116,7 +116,7 @@ class PostUsersExternalIdsRemove extends \Braze\Runtime\Client\BaseEndpoint impl
      * @throws \Braze\Exception\PostUsersExternalIdsRemoveTooManyRequestsException
      * @throws \Braze\Exception\PostUsersExternalIdsRemoveInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();

@@ -229,7 +229,7 @@ class PostTransactionalV1CampaignsByCampaignIdSend extends \Braze\Runtime\Client
      * @var string $Authorization
      *             }
      */
-    public function __construct(string $campaignId, \Braze\Model\TransactionalV1CampaignsCampaignIdSendPostBody $requestBody = null, array $headerParameters = [])
+    public function __construct(string $campaignId, ?\Braze\Model\TransactionalV1CampaignsCampaignIdSendPostBody $requestBody = null, array $headerParameters = [])
     {
         $this->campaign_id = $campaignId;
         $this->body = $requestBody;
@@ -282,7 +282,7 @@ class PostTransactionalV1CampaignsByCampaignIdSend extends \Braze\Runtime\Client
      * @throws \Braze\Exception\PostTransactionalV1CampaignsByCampaignIdSendTooManyRequestsException
      * @throws \Braze\Exception\PostTransactionalV1CampaignsByCampaignIdSendInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();

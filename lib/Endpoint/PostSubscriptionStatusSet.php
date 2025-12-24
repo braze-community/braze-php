@@ -86,7 +86,7 @@ class PostSubscriptionStatusSet extends \Braze\Runtime\Client\BaseEndpoint imple
      * @var string
      *                  }
      */
-    public function __construct(\Braze\Model\SubscriptionStatusSetPostBody $requestBody = null, array $headerParameters = [])
+    public function __construct(?\Braze\Model\SubscriptionStatusSetPostBody $requestBody = null, array $headerParameters = [])
     {
         $this->body = $requestBody;
         $this->headerParameters = $headerParameters;
@@ -138,7 +138,7 @@ class PostSubscriptionStatusSet extends \Braze\Runtime\Client\BaseEndpoint imple
      * @throws \Braze\Exception\PostSubscriptionStatusSetTooManyRequestsException
      * @throws \Braze\Exception\PostSubscriptionStatusSetInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();

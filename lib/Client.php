@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace Braze;
 
-class Client extends \Braze\Runtime\Client\Client
+class Client extends Runtime\Client\Client
 {
     /**
      * > Use this endpoint to delete a catalog.
@@ -85,16 +85,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\DeleteCatalogByCatalogNameBadRequestException
-     * @throws \Braze\Exception\DeleteCatalogByCatalogNameUnauthorizedException
-     * @throws \Braze\Exception\DeleteCatalogByCatalogNameForbiddenException
-     * @throws \Braze\Exception\DeleteCatalogByCatalogNameNotFoundException
-     * @throws \Braze\Exception\DeleteCatalogByCatalogNameTooManyRequestsException
-     * @throws \Braze\Exception\DeleteCatalogByCatalogNameInternalServerErrorException
+     * @throws Exception\DeleteCatalogByCatalogNameBadRequestException
+     * @throws Exception\DeleteCatalogByCatalogNameUnauthorizedException
+     * @throws Exception\DeleteCatalogByCatalogNameForbiddenException
+     * @throws Exception\DeleteCatalogByCatalogNameNotFoundException
+     * @throws Exception\DeleteCatalogByCatalogNameTooManyRequestsException
+     * @throws Exception\DeleteCatalogByCatalogNameInternalServerErrorException
      */
     public function deleteCatalogByCatalogName(string $catalogName, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\DeleteCatalogByCatalogName($catalogName, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\DeleteCatalogByCatalogName($catalogName, $headerParameters), $fetch);
     }
 
     /**
@@ -210,16 +210,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\GetCatalogBadRequestException
-     * @throws \Braze\Exception\GetCatalogUnauthorizedException
-     * @throws \Braze\Exception\GetCatalogForbiddenException
-     * @throws \Braze\Exception\GetCatalogNotFoundException
-     * @throws \Braze\Exception\GetCatalogTooManyRequestsException
-     * @throws \Braze\Exception\GetCatalogInternalServerErrorException
+     * @throws Exception\GetCatalogBadRequestException
+     * @throws Exception\GetCatalogUnauthorizedException
+     * @throws Exception\GetCatalogForbiddenException
+     * @throws Exception\GetCatalogNotFoundException
+     * @throws Exception\GetCatalogTooManyRequestsException
+     * @throws Exception\GetCatalogInternalServerErrorException
      */
     public function getCatalog(array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\GetCatalog($headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\GetCatalog($headerParameters), $fetch);
     }
 
     /**
@@ -391,8 +391,7 @@ class Client extends \Braze\Runtime\Client\Client
      * | `too-many-catalog-atoms` | You can only create one catalog per request. |
      * | `too-many-fields` | Number of fields limit is 30. |
      *
-     * @param \Braze\Model\CatalogsPostBody|null $requestBody
-     * @param array                              $headerParameters {
+     * @param array $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -402,16 +401,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PostCatalogBadRequestException
-     * @throws \Braze\Exception\PostCatalogUnauthorizedException
-     * @throws \Braze\Exception\PostCatalogForbiddenException
-     * @throws \Braze\Exception\PostCatalogNotFoundException
-     * @throws \Braze\Exception\PostCatalogTooManyRequestsException
-     * @throws \Braze\Exception\PostCatalogInternalServerErrorException
+     * @throws Exception\PostCatalogBadRequestException
+     * @throws Exception\PostCatalogUnauthorizedException
+     * @throws Exception\PostCatalogForbiddenException
+     * @throws Exception\PostCatalogNotFoundException
+     * @throws Exception\PostCatalogTooManyRequestsException
+     * @throws Exception\PostCatalogInternalServerErrorException
      */
-    public function postCatalog(Model\CatalogsPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postCatalog(?Model\CatalogsPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PostCatalog($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PostCatalog($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -503,8 +502,7 @@ class Client extends \Braze\Runtime\Client\Client
      * | `invalid-ids` | Item IDs can only include letters, numbers, hyphens, and underscores. |
      * | `request-includes-too-many-items` | Your request has too many items. The item limit per request is 50. |
      *
-     * @param \Braze\Model\CatalogsCatalogNameItemsDeleteBody|null $requestBody
-     * @param array                                                $headerParameters {
+     * @param array $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -514,16 +512,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\DeleteCatalogsByCatalogNameItemBadRequestException
-     * @throws \Braze\Exception\DeleteCatalogsByCatalogNameItemUnauthorizedException
-     * @throws \Braze\Exception\DeleteCatalogsByCatalogNameItemForbiddenException
-     * @throws \Braze\Exception\DeleteCatalogsByCatalogNameItemNotFoundException
-     * @throws \Braze\Exception\DeleteCatalogsByCatalogNameItemTooManyRequestsException
-     * @throws \Braze\Exception\DeleteCatalogsByCatalogNameItemInternalServerErrorException
+     * @throws Exception\DeleteCatalogsByCatalogNameItemBadRequestException
+     * @throws Exception\DeleteCatalogsByCatalogNameItemUnauthorizedException
+     * @throws Exception\DeleteCatalogsByCatalogNameItemForbiddenException
+     * @throws Exception\DeleteCatalogsByCatalogNameItemNotFoundException
+     * @throws Exception\DeleteCatalogsByCatalogNameItemTooManyRequestsException
+     * @throws Exception\DeleteCatalogsByCatalogNameItemInternalServerErrorException
      */
-    public function deleteCatalogsByCatalogNameItem(string $catalogName, Model\CatalogsCatalogNameItemsDeleteBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function deleteCatalogsByCatalogNameItem(string $catalogName, ?Model\CatalogsCatalogNameItemsDeleteBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\DeleteCatalogsByCatalogNameItem($catalogName, $requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\DeleteCatalogsByCatalogNameItem($catalogName, $requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -671,16 +669,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\GetCatalogsByCatalogNameItemBadRequestException
-     * @throws \Braze\Exception\GetCatalogsByCatalogNameItemUnauthorizedException
-     * @throws \Braze\Exception\GetCatalogsByCatalogNameItemForbiddenException
-     * @throws \Braze\Exception\GetCatalogsByCatalogNameItemNotFoundException
-     * @throws \Braze\Exception\GetCatalogsByCatalogNameItemTooManyRequestsException
-     * @throws \Braze\Exception\GetCatalogsByCatalogNameItemInternalServerErrorException
+     * @throws Exception\GetCatalogsByCatalogNameItemBadRequestException
+     * @throws Exception\GetCatalogsByCatalogNameItemUnauthorizedException
+     * @throws Exception\GetCatalogsByCatalogNameItemForbiddenException
+     * @throws Exception\GetCatalogsByCatalogNameItemNotFoundException
+     * @throws Exception\GetCatalogsByCatalogNameItemTooManyRequestsException
+     * @throws Exception\GetCatalogsByCatalogNameItemInternalServerErrorException
      */
     public function getCatalogsByCatalogNameItem(string $catalogName, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\GetCatalogsByCatalogNameItem($catalogName, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\GetCatalogsByCatalogNameItem($catalogName, $headerParameters), $fetch);
     }
 
     /**
@@ -810,8 +808,7 @@ class Client extends \Braze\Runtime\Client\Client
      * | `too-deep-nesting-in-value-object` | Item objects can't have more than 50 levels of nesting. |
      * | `unable-to-coerce-value` | Item types can't be converted. |
      *
-     * @param \Braze\Model\CatalogsCatalogNameItemsPatchBody|null $requestBody
-     * @param array                                               $headerParameters {
+     * @param array $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -821,16 +818,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PatchCatalogsByCatalogNameItemBadRequestException
-     * @throws \Braze\Exception\PatchCatalogsByCatalogNameItemUnauthorizedException
-     * @throws \Braze\Exception\PatchCatalogsByCatalogNameItemForbiddenException
-     * @throws \Braze\Exception\PatchCatalogsByCatalogNameItemNotFoundException
-     * @throws \Braze\Exception\PatchCatalogsByCatalogNameItemTooManyRequestsException
-     * @throws \Braze\Exception\PatchCatalogsByCatalogNameItemInternalServerErrorException
+     * @throws Exception\PatchCatalogsByCatalogNameItemBadRequestException
+     * @throws Exception\PatchCatalogsByCatalogNameItemUnauthorizedException
+     * @throws Exception\PatchCatalogsByCatalogNameItemForbiddenException
+     * @throws Exception\PatchCatalogsByCatalogNameItemNotFoundException
+     * @throws Exception\PatchCatalogsByCatalogNameItemTooManyRequestsException
+     * @throws Exception\PatchCatalogsByCatalogNameItemInternalServerErrorException
      */
-    public function patchCatalogsByCatalogNameItem(string $catalogName, Model\CatalogsCatalogNameItemsPatchBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function patchCatalogsByCatalogNameItem(string $catalogName, ?Model\CatalogsCatalogNameItemsPatchBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PatchCatalogsByCatalogNameItem($catalogName, $requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PatchCatalogsByCatalogNameItem($catalogName, $requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -980,8 +977,7 @@ class Client extends \Braze\Runtime\Client\Client
      * | `too-deep-nesting-in-value-object` | Item objects can't have more than 50 levels of nesting. |
      * | `unable-to-coerce-value` | Item types can't be converted. |
      *
-     * @param \Braze\Model\CatalogsCatalogNameItemsPostBody|null $requestBody
-     * @param array                                              $headerParameters {
+     * @param array $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -991,16 +987,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PostCatalogsByCatalogNameItemBadRequestException
-     * @throws \Braze\Exception\PostCatalogsByCatalogNameItemUnauthorizedException
-     * @throws \Braze\Exception\PostCatalogsByCatalogNameItemForbiddenException
-     * @throws \Braze\Exception\PostCatalogsByCatalogNameItemNotFoundException
-     * @throws \Braze\Exception\PostCatalogsByCatalogNameItemTooManyRequestsException
-     * @throws \Braze\Exception\PostCatalogsByCatalogNameItemInternalServerErrorException
+     * @throws Exception\PostCatalogsByCatalogNameItemBadRequestException
+     * @throws Exception\PostCatalogsByCatalogNameItemUnauthorizedException
+     * @throws Exception\PostCatalogsByCatalogNameItemForbiddenException
+     * @throws Exception\PostCatalogsByCatalogNameItemNotFoundException
+     * @throws Exception\PostCatalogsByCatalogNameItemTooManyRequestsException
+     * @throws Exception\PostCatalogsByCatalogNameItemInternalServerErrorException
      */
-    public function postCatalogsByCatalogNameItem(string $catalogName, Model\CatalogsCatalogNameItemsPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postCatalogsByCatalogNameItem(string $catalogName, ?Model\CatalogsCatalogNameItemsPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PostCatalogsByCatalogNameItem($catalogName, $requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PostCatalogsByCatalogNameItem($catalogName, $requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -1122,8 +1118,7 @@ class Client extends \Braze\Runtime\Client\Client
      * | `request_includes_too_many_items` | Your request has too many items. The item limit per request is 50. |
      * | `unable_to_coerce_value` | Item types can't be converted. |
      *
-     * @param \Braze\Model\CatalogsCatalogNameItemsPutBody|null $requestBody
-     * @param array                                             $headerParameters {
+     * @param array $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -1133,16 +1128,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PutCatalogsByCatalogNameItemBadRequestException
-     * @throws \Braze\Exception\PutCatalogsByCatalogNameItemUnauthorizedException
-     * @throws \Braze\Exception\PutCatalogsByCatalogNameItemForbiddenException
-     * @throws \Braze\Exception\PutCatalogsByCatalogNameItemNotFoundException
-     * @throws \Braze\Exception\PutCatalogsByCatalogNameItemTooManyRequestsException
-     * @throws \Braze\Exception\PutCatalogsByCatalogNameItemInternalServerErrorException
+     * @throws Exception\PutCatalogsByCatalogNameItemBadRequestException
+     * @throws Exception\PutCatalogsByCatalogNameItemUnauthorizedException
+     * @throws Exception\PutCatalogsByCatalogNameItemForbiddenException
+     * @throws Exception\PutCatalogsByCatalogNameItemNotFoundException
+     * @throws Exception\PutCatalogsByCatalogNameItemTooManyRequestsException
+     * @throws Exception\PutCatalogsByCatalogNameItemInternalServerErrorException
      */
-    public function putCatalogsByCatalogNameItem(string $catalogName, Model\CatalogsCatalogNameItemsPutBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function putCatalogsByCatalogNameItem(string $catalogName, ?Model\CatalogsCatalogNameItemsPutBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PutCatalogsByCatalogNameItem($catalogName, $requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PutCatalogsByCatalogNameItem($catalogName, $requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -1234,16 +1229,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\DeleteCatalogsByCatalogNameItemByItemIdBadRequestException
-     * @throws \Braze\Exception\DeleteCatalogsByCatalogNameItemByItemIdUnauthorizedException
-     * @throws \Braze\Exception\DeleteCatalogsByCatalogNameItemByItemIdForbiddenException
-     * @throws \Braze\Exception\DeleteCatalogsByCatalogNameItemByItemIdNotFoundException
-     * @throws \Braze\Exception\DeleteCatalogsByCatalogNameItemByItemIdTooManyRequestsException
-     * @throws \Braze\Exception\DeleteCatalogsByCatalogNameItemByItemIdInternalServerErrorException
+     * @throws Exception\DeleteCatalogsByCatalogNameItemByItemIdBadRequestException
+     * @throws Exception\DeleteCatalogsByCatalogNameItemByItemIdUnauthorizedException
+     * @throws Exception\DeleteCatalogsByCatalogNameItemByItemIdForbiddenException
+     * @throws Exception\DeleteCatalogsByCatalogNameItemByItemIdNotFoundException
+     * @throws Exception\DeleteCatalogsByCatalogNameItemByItemIdTooManyRequestsException
+     * @throws Exception\DeleteCatalogsByCatalogNameItemByItemIdInternalServerErrorException
      */
     public function deleteCatalogsByCatalogNameItemByItemId(string $catalogName, string $itemId, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\DeleteCatalogsByCatalogNameItemByItemId($catalogName, $itemId, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\DeleteCatalogsByCatalogNameItemByItemId($catalogName, $itemId, $headerParameters), $fetch);
     }
 
     /**
@@ -1345,16 +1340,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\GetCatalogsByCatalogNameItemByItemIdBadRequestException
-     * @throws \Braze\Exception\GetCatalogsByCatalogNameItemByItemIdUnauthorizedException
-     * @throws \Braze\Exception\GetCatalogsByCatalogNameItemByItemIdForbiddenException
-     * @throws \Braze\Exception\GetCatalogsByCatalogNameItemByItemIdNotFoundException
-     * @throws \Braze\Exception\GetCatalogsByCatalogNameItemByItemIdTooManyRequestsException
-     * @throws \Braze\Exception\GetCatalogsByCatalogNameItemByItemIdInternalServerErrorException
+     * @throws Exception\GetCatalogsByCatalogNameItemByItemIdBadRequestException
+     * @throws Exception\GetCatalogsByCatalogNameItemByItemIdUnauthorizedException
+     * @throws Exception\GetCatalogsByCatalogNameItemByItemIdForbiddenException
+     * @throws Exception\GetCatalogsByCatalogNameItemByItemIdNotFoundException
+     * @throws Exception\GetCatalogsByCatalogNameItemByItemIdTooManyRequestsException
+     * @throws Exception\GetCatalogsByCatalogNameItemByItemIdInternalServerErrorException
      */
     public function getCatalogsByCatalogNameItemByItemId(string $catalogName, string $itemId, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\GetCatalogsByCatalogNameItemByItemId($catalogName, $itemId, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\GetCatalogsByCatalogNameItemByItemId($catalogName, $itemId, $headerParameters), $fetch);
     }
 
     /**
@@ -1474,8 +1469,7 @@ class Client extends \Braze\Runtime\Client\Client
      * | `too-deep-nesting-in-value-object` | Item objects can't have more than 50 levels of nesting. |
      * | `unable-to-coerce-value` | Item types can't be converted. |
      *
-     * @param \Braze\Model\CatalogsCatalogNameItemsItemIdPatchBody|null $requestBody
-     * @param array                                                     $headerParameters {
+     * @param array $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -1485,16 +1479,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PatchCatalogsByCatalogNameItemByItemIdBadRequestException
-     * @throws \Braze\Exception\PatchCatalogsByCatalogNameItemByItemIdUnauthorizedException
-     * @throws \Braze\Exception\PatchCatalogsByCatalogNameItemByItemIdForbiddenException
-     * @throws \Braze\Exception\PatchCatalogsByCatalogNameItemByItemIdNotFoundException
-     * @throws \Braze\Exception\PatchCatalogsByCatalogNameItemByItemIdTooManyRequestsException
-     * @throws \Braze\Exception\PatchCatalogsByCatalogNameItemByItemIdInternalServerErrorException
+     * @throws Exception\PatchCatalogsByCatalogNameItemByItemIdBadRequestException
+     * @throws Exception\PatchCatalogsByCatalogNameItemByItemIdUnauthorizedException
+     * @throws Exception\PatchCatalogsByCatalogNameItemByItemIdForbiddenException
+     * @throws Exception\PatchCatalogsByCatalogNameItemByItemIdNotFoundException
+     * @throws Exception\PatchCatalogsByCatalogNameItemByItemIdTooManyRequestsException
+     * @throws Exception\PatchCatalogsByCatalogNameItemByItemIdInternalServerErrorException
      */
-    public function patchCatalogsByCatalogNameItemByItemId(string $catalogName, string $itemId, Model\CatalogsCatalogNameItemsItemIdPatchBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function patchCatalogsByCatalogNameItemByItemId(string $catalogName, string $itemId, ?Model\CatalogsCatalogNameItemsItemIdPatchBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PatchCatalogsByCatalogNameItemByItemId($catalogName, $itemId, $requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PatchCatalogsByCatalogNameItemByItemId($catalogName, $itemId, $requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -1612,8 +1606,7 @@ class Client extends \Braze\Runtime\Client\Client
      * | `too-deep-nesting-in-value-object` | Item objects can't have more than 50 levels of nesting. |
      * | `unable-to-coerce-value` | Item types can't be converted. |
      *
-     * @param \Braze\Model\CatalogsCatalogNameItemsItemIdPostBody|null $requestBody
-     * @param array                                                    $headerParameters {
+     * @param array $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -1623,16 +1616,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PostCatalogsByCatalogNameItemByItemIdBadRequestException
-     * @throws \Braze\Exception\PostCatalogsByCatalogNameItemByItemIdUnauthorizedException
-     * @throws \Braze\Exception\PostCatalogsByCatalogNameItemByItemIdForbiddenException
-     * @throws \Braze\Exception\PostCatalogsByCatalogNameItemByItemIdNotFoundException
-     * @throws \Braze\Exception\PostCatalogsByCatalogNameItemByItemIdTooManyRequestsException
-     * @throws \Braze\Exception\PostCatalogsByCatalogNameItemByItemIdInternalServerErrorException
+     * @throws Exception\PostCatalogsByCatalogNameItemByItemIdBadRequestException
+     * @throws Exception\PostCatalogsByCatalogNameItemByItemIdUnauthorizedException
+     * @throws Exception\PostCatalogsByCatalogNameItemByItemIdForbiddenException
+     * @throws Exception\PostCatalogsByCatalogNameItemByItemIdNotFoundException
+     * @throws Exception\PostCatalogsByCatalogNameItemByItemIdTooManyRequestsException
+     * @throws Exception\PostCatalogsByCatalogNameItemByItemIdInternalServerErrorException
      */
-    public function postCatalogsByCatalogNameItemByItemId(string $catalogName, string $itemId, Model\CatalogsCatalogNameItemsItemIdPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postCatalogsByCatalogNameItemByItemId(string $catalogName, string $itemId, ?Model\CatalogsCatalogNameItemsItemIdPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PostCatalogsByCatalogNameItemByItemId($catalogName, $itemId, $requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PostCatalogsByCatalogNameItemByItemId($catalogName, $itemId, $requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -1748,8 +1741,7 @@ class Client extends \Braze\Runtime\Client\Client
      * | `too_deep_nesting_in_value_object` | Item objects can't have more than 50 levels of nesting. |
      * | `unable_to_coerce_value` | Item types can't be converted. |
      *
-     * @param \Braze\Model\CatalogsCatalogNameItemsItemIdPutBody|null $requestBody
-     * @param array                                                   $headerParameters {
+     * @param array $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -1759,16 +1751,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PutCatalogsByCatalogNameItemByItemIdBadRequestException
-     * @throws \Braze\Exception\PutCatalogsByCatalogNameItemByItemIdUnauthorizedException
-     * @throws \Braze\Exception\PutCatalogsByCatalogNameItemByItemIdForbiddenException
-     * @throws \Braze\Exception\PutCatalogsByCatalogNameItemByItemIdNotFoundException
-     * @throws \Braze\Exception\PutCatalogsByCatalogNameItemByItemIdTooManyRequestsException
-     * @throws \Braze\Exception\PutCatalogsByCatalogNameItemByItemIdInternalServerErrorException
+     * @throws Exception\PutCatalogsByCatalogNameItemByItemIdBadRequestException
+     * @throws Exception\PutCatalogsByCatalogNameItemByItemIdUnauthorizedException
+     * @throws Exception\PutCatalogsByCatalogNameItemByItemIdForbiddenException
+     * @throws Exception\PutCatalogsByCatalogNameItemByItemIdNotFoundException
+     * @throws Exception\PutCatalogsByCatalogNameItemByItemIdTooManyRequestsException
+     * @throws Exception\PutCatalogsByCatalogNameItemByItemIdInternalServerErrorException
      */
-    public function putCatalogsByCatalogNameItemByItemId(string $catalogName, string $itemId, Model\CatalogsCatalogNameItemsItemIdPutBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function putCatalogsByCatalogNameItemByItemId(string $catalogName, string $itemId, ?Model\CatalogsCatalogNameItemsItemIdPutBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PutCatalogsByCatalogNameItemByItemId($catalogName, $itemId, $requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PutCatalogsByCatalogNameItemByItemId($catalogName, $itemId, $requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -1856,16 +1848,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\GetEmailHardBounceBadRequestException
-     * @throws \Braze\Exception\GetEmailHardBounceUnauthorizedException
-     * @throws \Braze\Exception\GetEmailHardBounceForbiddenException
-     * @throws \Braze\Exception\GetEmailHardBounceNotFoundException
-     * @throws \Braze\Exception\GetEmailHardBounceTooManyRequestsException
-     * @throws \Braze\Exception\GetEmailHardBounceInternalServerErrorException
+     * @throws Exception\GetEmailHardBounceBadRequestException
+     * @throws Exception\GetEmailHardBounceUnauthorizedException
+     * @throws Exception\GetEmailHardBounceForbiddenException
+     * @throws Exception\GetEmailHardBounceNotFoundException
+     * @throws Exception\GetEmailHardBounceTooManyRequestsException
+     * @throws Exception\GetEmailHardBounceInternalServerErrorException
      */
     public function getEmailHardBounce(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\GetEmailHardBounce($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\GetEmailHardBounce($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -1952,16 +1944,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\GetEmailUnsubscribeBadRequestException
-     * @throws \Braze\Exception\GetEmailUnsubscribeUnauthorizedException
-     * @throws \Braze\Exception\GetEmailUnsubscribeForbiddenException
-     * @throws \Braze\Exception\GetEmailUnsubscribeNotFoundException
-     * @throws \Braze\Exception\GetEmailUnsubscribeTooManyRequestsException
-     * @throws \Braze\Exception\GetEmailUnsubscribeInternalServerErrorException
+     * @throws Exception\GetEmailUnsubscribeBadRequestException
+     * @throws Exception\GetEmailUnsubscribeUnauthorizedException
+     * @throws Exception\GetEmailUnsubscribeForbiddenException
+     * @throws Exception\GetEmailUnsubscribeNotFoundException
+     * @throws Exception\GetEmailUnsubscribeTooManyRequestsException
+     * @throws Exception\GetEmailUnsubscribeInternalServerErrorException
      */
     public function getEmailUnsubscribe(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\GetEmailUnsubscribe($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\GetEmailUnsubscribe($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -1984,8 +1976,7 @@ class Client extends \Braze\Runtime\Client\Client
      * | `email` | Required | String or array | String email address to modify, or an array of up to 50 email addresses to modify. |
      * | `subscription_state` | Required | String | Either “subscribed”, “unsubscribed”, or “opted_in”. |
      *
-     * @param \Braze\Model\EmailStatusPostBody|null $requestBody
-     * @param array                                 $headerParameters {
+     * @param array $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -1995,16 +1986,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PostEmailStatusBadRequestException
-     * @throws \Braze\Exception\PostEmailStatusUnauthorizedException
-     * @throws \Braze\Exception\PostEmailStatusForbiddenException
-     * @throws \Braze\Exception\PostEmailStatusNotFoundException
-     * @throws \Braze\Exception\PostEmailStatusTooManyRequestsException
-     * @throws \Braze\Exception\PostEmailStatusInternalServerErrorException
+     * @throws Exception\PostEmailStatusBadRequestException
+     * @throws Exception\PostEmailStatusUnauthorizedException
+     * @throws Exception\PostEmailStatusForbiddenException
+     * @throws Exception\PostEmailStatusNotFoundException
+     * @throws Exception\PostEmailStatusTooManyRequestsException
+     * @throws Exception\PostEmailStatusInternalServerErrorException
      */
-    public function postEmailStatus(Model\EmailStatusPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postEmailStatus(?Model\EmailStatusPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PostEmailStatus($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PostEmailStatus($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -2024,8 +2015,7 @@ class Client extends \Braze\Runtime\Client\Client
      * | --- | --- | --- | --- |
      * | `email` | Required | String or array | String email address to modify, or an array of up to 50 email addresses to modify. |
      *
-     * @param \Braze\Model\EmailBounceRemovePostBody|null $requestBody
-     * @param array                                       $headerParameters {
+     * @param array $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -2035,16 +2025,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PostEmailBounceRemoveBadRequestException
-     * @throws \Braze\Exception\PostEmailBounceRemoveUnauthorizedException
-     * @throws \Braze\Exception\PostEmailBounceRemoveForbiddenException
-     * @throws \Braze\Exception\PostEmailBounceRemoveNotFoundException
-     * @throws \Braze\Exception\PostEmailBounceRemoveTooManyRequestsException
-     * @throws \Braze\Exception\PostEmailBounceRemoveInternalServerErrorException
+     * @throws Exception\PostEmailBounceRemoveBadRequestException
+     * @throws Exception\PostEmailBounceRemoveUnauthorizedException
+     * @throws Exception\PostEmailBounceRemoveForbiddenException
+     * @throws Exception\PostEmailBounceRemoveNotFoundException
+     * @throws Exception\PostEmailBounceRemoveTooManyRequestsException
+     * @throws Exception\PostEmailBounceRemoveInternalServerErrorException
      */
-    public function postEmailBounceRemove(Model\EmailBounceRemovePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postEmailBounceRemove(?Model\EmailBounceRemovePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PostEmailBounceRemove($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PostEmailBounceRemove($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -2064,8 +2054,7 @@ class Client extends \Braze\Runtime\Client\Client
      * | --- | --- | --- | --- |
      * | `email` | Required | String or array | String email address to modify, or an array of up to 50 email addresses to modify. |
      *
-     * @param \Braze\Model\EmailSpamRemovePostBody|null $requestBody
-     * @param array                                     $headerParameters {
+     * @param array $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -2075,16 +2064,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PostEmailSpamRemoveBadRequestException
-     * @throws \Braze\Exception\PostEmailSpamRemoveUnauthorizedException
-     * @throws \Braze\Exception\PostEmailSpamRemoveForbiddenException
-     * @throws \Braze\Exception\PostEmailSpamRemoveNotFoundException
-     * @throws \Braze\Exception\PostEmailSpamRemoveTooManyRequestsException
-     * @throws \Braze\Exception\PostEmailSpamRemoveInternalServerErrorException
+     * @throws Exception\PostEmailSpamRemoveBadRequestException
+     * @throws Exception\PostEmailSpamRemoveUnauthorizedException
+     * @throws Exception\PostEmailSpamRemoveForbiddenException
+     * @throws Exception\PostEmailSpamRemoveNotFoundException
+     * @throws Exception\PostEmailSpamRemoveTooManyRequestsException
+     * @throws Exception\PostEmailSpamRemoveInternalServerErrorException
      */
-    public function postEmailSpamRemove(Model\EmailSpamRemovePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postEmailSpamRemove(?Model\EmailSpamRemovePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PostEmailSpamRemove($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PostEmailSpamRemove($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -2104,8 +2093,7 @@ class Client extends \Braze\Runtime\Client\Client
      * | --- | --- | --- | --- |
      * | `email` | Required | String or array | String email address to blacklist, or an array of up to 50 email addresses to blocklist. |
      *
-     * @param \Braze\Model\EmailBlocklistPostBody|null $requestBody
-     * @param array                                    $headerParameters {
+     * @param array $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -2115,16 +2103,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PostEmailBlocklistBadRequestException
-     * @throws \Braze\Exception\PostEmailBlocklistUnauthorizedException
-     * @throws \Braze\Exception\PostEmailBlocklistForbiddenException
-     * @throws \Braze\Exception\PostEmailBlocklistNotFoundException
-     * @throws \Braze\Exception\PostEmailBlocklistTooManyRequestsException
-     * @throws \Braze\Exception\PostEmailBlocklistInternalServerErrorException
+     * @throws Exception\PostEmailBlocklistBadRequestException
+     * @throws Exception\PostEmailBlocklistUnauthorizedException
+     * @throws Exception\PostEmailBlocklistForbiddenException
+     * @throws Exception\PostEmailBlocklistNotFoundException
+     * @throws Exception\PostEmailBlocklistTooManyRequestsException
+     * @throws Exception\PostEmailBlocklistInternalServerErrorException
      */
-    public function postEmailBlocklist(Model\EmailBlocklistPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postEmailBlocklist(?Model\EmailBlocklistPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PostEmailBlocklist($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PostEmailBlocklist($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -2144,8 +2132,7 @@ class Client extends \Braze\Runtime\Client\Client
      * | --- | --- | --- | --- |
      * | `email` | Required | String or array | String email address to blacklist, or an array of up to 50 email addresses to blocklist. |
      *
-     * @param \Braze\Model\EmailBlacklistPostBody|null $requestBody
-     * @param array                                    $headerParameters {
+     * @param array $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -2155,16 +2142,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PostEmailBlacklistBadRequestException
-     * @throws \Braze\Exception\PostEmailBlacklistUnauthorizedException
-     * @throws \Braze\Exception\PostEmailBlacklistForbiddenException
-     * @throws \Braze\Exception\PostEmailBlacklistNotFoundException
-     * @throws \Braze\Exception\PostEmailBlacklistTooManyRequestsException
-     * @throws \Braze\Exception\PostEmailBlacklistInternalServerErrorException
+     * @throws Exception\PostEmailBlacklistBadRequestException
+     * @throws Exception\PostEmailBlacklistUnauthorizedException
+     * @throws Exception\PostEmailBlacklistForbiddenException
+     * @throws Exception\PostEmailBlacklistNotFoundException
+     * @throws Exception\PostEmailBlacklistTooManyRequestsException
+     * @throws Exception\PostEmailBlacklistInternalServerErrorException
      */
-    public function postEmailBlacklist(Model\EmailBlacklistPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postEmailBlacklist(?Model\EmailBlacklistPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PostEmailBlacklist($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PostEmailBlacklist($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -2377,16 +2364,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\GetCampaignsDataSeriesBadRequestException
-     * @throws \Braze\Exception\GetCampaignsDataSeriesUnauthorizedException
-     * @throws \Braze\Exception\GetCampaignsDataSeriesForbiddenException
-     * @throws \Braze\Exception\GetCampaignsDataSeriesNotFoundException
-     * @throws \Braze\Exception\GetCampaignsDataSeriesTooManyRequestsException
-     * @throws \Braze\Exception\GetCampaignsDataSeriesInternalServerErrorException
+     * @throws Exception\GetCampaignsDataSeriesBadRequestException
+     * @throws Exception\GetCampaignsDataSeriesUnauthorizedException
+     * @throws Exception\GetCampaignsDataSeriesForbiddenException
+     * @throws Exception\GetCampaignsDataSeriesNotFoundException
+     * @throws Exception\GetCampaignsDataSeriesTooManyRequestsException
+     * @throws Exception\GetCampaignsDataSeriesInternalServerErrorException
      */
     public function getCampaignsDataSeries(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\GetCampaignsDataSeries($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\GetCampaignsDataSeries($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -2674,16 +2661,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\GetCampaignsDetailBadRequestException
-     * @throws \Braze\Exception\GetCampaignsDetailUnauthorizedException
-     * @throws \Braze\Exception\GetCampaignsDetailForbiddenException
-     * @throws \Braze\Exception\GetCampaignsDetailNotFoundException
-     * @throws \Braze\Exception\GetCampaignsDetailTooManyRequestsException
-     * @throws \Braze\Exception\GetCampaignsDetailInternalServerErrorException
+     * @throws Exception\GetCampaignsDetailBadRequestException
+     * @throws Exception\GetCampaignsDetailUnauthorizedException
+     * @throws Exception\GetCampaignsDetailForbiddenException
+     * @throws Exception\GetCampaignsDetailNotFoundException
+     * @throws Exception\GetCampaignsDetailTooManyRequestsException
+     * @throws Exception\GetCampaignsDetailInternalServerErrorException
      */
     public function getCampaignsDetail(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\GetCampaignsDetail($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\GetCampaignsDetail($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -2750,16 +2737,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\GetCampaignsListBadRequestException
-     * @throws \Braze\Exception\GetCampaignsListUnauthorizedException
-     * @throws \Braze\Exception\GetCampaignsListForbiddenException
-     * @throws \Braze\Exception\GetCampaignsListNotFoundException
-     * @throws \Braze\Exception\GetCampaignsListTooManyRequestsException
-     * @throws \Braze\Exception\GetCampaignsListInternalServerErrorException
+     * @throws Exception\GetCampaignsListBadRequestException
+     * @throws Exception\GetCampaignsListUnauthorizedException
+     * @throws Exception\GetCampaignsListForbiddenException
+     * @throws Exception\GetCampaignsListNotFoundException
+     * @throws Exception\GetCampaignsListTooManyRequestsException
+     * @throws Exception\GetCampaignsListInternalServerErrorException
      */
     public function getCampaignsList(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\GetCampaignsList($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\GetCampaignsList($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -2849,16 +2836,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\GetSendsDataSeriesBadRequestException
-     * @throws \Braze\Exception\GetSendsDataSeriesUnauthorizedException
-     * @throws \Braze\Exception\GetSendsDataSeriesForbiddenException
-     * @throws \Braze\Exception\GetSendsDataSeriesNotFoundException
-     * @throws \Braze\Exception\GetSendsDataSeriesTooManyRequestsException
-     * @throws \Braze\Exception\GetSendsDataSeriesInternalServerErrorException
+     * @throws Exception\GetSendsDataSeriesBadRequestException
+     * @throws Exception\GetSendsDataSeriesUnauthorizedException
+     * @throws Exception\GetSendsDataSeriesForbiddenException
+     * @throws Exception\GetSendsDataSeriesNotFoundException
+     * @throws Exception\GetSendsDataSeriesTooManyRequestsException
+     * @throws Exception\GetSendsDataSeriesInternalServerErrorException
      */
     public function getSendsDataSeries(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\GetSendsDataSeries($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\GetSendsDataSeries($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -2969,16 +2956,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\GetCanvasDataSeriesBadRequestException
-     * @throws \Braze\Exception\GetCanvasDataSeriesUnauthorizedException
-     * @throws \Braze\Exception\GetCanvasDataSeriesForbiddenException
-     * @throws \Braze\Exception\GetCanvasDataSeriesNotFoundException
-     * @throws \Braze\Exception\GetCanvasDataSeriesTooManyRequestsException
-     * @throws \Braze\Exception\GetCanvasDataSeriesInternalServerErrorException
+     * @throws Exception\GetCanvasDataSeriesBadRequestException
+     * @throws Exception\GetCanvasDataSeriesUnauthorizedException
+     * @throws Exception\GetCanvasDataSeriesForbiddenException
+     * @throws Exception\GetCanvasDataSeriesNotFoundException
+     * @throws Exception\GetCanvasDataSeriesTooManyRequestsException
+     * @throws Exception\GetCanvasDataSeriesInternalServerErrorException
      */
     public function getCanvasDataSeries(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\GetCanvasDataSeries($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\GetCanvasDataSeries($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -3081,16 +3068,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\GetCanvasDataSummaryBadRequestException
-     * @throws \Braze\Exception\GetCanvasDataSummaryUnauthorizedException
-     * @throws \Braze\Exception\GetCanvasDataSummaryForbiddenException
-     * @throws \Braze\Exception\GetCanvasDataSummaryNotFoundException
-     * @throws \Braze\Exception\GetCanvasDataSummaryTooManyRequestsException
-     * @throws \Braze\Exception\GetCanvasDataSummaryInternalServerErrorException
+     * @throws Exception\GetCanvasDataSummaryBadRequestException
+     * @throws Exception\GetCanvasDataSummaryUnauthorizedException
+     * @throws Exception\GetCanvasDataSummaryForbiddenException
+     * @throws Exception\GetCanvasDataSummaryNotFoundException
+     * @throws Exception\GetCanvasDataSummaryTooManyRequestsException
+     * @throws Exception\GetCanvasDataSummaryInternalServerErrorException
      */
     public function getCanvasDataSummary(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\GetCanvasDataSummary($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\GetCanvasDataSummary($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -3181,16 +3168,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\GetCanvasDetailBadRequestException
-     * @throws \Braze\Exception\GetCanvasDetailUnauthorizedException
-     * @throws \Braze\Exception\GetCanvasDetailForbiddenException
-     * @throws \Braze\Exception\GetCanvasDetailNotFoundException
-     * @throws \Braze\Exception\GetCanvasDetailTooManyRequestsException
-     * @throws \Braze\Exception\GetCanvasDetailInternalServerErrorException
+     * @throws Exception\GetCanvasDetailBadRequestException
+     * @throws Exception\GetCanvasDetailUnauthorizedException
+     * @throws Exception\GetCanvasDetailForbiddenException
+     * @throws Exception\GetCanvasDetailNotFoundException
+     * @throws Exception\GetCanvasDetailTooManyRequestsException
+     * @throws Exception\GetCanvasDetailInternalServerErrorException
      */
     public function getCanvasDetail(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\GetCanvasDetail($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\GetCanvasDetail($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -3258,16 +3245,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\GetCanvasListBadRequestException
-     * @throws \Braze\Exception\GetCanvasListUnauthorizedException
-     * @throws \Braze\Exception\GetCanvasListForbiddenException
-     * @throws \Braze\Exception\GetCanvasListNotFoundException
-     * @throws \Braze\Exception\GetCanvasListTooManyRequestsException
-     * @throws \Braze\Exception\GetCanvasListInternalServerErrorException
+     * @throws Exception\GetCanvasListBadRequestException
+     * @throws Exception\GetCanvasListUnauthorizedException
+     * @throws Exception\GetCanvasListForbiddenException
+     * @throws Exception\GetCanvasListNotFoundException
+     * @throws Exception\GetCanvasListTooManyRequestsException
+     * @throws Exception\GetCanvasListInternalServerErrorException
      */
     public function getCanvasList(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\GetCanvasList($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\GetCanvasList($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -3320,16 +3307,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\GetEventsListBadRequestException
-     * @throws \Braze\Exception\GetEventsListUnauthorizedException
-     * @throws \Braze\Exception\GetEventsListForbiddenException
-     * @throws \Braze\Exception\GetEventsListNotFoundException
-     * @throws \Braze\Exception\GetEventsListTooManyRequestsException
-     * @throws \Braze\Exception\GetEventsListInternalServerErrorException
+     * @throws Exception\GetEventsListBadRequestException
+     * @throws Exception\GetEventsListUnauthorizedException
+     * @throws Exception\GetEventsListForbiddenException
+     * @throws Exception\GetEventsListNotFoundException
+     * @throws Exception\GetEventsListTooManyRequestsException
+     * @throws Exception\GetEventsListInternalServerErrorException
      */
     public function getEventsList(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\GetEventsList($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\GetEventsList($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -3400,16 +3387,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\GetEventsDataSeriesBadRequestException
-     * @throws \Braze\Exception\GetEventsDataSeriesUnauthorizedException
-     * @throws \Braze\Exception\GetEventsDataSeriesForbiddenException
-     * @throws \Braze\Exception\GetEventsDataSeriesNotFoundException
-     * @throws \Braze\Exception\GetEventsDataSeriesTooManyRequestsException
-     * @throws \Braze\Exception\GetEventsDataSeriesInternalServerErrorException
+     * @throws Exception\GetEventsDataSeriesBadRequestException
+     * @throws Exception\GetEventsDataSeriesUnauthorizedException
+     * @throws Exception\GetEventsDataSeriesForbiddenException
+     * @throws Exception\GetEventsDataSeriesNotFoundException
+     * @throws Exception\GetEventsDataSeriesTooManyRequestsException
+     * @throws Exception\GetEventsDataSeriesInternalServerErrorException
      */
     public function getEventsDataSeries(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\GetEventsDataSeries($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\GetEventsDataSeries($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -3465,16 +3452,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\GetKpiNewUsersDataSeriesBadRequestException
-     * @throws \Braze\Exception\GetKpiNewUsersDataSeriesUnauthorizedException
-     * @throws \Braze\Exception\GetKpiNewUsersDataSeriesForbiddenException
-     * @throws \Braze\Exception\GetKpiNewUsersDataSeriesNotFoundException
-     * @throws \Braze\Exception\GetKpiNewUsersDataSeriesTooManyRequestsException
-     * @throws \Braze\Exception\GetKpiNewUsersDataSeriesInternalServerErrorException
+     * @throws Exception\GetKpiNewUsersDataSeriesBadRequestException
+     * @throws Exception\GetKpiNewUsersDataSeriesUnauthorizedException
+     * @throws Exception\GetKpiNewUsersDataSeriesForbiddenException
+     * @throws Exception\GetKpiNewUsersDataSeriesNotFoundException
+     * @throws Exception\GetKpiNewUsersDataSeriesTooManyRequestsException
+     * @throws Exception\GetKpiNewUsersDataSeriesInternalServerErrorException
      */
     public function getKpiNewUsersDataSeries(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\GetKpiNewUsersDataSeries($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\GetKpiNewUsersDataSeries($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -3529,16 +3516,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\GetKpiDauDataSeriesBadRequestException
-     * @throws \Braze\Exception\GetKpiDauDataSeriesUnauthorizedException
-     * @throws \Braze\Exception\GetKpiDauDataSeriesForbiddenException
-     * @throws \Braze\Exception\GetKpiDauDataSeriesNotFoundException
-     * @throws \Braze\Exception\GetKpiDauDataSeriesTooManyRequestsException
-     * @throws \Braze\Exception\GetKpiDauDataSeriesInternalServerErrorException
+     * @throws Exception\GetKpiDauDataSeriesBadRequestException
+     * @throws Exception\GetKpiDauDataSeriesUnauthorizedException
+     * @throws Exception\GetKpiDauDataSeriesForbiddenException
+     * @throws Exception\GetKpiDauDataSeriesNotFoundException
+     * @throws Exception\GetKpiDauDataSeriesTooManyRequestsException
+     * @throws Exception\GetKpiDauDataSeriesInternalServerErrorException
      */
     public function getKpiDauDataSeries(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\GetKpiDauDataSeries($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\GetKpiDauDataSeries($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -3594,16 +3581,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\GetKpiMauDataSeriesBadRequestException
-     * @throws \Braze\Exception\GetKpiMauDataSeriesUnauthorizedException
-     * @throws \Braze\Exception\GetKpiMauDataSeriesForbiddenException
-     * @throws \Braze\Exception\GetKpiMauDataSeriesNotFoundException
-     * @throws \Braze\Exception\GetKpiMauDataSeriesTooManyRequestsException
-     * @throws \Braze\Exception\GetKpiMauDataSeriesInternalServerErrorException
+     * @throws Exception\GetKpiMauDataSeriesBadRequestException
+     * @throws Exception\GetKpiMauDataSeriesUnauthorizedException
+     * @throws Exception\GetKpiMauDataSeriesForbiddenException
+     * @throws Exception\GetKpiMauDataSeriesNotFoundException
+     * @throws Exception\GetKpiMauDataSeriesTooManyRequestsException
+     * @throws Exception\GetKpiMauDataSeriesInternalServerErrorException
      */
     public function getKpiMauDataSeries(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\GetKpiMauDataSeries($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\GetKpiMauDataSeries($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -3659,16 +3646,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\GetKpiUninstallsDataSeriesBadRequestException
-     * @throws \Braze\Exception\GetKpiUninstallsDataSeriesUnauthorizedException
-     * @throws \Braze\Exception\GetKpiUninstallsDataSeriesForbiddenException
-     * @throws \Braze\Exception\GetKpiUninstallsDataSeriesNotFoundException
-     * @throws \Braze\Exception\GetKpiUninstallsDataSeriesTooManyRequestsException
-     * @throws \Braze\Exception\GetKpiUninstallsDataSeriesInternalServerErrorException
+     * @throws Exception\GetKpiUninstallsDataSeriesBadRequestException
+     * @throws Exception\GetKpiUninstallsDataSeriesUnauthorizedException
+     * @throws Exception\GetKpiUninstallsDataSeriesForbiddenException
+     * @throws Exception\GetKpiUninstallsDataSeriesNotFoundException
+     * @throws Exception\GetKpiUninstallsDataSeriesTooManyRequestsException
+     * @throws Exception\GetKpiUninstallsDataSeriesInternalServerErrorException
      */
     public function getKpiUninstallsDataSeries(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\GetKpiUninstallsDataSeries($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\GetKpiUninstallsDataSeries($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -3732,16 +3719,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\GetFeedDataSeriesBadRequestException
-     * @throws \Braze\Exception\GetFeedDataSeriesUnauthorizedException
-     * @throws \Braze\Exception\GetFeedDataSeriesForbiddenException
-     * @throws \Braze\Exception\GetFeedDataSeriesNotFoundException
-     * @throws \Braze\Exception\GetFeedDataSeriesTooManyRequestsException
-     * @throws \Braze\Exception\GetFeedDataSeriesInternalServerErrorException
+     * @throws Exception\GetFeedDataSeriesBadRequestException
+     * @throws Exception\GetFeedDataSeriesUnauthorizedException
+     * @throws Exception\GetFeedDataSeriesForbiddenException
+     * @throws Exception\GetFeedDataSeriesNotFoundException
+     * @throws Exception\GetFeedDataSeriesTooManyRequestsException
+     * @throws Exception\GetFeedDataSeriesInternalServerErrorException
      */
     public function getFeedDataSeries(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\GetFeedDataSeries($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\GetFeedDataSeries($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -3798,16 +3785,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\GetFeedDetailBadRequestException
-     * @throws \Braze\Exception\GetFeedDetailUnauthorizedException
-     * @throws \Braze\Exception\GetFeedDetailForbiddenException
-     * @throws \Braze\Exception\GetFeedDetailNotFoundException
-     * @throws \Braze\Exception\GetFeedDetailTooManyRequestsException
-     * @throws \Braze\Exception\GetFeedDetailInternalServerErrorException
+     * @throws Exception\GetFeedDetailBadRequestException
+     * @throws Exception\GetFeedDetailUnauthorizedException
+     * @throws Exception\GetFeedDetailForbiddenException
+     * @throws Exception\GetFeedDetailNotFoundException
+     * @throws Exception\GetFeedDetailTooManyRequestsException
+     * @throws Exception\GetFeedDetailInternalServerErrorException
      */
     public function getFeedDetail(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\GetFeedDetail($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\GetFeedDetail($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -3868,16 +3855,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\GetFeedListBadRequestException
-     * @throws \Braze\Exception\GetFeedListUnauthorizedException
-     * @throws \Braze\Exception\GetFeedListForbiddenException
-     * @throws \Braze\Exception\GetFeedListNotFoundException
-     * @throws \Braze\Exception\GetFeedListTooManyRequestsException
-     * @throws \Braze\Exception\GetFeedListInternalServerErrorException
+     * @throws Exception\GetFeedListBadRequestException
+     * @throws Exception\GetFeedListUnauthorizedException
+     * @throws Exception\GetFeedListForbiddenException
+     * @throws Exception\GetFeedListNotFoundException
+     * @throws Exception\GetFeedListTooManyRequestsException
+     * @throws Exception\GetFeedListInternalServerErrorException
      */
     public function getFeedList(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\GetFeedList($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\GetFeedList($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -3921,16 +3908,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\GetPurchasesProductListBadRequestException
-     * @throws \Braze\Exception\GetPurchasesProductListUnauthorizedException
-     * @throws \Braze\Exception\GetPurchasesProductListForbiddenException
-     * @throws \Braze\Exception\GetPurchasesProductListNotFoundException
-     * @throws \Braze\Exception\GetPurchasesProductListTooManyRequestsException
-     * @throws \Braze\Exception\GetPurchasesProductListInternalServerErrorException
+     * @throws Exception\GetPurchasesProductListBadRequestException
+     * @throws Exception\GetPurchasesProductListUnauthorizedException
+     * @throws Exception\GetPurchasesProductListForbiddenException
+     * @throws Exception\GetPurchasesProductListNotFoundException
+     * @throws Exception\GetPurchasesProductListTooManyRequestsException
+     * @throws Exception\GetPurchasesProductListInternalServerErrorException
      */
     public function getPurchasesProductList(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\GetPurchasesProductList($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\GetPurchasesProductList($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -3993,16 +3980,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\GetPurchasesQuantitySeriesBadRequestException
-     * @throws \Braze\Exception\GetPurchasesQuantitySeriesUnauthorizedException
-     * @throws \Braze\Exception\GetPurchasesQuantitySeriesForbiddenException
-     * @throws \Braze\Exception\GetPurchasesQuantitySeriesNotFoundException
-     * @throws \Braze\Exception\GetPurchasesQuantitySeriesTooManyRequestsException
-     * @throws \Braze\Exception\GetPurchasesQuantitySeriesInternalServerErrorException
+     * @throws Exception\GetPurchasesQuantitySeriesBadRequestException
+     * @throws Exception\GetPurchasesQuantitySeriesUnauthorizedException
+     * @throws Exception\GetPurchasesQuantitySeriesForbiddenException
+     * @throws Exception\GetPurchasesQuantitySeriesNotFoundException
+     * @throws Exception\GetPurchasesQuantitySeriesTooManyRequestsException
+     * @throws Exception\GetPurchasesQuantitySeriesInternalServerErrorException
      */
     public function getPurchasesQuantitySeries(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\GetPurchasesQuantitySeries($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\GetPurchasesQuantitySeries($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -4065,16 +4052,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\GetPurchasesRevenueSeriesBadRequestException
-     * @throws \Braze\Exception\GetPurchasesRevenueSeriesUnauthorizedException
-     * @throws \Braze\Exception\GetPurchasesRevenueSeriesForbiddenException
-     * @throws \Braze\Exception\GetPurchasesRevenueSeriesNotFoundException
-     * @throws \Braze\Exception\GetPurchasesRevenueSeriesTooManyRequestsException
-     * @throws \Braze\Exception\GetPurchasesRevenueSeriesInternalServerErrorException
+     * @throws Exception\GetPurchasesRevenueSeriesBadRequestException
+     * @throws Exception\GetPurchasesRevenueSeriesUnauthorizedException
+     * @throws Exception\GetPurchasesRevenueSeriesForbiddenException
+     * @throws Exception\GetPurchasesRevenueSeriesNotFoundException
+     * @throws Exception\GetPurchasesRevenueSeriesTooManyRequestsException
+     * @throws Exception\GetPurchasesRevenueSeriesInternalServerErrorException
      */
     public function getPurchasesRevenueSeries(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\GetPurchasesRevenueSeries($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\GetPurchasesRevenueSeries($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -4134,16 +4121,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\GetSegmentsListBadRequestException
-     * @throws \Braze\Exception\GetSegmentsListUnauthorizedException
-     * @throws \Braze\Exception\GetSegmentsListForbiddenException
-     * @throws \Braze\Exception\GetSegmentsListNotFoundException
-     * @throws \Braze\Exception\GetSegmentsListTooManyRequestsException
-     * @throws \Braze\Exception\GetSegmentsListInternalServerErrorException
+     * @throws Exception\GetSegmentsListBadRequestException
+     * @throws Exception\GetSegmentsListUnauthorizedException
+     * @throws Exception\GetSegmentsListForbiddenException
+     * @throws Exception\GetSegmentsListNotFoundException
+     * @throws Exception\GetSegmentsListTooManyRequestsException
+     * @throws Exception\GetSegmentsListInternalServerErrorException
      */
     public function getSegmentsList(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\GetSegmentsList($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\GetSegmentsList($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -4201,16 +4188,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\GetSegmentsDataSeriesBadRequestException
-     * @throws \Braze\Exception\GetSegmentsDataSeriesUnauthorizedException
-     * @throws \Braze\Exception\GetSegmentsDataSeriesForbiddenException
-     * @throws \Braze\Exception\GetSegmentsDataSeriesNotFoundException
-     * @throws \Braze\Exception\GetSegmentsDataSeriesTooManyRequestsException
-     * @throws \Braze\Exception\GetSegmentsDataSeriesInternalServerErrorException
+     * @throws Exception\GetSegmentsDataSeriesBadRequestException
+     * @throws Exception\GetSegmentsDataSeriesUnauthorizedException
+     * @throws Exception\GetSegmentsDataSeriesForbiddenException
+     * @throws Exception\GetSegmentsDataSeriesNotFoundException
+     * @throws Exception\GetSegmentsDataSeriesTooManyRequestsException
+     * @throws Exception\GetSegmentsDataSeriesInternalServerErrorException
      */
     public function getSegmentsDataSeries(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\GetSegmentsDataSeries($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\GetSegmentsDataSeries($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -4262,16 +4249,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\GetSegmentsDetailBadRequestException
-     * @throws \Braze\Exception\GetSegmentsDetailUnauthorizedException
-     * @throws \Braze\Exception\GetSegmentsDetailForbiddenException
-     * @throws \Braze\Exception\GetSegmentsDetailNotFoundException
-     * @throws \Braze\Exception\GetSegmentsDetailTooManyRequestsException
-     * @throws \Braze\Exception\GetSegmentsDetailInternalServerErrorException
+     * @throws Exception\GetSegmentsDetailBadRequestException
+     * @throws Exception\GetSegmentsDetailUnauthorizedException
+     * @throws Exception\GetSegmentsDetailForbiddenException
+     * @throws Exception\GetSegmentsDetailNotFoundException
+     * @throws Exception\GetSegmentsDetailTooManyRequestsException
+     * @throws Exception\GetSegmentsDetailInternalServerErrorException
      */
     public function getSegmentsDetail(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\GetSegmentsDetail($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\GetSegmentsDetail($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -4333,16 +4320,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\GetSessionsDataSeriesBadRequestException
-     * @throws \Braze\Exception\GetSessionsDataSeriesUnauthorizedException
-     * @throws \Braze\Exception\GetSessionsDataSeriesForbiddenException
-     * @throws \Braze\Exception\GetSessionsDataSeriesNotFoundException
-     * @throws \Braze\Exception\GetSessionsDataSeriesTooManyRequestsException
-     * @throws \Braze\Exception\GetSessionsDataSeriesInternalServerErrorException
+     * @throws Exception\GetSessionsDataSeriesBadRequestException
+     * @throws Exception\GetSessionsDataSeriesUnauthorizedException
+     * @throws Exception\GetSessionsDataSeriesForbiddenException
+     * @throws Exception\GetSessionsDataSeriesNotFoundException
+     * @throws Exception\GetSessionsDataSeriesTooManyRequestsException
+     * @throws Exception\GetSessionsDataSeriesInternalServerErrorException
      */
     public function getSessionsDataSeries(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\GetSessionsDataSeries($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\GetSessionsDataSeries($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -4706,8 +4693,7 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * > **Tip:** For help with CSV and API exports, visit [Export troubleshooting](https://www.braze.com/docs/user_guide/data_and_analytics/export_braze_data/export_troubleshooting/).
      *
-     * @param \Braze\Model\UsersExportIdsPostBody|null $requestBody
-     * @param array                                    $headerParameters {
+     * @param array $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -4717,16 +4703,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PostUsersExportIdBadRequestException
-     * @throws \Braze\Exception\PostUsersExportIdUnauthorizedException
-     * @throws \Braze\Exception\PostUsersExportIdForbiddenException
-     * @throws \Braze\Exception\PostUsersExportIdNotFoundException
-     * @throws \Braze\Exception\PostUsersExportIdTooManyRequestsException
-     * @throws \Braze\Exception\PostUsersExportIdInternalServerErrorException
+     * @throws Exception\PostUsersExportIdBadRequestException
+     * @throws Exception\PostUsersExportIdUnauthorizedException
+     * @throws Exception\PostUsersExportIdForbiddenException
+     * @throws Exception\PostUsersExportIdNotFoundException
+     * @throws Exception\PostUsersExportIdTooManyRequestsException
+     * @throws Exception\PostUsersExportIdInternalServerErrorException
      */
-    public function postUsersExportId(Model\UsersExportIdsPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postUsersExportId(?Model\UsersExportIdsPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PostUsersExportId($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PostUsersExportId($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -5132,8 +5118,7 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * > Tip: For help with CSV and API exports, visit Export troubleshooting.
      *
-     * @param \Braze\Model\UsersExportSegmentPostBody|null $requestBody
-     * @param array                                        $headerParameters {
+     * @param array $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -5143,16 +5128,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PostUsersExportSegmentBadRequestException
-     * @throws \Braze\Exception\PostUsersExportSegmentUnauthorizedException
-     * @throws \Braze\Exception\PostUsersExportSegmentForbiddenException
-     * @throws \Braze\Exception\PostUsersExportSegmentNotFoundException
-     * @throws \Braze\Exception\PostUsersExportSegmentTooManyRequestsException
-     * @throws \Braze\Exception\PostUsersExportSegmentInternalServerErrorException
+     * @throws Exception\PostUsersExportSegmentBadRequestException
+     * @throws Exception\PostUsersExportSegmentUnauthorizedException
+     * @throws Exception\PostUsersExportSegmentForbiddenException
+     * @throws Exception\PostUsersExportSegmentNotFoundException
+     * @throws Exception\PostUsersExportSegmentTooManyRequestsException
+     * @throws Exception\PostUsersExportSegmentInternalServerErrorException
      */
-    public function postUsersExportSegment(Model\UsersExportSegmentPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postUsersExportSegment(?Model\UsersExportSegmentPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PostUsersExportSegment($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PostUsersExportSegment($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -5389,8 +5374,7 @@ class Client extends \Braze\Runtime\Client\Client
      *
      *  ```
      *
-     * @param \Braze\Model\UsersExportGlobalControlGroupPostBody|null $requestBody
-     * @param array                                                   $headerParameters {
+     * @param array $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -5400,16 +5384,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PostUsersExportGlobalControlGroupBadRequestException
-     * @throws \Braze\Exception\PostUsersExportGlobalControlGroupUnauthorizedException
-     * @throws \Braze\Exception\PostUsersExportGlobalControlGroupForbiddenException
-     * @throws \Braze\Exception\PostUsersExportGlobalControlGroupNotFoundException
-     * @throws \Braze\Exception\PostUsersExportGlobalControlGroupTooManyRequestsException
-     * @throws \Braze\Exception\PostUsersExportGlobalControlGroupInternalServerErrorException
+     * @throws Exception\PostUsersExportGlobalControlGroupBadRequestException
+     * @throws Exception\PostUsersExportGlobalControlGroupUnauthorizedException
+     * @throws Exception\PostUsersExportGlobalControlGroupForbiddenException
+     * @throws Exception\PostUsersExportGlobalControlGroupNotFoundException
+     * @throws Exception\PostUsersExportGlobalControlGroupTooManyRequestsException
+     * @throws Exception\PostUsersExportGlobalControlGroupInternalServerErrorException
      */
-    public function postUsersExportGlobalControlGroup(Model\UsersExportGlobalControlGroupPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postUsersExportGlobalControlGroup(?Model\UsersExportGlobalControlGroupPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PostUsersExportGlobalControlGroup($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PostUsersExportGlobalControlGroup($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -5470,8 +5454,7 @@ class Client extends \Braze\Runtime\Client\Client
      *
      *  ```
      *
-     * @param \Braze\Model\MessagesLiveActivityUpdatePostBody|null $requestBody
-     * @param array                                                $headerParameters {
+     * @param array $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -5481,16 +5464,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PostMessagesLiveActivityUpdateBadRequestException
-     * @throws \Braze\Exception\PostMessagesLiveActivityUpdateUnauthorizedException
-     * @throws \Braze\Exception\PostMessagesLiveActivityUpdateForbiddenException
-     * @throws \Braze\Exception\PostMessagesLiveActivityUpdateNotFoundException
-     * @throws \Braze\Exception\PostMessagesLiveActivityUpdateTooManyRequestsException
-     * @throws \Braze\Exception\PostMessagesLiveActivityUpdateInternalServerErrorException
+     * @throws Exception\PostMessagesLiveActivityUpdateBadRequestException
+     * @throws Exception\PostMessagesLiveActivityUpdateUnauthorizedException
+     * @throws Exception\PostMessagesLiveActivityUpdateForbiddenException
+     * @throws Exception\PostMessagesLiveActivityUpdateNotFoundException
+     * @throws Exception\PostMessagesLiveActivityUpdateTooManyRequestsException
+     * @throws Exception\PostMessagesLiveActivityUpdateInternalServerErrorException
      */
-    public function postMessagesLiveActivityUpdate(Model\MessagesLiveActivityUpdatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postMessagesLiveActivityUpdate(?Model\MessagesLiveActivityUpdatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PostMessagesLiveActivityUpdate($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PostMessagesLiveActivityUpdate($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -5542,16 +5525,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\GetMessagesScheduledBroadcastBadRequestException
-     * @throws \Braze\Exception\GetMessagesScheduledBroadcastUnauthorizedException
-     * @throws \Braze\Exception\GetMessagesScheduledBroadcastForbiddenException
-     * @throws \Braze\Exception\GetMessagesScheduledBroadcastNotFoundException
-     * @throws \Braze\Exception\GetMessagesScheduledBroadcastTooManyRequestsException
-     * @throws \Braze\Exception\GetMessagesScheduledBroadcastInternalServerErrorException
+     * @throws Exception\GetMessagesScheduledBroadcastBadRequestException
+     * @throws Exception\GetMessagesScheduledBroadcastUnauthorizedException
+     * @throws Exception\GetMessagesScheduledBroadcastForbiddenException
+     * @throws Exception\GetMessagesScheduledBroadcastNotFoundException
+     * @throws Exception\GetMessagesScheduledBroadcastTooManyRequestsException
+     * @throws Exception\GetMessagesScheduledBroadcastInternalServerErrorException
      */
     public function getMessagesScheduledBroadcast(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\GetMessagesScheduledBroadcast($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\GetMessagesScheduledBroadcast($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -5571,8 +5554,7 @@ class Client extends \Braze\Runtime\Client\Client
      * | --- | --- | --- | --- |
      * | `schedule_id` | Required | String | The schedule_id to delete (obtained from the response to create schedule). |
      *
-     * @param \Braze\Model\MessagesScheduleDeletePostBody|null $requestBody
-     * @param array                                            $headerParameters {
+     * @param array $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -5582,16 +5564,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PostMessagesScheduleDeleteBadRequestException
-     * @throws \Braze\Exception\PostMessagesScheduleDeleteUnauthorizedException
-     * @throws \Braze\Exception\PostMessagesScheduleDeleteForbiddenException
-     * @throws \Braze\Exception\PostMessagesScheduleDeleteNotFoundException
-     * @throws \Braze\Exception\PostMessagesScheduleDeleteTooManyRequestsException
-     * @throws \Braze\Exception\PostMessagesScheduleDeleteInternalServerErrorException
+     * @throws Exception\PostMessagesScheduleDeleteBadRequestException
+     * @throws Exception\PostMessagesScheduleDeleteUnauthorizedException
+     * @throws Exception\PostMessagesScheduleDeleteForbiddenException
+     * @throws Exception\PostMessagesScheduleDeleteNotFoundException
+     * @throws Exception\PostMessagesScheduleDeleteTooManyRequestsException
+     * @throws Exception\PostMessagesScheduleDeleteInternalServerErrorException
      */
-    public function postMessagesScheduleDelete(Model\MessagesScheduleDeletePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postMessagesScheduleDelete(?Model\MessagesScheduleDeletePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PostMessagesScheduleDelete($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PostMessagesScheduleDelete($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -5612,8 +5594,7 @@ class Client extends \Braze\Runtime\Client\Client
      * | `canvas_id` | Required | String | See [Canvas identifier](https://braze.com/docs/api/identifier_types/). |
      * | `schedule_id` | Required | String | The `schedule_id` to delete (obtained from the response to create schedule). |
      *
-     * @param \Braze\Model\CanvasTriggerScheduleDeletePostBody|null $requestBody
-     * @param array                                                 $headerParameters {
+     * @param array $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -5623,16 +5604,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PostCanvasTriggerScheduleDeleteBadRequestException
-     * @throws \Braze\Exception\PostCanvasTriggerScheduleDeleteUnauthorizedException
-     * @throws \Braze\Exception\PostCanvasTriggerScheduleDeleteForbiddenException
-     * @throws \Braze\Exception\PostCanvasTriggerScheduleDeleteNotFoundException
-     * @throws \Braze\Exception\PostCanvasTriggerScheduleDeleteTooManyRequestsException
-     * @throws \Braze\Exception\PostCanvasTriggerScheduleDeleteInternalServerErrorException
+     * @throws Exception\PostCanvasTriggerScheduleDeleteBadRequestException
+     * @throws Exception\PostCanvasTriggerScheduleDeleteUnauthorizedException
+     * @throws Exception\PostCanvasTriggerScheduleDeleteForbiddenException
+     * @throws Exception\PostCanvasTriggerScheduleDeleteNotFoundException
+     * @throws Exception\PostCanvasTriggerScheduleDeleteTooManyRequestsException
+     * @throws Exception\PostCanvasTriggerScheduleDeleteInternalServerErrorException
      */
-    public function postCanvasTriggerScheduleDelete(Model\CanvasTriggerScheduleDeletePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postCanvasTriggerScheduleDelete(?Model\CanvasTriggerScheduleDeletePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PostCanvasTriggerScheduleDelete($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PostCanvasTriggerScheduleDelete($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -5655,8 +5636,7 @@ class Client extends \Braze\Runtime\Client\Client
      * | `campaign_id` | Required | String | See [campaign identifier](https://www.braze.com/docs/api/identifier_types/). |
      * | `schedule_id` | Required | String | The `schedule_id` to delete (obtained from the response to create schedule). |
      *
-     * @param \Braze\Model\CampaignsTriggerScheduleDeletePostBody|null $requestBody
-     * @param array                                                    $headerParameters {
+     * @param array $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -5666,16 +5646,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PostCampaignsTriggerScheduleDeleteBadRequestException
-     * @throws \Braze\Exception\PostCampaignsTriggerScheduleDeleteUnauthorizedException
-     * @throws \Braze\Exception\PostCampaignsTriggerScheduleDeleteForbiddenException
-     * @throws \Braze\Exception\PostCampaignsTriggerScheduleDeleteNotFoundException
-     * @throws \Braze\Exception\PostCampaignsTriggerScheduleDeleteTooManyRequestsException
-     * @throws \Braze\Exception\PostCampaignsTriggerScheduleDeleteInternalServerErrorException
+     * @throws Exception\PostCampaignsTriggerScheduleDeleteBadRequestException
+     * @throws Exception\PostCampaignsTriggerScheduleDeleteUnauthorizedException
+     * @throws Exception\PostCampaignsTriggerScheduleDeleteForbiddenException
+     * @throws Exception\PostCampaignsTriggerScheduleDeleteNotFoundException
+     * @throws Exception\PostCampaignsTriggerScheduleDeleteTooManyRequestsException
+     * @throws Exception\PostCampaignsTriggerScheduleDeleteInternalServerErrorException
      */
-    public function postCampaignsTriggerScheduleDelete(Model\CampaignsTriggerScheduleDeletePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postCampaignsTriggerScheduleDelete(?Model\CampaignsTriggerScheduleDeletePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PostCampaignsTriggerScheduleDelete($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PostCampaignsTriggerScheduleDelete($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -5728,21 +5708,20 @@ class Client extends \Braze\Runtime\Client\Client
      *
      *  ```
      *
-     * @param \Braze\Model\MessagesScheduleCreatePostBody|null $requestBody
-     * @param string                                           $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PostMessagesScheduleCreateBadRequestException
-     * @throws \Braze\Exception\PostMessagesScheduleCreateUnauthorizedException
-     * @throws \Braze\Exception\PostMessagesScheduleCreateForbiddenException
-     * @throws \Braze\Exception\PostMessagesScheduleCreateNotFoundException
-     * @throws \Braze\Exception\PostMessagesScheduleCreateTooManyRequestsException
-     * @throws \Braze\Exception\PostMessagesScheduleCreateInternalServerErrorException
+     * @throws Exception\PostMessagesScheduleCreateBadRequestException
+     * @throws Exception\PostMessagesScheduleCreateUnauthorizedException
+     * @throws Exception\PostMessagesScheduleCreateForbiddenException
+     * @throws Exception\PostMessagesScheduleCreateNotFoundException
+     * @throws Exception\PostMessagesScheduleCreateTooManyRequestsException
+     * @throws Exception\PostMessagesScheduleCreateInternalServerErrorException
      */
-    public function postMessagesScheduleCreate(Model\MessagesScheduleCreatePostBody $requestBody = null, string $fetch = self::FETCH_OBJECT)
+    public function postMessagesScheduleCreate(?Model\MessagesScheduleCreatePostBody $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PostMessagesScheduleCreate($requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\PostMessagesScheduleCreate($requestBody), $fetch);
     }
 
     /**
@@ -5795,8 +5774,7 @@ class Client extends \Braze\Runtime\Client\Client
      *
      *  ```
      *
-     * @param \Braze\Model\CampaignsTriggerScheduleCreatePostBody|null $requestBody
-     * @param array                                                    $headerParameters {
+     * @param array $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -5806,16 +5784,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PostCampaignsTriggerScheduleCreateBadRequestException
-     * @throws \Braze\Exception\PostCampaignsTriggerScheduleCreateUnauthorizedException
-     * @throws \Braze\Exception\PostCampaignsTriggerScheduleCreateForbiddenException
-     * @throws \Braze\Exception\PostCampaignsTriggerScheduleCreateNotFoundException
-     * @throws \Braze\Exception\PostCampaignsTriggerScheduleCreateTooManyRequestsException
-     * @throws \Braze\Exception\PostCampaignsTriggerScheduleCreateInternalServerErrorException
+     * @throws Exception\PostCampaignsTriggerScheduleCreateBadRequestException
+     * @throws Exception\PostCampaignsTriggerScheduleCreateUnauthorizedException
+     * @throws Exception\PostCampaignsTriggerScheduleCreateForbiddenException
+     * @throws Exception\PostCampaignsTriggerScheduleCreateNotFoundException
+     * @throws Exception\PostCampaignsTriggerScheduleCreateTooManyRequestsException
+     * @throws Exception\PostCampaignsTriggerScheduleCreateInternalServerErrorException
      */
-    public function postCampaignsTriggerScheduleCreate(Model\CampaignsTriggerScheduleCreatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postCampaignsTriggerScheduleCreate(?Model\CampaignsTriggerScheduleCreatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PostCampaignsTriggerScheduleCreate($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PostCampaignsTriggerScheduleCreate($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -5852,8 +5830,7 @@ class Client extends \Braze\Runtime\Client\Client
      * | `trigger_properties` | Optional | Object | Personalization key-value pairs for all users in this send. See [trigger properties](https://www.braze.com/docs/api/objects_filters/trigger_properties_object/). |
      * | `schedule` | Required | Schedule object | See [schedule object](https://www.braze.com/docs/api/objects_filters/schedule_object/). |
      *
-     * @param \Braze\Model\CanvasTriggerScheduleCreatePostBody|null $requestBody
-     * @param array                                                 $headerParameters {
+     * @param array $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -5863,16 +5840,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PostCanvasTriggerScheduleCreateBadRequestException
-     * @throws \Braze\Exception\PostCanvasTriggerScheduleCreateUnauthorizedException
-     * @throws \Braze\Exception\PostCanvasTriggerScheduleCreateForbiddenException
-     * @throws \Braze\Exception\PostCanvasTriggerScheduleCreateNotFoundException
-     * @throws \Braze\Exception\PostCanvasTriggerScheduleCreateTooManyRequestsException
-     * @throws \Braze\Exception\PostCanvasTriggerScheduleCreateInternalServerErrorException
+     * @throws Exception\PostCanvasTriggerScheduleCreateBadRequestException
+     * @throws Exception\PostCanvasTriggerScheduleCreateUnauthorizedException
+     * @throws Exception\PostCanvasTriggerScheduleCreateForbiddenException
+     * @throws Exception\PostCanvasTriggerScheduleCreateNotFoundException
+     * @throws Exception\PostCanvasTriggerScheduleCreateTooManyRequestsException
+     * @throws Exception\PostCanvasTriggerScheduleCreateInternalServerErrorException
      */
-    public function postCanvasTriggerScheduleCreate(Model\CanvasTriggerScheduleCreatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postCanvasTriggerScheduleCreate(?Model\CanvasTriggerScheduleCreatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PostCanvasTriggerScheduleCreate($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PostCanvasTriggerScheduleCreate($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -5926,8 +5903,7 @@ class Client extends \Braze\Runtime\Client\Client
      * }'
      *  ```
      *
-     * @param \Braze\Model\MessagesScheduleUpdatePostBody|null $requestBody
-     * @param array                                            $headerParameters {
+     * @param array $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -5937,16 +5913,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PostMessagesScheduleUpdateBadRequestException
-     * @throws \Braze\Exception\PostMessagesScheduleUpdateUnauthorizedException
-     * @throws \Braze\Exception\PostMessagesScheduleUpdateForbiddenException
-     * @throws \Braze\Exception\PostMessagesScheduleUpdateNotFoundException
-     * @throws \Braze\Exception\PostMessagesScheduleUpdateTooManyRequestsException
-     * @throws \Braze\Exception\PostMessagesScheduleUpdateInternalServerErrorException
+     * @throws Exception\PostMessagesScheduleUpdateBadRequestException
+     * @throws Exception\PostMessagesScheduleUpdateUnauthorizedException
+     * @throws Exception\PostMessagesScheduleUpdateForbiddenException
+     * @throws Exception\PostMessagesScheduleUpdateNotFoundException
+     * @throws Exception\PostMessagesScheduleUpdateTooManyRequestsException
+     * @throws Exception\PostMessagesScheduleUpdateInternalServerErrorException
      */
-    public function postMessagesScheduleUpdate(Model\MessagesScheduleUpdatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postMessagesScheduleUpdate(?Model\MessagesScheduleUpdatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PostMessagesScheduleUpdate($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PostMessagesScheduleUpdate($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -5990,8 +5966,7 @@ class Client extends \Braze\Runtime\Client\Client
      * }'
      *  ```
      *
-     * @param \Braze\Model\CampaignsTriggerScheduleUpdatePostBody|null $requestBody
-     * @param array                                                    $headerParameters {
+     * @param array $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -6001,16 +5976,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PostCampaignsTriggerScheduleUpdateBadRequestException
-     * @throws \Braze\Exception\PostCampaignsTriggerScheduleUpdateUnauthorizedException
-     * @throws \Braze\Exception\PostCampaignsTriggerScheduleUpdateForbiddenException
-     * @throws \Braze\Exception\PostCampaignsTriggerScheduleUpdateNotFoundException
-     * @throws \Braze\Exception\PostCampaignsTriggerScheduleUpdateTooManyRequestsException
-     * @throws \Braze\Exception\PostCampaignsTriggerScheduleUpdateInternalServerErrorException
+     * @throws Exception\PostCampaignsTriggerScheduleUpdateBadRequestException
+     * @throws Exception\PostCampaignsTriggerScheduleUpdateUnauthorizedException
+     * @throws Exception\PostCampaignsTriggerScheduleUpdateForbiddenException
+     * @throws Exception\PostCampaignsTriggerScheduleUpdateNotFoundException
+     * @throws Exception\PostCampaignsTriggerScheduleUpdateTooManyRequestsException
+     * @throws Exception\PostCampaignsTriggerScheduleUpdateInternalServerErrorException
      */
-    public function postCampaignsTriggerScheduleUpdate(Model\CampaignsTriggerScheduleUpdatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postCampaignsTriggerScheduleUpdate(?Model\CampaignsTriggerScheduleUpdatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PostCampaignsTriggerScheduleUpdate($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PostCampaignsTriggerScheduleUpdate($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -6055,8 +6030,7 @@ class Client extends \Braze\Runtime\Client\Client
      * | `schedule_id` | Optional | String | The `schedule_id` to update (obtained from the response to create schedule). |
      * | `schedule` | Required | Object | See [schedule object](https://www.braze.com/docs/api/objects_filters/schedule_object/). |
      *
-     * @param \Braze\Model\CanvasTriggerScheduleUpdatePostBody|null $requestBody
-     * @param array                                                 $headerParameters {
+     * @param array $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -6066,16 +6040,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PostCanvasTriggerScheduleUpdateBadRequestException
-     * @throws \Braze\Exception\PostCanvasTriggerScheduleUpdateUnauthorizedException
-     * @throws \Braze\Exception\PostCanvasTriggerScheduleUpdateForbiddenException
-     * @throws \Braze\Exception\PostCanvasTriggerScheduleUpdateNotFoundException
-     * @throws \Braze\Exception\PostCanvasTriggerScheduleUpdateTooManyRequestsException
-     * @throws \Braze\Exception\PostCanvasTriggerScheduleUpdateInternalServerErrorException
+     * @throws Exception\PostCanvasTriggerScheduleUpdateBadRequestException
+     * @throws Exception\PostCanvasTriggerScheduleUpdateUnauthorizedException
+     * @throws Exception\PostCanvasTriggerScheduleUpdateForbiddenException
+     * @throws Exception\PostCanvasTriggerScheduleUpdateNotFoundException
+     * @throws Exception\PostCanvasTriggerScheduleUpdateTooManyRequestsException
+     * @throws Exception\PostCanvasTriggerScheduleUpdateInternalServerErrorException
      */
-    public function postCanvasTriggerScheduleUpdate(Model\CanvasTriggerScheduleUpdatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postCanvasTriggerScheduleUpdate(?Model\CanvasTriggerScheduleUpdatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PostCanvasTriggerScheduleUpdate($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PostCanvasTriggerScheduleUpdate($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -6112,8 +6086,7 @@ class Client extends \Braze\Runtime\Client\Client
      *
      *  ```
      *
-     * @param \Braze\Model\SendsIdCreatePostBody|null $requestBody
-     * @param array                                   $headerParameters {
+     * @param array $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -6123,16 +6096,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PostSendsIdCreateBadRequestException
-     * @throws \Braze\Exception\PostSendsIdCreateUnauthorizedException
-     * @throws \Braze\Exception\PostSendsIdCreateForbiddenException
-     * @throws \Braze\Exception\PostSendsIdCreateNotFoundException
-     * @throws \Braze\Exception\PostSendsIdCreateTooManyRequestsException
-     * @throws \Braze\Exception\PostSendsIdCreateInternalServerErrorException
+     * @throws Exception\PostSendsIdCreateBadRequestException
+     * @throws Exception\PostSendsIdCreateUnauthorizedException
+     * @throws Exception\PostSendsIdCreateForbiddenException
+     * @throws Exception\PostSendsIdCreateNotFoundException
+     * @throws Exception\PostSendsIdCreateTooManyRequestsException
+     * @throws Exception\PostSendsIdCreateInternalServerErrorException
      */
-    public function postSendsIdCreate(Model\SendsIdCreatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postSendsIdCreate(?Model\SendsIdCreatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PostSendsIdCreate($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PostSendsIdCreate($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -6178,8 +6151,7 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * Message sending endpoint responses will include the message’s `dispatch_id` for reference back to the dispatch of the message. The `dispatch_id` is the ID of the message dispatch, meaning the unique ID for each “transmission” sent from Braze. For more information, refer to [Dispatch ID behavior](https://www.braze.com/docs/help/help_articles/data/dispatch_id/).
      *
-     * @param \Braze\Model\MessagesSendPostBody|null $requestBody
-     * @param array                                  $headerParameters {
+     * @param array $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -6189,16 +6161,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PostMessagesSendBadRequestException
-     * @throws \Braze\Exception\PostMessagesSendUnauthorizedException
-     * @throws \Braze\Exception\PostMessagesSendForbiddenException
-     * @throws \Braze\Exception\PostMessagesSendNotFoundException
-     * @throws \Braze\Exception\PostMessagesSendTooManyRequestsException
-     * @throws \Braze\Exception\PostMessagesSendInternalServerErrorException
+     * @throws Exception\PostMessagesSendBadRequestException
+     * @throws Exception\PostMessagesSendUnauthorizedException
+     * @throws Exception\PostMessagesSendForbiddenException
+     * @throws Exception\PostMessagesSendNotFoundException
+     * @throws Exception\PostMessagesSendTooManyRequestsException
+     * @throws Exception\PostMessagesSendInternalServerErrorException
      */
-    public function postMessagesSend(Model\MessagesSendPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postMessagesSend(?Model\MessagesSendPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PostMessagesSend($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PostMessagesSend($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -6409,8 +6381,7 @@ class Client extends \Braze\Runtime\Client\Client
      *
      *  ```
      *
-     * @param \Braze\Model\TransactionalV1CampaignsCampaignIdSendPostBody|null $requestBody
-     * @param array                                                            $headerParameters {
+     * @param array $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -6420,16 +6391,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PostTransactionalV1CampaignsByCampaignIdSendBadRequestException
-     * @throws \Braze\Exception\PostTransactionalV1CampaignsByCampaignIdSendUnauthorizedException
-     * @throws \Braze\Exception\PostTransactionalV1CampaignsByCampaignIdSendForbiddenException
-     * @throws \Braze\Exception\PostTransactionalV1CampaignsByCampaignIdSendNotFoundException
-     * @throws \Braze\Exception\PostTransactionalV1CampaignsByCampaignIdSendTooManyRequestsException
-     * @throws \Braze\Exception\PostTransactionalV1CampaignsByCampaignIdSendInternalServerErrorException
+     * @throws Exception\PostTransactionalV1CampaignsByCampaignIdSendBadRequestException
+     * @throws Exception\PostTransactionalV1CampaignsByCampaignIdSendUnauthorizedException
+     * @throws Exception\PostTransactionalV1CampaignsByCampaignIdSendForbiddenException
+     * @throws Exception\PostTransactionalV1CampaignsByCampaignIdSendNotFoundException
+     * @throws Exception\PostTransactionalV1CampaignsByCampaignIdSendTooManyRequestsException
+     * @throws Exception\PostTransactionalV1CampaignsByCampaignIdSendInternalServerErrorException
      */
-    public function postTransactionalV1CampaignsByCampaignIdSend(string $campaignId, Model\TransactionalV1CampaignsCampaignIdSendPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postTransactionalV1CampaignsByCampaignIdSend(string $campaignId, ?Model\TransactionalV1CampaignsCampaignIdSendPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PostTransactionalV1CampaignsByCampaignIdSend($campaignId, $requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PostTransactionalV1CampaignsByCampaignIdSend($campaignId, $requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -6484,8 +6455,7 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * > **Important:** Looking for the Canvas version of this endpoint? Check out [Sending Canvas messages via API-triggered delivery](https://www.braze.com/docs/api/endpoints/messaging/send_messages/post_send_triggered_canvases/#create-send-endpoint).
      *
-     * @param \Braze\Model\CampaignsTriggerSendPostBody|null $requestBody
-     * @param array                                          $headerParameters {
+     * @param array $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -6495,16 +6465,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PostCampaignsTriggerSendBadRequestException
-     * @throws \Braze\Exception\PostCampaignsTriggerSendUnauthorizedException
-     * @throws \Braze\Exception\PostCampaignsTriggerSendForbiddenException
-     * @throws \Braze\Exception\PostCampaignsTriggerSendNotFoundException
-     * @throws \Braze\Exception\PostCampaignsTriggerSendTooManyRequestsException
-     * @throws \Braze\Exception\PostCampaignsTriggerSendInternalServerErrorException
+     * @throws Exception\PostCampaignsTriggerSendBadRequestException
+     * @throws Exception\PostCampaignsTriggerSendUnauthorizedException
+     * @throws Exception\PostCampaignsTriggerSendForbiddenException
+     * @throws Exception\PostCampaignsTriggerSendNotFoundException
+     * @throws Exception\PostCampaignsTriggerSendTooManyRequestsException
+     * @throws Exception\PostCampaignsTriggerSendInternalServerErrorException
      */
-    public function postCampaignsTriggerSend(Model\CampaignsTriggerSendPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postCampaignsTriggerSend(?Model\CampaignsTriggerSendPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PostCampaignsTriggerSend($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PostCampaignsTriggerSend($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -6554,8 +6524,7 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * > **Important:** Looking for the camaigns version of this endpoint? Check out [Sending campaign messages via API-triggered delivery](https://www.braze.com/docs/api/endpoints/messaging/send_messages/post_send_triggered_campaigns/).
      *
-     * @param \Braze\Model\CanvasTriggerSendPostBody|null $requestBody
-     * @param array                                       $headerParameters {
+     * @param array $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -6565,16 +6534,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PostCanvasTriggerSendBadRequestException
-     * @throws \Braze\Exception\PostCanvasTriggerSendUnauthorizedException
-     * @throws \Braze\Exception\PostCanvasTriggerSendForbiddenException
-     * @throws \Braze\Exception\PostCanvasTriggerSendNotFoundException
-     * @throws \Braze\Exception\PostCanvasTriggerSendTooManyRequestsException
-     * @throws \Braze\Exception\PostCanvasTriggerSendInternalServerErrorException
+     * @throws Exception\PostCanvasTriggerSendBadRequestException
+     * @throws Exception\PostCanvasTriggerSendUnauthorizedException
+     * @throws Exception\PostCanvasTriggerSendForbiddenException
+     * @throws Exception\PostCanvasTriggerSendNotFoundException
+     * @throws Exception\PostCanvasTriggerSendTooManyRequestsException
+     * @throws Exception\PostCanvasTriggerSendInternalServerErrorException
      */
-    public function postCanvasTriggerSend(Model\CanvasTriggerSendPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postCanvasTriggerSend(?Model\CanvasTriggerSendPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PostCanvasTriggerSend($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PostCanvasTriggerSend($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -6636,16 +6605,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserIDBadRequestException
-     * @throws \Braze\Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserIDUnauthorizedException
-     * @throws \Braze\Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserIDForbiddenException
-     * @throws \Braze\Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserIDNotFoundException
-     * @throws \Braze\Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserIDTooManyRequestsException
-     * @throws \Braze\Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserIDInternalServerErrorException
+     * @throws Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserIDBadRequestException
+     * @throws Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserIDUnauthorizedException
+     * @throws Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserIDForbiddenException
+     * @throws Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserIDNotFoundException
+     * @throws Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserIDTooManyRequestsException
+     * @throws Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserIDInternalServerErrorException
      */
     public function getPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserID(string $preferenceCenterExternalID, string $userID, array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserID($preferenceCenterExternalID, $userID, $queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserID($preferenceCenterExternalID, $userID, $queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -6714,16 +6683,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\GetPreferenceCenterV1ListBadRequestException
-     * @throws \Braze\Exception\GetPreferenceCenterV1ListUnauthorizedException
-     * @throws \Braze\Exception\GetPreferenceCenterV1ListForbiddenException
-     * @throws \Braze\Exception\GetPreferenceCenterV1ListNotFoundException
-     * @throws \Braze\Exception\GetPreferenceCenterV1ListTooManyRequestsException
-     * @throws \Braze\Exception\GetPreferenceCenterV1ListInternalServerErrorException
+     * @throws Exception\GetPreferenceCenterV1ListBadRequestException
+     * @throws Exception\GetPreferenceCenterV1ListUnauthorizedException
+     * @throws Exception\GetPreferenceCenterV1ListForbiddenException
+     * @throws Exception\GetPreferenceCenterV1ListNotFoundException
+     * @throws Exception\GetPreferenceCenterV1ListTooManyRequestsException
+     * @throws Exception\GetPreferenceCenterV1ListInternalServerErrorException
      */
     public function getPreferenceCenterV1List(array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\GetPreferenceCenterV1List($headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\GetPreferenceCenterV1List($headerParameters), $fetch);
     }
 
     /**
@@ -6784,16 +6753,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDBadRequestException
-     * @throws \Braze\Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDUnauthorizedException
-     * @throws \Braze\Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDForbiddenException
-     * @throws \Braze\Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDNotFoundException
-     * @throws \Braze\Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDTooManyRequestsException
-     * @throws \Braze\Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDInternalServerErrorException
+     * @throws Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDBadRequestException
+     * @throws Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDUnauthorizedException
+     * @throws Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDForbiddenException
+     * @throws Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDNotFoundException
+     * @throws Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDTooManyRequestsException
+     * @throws Exception\GetPreferenceCenterV1ByPreferenceCenterExternalIDInternalServerErrorException
      */
     public function getPreferenceCenterV1ByPreferenceCenterExternalID(string $preferenceCenterExternalID, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\GetPreferenceCenterV1ByPreferenceCenterExternalID($preferenceCenterExternalID, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\GetPreferenceCenterV1ByPreferenceCenterExternalID($preferenceCenterExternalID, $headerParameters), $fetch);
     }
 
     /**
@@ -6852,8 +6821,7 @@ class Client extends \Braze\Runtime\Client\Client
      *
      *  ```
      *
-     * @param \Braze\Model\PreferenceCenterV1PreferenceCenterExternalIDPutBody|null $requestBody
-     * @param array                                                                 $headerParameters {
+     * @param array $headerParameters {
      *
      * @var string-Type
      * @var string
@@ -6863,16 +6831,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PutPreferenceCenterV1ByPreferenceCenterExternalIDBadRequestException
-     * @throws \Braze\Exception\PutPreferenceCenterV1ByPreferenceCenterExternalIDUnauthorizedException
-     * @throws \Braze\Exception\PutPreferenceCenterV1ByPreferenceCenterExternalIDForbiddenException
-     * @throws \Braze\Exception\PutPreferenceCenterV1ByPreferenceCenterExternalIDNotFoundException
-     * @throws \Braze\Exception\PutPreferenceCenterV1ByPreferenceCenterExternalIDTooManyRequestsException
-     * @throws \Braze\Exception\PutPreferenceCenterV1ByPreferenceCenterExternalIDInternalServerErrorException
+     * @throws Exception\PutPreferenceCenterV1ByPreferenceCenterExternalIDBadRequestException
+     * @throws Exception\PutPreferenceCenterV1ByPreferenceCenterExternalIDUnauthorizedException
+     * @throws Exception\PutPreferenceCenterV1ByPreferenceCenterExternalIDForbiddenException
+     * @throws Exception\PutPreferenceCenterV1ByPreferenceCenterExternalIDNotFoundException
+     * @throws Exception\PutPreferenceCenterV1ByPreferenceCenterExternalIDTooManyRequestsException
+     * @throws Exception\PutPreferenceCenterV1ByPreferenceCenterExternalIDInternalServerErrorException
      */
-    public function putPreferenceCenterV1ByPreferenceCenterExternalID(string $preferenceCenterExternalID, Model\PreferenceCenterV1PreferenceCenterExternalIDPutBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function putPreferenceCenterV1ByPreferenceCenterExternalID(string $preferenceCenterExternalID, ?Model\PreferenceCenterV1PreferenceCenterExternalIDPutBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PutPreferenceCenterV1ByPreferenceCenterExternalID($preferenceCenterExternalID, $requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PutPreferenceCenterV1ByPreferenceCenterExternalID($preferenceCenterExternalID, $requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -7093,8 +7061,7 @@ class Client extends \Braze\Runtime\Client\Client
      *
      *  ```
      *
-     * @param \Braze\Model\PreferenceCenterV1PostBody|null $requestBody
-     * @param array                                        $headerParameters {
+     * @param array $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -7104,16 +7071,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PostPreferenceCenterV1BadRequestException
-     * @throws \Braze\Exception\PostPreferenceCenterV1UnauthorizedException
-     * @throws \Braze\Exception\PostPreferenceCenterV1ForbiddenException
-     * @throws \Braze\Exception\PostPreferenceCenterV1NotFoundException
-     * @throws \Braze\Exception\PostPreferenceCenterV1TooManyRequestsException
-     * @throws \Braze\Exception\PostPreferenceCenterV1InternalServerErrorException
+     * @throws Exception\PostPreferenceCenterV1BadRequestException
+     * @throws Exception\PostPreferenceCenterV1UnauthorizedException
+     * @throws Exception\PostPreferenceCenterV1ForbiddenException
+     * @throws Exception\PostPreferenceCenterV1NotFoundException
+     * @throws Exception\PostPreferenceCenterV1TooManyRequestsException
+     * @throws Exception\PostPreferenceCenterV1InternalServerErrorException
      */
-    public function postPreferenceCenterV1(Model\PreferenceCenterV1PostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postPreferenceCenterV1(?Model\PreferenceCenterV1PostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PostPreferenceCenterV1($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PostPreferenceCenterV1($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -7178,16 +7145,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\DeleteScimV2UserByIdBadRequestException
-     * @throws \Braze\Exception\DeleteScimV2UserByIdUnauthorizedException
-     * @throws \Braze\Exception\DeleteScimV2UserByIdForbiddenException
-     * @throws \Braze\Exception\DeleteScimV2UserByIdNotFoundException
-     * @throws \Braze\Exception\DeleteScimV2UserByIdTooManyRequestsException
-     * @throws \Braze\Exception\DeleteScimV2UserByIdInternalServerErrorException
+     * @throws Exception\DeleteScimV2UserByIdBadRequestException
+     * @throws Exception\DeleteScimV2UserByIdUnauthorizedException
+     * @throws Exception\DeleteScimV2UserByIdForbiddenException
+     * @throws Exception\DeleteScimV2UserByIdNotFoundException
+     * @throws Exception\DeleteScimV2UserByIdTooManyRequestsException
+     * @throws Exception\DeleteScimV2UserByIdInternalServerErrorException
      */
     public function deleteScimV2UserById(string $id, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\DeleteScimV2UserById($id, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\DeleteScimV2UserById($id, $headerParameters), $fetch);
     }
 
     /**
@@ -7286,16 +7253,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\GetScimV2UserByIdBadRequestException
-     * @throws \Braze\Exception\GetScimV2UserByIdUnauthorizedException
-     * @throws \Braze\Exception\GetScimV2UserByIdForbiddenException
-     * @throws \Braze\Exception\GetScimV2UserByIdNotFoundException
-     * @throws \Braze\Exception\GetScimV2UserByIdTooManyRequestsException
-     * @throws \Braze\Exception\GetScimV2UserByIdInternalServerErrorException
+     * @throws Exception\GetScimV2UserByIdBadRequestException
+     * @throws Exception\GetScimV2UserByIdUnauthorizedException
+     * @throws Exception\GetScimV2UserByIdForbiddenException
+     * @throws Exception\GetScimV2UserByIdNotFoundException
+     * @throws Exception\GetScimV2UserByIdTooManyRequestsException
+     * @throws Exception\GetScimV2UserByIdInternalServerErrorException
      */
     public function getScimV2UserById(string $id, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\GetScimV2UserById($id, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\GetScimV2UserById($id, $headerParameters), $fetch);
     }
 
     /**
@@ -7377,8 +7344,7 @@ class Client extends \Braze\Runtime\Client\Client
      *
      *  ```
      *
-     * @param \Braze\Model\ScimV2UsersIdPutBody|null $requestBody
-     * @param array                                  $headerParameters {
+     * @param array $headerParameters {
      *
      * @var string $Content-Type
      * @var string $X-Request-Origin
@@ -7389,16 +7355,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PutScimV2UserByIdBadRequestException
-     * @throws \Braze\Exception\PutScimV2UserByIdUnauthorizedException
-     * @throws \Braze\Exception\PutScimV2UserByIdForbiddenException
-     * @throws \Braze\Exception\PutScimV2UserByIdNotFoundException
-     * @throws \Braze\Exception\PutScimV2UserByIdTooManyRequestsException
-     * @throws \Braze\Exception\PutScimV2UserByIdInternalServerErrorException
+     * @throws Exception\PutScimV2UserByIdBadRequestException
+     * @throws Exception\PutScimV2UserByIdUnauthorizedException
+     * @throws Exception\PutScimV2UserByIdForbiddenException
+     * @throws Exception\PutScimV2UserByIdNotFoundException
+     * @throws Exception\PutScimV2UserByIdTooManyRequestsException
+     * @throws Exception\PutScimV2UserByIdInternalServerErrorException
      */
-    public function putScimV2UserById(string $id, Model\ScimV2UsersIdPutBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function putScimV2UserById(string $id, ?Model\ScimV2UsersIdPutBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PutScimV2UserById($id, $requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PutScimV2UserById($id, $requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -7482,16 +7448,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\GetScimV2UserBadRequestException
-     * @throws \Braze\Exception\GetScimV2UserUnauthorizedException
-     * @throws \Braze\Exception\GetScimV2UserForbiddenException
-     * @throws \Braze\Exception\GetScimV2UserNotFoundException
-     * @throws \Braze\Exception\GetScimV2UserTooManyRequestsException
-     * @throws \Braze\Exception\GetScimV2UserInternalServerErrorException
+     * @throws Exception\GetScimV2UserBadRequestException
+     * @throws Exception\GetScimV2UserUnauthorizedException
+     * @throws Exception\GetScimV2UserForbiddenException
+     * @throws Exception\GetScimV2UserNotFoundException
+     * @throws Exception\GetScimV2UserTooManyRequestsException
+     * @throws Exception\GetScimV2UserInternalServerErrorException
      */
     public function getScimV2User(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\GetScimV2User($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\GetScimV2User($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -7565,8 +7531,7 @@ class Client extends \Braze\Runtime\Client\Client
      *
      *  ```
      *
-     * @param \Braze\Model\ScimV2UsersPostBody|null $requestBody
-     * @param array                                 $headerParameters {
+     * @param array $headerParameters {
      *
      * @var string $Content-Type
      * @var string $X-Request-Origin
@@ -7577,16 +7542,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PostScimV2UserBadRequestException
-     * @throws \Braze\Exception\PostScimV2UserUnauthorizedException
-     * @throws \Braze\Exception\PostScimV2UserForbiddenException
-     * @throws \Braze\Exception\PostScimV2UserNotFoundException
-     * @throws \Braze\Exception\PostScimV2UserTooManyRequestsException
-     * @throws \Braze\Exception\PostScimV2UserInternalServerErrorException
+     * @throws Exception\PostScimV2UserBadRequestException
+     * @throws Exception\PostScimV2UserUnauthorizedException
+     * @throws Exception\PostScimV2UserForbiddenException
+     * @throws Exception\PostScimV2UserNotFoundException
+     * @throws Exception\PostScimV2UserTooManyRequestsException
+     * @throws Exception\PostScimV2UserInternalServerErrorException
      */
-    public function postScimV2User(Model\ScimV2UsersPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postScimV2User(?Model\ScimV2UsersPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PostScimV2User($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PostScimV2User($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -7685,16 +7650,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\GetSmsInvalidPhoneNumberBadRequestException
-     * @throws \Braze\Exception\GetSmsInvalidPhoneNumberUnauthorizedException
-     * @throws \Braze\Exception\GetSmsInvalidPhoneNumberForbiddenException
-     * @throws \Braze\Exception\GetSmsInvalidPhoneNumberNotFoundException
-     * @throws \Braze\Exception\GetSmsInvalidPhoneNumberTooManyRequestsException
-     * @throws \Braze\Exception\GetSmsInvalidPhoneNumberInternalServerErrorException
+     * @throws Exception\GetSmsInvalidPhoneNumberBadRequestException
+     * @throws Exception\GetSmsInvalidPhoneNumberUnauthorizedException
+     * @throws Exception\GetSmsInvalidPhoneNumberForbiddenException
+     * @throws Exception\GetSmsInvalidPhoneNumberNotFoundException
+     * @throws Exception\GetSmsInvalidPhoneNumberTooManyRequestsException
+     * @throws Exception\GetSmsInvalidPhoneNumberInternalServerErrorException
      */
     public function getSmsInvalidPhoneNumber(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\GetSmsInvalidPhoneNumber($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\GetSmsInvalidPhoneNumber($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -7728,8 +7693,7 @@ class Client extends \Braze\Runtime\Client\Client
      *
      *  ```
      *
-     * @param \Braze\Model\SmsInvalidPhoneNumbersRemovePostBody|null $requestBody
-     * @param array                                                  $headerParameters {
+     * @param array $headerParameters {
      *
      * @var string $Authorization
      * @var string $Content-Type
@@ -7739,16 +7703,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PostSmsInvalidPhoneNumbersRemoveBadRequestException
-     * @throws \Braze\Exception\PostSmsInvalidPhoneNumbersRemoveUnauthorizedException
-     * @throws \Braze\Exception\PostSmsInvalidPhoneNumbersRemoveForbiddenException
-     * @throws \Braze\Exception\PostSmsInvalidPhoneNumbersRemoveNotFoundException
-     * @throws \Braze\Exception\PostSmsInvalidPhoneNumbersRemoveTooManyRequestsException
-     * @throws \Braze\Exception\PostSmsInvalidPhoneNumbersRemoveInternalServerErrorException
+     * @throws Exception\PostSmsInvalidPhoneNumbersRemoveBadRequestException
+     * @throws Exception\PostSmsInvalidPhoneNumbersRemoveUnauthorizedException
+     * @throws Exception\PostSmsInvalidPhoneNumbersRemoveForbiddenException
+     * @throws Exception\PostSmsInvalidPhoneNumbersRemoveNotFoundException
+     * @throws Exception\PostSmsInvalidPhoneNumbersRemoveTooManyRequestsException
+     * @throws Exception\PostSmsInvalidPhoneNumbersRemoveInternalServerErrorException
      */
-    public function postSmsInvalidPhoneNumbersRemove(Model\SmsInvalidPhoneNumbersRemovePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postSmsInvalidPhoneNumbersRemove(?Model\SmsInvalidPhoneNumbersRemovePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PostSmsInvalidPhoneNumbersRemove($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PostSmsInvalidPhoneNumbersRemove($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -7845,16 +7809,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\GetSubscriptionStatusGetBadRequestException
-     * @throws \Braze\Exception\GetSubscriptionStatusGetUnauthorizedException
-     * @throws \Braze\Exception\GetSubscriptionStatusGetForbiddenException
-     * @throws \Braze\Exception\GetSubscriptionStatusGetNotFoundException
-     * @throws \Braze\Exception\GetSubscriptionStatusGetTooManyRequestsException
-     * @throws \Braze\Exception\GetSubscriptionStatusGetInternalServerErrorException
+     * @throws Exception\GetSubscriptionStatusGetBadRequestException
+     * @throws Exception\GetSubscriptionStatusGetUnauthorizedException
+     * @throws Exception\GetSubscriptionStatusGetForbiddenException
+     * @throws Exception\GetSubscriptionStatusGetNotFoundException
+     * @throws Exception\GetSubscriptionStatusGetTooManyRequestsException
+     * @throws Exception\GetSubscriptionStatusGetInternalServerErrorException
      */
     public function getSubscriptionStatusGet(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\GetSubscriptionStatusGet($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\GetSubscriptionStatusGet($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -7912,16 +7876,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\GetSubscriptionUserStatusBadRequestException
-     * @throws \Braze\Exception\GetSubscriptionUserStatusUnauthorizedException
-     * @throws \Braze\Exception\GetSubscriptionUserStatusForbiddenException
-     * @throws \Braze\Exception\GetSubscriptionUserStatusNotFoundException
-     * @throws \Braze\Exception\GetSubscriptionUserStatusTooManyRequestsException
-     * @throws \Braze\Exception\GetSubscriptionUserStatusInternalServerErrorException
+     * @throws Exception\GetSubscriptionUserStatusBadRequestException
+     * @throws Exception\GetSubscriptionUserStatusUnauthorizedException
+     * @throws Exception\GetSubscriptionUserStatusForbiddenException
+     * @throws Exception\GetSubscriptionUserStatusNotFoundException
+     * @throws Exception\GetSubscriptionUserStatusTooManyRequestsException
+     * @throws Exception\GetSubscriptionUserStatusInternalServerErrorException
      */
     public function getSubscriptionUserStatus(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\GetSubscriptionUserStatus($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\GetSubscriptionUserStatus($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -7990,8 +7954,7 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * > The endpoint only accepts the `email` or `phone` value, not both. If given both, you will receive this response: `{"message":"Either an email address or a phone number should be provided, but not both."}`
      *
-     * @param \Braze\Model\SubscriptionStatusSetPostBody|null $requestBody
-     * @param array                                           $headerParameters {
+     * @param array $headerParameters {
      *
      * @var string-Type
      * @var string
@@ -8001,16 +7964,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PostSubscriptionStatusSetBadRequestException
-     * @throws \Braze\Exception\PostSubscriptionStatusSetUnauthorizedException
-     * @throws \Braze\Exception\PostSubscriptionStatusSetForbiddenException
-     * @throws \Braze\Exception\PostSubscriptionStatusSetNotFoundException
-     * @throws \Braze\Exception\PostSubscriptionStatusSetTooManyRequestsException
-     * @throws \Braze\Exception\PostSubscriptionStatusSetInternalServerErrorException
+     * @throws Exception\PostSubscriptionStatusSetBadRequestException
+     * @throws Exception\PostSubscriptionStatusSetUnauthorizedException
+     * @throws Exception\PostSubscriptionStatusSetForbiddenException
+     * @throws Exception\PostSubscriptionStatusSetNotFoundException
+     * @throws Exception\PostSubscriptionStatusSetTooManyRequestsException
+     * @throws Exception\PostSubscriptionStatusSetInternalServerErrorException
      */
-    public function postSubscriptionStatusSet(Model\SubscriptionStatusSetPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postSubscriptionStatusSet(?Model\SubscriptionStatusSetPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PostSubscriptionStatusSet($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PostSubscriptionStatusSet($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -8076,8 +8039,7 @@ class Client extends \Braze\Runtime\Client\Client
      *
      *  ```
      *
-     * @param \Braze\Model\V2SubscriptionStatusSetPostBody|null $requestBody
-     * @param array                                             $headerParameters {
+     * @param array $headerParameters {
      *
      * @var string-Type
      * @var string
@@ -8087,16 +8049,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PostV2SubscriptionStatusSetBadRequestException
-     * @throws \Braze\Exception\PostV2SubscriptionStatusSetUnauthorizedException
-     * @throws \Braze\Exception\PostV2SubscriptionStatusSetForbiddenException
-     * @throws \Braze\Exception\PostV2SubscriptionStatusSetNotFoundException
-     * @throws \Braze\Exception\PostV2SubscriptionStatusSetTooManyRequestsException
-     * @throws \Braze\Exception\PostV2SubscriptionStatusSetInternalServerErrorException
+     * @throws Exception\PostV2SubscriptionStatusSetBadRequestException
+     * @throws Exception\PostV2SubscriptionStatusSetUnauthorizedException
+     * @throws Exception\PostV2SubscriptionStatusSetForbiddenException
+     * @throws Exception\PostV2SubscriptionStatusSetNotFoundException
+     * @throws Exception\PostV2SubscriptionStatusSetTooManyRequestsException
+     * @throws Exception\PostV2SubscriptionStatusSetInternalServerErrorException
      */
-    public function postV2SubscriptionStatusSet(Model\V2SubscriptionStatusSetPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postV2SubscriptionStatusSet(?Model\V2SubscriptionStatusSetPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PostV2SubscriptionStatusSet($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PostV2SubscriptionStatusSet($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -8190,16 +8152,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\GetContentBlocksListBadRequestException
-     * @throws \Braze\Exception\GetContentBlocksListUnauthorizedException
-     * @throws \Braze\Exception\GetContentBlocksListForbiddenException
-     * @throws \Braze\Exception\GetContentBlocksListNotFoundException
-     * @throws \Braze\Exception\GetContentBlocksListTooManyRequestsException
-     * @throws \Braze\Exception\GetContentBlocksListInternalServerErrorException
+     * @throws Exception\GetContentBlocksListBadRequestException
+     * @throws Exception\GetContentBlocksListUnauthorizedException
+     * @throws Exception\GetContentBlocksListForbiddenException
+     * @throws Exception\GetContentBlocksListNotFoundException
+     * @throws Exception\GetContentBlocksListTooManyRequestsException
+     * @throws Exception\GetContentBlocksListInternalServerErrorException
      */
     public function getContentBlocksList(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\GetContentBlocksList($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\GetContentBlocksList($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -8281,16 +8243,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\GetContentBlocksInfoBadRequestException
-     * @throws \Braze\Exception\GetContentBlocksInfoUnauthorizedException
-     * @throws \Braze\Exception\GetContentBlocksInfoForbiddenException
-     * @throws \Braze\Exception\GetContentBlocksInfoNotFoundException
-     * @throws \Braze\Exception\GetContentBlocksInfoTooManyRequestsException
-     * @throws \Braze\Exception\GetContentBlocksInfoInternalServerErrorException
+     * @throws Exception\GetContentBlocksInfoBadRequestException
+     * @throws Exception\GetContentBlocksInfoUnauthorizedException
+     * @throws Exception\GetContentBlocksInfoForbiddenException
+     * @throws Exception\GetContentBlocksInfoNotFoundException
+     * @throws Exception\GetContentBlocksInfoTooManyRequestsException
+     * @throws Exception\GetContentBlocksInfoInternalServerErrorException
      */
     public function getContentBlocksInfo(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\GetContentBlocksInfo($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\GetContentBlocksInfo($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -8367,8 +8329,7 @@ class Client extends \Braze\Runtime\Client\Client
      * | `All tags must be strings` | Make sure your tags are encapsulated in quotes (`""`). |
      * | `Some tags could not be found` | To add a tag when creating a Content Block, the tag must already exist in Braze. |
      *
-     * @param \Braze\Model\ContentBlocksCreatePostBody|null $requestBody
-     * @param array                                         $headerParameters {
+     * @param array $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -8378,16 +8339,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PostContentBlocksCreateBadRequestException
-     * @throws \Braze\Exception\PostContentBlocksCreateUnauthorizedException
-     * @throws \Braze\Exception\PostContentBlocksCreateForbiddenException
-     * @throws \Braze\Exception\PostContentBlocksCreateNotFoundException
-     * @throws \Braze\Exception\PostContentBlocksCreateTooManyRequestsException
-     * @throws \Braze\Exception\PostContentBlocksCreateInternalServerErrorException
+     * @throws Exception\PostContentBlocksCreateBadRequestException
+     * @throws Exception\PostContentBlocksCreateUnauthorizedException
+     * @throws Exception\PostContentBlocksCreateForbiddenException
+     * @throws Exception\PostContentBlocksCreateNotFoundException
+     * @throws Exception\PostContentBlocksCreateTooManyRequestsException
+     * @throws Exception\PostContentBlocksCreateInternalServerErrorException
      */
-    public function postContentBlocksCreate(Model\ContentBlocksCreatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postContentBlocksCreate(?Model\ContentBlocksCreatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PostContentBlocksCreate($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PostContentBlocksCreate($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -8468,8 +8429,7 @@ class Client extends \Braze\Runtime\Client\Client
      * | `All tags must be strings` | Make sure your tags are encapsulated in quotes (`""`). |
      * | `Some tags could not be found` | To add a tag when creating a Content Block, the tag must already exist in Braze. |
      *
-     * @param \Braze\Model\ContentBlocksUpdatePostBody|null $requestBody
-     * @param array                                         $headerParameters {
+     * @param array $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -8479,16 +8439,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PostContentBlocksUpdateBadRequestException
-     * @throws \Braze\Exception\PostContentBlocksUpdateUnauthorizedException
-     * @throws \Braze\Exception\PostContentBlocksUpdateForbiddenException
-     * @throws \Braze\Exception\PostContentBlocksUpdateNotFoundException
-     * @throws \Braze\Exception\PostContentBlocksUpdateTooManyRequestsException
-     * @throws \Braze\Exception\PostContentBlocksUpdateInternalServerErrorException
+     * @throws Exception\PostContentBlocksUpdateBadRequestException
+     * @throws Exception\PostContentBlocksUpdateUnauthorizedException
+     * @throws Exception\PostContentBlocksUpdateForbiddenException
+     * @throws Exception\PostContentBlocksUpdateNotFoundException
+     * @throws Exception\PostContentBlocksUpdateTooManyRequestsException
+     * @throws Exception\PostContentBlocksUpdateInternalServerErrorException
      */
-    public function postContentBlocksUpdate(Model\ContentBlocksUpdatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postContentBlocksUpdate(?Model\ContentBlocksUpdatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PostContentBlocksUpdate($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PostContentBlocksUpdate($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -8563,16 +8523,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\GetTemplatesEmailListBadRequestException
-     * @throws \Braze\Exception\GetTemplatesEmailListUnauthorizedException
-     * @throws \Braze\Exception\GetTemplatesEmailListForbiddenException
-     * @throws \Braze\Exception\GetTemplatesEmailListNotFoundException
-     * @throws \Braze\Exception\GetTemplatesEmailListTooManyRequestsException
-     * @throws \Braze\Exception\GetTemplatesEmailListInternalServerErrorException
+     * @throws Exception\GetTemplatesEmailListBadRequestException
+     * @throws Exception\GetTemplatesEmailListUnauthorizedException
+     * @throws Exception\GetTemplatesEmailListForbiddenException
+     * @throws Exception\GetTemplatesEmailListNotFoundException
+     * @throws Exception\GetTemplatesEmailListTooManyRequestsException
+     * @throws Exception\GetTemplatesEmailListInternalServerErrorException
      */
     public function getTemplatesEmailList(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\GetTemplatesEmailList($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\GetTemplatesEmailList($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -8641,16 +8601,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\GetTemplatesEmailInfoBadRequestException
-     * @throws \Braze\Exception\GetTemplatesEmailInfoUnauthorizedException
-     * @throws \Braze\Exception\GetTemplatesEmailInfoForbiddenException
-     * @throws \Braze\Exception\GetTemplatesEmailInfoNotFoundException
-     * @throws \Braze\Exception\GetTemplatesEmailInfoTooManyRequestsException
-     * @throws \Braze\Exception\GetTemplatesEmailInfoInternalServerErrorException
+     * @throws Exception\GetTemplatesEmailInfoBadRequestException
+     * @throws Exception\GetTemplatesEmailInfoUnauthorizedException
+     * @throws Exception\GetTemplatesEmailInfoForbiddenException
+     * @throws Exception\GetTemplatesEmailInfoNotFoundException
+     * @throws Exception\GetTemplatesEmailInfoTooManyRequestsException
+     * @throws Exception\GetTemplatesEmailInfoInternalServerErrorException
      */
     public function getTemplatesEmailInfo(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\GetTemplatesEmailInfo($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\GetTemplatesEmailInfo($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -8710,8 +8670,7 @@ class Client extends \Braze\Runtime\Client\Client
      * | Email must have valid Content Block names | The email might contain Content Blocks that don’t exist in this environment. |
      * | Invalid value for `should_inline_css`. One of `true` or `false` was expected | This parameter only accepts boolean values (true or false). Make sure the value for `should_inline_css` is not encapsulated in quotes (`""`), which causes the value to be sent as a string instead. |
      *
-     * @param \Braze\Model\TemplatesEmailCreatePostBody|null $requestBody
-     * @param array                                          $queryParameters {
+     * @param array $queryParameters {
      *
      * @var string $template_name (Required) String
      * @var string $subject (Required) String
@@ -8732,16 +8691,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PostTemplatesEmailCreateBadRequestException
-     * @throws \Braze\Exception\PostTemplatesEmailCreateUnauthorizedException
-     * @throws \Braze\Exception\PostTemplatesEmailCreateForbiddenException
-     * @throws \Braze\Exception\PostTemplatesEmailCreateNotFoundException
-     * @throws \Braze\Exception\PostTemplatesEmailCreateTooManyRequestsException
-     * @throws \Braze\Exception\PostTemplatesEmailCreateInternalServerErrorException
+     * @throws Exception\PostTemplatesEmailCreateBadRequestException
+     * @throws Exception\PostTemplatesEmailCreateUnauthorizedException
+     * @throws Exception\PostTemplatesEmailCreateForbiddenException
+     * @throws Exception\PostTemplatesEmailCreateNotFoundException
+     * @throws Exception\PostTemplatesEmailCreateTooManyRequestsException
+     * @throws Exception\PostTemplatesEmailCreateInternalServerErrorException
      */
-    public function postTemplatesEmailCreate(Model\TemplatesEmailCreatePostBody $requestBody = null, array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postTemplatesEmailCreate(?Model\TemplatesEmailCreatePostBody $requestBody = null, array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PostTemplatesEmailCreate($requestBody, $queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PostTemplatesEmailCreate($requestBody, $queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -8814,8 +8773,7 @@ class Client extends \Braze\Runtime\Client\Client
      * | Some tags could not be found | To add a tag when creating an email template, the tag must already exist in Braze. |
      * | Invalid value for `should_inline_css`. One of `true` or `false` was expected | This parameter only accepts boolean values (true or false). Make sure the value for `should_inline_css` is not encapsulated in quotes (`""`), which causes the value to be sent as a string instead. |
      *
-     * @param \Braze\Model\TemplatesEmailUpdatePostBody|null $requestBody
-     * @param array                                          $queryParameters {
+     * @param array $queryParameters {
      *
      * @var string $email_template_id (Required) String
      * @var string $template_name (Optional) String
@@ -8837,16 +8795,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PostTemplatesEmailUpdateBadRequestException
-     * @throws \Braze\Exception\PostTemplatesEmailUpdateUnauthorizedException
-     * @throws \Braze\Exception\PostTemplatesEmailUpdateForbiddenException
-     * @throws \Braze\Exception\PostTemplatesEmailUpdateNotFoundException
-     * @throws \Braze\Exception\PostTemplatesEmailUpdateTooManyRequestsException
-     * @throws \Braze\Exception\PostTemplatesEmailUpdateInternalServerErrorException
+     * @throws Exception\PostTemplatesEmailUpdateBadRequestException
+     * @throws Exception\PostTemplatesEmailUpdateUnauthorizedException
+     * @throws Exception\PostTemplatesEmailUpdateForbiddenException
+     * @throws Exception\PostTemplatesEmailUpdateNotFoundException
+     * @throws Exception\PostTemplatesEmailUpdateTooManyRequestsException
+     * @throws Exception\PostTemplatesEmailUpdateInternalServerErrorException
      */
-    public function postTemplatesEmailUpdate(Model\TemplatesEmailUpdatePostBody $requestBody = null, array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postTemplatesEmailUpdate(?Model\TemplatesEmailUpdatePostBody $requestBody = null, array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PostTemplatesEmailUpdate($requestBody, $queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PostTemplatesEmailUpdate($requestBody, $queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -8930,8 +8888,7 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * We have no hard limit on how long you can keep deprecated external IDs around, but we highly recommend removing them once there is no longer a need to reference users by the deprecated ID.
      *
-     * @param \Braze\Model\UsersExternalIdsRenamePostBody|null $requestBody
-     * @param array                                            $headerParameters {
+     * @param array $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -8941,16 +8898,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PostUsersExternalIdsRenameBadRequestException
-     * @throws \Braze\Exception\PostUsersExternalIdsRenameUnauthorizedException
-     * @throws \Braze\Exception\PostUsersExternalIdsRenameForbiddenException
-     * @throws \Braze\Exception\PostUsersExternalIdsRenameNotFoundException
-     * @throws \Braze\Exception\PostUsersExternalIdsRenameTooManyRequestsException
-     * @throws \Braze\Exception\PostUsersExternalIdsRenameInternalServerErrorException
+     * @throws Exception\PostUsersExternalIdsRenameBadRequestException
+     * @throws Exception\PostUsersExternalIdsRenameUnauthorizedException
+     * @throws Exception\PostUsersExternalIdsRenameForbiddenException
+     * @throws Exception\PostUsersExternalIdsRenameNotFoundException
+     * @throws Exception\PostUsersExternalIdsRenameTooManyRequestsException
+     * @throws Exception\PostUsersExternalIdsRenameInternalServerErrorException
      */
-    public function postUsersExternalIdsRename(Model\UsersExternalIdsRenamePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postUsersExternalIdsRename(?Model\UsersExternalIdsRenamePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PostUsersExternalIdsRename($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PostUsersExternalIdsRename($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -8997,8 +8954,7 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * - Rate limit hit (more than 1,000 requests per minute)
      *
-     * @param \Braze\Model\UsersExternalIdsRemovePostBody|null $requestBody
-     * @param array                                            $headerParameters {
+     * @param array $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -9008,16 +8964,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PostUsersExternalIdsRemoveBadRequestException
-     * @throws \Braze\Exception\PostUsersExternalIdsRemoveUnauthorizedException
-     * @throws \Braze\Exception\PostUsersExternalIdsRemoveForbiddenException
-     * @throws \Braze\Exception\PostUsersExternalIdsRemoveNotFoundException
-     * @throws \Braze\Exception\PostUsersExternalIdsRemoveTooManyRequestsException
-     * @throws \Braze\Exception\PostUsersExternalIdsRemoveInternalServerErrorException
+     * @throws Exception\PostUsersExternalIdsRemoveBadRequestException
+     * @throws Exception\PostUsersExternalIdsRemoveUnauthorizedException
+     * @throws Exception\PostUsersExternalIdsRemoveForbiddenException
+     * @throws Exception\PostUsersExternalIdsRemoveNotFoundException
+     * @throws Exception\PostUsersExternalIdsRemoveTooManyRequestsException
+     * @throws Exception\PostUsersExternalIdsRemoveInternalServerErrorException
      */
-    public function postUsersExternalIdsRemove(Model\UsersExternalIdsRemovePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postUsersExternalIdsRemove(?Model\UsersExternalIdsRemovePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PostUsersExternalIdsRemove($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PostUsersExternalIdsRemove($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -9055,8 +9011,7 @@ class Client extends \Braze\Runtime\Client\Client
      * }
      *  ```
      *
-     * @param \Braze\Model\UsersAliasNewPostBody|null $requestBody
-     * @param array                                   $headerParameters {
+     * @param array $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -9066,16 +9021,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PostUsersAliasNewBadRequestException
-     * @throws \Braze\Exception\PostUsersAliasNewUnauthorizedException
-     * @throws \Braze\Exception\PostUsersAliasNewForbiddenException
-     * @throws \Braze\Exception\PostUsersAliasNewNotFoundException
-     * @throws \Braze\Exception\PostUsersAliasNewTooManyRequestsException
-     * @throws \Braze\Exception\PostUsersAliasNewInternalServerErrorException
+     * @throws Exception\PostUsersAliasNewBadRequestException
+     * @throws Exception\PostUsersAliasNewUnauthorizedException
+     * @throws Exception\PostUsersAliasNewForbiddenException
+     * @throws Exception\PostUsersAliasNewNotFoundException
+     * @throws Exception\PostUsersAliasNewTooManyRequestsException
+     * @throws Exception\PostUsersAliasNewInternalServerErrorException
      */
-    public function postUsersAliasNew(Model\UsersAliasNewPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postUsersAliasNew(?Model\UsersAliasNewPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PostUsersAliasNew($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PostUsersAliasNew($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -9112,8 +9067,7 @@ class Client extends \Braze\Runtime\Client\Client
      *
      *  ```
      *
-     * @param \Braze\Model\UsersAliasUpdatePostBody|null $requestBody
-     * @param array                                      $headerParameters {
+     * @param array $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -9123,16 +9077,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PostUsersAliasUpdateBadRequestException
-     * @throws \Braze\Exception\PostUsersAliasUpdateUnauthorizedException
-     * @throws \Braze\Exception\PostUsersAliasUpdateForbiddenException
-     * @throws \Braze\Exception\PostUsersAliasUpdateNotFoundException
-     * @throws \Braze\Exception\PostUsersAliasUpdateTooManyRequestsException
-     * @throws \Braze\Exception\PostUsersAliasUpdateInternalServerErrorException
+     * @throws Exception\PostUsersAliasUpdateBadRequestException
+     * @throws Exception\PostUsersAliasUpdateUnauthorizedException
+     * @throws Exception\PostUsersAliasUpdateForbiddenException
+     * @throws Exception\PostUsersAliasUpdateNotFoundException
+     * @throws Exception\PostUsersAliasUpdateTooManyRequestsException
+     * @throws Exception\PostUsersAliasUpdateInternalServerErrorException
      */
-    public function postUsersAliasUpdate(Model\UsersAliasUpdatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postUsersAliasUpdate(?Model\UsersAliasUpdatePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PostUsersAliasUpdate($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PostUsersAliasUpdate($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -9294,8 +9248,7 @@ class Client extends \Braze\Runtime\Client\Client
      *
      *  ```
      *
-     * @param \Braze\Model\UsersIdentifyPostBody|null $requestBody
-     * @param array                                   $headerParameters {
+     * @param array $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -9305,16 +9258,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PostUsersIdentifyBadRequestException
-     * @throws \Braze\Exception\PostUsersIdentifyUnauthorizedException
-     * @throws \Braze\Exception\PostUsersIdentifyForbiddenException
-     * @throws \Braze\Exception\PostUsersIdentifyNotFoundException
-     * @throws \Braze\Exception\PostUsersIdentifyTooManyRequestsException
-     * @throws \Braze\Exception\PostUsersIdentifyInternalServerErrorException
+     * @throws Exception\PostUsersIdentifyBadRequestException
+     * @throws Exception\PostUsersIdentifyUnauthorizedException
+     * @throws Exception\PostUsersIdentifyForbiddenException
+     * @throws Exception\PostUsersIdentifyNotFoundException
+     * @throws Exception\PostUsersIdentifyTooManyRequestsException
+     * @throws Exception\PostUsersIdentifyInternalServerErrorException
      */
-    public function postUsersIdentify(Model\UsersIdentifyPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postUsersIdentify(?Model\UsersIdentifyPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PostUsersIdentify($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PostUsersIdentify($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -9611,8 +9564,7 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * Current limits based on expected ingestion can be found in the dashboard under **Settings** > **APIs and Identifiers** > **API limits**. We may modify rate limits to protect system stability or allow for increased data throughput on your account. Please contact Braze Support or your customer success manager for questions or concerns regarding hourly or per-second request limit and the needs of your business.
      *
-     * @param \Braze\Model\UsersTrackPostBody|null $requestBody
-     * @param array                                $headerParameters {
+     * @param array $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -9622,16 +9574,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PostUsersTrackBadRequestException
-     * @throws \Braze\Exception\PostUsersTrackUnauthorizedException
-     * @throws \Braze\Exception\PostUsersTrackForbiddenException
-     * @throws \Braze\Exception\PostUsersTrackNotFoundException
-     * @throws \Braze\Exception\PostUsersTrackTooManyRequestsException
-     * @throws \Braze\Exception\PostUsersTrackInternalServerErrorException
+     * @throws Exception\PostUsersTrackBadRequestException
+     * @throws Exception\PostUsersTrackUnauthorizedException
+     * @throws Exception\PostUsersTrackForbiddenException
+     * @throws Exception\PostUsersTrackNotFoundException
+     * @throws Exception\PostUsersTrackTooManyRequestsException
+     * @throws Exception\PostUsersTrackInternalServerErrorException
      */
-    public function postUsersTrack(Model\UsersTrackPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postUsersTrack(?Model\UsersTrackPostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PostUsersTrack($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PostUsersTrack($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -9683,8 +9635,7 @@ class Client extends \Braze\Runtime\Client\Client
      *
      *  ```
      *
-     * @param \Braze\Model\UsersDeletePostBody|null $requestBody
-     * @param array                                 $headerParameters {
+     * @param array $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -9694,16 +9645,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PostUsersDeleteBadRequestException
-     * @throws \Braze\Exception\PostUsersDeleteUnauthorizedException
-     * @throws \Braze\Exception\PostUsersDeleteForbiddenException
-     * @throws \Braze\Exception\PostUsersDeleteNotFoundException
-     * @throws \Braze\Exception\PostUsersDeleteTooManyRequestsException
-     * @throws \Braze\Exception\PostUsersDeleteInternalServerErrorException
+     * @throws Exception\PostUsersDeleteBadRequestException
+     * @throws Exception\PostUsersDeleteUnauthorizedException
+     * @throws Exception\PostUsersDeleteForbiddenException
+     * @throws Exception\PostUsersDeleteNotFoundException
+     * @throws Exception\PostUsersDeleteTooManyRequestsException
+     * @throws Exception\PostUsersDeleteInternalServerErrorException
      */
-    public function postUsersDelete(Model\UsersDeletePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postUsersDelete(?Model\UsersDeletePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PostUsersDelete($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PostUsersDelete($requestBody, $headerParameters), $fetch);
     }
 
     /**
@@ -9852,8 +9803,7 @@ class Client extends \Braze\Runtime\Client\Client
      * | `identifiers must be objects with an 'external_id' property that is a string, or 'user_alias' property that is an object` | Check the identifiers in your request. |
      * | `'merge_updates' must only have 'identifier_to_merge' and 'identifier_to_keep'` | Check that `merge_updates` only contains the two objects `identifier_to_merge` and `identifier_to_keep`. |
      *
-     * @param \Braze\Model\UsersMergePostBody|null $requestBody
-     * @param array                                $headerParameters {
+     * @param array $headerParameters {
      *
      * @var string $Content-Type
      * @var string $Authorization
@@ -9863,16 +9813,16 @@ class Client extends \Braze\Runtime\Client\Client
      *
      * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      *
-     * @throws \Braze\Exception\PostUsersMergeBadRequestException
-     * @throws \Braze\Exception\PostUsersMergeUnauthorizedException
-     * @throws \Braze\Exception\PostUsersMergeForbiddenException
-     * @throws \Braze\Exception\PostUsersMergeNotFoundException
-     * @throws \Braze\Exception\PostUsersMergeTooManyRequestsException
-     * @throws \Braze\Exception\PostUsersMergeInternalServerErrorException
+     * @throws Exception\PostUsersMergeBadRequestException
+     * @throws Exception\PostUsersMergeUnauthorizedException
+     * @throws Exception\PostUsersMergeForbiddenException
+     * @throws Exception\PostUsersMergeNotFoundException
+     * @throws Exception\PostUsersMergeTooManyRequestsException
+     * @throws Exception\PostUsersMergeInternalServerErrorException
      */
-    public function postUsersMerge(Model\UsersMergePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function postUsersMerge(?Model\UsersMergePostBody $requestBody = null, array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Braze\Endpoint\PostUsersMerge($requestBody, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PostUsersMerge($requestBody, $headerParameters), $fetch);
     }
 
     public static function create($httpClient = null, array $additionalPlugins = [], array $additionalNormalizers = [])
@@ -9889,7 +9839,7 @@ class Client extends \Braze\Runtime\Client\Client
         }
         $requestFactory = \Http\Discovery\Psr17FactoryDiscovery::findRequestFactory();
         $streamFactory = \Http\Discovery\Psr17FactoryDiscovery::findStreamFactory();
-        $normalizers = [new \Symfony\Component\Serializer\Normalizer\ArrayDenormalizer(), new \Braze\Normalizer\JaneObjectNormalizer()];
+        $normalizers = [new \Symfony\Component\Serializer\Normalizer\ArrayDenormalizer(), new Normalizer\JaneObjectNormalizer()];
         if (count($additionalNormalizers) > 0) {
             $normalizers = array_merge($normalizers, $additionalNormalizers);
         }

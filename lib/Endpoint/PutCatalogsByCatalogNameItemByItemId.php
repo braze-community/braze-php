@@ -135,7 +135,7 @@ class PutCatalogsByCatalogNameItemByItemId extends \Braze\Runtime\Client\BaseEnd
      * @var string $Authorization
      *             }
      */
-    public function __construct(string $catalogName, string $itemId, \Braze\Model\CatalogsCatalogNameItemsItemIdPutBody $requestBody = null, array $headerParameters = [])
+    public function __construct(string $catalogName, string $itemId, ?\Braze\Model\CatalogsCatalogNameItemsItemIdPutBody $requestBody = null, array $headerParameters = [])
     {
         $this->catalog_name = $catalogName;
         $this->item_id = $itemId;
@@ -189,7 +189,7 @@ class PutCatalogsByCatalogNameItemByItemId extends \Braze\Runtime\Client\BaseEnd
      * @throws \Braze\Exception\PutCatalogsByCatalogNameItemByItemIdTooManyRequestsException
      * @throws \Braze\Exception\PutCatalogsByCatalogNameItemByItemIdInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();

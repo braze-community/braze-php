@@ -179,7 +179,7 @@ class PostUsersIdentify extends \Braze\Runtime\Client\BaseEndpoint implements \B
      * @var string $Authorization
      *             }
      */
-    public function __construct(\Braze\Model\UsersIdentifyPostBody $requestBody = null, array $headerParameters = [])
+    public function __construct(?\Braze\Model\UsersIdentifyPostBody $requestBody = null, array $headerParameters = [])
     {
         $this->body = $requestBody;
         $this->headerParameters = $headerParameters;
@@ -231,7 +231,7 @@ class PostUsersIdentify extends \Braze\Runtime\Client\BaseEndpoint implements \B
      * @throws \Braze\Exception\PostUsersIdentifyTooManyRequestsException
      * @throws \Braze\Exception\PostUsersIdentifyInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();

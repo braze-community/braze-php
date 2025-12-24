@@ -254,7 +254,7 @@ class PostUsersExportGlobalControlGroup extends \Braze\Runtime\Client\BaseEndpoi
      * @var string $Authorization
      *             }
      */
-    public function __construct(\Braze\Model\UsersExportGlobalControlGroupPostBody $requestBody = null, array $headerParameters = [])
+    public function __construct(?\Braze\Model\UsersExportGlobalControlGroupPostBody $requestBody = null, array $headerParameters = [])
     {
         $this->body = $requestBody;
         $this->headerParameters = $headerParameters;
@@ -306,7 +306,7 @@ class PostUsersExportGlobalControlGroup extends \Braze\Runtime\Client\BaseEndpoi
      * @throws \Braze\Exception\PostUsersExportGlobalControlGroupTooManyRequestsException
      * @throws \Braze\Exception\PostUsersExportGlobalControlGroupInternalServerErrorException
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();
