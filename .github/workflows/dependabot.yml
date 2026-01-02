@@ -30,4 +30,4 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: 'feat(lib): generate code from braze-specification'
-          add_options: '-A'
+          add_options: '*.php'
