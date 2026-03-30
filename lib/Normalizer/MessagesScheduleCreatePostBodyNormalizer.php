@@ -39,21 +39,21 @@ class MessagesScheduleCreatePostBodyNormalizer implements DenormalizerInterface,
 
     public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
-        if (isset($data['$ref'])) {
+        $object = new \Braze\Model\MessagesScheduleCreatePostBody();
+        if (null === $data || false === \is_array($data)) {
+            return $object;
+        }
+        if (isset($data['$ref']) && !isset($data['type']) && !isset($data['properties']) && !isset($data['allOf'])) {
             return new Reference($data['$ref'], $context['document-origin']);
         }
         if (isset($data['$recursiveRef'])) {
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
-        $object = new \Braze\Model\MessagesScheduleCreatePostBody();
         if (\array_key_exists('broadcast', $data) && \is_int($data['broadcast'])) {
             $data['broadcast'] = (bool) $data['broadcast'];
         }
         if (\array_key_exists('override_messaging_limits', $data) && \is_int($data['override_messaging_limits'])) {
             $data['override_messaging_limits'] = (bool) $data['override_messaging_limits'];
-        }
-        if (null === $data || false === \is_array($data)) {
-            return $object;
         }
         if (\array_key_exists('broadcast', $data)) {
             $object->setBroadcast($data['broadcast']);

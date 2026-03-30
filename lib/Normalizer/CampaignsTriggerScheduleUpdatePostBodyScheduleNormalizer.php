@@ -39,18 +39,18 @@ class CampaignsTriggerScheduleUpdatePostBodyScheduleNormalizer implements Denorm
 
     public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
-        if (isset($data['$ref'])) {
+        $object = new \Braze\Model\CampaignsTriggerScheduleUpdatePostBodySchedule();
+        if (null === $data || false === \is_array($data)) {
+            return $object;
+        }
+        if (isset($data['$ref']) && !isset($data['type']) && !isset($data['properties']) && !isset($data['allOf'])) {
             return new Reference($data['$ref'], $context['document-origin']);
         }
         if (isset($data['$recursiveRef'])) {
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
-        $object = new \Braze\Model\CampaignsTriggerScheduleUpdatePostBodySchedule();
         if (\array_key_exists('in_local_time', $data) && \is_int($data['in_local_time'])) {
             $data['in_local_time'] = (bool) $data['in_local_time'];
-        }
-        if (null === $data || false === \is_array($data)) {
-            return $object;
         }
         if (\array_key_exists('time', $data)) {
             $object->setTime(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['time']));

@@ -39,18 +39,18 @@ class MessagesLiveActivityUpdatePostBodyNormalizer implements DenormalizerInterf
 
     public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
-        if (isset($data['$ref'])) {
+        $object = new \Braze\Model\MessagesLiveActivityUpdatePostBody();
+        if (null === $data || false === \is_array($data)) {
+            return $object;
+        }
+        if (isset($data['$ref']) && !isset($data['type']) && !isset($data['properties']) && !isset($data['allOf'])) {
             return new Reference($data['$ref'], $context['document-origin']);
         }
         if (isset($data['$recursiveRef'])) {
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
-        $object = new \Braze\Model\MessagesLiveActivityUpdatePostBody();
         if (\array_key_exists('end_activity', $data) && \is_int($data['end_activity'])) {
             $data['end_activity'] = (bool) $data['end_activity'];
-        }
-        if (null === $data || false === \is_array($data)) {
-            return $object;
         }
         if (\array_key_exists('app_id', $data)) {
             $object->setAppId($data['app_id']);

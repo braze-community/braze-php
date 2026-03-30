@@ -39,18 +39,18 @@ class CatalogsCatalogNameItemsPostBodyItemsItemNormalizer implements Denormalize
 
     public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
-        if (isset($data['$ref'])) {
+        $object = new \Braze\Model\CatalogsCatalogNameItemsPostBodyItemsItem();
+        if (null === $data || false === \is_array($data)) {
+            return $object;
+        }
+        if (isset($data['$ref']) && !isset($data['type']) && !isset($data['properties']) && !isset($data['allOf'])) {
             return new Reference($data['$ref'], $context['document-origin']);
         }
         if (isset($data['$recursiveRef'])) {
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
-        $object = new \Braze\Model\CatalogsCatalogNameItemsPostBodyItemsItem();
         if (\array_key_exists('Loyalty_Program', $data) && \is_int($data['Loyalty_Program'])) {
             $data['Loyalty_Program'] = (bool) $data['Loyalty_Program'];
-        }
-        if (null === $data || false === \is_array($data)) {
-            return $object;
         }
         if (\array_key_exists('id', $data)) {
             $object->setId($data['id']);
