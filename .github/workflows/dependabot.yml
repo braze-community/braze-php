@@ -26,6 +26,9 @@ jobs:
       - name: Build library
         run: composer build
 
+      - name: Run php-cs-fixer
+        run: vendor/bin/php-cs-fixer fix .
+
       - name: Git commit and push
         uses: stefanzweifel/git-auto-commit-action@v7
         with:
