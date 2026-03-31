@@ -24,6 +24,9 @@ jobs:
       - name: Build library
         run: composer build
 
+      - name: Run php-cs-fixer
+        run: vendor/bin/php-cs-fixer fix .
+
       - name: Check Git working tree
         run: |
           if [[ $(git diff --stat) != '' ]]; then

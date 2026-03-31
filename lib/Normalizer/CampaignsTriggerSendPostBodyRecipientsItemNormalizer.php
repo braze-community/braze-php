@@ -39,18 +39,18 @@ class CampaignsTriggerSendPostBodyRecipientsItemNormalizer implements Denormaliz
 
     public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
-        if (isset($data['$ref'])) {
+        $object = new \Braze\Model\CampaignsTriggerSendPostBodyRecipientsItem();
+        if (null === $data || false === \is_array($data)) {
+            return $object;
+        }
+        if (isset($data['$ref']) && !isset($data['type']) && !isset($data['properties']) && !isset($data['allOf'])) {
             return new Reference($data['$ref'], $context['document-origin']);
         }
         if (isset($data['$recursiveRef'])) {
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
-        $object = new \Braze\Model\CampaignsTriggerSendPostBodyRecipientsItem();
         if (\array_key_exists('send_to_existing_only', $data) && \is_int($data['send_to_existing_only'])) {
             $data['send_to_existing_only'] = (bool) $data['send_to_existing_only'];
-        }
-        if (null === $data || false === \is_array($data)) {
-            return $object;
         }
         if (\array_key_exists('user_alias', $data)) {
             $object->setUserAlias($this->denormalizer->denormalize($data['user_alias'], \Braze\Model\CampaignsTriggerSendPostBodyRecipientsItemUserAlias::class, 'json', $context));
