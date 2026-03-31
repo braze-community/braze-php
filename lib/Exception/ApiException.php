@@ -10,4 +10,6 @@ declare(strict_types=1);
 
 namespace Braze\Exception;
 
-interface ApiException extends \Throwable {}
+interface ApiException extends \Throwable
+{
+}
