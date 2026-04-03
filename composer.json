@@ -30,7 +30,7 @@
         "friendsofphp/php-cs-fixer": "3.94.2",
         "pestphp/pest": "^1.23 || ^2.0 || ^4.0",
         "php-http/guzzle7-adapter": "^1.0",
-        "symfony/http-kernel": "^6.4",
+        "symfony/http-kernel": "^6.4 || ^8.0",
         "spatie/pest-plugin-snapshots": "^2.2"
     },
     "config": {
