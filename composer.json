@@ -21,11 +21,11 @@
         }
     ],
     "require": {
-        "jane-php/open-api-runtime": "7.11.1",
+        "jane-php/open-api-runtime": "7.11.2",
         "php": ">=8.1"
     },
     "require-dev": {
-        "jane-php/open-api-3": "7.11.1",
+        "jane-php/open-api-3": "7.11.2",
         "nyholm/psr7": "^1.8",
         "friendsofphp/php-cs-fixer": "3.95.1",
         "pestphp/pest": "^1.23 || ^2.0 || ^4.0",
