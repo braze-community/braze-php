@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.4](https://github.com/braze-community/braze-php/compare/v3.0.3...v3.0.4) (2026-04-24)
+
+
+### Build System
+
+* **deps:** bump the jane-php group with 2 updates ([#250](https://github.com/braze-community/braze-php/issues/250)) ([dd3acd0](https://github.com/braze-community/braze-php/commit/dd3acd035b3c2255cfc0edc783345ce7187e61a7))
+
 ## [3.0.3](https://github.com/braze-community/braze-php/compare/v3.0.2...v3.0.3) (2026-03-31)
 
 
