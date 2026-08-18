@@ -1,12 +1,11 @@
-name: dependabot
-on: pull_request_target
+name: dependabot-build
+on: pull_request
 
 permissions:
-  pull-requests: write
-  contents: write
+  contents: read
 
 jobs:
-  dependabot:
+  dependabot-build:
     runs-on: ubuntu-latest
     if: github.actor == 'dependabot[bot]'
 
@@ -14,7 +13,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v7
         with:
-          ref: ${{ github.event.pull_request.head.ref }}
+          ref: ${{ github.event.pull_request.head.sha }}
           submodules: true
 
       - name: Setup PHP
@@ -29,9 +28,14 @@ jobs:
       - name: Run php-cs-fixer
         run: vendor/bin/php-cs-fixer fix .
 
-      - name: Git commit and push
-        uses: stefanzweifel/git-auto-commit-action@v7
+      - name: Create diff of changes
+        run: |
+          git add -A
+          git diff --cached --binary > /tmp/changes.patch
+
+      - name: Upload build diff
+        uses: actions/upload-artifact@v7
         with:
-          commit_message: 'feat(lib): generate code from braze-specification'
-          add_options: '-A'
-          file_pattern: '*.php'
+          name: dependabot-build-${{ github.run_id }}
+          path: /tmp/changes.patch
+          retention-days: 1
