@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.6](https://github.com/braze-community/braze-php/compare/v3.0.5...v3.0.6) (2026-08-18)
+
+
+### Build System
+
+* **deps:** bump jane-php/open-api-runtime from 7.12.0 to 7.13.0 ([#299](https://github.com/braze-community/braze-php/issues/299)) ([9f3fa23](https://github.com/braze-community/braze-php/commit/9f3fa23d1f9fe8c2f684334a0ce491e169d8918d))
+
 ## [3.0.5](https://github.com/braze-community/braze-php/compare/v3.0.4...v3.0.5) (2026-07-10)
 
 
