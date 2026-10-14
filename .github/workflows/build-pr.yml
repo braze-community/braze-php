@@ -1,0 +1,46 @@
+name: build-pr
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: build-pr
+  cancel-in-progress: false
+
+jobs:
+  build-pr:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          submodules: true
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+
+      - name: Install dependencies
+        run: composer install --no-interaction --prefer-dist --optimize-autoloader
+
+      - name: Build library
+        run: composer build
+
+      - name: Run php-cs-fixer
+        run: vendor/bin/php-cs-fixer fix .
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v8
+        with:
+          branch: feat/lib
+          base: master
+          commit-message: 'feat(lib): generate code from braze-specification'
+          title: 'feat(lib): generate code from braze-specification'
+          body: ''
+          author: 'github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>'
+          delete-branch: true
