@@ -75,7 +75,7 @@ class CampaignsTriggerSendPostBodyRecipientsItemUserAliasNormalizer implements D
         if ($data->isInitialized('aliasLabel') && null !== $data->getAliasLabel()) {
             $dataArray['alias_label'] = $data->getAliasLabel();
         }
-        foreach ($data as $key => $value) {
+        foreach ($data->additionalPropertyEntries() as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value;
             }

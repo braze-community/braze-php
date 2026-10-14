@@ -10,8 +10,12 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class SubscriptionStatusSetPostBody extends \ArrayObject
+use Braze\Runtime\AdditionalAndPatternProperties;
+use Braze\Runtime\AdditionalPropertiesInterface;
+
+class SubscriptionStatusSetPostBody implements AdditionalPropertiesInterface
 {
+    use AdditionalAndPatternProperties;
     /**
      * @var array
      */
@@ -100,5 +104,10 @@ class SubscriptionStatusSetPostBody extends \ArrayObject
         $this->email = $email;
 
         return $this;
+    }
+
+    public function definedProperties(): array
+    {
+        return ['subscriptionGroupId' => ['subscription_group_id', 'getSubscriptionGroupId', 'setSubscriptionGroupId'], 'subscriptionState' => ['subscription_state', 'getSubscriptionState', 'setSubscriptionState'], 'externalId' => ['external_id', 'getExternalId', 'setExternalId'], 'email' => ['email', 'getEmail', 'setEmail']];
     }
 }

@@ -74,15 +74,15 @@ class MessagesScheduleUpdatePostBodyMessagesNormalizer implements DenormalizerIn
     {
         $dataArray = [];
         if ($data->isInitialized('applePush') && null !== $data->getApplePush()) {
-            $dataArray['apple_push'] = $this->normalizer->normalize($data->getApplePush(), 'json', $context);
+            $dataArray['apple_push'] = $data->getApplePush() === null ? null : new \Braze\Runtime\JsonObject($this->normalizer->normalize($data->getApplePush(), 'json', $context));
         }
         if ($data->isInitialized('androidPush') && null !== $data->getAndroidPush()) {
-            $dataArray['android_push'] = $this->normalizer->normalize($data->getAndroidPush(), 'json', $context);
+            $dataArray['android_push'] = $data->getAndroidPush() === null ? null : new \Braze\Runtime\JsonObject($this->normalizer->normalize($data->getAndroidPush(), 'json', $context));
         }
         if ($data->isInitialized('sms') && null !== $data->getSms()) {
-            $dataArray['sms'] = $this->normalizer->normalize($data->getSms(), 'json', $context);
+            $dataArray['sms'] = $data->getSms() === null ? null : new \Braze\Runtime\JsonObject($this->normalizer->normalize($data->getSms(), 'json', $context));
         }
-        foreach ($data as $key => $value) {
+        foreach ($data->additionalPropertyEntries() as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value;
             }

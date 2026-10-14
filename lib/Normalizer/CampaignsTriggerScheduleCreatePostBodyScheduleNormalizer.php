@@ -88,7 +88,7 @@ class CampaignsTriggerScheduleCreatePostBodyScheduleNormalizer implements Denorm
         if ($data->isInitialized('atOptimalTime') && null !== $data->getAtOptimalTime()) {
             $dataArray['at_optimal_time'] = $data->getAtOptimalTime();
         }
-        foreach ($data as $key => $value) {
+        foreach ($data->additionalPropertyEntries() as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value;
             }

@@ -10,8 +10,12 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class TransactionalV1CampaignsCampaignIdSendPostBodyRecipientItem extends \ArrayObject
+use Braze\Runtime\AdditionalAndPatternProperties;
+use Braze\Runtime\AdditionalPropertiesInterface;
+
+class TransactionalV1CampaignsCampaignIdSendPostBodyRecipientItem implements AdditionalPropertiesInterface
 {
+    use AdditionalAndPatternProperties;
     /**
      * @var array
      */
@@ -37,5 +41,10 @@ class TransactionalV1CampaignsCampaignIdSendPostBodyRecipientItem extends \Array
         $this->externalUserId = $externalUserId;
 
         return $this;
+    }
+
+    public function definedProperties(): array
+    {
+        return ['externalUserId' => ['external_user_id', 'getExternalUserId', 'setExternalUserId']];
     }
 }

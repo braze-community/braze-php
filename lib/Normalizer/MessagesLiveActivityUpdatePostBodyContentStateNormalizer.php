@@ -75,7 +75,7 @@ class MessagesLiveActivityUpdatePostBodyContentStateNormalizer implements Denorm
         if ($data->isInitialized('teamTwoScore') && null !== $data->getTeamTwoScore()) {
             $dataArray['teamTwoScore'] = $data->getTeamTwoScore();
         }
-        foreach ($data as $key => $value) {
+        foreach ($data->additionalPropertyEntries() as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value;
             }

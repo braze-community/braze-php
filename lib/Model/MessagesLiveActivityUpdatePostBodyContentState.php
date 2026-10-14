@@ -10,8 +10,12 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class MessagesLiveActivityUpdatePostBodyContentState extends \ArrayObject
+use Braze\Runtime\AdditionalAndPatternProperties;
+use Braze\Runtime\AdditionalPropertiesInterface;
+
+class MessagesLiveActivityUpdatePostBodyContentState implements AdditionalPropertiesInterface
 {
+    use AdditionalAndPatternProperties;
     /**
      * @var array
      */
@@ -54,5 +58,10 @@ class MessagesLiveActivityUpdatePostBodyContentState extends \ArrayObject
         $this->teamTwoScore = $teamTwoScore;
 
         return $this;
+    }
+
+    public function definedProperties(): array
+    {
+        return ['teamOneScore' => ['teamOneScore', 'getTeamOneScore', 'setTeamOneScore'], 'teamTwoScore' => ['teamTwoScore', 'getTeamTwoScore', 'setTeamTwoScore']];
     }
 }

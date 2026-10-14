@@ -126,13 +126,13 @@ class MessagesScheduleCreatePostBodyNormalizer implements DenormalizerInterface,
             $dataArray['external_user_ids'] = $values;
         }
         if ($data->isInitialized('userAliases') && null !== $data->getUserAliases()) {
-            $dataArray['user_aliases'] = $this->normalizer->normalize($data->getUserAliases(), 'json', $context);
+            $dataArray['user_aliases'] = $data->getUserAliases() === null ? null : new \Braze\Runtime\JsonObject($this->normalizer->normalize($data->getUserAliases(), 'json', $context));
         }
         if ($data->isInitialized('segmentId') && null !== $data->getSegmentId()) {
             $dataArray['segment_id'] = $data->getSegmentId();
         }
         if ($data->isInitialized('audience') && null !== $data->getAudience()) {
-            $dataArray['audience'] = $this->normalizer->normalize($data->getAudience(), 'json', $context);
+            $dataArray['audience'] = $data->getAudience() === null ? null : new \Braze\Runtime\JsonObject($this->normalizer->normalize($data->getAudience(), 'json', $context));
         }
         if ($data->isInitialized('campaignId') && null !== $data->getCampaignId()) {
             $dataArray['campaign_id'] = $data->getCampaignId();
@@ -147,12 +147,12 @@ class MessagesScheduleCreatePostBodyNormalizer implements DenormalizerInterface,
             $dataArray['recipient_subscription_state'] = $data->getRecipientSubscriptionState();
         }
         if ($data->isInitialized('schedule') && null !== $data->getSchedule()) {
-            $dataArray['schedule'] = $this->normalizer->normalize($data->getSchedule(), 'json', $context);
+            $dataArray['schedule'] = $data->getSchedule() === null ? null : new \Braze\Runtime\JsonObject($this->normalizer->normalize($data->getSchedule(), 'json', $context));
         }
         if ($data->isInitialized('messages') && null !== $data->getMessages()) {
-            $dataArray['messages'] = $this->normalizer->normalize($data->getMessages(), 'json', $context);
+            $dataArray['messages'] = $data->getMessages() === null ? null : new \Braze\Runtime\JsonObject($this->normalizer->normalize($data->getMessages(), 'json', $context));
         }
-        foreach ($data as $key => $value_1) {
+        foreach ($data->additionalPropertyEntries() as $key => $value_1) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value_1;
             }

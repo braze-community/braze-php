@@ -10,8 +10,12 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class MessagesScheduleUpdatePostBodyMessages extends \ArrayObject
+use Braze\Runtime\AdditionalAndPatternProperties;
+use Braze\Runtime\AdditionalPropertiesInterface;
+
+class MessagesScheduleUpdatePostBodyMessages implements AdditionalPropertiesInterface
 {
+    use AdditionalAndPatternProperties;
     /**
      * @var array
      */
@@ -71,5 +75,10 @@ class MessagesScheduleUpdatePostBodyMessages extends \ArrayObject
         $this->sms = $sms;
 
         return $this;
+    }
+
+    public function definedProperties(): array
+    {
+        return ['applePush' => ['apple_push', 'getApplePush', 'setApplePush'], 'androidPush' => ['android_push', 'getAndroidPush', 'setAndroidPush'], 'sms' => ['sms', 'getSms', 'setSms']];
     }
 }

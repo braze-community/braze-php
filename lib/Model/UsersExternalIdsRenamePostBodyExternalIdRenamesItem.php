@@ -10,8 +10,12 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class UsersExternalIdsRenamePostBodyExternalIdRenamesItem extends \ArrayObject
+use Braze\Runtime\AdditionalAndPatternProperties;
+use Braze\Runtime\AdditionalPropertiesInterface;
+
+class UsersExternalIdsRenamePostBodyExternalIdRenamesItem implements AdditionalPropertiesInterface
 {
+    use AdditionalAndPatternProperties;
     /**
      * @var array
      */
@@ -54,5 +58,10 @@ class UsersExternalIdsRenamePostBodyExternalIdRenamesItem extends \ArrayObject
         $this->newExternalId = $newExternalId;
 
         return $this;
+    }
+
+    public function definedProperties(): array
+    {
+        return ['currentExternalId' => ['current_external_id', 'getCurrentExternalId', 'setCurrentExternalId'], 'newExternalId' => ['new_external_id', 'getNewExternalId', 'setNewExternalId']];
     }
 }

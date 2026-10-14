@@ -111,7 +111,7 @@ class UsersExportIdsPostBodyNormalizer implements DenormalizerInterface, Normali
         if ($data->isInitialized('userAliases') && null !== $data->getUserAliases()) {
             $values_1 = [];
             foreach ($data->getUserAliases() as $value_1) {
-                $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
+                $values_1[] = $value_1 === null ? null : new \Braze\Runtime\JsonObject($this->normalizer->normalize($value_1, 'json', $context));
             }
             $dataArray['user_aliases'] = $values_1;
         }
@@ -134,7 +134,7 @@ class UsersExportIdsPostBodyNormalizer implements DenormalizerInterface, Normali
             }
             $dataArray['fields_to_export'] = $values_2;
         }
-        foreach ($data as $key => $value_3) {
+        foreach ($data->additionalPropertyEntries() as $key => $value_3) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value_3;
             }

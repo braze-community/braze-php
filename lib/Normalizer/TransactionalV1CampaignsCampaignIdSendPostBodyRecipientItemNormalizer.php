@@ -68,7 +68,7 @@ class TransactionalV1CampaignsCampaignIdSendPostBodyRecipientItemNormalizer impl
         if ($data->isInitialized('externalUserId') && null !== $data->getExternalUserId()) {
             $dataArray['external_user_id'] = $data->getExternalUserId();
         }
-        foreach ($data as $key => $value) {
+        foreach ($data->additionalPropertyEntries() as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value;
             }

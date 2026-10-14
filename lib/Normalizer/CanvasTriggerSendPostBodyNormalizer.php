@@ -57,7 +57,7 @@ class CanvasTriggerSendPostBodyNormalizer implements DenormalizerInterface, Norm
             unset($data['canvas_id']);
         }
         if (\array_key_exists('canvas_entry_properties', $data)) {
-            $values = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+            $values = new \Braze\Runtime\JsonObject();
             foreach ($data['canvas_entry_properties'] as $key => $value) {
                 $values[$key] = $value;
             }
@@ -96,7 +96,7 @@ class CanvasTriggerSendPostBodyNormalizer implements DenormalizerInterface, Norm
             $dataArray['canvas_id'] = $data->getCanvasId();
         }
         if ($data->isInitialized('canvasEntryProperties') && null !== $data->getCanvasEntryProperties()) {
-            $values = [];
+            $values = new \Braze\Runtime\JsonObject();
             foreach ($data->getCanvasEntryProperties() as $key => $value) {
                 $values[$key] = $value;
             }
@@ -106,16 +106,16 @@ class CanvasTriggerSendPostBodyNormalizer implements DenormalizerInterface, Norm
             $dataArray['broadcast'] = $data->getBroadcast();
         }
         if ($data->isInitialized('audience') && null !== $data->getAudience()) {
-            $dataArray['audience'] = $this->normalizer->normalize($data->getAudience(), 'json', $context);
+            $dataArray['audience'] = $data->getAudience() === null ? null : new \Braze\Runtime\JsonObject($this->normalizer->normalize($data->getAudience(), 'json', $context));
         }
         if ($data->isInitialized('recipients') && null !== $data->getRecipients()) {
             $values_1 = [];
             foreach ($data->getRecipients() as $value_1) {
-                $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
+                $values_1[] = $value_1 === null ? null : new \Braze\Runtime\JsonObject($this->normalizer->normalize($value_1, 'json', $context));
             }
             $dataArray['recipients'] = $values_1;
         }
-        foreach ($data as $key_1 => $value_2) {
+        foreach ($data->additionalPropertyEntries() as $key_1 => $value_2) {
             if (preg_match('/.*/', (string) $key_1)) {
                 $dataArray[$key_1] = $value_2;
             }

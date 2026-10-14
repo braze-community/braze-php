@@ -10,8 +10,12 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class CatalogsPostBody extends \ArrayObject
+use Braze\Runtime\AdditionalAndPatternProperties;
+use Braze\Runtime\AdditionalPropertiesInterface;
+
+class CatalogsPostBody implements AdditionalPropertiesInterface
 {
+    use AdditionalAndPatternProperties;
     /**
      * @var array
      */
@@ -43,5 +47,10 @@ class CatalogsPostBody extends \ArrayObject
         $this->catalogs = $catalogs;
 
         return $this;
+    }
+
+    public function definedProperties(): array
+    {
+        return ['catalogs' => ['catalogs', 'getCatalogs', 'setCatalogs']];
     }
 }

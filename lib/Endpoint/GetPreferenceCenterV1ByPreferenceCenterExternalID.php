@@ -81,7 +81,7 @@ class GetPreferenceCenterV1ByPreferenceCenterExternalID extends \Braze\Runtime\C
 
     public function getUri(): string
     {
-        return str_replace(['{PreferenceCenterExternalID}'], [$this->PreferenceCenterExternalID], '/preference_center/v1/{PreferenceCenterExternalID}');
+        return str_replace(['{PreferenceCenterExternalID}'], [rawurlencode($this->PreferenceCenterExternalID)], '/preference_center/v1/{PreferenceCenterExternalID}');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array

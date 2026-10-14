@@ -72,11 +72,11 @@ class UsersAliasUpdatePostBodyNormalizer implements DenormalizerInterface, Norma
         if ($data->isInitialized('aliasUpdates') && null !== $data->getAliasUpdates()) {
             $values = [];
             foreach ($data->getAliasUpdates() as $value) {
-                $values[] = $this->normalizer->normalize($value, 'json', $context);
+                $values[] = $value === null ? null : new \Braze\Runtime\JsonObject($this->normalizer->normalize($value, 'json', $context));
             }
             $dataArray['alias_updates'] = $values;
         }
-        foreach ($data as $key => $value_1) {
+        foreach ($data->additionalPropertyEntries() as $key => $value_1) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value_1;
             }

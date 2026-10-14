@@ -75,7 +75,7 @@ class ScimV2UsersIdPutBodyNameNormalizer implements DenormalizerInterface, Norma
         if ($data->isInitialized('familyName') && null !== $data->getFamilyName()) {
             $dataArray['familyName'] = $data->getFamilyName();
         }
-        foreach ($data as $key => $value) {
+        foreach ($data->additionalPropertyEntries() as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value;
             }

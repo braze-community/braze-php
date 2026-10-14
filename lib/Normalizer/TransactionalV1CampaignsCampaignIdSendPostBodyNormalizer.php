@@ -54,7 +54,7 @@ class TransactionalV1CampaignsCampaignIdSendPostBodyNormalizer implements Denorm
             unset($data['external_send_id']);
         }
         if (\array_key_exists('trigger_properties', $data)) {
-            $values = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+            $values = new \Braze\Runtime\JsonObject();
             foreach ($data['trigger_properties'] as $key => $value) {
                 $values[$key] = $value;
             }
@@ -85,7 +85,7 @@ class TransactionalV1CampaignsCampaignIdSendPostBodyNormalizer implements Denorm
             $dataArray['external_send_id'] = $data->getExternalSendId();
         }
         if ($data->isInitialized('triggerProperties') && null !== $data->getTriggerProperties()) {
-            $values = [];
+            $values = new \Braze\Runtime\JsonObject();
             foreach ($data->getTriggerProperties() as $key => $value) {
                 $values[$key] = $value;
             }
@@ -94,11 +94,11 @@ class TransactionalV1CampaignsCampaignIdSendPostBodyNormalizer implements Denorm
         if ($data->isInitialized('recipient') && null !== $data->getRecipient()) {
             $values_1 = [];
             foreach ($data->getRecipient() as $value_1) {
-                $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
+                $values_1[] = $value_1 === null ? null : new \Braze\Runtime\JsonObject($this->normalizer->normalize($value_1, 'json', $context));
             }
             $dataArray['recipient'] = $values_1;
         }
-        foreach ($data as $key_1 => $value_2) {
+        foreach ($data->additionalPropertyEntries() as $key_1 => $value_2) {
             if (preg_match('/.*/', (string) $key_1)) {
                 $dataArray[$key_1] = $value_2;
             }

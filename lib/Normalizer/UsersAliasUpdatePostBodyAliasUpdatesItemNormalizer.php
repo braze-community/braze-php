@@ -82,7 +82,7 @@ class UsersAliasUpdatePostBodyAliasUpdatesItemNormalizer implements Denormalizer
         if ($data->isInitialized('newAliasName') && null !== $data->getNewAliasName()) {
             $dataArray['new_alias_name'] = $data->getNewAliasName();
         }
-        foreach ($data as $key => $value) {
+        foreach ($data->additionalPropertyEntries() as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value;
             }

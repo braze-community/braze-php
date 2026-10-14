@@ -10,8 +10,12 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class MessagesScheduleCreatePostBodyMessages extends \ArrayObject
+use Braze\Runtime\AdditionalAndPatternProperties;
+use Braze\Runtime\AdditionalPropertiesInterface;
+
+class MessagesScheduleCreatePostBodyMessages implements AdditionalPropertiesInterface
 {
+    use AdditionalAndPatternProperties;
     /**
      * @var array
      */
@@ -227,5 +231,10 @@ class MessagesScheduleCreatePostBodyMessages extends \ArrayObject
         $this->contentCard = $contentCard;
 
         return $this;
+    }
+
+    public function definedProperties(): array
+    {
+        return ['applePush' => ['apple_push', 'getApplePush', 'setApplePush'], 'androidPush' => ['android_push', 'getAndroidPush', 'setAndroidPush'], 'windowsPush' => ['windows_push', 'getWindowsPush', 'setWindowsPush'], 'windows8Push' => ['windows8_push', 'getWindows8Push', 'setWindows8Push'], 'kindlePush' => ['kindle_push', 'getKindlePush', 'setKindlePush'], 'webPush' => ['web_push', 'getWebPush', 'setWebPush'], 'email' => ['email', 'getEmail', 'setEmail'], 'webhook' => ['webhook', 'getWebhook', 'setWebhook'], 'contentCard' => ['content_card', 'getContentCard', 'setContentCard']];
     }
 }

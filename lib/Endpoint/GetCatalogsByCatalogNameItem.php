@@ -168,7 +168,7 @@ class GetCatalogsByCatalogNameItem extends \Braze\Runtime\Client\BaseEndpoint im
 
     public function getUri(): string
     {
-        return str_replace(['{catalog_name}'], [$this->catalog_name], '/catalogs/{catalog_name}/items');
+        return str_replace(['{catalog_name}'], [rawurlencode($this->catalog_name)], '/catalogs/{catalog_name}/items');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array

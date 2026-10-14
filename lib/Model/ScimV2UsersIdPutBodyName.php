@@ -10,8 +10,12 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class ScimV2UsersIdPutBodyName extends \ArrayObject
+use Braze\Runtime\AdditionalAndPatternProperties;
+use Braze\Runtime\AdditionalPropertiesInterface;
+
+class ScimV2UsersIdPutBodyName implements AdditionalPropertiesInterface
 {
+    use AdditionalAndPatternProperties;
     /**
      * @var array
      */
@@ -54,5 +58,10 @@ class ScimV2UsersIdPutBodyName extends \ArrayObject
         $this->familyName = $familyName;
 
         return $this;
+    }
+
+    public function definedProperties(): array
+    {
+        return ['givenName' => ['givenName', 'getGivenName', 'setGivenName'], 'familyName' => ['familyName', 'getFamilyName', 'setFamilyName']];
     }
 }

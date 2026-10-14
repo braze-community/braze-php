@@ -10,8 +10,12 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class ScimV2UsersPostBodyPermissionsAppGroupItem extends \ArrayObject
+use Braze\Runtime\AdditionalAndPatternProperties;
+use Braze\Runtime\AdditionalPropertiesInterface;
+
+class ScimV2UsersPostBodyPermissionsAppGroupItem implements AdditionalPropertiesInterface
 {
+    use AdditionalAndPatternProperties;
     /**
      * @var array
      */
@@ -83,5 +87,10 @@ class ScimV2UsersPostBodyPermissionsAppGroupItem extends \ArrayObject
         $this->team = $team;
 
         return $this;
+    }
+
+    public function definedProperties(): array
+    {
+        return ['appGroupName' => ['appGroupName', 'getAppGroupName', 'setAppGroupName'], 'appGroupPermissions' => ['appGroupPermissions', 'getAppGroupPermissions', 'setAppGroupPermissions'], 'team' => ['team', 'getTeam', 'setTeam']];
     }
 }

@@ -10,8 +10,12 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class UsersIdentifyPostBodyPhoneNumbersToIdentifyItem extends \ArrayObject
+use Braze\Runtime\AdditionalAndPatternProperties;
+use Braze\Runtime\AdditionalPropertiesInterface;
+
+class UsersIdentifyPostBodyPhoneNumbersToIdentifyItem implements AdditionalPropertiesInterface
 {
+    use AdditionalAndPatternProperties;
     /**
      * @var array
      */
@@ -77,5 +81,10 @@ class UsersIdentifyPostBodyPhoneNumbersToIdentifyItem extends \ArrayObject
         $this->prioritization = $prioritization;
 
         return $this;
+    }
+
+    public function definedProperties(): array
+    {
+        return ['externalId' => ['external_id', 'getExternalId', 'setExternalId'], 'phone' => ['phone', 'getPhone', 'setPhone'], 'prioritization' => ['prioritization', 'getPrioritization', 'setPrioritization']];
     }
 }

@@ -52,7 +52,7 @@ class CampaignsTriggerScheduleCreatePostBodyAudienceNormalizer implements Denorm
         if (\array_key_exists('AND', $data)) {
             $values = [];
             foreach ($data['AND'] as $value) {
-                $values_1 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+                $values_1 = new \Braze\Runtime\JsonObject();
                 foreach ($value as $key => $value_1) {
                     $values_1[$key] = $value_1;
                 }
@@ -76,7 +76,7 @@ class CampaignsTriggerScheduleCreatePostBodyAudienceNormalizer implements Denorm
         if ($data->isInitialized('aND') && null !== $data->getAND()) {
             $values = [];
             foreach ($data->getAND() as $value) {
-                $values_1 = [];
+                $values_1 = new \Braze\Runtime\JsonObject();
                 foreach ($value as $key => $value_1) {
                     $values_1[$key] = $value_1;
                 }
@@ -84,7 +84,7 @@ class CampaignsTriggerScheduleCreatePostBodyAudienceNormalizer implements Denorm
             }
             $dataArray['AND'] = $values;
         }
-        foreach ($data as $key_1 => $value_2) {
+        foreach ($data->additionalPropertyEntries() as $key_1 => $value_2) {
             if (preg_match('/.*/', (string) $key_1)) {
                 $dataArray[$key_1] = $value_2;
             }

@@ -10,8 +10,12 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class MessagesSendPostBodyAudience extends \ArrayObject
+use Braze\Runtime\AdditionalAndPatternProperties;
+use Braze\Runtime\AdditionalPropertiesInterface;
+
+class MessagesSendPostBodyAudience implements AdditionalPropertiesInterface
 {
+    use AdditionalAndPatternProperties;
     /**
      * @var array
      */
@@ -43,5 +47,10 @@ class MessagesSendPostBodyAudience extends \ArrayObject
         $this->aND = $aND;
 
         return $this;
+    }
+
+    public function definedProperties(): array
+    {
+        return ['aND' => ['AND', 'getAND', 'setAND']];
     }
 }

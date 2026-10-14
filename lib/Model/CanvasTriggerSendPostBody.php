@@ -10,8 +10,12 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class CanvasTriggerSendPostBody extends \ArrayObject
+use Braze\Runtime\AdditionalAndPatternProperties;
+use Braze\Runtime\AdditionalPropertiesInterface;
+
+class CanvasTriggerSendPostBody implements AdditionalPropertiesInterface
 {
+    use AdditionalAndPatternProperties;
     /**
      * @var array
      */
@@ -117,5 +121,10 @@ class CanvasTriggerSendPostBody extends \ArrayObject
         $this->recipients = $recipients;
 
         return $this;
+    }
+
+    public function definedProperties(): array
+    {
+        return ['canvasId' => ['canvas_id', 'getCanvasId', 'setCanvasId'], 'canvasEntryProperties' => ['canvas_entry_properties', 'getCanvasEntryProperties', 'setCanvasEntryProperties'], 'broadcast' => ['broadcast', 'getBroadcast', 'setBroadcast'], 'audience' => ['audience', 'getAudience', 'setAudience'], 'recipients' => ['recipients', 'getRecipients', 'setRecipients']];
     }
 }

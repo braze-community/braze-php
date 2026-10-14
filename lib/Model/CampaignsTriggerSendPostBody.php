@@ -10,8 +10,12 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class CampaignsTriggerSendPostBody extends \ArrayObject
+use Braze\Runtime\AdditionalAndPatternProperties;
+use Braze\Runtime\AdditionalPropertiesInterface;
+
+class CampaignsTriggerSendPostBody implements AdditionalPropertiesInterface
 {
+    use AdditionalAndPatternProperties;
     /**
      * @var array
      */
@@ -134,5 +138,10 @@ class CampaignsTriggerSendPostBody extends \ArrayObject
         $this->recipients = $recipients;
 
         return $this;
+    }
+
+    public function definedProperties(): array
+    {
+        return ['campaignId' => ['campaign_id', 'getCampaignId', 'setCampaignId'], 'sendId' => ['send_id', 'getSendId', 'setSendId'], 'triggerProperties' => ['trigger_properties', 'getTriggerProperties', 'setTriggerProperties'], 'broadcast' => ['broadcast', 'getBroadcast', 'setBroadcast'], 'audience' => ['audience', 'getAudience', 'setAudience'], 'recipients' => ['recipients', 'getRecipients', 'setRecipients']];
     }
 }

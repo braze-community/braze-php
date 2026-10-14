@@ -77,12 +77,12 @@ class MessagesScheduleUpdatePostBodyNormalizer implements DenormalizerInterface,
             $dataArray['schedule_id'] = $data->getScheduleId();
         }
         if ($data->isInitialized('schedule') && null !== $data->getSchedule()) {
-            $dataArray['schedule'] = $this->normalizer->normalize($data->getSchedule(), 'json', $context);
+            $dataArray['schedule'] = $data->getSchedule() === null ? null : new \Braze\Runtime\JsonObject($this->normalizer->normalize($data->getSchedule(), 'json', $context));
         }
         if ($data->isInitialized('messages') && null !== $data->getMessages()) {
-            $dataArray['messages'] = $this->normalizer->normalize($data->getMessages(), 'json', $context);
+            $dataArray['messages'] = $data->getMessages() === null ? null : new \Braze\Runtime\JsonObject($this->normalizer->normalize($data->getMessages(), 'json', $context));
         }
-        foreach ($data as $key => $value) {
+        foreach ($data->additionalPropertyEntries() as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value;
             }

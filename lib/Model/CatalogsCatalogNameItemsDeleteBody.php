@@ -10,8 +10,12 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class CatalogsCatalogNameItemsDeleteBody extends \ArrayObject
+use Braze\Runtime\AdditionalAndPatternProperties;
+use Braze\Runtime\AdditionalPropertiesInterface;
+
+class CatalogsCatalogNameItemsDeleteBody implements AdditionalPropertiesInterface
 {
+    use AdditionalAndPatternProperties;
     /**
      * @var array
      */
@@ -43,5 +47,10 @@ class CatalogsCatalogNameItemsDeleteBody extends \ArrayObject
         $this->items = $items;
 
         return $this;
+    }
+
+    public function definedProperties(): array
+    {
+        return ['items' => ['items', 'getItems', 'setItems']];
     }
 }

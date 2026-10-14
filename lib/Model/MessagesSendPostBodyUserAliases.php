@@ -10,8 +10,12 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class MessagesSendPostBodyUserAliases extends \ArrayObject
+use Braze\Runtime\AdditionalAndPatternProperties;
+use Braze\Runtime\AdditionalPropertiesInterface;
+
+class MessagesSendPostBodyUserAliases implements AdditionalPropertiesInterface
 {
+    use AdditionalAndPatternProperties;
     /**
      * @var array
      */
@@ -54,5 +58,10 @@ class MessagesSendPostBodyUserAliases extends \ArrayObject
         $this->aliasLabel = $aliasLabel;
 
         return $this;
+    }
+
+    public function definedProperties(): array
+    {
+        return ['aliasName' => ['alias_name', 'getAliasName', 'setAliasName'], 'aliasLabel' => ['alias_label', 'getAliasLabel', 'setAliasLabel']];
     }
 }

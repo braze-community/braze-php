@@ -10,8 +10,12 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class CanvasTriggerScheduleCreatePostBodyAudience extends \ArrayObject
+use Braze\Runtime\AdditionalAndPatternProperties;
+use Braze\Runtime\AdditionalPropertiesInterface;
+
+class CanvasTriggerScheduleCreatePostBodyAudience implements AdditionalPropertiesInterface
 {
+    use AdditionalAndPatternProperties;
     /**
      * @var array
      */
@@ -43,5 +47,10 @@ class CanvasTriggerScheduleCreatePostBodyAudience extends \ArrayObject
         $this->aND = $aND;
 
         return $this;
+    }
+
+    public function definedProperties(): array
+    {
+        return ['aND' => ['AND', 'getAND', 'setAND']];
     }
 }

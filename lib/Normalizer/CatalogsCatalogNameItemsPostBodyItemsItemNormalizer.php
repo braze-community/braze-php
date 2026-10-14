@@ -77,7 +77,19 @@ class CatalogsCatalogNameItemsPostBodyItemsItemNormalizer implements Denormalize
             unset($data['Loyalty_Program']);
         }
         if (\array_key_exists('Created_At', $data)) {
-            $object->setCreatedAt(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['Created_At']));
+            $date = \DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['Created_At']);
+            if (false === $date) {
+                if (is_string($data['Created_At']) and 1 === preg_match('/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/', $data['Created_At'])) {
+                    try {
+                        $date = new \DateTime($data['Created_At']);
+                    } catch (\Exception) {
+                        throw new \Braze\Runtime\Normalizer\InvalidDateException($data['Created_At'], 'Y-m-d\TH:i:sP');
+                    }
+                } else {
+                    throw new \Braze\Runtime\Normalizer\InvalidDateException($data['Created_At'], 'Y-m-d\TH:i:sP');
+                }
+            }
+            $object->setCreatedAt($date);
             unset($data['Created_At']);
         }
         foreach ($data as $key => $value) {
@@ -113,7 +125,7 @@ class CatalogsCatalogNameItemsPostBodyItemsItemNormalizer implements Denormalize
         if ($data->isInitialized('createdAt') && null !== $data->getCreatedAt()) {
             $dataArray['Created_At'] = $data->getCreatedAt()->format('Y-m-d\TH:i:sP');
         }
-        foreach ($data as $key => $value) {
+        foreach ($data->additionalPropertyEntries() as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value;
             }

@@ -10,8 +10,12 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class CampaignsTriggerScheduleUpdatePostBodySchedule extends \ArrayObject
+use Braze\Runtime\AdditionalAndPatternProperties;
+use Braze\Runtime\AdditionalPropertiesInterface;
+
+class CampaignsTriggerScheduleUpdatePostBodySchedule implements AdditionalPropertiesInterface
 {
+    use AdditionalAndPatternProperties;
     /**
      * @var array
      */
@@ -54,5 +58,10 @@ class CampaignsTriggerScheduleUpdatePostBodySchedule extends \ArrayObject
         $this->inLocalTime = $inLocalTime;
 
         return $this;
+    }
+
+    public function definedProperties(): array
+    {
+        return ['time' => ['time', 'getTime', 'setTime'], 'inLocalTime' => ['in_local_time', 'getInLocalTime', 'setInLocalTime']];
     }
 }

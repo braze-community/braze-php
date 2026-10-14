@@ -10,8 +10,12 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class MessagesScheduleUpdatePostBodyMessagesSms extends \ArrayObject
+use Braze\Runtime\AdditionalAndPatternProperties;
+use Braze\Runtime\AdditionalPropertiesInterface;
+
+class MessagesScheduleUpdatePostBodyMessagesSms implements AdditionalPropertiesInterface
 {
+    use AdditionalAndPatternProperties;
     /**
      * @var array
      */
@@ -88,5 +92,10 @@ class MessagesScheduleUpdatePostBodyMessagesSms extends \ArrayObject
         $this->appId = $appId;
 
         return $this;
+    }
+
+    public function definedProperties(): array
+    {
+        return ['subscriptionGroupId' => ['subscription_group_id', 'getSubscriptionGroupId', 'setSubscriptionGroupId'], 'messageVariationId' => ['message_variation_id', 'getMessageVariationId', 'setMessageVariationId'], 'body' => ['body', 'getBody', 'setBody'], 'appId' => ['app_id', 'getAppId', 'setAppId']];
     }
 }

@@ -83,7 +83,7 @@ class GetPreferenceCenterV1ByPreferenceCenterExternalIDUrlByUserID extends \Braz
 
     public function getUri(): string
     {
-        return str_replace(['{PreferenceCenterExternalID}', '{UserID}'], [$this->PreferenceCenterExternalID, $this->UserID], '/preference_center/v1/{PreferenceCenterExternalID}/url/{UserID}');
+        return str_replace(['{PreferenceCenterExternalID}', '{UserID}'], [rawurlencode($this->PreferenceCenterExternalID), rawurlencode($this->UserID)], '/preference_center/v1/{PreferenceCenterExternalID}/url/{UserID}');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array

@@ -61,7 +61,7 @@ class CampaignsTriggerSendPostBodyRecipientsItemNormalizer implements Denormaliz
             unset($data['external_user_id']);
         }
         if (\array_key_exists('trigger_properties', $data)) {
-            $values = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+            $values = new \Braze\Runtime\JsonObject();
             foreach ($data['trigger_properties'] as $key => $value) {
                 $values[$key] = $value;
             }
@@ -89,13 +89,13 @@ class CampaignsTriggerSendPostBodyRecipientsItemNormalizer implements Denormaliz
     {
         $dataArray = [];
         if ($data->isInitialized('userAlias') && null !== $data->getUserAlias()) {
-            $dataArray['user_alias'] = $this->normalizer->normalize($data->getUserAlias(), 'json', $context);
+            $dataArray['user_alias'] = $data->getUserAlias() === null ? null : new \Braze\Runtime\JsonObject($this->normalizer->normalize($data->getUserAlias(), 'json', $context));
         }
         if ($data->isInitialized('externalUserId') && null !== $data->getExternalUserId()) {
             $dataArray['external_user_id'] = $data->getExternalUserId();
         }
         if ($data->isInitialized('triggerProperties') && null !== $data->getTriggerProperties()) {
-            $values = [];
+            $values = new \Braze\Runtime\JsonObject();
             foreach ($data->getTriggerProperties() as $key => $value) {
                 $values[$key] = $value;
             }
@@ -105,9 +105,9 @@ class CampaignsTriggerSendPostBodyRecipientsItemNormalizer implements Denormaliz
             $dataArray['send_to_existing_only'] = $data->getSendToExistingOnly();
         }
         if ($data->isInitialized('attributes') && null !== $data->getAttributes()) {
-            $dataArray['attributes'] = $this->normalizer->normalize($data->getAttributes(), 'json', $context);
+            $dataArray['attributes'] = $data->getAttributes() === null ? null : new \Braze\Runtime\JsonObject($this->normalizer->normalize($data->getAttributes(), 'json', $context));
         }
-        foreach ($data as $key_1 => $value_1) {
+        foreach ($data->additionalPropertyEntries() as $key_1 => $value_1) {
             if (preg_match('/.*/', (string) $key_1)) {
                 $dataArray[$key_1] = $value_1;
             }

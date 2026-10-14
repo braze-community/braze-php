@@ -73,9 +73,9 @@ class UsersIdentifyPostBodyAliasesToIdentifyItemNormalizer implements Denormaliz
             $dataArray['external_id'] = $data->getExternalId();
         }
         if ($data->isInitialized('userAlias') && null !== $data->getUserAlias()) {
-            $dataArray['user_alias'] = $this->normalizer->normalize($data->getUserAlias(), 'json', $context);
+            $dataArray['user_alias'] = $data->getUserAlias() === null ? null : new \Braze\Runtime\JsonObject($this->normalizer->normalize($data->getUserAlias(), 'json', $context));
         }
-        foreach ($data as $key => $value) {
+        foreach ($data->additionalPropertyEntries() as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value;
             }

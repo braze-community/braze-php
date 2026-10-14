@@ -242,7 +242,7 @@ class PostTransactionalV1CampaignsByCampaignIdSend extends \Braze\Runtime\Client
 
     public function getUri(): string
     {
-        return str_replace(['{campaign_id}'], [$this->campaign_id], '/transactional/v1/campaigns/{campaign_id}/send');
+        return str_replace(['{campaign_id}'], [rawurlencode($this->campaign_id)], '/transactional/v1/campaigns/{campaign_id}/send');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array

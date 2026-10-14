@@ -94,11 +94,11 @@ class ScimV2UsersIdPutBodyPermissionsAppGroupItemNormalizer implements Denormali
         if ($data->isInitialized('team') && null !== $data->getTeam()) {
             $values_1 = [];
             foreach ($data->getTeam() as $value_1) {
-                $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
+                $values_1[] = $value_1 === null ? null : new \Braze\Runtime\JsonObject($this->normalizer->normalize($value_1, 'json', $context));
             }
             $dataArray['team'] = $values_1;
         }
-        foreach ($data as $key => $value_2) {
+        foreach ($data->additionalPropertyEntries() as $key => $value_2) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value_2;
             }

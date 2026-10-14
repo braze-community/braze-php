@@ -10,8 +10,12 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class PreferenceCenterV1PostBody extends \ArrayObject
+use Braze\Runtime\AdditionalAndPatternProperties;
+use Braze\Runtime\AdditionalPropertiesInterface;
+
+class PreferenceCenterV1PostBody implements AdditionalPropertiesInterface
 {
+    use AdditionalAndPatternProperties;
     /**
      * @var array
      */
@@ -122,5 +126,10 @@ class PreferenceCenterV1PostBody extends \ArrayObject
         $this->options = $options;
 
         return $this;
+    }
+
+    public function definedProperties(): array
+    {
+        return ['name' => ['name', 'getName', 'setName'], 'preferenceCenterTitle' => ['preference_center_title', 'getPreferenceCenterTitle', 'setPreferenceCenterTitle'], 'preferenceCenterPageHtml' => ['preference_center_page_html', 'getPreferenceCenterPageHtml', 'setPreferenceCenterPageHtml'], 'confirmationPageHtml' => ['confirmation_page_html', 'getConfirmationPageHtml', 'setConfirmationPageHtml'], 'state' => ['state', 'getState', 'setState'], 'options' => ['options', 'getOptions', 'setOptions']];
     }
 }

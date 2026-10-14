@@ -10,8 +10,12 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class CanvasTriggerSendPostBodyRecipientsItemUserAlias extends \ArrayObject
+use Braze\Runtime\AdditionalAndPatternProperties;
+use Braze\Runtime\AdditionalPropertiesInterface;
+
+class CanvasTriggerSendPostBodyRecipientsItemUserAlias implements AdditionalPropertiesInterface
 {
+    use AdditionalAndPatternProperties;
     /**
      * @var array
      */
@@ -54,5 +58,10 @@ class CanvasTriggerSendPostBodyRecipientsItemUserAlias extends \ArrayObject
         $this->aliasLabel = $aliasLabel;
 
         return $this;
+    }
+
+    public function definedProperties(): array
+    {
+        return ['aliasName' => ['alias_name', 'getAliasName', 'setAliasName'], 'aliasLabel' => ['alias_label', 'getAliasLabel', 'setAliasLabel']];
     }
 }

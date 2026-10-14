@@ -72,11 +72,11 @@ class UsersAliasNewPostBodyNormalizer implements DenormalizerInterface, Normaliz
         if ($data->isInitialized('userAliases') && null !== $data->getUserAliases()) {
             $values = [];
             foreach ($data->getUserAliases() as $value) {
-                $values[] = $this->normalizer->normalize($value, 'json', $context);
+                $values[] = $value === null ? null : new \Braze\Runtime\JsonObject($this->normalizer->normalize($value, 'json', $context));
             }
             $dataArray['user_aliases'] = $values;
         }
-        foreach ($data as $key => $value_1) {
+        foreach ($data->additionalPropertyEntries() as $key => $value_1) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value_1;
             }

@@ -10,8 +10,12 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class MessagesLiveActivityUpdatePostBodyNotification extends \ArrayObject
+use Braze\Runtime\AdditionalAndPatternProperties;
+use Braze\Runtime\AdditionalPropertiesInterface;
+
+class MessagesLiveActivityUpdatePostBodyNotification implements AdditionalPropertiesInterface
 {
+    use AdditionalAndPatternProperties;
     /**
      * @var array
      */
@@ -37,5 +41,10 @@ class MessagesLiveActivityUpdatePostBodyNotification extends \ArrayObject
         $this->alert = $alert;
 
         return $this;
+    }
+
+    public function definedProperties(): array
+    {
+        return ['alert' => ['alert', 'getAlert', 'setAlert']];
     }
 }

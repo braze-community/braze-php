@@ -75,7 +75,7 @@ class SendsIdCreatePostBodyNormalizer implements DenormalizerInterface, Normaliz
         if ($data->isInitialized('sendId') && null !== $data->getSendId()) {
             $dataArray['send_id'] = $data->getSendId();
         }
-        foreach ($data as $key => $value) {
+        foreach ($data->additionalPropertyEntries() as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value;
             }

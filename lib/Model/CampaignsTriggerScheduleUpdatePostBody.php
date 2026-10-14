@@ -10,8 +10,12 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class CampaignsTriggerScheduleUpdatePostBody extends \ArrayObject
+use Braze\Runtime\AdditionalAndPatternProperties;
+use Braze\Runtime\AdditionalPropertiesInterface;
+
+class CampaignsTriggerScheduleUpdatePostBody implements AdditionalPropertiesInterface
 {
+    use AdditionalAndPatternProperties;
     /**
      * @var array
      */
@@ -71,5 +75,10 @@ class CampaignsTriggerScheduleUpdatePostBody extends \ArrayObject
         $this->schedule = $schedule;
 
         return $this;
+    }
+
+    public function definedProperties(): array
+    {
+        return ['campaignId' => ['campaign_id', 'getCampaignId', 'setCampaignId'], 'scheduleId' => ['schedule_id', 'getScheduleId', 'setScheduleId'], 'schedule' => ['schedule', 'getSchedule', 'setSchedule']];
     }
 }

@@ -151,7 +151,7 @@ class PostCatalogsByCatalogNameItemByItemId extends \Braze\Runtime\Client\BaseEn
 
     public function getUri(): string
     {
-        return str_replace(['{catalog_name}', '{item_id}'], [$this->catalog_name, $this->item_id], '/catalogs/{catalog_name}/items/{item_id}');
+        return str_replace(['{catalog_name}', '{item_id}'], [rawurlencode($this->catalog_name), rawurlencode($this->item_id)], '/catalogs/{catalog_name}/items/{item_id}');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array

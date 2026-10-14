@@ -86,11 +86,11 @@ class CatalogsPostBodyCatalogsItemNormalizer implements DenormalizerInterface, N
         if ($data->isInitialized('fields') && null !== $data->getFields()) {
             $values = [];
             foreach ($data->getFields() as $value) {
-                $values[] = $this->normalizer->normalize($value, 'json', $context);
+                $values[] = $value === null ? null : new \Braze\Runtime\JsonObject($this->normalizer->normalize($value, 'json', $context));
             }
             $dataArray['fields'] = $values;
         }
-        foreach ($data as $key => $value_1) {
+        foreach ($data->additionalPropertyEntries() as $key => $value_1) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value_1;
             }

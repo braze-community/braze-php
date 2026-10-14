@@ -10,8 +10,12 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class CanvasTriggerScheduleUpdatePostBody extends \ArrayObject
+use Braze\Runtime\AdditionalAndPatternProperties;
+use Braze\Runtime\AdditionalPropertiesInterface;
+
+class CanvasTriggerScheduleUpdatePostBody implements AdditionalPropertiesInterface
 {
+    use AdditionalAndPatternProperties;
     /**
      * @var array
      */
@@ -71,5 +75,10 @@ class CanvasTriggerScheduleUpdatePostBody extends \ArrayObject
         $this->schedule = $schedule;
 
         return $this;
+    }
+
+    public function definedProperties(): array
+    {
+        return ['canvasId' => ['canvas_id', 'getCanvasId', 'setCanvasId'], 'scheduleId' => ['schedule_id', 'getScheduleId', 'setScheduleId'], 'schedule' => ['schedule', 'getSchedule', 'setSchedule']];
     }
 }

@@ -75,7 +75,7 @@ class MessagesScheduleUpdatePostBodyMessagesApplePushNormalizer implements Denor
         if ($data->isInitialized('badge') && null !== $data->getBadge()) {
             $dataArray['badge'] = $data->getBadge();
         }
-        foreach ($data as $key => $value) {
+        foreach ($data->additionalPropertyEntries() as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value;
             }

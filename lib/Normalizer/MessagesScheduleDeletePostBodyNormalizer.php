@@ -68,7 +68,7 @@ class MessagesScheduleDeletePostBodyNormalizer implements DenormalizerInterface,
         if ($data->isInitialized('scheduleId') && null !== $data->getScheduleId()) {
             $dataArray['schedule_id'] = $data->getScheduleId();
         }
-        foreach ($data as $key => $value) {
+        foreach ($data->additionalPropertyEntries() as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value;
             }

@@ -10,8 +10,12 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class V2SubscriptionStatusSetPostBody extends \ArrayObject
+use Braze\Runtime\AdditionalAndPatternProperties;
+use Braze\Runtime\AdditionalPropertiesInterface;
+
+class V2SubscriptionStatusSetPostBody implements AdditionalPropertiesInterface
 {
+    use AdditionalAndPatternProperties;
     /**
      * @var array
      */
@@ -43,5 +47,10 @@ class V2SubscriptionStatusSetPostBody extends \ArrayObject
         $this->subscriptionGroups = $subscriptionGroups;
 
         return $this;
+    }
+
+    public function definedProperties(): array
+    {
+        return ['subscriptionGroups' => ['subscription_groups', 'getSubscriptionGroups', 'setSubscriptionGroups']];
     }
 }

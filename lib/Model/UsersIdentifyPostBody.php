@@ -10,8 +10,12 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class UsersIdentifyPostBody extends \ArrayObject
+use Braze\Runtime\AdditionalAndPatternProperties;
+use Braze\Runtime\AdditionalPropertiesInterface;
+
+class UsersIdentifyPostBody implements AdditionalPropertiesInterface
 {
+    use AdditionalAndPatternProperties;
     /**
      * @var array
      */
@@ -106,5 +110,10 @@ class UsersIdentifyPostBody extends \ArrayObject
         $this->mergeBehavior = $mergeBehavior;
 
         return $this;
+    }
+
+    public function definedProperties(): array
+    {
+        return ['aliasesToIdentify' => ['aliases_to_identify', 'getAliasesToIdentify', 'setAliasesToIdentify'], 'emailsToIdentify' => ['emails_to_identify', 'getEmailsToIdentify', 'setEmailsToIdentify'], 'phoneNumbersToIdentify' => ['phone_numbers_to_identify', 'getPhoneNumbersToIdentify', 'setPhoneNumbersToIdentify'], 'mergeBehavior' => ['merge_behavior', 'getMergeBehavior', 'setMergeBehavior']];
     }
 }

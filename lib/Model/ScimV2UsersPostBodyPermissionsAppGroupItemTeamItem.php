@@ -10,8 +10,12 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class ScimV2UsersPostBodyPermissionsAppGroupItemTeamItem extends \ArrayObject
+use Braze\Runtime\AdditionalAndPatternProperties;
+use Braze\Runtime\AdditionalPropertiesInterface;
+
+class ScimV2UsersPostBodyPermissionsAppGroupItemTeamItem implements AdditionalPropertiesInterface
 {
+    use AdditionalAndPatternProperties;
     /**
      * @var array
      */
@@ -60,5 +64,10 @@ class ScimV2UsersPostBodyPermissionsAppGroupItemTeamItem extends \ArrayObject
         $this->teamPermissions = $teamPermissions;
 
         return $this;
+    }
+
+    public function definedProperties(): array
+    {
+        return ['teamName' => ['teamName', 'getTeamName', 'setTeamName'], 'teamPermissions' => ['teamPermissions', 'getTeamPermissions', 'setTeamPermissions']];
     }
 }

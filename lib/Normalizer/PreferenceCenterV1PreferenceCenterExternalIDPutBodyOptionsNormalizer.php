@@ -68,7 +68,7 @@ class PreferenceCenterV1PreferenceCenterExternalIDPutBodyOptionsNormalizer imple
         if ($data->isInitialized('metaViewportContent') && null !== $data->getMetaViewportContent()) {
             $dataArray['meta-viewport-content'] = $data->getMetaViewportContent();
         }
-        foreach ($data as $key => $value) {
+        foreach ($data->additionalPropertyEntries() as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value;
             }

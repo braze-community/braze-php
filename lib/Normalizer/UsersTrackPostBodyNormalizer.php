@@ -52,7 +52,7 @@ class UsersTrackPostBodyNormalizer implements DenormalizerInterface, NormalizerI
         if (\array_key_exists('attributes', $data)) {
             $values = [];
             foreach ($data['attributes'] as $value) {
-                $values_1 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+                $values_1 = new \Braze\Runtime\JsonObject();
                 foreach ($value as $key => $value_1) {
                     $values_1[$key] = $value_1;
                 }
@@ -64,7 +64,7 @@ class UsersTrackPostBodyNormalizer implements DenormalizerInterface, NormalizerI
         if (\array_key_exists('events', $data)) {
             $values_2 = [];
             foreach ($data['events'] as $value_2) {
-                $values_3 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+                $values_3 = new \Braze\Runtime\JsonObject();
                 foreach ($value_2 as $key_1 => $value_3) {
                     $values_3[$key_1] = $value_3;
                 }
@@ -76,7 +76,7 @@ class UsersTrackPostBodyNormalizer implements DenormalizerInterface, NormalizerI
         if (\array_key_exists('purchases', $data)) {
             $values_4 = [];
             foreach ($data['purchases'] as $value_4) {
-                $values_5 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+                $values_5 = new \Braze\Runtime\JsonObject();
                 foreach ($value_4 as $key_2 => $value_5) {
                     $values_5[$key_2] = $value_5;
                 }
@@ -100,7 +100,7 @@ class UsersTrackPostBodyNormalizer implements DenormalizerInterface, NormalizerI
         if ($data->isInitialized('attributes') && null !== $data->getAttributes()) {
             $values = [];
             foreach ($data->getAttributes() as $value) {
-                $values_1 = [];
+                $values_1 = new \Braze\Runtime\JsonObject();
                 foreach ($value as $key => $value_1) {
                     $values_1[$key] = $value_1;
                 }
@@ -111,7 +111,7 @@ class UsersTrackPostBodyNormalizer implements DenormalizerInterface, NormalizerI
         if ($data->isInitialized('events') && null !== $data->getEvents()) {
             $values_2 = [];
             foreach ($data->getEvents() as $value_2) {
-                $values_3 = [];
+                $values_3 = new \Braze\Runtime\JsonObject();
                 foreach ($value_2 as $key_1 => $value_3) {
                     $values_3[$key_1] = $value_3;
                 }
@@ -122,7 +122,7 @@ class UsersTrackPostBodyNormalizer implements DenormalizerInterface, NormalizerI
         if ($data->isInitialized('purchases') && null !== $data->getPurchases()) {
             $values_4 = [];
             foreach ($data->getPurchases() as $value_4) {
-                $values_5 = [];
+                $values_5 = new \Braze\Runtime\JsonObject();
                 foreach ($value_4 as $key_2 => $value_5) {
                     $values_5[$key_2] = $value_5;
                 }
@@ -130,7 +130,7 @@ class UsersTrackPostBodyNormalizer implements DenormalizerInterface, NormalizerI
             }
             $dataArray['purchases'] = $values_4;
         }
-        foreach ($data as $key_3 => $value_6) {
+        foreach ($data->additionalPropertyEntries() as $key_3 => $value_6) {
             if (preg_match('/.*/', (string) $key_3)) {
                 $dataArray[$key_3] = $value_6;
             }

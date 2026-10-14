@@ -128,7 +128,7 @@ class TemplatesEmailUpdatePostBodyNormalizer implements DenormalizerInterface, N
         if ($data->isInitialized('shouldInlineCss') && null !== $data->getShouldInlineCss()) {
             $dataArray['should_inline_css'] = $data->getShouldInlineCss();
         }
-        foreach ($data as $key => $value_1) {
+        foreach ($data->additionalPropertyEntries() as $key => $value_1) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value_1;
             }

@@ -10,8 +10,12 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class MessagesScheduleUpdatePostBodySchedule extends \ArrayObject
+use Braze\Runtime\AdditionalAndPatternProperties;
+use Braze\Runtime\AdditionalPropertiesInterface;
+
+class MessagesScheduleUpdatePostBodySchedule implements AdditionalPropertiesInterface
 {
+    use AdditionalAndPatternProperties;
     /**
      * @var array
      */
@@ -37,5 +41,10 @@ class MessagesScheduleUpdatePostBodySchedule extends \ArrayObject
         $this->time = $time;
 
         return $this;
+    }
+
+    public function definedProperties(): array
+    {
+        return ['time' => ['time', 'getTime', 'setTime']];
     }
 }

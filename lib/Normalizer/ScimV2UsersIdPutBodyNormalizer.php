@@ -89,15 +89,15 @@ class ScimV2UsersIdPutBodyNormalizer implements DenormalizerInterface, Normalize
             $dataArray['schemas'] = $values;
         }
         if ($data->isInitialized('name') && null !== $data->getName()) {
-            $dataArray['name'] = $this->normalizer->normalize($data->getName(), 'json', $context);
+            $dataArray['name'] = $data->getName() === null ? null : new \Braze\Runtime\JsonObject($this->normalizer->normalize($data->getName(), 'json', $context));
         }
         if ($data->isInitialized('department') && null !== $data->getDepartment()) {
             $dataArray['department'] = $data->getDepartment();
         }
         if ($data->isInitialized('permissions') && null !== $data->getPermissions()) {
-            $dataArray['permissions'] = $this->normalizer->normalize($data->getPermissions(), 'json', $context);
+            $dataArray['permissions'] = $data->getPermissions() === null ? null : new \Braze\Runtime\JsonObject($this->normalizer->normalize($data->getPermissions(), 'json', $context));
         }
-        foreach ($data as $key => $value_1) {
+        foreach ($data->additionalPropertyEntries() as $key => $value_1) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value_1;
             }

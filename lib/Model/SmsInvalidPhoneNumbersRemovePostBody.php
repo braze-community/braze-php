@@ -10,8 +10,12 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class SmsInvalidPhoneNumbersRemovePostBody extends \ArrayObject
+use Braze\Runtime\AdditionalAndPatternProperties;
+use Braze\Runtime\AdditionalPropertiesInterface;
+
+class SmsInvalidPhoneNumbersRemovePostBody implements AdditionalPropertiesInterface
 {
+    use AdditionalAndPatternProperties;
     /**
      * @var array
      */
@@ -43,5 +47,10 @@ class SmsInvalidPhoneNumbersRemovePostBody extends \ArrayObject
         $this->phoneNumbers = $phoneNumbers;
 
         return $this;
+    }
+
+    public function definedProperties(): array
+    {
+        return ['phoneNumbers' => ['phone_numbers', 'getPhoneNumbers', 'setPhoneNumbers']];
     }
 }

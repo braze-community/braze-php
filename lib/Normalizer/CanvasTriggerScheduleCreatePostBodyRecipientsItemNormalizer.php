@@ -58,7 +58,7 @@ class CanvasTriggerScheduleCreatePostBodyRecipientsItemNormalizer implements Den
             unset($data['external_user_id']);
         }
         if (\array_key_exists('trigger_properties', $data)) {
-            $values = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+            $values = new \Braze\Runtime\JsonObject();
             foreach ($data['trigger_properties'] as $key => $value) {
                 $values[$key] = $value;
             }
@@ -66,7 +66,7 @@ class CanvasTriggerScheduleCreatePostBodyRecipientsItemNormalizer implements Den
             unset($data['trigger_properties']);
         }
         if (\array_key_exists('canvas_entry_properties', $data)) {
-            $values_1 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+            $values_1 = new \Braze\Runtime\JsonObject();
             foreach ($data['canvas_entry_properties'] as $key_1 => $value_1) {
                 $values_1[$key_1] = $value_1;
             }
@@ -92,20 +92,20 @@ class CanvasTriggerScheduleCreatePostBodyRecipientsItemNormalizer implements Den
             $dataArray['external_user_id'] = $data->getExternalUserId();
         }
         if ($data->isInitialized('triggerProperties') && null !== $data->getTriggerProperties()) {
-            $values = [];
+            $values = new \Braze\Runtime\JsonObject();
             foreach ($data->getTriggerProperties() as $key => $value) {
                 $values[$key] = $value;
             }
             $dataArray['trigger_properties'] = $values;
         }
         if ($data->isInitialized('canvasEntryProperties') && null !== $data->getCanvasEntryProperties()) {
-            $values_1 = [];
+            $values_1 = new \Braze\Runtime\JsonObject();
             foreach ($data->getCanvasEntryProperties() as $key_1 => $value_1) {
                 $values_1[$key_1] = $value_1;
             }
             $dataArray['canvas_entry_properties'] = $values_1;
         }
-        foreach ($data as $key_2 => $value_2) {
+        foreach ($data->additionalPropertyEntries() as $key_2 => $value_2) {
             if (preg_match('/.*/', (string) $key_2)) {
                 $dataArray[$key_2] = $value_2;
             }

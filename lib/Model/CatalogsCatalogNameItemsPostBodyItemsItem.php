@@ -10,8 +10,12 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class CatalogsCatalogNameItemsPostBodyItemsItem extends \ArrayObject
+use Braze\Runtime\AdditionalAndPatternProperties;
+use Braze\Runtime\AdditionalPropertiesInterface;
+
+class CatalogsCatalogNameItemsPostBodyItemsItem implements AdditionalPropertiesInterface
 {
+    use AdditionalAndPatternProperties;
     /**
      * @var array
      */
@@ -139,5 +143,10 @@ class CatalogsCatalogNameItemsPostBodyItemsItem extends \ArrayObject
         $this->createdAt = $createdAt;
 
         return $this;
+    }
+
+    public function definedProperties(): array
+    {
+        return ['id' => ['id', 'getId', 'setId'], 'name' => ['Name', 'getName', 'setName'], 'city' => ['City', 'getCity', 'setCity'], 'cuisine' => ['Cuisine', 'getCuisine', 'setCuisine'], 'rating' => ['Rating', 'getRating', 'setRating'], 'loyaltyProgram' => ['Loyalty_Program', 'getLoyaltyProgram', 'setLoyaltyProgram'], 'createdAt' => ['Created_At', 'getCreatedAt', 'setCreatedAt']];
     }
 }

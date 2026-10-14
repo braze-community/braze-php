@@ -68,7 +68,7 @@ class CampaignsTriggerSendPostBodyRecipientsItemAttributesNormalizer implements 
         if ($data->isInitialized('firstName') && null !== $data->getFirstName()) {
             $dataArray['first_name'] = $data->getFirstName();
         }
-        foreach ($data as $key => $value) {
+        foreach ($data->additionalPropertyEntries() as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value;
             }

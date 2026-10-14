@@ -10,8 +10,12 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class UsersExportIdsPostBody extends \ArrayObject
+use Braze\Runtime\AdditionalAndPatternProperties;
+use Braze\Runtime\AdditionalPropertiesInterface;
+
+class UsersExportIdsPostBody implements AdditionalPropertiesInterface
 {
+    use AdditionalAndPatternProperties;
     /**
      * @var array
      */
@@ -157,5 +161,10 @@ class UsersExportIdsPostBody extends \ArrayObject
         $this->fieldsToExport = $fieldsToExport;
 
         return $this;
+    }
+
+    public function definedProperties(): array
+    {
+        return ['externalIds' => ['external_ids', 'getExternalIds', 'setExternalIds'], 'userAliases' => ['user_aliases', 'getUserAliases', 'setUserAliases'], 'deviceId' => ['device_id', 'getDeviceId', 'setDeviceId'], 'brazeId' => ['braze_id', 'getBrazeId', 'setBrazeId'], 'emailAddress' => ['email_address', 'getEmailAddress', 'setEmailAddress'], 'phone' => ['phone', 'getPhone', 'setPhone'], 'fieldsToExport' => ['fields_to_export', 'getFieldsToExport', 'setFieldsToExport']];
     }
 }

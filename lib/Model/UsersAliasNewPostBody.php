@@ -10,8 +10,12 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class UsersAliasNewPostBody extends \ArrayObject
+use Braze\Runtime\AdditionalAndPatternProperties;
+use Braze\Runtime\AdditionalPropertiesInterface;
+
+class UsersAliasNewPostBody implements AdditionalPropertiesInterface
 {
+    use AdditionalAndPatternProperties;
     /**
      * @var array
      */
@@ -43,5 +47,10 @@ class UsersAliasNewPostBody extends \ArrayObject
         $this->userAliases = $userAliases;
 
         return $this;
+    }
+
+    public function definedProperties(): array
+    {
+        return ['userAliases' => ['user_aliases', 'getUserAliases', 'setUserAliases']];
     }
 }

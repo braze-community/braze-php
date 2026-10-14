@@ -75,7 +75,7 @@ class UsersExternalIdsRenamePostBodyExternalIdRenamesItemNormalizer implements D
         if ($data->isInitialized('newExternalId') && null !== $data->getNewExternalId()) {
             $dataArray['new_external_id'] = $data->getNewExternalId();
         }
-        foreach ($data as $key => $value) {
+        foreach ($data->additionalPropertyEntries() as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value;
             }

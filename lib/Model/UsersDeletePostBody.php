@@ -10,8 +10,12 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class UsersDeletePostBody extends \ArrayObject
+use Braze\Runtime\AdditionalAndPatternProperties;
+use Braze\Runtime\AdditionalPropertiesInterface;
+
+class UsersDeletePostBody implements AdditionalPropertiesInterface
 {
+    use AdditionalAndPatternProperties;
     /**
      * @var array
      */
@@ -89,5 +93,10 @@ class UsersDeletePostBody extends \ArrayObject
         $this->userAliases = $userAliases;
 
         return $this;
+    }
+
+    public function definedProperties(): array
+    {
+        return ['externalIds' => ['external_ids', 'getExternalIds', 'setExternalIds'], 'brazeIds' => ['braze_ids', 'getBrazeIds', 'setBrazeIds'], 'userAliases' => ['user_aliases', 'getUserAliases', 'setUserAliases']];
     }
 }

@@ -10,8 +10,12 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class UsersTrackPostBody extends \ArrayObject
+use Braze\Runtime\AdditionalAndPatternProperties;
+use Braze\Runtime\AdditionalPropertiesInterface;
+
+class UsersTrackPostBody implements AdditionalPropertiesInterface
 {
+    use AdditionalAndPatternProperties;
     /**
      * @var array
      */
@@ -89,5 +93,10 @@ class UsersTrackPostBody extends \ArrayObject
         $this->purchases = $purchases;
 
         return $this;
+    }
+
+    public function definedProperties(): array
+    {
+        return ['attributes' => ['attributes', 'getAttributes', 'setAttributes'], 'events' => ['events', 'getEvents', 'setEvents'], 'purchases' => ['purchases', 'getPurchases', 'setPurchases']];
     }
 }

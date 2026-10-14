@@ -101,9 +101,9 @@ class PreferenceCenterV1PostBodyNormalizer implements DenormalizerInterface, Nor
             $dataArray['state'] = $data->getState();
         }
         if ($data->isInitialized('options') && null !== $data->getOptions()) {
-            $dataArray['options'] = $this->normalizer->normalize($data->getOptions(), 'json', $context);
+            $dataArray['options'] = $data->getOptions() === null ? null : new \Braze\Runtime\JsonObject($this->normalizer->normalize($data->getOptions(), 'json', $context));
         }
-        foreach ($data as $key => $value) {
+        foreach ($data->additionalPropertyEntries() as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value;
             }

@@ -10,8 +10,12 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class MessagesScheduleCreatePostBody extends \ArrayObject
+use Braze\Runtime\AdditionalAndPatternProperties;
+use Braze\Runtime\AdditionalPropertiesInterface;
+
+class MessagesScheduleCreatePostBody implements AdditionalPropertiesInterface
 {
+    use AdditionalAndPatternProperties;
     /**
      * @var array
      */
@@ -213,5 +217,10 @@ class MessagesScheduleCreatePostBody extends \ArrayObject
         $this->messages = $messages;
 
         return $this;
+    }
+
+    public function definedProperties(): array
+    {
+        return ['broadcast' => ['broadcast', 'getBroadcast', 'setBroadcast'], 'externalUserIds' => ['external_user_ids', 'getExternalUserIds', 'setExternalUserIds'], 'userAliases' => ['user_aliases', 'getUserAliases', 'setUserAliases'], 'segmentId' => ['segment_id', 'getSegmentId', 'setSegmentId'], 'audience' => ['audience', 'getAudience', 'setAudience'], 'campaignId' => ['campaign_id', 'getCampaignId', 'setCampaignId'], 'sendId' => ['send_id', 'getSendId', 'setSendId'], 'overrideMessagingLimits' => ['override_messaging_limits', 'getOverrideMessagingLimits', 'setOverrideMessagingLimits'], 'recipientSubscriptionState' => ['recipient_subscription_state', 'getRecipientSubscriptionState', 'setRecipientSubscriptionState'], 'schedule' => ['schedule', 'getSchedule', 'setSchedule'], 'messages' => ['messages', 'getMessages', 'setMessages']];
     }
 }

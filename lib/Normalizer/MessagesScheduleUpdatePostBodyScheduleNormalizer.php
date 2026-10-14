@@ -50,7 +50,19 @@ class MessagesScheduleUpdatePostBodyScheduleNormalizer implements DenormalizerIn
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         if (\array_key_exists('time', $data)) {
-            $object->setTime(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['time']));
+            $date = \DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['time']);
+            if (false === $date) {
+                if (is_string($data['time']) and 1 === preg_match('/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/', $data['time'])) {
+                    try {
+                        $date = new \DateTime($data['time']);
+                    } catch (\Exception) {
+                        throw new \Braze\Runtime\Normalizer\InvalidDateException($data['time'], 'Y-m-d\TH:i:sP');
+                    }
+                } else {
+                    throw new \Braze\Runtime\Normalizer\InvalidDateException($data['time'], 'Y-m-d\TH:i:sP');
+                }
+            }
+            $object->setTime($date);
             unset($data['time']);
         }
         foreach ($data as $key => $value) {
@@ -68,7 +80,7 @@ class MessagesScheduleUpdatePostBodyScheduleNormalizer implements DenormalizerIn
         if ($data->isInitialized('time') && null !== $data->getTime()) {
             $dataArray['time'] = $data->getTime()->format('Y-m-d\TH:i:sP');
         }
-        foreach ($data as $key => $value) {
+        foreach ($data->additionalPropertyEntries() as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value;
             }

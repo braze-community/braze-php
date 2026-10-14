@@ -94,9 +94,9 @@ class PreferenceCenterV1PreferenceCenterExternalIDPutBodyNormalizer implements D
             $dataArray['confirmation_page_html'] = $data->getConfirmationPageHtml();
         }
         if ($data->isInitialized('options') && null !== $data->getOptions()) {
-            $dataArray['options'] = $this->normalizer->normalize($data->getOptions(), 'json', $context);
+            $dataArray['options'] = $data->getOptions() === null ? null : new \Braze\Runtime\JsonObject($this->normalizer->normalize($data->getOptions(), 'json', $context));
         }
-        foreach ($data as $key => $value) {
+        foreach ($data->additionalPropertyEntries() as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value;
             }

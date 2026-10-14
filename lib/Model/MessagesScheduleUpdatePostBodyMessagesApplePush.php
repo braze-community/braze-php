@@ -10,8 +10,12 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class MessagesScheduleUpdatePostBodyMessagesApplePush extends \ArrayObject
+use Braze\Runtime\AdditionalAndPatternProperties;
+use Braze\Runtime\AdditionalPropertiesInterface;
+
+class MessagesScheduleUpdatePostBodyMessagesApplePush implements AdditionalPropertiesInterface
 {
+    use AdditionalAndPatternProperties;
     /**
      * @var array
      */
@@ -54,5 +58,10 @@ class MessagesScheduleUpdatePostBodyMessagesApplePush extends \ArrayObject
         $this->badge = $badge;
 
         return $this;
+    }
+
+    public function definedProperties(): array
+    {
+        return ['alert' => ['alert', 'getAlert', 'setAlert'], 'badge' => ['badge', 'getBadge', 'setBadge']];
     }
 }

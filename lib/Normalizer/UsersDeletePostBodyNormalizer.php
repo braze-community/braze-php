@@ -102,11 +102,11 @@ class UsersDeletePostBodyNormalizer implements DenormalizerInterface, Normalizer
         if ($data->isInitialized('userAliases') && null !== $data->getUserAliases()) {
             $values_2 = [];
             foreach ($data->getUserAliases() as $value_2) {
-                $values_2[] = $this->normalizer->normalize($value_2, 'json', $context);
+                $values_2[] = $value_2 === null ? null : new \Braze\Runtime\JsonObject($this->normalizer->normalize($value_2, 'json', $context));
             }
             $dataArray['user_aliases'] = $values_2;
         }
-        foreach ($data as $key => $value_3) {
+        foreach ($data->additionalPropertyEntries() as $key => $value_3) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value_3;
             }

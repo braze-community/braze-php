@@ -10,8 +10,12 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class CanvasTriggerScheduleCreatePostBodySchedule extends \ArrayObject
+use Braze\Runtime\AdditionalAndPatternProperties;
+use Braze\Runtime\AdditionalPropertiesInterface;
+
+class CanvasTriggerScheduleCreatePostBodySchedule implements AdditionalPropertiesInterface
 {
+    use AdditionalAndPatternProperties;
     /**
      * @var array
      */
@@ -71,5 +75,10 @@ class CanvasTriggerScheduleCreatePostBodySchedule extends \ArrayObject
         $this->atOptimalTime = $atOptimalTime;
 
         return $this;
+    }
+
+    public function definedProperties(): array
+    {
+        return ['time' => ['time', 'getTime', 'setTime'], 'inLocalTime' => ['in_local_time', 'getInLocalTime', 'setInLocalTime'], 'atOptimalTime' => ['at_optimal_time', 'getAtOptimalTime', 'setAtOptimalTime']];
     }
 }

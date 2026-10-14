@@ -10,8 +10,12 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class UsersExternalIdsRemovePostBody extends \ArrayObject
+use Braze\Runtime\AdditionalAndPatternProperties;
+use Braze\Runtime\AdditionalPropertiesInterface;
+
+class UsersExternalIdsRemovePostBody implements AdditionalPropertiesInterface
 {
+    use AdditionalAndPatternProperties;
     /**
      * @var array
      */
@@ -43,5 +47,10 @@ class UsersExternalIdsRemovePostBody extends \ArrayObject
         $this->externalIds = $externalIds;
 
         return $this;
+    }
+
+    public function definedProperties(): array
+    {
+        return ['externalIds' => ['external_ids', 'getExternalIds', 'setExternalIds']];
     }
 }

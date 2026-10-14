@@ -10,8 +10,12 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class SendsIdCreatePostBody extends \ArrayObject
+use Braze\Runtime\AdditionalAndPatternProperties;
+use Braze\Runtime\AdditionalPropertiesInterface;
+
+class SendsIdCreatePostBody implements AdditionalPropertiesInterface
 {
+    use AdditionalAndPatternProperties;
     /**
      * @var array
      */
@@ -54,5 +58,10 @@ class SendsIdCreatePostBody extends \ArrayObject
         $this->sendId = $sendId;
 
         return $this;
+    }
+
+    public function definedProperties(): array
+    {
+        return ['campaignId' => ['campaign_id', 'getCampaignId', 'setCampaignId'], 'sendId' => ['send_id', 'getSendId', 'setSendId']];
     }
 }

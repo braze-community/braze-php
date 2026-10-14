@@ -85,7 +85,7 @@ class DeleteScimV2UserById extends \Braze\Runtime\Client\BaseEndpoint implements
 
     public function getUri(): string
     {
-        return str_replace(['{id}'], [$this->id], '/scim/v2/Users/{id}');
+        return str_replace(['{id}'], [rawurlencode($this->id)], '/scim/v2/Users/{id}');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array

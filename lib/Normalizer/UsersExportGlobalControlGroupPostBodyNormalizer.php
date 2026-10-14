@@ -90,7 +90,7 @@ class UsersExportGlobalControlGroupPostBodyNormalizer implements DenormalizerInt
         if ($data->isInitialized('outputFormat') && null !== $data->getOutputFormat()) {
             $dataArray['output_format'] = $data->getOutputFormat();
         }
-        foreach ($data as $key => $value_1) {
+        foreach ($data->additionalPropertyEntries() as $key => $value_1) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value_1;
             }

@@ -10,8 +10,12 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class MessagesLiveActivityUpdatePostBody extends \ArrayObject
+use Braze\Runtime\AdditionalAndPatternProperties;
+use Braze\Runtime\AdditionalPropertiesInterface;
+
+class MessagesLiveActivityUpdatePostBody implements AdditionalPropertiesInterface
 {
+    use AdditionalAndPatternProperties;
     /**
      * @var array
      */
@@ -139,5 +143,10 @@ class MessagesLiveActivityUpdatePostBody extends \ArrayObject
         $this->notification = $notification;
 
         return $this;
+    }
+
+    public function definedProperties(): array
+    {
+        return ['appId' => ['app_id', 'getAppId', 'setAppId'], 'activityId' => ['activity_id', 'getActivityId', 'setActivityId'], 'contentState' => ['content_state', 'getContentState', 'setContentState'], 'endActivity' => ['end_activity', 'getEndActivity', 'setEndActivity'], 'dismissalDate' => ['dismissal_date', 'getDismissalDate', 'setDismissalDate'], 'staleDate' => ['stale_date', 'getStaleDate', 'setStaleDate'], 'notification' => ['notification', 'getNotification', 'setNotification']];
     }
 }

@@ -10,8 +10,12 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class ScimV2UsersIdPutBody extends \ArrayObject
+use Braze\Runtime\AdditionalAndPatternProperties;
+use Braze\Runtime\AdditionalPropertiesInterface;
+
+class ScimV2UsersIdPutBody implements AdditionalPropertiesInterface
 {
+    use AdditionalAndPatternProperties;
     /**
      * @var array
      */
@@ -94,5 +98,10 @@ class ScimV2UsersIdPutBody extends \ArrayObject
         $this->permissions = $permissions;
 
         return $this;
+    }
+
+    public function definedProperties(): array
+    {
+        return ['schemas' => ['schemas', 'getSchemas', 'setSchemas'], 'name' => ['name', 'getName', 'setName'], 'department' => ['department', 'getDepartment', 'setDepartment'], 'permissions' => ['permissions', 'getPermissions', 'setPermissions']];
     }
 }

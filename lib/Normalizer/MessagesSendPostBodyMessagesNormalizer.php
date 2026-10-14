@@ -50,7 +50,7 @@ class MessagesSendPostBodyMessagesNormalizer implements DenormalizerInterface, N
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         if (\array_key_exists('android_push', $data)) {
-            $values = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+            $values = new \Braze\Runtime\JsonObject();
             foreach ($data['android_push'] as $key => $value) {
                 $values[$key] = $value;
             }
@@ -58,7 +58,7 @@ class MessagesSendPostBodyMessagesNormalizer implements DenormalizerInterface, N
             unset($data['android_push']);
         }
         if (\array_key_exists('apple_push', $data)) {
-            $values_1 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+            $values_1 = new \Braze\Runtime\JsonObject();
             foreach ($data['apple_push'] as $key_1 => $value_1) {
                 $values_1[$key_1] = $value_1;
             }
@@ -66,7 +66,7 @@ class MessagesSendPostBodyMessagesNormalizer implements DenormalizerInterface, N
             unset($data['apple_push']);
         }
         if (\array_key_exists('content_card', $data)) {
-            $values_2 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+            $values_2 = new \Braze\Runtime\JsonObject();
             foreach ($data['content_card'] as $key_2 => $value_2) {
                 $values_2[$key_2] = $value_2;
             }
@@ -74,7 +74,7 @@ class MessagesSendPostBodyMessagesNormalizer implements DenormalizerInterface, N
             unset($data['content_card']);
         }
         if (\array_key_exists('email', $data)) {
-            $values_3 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+            $values_3 = new \Braze\Runtime\JsonObject();
             foreach ($data['email'] as $key_3 => $value_3) {
                 $values_3[$key_3] = $value_3;
             }
@@ -82,7 +82,7 @@ class MessagesSendPostBodyMessagesNormalizer implements DenormalizerInterface, N
             unset($data['email']);
         }
         if (\array_key_exists('kindle_push', $data)) {
-            $values_4 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+            $values_4 = new \Braze\Runtime\JsonObject();
             foreach ($data['kindle_push'] as $key_4 => $value_4) {
                 $values_4[$key_4] = $value_4;
             }
@@ -90,7 +90,7 @@ class MessagesSendPostBodyMessagesNormalizer implements DenormalizerInterface, N
             unset($data['kindle_push']);
         }
         if (\array_key_exists('web_push', $data)) {
-            $values_5 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+            $values_5 = new \Braze\Runtime\JsonObject();
             foreach ($data['web_push'] as $key_5 => $value_5) {
                 $values_5[$key_5] = $value_5;
             }
@@ -98,7 +98,7 @@ class MessagesSendPostBodyMessagesNormalizer implements DenormalizerInterface, N
             unset($data['web_push']);
         }
         if (\array_key_exists('windows_phone8_push', $data)) {
-            $values_6 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+            $values_6 = new \Braze\Runtime\JsonObject();
             foreach ($data['windows_phone8_push'] as $key_6 => $value_6) {
                 $values_6[$key_6] = $value_6;
             }
@@ -106,7 +106,7 @@ class MessagesSendPostBodyMessagesNormalizer implements DenormalizerInterface, N
             unset($data['windows_phone8_push']);
         }
         if (\array_key_exists('windows_universal_push', $data)) {
-            $values_7 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+            $values_7 = new \Braze\Runtime\JsonObject();
             foreach ($data['windows_universal_push'] as $key_7 => $value_7) {
                 $values_7[$key_7] = $value_7;
             }
@@ -126,62 +126,62 @@ class MessagesSendPostBodyMessagesNormalizer implements DenormalizerInterface, N
     {
         $dataArray = [];
         if ($data->isInitialized('androidPush') && null !== $data->getAndroidPush()) {
-            $values = [];
+            $values = new \Braze\Runtime\JsonObject();
             foreach ($data->getAndroidPush() as $key => $value) {
                 $values[$key] = $value;
             }
             $dataArray['android_push'] = $values;
         }
         if ($data->isInitialized('applePush') && null !== $data->getApplePush()) {
-            $values_1 = [];
+            $values_1 = new \Braze\Runtime\JsonObject();
             foreach ($data->getApplePush() as $key_1 => $value_1) {
                 $values_1[$key_1] = $value_1;
             }
             $dataArray['apple_push'] = $values_1;
         }
         if ($data->isInitialized('contentCard') && null !== $data->getContentCard()) {
-            $values_2 = [];
+            $values_2 = new \Braze\Runtime\JsonObject();
             foreach ($data->getContentCard() as $key_2 => $value_2) {
                 $values_2[$key_2] = $value_2;
             }
             $dataArray['content_card'] = $values_2;
         }
         if ($data->isInitialized('email') && null !== $data->getEmail()) {
-            $values_3 = [];
+            $values_3 = new \Braze\Runtime\JsonObject();
             foreach ($data->getEmail() as $key_3 => $value_3) {
                 $values_3[$key_3] = $value_3;
             }
             $dataArray['email'] = $values_3;
         }
         if ($data->isInitialized('kindlePush') && null !== $data->getKindlePush()) {
-            $values_4 = [];
+            $values_4 = new \Braze\Runtime\JsonObject();
             foreach ($data->getKindlePush() as $key_4 => $value_4) {
                 $values_4[$key_4] = $value_4;
             }
             $dataArray['kindle_push'] = $values_4;
         }
         if ($data->isInitialized('webPush') && null !== $data->getWebPush()) {
-            $values_5 = [];
+            $values_5 = new \Braze\Runtime\JsonObject();
             foreach ($data->getWebPush() as $key_5 => $value_5) {
                 $values_5[$key_5] = $value_5;
             }
             $dataArray['web_push'] = $values_5;
         }
         if ($data->isInitialized('windowsPhone8Push') && null !== $data->getWindowsPhone8Push()) {
-            $values_6 = [];
+            $values_6 = new \Braze\Runtime\JsonObject();
             foreach ($data->getWindowsPhone8Push() as $key_6 => $value_6) {
                 $values_6[$key_6] = $value_6;
             }
             $dataArray['windows_phone8_push'] = $values_6;
         }
         if ($data->isInitialized('windowsUniversalPush') && null !== $data->getWindowsUniversalPush()) {
-            $values_7 = [];
+            $values_7 = new \Braze\Runtime\JsonObject();
             foreach ($data->getWindowsUniversalPush() as $key_7 => $value_7) {
                 $values_7[$key_7] = $value_7;
             }
             $dataArray['windows_universal_push'] = $values_7;
         }
-        foreach ($data as $key_8 => $value_8) {
+        foreach ($data->additionalPropertyEntries() as $key_8 => $value_8) {
             if (preg_match('/.*/', (string) $key_8)) {
                 $dataArray[$key_8] = $value_8;
             }

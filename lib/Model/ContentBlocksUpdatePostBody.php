@@ -10,8 +10,12 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class ContentBlocksUpdatePostBody extends \ArrayObject
+use Braze\Runtime\AdditionalAndPatternProperties;
+use Braze\Runtime\AdditionalPropertiesInterface;
+
+class ContentBlocksUpdatePostBody implements AdditionalPropertiesInterface
 {
+    use AdditionalAndPatternProperties;
     /**
      * @var array
      */
@@ -128,5 +132,10 @@ class ContentBlocksUpdatePostBody extends \ArrayObject
         $this->tags = $tags;
 
         return $this;
+    }
+
+    public function definedProperties(): array
+    {
+        return ['contentBlockId' => ['content_block_id', 'getContentBlockId', 'setContentBlockId'], 'name' => ['name', 'getName', 'setName'], 'description' => ['description', 'getDescription', 'setDescription'], 'content' => ['content', 'getContent', 'setContent'], 'state' => ['state', 'getState', 'setState'], 'tags' => ['tags', 'getTags', 'setTags']];
     }
 }

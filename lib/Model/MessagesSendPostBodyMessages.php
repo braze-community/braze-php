@@ -10,8 +10,12 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class MessagesSendPostBodyMessages extends \ArrayObject
+use Braze\Runtime\AdditionalAndPatternProperties;
+use Braze\Runtime\AdditionalPropertiesInterface;
+
+class MessagesSendPostBodyMessages implements AdditionalPropertiesInterface
 {
+    use AdditionalAndPatternProperties;
     /**
      * @var array
      */
@@ -204,5 +208,10 @@ class MessagesSendPostBodyMessages extends \ArrayObject
         $this->windowsUniversalPush = $windowsUniversalPush;
 
         return $this;
+    }
+
+    public function definedProperties(): array
+    {
+        return ['androidPush' => ['android_push', 'getAndroidPush', 'setAndroidPush'], 'applePush' => ['apple_push', 'getApplePush', 'setApplePush'], 'contentCard' => ['content_card', 'getContentCard', 'setContentCard'], 'email' => ['email', 'getEmail', 'setEmail'], 'kindlePush' => ['kindle_push', 'getKindlePush', 'setKindlePush'], 'webPush' => ['web_push', 'getWebPush', 'setWebPush'], 'windowsPhone8Push' => ['windows_phone8_push', 'getWindowsPhone8Push', 'setWindowsPhone8Push'], 'windowsUniversalPush' => ['windows_universal_push', 'getWindowsUniversalPush', 'setWindowsUniversalPush']];
     }
 }

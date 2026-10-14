@@ -10,8 +10,12 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class MessagesSendPostBody extends \ArrayObject
+use Braze\Runtime\AdditionalAndPatternProperties;
+use Braze\Runtime\AdditionalPropertiesInterface;
+
+class MessagesSendPostBody implements AdditionalPropertiesInterface
 {
+    use AdditionalAndPatternProperties;
     /**
      * @var array
      */
@@ -196,5 +200,10 @@ class MessagesSendPostBody extends \ArrayObject
         $this->messages = $messages;
 
         return $this;
+    }
+
+    public function definedProperties(): array
+    {
+        return ['broadcast' => ['broadcast', 'getBroadcast', 'setBroadcast'], 'externalUserIds' => ['external_user_ids', 'getExternalUserIds', 'setExternalUserIds'], 'userAliases' => ['user_aliases', 'getUserAliases', 'setUserAliases'], 'segmentId' => ['segment_id', 'getSegmentId', 'setSegmentId'], 'audience' => ['audience', 'getAudience', 'setAudience'], 'campaignId' => ['campaign_id', 'getCampaignId', 'setCampaignId'], 'sendId' => ['send_id', 'getSendId', 'setSendId'], 'overrideFrequencyCapping' => ['override_frequency_capping', 'getOverrideFrequencyCapping', 'setOverrideFrequencyCapping'], 'recipientSubscriptionState' => ['recipient_subscription_state', 'getRecipientSubscriptionState', 'setRecipientSubscriptionState'], 'messages' => ['messages', 'getMessages', 'setMessages']];
     }
 }

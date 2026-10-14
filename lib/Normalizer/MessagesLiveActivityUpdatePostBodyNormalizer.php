@@ -69,11 +69,35 @@ class MessagesLiveActivityUpdatePostBodyNormalizer implements DenormalizerInterf
             unset($data['end_activity']);
         }
         if (\array_key_exists('dismissal_date', $data)) {
-            $object->setDismissalDate(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['dismissal_date']));
+            $date = \DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['dismissal_date']);
+            if (false === $date) {
+                if (is_string($data['dismissal_date']) and 1 === preg_match('/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/', $data['dismissal_date'])) {
+                    try {
+                        $date = new \DateTime($data['dismissal_date']);
+                    } catch (\Exception) {
+                        throw new \Braze\Runtime\Normalizer\InvalidDateException($data['dismissal_date'], 'Y-m-d\TH:i:sP');
+                    }
+                } else {
+                    throw new \Braze\Runtime\Normalizer\InvalidDateException($data['dismissal_date'], 'Y-m-d\TH:i:sP');
+                }
+            }
+            $object->setDismissalDate($date);
             unset($data['dismissal_date']);
         }
         if (\array_key_exists('stale_date', $data)) {
-            $object->setStaleDate(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['stale_date']));
+            $date_1 = \DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['stale_date']);
+            if (false === $date_1) {
+                if (is_string($data['stale_date']) and 1 === preg_match('/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/', $data['stale_date'])) {
+                    try {
+                        $date_1 = new \DateTime($data['stale_date']);
+                    } catch (\Exception) {
+                        throw new \Braze\Runtime\Normalizer\InvalidDateException($data['stale_date'], 'Y-m-d\TH:i:sP');
+                    }
+                } else {
+                    throw new \Braze\Runtime\Normalizer\InvalidDateException($data['stale_date'], 'Y-m-d\TH:i:sP');
+                }
+            }
+            $object->setStaleDate($date_1);
             unset($data['stale_date']);
         }
         if (\array_key_exists('notification', $data)) {
@@ -99,7 +123,7 @@ class MessagesLiveActivityUpdatePostBodyNormalizer implements DenormalizerInterf
             $dataArray['activity_id'] = $data->getActivityId();
         }
         if ($data->isInitialized('contentState') && null !== $data->getContentState()) {
-            $dataArray['content_state'] = $this->normalizer->normalize($data->getContentState(), 'json', $context);
+            $dataArray['content_state'] = $data->getContentState() === null ? null : new \Braze\Runtime\JsonObject($this->normalizer->normalize($data->getContentState(), 'json', $context));
         }
         if ($data->isInitialized('endActivity') && null !== $data->getEndActivity()) {
             $dataArray['end_activity'] = $data->getEndActivity();
@@ -111,9 +135,9 @@ class MessagesLiveActivityUpdatePostBodyNormalizer implements DenormalizerInterf
             $dataArray['stale_date'] = $data->getStaleDate()->format('Y-m-d\TH:i:sP');
         }
         if ($data->isInitialized('notification') && null !== $data->getNotification()) {
-            $dataArray['notification'] = $this->normalizer->normalize($data->getNotification(), 'json', $context);
+            $dataArray['notification'] = $data->getNotification() === null ? null : new \Braze\Runtime\JsonObject($this->normalizer->normalize($data->getNotification(), 'json', $context));
         }
-        foreach ($data as $key => $value) {
+        foreach ($data->additionalPropertyEntries() as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value;
             }

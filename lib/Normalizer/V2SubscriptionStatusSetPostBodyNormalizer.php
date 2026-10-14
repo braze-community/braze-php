@@ -72,11 +72,11 @@ class V2SubscriptionStatusSetPostBodyNormalizer implements DenormalizerInterface
         if ($data->isInitialized('subscriptionGroups') && null !== $data->getSubscriptionGroups()) {
             $values = [];
             foreach ($data->getSubscriptionGroups() as $value) {
-                $values[] = $this->normalizer->normalize($value, 'json', $context);
+                $values[] = $value === null ? null : new \Braze\Runtime\JsonObject($this->normalizer->normalize($value, 'json', $context));
             }
             $dataArray['subscription_groups'] = $values;
         }
-        foreach ($data as $key => $value_1) {
+        foreach ($data->additionalPropertyEntries() as $key => $value_1) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value_1;
             }

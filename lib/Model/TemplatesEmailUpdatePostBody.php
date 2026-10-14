@@ -10,8 +10,12 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class TemplatesEmailUpdatePostBody extends \ArrayObject
+use Braze\Runtime\AdditionalAndPatternProperties;
+use Braze\Runtime\AdditionalPropertiesInterface;
+
+class TemplatesEmailUpdatePostBody implements AdditionalPropertiesInterface
 {
+    use AdditionalAndPatternProperties;
     /**
      * @var array
      */
@@ -162,5 +166,10 @@ class TemplatesEmailUpdatePostBody extends \ArrayObject
         $this->shouldInlineCss = $shouldInlineCss;
 
         return $this;
+    }
+
+    public function definedProperties(): array
+    {
+        return ['emailTemplateId' => ['email_template_id', 'getEmailTemplateId', 'setEmailTemplateId'], 'templateName' => ['template_name', 'getTemplateName', 'setTemplateName'], 'subject' => ['subject', 'getSubject', 'setSubject'], 'body' => ['body', 'getBody', 'setBody'], 'plaintextBody' => ['plaintext_body', 'getPlaintextBody', 'setPlaintextBody'], 'preheader' => ['preheader', 'getPreheader', 'setPreheader'], 'tags' => ['tags', 'getTags', 'setTags'], 'shouldInlineCss' => ['should_inline_css', 'getShouldInlineCss', 'setShouldInlineCss']];
     }
 }

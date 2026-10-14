@@ -10,8 +10,12 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class CampaignsTriggerSendPostBodyRecipientsItem extends \ArrayObject
+use Braze\Runtime\AdditionalAndPatternProperties;
+use Braze\Runtime\AdditionalPropertiesInterface;
+
+class CampaignsTriggerSendPostBodyRecipientsItem implements AdditionalPropertiesInterface
 {
+    use AdditionalAndPatternProperties;
     /**
      * @var array
      */
@@ -111,5 +115,10 @@ class CampaignsTriggerSendPostBodyRecipientsItem extends \ArrayObject
         $this->attributes = $attributes;
 
         return $this;
+    }
+
+    public function definedProperties(): array
+    {
+        return ['userAlias' => ['user_alias', 'getUserAlias', 'setUserAlias'], 'externalUserId' => ['external_user_id', 'getExternalUserId', 'setExternalUserId'], 'triggerProperties' => ['trigger_properties', 'getTriggerProperties', 'setTriggerProperties'], 'sendToExistingOnly' => ['send_to_existing_only', 'getSendToExistingOnly', 'setSendToExistingOnly'], 'attributes' => ['attributes', 'getAttributes', 'setAttributes']];
     }
 }

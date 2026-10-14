@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace Braze\Exception;
 
-class ForbiddenException extends \RuntimeException implements ClientException
+abstract class ForbiddenException extends \RuntimeException implements ClientException, WithResponseInterface
 {
     public function __construct(string $message)
     {

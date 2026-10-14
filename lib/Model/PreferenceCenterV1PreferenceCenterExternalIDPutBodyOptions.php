@@ -10,8 +10,12 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class PreferenceCenterV1PreferenceCenterExternalIDPutBodyOptions extends \ArrayObject
+use Braze\Runtime\AdditionalAndPatternProperties;
+use Braze\Runtime\AdditionalPropertiesInterface;
+
+class PreferenceCenterV1PreferenceCenterExternalIDPutBodyOptions implements AdditionalPropertiesInterface
 {
+    use AdditionalAndPatternProperties;
     /**
      * @var array
      */
@@ -37,5 +41,10 @@ class PreferenceCenterV1PreferenceCenterExternalIDPutBodyOptions extends \ArrayO
         $this->metaViewportContent = $metaViewportContent;
 
         return $this;
+    }
+
+    public function definedProperties(): array
+    {
+        return ['metaViewportContent' => ['meta-viewport-content', 'getMetaViewportContent', 'setMetaViewportContent']];
     }
 }

@@ -66,9 +66,9 @@ class MessagesLiveActivityUpdatePostBodyNotificationNormalizer implements Denorm
     {
         $dataArray = [];
         if ($data->isInitialized('alert') && null !== $data->getAlert()) {
-            $dataArray['alert'] = $this->normalizer->normalize($data->getAlert(), 'json', $context);
+            $dataArray['alert'] = $data->getAlert() === null ? null : new \Braze\Runtime\JsonObject($this->normalizer->normalize($data->getAlert(), 'json', $context));
         }
-        foreach ($data as $key => $value) {
+        foreach ($data->additionalPropertyEntries() as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value;
             }

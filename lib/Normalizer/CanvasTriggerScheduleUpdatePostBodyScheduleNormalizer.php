@@ -53,7 +53,19 @@ class CanvasTriggerScheduleUpdatePostBodyScheduleNormalizer implements Denormali
             $data['in_local_time'] = (bool) $data['in_local_time'];
         }
         if (\array_key_exists('time', $data)) {
-            $object->setTime(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['time']));
+            $date = \DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['time']);
+            if (false === $date) {
+                if (is_string($data['time']) and 1 === preg_match('/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/', $data['time'])) {
+                    try {
+                        $date = new \DateTime($data['time']);
+                    } catch (\Exception) {
+                        throw new \Braze\Runtime\Normalizer\InvalidDateException($data['time'], 'Y-m-d\TH:i:sP');
+                    }
+                } else {
+                    throw new \Braze\Runtime\Normalizer\InvalidDateException($data['time'], 'Y-m-d\TH:i:sP');
+                }
+            }
+            $object->setTime($date);
             unset($data['time']);
         }
         if (\array_key_exists('in_local_time', $data)) {
@@ -78,7 +90,7 @@ class CanvasTriggerScheduleUpdatePostBodyScheduleNormalizer implements Denormali
         if ($data->isInitialized('inLocalTime') && null !== $data->getInLocalTime()) {
             $dataArray['in_local_time'] = $data->getInLocalTime();
         }
-        foreach ($data as $key => $value) {
+        foreach ($data->additionalPropertyEntries() as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value;
             }

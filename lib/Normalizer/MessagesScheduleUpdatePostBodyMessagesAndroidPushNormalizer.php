@@ -75,7 +75,7 @@ class MessagesScheduleUpdatePostBodyMessagesAndroidPushNormalizer implements Den
         if ($data->isInitialized('alert') && null !== $data->getAlert()) {
             $dataArray['alert'] = $data->getAlert();
         }
-        foreach ($data as $key => $value) {
+        foreach ($data->additionalPropertyEntries() as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value;
             }

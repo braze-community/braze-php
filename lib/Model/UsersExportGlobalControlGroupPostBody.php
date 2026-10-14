@@ -10,8 +10,12 @@ declare(strict_types=1);
 
 namespace Braze\Model;
 
-class UsersExportGlobalControlGroupPostBody extends \ArrayObject
+use Braze\Runtime\AdditionalAndPatternProperties;
+use Braze\Runtime\AdditionalPropertiesInterface;
+
+class UsersExportGlobalControlGroupPostBody implements AdditionalPropertiesInterface
 {
+    use AdditionalAndPatternProperties;
     /**
      * @var array
      */
@@ -77,5 +81,10 @@ class UsersExportGlobalControlGroupPostBody extends \ArrayObject
         $this->outputFormat = $outputFormat;
 
         return $this;
+    }
+
+    public function definedProperties(): array
+    {
+        return ['callbackEndpoint' => ['callback_endpoint', 'getCallbackEndpoint', 'setCallbackEndpoint'], 'fieldsToExport' => ['fields_to_export', 'getFieldsToExport', 'setFieldsToExport'], 'outputFormat' => ['output_format', 'getOutputFormat', 'setOutputFormat']];
     }
 }
