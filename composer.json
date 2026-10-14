@@ -49,7 +49,7 @@
             "composer update",
             "composer clean",
             "vendor/bin/jane-openapi generate",
-            "cp src/Braze.php lib/Braze.php"
+            "cp -Rn src/. lib/"
         ],
         "clean": [
             "rm -rf lib/"
