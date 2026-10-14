@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.7](https://github.com/braze-community/braze-php/compare/v3.0.6...v3.0.7) (2026-10-14)
+
+
+### Miscellaneous Chores
+
+* add Runtime/Client/ files ([b9df423](https://github.com/braze-community/braze-php/commit/b9df423456a76c36b38a6520ee022f8bfa853b18))
+
 ## [3.0.6](https://github.com/braze-community/braze-php/compare/v3.0.5...v3.0.6) (2026-08-18)
 
 
